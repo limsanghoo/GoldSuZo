@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.zagle.service.board.BoardDAO;
 import com.zagle.service.board.BoardService;
-import com.zagle.service.board.Report;
+import com.zagle.service.board.RestBoardDAO;
+import com.zagle.service.domain.Report;
+import com.zagle.service.domain.Scrap;
 import com.zagle.service.domain.Board;
 import com.zagle.service.domain.Comment;
 import com.zagle.service.domain.Like;
@@ -23,6 +25,27 @@ public class BoardServiceImpl implements BoardService{
 	private BoardDAO boardDAO;
 	public void setBoardDAO(BoardDAO boardDAO) {
 		this.boardDAO=boardDAO;
+	}
+	
+	/*@Autowired
+	@Qualifier("restBoardDAO")
+	private RestBoardDAO restBoardDAO;
+	public void setRestBoardDAO(RestBoardDAO RestBoardDAO) {
+		this.restBoardDAO=RestBoardDAO;
+	}*/
+	
+	@Autowired
+	@Qualifier("kakaoRestDAOImpl")
+	private KaKaoRestDAOImpl kakaoRestDAOImpl;
+	public void setKaKaoRestDAOImpl(KaKaoRestDAOImpl kakaoRestDAOImpl) {
+		this.kakaoRestDAOImpl=kakaoRestDAOImpl;
+	}
+	
+	@Autowired
+	@Qualifier("daumRestDAOImpl")
+	private DaumRestDAOImpl daumRestDAOImpl;
+	public void setDaumRestDAOImpl(DaumRestDAOImpl daumRestDAOImpl) {
+		this.daumRestDAOImpl=daumRestDAOImpl;
 	}
 
 	@Override
@@ -105,7 +128,6 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public void addBoardVisionTag(Board board) throws Exception {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -119,6 +141,24 @@ public class BoardServiceImpl implements BoardService{
 	public Map<String, Object> listMap(Board board) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void deleteLink(Link link) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addScrap(Scrap scrap) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void cancelScrap(Scrap scrap) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

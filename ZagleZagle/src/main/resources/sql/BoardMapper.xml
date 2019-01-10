@@ -4,28 +4,35 @@
 		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="UserMapper">
- 	
- 	
-	<resultMap id="userSelectMap" type="user">
-		<result property="userId" 			column="user_id" 			jdbcType="VARCHAR"/>
-		<result property="userName"	column="user_name" 		jdbcType="VARCHAR" />
-		<result property="password" 	column="password" 		jdbcType="VARCHAR" />
-		<result property="role" 				column="role" 					jdbcType="VARCHAR" />
-		<result property="ssn" 				column="ssn" 					jdbcType="VARCHAR" />
-		<result property="phone" 			column="cell_phone" 		jdbcType="VARCHAR" />
-		<result property="addr" 				column="addr" 					jdbcType="VARCHAR" />
-		<result property="email" 			column="email" 				jdbcType="NUMERIC"  />
-		<result property="regDate" 		column="reg_date" 			jdbcType="DATE" />
+<mapper namespace="BoardMapper">
+	
+	<resultMap type="board" id="boardSelectMap">
+		<result property="boardNo"	column="board_no"	jdbcType="VARCHAR"/>
+		<result property="user.userNo"	column="user_no"	jdbcType="VARCHAR"/>
+		<result	property="boardDetailText"	column="board_detail_text"	jdbcType="VARCHAR"/>
+		<result	property="hashTag"	column="hash_tag"	jdbcType="VARCHAR"/>
+		<result	property="userTheme"	column="user_theme"	jdbcType="VARCHAR"/>
+		<result	property="boardRegDate"	column="board_reg_date"	jdbcType="DATE"/>
+		<result	property="boardStatus"	column="board_status"	jdbcType="VARCHAR"/>
+		<result	property="photo1"	column="photo1"	jdbcType="VARCHAR"/>
+		<result	property="photo2"	column="photo2"	jdbcType="VARCHAR"/>
+		<result	property="photo3"	column="photo3"	jdbcType="VARCHAR"/>
+		<result	property="coord"	column="coord"	jdbcType="VARCHAR"/>
+		<result	property="address"	column="address"	jdbcType="VARCHAR"/>
 	</resultMap>
 	
+	
+	
 	<!-- SQL : INSERT -->
-	<insert 	id="addUser"		parameterType="user" >
+	 
+	 <insert 	id="addBoard"		parameterType="board" >
 	 	INSERT
-		INTO users( user_id , user_name , password , role , ssn, cell_phone, addr, email , reg_date) 
-		VALUES	 (	#{userId} , #{userName} , #{password} , 'user' , #{ssn:VARCHAR} , 
-							#{phone:VARCHAR} , #{addr:VARCHAR} , #{email:VARCHAR} , SYSDATE )
+		INTO board(board_no, user_no, board_detail_text, hash_tag, user_theme, board_reg_date, board_status, photo1, photo2, photo3, coord, address)
+		VALUES('BD'||seq_bd.nextval,#{user.userNo},#{boardDetailText},#{hashTag},#{userTheme},sysdate,#{boardStatus},#{photo1},#{photo2},#{photo3},#{coord},#{address})
 	 </insert>
+
+	 
+	 
 	 
 	 <!-- SQL : SELECT ONE -->
 	 <select 	id="getUser"	parameterType="string"	resultMap="userSelectMap">
