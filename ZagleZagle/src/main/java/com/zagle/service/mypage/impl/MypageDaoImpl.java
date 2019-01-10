@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.zagle.common.Search;
+import com.zagle.service.domain.Comment;
+import com.zagle.service.domain.Like;
+import com.zagle.service.domain.Scrap;
 import com.zagle.service.domain.User;
 import com.zagle.service.mypage.MypageDao;
 
@@ -36,9 +39,9 @@ public class MypageDaoImpl implements MypageDao {
 		sqlSession.update("MypageMapper.updateAccount", user);
 	}
 	
-	public User getAccountCheck(String userNo) throws Exception {
+	public User getAccountCheck(User user) throws Exception {
 		
-		return sqlSession.selectOne("MypageMapper.getAccountCheck",  userNo);
+		return sqlSession.selectOne("MypageMapper.getAccountCheck",  user);
 	}
 	
 	public List<Comment> commentList(Search search) throws Exception {
@@ -58,6 +61,8 @@ public class MypageDaoImpl implements MypageDao {
 		
 		return sqlSession.selectOne("MypageMapper.getTotalCount", search);
 	}
+
+	
 	
 
 }

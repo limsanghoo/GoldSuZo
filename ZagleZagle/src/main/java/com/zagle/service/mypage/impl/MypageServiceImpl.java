@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.zagle.common.Search;
+import com.zagle.service.domain.Comment;
+import com.zagle.service.domain.Like;
+import com.zagle.service.domain.Scrap;
 import com.zagle.service.domain.User;
 import com.zagle.service.mypage.MypageDao;
 import com.zagle.service.mypage.MypageService;
