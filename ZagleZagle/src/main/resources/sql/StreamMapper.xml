@@ -4,28 +4,23 @@
 		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="UserMapper">
+<mapper namespace="StreamMapper">
  	
  	
-	<resultMap id="userSelectMap" type="user">
-		<result property="userId" 			column="user_id" 			jdbcType="VARCHAR"/>
-		<result property="userName"	column="user_name" 		jdbcType="VARCHAR" />
-		<result property="password" 	column="password" 		jdbcType="VARCHAR" />
-		<result property="role" 				column="role" 					jdbcType="VARCHAR" />
-		<result property="ssn" 				column="ssn" 					jdbcType="VARCHAR" />
-		<result property="phone" 			column="cell_phone" 		jdbcType="VARCHAR" />
-		<result property="addr" 				column="addr" 					jdbcType="VARCHAR" />
-		<result property="email" 			column="email" 				jdbcType="NUMERIC"  />
-		<result property="regDate" 		column="reg_date" 			jdbcType="DATE" />
+	<resultMap id="userSelectMap" type="stream">
+		<result property="streamNo" 			column="stream_no" 			jdbcType="VARCHAR"/>
+		<result property="user.userNo"	column="user_no" 		jdbcType="VARCHAR" />
+		<result property="streamLikeCount" 	column="stream_like" 		jdbcType="NUMERIC" />
+		<result property="streamDate" 				column="stream_date" 					jdbcType="DATE" />
+		<result property="streamTitle" 				column="stream_title" 					jdbcType="VARCHAR" />
+		<result property="streamContent" 			column="stream_content" 		jdbcType="VARCHAR" />
 	</resultMap>
 	
 	<!-- SQL : INSERT -->
-	<insert 	id="addUser"		parameterType="user" >
-	 	INSERT
-		INTO users( user_id , user_name , password , role , ssn, cell_phone, addr, email , reg_date) 
-		VALUES	 (	#{userId} , #{userName} , #{password} , 'user' , #{ssn:VARCHAR} , 
-							#{phone:VARCHAR} , #{addr:VARCHAR} , #{email:VARCHAR} , SYSDATE )
-	 </insert>
+	<insert 	id="addStream"		parameterType="map" >
+	 INSERT INTO stream(stream_no,user_no,stream_like,stream_date,stream_title,stream_content)
+	 VALUES('ST'||seq_st.nextval,#{userNo},0,sysdate,#{streamTitle},#{streamContent});	
+	</insert>
 	 
 	 <!-- SQL : SELECT ONE -->
 	 <select 	id="getUser"	parameterType="string"	resultMap="userSelectMap">
