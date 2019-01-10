@@ -4,6 +4,7 @@ public class ChatRestController {
 
 	public ChatRestController() {
 		// TODO Auto-generated constructor stub
+		System.out.println(this.getClass());
 	}
 
 }

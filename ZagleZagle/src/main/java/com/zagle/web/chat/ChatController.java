@@ -21,6 +21,7 @@ public class ChatController {
 	
 	public ChatController() {
 		// TODO Auto-generated constructor stub
+		System.out.println(this.getClass());
 	}
 
 	@RequestMapping(value="chat/{value}",method=RequestMethod.GET)
