@@ -3,9 +3,7 @@ package com.zagle.service.domain;
 public class Chat {
 	
 	private String chatAddress;
-	private String imageFile;
-	private String videoFile;
-	private int userCount;
+	private String profile;
 	private String nickName;
 
 	public Chat() {
@@ -20,28 +18,12 @@ public class Chat {
 		this.chatAddress = chatAddress;
 	}
 
-	public String getImageFile() {
-		return imageFile;
+	public String getProfile() {
+		return profile;
 	}
 
-	public void setImageFile(String imageFile) {
-		this.imageFile = imageFile;
-	}
-
-	public String getVideoFile() {
-		return videoFile;
-	}
-
-	public void setVideoFile(String videoFile) {
-		this.videoFile = videoFile;
-	}
-
-	public int getUserCount() {
-		return userCount;
-	}
-
-	public void setUserCount(int userCount) {
-		this.userCount = userCount;
+	public void setProfile(String profile) {
+		this.profile = profile;
 	}
 
 	public String getNickName() {
@@ -54,8 +36,7 @@ public class Chat {
 
 	@Override
 	public String toString() {
-		return "Chat [chatAddress=" + chatAddress + ", imageFile=" + imageFile + ", videoFile=" + videoFile
-				+ ", userCount=" + userCount + ", nickName=" + nickName + "]";
+		return "Chat [chatAddress=" + chatAddress + ", profile=" + profile + ", nickName=" + nickName + "]";
 	}
 
 }

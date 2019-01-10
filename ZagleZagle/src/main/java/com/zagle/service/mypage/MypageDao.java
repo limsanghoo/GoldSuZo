@@ -3,6 +3,9 @@ package com.zagle.service.mypage;
 import java.util.List;
 
 import com.zagle.common.Search;
+import com.zagle.service.domain.Comment;
+import com.zagle.service.domain.Like;
+import com.zagle.service.domain.Scrap;
 import com.zagle.service.domain.User;
 
 public interface MypageDao {
