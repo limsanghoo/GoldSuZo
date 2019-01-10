@@ -19,13 +19,35 @@ public class StreamServiceImpl implements StreamService{
 	@Autowired
 	@Qualifier("streamDaoImpl")
 	private StreamDao streamDao;
+	
+	@Autowired
+	@Qualifier("streamRestDaoImpl")
 	private StreamRestDao streamRestDao;
+	
+	
+	
+	@Autowired
+	@Qualifier("MongoRestDaoImpl")
+	private MongoRestDaoImpl mongoRestDaoImpl;
+	
+	@Autowired
+	@Qualifier("KakaoRestDaoImpl")
+	private KakaoRestDaoImpl kakaoRestDaoImpl;
+	
+	@Autowired
+	@Qualifier("NaverRestDaoImpl")
+	private NaverRestDaoImpl naverRestDaoImpl;
+	
+	@Autowired
+	@Qualifier("InicisRestDaoImpl")
+	private InicisRestDaoImpl inicisRestDaoImpl;
+	
 	
 	@Override
 	public void addStream(Stream stream) throws Exception {
 		// TODO Auto-generated method stub
-
-		
+		streamDao.addStream(stream);
+		streamRestDao.addMongo(stream);
 	}
 
 	@Override
