@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.zagle.service.user.UserService;
 
-//==>È¸¿ø°ü¸® RestController
+//==>È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ RestController
 @Controller
 @RequestMapping("/user/*")
 
@@ -21,6 +21,7 @@ public class UserRestController {
 	public UserRestController() {
 		System.out.println(this.getClass());
 	}
+	
 	
 	
 

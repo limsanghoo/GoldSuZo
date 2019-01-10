@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -93,5 +94,17 @@ public class UserController {
 		
 		return modelAndView;
 	}
-	
+	@RequestMapping(value="snsLogin/{userNo}", method=RequestMethod.POST)
+	public ModelAndView snsLogin(@PathVariable String userNo, HttpSession session) throws Exception {
+		
+		User dbUser = userService.getUser(userNo);
+		
+		session.setAttribute("user", dbUser);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject(dbUser);
+		modelAndView.setViewName("redircet:/main.jsp");
+		
+		return modelAndView;
+	}
 }
