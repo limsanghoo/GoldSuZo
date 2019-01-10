@@ -14,18 +14,18 @@ public class User {
 	private String userAddr;
 	private String profile;
 	private String grade;
-	private String blackCode;
 	private String snsName;
 	private String bankName;
 	
 	private Date regDate;
 	
+	private int blackCode;
 	private int account;
 	private int userBirth;
 	private int deleteCount;
 	private int totalActiveScore;
 	
-	///////////////////EL Àû¿ë À§ÇØ Ãß°¡ÇÑ Field////////////////////////
+	///////////////////EL ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ Field////////////////////////
 	private String phone1;
 	private String phone2;
 	private String phone3;
@@ -109,11 +109,11 @@ public class User {
 		this.grade = grade;
 	}
 
-	public String getBlackCode() {
+	public int getBlackCode() {
 		return blackCode;
 	}
 
-	public void setBlackCode(String blackCode) {
+	public void setBlackCode(int blackCode) {
 		this.blackCode = blackCode;
 	}
 
@@ -185,7 +185,7 @@ public class User {
 	
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
-	// JSON == > Domain Obejct Binding À§ÇØ Ãß°¡ÇÑ ºÎºÐ
+	// JSON == > Domain Obejct Binding ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½Îºï¿½
 	
 	
 

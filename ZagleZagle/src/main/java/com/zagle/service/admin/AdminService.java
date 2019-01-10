@@ -3,7 +3,10 @@ package com.zagle.service.admin;
 import java.util.Map;
 
 import com.zagle.common.Search;
+import com.zagle.service.domain.Board;
+import com.zagle.service.domain.Comment;
 import com.zagle.service.domain.Report;
+import com.zagle.service.domain.User;
 
 public interface AdminService {
 
@@ -23,7 +26,11 @@ public interface AdminService {
 	
 	public void cancelComment(Comment comment) throws Exception;
 	
-	public void deleteBlind()
+	public void deleteBlind(Board board) throws Exception;
+	
+	public void delteBlind2(Comment comment) throws Exception;
+	
+	public void checkBlack(User BlackCode) throws Exception;
 	
 	
 	
