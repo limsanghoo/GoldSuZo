@@ -96,7 +96,7 @@ public class MongoRestDAOImpl implements StreamRestDAO{
 		
 		BasicDBObject addObject = new BasicDBObject();
 		
-		addObject.put("streamer",stream.getStreamNo());
+		addObject.put("streamer",stream.getUser().getUserNo());
 		addObject.put("streamerProfile", stream.getUser().getProfile());
 		addObject.put("streamNickname", stream.getUser().getUserNickname());
 		addObject.put("streamTitle",stream.getStreamTitle());
