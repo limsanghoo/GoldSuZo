@@ -7,7 +7,7 @@
 <mapper namespace="StreamMapper">
  	
  	
-	<resultMap id="streamSelectMap" type="com.zagle.service.domain.Stream">
+	<resultMap id="streamSelectMap" type="stream">
 		<result property="streamNo" 			column="stream_no" 			jdbcType="VARCHAR"/>
 		<result property="user.userNo"	column="user_no" 		jdbcType="VARCHAR" />
 		<result property="streamLikeCount" 	column="stream_like" 		jdbcType="NUMERIC" />
