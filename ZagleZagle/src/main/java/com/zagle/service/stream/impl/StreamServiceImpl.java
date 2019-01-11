@@ -1,7 +1,10 @@
 package com.zagle.service.stream.impl;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -53,11 +56,18 @@ public class StreamServiceImpl implements StreamService{
 	@Override
 	public Map<String, Object> listStream(Search search) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<JSONObject> list = streamRestDao.listMongo(search);
+		int count = (int)streamDao.getTotalCount(search);
+		
+		System.out.println("count::"+ count );
+		map.put("list", list);
+		map.put("totalCount",count);
+		return map;
 	}
 
 	@Override
-	public Map<String, Object> listStream(Search search, String grade) throws Exception {
+	public Map<String, Object> listRefund(Search search, String grade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

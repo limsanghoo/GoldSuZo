@@ -12,7 +12,7 @@ public interface StreamService {
 	
 	public Map<String,Object> listStream(Search search)throws Exception;
 	
-	public Map<String,Object> listStream(Search search,String grade)throws Exception;
+	public Map<String,Object> listRefund(Search search,String grade)throws Exception; 
 	
 	public String kakaopayStream(Map<String,Object> map)throws Exception;
 	
