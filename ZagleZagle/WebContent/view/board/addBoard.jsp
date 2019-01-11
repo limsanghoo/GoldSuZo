@@ -19,8 +19,6 @@ $(function(){
 		var userTheme=$("input[name='userTheme']").val();
 		var boardDetailText=$("input[name='boardDetailText']").val();
 		
-		alert(userTheme+boardDetailText);
-		
 		if(boardDetailText==""){
 			alert("내용을 입력해라");
 		}
@@ -61,7 +59,7 @@ function fileInfo(f){
 
 <form name="fileForm" class="form-horizontal" enctype="multipart/form-data">
 
-<input type="hidden" name="userNo" value="10021"/>
+<input type="hidden" name="userNo" value="US10021"/>
 
 <div style="text-align:center;">
 	<input multiple="multiple" type="file" style="width:500px;" accept="image/*" multiple onchange="fileInfo(this)" name="file"/><br>
