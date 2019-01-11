@@ -62,6 +62,8 @@ public class BoardController {
 	@RequestMapping(value="addBoard", method=RequestMethod.POST)
 	public ModelAndView addBoard(@ModelAttribute("board") Board board) throws Exception{
 		
+		System.out.println("/addBoard POST");
+		
 		ModelAndView modelAndView=new ModelAndView();
 		
 		return modelAndView;

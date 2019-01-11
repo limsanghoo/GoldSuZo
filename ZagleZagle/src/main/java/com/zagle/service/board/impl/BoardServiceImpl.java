@@ -27,31 +27,23 @@ public class BoardServiceImpl implements BoardService{
 		this.boardDAO=boardDAO;
 	}
 	
-	/*@Autowired
-	@Qualifier("restBoardDAO")
-	private RestBoardDAO restBoardDAO;
-	public void setRestBoardDAO(RestBoardDAO RestBoardDAO) {
-		this.restBoardDAO=RestBoardDAO;
-	}*/
-	
-	/*@Autowired
+	@Autowired
 	@Qualifier("kakaoRestDAOImpl")
-	private KaKaoRestDAOImpl kakaoRestDAOImpl;
-	public void setKaKaoRestDAOImpl(KaKaoRestDAOImpl kakaoRestDAOImpl) {
+	private RestBoardDAO kakaoRestDAOImpl;
+	public void setKaKaoRestDAOImpl(RestBoardDAO kakaoRestDAOImpl) {
 		this.kakaoRestDAOImpl=kakaoRestDAOImpl;
 	}
 	
 	@Autowired
 	@Qualifier("daumRestDAOImpl")
-	private DaumRestDAOImpl daumRestDAOImpl;
-	public void setDaumRestDAOImpl(DaumRestDAOImpl daumRestDAOImpl) {
+	private RestBoardDAO daumRestDAOImpl;
+	public void setDaumRestDAOImpl(RestBoardDAO daumRestDAOImpl) {
 		this.daumRestDAOImpl=daumRestDAOImpl;
-	}*/
+	}
 
 	@Override
 	public void addBoard(Board board) throws Exception {
-		// TODO Auto-generated method stub
-		
+		boardDAO.addBoard(board);	
 	}
 
 	@Override

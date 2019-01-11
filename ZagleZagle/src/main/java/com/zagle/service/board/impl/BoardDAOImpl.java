@@ -18,17 +18,20 @@ import com.zagle.service.domain.SearchBoard;
 @Repository("boardDAOImpl")
 public class BoardDAOImpl implements BoardDAO{
 	
-	/*@Autowired
+	@Autowired
 	@Qualifier("sqlSessionTemplate")
 	private SqlSession sqlSession;
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
-	}*/
+	}
+	
+	public BoardDAOImpl() {
+		System.out.println(this.getClass());
+	}
 
 	@Override
 	public void addBoard(Board board) throws Exception {
-		// TODO Auto-generated method stub
-		
+		sqlSession.insert("BoardMapper.addBoard", board);
 	}
 
 	@Override

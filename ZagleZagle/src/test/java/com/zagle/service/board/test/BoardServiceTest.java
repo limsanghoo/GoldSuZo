@@ -27,16 +27,29 @@ public class BoardServiceTest {
 	public void testAddBoard() throws Exception{
 		
 		User user=new User();
-		user.setUserNo("US10001");
+		user.setUserNo("US10020");
 		
 		Board board=new Board();
+		
+		String finalFileName="aaa.jpg,bbb.jpg,ccc.jpg";
+		
+		String[] photo=finalFileName.split(",");
+        
+        if(photo.length==1) {
+        	board.setPhoto1(photo[0]);
+        }else if(photo.length==2) {
+        	board.setPhoto1(photo[0]);
+        	board.setPhoto2(photo[1]);
+        }else if(photo.length==3) {
+        	board.setPhoto1(photo[0]);
+        	board.setPhoto2(photo[1]);
+        	board.setPhoto3(photo[2]);
+        }
+
 		board.setUser(user);
 		board.setBoardDetailText("JUnit 테스트");
 		board.setHashTag("#해시태그#테스트");
 		board.setUserTheme("themeTest.jpg");
-		board.setPhoto1("1111.jpg");
-		board.setPhoto2("222.jpg");
-		board.setPhoto3("333.jpg");
 		board.setAddress("서울시 동작구 사당동 1111-222");
 		board.setCoord("33.45046098229819,126.57697044204765");
 		board.setBoardStatus("1");
