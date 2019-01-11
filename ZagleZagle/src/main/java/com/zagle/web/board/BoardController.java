@@ -139,14 +139,6 @@ public class BoardController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="deleteBoard", method=RequestMethod.GET)
-	public ModelAndView deleteLink() throws Exception{
-		
-		ModelAndView modelAndView=new ModelAndView();
-		
-		return modelAndView;
-	}
-	
 	@RequestMapping(value="getBoard", method=RequestMethod.GET)
 	public ModelAndView getBoard() throws Exception{
 		

@@ -22,10 +22,9 @@ import com.zagle.common.Search;
 import com.zagle.service.domain.Stream;
 import com.zagle.service.stream.StreamRestDao;
 
-@Repository("MongoRestDaoImpl")
+
 public class MongoRestDaoImpl implements StreamRestDao{
-	@Autowired
-	@Qualifier("sqlSessionTemplate")
+	
 	private SqlSession sqlSession;
 
 	public void setSqlSession(SqlSession sqlSession) {

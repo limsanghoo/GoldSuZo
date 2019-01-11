@@ -22,8 +22,11 @@ public class MypageController {
 	
 	///Field
 	@Autowired
-	@Qualifier("mypageService")
+	@Qualifier("mypageServiceImpl")
 	private MypageService mypageService;
+	
+	@Autowired
+	@Qualifier("userServiceImpl")
 	private UserService userService;
 	
 	public MypageController() {

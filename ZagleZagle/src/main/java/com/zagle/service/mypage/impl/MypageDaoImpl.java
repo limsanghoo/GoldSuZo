@@ -14,12 +14,12 @@ import com.zagle.service.domain.Scrap;
 import com.zagle.service.domain.User;
 import com.zagle.service.mypage.MypageDao;
 
-@Repository("mypageDaoImpl")
+@Repository("mypageDAOImpl")
 public class MypageDaoImpl implements MypageDao {
 	
 	///Field
 	@Autowired
-	@Qualifier("sqlSessonTemplate")
+	@Qualifier("sqlSessionTemplate")
 	private SqlSession sqlSession;
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;

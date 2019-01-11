@@ -20,30 +20,30 @@ import com.zagle.service.stream.StreamService;
 public class StreamServiceImpl implements StreamService{
 
 	@Autowired
-	@Qualifier("streamDaoImpl")
+	@Qualifier("streamDAOImpl")
 	private StreamDao streamDao;
 	
 	@Autowired
-	@Qualifier("streamRestDaoImpl")
+	@Qualifier("streamRestDAOImpl")
 	private StreamRestDao streamRestDao;
 	
 	
 	
-	@Autowired
-	@Qualifier("MongoRestDaoImpl")
-	private MongoRestDaoImpl mongoRestDaoImpl;
-	
-	@Autowired
-	@Qualifier("KakaoRestDaoImpl")
-	private KakaoRestDaoImpl kakaoRestDaoImpl;
-	
-	@Autowired
-	@Qualifier("NaverRestDaoImpl")
-	private NaverRestDaoImpl naverRestDaoImpl;
-	
-	@Autowired
-	@Qualifier("InicisRestDaoImpl")
-	private InicisRestDaoImpl inicisRestDaoImpl;
+//	@Autowired
+//	@Qualifier("MongoRestDAOImpl")
+//	private MongoRestDaoImpl mongoRestDaoImpl;
+//	
+//	@Autowired
+//	@Qualifier("KakaoRestDAOImpl")
+//	private KakaoRestDaoImpl kakaoRestDaoImpl;
+//	
+//	@Autowired
+//	@Qualifier("NaverRestDAOImpl")
+//	private NaverRestDaoImpl naverRestDaoImpl;
+//	
+//	@Autowired
+//	@Qualifier("InicisRestDAOImpl")
+//	private InicisRestDaoImpl inicisRestDaoImpl;
 	
 	
 	@Override

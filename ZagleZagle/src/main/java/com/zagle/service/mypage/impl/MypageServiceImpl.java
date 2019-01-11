@@ -21,7 +21,7 @@ public class MypageServiceImpl implements MypageService {
 	
 	///Field
 	@Autowired
-	@Qualifier("mypageDaoImpl")
+	@Qualifier("mypageDAOImpl")
 	private MypageDao mypageDao;
 	public void setMypageDao(MypageDao mypageDao) {
 		this.mypageDao = mypageDao;

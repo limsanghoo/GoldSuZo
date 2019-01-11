@@ -15,7 +15,7 @@ import com.zagle.service.domain.Stream;
 import com.zagle.service.stream.StreamDao;
 
 
-@Repository("streamDaoImpl")
+@Repository("streamDAOImpl")
 public class StreamDaoImpl  implements StreamDao{
 
 	@Autowired
