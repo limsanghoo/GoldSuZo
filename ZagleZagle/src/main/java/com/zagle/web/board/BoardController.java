@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -66,9 +67,13 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="addBoard", method=RequestMethod.POST)
-	public ModelAndView addBoard(@ModelAttribute("board") Board board, MultipartHttpServletRequest mtfRequest) throws Exception{
+	public ModelAndView addBoard(@ModelAttribute("board") Board board, @RequestParam("userNo") int userNo, MultipartHttpServletRequest mtfRequest) throws Exception{
 		
 		System.out.println("/addBoard POST");
+		
+		System.out.println(board);
+		
+		System.out.println(userNo);
 		
 		String finalFileName="";
 		
