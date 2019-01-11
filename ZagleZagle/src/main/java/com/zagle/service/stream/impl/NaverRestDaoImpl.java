@@ -3,6 +3,8 @@ package com.zagle.service.stream.impl;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
+
 import com.zagle.common.Search;
 import com.zagle.service.domain.Stream;
 import com.zagle.service.stream.StreamRestDao;
@@ -10,7 +12,7 @@ import com.zagle.service.stream.StreamRestDao;
 public class NaverRestDaoImpl  implements StreamRestDao {
 
 	@Override
-	public List<Stream> listMongo(Search search) throws Exception {
+	public List<JSONObject> listMongo(Search search) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

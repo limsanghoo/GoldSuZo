@@ -3,14 +3,18 @@ package com.zagle.service.stream;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
+
 import com.zagle.common.Search;
 import com.zagle.service.domain.Stream;
 
 public interface StreamRestDao {
 
-	public List<Stream> listMongo(Search search)throws Exception;
+	public List<JSONObject> listMongo(Search search)throws Exception;
 	
 	public void addMongo(Stream stream)throws Exception;
+	
+	//public int getTotalCount(Search search)throws Exception;
 	
 	public Map<String,Object>kakaopayStream(Map<String,Object>map)throws Exception;
 	
