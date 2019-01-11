@@ -40,9 +40,10 @@
 	 <!-- SQL : SELECT ONE -->
 	 <select 	id="getUser"	parameterType="string"	resultMap="userSelectMap">
 		SELECT
-		user_id , user_name , password , role ,  cell_phone ,  addr , email , reg_date 		
+			user_name , phone , user_nickname , user_birth , user_addr, profile, total_active_score, 
+			reg_date,grade,account,bank_name	
 		FROM users 
-		WHERE user_id = #{value}
+		WHERE user_no = #{value}
 	 </select>
 	 
 	 <!-- SQL : UPDATE -->
