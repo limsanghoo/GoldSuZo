@@ -32,9 +32,36 @@ $(function() {
 	
 	var modal = document.getElementById('myModal');
 	var moda2 = document.getElementById('myModal2');
+	var title = document.getElementById('streamTitle');
+	var content = document.getElementById('streamContent');
+	
+	  var streamTitle = $("input[name='streamTitle']").val();
+	  
+	  var streamContent = $("input[name='streamContent']").val();
+      
 	$("#upload").on("click", function() {
 	
-		   modal.style.display = "block";
+		var data = {
+				"userNo":"US10001",
+				"streamTitle":title,
+				"streamContent" : content,
+		}; 
+		$.ajax({
+		
+			method: "post",
+			url : "/stream/json/addStream",
+			data: JSON.stringify(data),
+	  		dataType : 'json', 
+			  headers: {
+	  	            "Accept": "application/json",
+	  	            "Content-Type": "application/json"
+	  	        },
+	  	      success: function(JSONData,status){
+	  	     	alert(status);
+	  	      }
+	  	        
+	});
+		  
 	
 	});
 	$('span[class="close"]').on("click", function() {
@@ -72,10 +99,10 @@ $(function() {
       </div>
       <div class="modal-body">
        			<label for="txt-user-text" class="col-form-label">제목</label><br/> 
-       			   <input type="text" class="form-control" id="streamTtitle" value="" placeholder="제목을 입력하세요"><br/>
+       			   <input type="text" class="form-control" id="streamTtitle" value="" placeholder="제목을 입력하세요" name="streamTitle"><br/>
  				
        			<label for="txt-user-text" class="col-form-label">내용</label> <br/> 
- 				   <input type="text" class="form-control" id="streamContent" value="" placeholder="내용을 입력하세요"> <br/>
+ 				   <input type="text" class="form-control" id="streamContent" value="" placeholder="내용을 입력하세요" name="streamContent"> <br/>
  				
  			
       </div>

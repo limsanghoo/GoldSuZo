@@ -22,6 +22,8 @@
         body {
             padding-top : 70px;
         }
+       
+		div { text-align: center; }
    	</style>
    	
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -32,18 +34,17 @@
 <body>
 
 
-	<!--  아래의 내용은 http://getbootstrap.com/getting-started/  참조 -->	
-   	<div class="container ">
-      <!-- Main jumbotron for a primary marketing message or call to action -->
-      <div class="jumbotron">
-        <h1>써버열린거다!!!!!!!!</h1>
-        
-     </div>
-    </div>
 
 	<!-- 참조 : http://getbootstrap.com/css/   : container part..... -->
 	<div class="container">
-	<p><img src='/common/images/201604131460701467_1.jpg' style="width: 1000px; height: 1000px; overflow: hidden" /></p>
+	<p><img src='/common/images/LOGO.png' style="width: 1100px; height: 500px; overflow: hidden" /></p>
+  	 </div>
+  	 
+  	 <div class="container">
+  	 <img src="/common/images/login.png" style="width: 100px; height: 100px; overflow: hidden"/>
+  	 <h3>Login</h3>
+  	 <br/>
+  	 <h4><a href="#">요즘뜨는 게시물</a></h4>
   	 </div>
 
 </body>
