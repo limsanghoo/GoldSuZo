@@ -11,9 +11,10 @@ import org.springframework.stereotype.Service;
 
 
 import com.zagle.common.Search;
+import com.zagle.service.domain.SearchStream;
 import com.zagle.service.domain.Stream;
-import com.zagle.service.stream.StreamDao;
-import com.zagle.service.stream.StreamRestDao;
+import com.zagle.service.stream.StreamDAO;
+import com.zagle.service.stream.StreamRestDAO;
 import com.zagle.service.stream.StreamService;
 
 @Service("streamServiceImpl")
@@ -21,17 +22,19 @@ public class StreamServiceImpl implements StreamService{
 
 	@Autowired
 	@Qualifier("streamDAOImpl")
-	private StreamDao streamDao;
+	private StreamDAO streamDAO;
 	
 	@Autowired
-	@Qualifier("streamRestDAOImpl")
-	private StreamRestDao streamRestDao;
+	@Qualifier("mongoRestDAOImpl")
+	private StreamRestDAO mongoRestDAOImpl;
+
+	public void setStreamDAO(StreamDAO streamDAO) {
+		this.streamDAO=streamDAO;
+	}
 	
-	
-	
-//	@Autowired
-//	@Qualifier("MongoRestDAOImpl")
-//	private MongoRestDaoImpl mongoRestDaoImpl;
+	public StreamServiceImpl() {
+		System.out.println(this.getClass());
+	}
 //	
 //	@Autowired
 //	@Qualifier("KakaoRestDAOImpl")
@@ -49,16 +52,16 @@ public class StreamServiceImpl implements StreamService{
 	@Override
 	public void addStream(Stream stream) throws Exception {
 		// TODO Auto-generated method stub
-		streamDao.addStream(stream);
-		streamRestDao.addMongo(stream);
+		streamDAO.addStream(stream);
+		mongoRestDAOImpl.addMongo(stream);
 	}
 
 	@Override
-	public Map<String, Object> listStream(Search search) throws Exception {
+	public Map<String, Object> listStream(SearchStream search) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<JSONObject> list = streamRestDao.listMongo(search);
-		int count = (int)streamRestDao.getTotalCount(search);
+		List<JSONObject> list = mongoRestDAOImpl.listMongo(search);
+		int count = (int)mongoRestDAOImpl.getTotalCount(search);
 		
 		System.out.println("count::"+ count );
 		map.put("list", list);
@@ -67,7 +70,7 @@ public class StreamServiceImpl implements StreamService{
 	}
 
 	@Override
-	public Map<String, Object> listRefund(Search search, String grade) throws Exception {
+	public Map<String, Object> listRefund(SearchStream search, String grade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

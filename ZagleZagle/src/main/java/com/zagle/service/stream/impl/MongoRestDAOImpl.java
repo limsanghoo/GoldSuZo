@@ -19,25 +19,28 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.WriteConcern;
 import com.zagle.common.Search;
+import com.zagle.service.domain.SearchStream;
 import com.zagle.service.domain.Stream;
-import com.zagle.service.stream.StreamRestDao;
+import com.zagle.service.stream.StreamRestDAO;
 
+@Repository("mongoRestDAOImpl")
+public class MongoRestDAOImpl implements StreamRestDAO{
 
-public class MongoRestDaoImpl implements StreamRestDao{
-	
+	@Autowired
+	@Qualifier("sqlSessionTemplate")
 	private SqlSession sqlSession;
-
+	
+	 
+	public MongoRestDAOImpl() {
+       System.out.println(getClass()+"constructor call");		
+	}
 	public void setSqlSession(SqlSession sqlSession) {
-		System.out.println(":: "+getClass()+" setSqlSession() Call.......");
 		this.sqlSession = sqlSession;
 	}
 	
-	public MongoRestDaoImpl() {
-System.out.println(getClass()+"constructor call");		
-	}
 	
 	@Override
-	public List<JSONObject> listMongo(Search search) throws Exception {
+	public List<JSONObject> listMongo(SearchStream search) throws Exception {
 		// TODO Auto-generated method stub
 		List<String> list = new ArrayList<String>();	
 		List<JSONObject> list2 = new ArrayList<JSONObject>();
@@ -86,7 +89,7 @@ System.out.println(getClass()+"constructor call");
 		
 		System.out.println("몽고디비 성공");
 		
-		DBCollection dbcoll = db.getCollection("streams");
+		DBCollection dbcoll = db.getCollection("stresams");
 		
 		WriteConcern w = new WriteConcern(1,2000);
 		mongoClient.setWriteConcern(w);
@@ -142,7 +145,7 @@ System.out.println(getClass()+"constructor call");
 	}
 
 	@Override
-	public long getTotalCount(Search search) throws Exception {
+	public long getTotalCount(SearchStream search) throws Exception {
 		// TODO Auto-generated method stub
 		MongoClientURI uri  = new MongoClientURI("mongodb://localhost:27017/stream"); 
         MongoClient mongoClient = new MongoClient(uri);

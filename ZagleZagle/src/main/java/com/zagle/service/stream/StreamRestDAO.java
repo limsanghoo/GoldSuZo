@@ -6,15 +6,16 @@ import java.util.Map;
 import org.json.simple.JSONObject;
 
 import com.zagle.common.Search;
+import com.zagle.service.domain.SearchStream;
 import com.zagle.service.domain.Stream;
 
-public interface StreamRestDao {
+public interface StreamRestDAO {
 
-	public List<JSONObject> listMongo(Search search)throws Exception;
+	public List<JSONObject> listMongo(SearchStream search)throws Exception;
 	
 	public void addMongo(Stream stream)throws Exception;
 	
-	public long getTotalCount(Search search)throws Exception;
+	public long getTotalCount(SearchStream search)throws Exception;
 	
 	public Map<String,Object>kakaopayStream(Map<String,Object>map)throws Exception;
 	

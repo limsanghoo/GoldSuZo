@@ -9,20 +9,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import com.zagle.common.Search;
+
 import com.zagle.service.domain.Refund;
+import com.zagle.service.domain.SearchStream;
 import com.zagle.service.domain.Stream;
-import com.zagle.service.stream.StreamDao;
+import com.zagle.service.stream.StreamDAO;
 
 
 @Repository("streamDAOImpl")
-public class StreamDaoImpl  implements StreamDao{
+public class StreamDAOImpl  implements StreamDAO{
 
 	@Autowired
 	@Qualifier("sqlSessionTemplate")
 	private SqlSession sqlSession;
 	
-	public StreamDaoImpl() {
+	public StreamDAOImpl() {
 		System.out.println(this.getClass());
 	}
 	
@@ -38,17 +39,20 @@ public class StreamDaoImpl  implements StreamDao{
 		map.put("userNo",stream.getUser().getUserNo());
 		map.put("streamTitle",stream.getStreamTitle());
 		map.put("streamContent",stream.getStreamContent());
+		System.out.println("streamdaoimpl=="+map);
+		sqlSession.insert("StreamMapper.addStream", map);
+		
 	}
 
 	@Override
-	public List<Stream> listRefund(Search search, String grade) throws Exception {
+	public List<Stream> listRefund(SearchStream search, String grade) throws Exception {
 		// TODO Auto-generated method stub
 		
 		return null;
 	}
 
 	@Override
-	public int getTotalCount(Search search) throws Exception {
+	public int getTotalCount(SearchStream search) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
 	}

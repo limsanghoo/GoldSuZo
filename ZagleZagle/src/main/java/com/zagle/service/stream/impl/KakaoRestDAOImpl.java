@@ -5,14 +5,15 @@ import java.util.Map;
 
 import org.json.simple.JSONObject;
 
-import com.zagle.common.Search;
-import com.zagle.service.domain.Stream;
-import com.zagle.service.stream.StreamRestDao;
 
-public class NaverRestDaoImpl  implements StreamRestDao {
+import com.zagle.service.domain.SearchStream;
+import com.zagle.service.domain.Stream;
+import com.zagle.service.stream.StreamRestDAO;
+
+public class KakaoRestDAOImpl implements StreamRestDAO {
 
 	@Override
-	public List<JSONObject> listMongo(Search search) throws Exception {
+	public List<JSONObject> listMongo(SearchStream search) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -60,7 +61,7 @@ public class NaverRestDaoImpl  implements StreamRestDao {
 	}
 
 	@Override
-	public long getTotalCount(Search search) throws Exception {
+	public long getTotalCount(SearchStream search) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
 	}

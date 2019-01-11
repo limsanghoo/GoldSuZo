@@ -8,18 +8,18 @@
  	
  	
 	<resultMap id="streamSelectMap" type="stream">
-		<result property="streamNo" 			column="stream_no" 			jdbcType="VARCHAR"/>
-		<result property="user.userNo"	column="user_no" 		jdbcType="VARCHAR" />
-		<result property="streamLikeCount" 	column="stream_like" 		jdbcType="NUMERIC" />
-		<result property="streamDate" 				column="stream_date" 					jdbcType="DATE" />
-		<result property="streamTitle" 				column="stream_title" 					jdbcType="VARCHAR" />
-		<result property="streamContent" 			column="stream_content" 		jdbcType="VARCHAR" />
+		<result property="streamNo" 			column="stream_no" 		jdbcType="VARCHAR"/>
+		<result property="user.userNo"	column="user_no" 		          jdbcType="VARCHAR" />
+		<result property="streamLikeCount" 	column="stream_like" 		  jdbcType="NUMERIC" />
+		<result property="streamDate" 				column="stream_date"   jdbcType="DATE" />
+		<result property="streamTitle" 				column="stream_title" 	jdbcType="VARCHAR" />
+		<result property="streamContent" 			column="stream_content" jdbcType="VARCHAR" />
 	</resultMap>
 	
 	<!-- SQL : INSERT -->
-	<insert 	id="addStream"		parameterType="java.util.Map" >
+	<insert 	id="addStream"		parameterType="map" >
 	 INSERT INTO stream(stream_no,user_no,stream_like,stream_date,stream_title,stream_content)
-	 VALUES('ST'||seq_st.nextval,#{userNo},0,sysdate,#{streamTitle},#{streamContent});	
+	 VALUES('ST'||seq_st.nextval,#{userNo},0,sysdate,#{streamTitle},#{streamContent})	
 	</insert>
 	 	 
 	 
