@@ -15,8 +15,8 @@
 	<!-- FQCN(Full Qualified Class Name) Alias(별칭관리) -->
 	<typeAliases>
 		<typeAlias alias="user" type="com.zagle.service.domain.User" />
-		<typeAlias alias="user" type="com.zagle.service.domain.Board" />
-		<typeAlias alias="user" type="com.zagle.service.domain.Stream" />
+		<typeAlias alias="board" type="com.zagle.service.domain.Board" />
+		<typeAlias alias="stream" type="com.zagle.service.domain.Stream" />
 		<typeAlias alias="search" type="com.zagle.common.Search" />
 	</typeAliases>
 	
