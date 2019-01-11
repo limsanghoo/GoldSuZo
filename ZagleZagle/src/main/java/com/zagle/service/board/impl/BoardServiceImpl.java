@@ -34,7 +34,7 @@ public class BoardServiceImpl implements BoardService{
 		this.restBoardDAO=RestBoardDAO;
 	}*/
 	
-	@Autowired
+	/*@Autowired
 	@Qualifier("kakaoRestDAOImpl")
 	private KaKaoRestDAOImpl kakaoRestDAOImpl;
 	public void setKaKaoRestDAOImpl(KaKaoRestDAOImpl kakaoRestDAOImpl) {
@@ -46,7 +46,7 @@ public class BoardServiceImpl implements BoardService{
 	private DaumRestDAOImpl daumRestDAOImpl;
 	public void setDaumRestDAOImpl(DaumRestDAOImpl daumRestDAOImpl) {
 		this.daumRestDAOImpl=daumRestDAOImpl;
-	}
+	}*/
 
 	@Override
 	public void addBoard(Board board) throws Exception {
