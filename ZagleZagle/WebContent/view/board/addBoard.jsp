@@ -24,8 +24,8 @@ $(function(){
 		if(boardDetailText==""){
 			alert("내용을 입력해라");
 		}
-		
-		$("form").attr("method" , "POST").attr("action" , "/board/addBoard").attr("enctype","multipart/form-data").submit();
+			//$("form").attr("method" , "POST").attr("enctype","multipart/form-data").attr("action" , "/board/addBoard").submit();
+			$("form").attr("method" , "POST").attr("action" , "/board/addBoard").submit();
 		
 	})
 });
@@ -49,19 +49,6 @@ function fileInfo(f){
 		}	
 		
 		reader.readAsDataURL(file[i]); // 파일을 읽는다
-		
-
-				
-		/* /////////////////////////////////링크 추가		
-				reader.onload = function(rst){
-					if(i=0){
-						$('#img_box').append('<div style="position: relative;"><div style="position: relative; top: 120px; left: 76px;"><img src="/images/addLink.jpg"></img></div></div><img src="'+rst.target.result+'">');
-					}else if(i=1){
-						$('#img_box').append('<img src="'+rst.target.result+'">');
-					}
-				}
-				reader.readAsDataURL(file[i]); // 파일을 읽는다	
-		///////////////////////////////////////	 */	
 				
 	}
 
@@ -107,12 +94,13 @@ function fileInfo(f){
 </div>
 <br/>
 
+</form>
+
 <div>
 	<input type="button" id="submit" value="등록"/>
 	<input type="button" id="cancel" value="취소"/>
 </div>
 
-</form>
 </body>
 
 </html>
