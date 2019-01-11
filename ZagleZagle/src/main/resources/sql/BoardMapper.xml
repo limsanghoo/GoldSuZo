@@ -6,7 +6,7 @@
 
 <mapper namespace="BoardMapper">
 	
-	<resultMap type="board" id="boardSelectMap">
+	<resultMap type="com.zagle.service.domain.Board" id="boardSelectMap">
 		<result property="boardNo"	column="board_no"	jdbcType="VARCHAR"/>
 		<result property="user.userNo"	column="user_no"	jdbcType="VARCHAR"/>
 		<result	property="boardDetailText"	column="board_detail_text"	jdbcType="VARCHAR"/>
@@ -25,81 +25,11 @@
 	
 	<!-- SQL : INSERT -->
 	 
-	 <insert 	id="addBoard"		parameterType="board" >
+	 <insert 	id="addBoard"	parameterType="com.zagle.service.domain.Board" >
 	 	INSERT
 		INTO board(board_no, user_no, board_detail_text, hash_tag, user_theme, board_reg_date, board_status, photo1, photo2, photo3, coord, address)
 		VALUES('BD'||seq_bd.nextval,#{user.userNo},#{boardDetailText},#{hashTag},#{userTheme},sysdate,#{boardStatus},#{photo1},#{photo2},#{photo3},#{coord},#{address})
 	 </insert>
 
-	 
-	 
-	 
-	 <!-- SQL : SELECT ONE -->
-	 <select 	id="getUser"	parameterType="string"	resultMap="userSelectMap">
-		SELECT
-		user_id , user_name , password , role ,  cell_phone ,  addr , email , reg_date 		
-		FROM users 
-		WHERE user_id = #{value}
-	 </select>
-	 
-	 <!-- SQL : UPDATE -->
-	 <update	id="updateUser"	parameterType="user" >
-	   	UPDATE users
-	   	<set>
-	   		user_name 	= #{userName} ,
-			cell_phone	= #{phone},
-			addr 				= #{addr} ,
-			email				=	#{email}
-	   	</set>
-	   	WHERE user_id = #{userId}
-	 </update>
-		 
-	<!-- SQL : SELECT LIST -->
-	<select  id="getUserList"  parameterType="search"	resultMap="userSelectMap">
-	  	SELECT *
-	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT user_id , user_name , email
-											FROM users
-											<if test="searchCondition != null">
-												<where>
-													<if test="searchCondition == 0 and searchKeyword !='' ">
-										 				user_id = #{searchKeyword}
-													</if>
-													<if test="searchCondition == 1 and searchKeyword !='' ">
-										 				user_name = #{searchKeyword}
-													</if>
-												</where>
-											</if>
-											ORDER BY user_id ) inner_table
-						WHERE ROWNUM &lt;= #{endRowNum} )
-		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
-	 </select>
-	 	<!--  위 두번째 subQuery 의  
-	 			WHERE ROWNUM &lt;= #{endRowNum} ) 는
-	 			WHERE ROWNUM <= #{endRowNum} ) 의미이며..
-	 			< 는 keyword 로 &lt; 를	사용.
-	 			
-	 			<![CDATA[  ~~~  ]]> 를 이용하여 아래와 같이 사용  할 수 있다.
-	 			CDATA ==> Character Data 의 의미 Java 에서 \n 같은 특수문자 처리  
-
-				WHERE ROWNUM <![CDATA[ <=]]> #{endRowNum} )
-		-->
-	
-	<!-- SQL : SELECT ROW Count -->	 
-	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
-	  	SELECT COUNT(*)
-	  	FROM(	SELECT user_id , user_name , email
-						FROM users
-						<if test="searchCondition != null">
-							<where>
-								<if test="searchCondition == 0 and searchKeyword !='' ">
-						 			user_id = #{searchKeyword}
-								</if>
-								<if test="searchCondition == 1 and searchKeyword !='' ">
-						 		user_name = #{searchKeyword}
-								</if>
-							</where>
-						</if> ) countTable						
-	 </select>
 	 
 </mapper>
