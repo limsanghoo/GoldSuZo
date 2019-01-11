@@ -1,5 +1,7 @@
 package com.zagle.web.user;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.zagle.service.domain.User;
 import com.zagle.service.user.UserService;
@@ -107,4 +110,20 @@ public class UserController {
 		
 		return modelAndView;
 	}
+	
+	@RequestMapping(value="kakaologin", produces="application/json", 
+				method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView kakaoCallBack(@RequestParam("code") String code, RedirectAttributes ra, 
+								HttpSession session, HttpServletResponse response) throws Exception{
+	
+	System.out.println("code: "+code);
+	
+	ModelAndView modelAndView = new ModelAndView();
+	modelAndView.addObject("code", code);
+	modelAndView.setViewName("/view/user/kakaologin.jsp");
+
+	return modelAndView;
+	
+	}
+	
 }
