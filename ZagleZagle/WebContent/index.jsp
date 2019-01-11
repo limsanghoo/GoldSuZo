@@ -43,7 +43,7 @@
 
 	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   : container part..... -->
 	<div class="container">
-	<p><img src='http://newsimg.hankookilbo.com/2016/04/13/201604131460701467_1.jpg' style="width: 1000px; height: 1000px; overflow: hidden" title='intro.jpg'/></p>
+	<p><img src='/common/images/201604131460701467_1.jpg' style="width: 1000px; height: 1000px; overflow: hidden" /></p>
   	 </div>
 
 </body>
