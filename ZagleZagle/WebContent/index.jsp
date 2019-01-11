@@ -17,13 +17,6 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	
-	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-   
-    <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-	
 	<!--  CSS 추가 : 툴바에 화면 가리는 현상 해결 :  주석처리 전, 후 확인-->
 	<style>
         body {
@@ -43,19 +36,14 @@
    	<div class="container ">
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1>써버열린거다 </h1>
+        <h1>써버열린거다!!!!!!!!</h1>
         
      </div>
     </div>
 
 	<!-- 참조 : http://getbootstrap.com/css/   : container part..... -->
 	<div class="container">
-        <h3>나폴레옹은 이렇게 말했다.</h3>
-        <p>"오늘 나의 불행은 언젠가 내가 잘못 보낸 시간의 보복이다."</p>
-  	 	<h3>"... 장벽은 절실하게 원하지 않는 사람들을 걸러내려고 존재합니다. 장벽은. 당신이 아니라 '다른' 사람들을 멈추게 하려고 거기 있는 것이지요."</h3>
-         <h3>혜광스님</h3>
-         <p>행복한 삶의 비결은.</p>
-          <img src="/images/intro.jpg" style="width: 300px; height: 240px; overflow: hidden" class="img-thumbnail" />
+	<p><img src='http://newsimg.hankookilbo.com/2016/04/13/201604131460701467_1.jpg' style="width: 1000px; height: 1000px; overflow: hidden" title='intro.jpg'/></p>
   	 </div>
 
 </body>
