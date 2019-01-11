@@ -59,5 +59,11 @@ public class InicisRestDaoImpl  implements StreamRestDao {
 		return null;
 	}
 
+	@Override
+	public long getTotalCount(Search search) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	
 }

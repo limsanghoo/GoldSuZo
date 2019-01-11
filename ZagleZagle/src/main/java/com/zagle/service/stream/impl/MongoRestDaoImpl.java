@@ -142,5 +142,18 @@ System.out.println(getClass()+"constructor call");
 		return null;
 	}
 
+	@Override
+	public long getTotalCount(Search search) throws Exception {
+		// TODO Auto-generated method stub
+		MongoClientURI uri  = new MongoClientURI("mongodb://localhost:27017/stream"); 
+        MongoClient mongoClient = new MongoClient(uri);
+        DB db = mongoClient.getDB(uri.getDatabase());
+		System.out.println("MONGODB SUCCESS");
+		
+		DBCollection dbcoll = db.getCollection("streams");
+		long dbsize = dbcoll.count();
+		return dbsize;
+	}
+
 	
 }

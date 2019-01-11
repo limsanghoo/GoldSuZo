@@ -58,7 +58,7 @@ public class StreamServiceImpl implements StreamService{
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<JSONObject> list = streamRestDao.listMongo(search);
-		int count = (int)streamDao.getTotalCount(search);
+		int count = (int)streamRestDao.getTotalCount(search);
 		
 		System.out.println("count::"+ count );
 		map.put("list", list);

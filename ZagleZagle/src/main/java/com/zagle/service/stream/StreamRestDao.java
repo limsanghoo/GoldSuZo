@@ -14,7 +14,7 @@ public interface StreamRestDao {
 	
 	public void addMongo(Stream stream)throws Exception;
 	
-	//public int getTotalCount(Search search)throws Exception;
+	public long getTotalCount(Search search)throws Exception;
 	
 	public Map<String,Object>kakaopayStream(Map<String,Object>map)throws Exception;
 	

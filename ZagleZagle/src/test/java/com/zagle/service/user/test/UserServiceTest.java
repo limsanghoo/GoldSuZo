@@ -29,7 +29,7 @@ public class UserServiceTest {
 	public void testAddUser() throws Exception {
 		
 		User user = new User();
-		user.setUserNo("US10005");
+		user.setUserNo("US10003");
 		user.setUserName("임상후");
 		user.setPhone("01012345678");
 		user.setUserNickname("Joey");
@@ -41,7 +41,7 @@ public class UserServiceTest {
 		
 		userService.addUser(user);
 		
-		user = userService.getUser("US10005");
+		user = userService.getUser("US10003");
 		
 		
 		Assert.assertEquals("US10005", user.getUserNo());
