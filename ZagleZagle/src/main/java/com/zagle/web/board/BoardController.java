@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +24,8 @@ import com.zagle.service.chat.ChatService;
 import com.zagle.service.domain.Board;
 import com.zagle.service.domain.Comment;
 import com.zagle.service.domain.Report;
+import com.zagle.service.domain.SearchBoard;
+import com.zagle.service.domain.User;
 import com.zagle.service.user.UserService;
 
 
@@ -67,13 +71,9 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="addBoard", method=RequestMethod.POST)
-	public ModelAndView addBoard(@ModelAttribute("board") Board board, @RequestParam("userNo") int userNo, MultipartHttpServletRequest mtfRequest) throws Exception{
+	public ModelAndView addBoard(@ModelAttribute("board") Board board, @RequestParam("userNo") String userNo, MultipartHttpServletRequest mtfRequest) throws Exception{
 		
 		System.out.println("/addBoard POST");
-		
-		System.out.println(board);
-		
-		System.out.println(userNo);
 		
 		String finalFileName="";
 		
@@ -81,7 +81,7 @@ public class BoardController {
         /*String src = mtfRequest.getParameter("src");
         System.out.println("src value : " + src);*/
 
-        String path = "C:\\workspace\\ZagleTest\\WebContent\\images\\uploadFiles";
+        String path = "C:\\Users\\Bit\\git\\GoldSuZo\\ZagleZagle\\WebContent\\common\\images\\board";
 
         for (MultipartFile mf : fileList) {
             String originFileName = mf.getOriginalFilename(); // 원본 파일 명
@@ -124,8 +124,17 @@ public class BoardController {
         	board.setPhoto3(photo[2]);
         }
 
+		board.setUser(userService.getUser(userNo));
+		board.setBoardStatus("1");
 		
+		System.out.println(board);
+		
+		boardService.addBoard(board);
+        
 		ModelAndView modelAndView=new ModelAndView();
+	
+		modelAndView.setViewName("redirect:/board/listBoard");//뒤에 파라미터 넣기
+		
 		
 		return modelAndView;
 	}
@@ -219,7 +228,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="listBoard", method=RequestMethod.GET)
-	public ModelAndView listBoard() throws Exception{
+	public ModelAndView listBoard(@ModelAttribute("searchBoard") SearchBoard searchBoard, HttpServletRequest request) throws Exception{
 		
 		ModelAndView modelAndView=new ModelAndView();
 		

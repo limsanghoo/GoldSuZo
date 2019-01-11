@@ -23,12 +23,11 @@
 	
 	
 	
-	<!-- SQL : INSERT -->
-	 
+	<!-- SQL : INSERT -->	 
 	 <insert 	id="addBoard"	parameterType="board" >
 	 	INSERT
 		INTO board(board_no, user_no, board_detail_text, hash_tag, user_theme, board_reg_date, board_status, photo1, photo2, photo3, coord, address)
-		VALUES('BD'||seq_bd.nextval,#{user.userNo},#{boardDetailText},#{hashTag},#{userTheme},sysdate,#{boardStatus},#{photo1},#{photo2},#{photo3},#{coord},#{address})
+		VALUES('BD'||seq_bd.nextval,#{user.userNo},#{boardDetailText},#{hashTag:VARCHAR},#{userTheme},sysdate,#{boardStatus},#{photo1:VARCHAR},#{photo2:VARCHAR},#{photo3:VARCHAR},#{coord:VARCHAR},#{address:VARCHAR})
 	 </insert>
 
 	 
