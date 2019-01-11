@@ -19,29 +19,29 @@
 		<result property="grade" 								column="grade" 						jdbcType="VARCHAR" />
 		<result property="snsName" 						column="sns_name"					jdbcType="VARCHAR"/>
 		<result property="bankName"						column="bank_name"				jdbcType="VARCHAR"/>
-		<result property="regDate"							column="reg_date"					jdbcType="DATE"		/>
+		<result property="regDate"							column="reg_date"					jdbcType="DATE"/>
 		<result property="blackCode"						column="black_code"				jdbcType="VARCHAR" />
 		<result property="account"							column="account"						jdbcType="VARCHAR"/>
-		<result property="userBirth"							column="user_birth" 					jdbcType="VARCHAR"/>
-		<result property="deleteCount"					column="delete_count"				jdbcType="NUMERIC"/>
-		<result property="totalActiveScore"				column="total_active_score"	jdbcType="NUMERIC"/>
+		<result property="userBirth"							column="user_birth" 					jdbcType="INTEGER"/>
+		<result property="deleteCount"					column="delete_count"				jdbcType="INTEGER"/>
+		<result property="totalActiveScore"				column="total_active_score"	jdbcType="INTEGER"/>
 	</resultMap>
 	
 	<!-- SQL : INSERT -->
 	<insert 	id="addUser"		parameterType="user" >
 	 	INSERT
 		INTO users( user_no , sns_no , user_name , user_nickname , phone, user_sex, user_addr, profile , grade, sns_name, 
-															bank_name, reg_date, black_code, account, user_birh, delete_count, total_active_score) 
+															bank_name, reg_date, black_code, account, user_birth, delete_count, total_active_score) 
 															
-		VALUES	 (	#{snsNo} , #{userName} , #{userNickname} , #{phone}, #{userSex} , #{userAddr} , #{profile}, #{grade}, #{snsName} 
-							, #{bankName}, SYSDATE , #{blackCode} , #{account} , #{userBirth}, #{deleteCount}, #{totalActiveScore} )
+		VALUES	 (	'US'||seq_us.nextval, #{snsNo:VARCHAR} , #{userName:VARCHAR} , #{userNickname:VARCHAR} , #{phone:VARCHAR}, #{userSex:VARCHAR} , #{userAddr:VARCHAR} ,#{profile:VARCHAR}, #{grade:VARCHAR}, #{snsName:VARCHAR} 
+							, #{bankName:VARCHAR}, SYSDATE , 0 , #{account:VARCHAR} , #{userBirth:INTEGER}, 0, 0)
 	 </insert>
 	 
 	 <!-- SQL : SELECT ONE -->
 	 <select 	id="getUser"	parameterType="string"	resultMap="userSelectMap">
-		SELECT
-			user_name , phone , user_nickname , user_birth , user_addr, profile, total_active_score, 
-			reg_date,grade,account,bank_name	
+		SELECT*
+			<!--user_name , phone , user_nickname , user_birth , user_addr, profile, total_active_score, 
+			reg_date,grade,account,bank_name	  -->
 		FROM users 
 		WHERE user_no = #{value}
 	 </select>
@@ -50,60 +50,15 @@
 	 <update	id="updateUser"	parameterType="user" >
 	   	UPDATE users
 	   	<set>
-	   		user_name 	= #{userName} ,
-			cell_phone	= #{phone},
-			addr 				= #{addr} ,
-			email				=	#{email}
+	   		user_name 			= #{userName:VARCHAR} ,
+			phone						= 	#{phone:VARCHAR},
+			user_nickname 		= #{userNickname:VARCHAR} ,
+			user_birth				=	#{userBirth:INTEGER},
+			user_sex					= #{userSex:VARCHAR},
+			user_addr				=	#{userAddr:VARCHAR},
+			profile						=	#{profile:VARCHAR}
+			
 	   	</set>
-	   	WHERE user_id = #{userId}
+	   	WHERE user_no = #{userNo}
 	 </update>
-		 
-	<!-- SQL : SELECT LIST -->
-	<select  id="getUserList"  parameterType="search"	resultMap="userSelectMap">
-	  	SELECT *
-	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT user_id , user_name , email
-											FROM users
-											<if test="searchCondition != null">
-												<where>
-													<if test="searchCondition == 0 and searchKeyword !='' ">
-										 				user_id = #{searchKeyword}
-													</if>
-													<if test="searchCondition == 1 and searchKeyword !='' ">
-										 				user_name = #{searchKeyword}
-													</if>
-												</where>
-											</if>
-											ORDER BY user_id ) inner_table
-						WHERE ROWNUM &lt;= #{endRowNum} )
-		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
-	 </select>
-	 	<!--  위 두번째 subQuery 의  
-	 			WHERE ROWNUM &lt;= #{endRowNum} ) 는
-	 			WHERE ROWNUM <= #{endRowNum} ) 의미이며..
-	 			< 는 keyword 로 &lt; 를	사용.
-	 			
-	 			<![CDATA[  ~~~  ]]> 를 이용하여 아래와 같이 사용  할 수 있다.
-	 			CDATA ==> Character Data 의 의미 Java 에서 \n 같은 특수문자 처리  
-
-				WHERE ROWNUM <![CDATA[ <=]]> #{endRowNum} )
-		-->
-	
-	<!-- SQL : SELECT ROW Count -->	 
-	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
-	  	SELECT COUNT(*)
-	  	FROM(	SELECT user_id , user_name , email
-						FROM users
-						<if test="searchCondition != null">
-							<where>
-								<if test="searchCondition == 0 and searchKeyword !='' ">
-						 			user_id = #{searchKeyword}
-								</if>
-								<if test="searchCondition == 1 and searchKeyword !='' ">
-						 		user_name = #{searchKeyword}
-								</if>
-							</where>
-						</if> ) countTable						
-	 </select>
-	 
 </mapper>
