@@ -22,6 +22,9 @@ import com.zagle.service.user.UserService;
 @RequestMapping("/board/*")
 public class BoardController {
 	
+	
+	
+	
 	@Autowired
 	@Qualifier("boardServiceImpl")
 	private BoardService boardService;
@@ -30,13 +33,13 @@ public class BoardController {
 	@Qualifier("userServiceImpl")
 	private UserService userService;
 	
-	@Autowired
+	/*@Autowired
 	@Qualifier("chatServiceImpl")
 	private ChatService chatService;
 	
 	@Autowired
 	@Qualifier("adminServiceImpl")
-	private AdminService adminService;
+	private AdminService adminService;*/
 	
 	public BoardController() {
 		System.out.println(this.getClass());

@@ -6,7 +6,7 @@
 
 <mapper namespace="BoardMapper">
 	
-	<resultMap type="com.zagle.service.domain.Board" id="boardSelectMap">
+	<resultMap type="board" id="boardSelectMap">
 		<result property="boardNo"	column="board_no"	jdbcType="VARCHAR"/>
 		<result property="user.userNo"	column="user_no"	jdbcType="VARCHAR"/>
 		<result	property="boardDetailText"	column="board_detail_text"	jdbcType="VARCHAR"/>
@@ -25,7 +25,7 @@
 	
 	<!-- SQL : INSERT -->
 	 
-	 <insert 	id="addBoard"	parameterType="com.zagle.service.domain.Board" >
+	 <insert 	id="addBoard"	parameterType="board" >
 	 	INSERT
 		INTO board(board_no, user_no, board_detail_text, hash_tag, user_theme, board_reg_date, board_status, photo1, photo2, photo3, coord, address)
 		VALUES('BD'||seq_bd.nextval,#{user.userNo},#{boardDetailText},#{hashTag},#{userTheme},sysdate,#{boardStatus},#{photo1},#{photo2},#{photo3},#{coord},#{address})
