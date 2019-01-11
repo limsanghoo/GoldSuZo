@@ -1,5 +1,9 @@
 package com.zagle.web.board;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -7,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.zagle.service.admin.AdminService;
@@ -60,9 +66,59 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="addBoard", method=RequestMethod.POST)
-	public ModelAndView addBoard(@ModelAttribute("board") Board board) throws Exception{
+	public ModelAndView addBoard(@ModelAttribute("board") Board board, MultipartHttpServletRequest mtfRequest) throws Exception{
 		
 		System.out.println("/addBoard POST");
+		
+		String finalFileName="";
+		
+		List<MultipartFile> fileList = mtfRequest.getFiles("file");
+        /*String src = mtfRequest.getParameter("src");
+        System.out.println("src value : " + src);*/
+
+        String path = "C:\\workspace\\ZagleTest\\WebContent\\images\\uploadFiles";
+
+        for (MultipartFile mf : fileList) {
+            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+            long fileSize = mf.getSize(); // 파일 사이즈
+
+            System.out.println("originFileName : " + originFileName);
+            System.out.println("fileSize : " + fileSize);
+
+            //String safeFile = path+ originFileName;
+            try {
+                mf.transferTo(new File(path, originFileName));
+            } catch (IllegalStateException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            
+            
+        finalFileName+=originFileName+",";
+        
+    		
+        }
+        
+        System.out.println("finalFileName : "+finalFileName);
+  
+        String[] photo=finalFileName.split(",");
+        
+        System.out.println(photo.length);
+        
+        if(photo.length==1) {
+        	board.setPhoto1(photo[0]);
+        }else if(photo.length==2) {
+        	board.setPhoto1(photo[0]);
+        	board.setPhoto2(photo[1]);
+        }else if(photo.length==3) {
+        	board.setPhoto1(photo[0]);
+        	board.setPhoto2(photo[1]);
+        	board.setPhoto3(photo[2]);
+        }
+
 		
 		ModelAndView modelAndView=new ModelAndView();
 		
