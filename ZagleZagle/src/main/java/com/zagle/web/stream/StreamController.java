@@ -60,7 +60,7 @@ public class StreamController {
 	
 	ModelAndView modelAndView = new ModelAndView();
 	modelAndView.addObject("streamer",stream.getUser().getUserNo());
-	modelAndView.addObject("userName",stream.getUser().getUserNickname());
+	modelAndView.addObject("userNo",stream.getUser().getUserNo());
 	modelAndView.setViewName("redirect:http://localhost:3000/stream/add");
 	return modelAndView;
 	}
