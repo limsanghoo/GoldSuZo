@@ -1,5 +1,14 @@
 package com.zagle.web.user;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,6 +33,7 @@ import com.zagle.service.user.UserService;
 @Controller
 @RequestMapping("/user/*")
 public class UserController {
+	
 	
 	///Field
 	@Autowired
@@ -120,10 +130,10 @@ public class UserController {
 	
 	ModelAndView modelAndView = new ModelAndView();
 	modelAndView.addObject("code", code);
-	modelAndView.setViewName("/view/user/kakaologin.jsp");
+	modelAndView.setViewName("getAccessToken");
 
 	return modelAndView;
 	
 	}
-	
+
 }

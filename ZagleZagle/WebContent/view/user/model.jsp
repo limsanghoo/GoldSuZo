@@ -8,15 +8,24 @@
 
 
 <script type="text/javascript">
- 
-var code = str(requset.rgs.get('code'))
 
+	JsonNode userInfo = UserRestController.getKaKaoUserInfo(accessToken); 
+	
+ 	String id = UserRestController.path("id").asText();
+ 	String name = null;
+ 	
+   console.log{"${id}"}
+   
+   JsonNode properties = userInfo.path("properties");
+ 	
+ 	
 </script>
 
 
 </head>
 <body>
 
+"${id}"
 컨트롤러 기능 확인용
 </body>
 </html>
