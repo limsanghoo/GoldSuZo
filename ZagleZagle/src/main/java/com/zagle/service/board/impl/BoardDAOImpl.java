@@ -1,5 +1,6 @@
 package com.zagle.service.board.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -53,15 +54,15 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
-	public Map<String, Object> listBoard(SearchBoard searhBoard) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Board> listBoard(SearchBoard searchBoard) throws Exception {
+	
+		return sqlSession.selectList("BoardMapper.listBoard", searchBoard);
 	}
 
 	@Override
 	public Board getBoard(String boardNo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	
+		return sqlSession.selectOne("BoardMapper.getBoard", boardNo);
 	}
 
 	@Override

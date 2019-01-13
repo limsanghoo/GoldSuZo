@@ -3,6 +3,7 @@ package com.zagle.web.board;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -132,7 +133,7 @@ public class BoardController {
         
 		ModelAndView modelAndView=new ModelAndView();
 	
-		modelAndView.setViewName("forward:/board/getBoard.jsp");
+		modelAndView.setViewName("forward:/view/board/getBoard.jsp");
 		
 		return modelAndView;
 	}
@@ -210,9 +211,21 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="getBoard", method=RequestMethod.GET)
-	public ModelAndView getBoard() throws Exception{
+	public ModelAndView getBoard(@RequestParam("boardNo") String boardNo) throws Exception{
+		
+		System.out.println("/getBoard");		
+		
+		Board board=boardService.getBoard(boardNo);
+		
+		User user=userService.getUser(board.getUser().getUserNo());
+		
+		board.setUser(user);
+		
+		System.out.println(board);
 		
 		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.addObject("board", board);
+		modelAndView.setViewName("forward:/view/board/getBoard.jsp");
 		
 		return modelAndView;
 	}
@@ -226,18 +239,26 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="listBoard", method=RequestMethod.GET)
-	public ModelAndView listBoard(@RequestParam("scale") String scale, @RequestParam("view") String view, @ModelAttribute("searchBoard") SearchBoard searchBoard, HttpServletRequest request) throws Exception{
+	public ModelAndView listBoard(@ModelAttribute("searchBoard") SearchBoard searchBoard, HttpServletRequest request) throws Exception{
 		
-		System.out.println("listBoard");
-		
-		System.out.println("scale : "+scale+", view : "+view);
+		System.out.println("/listBoard");
 		
 		System.out.println(searchBoard);
 		
+		if(searchBoard.getCurrentPage()==0) {
+			searchBoard.setCurrentPage(1);
+		}
 		
+		searchBoard.setPageSize(pageSize);
+		
+		Map<String , Object> map=boardService.listBoard(searchBoard);
+		
+		System.out.println("컨트롤러 map : "+map);
 		
 		ModelAndView modelAndView=new ModelAndView();
-		modelAndView.setViewName("forward:/view/board/listboard.jsp");
+		modelAndView.addObject("list", map.get("list"));
+		modelAndView.addObject("searchBoard", searchBoard);
+		modelAndView.setViewName("forward:/view/board/listBoard.jsp");
 		
 		return modelAndView;
 	}

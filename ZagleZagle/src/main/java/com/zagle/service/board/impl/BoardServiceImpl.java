@@ -1,5 +1,7 @@
 package com.zagle.service.board.impl;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,15 +67,21 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public Map<String, Object> listBoard(SearchBoard searhBoard) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<String, Object> listBoard(SearchBoard searchBoard) throws Exception {
+		List<Board> list=boardDAO.listBoard(searchBoard);
+		
+		System.out.println("******"+list);
+		
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("list", list);
+		
+		return map;
 	}
 
 	@Override
 	public Board getBoard(String boardNo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return boardDAO.getBoard(boardNo);
 	}
 
 	@Override
@@ -130,8 +138,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public Map<String, Object> listMap(Board board) throws Exception {
-		// TODO Auto-generated method stub
+	public Map<String, Object> listMap(SearchBoard searchBoard) throws Exception {
+		
 		return null;
 	}
 
