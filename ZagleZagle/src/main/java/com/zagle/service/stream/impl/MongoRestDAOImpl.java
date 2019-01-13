@@ -19,25 +19,28 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.WriteConcern;
 import com.zagle.common.Search;
+import com.zagle.service.domain.SearchStream;
 import com.zagle.service.domain.Stream;
-import com.zagle.service.stream.StreamRestDao;
+import com.zagle.service.stream.StreamRestDAO;
 
+@Repository("mongoRestDAOImpl")
+public class MongoRestDAOImpl implements StreamRestDAO{
 
-public class MongoRestDaoImpl implements StreamRestDao{
-	
+	@Autowired
+	@Qualifier("sqlSessionTemplate")
 	private SqlSession sqlSession;
-
+	
+	 
+	public MongoRestDAOImpl() {
+       System.out.println(getClass()+"constructor call");		
+	}
 	public void setSqlSession(SqlSession sqlSession) {
-		System.out.println(":: "+getClass()+" setSqlSession() Call.......");
 		this.sqlSession = sqlSession;
 	}
 	
-	public MongoRestDaoImpl() {
-System.out.println(getClass()+"constructor call");		
-	}
 	
 	@Override
-	public List<JSONObject> listMongo(Search search) throws Exception {
+	public List<JSONObject> listMongo(SearchStream search) throws Exception {
 		// TODO Auto-generated method stub
 		List<String> list = new ArrayList<String>();	
 		List<JSONObject> list2 = new ArrayList<JSONObject>();
@@ -85,6 +88,7 @@ System.out.println(getClass()+"constructor call");
 		DB db = mongoClient.getDB(uri.getDatabase());
 		
 		System.out.println("몽고디비 성공");
+		System.out.println(stream.getUser().getProfile());
 		
 		DBCollection dbcoll = db.getCollection("streams");
 		
@@ -93,17 +97,46 @@ System.out.println(getClass()+"constructor call");
 		
 		BasicDBObject addObject = new BasicDBObject();
 		
-		addObject.put("streamer",stream.getStreamNo());
-		addObject.put("streamerProfile", stream.getUser().getProfile());
-		addObject.put("streamNickname", stream.getUser().getUserNickname());
+		addObject.put("streamer",stream.getUser().getUserNo());
+		addObject.put("streamerProfile","default.jpg");
+		addObject.put("streamNickname",stream.getUser().getUserNickname());
 		addObject.put("streamTitle",stream.getStreamTitle());
-		addObject.put("streamContent", stream.getStreamContent());
+		addObject.put("streamContent",stream.getStreamContent());
 		addObject.put("streamLikeCount",0);
 		addObject.put("streamViewCount",0);
-		
 	    dbcoll.insert(addObject);
         mongoClient.close();       
 	}
+	
+	@Override
+	public void joinMongo(Map<String,Object> map) throws Exception {
+	
+		System.out.println("StreamRestDao입니다");
+		MongoClientURI uri = new MongoClientURI("mongodb://localhost:27017/stream");
+		MongoClient mongoClient = new MongoClient(uri);
+		DB db = mongoClient.getDB(uri.getDatabase());
+		
+		
+		System.out.println("몽고디비 성공 JoinMongo");
+		
+		ArrayList list = new ArrayList();
+		
+		list.add(map.get("userNo"));
+		list.add(map.get("userProfile"));
+		list.add(map.get("userNickname"));
+		
+		DBCollection dbcoll = db.getCollection("streams");
+		
+		WriteConcern w = new WriteConcern(1,2000);
+		mongoClient.setWriteConcern(w);
+		
+		 BasicDBObject updateQuery = new BasicDBObject().append("$set", new BasicDBObject().append("streamer",map.get("streamer")));
+	        BasicDBObject searchQuery = new BasicDBObject().append("join",list);
+	        dbcoll.update(searchQuery, updateQuery);
+	        mongoClient.close();       
+	}
+	
+	
 
 	@Override
 	public Map<String, Object> kakaopayStream(Map<String, Object> map) throws Exception {
@@ -142,7 +175,7 @@ System.out.println(getClass()+"constructor call");
 	}
 
 	@Override
-	public long getTotalCount(Search search) throws Exception {
+	public long getTotalCount(SearchStream search) throws Exception {
 		// TODO Auto-generated method stub
 		MongoClientURI uri  = new MongoClientURI("mongodb://localhost:27017/stream"); 
         MongoClient mongoClient = new MongoClient(uri);

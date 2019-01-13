@@ -1,5 +1,16 @@
 package com.zagle.web.user;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.zagle.service.domain.User;
 import com.zagle.service.user.UserService;
@@ -21,6 +33,7 @@ import com.zagle.service.user.UserService;
 @Controller
 @RequestMapping("/user/*")
 public class UserController {
+	
 	
 	///Field
 	@Autowired
@@ -107,4 +120,20 @@ public class UserController {
 		
 		return modelAndView;
 	}
+	
+	@RequestMapping(value="kakaologin", produces="application/json", 
+				method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView kakaoCallBack(@RequestParam("code") String code, RedirectAttributes ra, 
+								HttpSession session, HttpServletResponse response) throws Exception{
+	
+	System.out.println("code: "+code);
+	
+	ModelAndView modelAndView = new ModelAndView();
+	modelAndView.addObject("code", code);
+	modelAndView.setViewName("getAccessToken");
+
+	return modelAndView;
+	
+	}
+
 }

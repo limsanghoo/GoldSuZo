@@ -9,6 +9,8 @@
 	<resultMap type="board" id="boardSelectMap">
 		<result property="boardNo"	column="board_no"	jdbcType="VARCHAR"/>
 		<result property="user.userNo"	column="user_no"	jdbcType="VARCHAR"/>
+		<result property="user.profile"	column="profile"	jdbcType="VARCHAR"/>
+		<result property="user.userNickname" column="user_nickname"	jdbcType="VARCHAR"/>
 		<result	property="boardDetailText"	column="board_detail_text"	jdbcType="VARCHAR"/>
 		<result	property="hashTag"	column="hash_tag"	jdbcType="VARCHAR"/>
 		<result	property="userTheme"	column="user_theme"	jdbcType="VARCHAR"/>
@@ -22,14 +24,27 @@
 	</resultMap>
 	
 	
-	
-	<!-- SQL : INSERT -->
 	 
 	 <insert 	id="addBoard"	parameterType="board" >
 	 	INSERT
 		INTO board(board_no, user_no, board_detail_text, hash_tag, user_theme, board_reg_date, board_status, photo1, photo2, photo3, coord, address)
-		VALUES('BD'||seq_bd.nextval,#{user.userNo},#{boardDetailText},#{hashTag},#{userTheme},sysdate,#{boardStatus},#{photo1},#{photo2},#{photo3},#{coord},#{address})
+		VALUES('BD'||seq_bd.nextval,#{user.userNo},#{boardDetailText},#{hashTag:VARCHAR},#{userTheme},sysdate,#{boardStatus},#{photo1:VARCHAR},#{photo2:VARCHAR},#{photo3:VARCHAR},#{coord:VARCHAR},#{address:VARCHAR})
 	 </insert>
+	 
+	 
+	<select id="listBoard" parameterType="com.zagle.service.domain.SearchBoard" resultMap="boardSelectMap">
+		SELECT DISTINCT u.user_no, u.profile, u.user_nickname, b.board_no, b.photo1, b.board_detail_text, b.hash_tag, b.user_theme, b.coord, b.board_reg_date
+		FROM users u, board b
+		WHERE u.user_no=b.user_no
+		ORDER BY b.board_reg_date DESC
+	 </select>
+	 
+	 
+	 <select id="getBoard" parameterType="int"	resultMap="boardSelectMap">
+	 	SELECT *
+	 	FROM board
+	 	WHERE board_no=#{value}
+	 </select>
 
 	 
 </mapper>

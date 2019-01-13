@@ -1,18 +1,21 @@
 package com.zagle.service.stream;
 
+import com.zagle.service.domain.SearchStream;
 import com.zagle.service.domain.Stream;
 
 import java.util.Map;
 
-import com.zagle.common.*;
 public interface StreamService {
 	
 
 	public void addStream(Stream stream)throws Exception;
 	
-	public Map<String,Object> listStream(Search search)throws Exception;
+	public void joinStream(Map<String,Object> map)throws Exception;
 	
-	public Map<String,Object> listRefund(Search search,String grade)throws Exception; 
+	
+	public Map<String,Object> listStream(SearchStream search)throws Exception;
+	
+	public Map<String,Object> listRefund(SearchStream search,String grade)throws Exception; 
 	
 	public String kakaopayStream(Map<String,Object> map)throws Exception;
 	

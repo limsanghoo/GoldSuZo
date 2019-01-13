@@ -16,11 +16,11 @@ public class User {
 	private String grade;
 	private String snsName;
 	private String bankName;
+	private String account;
 	
 	private Date regDate;
 	
 	private int blackCode;
-	private int account;
 	private int userBirth;
 	private int deleteCount;
 	private int totalActiveScore;
@@ -141,11 +141,11 @@ public class User {
 		this.regDate = regDate;
 	}
 
-	public int getAccount() {
+	public String getAccount() {
 		return account;
 	}
 
-	public void setAccount(int account) {
+	public void setAccount(String account) {
 		this.account = account;
 	}
 
