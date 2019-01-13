@@ -1,5 +1,7 @@
 package com.zagle.web.stream;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.zagle.service.domain.SearchStream;
@@ -26,6 +27,9 @@ public class StreamController {
 	@Autowired
 	@Qualifier("streamServiceImpl")
 	private StreamService streamService;
+	
+	@Autowired
+	@Qualifier("userServiceImpl")
 	private UserService userService;
 	
 	public StreamController() {
@@ -40,18 +44,29 @@ public class StreamController {
 	//@Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
 	
-	@RequestMapping(value="addStream",method=RequestMethod.GET)
-	public ModelAndView addStream(@RequestParam("userNo")String userNo,@ModelAttribute("stream")Stream stream) throws Exception{
-		
-	User user = userService.getUser(userNo);
+	@RequestMapping(value="addStream",method=RequestMethod.POST)
+	public ModelAndView addStream(@ModelAttribute("stream")Stream stream) throws Exception{
+		System.out.println("Add controlloer");
+		System.out.println("stream모델 받은거"+stream);
+		String stringdate = "2018-01-11";
+		Date date = new SimpleDateFormat("yyyy-MM-dd").parse(stringdate);
+		System.out.println(date);
+		User user = userService.getUser("US10001");
+		System.out.println(user);
+		stream.setUser(user);
+		stream.setStreamDate(date);
+		System.out.println("addStream[stream]="+stream);
+		streamService.addStream(stream);
 	
-	stream.setUser(user);
-	System.out.println("addStream[stream]="+stream);
-	streamService.addStream(stream);
-	
-	ModelAndView modelAndView = new ModelAndView("redirect:localhost:3000/streamer="+user.getUserNo()+"&userName="+user.getUserNickname());
+	ModelAndView modelAndView = new ModelAndView();
+	modelAndView.addObject("streamer",stream.getUser().getUserNo());
+	modelAndView.addObject("userName",stream.getUser().getUserNickname());
+	modelAndView.setViewName("redirect:http://localhost:3000/stream/add");
 	return modelAndView;
 	}
+	
+	
+	
 	
 	@RequestMapping(value="listStream",method=RequestMethod.GET)
 	public ModelAndView listStream() throws Exception{
