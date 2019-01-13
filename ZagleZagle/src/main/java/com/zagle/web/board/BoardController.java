@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -78,8 +79,6 @@ public class BoardController {
 		String finalFileName="";
 		
 		List<MultipartFile> fileList = mtfRequest.getFiles("file");
-        /*String src = mtfRequest.getParameter("src");
-        System.out.println("src value : " + src);*/
 
         String path = "C:\\Users\\Bit\\git\\GoldSuZo\\ZagleZagle\\WebContent\\common\\images\\board";
 
@@ -125,7 +124,7 @@ public class BoardController {
         }
 
 		board.setUser(userService.getUser(userNo));
-		board.setBoardStatus("1");
+		board.setBoardStatus("1");//정상 게시물
 		
 		System.out.println(board);
 		
@@ -133,8 +132,7 @@ public class BoardController {
         
 		ModelAndView modelAndView=new ModelAndView();
 	
-		modelAndView.setViewName("redirect:/board/listBoard");//뒤에 파라미터 넣기
-		
+		modelAndView.setViewName("forward:/board/getBoard.jsp");
 		
 		return modelAndView;
 	}
@@ -228,9 +226,18 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="listBoard", method=RequestMethod.GET)
-	public ModelAndView listBoard(@ModelAttribute("searchBoard") SearchBoard searchBoard, HttpServletRequest request) throws Exception{
+	public ModelAndView listBoard(@RequestParam("scale") String scale, @RequestParam("view") String view, @ModelAttribute("searchBoard") SearchBoard searchBoard, HttpServletRequest request) throws Exception{
+		
+		System.out.println("listBoard");
+		
+		System.out.println("scale : "+scale+", view : "+view);
+		
+		System.out.println(searchBoard);
+		
+		
 		
 		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.setViewName("forward:/view/board/listboard.jsp");
 		
 		return modelAndView;
 	}
