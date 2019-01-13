@@ -5,17 +5,17 @@ import java.util.Date;
 
 public class Stream {
 
-	private int streamNo;
+	private String streamNo;
 	private User user;
 	private String streamTitle;
 	private String streamContent;
 	private int streamViewCount;
 	private int streamLikeCount;
 	private Date streamDate;
-	public int getStreamNo() {
+	public String getStreamNo() {
 		return streamNo;
 	}
-	public void setStreamNo(int streamNo) {
+	public void setStreamNo(String streamNo) {
 		this.streamNo = streamNo;
 	}
 	public User getUser() {

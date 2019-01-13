@@ -88,8 +88,9 @@ public class MongoRestDAOImpl implements StreamRestDAO{
 		DB db = mongoClient.getDB(uri.getDatabase());
 		
 		System.out.println("몽고디비 성공");
+		System.out.println(stream.getUser().getProfile());
 		
-		DBCollection dbcoll = db.getCollection("stresams");
+		DBCollection dbcoll = db.getCollection("streams");
 		
 		WriteConcern w = new WriteConcern(1,2000);
 		mongoClient.setWriteConcern(w);
@@ -97,16 +98,45 @@ public class MongoRestDAOImpl implements StreamRestDAO{
 		BasicDBObject addObject = new BasicDBObject();
 		
 		addObject.put("streamer",stream.getUser().getUserNo());
-		addObject.put("streamerProfile", stream.getUser().getProfile());
-		addObject.put("streamNickname", stream.getUser().getUserNickname());
+		addObject.put("streamerProfile","default.jpg");
+		addObject.put("streamNickname",stream.getUser().getUserNickname());
 		addObject.put("streamTitle",stream.getStreamTitle());
-		addObject.put("streamContent", stream.getStreamContent());
+		addObject.put("streamContent",stream.getStreamContent());
 		addObject.put("streamLikeCount",0);
 		addObject.put("streamViewCount",0);
-		
 	    dbcoll.insert(addObject);
         mongoClient.close();       
 	}
+	
+	@Override
+	public void joinMongo(Map<String,Object> map) throws Exception {
+	
+		System.out.println("StreamRestDao입니다");
+		MongoClientURI uri = new MongoClientURI("mongodb://localhost:27017/stream");
+		MongoClient mongoClient = new MongoClient(uri);
+		DB db = mongoClient.getDB(uri.getDatabase());
+		
+		
+		System.out.println("몽고디비 성공 JoinMongo");
+		
+		ArrayList list = new ArrayList();
+		
+		list.add(map.get("userNo"));
+		list.add(map.get("userProfile"));
+		list.add(map.get("userNickname"));
+		
+		DBCollection dbcoll = db.getCollection("streams");
+		
+		WriteConcern w = new WriteConcern(1,2000);
+		mongoClient.setWriteConcern(w);
+		
+		 BasicDBObject updateQuery = new BasicDBObject().append("$set", new BasicDBObject().append("streamer",map.get("streamer")));
+	        BasicDBObject searchQuery = new BasicDBObject().append("join",list);
+	        dbcoll.update(searchQuery, updateQuery);
+	        mongoClient.close();       
+	}
+	
+	
 
 	@Override
 	public Map<String, Object> kakaopayStream(Map<String, Object> map) throws Exception {

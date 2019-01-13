@@ -110,6 +110,12 @@ public class StreamServiceImpl implements StreamService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void joinStream(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		mongoRestDAOImpl.joinMongo(map);
+	}
 	
 	
 }

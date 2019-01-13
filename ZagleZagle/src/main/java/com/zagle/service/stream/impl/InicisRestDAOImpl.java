@@ -65,5 +65,11 @@ public class InicisRestDAOImpl  implements StreamRestDAO {
 		return 0;
 	}
 
+	@Override
+	public void joinMongo(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }
