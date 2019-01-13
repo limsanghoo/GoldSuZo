@@ -10,6 +10,9 @@ public interface StreamService {
 
 	public void addStream(Stream stream)throws Exception;
 	
+	public void joinStream(Map<String,Object> map)throws Exception;
+	
+	
 	public Map<String,Object> listStream(SearchStream search)throws Exception;
 	
 	public Map<String,Object> listRefund(SearchStream search,String grade)throws Exception; 

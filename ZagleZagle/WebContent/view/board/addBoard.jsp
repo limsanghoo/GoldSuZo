@@ -59,7 +59,7 @@ function fileInfo(f){
 
 <form name="fileForm" class="form-horizontal" enctype="multipart/form-data">
 
-<input type="hidden" name="userNo" value="US10021"/>
+<input type="hidden" name="userNo" value="US10040"/>
 
 <div style="text-align:center;">
 	<input multiple="multiple" type="file" style="width:500px;" accept="image/*" multiple onchange="fileInfo(this)" name="file"/><br>

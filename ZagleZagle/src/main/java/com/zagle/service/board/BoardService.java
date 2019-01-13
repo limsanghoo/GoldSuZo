@@ -22,7 +22,7 @@ public interface BoardService {
 	
 	public void deleteLink(Link link) throws Exception;
 	
-	public Map<String, Object> listBoard(SearchBoard searhBoard) throws Exception;
+	public Map<String, Object> listBoard(SearchBoard searchBoard) throws Exception;
 
 	public Board getBoard(String boardNo) throws Exception;
 	
@@ -48,7 +48,7 @@ public interface BoardService {
 	
 	public void addBoardDaumMap(Board board) throws Exception;
 	
-	public Map<String, Object> listMap(Board board) throws Exception;
+	public Map<String, Object> listMap(SearchBoard searchBoard) throws Exception;
 	
 	
 	

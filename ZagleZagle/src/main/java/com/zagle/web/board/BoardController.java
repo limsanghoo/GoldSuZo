@@ -3,6 +3,7 @@ package com.zagle.web.board;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -78,8 +80,6 @@ public class BoardController {
 		String finalFileName="";
 		
 		List<MultipartFile> fileList = mtfRequest.getFiles("file");
-        /*String src = mtfRequest.getParameter("src");
-        System.out.println("src value : " + src);*/
 
         String path = "C:\\Users\\Bit\\git\\GoldSuZo\\ZagleZagle\\WebContent\\common\\images\\board";
 
@@ -125,7 +125,7 @@ public class BoardController {
         }
 
 		board.setUser(userService.getUser(userNo));
-		board.setBoardStatus("1");
+		board.setBoardStatus("1");//정상 게시물
 		
 		System.out.println(board);
 		
@@ -133,8 +133,7 @@ public class BoardController {
         
 		ModelAndView modelAndView=new ModelAndView();
 	
-		modelAndView.setViewName("redirect:/board/listBoard");//뒤에 파라미터 넣기
-		
+		modelAndView.setViewName("forward:/view/board/getBoard.jsp");
 		
 		return modelAndView;
 	}
@@ -212,9 +211,21 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="getBoard", method=RequestMethod.GET)
-	public ModelAndView getBoard() throws Exception{
+	public ModelAndView getBoard(@RequestParam("boardNo") String boardNo) throws Exception{
+		
+		System.out.println("/getBoard");		
+		
+		Board board=boardService.getBoard(boardNo);
+		
+		User user=userService.getUser(board.getUser().getUserNo());
+		
+		board.setUser(user);
+		
+		System.out.println(board);
 		
 		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.addObject("board", board);
+		modelAndView.setViewName("forward:/view/board/getBoard.jsp");
 		
 		return modelAndView;
 	}
@@ -230,7 +241,24 @@ public class BoardController {
 	@RequestMapping(value="listBoard", method=RequestMethod.GET)
 	public ModelAndView listBoard(@ModelAttribute("searchBoard") SearchBoard searchBoard, HttpServletRequest request) throws Exception{
 		
+		System.out.println("/listBoard");
+		
+		System.out.println(searchBoard);
+		
+		if(searchBoard.getCurrentPage()==0) {
+			searchBoard.setCurrentPage(1);
+		}
+		
+		searchBoard.setPageSize(pageSize);
+		
+		Map<String , Object> map=boardService.listBoard(searchBoard);
+		
+		System.out.println("컨트롤러 map : "+map);
+		
 		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.addObject("list", map.get("list"));
+		modelAndView.addObject("searchBoard", searchBoard);
+		modelAndView.setViewName("forward:/view/board/listBoard.jsp");
 		
 		return modelAndView;
 	}

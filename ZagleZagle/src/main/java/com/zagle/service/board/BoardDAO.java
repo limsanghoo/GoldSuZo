@@ -1,5 +1,6 @@
 package com.zagle.service.board;
 
+import java.util.List;
 import java.util.Map;
 
 import com.zagle.service.domain.Board;
@@ -19,7 +20,7 @@ public void addBoard(Board board) throws Exception;
 	
 	public void deleteBoard(Board board) throws Exception;
 	
-	public Map<String, Object> listBoard(SearchBoard searhBoard) throws Exception;
+	public List<Board> listBoard(SearchBoard searchBoard) throws Exception;
 
 	public Board getBoard(String boardNo) throws Exception;
 	

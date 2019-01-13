@@ -1,5 +1,5 @@
 
-<%@ page contentType="text/html; charset=euc-kr" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
@@ -8,7 +8,7 @@
 
 <html>
 <head>
-<title>½ºÆ®¸®¹Ö ¸ñ·ÏÁ¶È¸</title>
+<title>ìŠ¤íŠ¸ë¦¬ë° ëª©ë¡ì¡°íšŒ</title>
 <style>
   #color {
     background: yellow;
@@ -28,8 +28,19 @@
 
 
 <script type="text/javascript">
-$(function() {
+
+/*var auto_refresh = setInterval(
+		function ()
+		{
+		$('#list').load('/stream/listStream').fadeIn("slow"); 
+		},3000); // ìƒˆë¡œê³ ì¹¨ ì‹œê°„ 1000ì€ 1ì´ˆë¥¼ ì˜ë¯¸í•©ë‹ˆë‹¤.
+   */
+function addStream(){
 	
+    $("#addStreamForm").attr("method", "POST").attr("action", "/stream/addStream").submit();
+ }
+ 
+$(function() {
 	var modal = document.getElementById('myModal');
 	var moda2 = document.getElementById('myModal2');
 	var title = document.getElementById('streamTitle');
@@ -40,29 +51,10 @@ $(function() {
 	  var streamContent = $("input[name='streamContent']").val();
       
 	$("#upload").on("click", function() {
-	
-		var data = {
-				"userNo":"US10001",
-				"streamTitle":title,
-				"streamContent" : content,
-		}; 
-		$.ajax({
-		
-			method: "post",
-			url : "/stream/json/addStream",
-			data: JSON.stringify(data),
-	  		dataType : 'json', 
-			  headers: {
-	  	            "Accept": "application/json",
-	  	            "Content-Type": "application/json"
-	  	        },
-	  	      success: function(JSONData,status){
-	  	     	alert(status);
-	  	      }
-	  	        
-	});
-		  
-	
+		   alert("ì „ì†¡ë©ë‹ˆë‹¤~");
+		   window.open("", "popup_window", "width=1450, height=900, scrollbars=no");
+		   addStream();
+	 
 	});
 	$('span[class="close"]').on("click", function() {
 		 var span = document.getElementsByClassName("close")[0];  
@@ -76,7 +68,16 @@ $(function() {
 	
 	});
 	
-}); 
+	$('a[name="get"]').on("click", function() {
+		var streamer = $(this).data("param");
+		alert(streamer);
+		  window.open("http://localhost:3000/stream/join?streamer="+streamer+"&userNo=US10002&userNickname=user02&userProfile=default.jpg", "popup_window", "width=1450, height=900, scrollbars=no");
+	});
+	
+	
+
+	
+});  
 </script>
 </head>
 
@@ -84,10 +85,10 @@ $(function() {
 
 <body>
    	<!-- ToolBar End /////////////////////////////////////-->
-<form class="form-inline" name="detailForm">
+
 
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin:15px; padding:15px;">
-½ºÆ®¸®¹Ö ¹æ ¾÷·Îµå ÇÏ±â
+ìŠ¤íŠ¸ë¦¬ë° ë°© ì—…ë¡œë“œ í•˜ê¸°
 </button>
 	
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -95,37 +96,37 @@ $(function() {
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-        <h4 class="modal-title" id="myModalLabel">½ºÆ®¸®¹Ö¹æ ¸¸µé±â</h4>
+        <h4 class="modal-title" id="myModalLabel">ìŠ¤íŠ¸ë¦¬ë°ë°© ë§Œë“¤ê¸°</h4>
       </div>
+      <form id="addStreamForm" method="post" target="popup_window">
       <div class="modal-body">
-       			<label for="txt-user-text" class="col-form-label">Á¦¸ñ</label><br/> 
-       			   <input type="text" class="form-control" id="streamTtitle" value="" placeholder="Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä" name="streamTitle"><br/>
+       			<label for="txt-user-text" class="col-form-label">ì œëª©</label><br/> 
+       			   <input type="text" class="form-control" id="streamTtitle" value="" placeholder="ì œëª©ì„ ì…ë ¥í•˜ì„¸ìš”" name="streamTitle"><br/>
  				
-       			<label for="txt-user-text" class="col-form-label">³»¿ë</label> <br/> 
- 				   <input type="text" class="form-control" id="streamContent" value="" placeholder="³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä" name="streamContent"> <br/>
- 				
- 			
+       			<label for="txt-user-text" class="col-form-label">ë‚´ìš©</label> <br/> 
+ 				   <input type="text" class="form-control" id="streamContent" value="" placeholder="ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”" name="streamContent"> <br/>	
       </div>
       <div class="modal-footer">
-      	<button type="button" class="btn btn-default" data-dismiss="modal" id="upload">¾÷·ÎµåÇÏ±â</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">´İ±â</button>
+      	<button type="button" class="btn btn-default" data-dismiss="modal" id="upload">ì—…ë¡œë“œí•˜ê¸°</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">ë‹«ê¸°</button>
       </div>
+      </form>
     </div>
   </div></div>	
 		
-	
+	 
 		
 		
-<div class="row" id="dd">
+<div class="row" id="list">
 <c:set var="i" value="0" />
 <c:forEach var="obj" items="${list}">
 <div class="col-sm-6 col-md-4"> <div class="thumbnail"> 
-<img alt="50x50" data-src="holder.js/100x200" src='/stream/star2.gif' style="height: 250px; width: 50%; display: block;">
-<div class="caption"> <h1>${obj.streamTitle}</h1><img id="profile" src='"/stream/'+${obj.streamerProfile}+'"'><h2>${obj.streamNickname}</h2><h3>${obj.streamer}</h3><p>³»¿ë:${obj.streamContent}</p><p>½ÃÃ»ÀÚ¼ö:${obj.streamViewCount}<p><p>ÁÁ¾Æ¿ä¼ö:${obj.streamLikeCount}</p><a class="btn btn-default" name="get" role="button">µé¾î°¡±â</a> 
+<img alt="50x50" data-src="holder.js/100x200" src='/common/images/stream/cat.gif' style="height: 250px; width: 50%; display: block;">
+<div class="caption"> <h1>${obj.streamTitle}</h1><img id="profile" src="/common/images/stream/${obj.streamerProfile}" style="height:100px; width:100px;"><h2>${obj.streamNickname}</h2><h3>${obj.streamer}</h3><p>ë‚´ìš©:${obj.streamContent}</p><p>ì‹œì²­ììˆ˜:${obj.streamViewCount}<p><p>ì¢‹ì•„ìš”ìˆ˜:${obj.streamLikeCount}</p><a class="btn btn-default" name="get" role="button" data-param="${obj.streamer}">ë“¤ì–´ê°€ê¸°</a> 
 </div>  
 </div> </div>
 </c:forEach>  
 </div>  
-</form> 
+ 
 </body>
 </html>
