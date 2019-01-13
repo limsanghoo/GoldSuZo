@@ -28,13 +28,19 @@
 
 
 <script type="text/javascript">
+
+/*var auto_refresh = setInterval(
+		function ()
+		{
+		$('#list').load('/stream/listStream').fadeIn("slow"); 
+		},3000); // 새로고침 시간 1000은 1초를 의미합니다.
+   */
 function addStream(){
-    
+	
     $("#addStreamForm").attr("method", "POST").attr("action", "/stream/addStream").submit();
  }
  
 $(function() {
-	
 	var modal = document.getElementById('myModal');
 	var moda2 = document.getElementById('myModal2');
 	var title = document.getElementById('streamTitle');
@@ -45,9 +51,10 @@ $(function() {
 	  var streamContent = $("input[name='streamContent']").val();
       
 	$("#upload").on("click", function() {
-		alert("전송됩니다~");
+		   alert("전송됩니다~");
+		   window.open("", "popup_window", "width=1450, height=900, scrollbars=no");
 		   addStream();
-	
+	 
 	});
 	$('span[class="close"]').on("click", function() {
 		 var span = document.getElementsByClassName("close")[0];  
@@ -61,7 +68,16 @@ $(function() {
 	
 	});
 	
-}); 
+	$('a[name="get"]').on("click", function() {
+		var streamer = $(this).data("param");
+		alert(streamer);
+		  window.open("http://localhost:3000/stream/join?streamer="+streamer+"&userNo=US10002&userNickname=user02&userProfile=default.jpg", "popup_window", "width=1450, height=900, scrollbars=no");
+	});
+	
+	
+
+	
+});  
 </script>
 </head>
 
@@ -82,7 +98,7 @@ $(function() {
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
         <h4 class="modal-title" id="myModalLabel">스트리밍방 만들기</h4>
       </div>
-      <form id="addStreamForm" method="post">
+      <form id="addStreamForm" method="post" target="popup_window">
       <div class="modal-body">
        			<label for="txt-user-text" class="col-form-label">제목</label><br/> 
        			   <input type="text" class="form-control" id="streamTtitle" value="" placeholder="제목을 입력하세요" name="streamTitle"><br/>
@@ -98,19 +114,19 @@ $(function() {
     </div>
   </div></div>	
 		
-	
+	 
 		
 		
-<div class="row" id="dd">
+<div class="row" id="list">
 <c:set var="i" value="0" />
 <c:forEach var="obj" items="${list}">
 <div class="col-sm-6 col-md-4"> <div class="thumbnail"> 
-<img alt="50x50" data-src="holder.js/100x200" src='/common/images/stream/star2.gif' style="height: 250px; width: 50%; display: block;">
-<div class="caption"> <h1>${obj.streamTitle}</h1><img id="profile" src="/common/images/stream/${obj.streamerProfile}" style="height:100px; width:100px;"><h2>${obj.streamNickname}</h2><h3>${obj.streamer}</h3><p>내용:${obj.streamContent}</p><p>시청자수:${obj.streamViewCount}<p><p>좋아요수:${obj.streamLikeCount}</p><a class="btn btn-default" name="get" role="button">들어가기</a> 
+<img alt="50x50" data-src="holder.js/100x200" src='/common/images/stream/cat.gif' style="height: 250px; width: 50%; display: block;">
+<div class="caption"> <h1>${obj.streamTitle}</h1><img id="profile" src="/common/images/stream/${obj.streamerProfile}" style="height:100px; width:100px;"><h2>${obj.streamNickname}</h2><h3>${obj.streamer}</h3><p>내용:${obj.streamContent}</p><p>시청자수:${obj.streamViewCount}<p><p>좋아요수:${obj.streamLikeCount}</p><a class="btn btn-default" name="get" role="button" data-param="${obj.streamer}">들어가기</a> 
 </div>  
 </div> </div>
 </c:forEach>  
 </div>  
-
+ 
 </body>
 </html>
