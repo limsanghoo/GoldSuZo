@@ -263,8 +263,27 @@ public class BoardController {
 		return modelAndView;
 	}
 	
+	@RequestMapping(value="updateBoard", method=RequestMethod.GET)
+	public ModelAndView updateBoard(@RequestParam("boardNo") String boardNo) throws Exception{
+		
+		System.out.println("updateBoard GET");
+		
+		System.out.println("boardNo : "+boardNo);
+	
+		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.addObject("board", boardService.getBoard(boardNo));
+		modelAndView.setViewName("forward:/view/board/updateBoard.jsp");
+
+		
+		return modelAndView;
+	}
+	
 	@RequestMapping(value="updateBoard", method=RequestMethod.POST)
-	public ModelAndView updateBoard() throws Exception{
+	public ModelAndView updateBoard(@ModelAttribute("board") Board board) throws Exception{
+		
+		System.out.println("updateBoard POST");	
+		
+		System.out.println(board);
 		
 		ModelAndView modelAndView=new ModelAndView();
 		

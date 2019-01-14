@@ -71,11 +71,14 @@ $(function() {
 	$('a[name="get"]').on("click", function() {
 		var streamer = $(this).data("param");
 		alert(streamer);
-		  window.open("http://localhost:3000/stream/join?streamer="+streamer+"&userNo=US10002&userNickname=user02&userProfile=default.jpg", "popup_window", "width=1450, height=900, scrollbars=no");
+		  window.open("http://localhost:5005/stream/join?streamer="+streamer+"&userNo=US10002&userNickname=user02&userProfile=default.jpg", "popup_window", "width=1450, height=900, scrollbars=no");
 	});
-	
-	
+	 
+	   $('button[name="banname"]').on('click',function(){
 
+	    	alert('ddd');	
+	    });
+ 
 	
 });  
 </script>
@@ -90,7 +93,7 @@ $(function() {
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin:15px; padding:15px;">
 스트리밍 방 업로드 하기
 </button>
-	
+	<button class="ban" name="banname">강퇴하기</button>
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

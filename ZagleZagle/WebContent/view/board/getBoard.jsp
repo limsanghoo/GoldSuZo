@@ -9,26 +9,21 @@
 </head>
 <body>
 
-<p>
-<img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px;" align="middle"/>
-${board.user.userNickname}
-</p>
-
 <div>
 ${board.coord}
 </div>
 
 <div>
 	<c:if test="${board.photo1 !=null}">
-	<img src="/common/images/board/${board.photo1}"/>
+	<img src="/common/images/board/${board.photo1}" style="width:100%;"/>
 	</c:if>
 
 	<c:if test="${board.photo2 !=null}">
-	<img src="/common/images/board/${board.photo2}"/>
+	<img src="/common/images/board/${board.photo2}" style="width:100%;"/>
 	</c:if>
 	
 	<c:if test="${board.photo3 !=null}">
-	<img src="/common/images/board/${board.photo3}"/>
+	<img src="/common/images/board/${board.photo3}" style="width:100%;"/>
 	</c:if>
 </div>
 

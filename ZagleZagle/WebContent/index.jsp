@@ -44,7 +44,7 @@
   	 <img src="/common/images/login.png" style="width: 100px; height: 100px; overflow: hidden"/>
   	 <h3>Login</h3>
   	 <br/>
-  	 <h4><a href="#">요즘뜨는 게시물</a></h4>
+  	 <h4><a href="/board/listBoard">요즘뜨는 게시물</a></h4>
   	 </div>
 
 </body>
