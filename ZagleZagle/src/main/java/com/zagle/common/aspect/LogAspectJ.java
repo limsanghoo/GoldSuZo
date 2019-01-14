@@ -17,16 +17,16 @@ public class LogAspectJ {
 	public Object invoke(ProceedingJoinPoint joinPoint) throws Throwable {
 			
 		System.out.println("");
-		System.out.println("[Around before] Ÿ����ü.�޼��� :"+
+		System.out.println("[Around before] Class Name :"+
 													joinPoint.getTarget().getClass().getName() +"."+
 													joinPoint.getSignature().getName());
 		if(joinPoint.getArgs().length !=0){
-			System.out.println("[Around before]method�� ���޵Ǵ� ���� : "+ joinPoint.getArgs()[0]);
+			System.out.println("[Around before] join Point : "+ joinPoint.getArgs()[0]);
 		}
-		//==> Ÿ�� ��ü�� Method �� ȣ�� �ϴ� �κ� 
+		//
 		Object obj = joinPoint.proceed();
 
-		System.out.println("[Around after] Ÿ�� ��üreturn value  : "+obj);
+		System.out.println("[Around after] Target Value : "+obj);
 		System.out.println("");
 		
 		return obj;
