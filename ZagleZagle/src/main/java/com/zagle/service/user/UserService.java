@@ -4,20 +4,20 @@ import com.zagle.service.domain.User;
 
 public interface UserService {
 	
-	///È¸¿ø°¡ÀÔ
+	///È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public void addUser(User user) throws Exception;
 	
-	///³»Á¤º¸ È®ÀÎ
+	///ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 	public User getUser(String userNo) throws Exception;
 	
 	
-	///³»Á¤º¸ ¼öÁ¤
+	///ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void updateUser(User user) throws Exception;
 
-	///È¸¿ø ID Áßº¹ È®ÀÎ
+	///È¸ï¿½ï¿½ ID ï¿½ßºï¿½ È®ï¿½ï¿½
 	public boolean checkDuplication(String snsNo) throws Exception;
 	
-	///È°µ¿ Á¡¼ö Ãß°¡
+	///È°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 	//public User addActiveScore(int totalActiveScore) throws Exception;
 	public void addActiveScore(User user) throws Exception;
 	

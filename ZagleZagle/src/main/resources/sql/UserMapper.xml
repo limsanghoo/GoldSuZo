@@ -33,7 +33,8 @@
 		INTO users( user_no , sns_no , user_name , user_nickname , phone, user_sex, user_addr, profile , grade, sns_name, 
 															bank_name, reg_date, black_code, account, user_birth, delete_count, total_active_score) 
 															
-		VALUES	 (	'US'||seq_us.nextval, #{snsNo:VARCHAR} , #{userName:VARCHAR} , #{userNickname:VARCHAR} , #{phone:VARCHAR}, #{userSex:VARCHAR} , #{userAddr:VARCHAR} ,#{profile:VARCHAR}, #{grade:VARCHAR}, #{snsName:VARCHAR} 
+		VALUES	 (	'US'||seq_us.nextval, #{snsNo:VARCHAR} , #{userName:VARCHAR} , #{userNickname:VARCHAR} , #{phone:VARCHAR},
+									 #{userSex:VARCHAR} , #{userAddr:VARCHAR} ,#{profile:VARCHAR}, #{grade:VARCHAR}, #{snsName:VARCHAR} 
 							, #{bankName:VARCHAR}, SYSDATE , 0 , #{account:VARCHAR} , #{userBirth:INTEGER}, 0, 0)
 	 </insert>
 	 
@@ -43,7 +44,7 @@
 			<!--user_name , phone , user_nickname , user_birth , user_addr, profile, total_active_score, 
 			reg_date,grade,account,bank_name	  -->
 		FROM users 
-		WHERE user_no = #{value}
+		WHERE sns_no = #{value}
 	 </select>
 	 
 	 <!-- SQL : UPDATE -->

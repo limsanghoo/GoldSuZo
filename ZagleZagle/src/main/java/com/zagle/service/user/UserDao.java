@@ -9,7 +9,7 @@ public interface UserDao {
 	public void addUser(User user) throws Exception;
 	
 	///SELECT ONE
-	public User getUser(String userNo) throws Exception;
+	public User getUser(String snsNo) throws Exception;
 	
 	//USER INFO UPDATE
 	public void updateUser(User user) throws Exception;
@@ -18,7 +18,7 @@ public interface UserDao {
 	//public User addActiveScore(int totalActiveScore) throws Exception;
 	public void addActiveScore(User user) throws Exception;
 	
-	// °Ô½ÃÆÇ Page Ã³¸®¸¦ À§ÇÑ ÀüÃ¼ Row(totalCount) return
+	// ï¿½Ô½ï¿½ï¿½ï¿½ Page Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ Row(totalCount) return
 	//public int getTotalCount(Search search) throws Exception;
 	
 }
