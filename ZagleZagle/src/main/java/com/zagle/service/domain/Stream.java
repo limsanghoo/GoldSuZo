@@ -12,9 +12,12 @@ public class Stream {
 	private int streamViewCount;
 	private int streamLikeCount;
 	private Date streamDate;
+	private String streamSum;
+	
 	public String getStreamNo() {
 		return streamNo;
 	}
+	
 	public void setStreamNo(String streamNo) {
 		this.streamNo = streamNo;
 	}
@@ -54,12 +57,22 @@ public class Stream {
 	public void setStreamDate(Date streamDate) {
 		this.streamDate = streamDate;
 	}
+	
+	public String getStreamSum() {
+		return streamSum;
+	}
+	
+	public void setStreamSum(String streamSum) {
+		this.streamSum = streamSum;
+	}
+
 	@Override
 	public String toString() {
-		return "Stream [streamNo=" + streamNo + ", streamTitle=" + streamTitle + ", streamContent=" + streamContent
-				+ ", streamViewCount=" + streamViewCount + ", streamLikeCount=" + streamLikeCount + ", streamDate="
-				+ streamDate + "]";
+		return "Stream [streamNo=" + streamNo + ", user=" + user + ", streamTitle=" + streamTitle + ", streamContent="
+				+ streamContent + ", streamViewCount=" + streamViewCount + ", streamLikeCount=" + streamLikeCount
+				+ ", streamDate=" + streamDate + ", streamSum=" + streamSum + "]";
 	}
+	
 	
 	
 	
