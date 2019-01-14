@@ -1,16 +1,18 @@
 package com.zagle.web.user;
 
 
+import java.io.BufferedReader;
 import java.io.IOException;
-
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URI;
-
+import java.net.URL;
 import java.util.ArrayList;
 
 import java.util.List;
 import java.util.Map;
 
-
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.http.HttpResponse;
@@ -23,6 +25,8 @@ import org.apache.http.impl.client.HttpClientBuilder;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
@@ -244,10 +248,81 @@ public class UserRestController {
 		        return modelAndView;
 		        
 		}
+		@RequestMapping(value = "getNaverInfo")
+		public ModelAndView getNaverInfo(@RequestParam("code") String code, RedirectAttributes ra, HttpSession session) throws Exception {
+		        
+				
+				String Ncode = (String) session.getAttribute("Ncode");
+				
+				System.out.println("get네이버정보 token값"+Ncode);
 			
-		
-}
+		        String header = "Bearer " + Ncode; // Bearer 다음에 공백 추가
+		        
+		        System.out.println("getnaverinfo에서 코드 확인"+code);
+		        
+		        System.out.println("헤더 확인"+header);
+		        
+		        try {
+		            String apiURL = "https://openapi.naver.com/v1/nid/me";
+		            URL url = new URL(apiURL);
+		            HttpURLConnection con = (HttpURLConnection)url.openConnection();
+		            con.setRequestMethod("GET");
+		            con.setRequestProperty("Authorization", header);
+		            int responseCode = con.getResponseCode();
+		            BufferedReader br;
+		            if(responseCode==200) { // 정상 호출
+		                br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+		            } else {  // 에러 발생
+		                br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+		            }
+		            System.out.println("responseCode :"+responseCode);
+		            
+		            String inputLine;
+		            StringBuffer response = new StringBuffer();
+		            while ((inputLine = br.readLine()) != null) {
+		                response.append(inputLine);
+		            }
+		            br.close();
+		            System.out.println(response.toString());
+		            
+		            
+		    	    JSONParser parser = new JSONParser();
+		    	    Object obj = parser.parse(response.toString());
+		    	    JSONObject jsonObj = (JSONObject) obj;
+		    	    
+		    	    Object Naverid =jsonObj.get("response");
+		    	    
+		    	    
+		    	    JSONParser parser1 = new JSONParser();
+		    	    Object obj1 = parser1.parse(Naverid.toString());
+		    	    JSONObject jsonObj1 = (JSONObject) obj1;
+		    	    
+		    	    String NaverNo = (String) jsonObj1.get("id");
+		    	    System.out.println("네이버확인 : "+NaverNo);
+		    	 
+		    	    
+		    	    session.setAttribute("snsNo", NaverNo);
+		    	    
+		            
+		            
+		    	    ModelAndView modelAndView = new ModelAndView();
+			        modelAndView.addObject(NaverNo);
+			        System.out.println("modelAndView :"+modelAndView);
+			        modelAndView.setViewName("checkDuplication");
+			        return modelAndView;
+		    	
+		        } catch (Exception e) {
+		            System.out.println(e);
+		        }
+		        
+		        
+		    	
+		    	return null;
+		}
+			
+	
 
+}
 	
 
 	
