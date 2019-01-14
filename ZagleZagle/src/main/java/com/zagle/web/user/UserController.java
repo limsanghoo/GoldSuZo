@@ -1,15 +1,6 @@
 package com.zagle.web.user;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.net.ssl.HttpsURLConnection;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -60,6 +51,22 @@ public class UserController {
 		return modelAndView;
 		
 	}
+	@RequestMapping(value="addUser", method=RequestMethod.POST)
+	public ModelAndView addUser(@ModelAttribute("user") User user)throws Exception {
+		
+		System.out.println("/user/addUser : POST");
+		
+		userService.addUser(user);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject(user);
+		modelAndView.setViewName("/view/user/model.jsp");
+		
+		return modelAndView;
+		
+	}
+ 	
+	
 	@RequestMapping(value="getUser", method=RequestMethod.GET)
 	public ModelAndView getUser(@RequestParam("userNo") String userNo) throws Exception {
 		
@@ -135,5 +142,6 @@ public class UserController {
 	return modelAndView;
 	
 	}
+	
 
 }

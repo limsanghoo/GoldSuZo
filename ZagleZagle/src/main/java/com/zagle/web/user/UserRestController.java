@@ -139,6 +139,7 @@ public class UserRestController {
 		            ObjectMapper mapper = new ObjectMapper();
 		            returnNode = mapper.readTree(response.getEntity().getContent());
 		            
+		            System.out.println(returnNode);
 		 
 		        } catch (ClientProtocolException e) {
 		            e.printStackTrace();
@@ -148,17 +149,62 @@ public class UserRestController {
 		            // clear resources
 		        }
 		       
+		       String snsNo = "K@"+returnNode.get("id");
+		        System.out.println(snsNo);
 		      
+		       session.setAttribute("snsNo", snsNo);
 		        
 		        ModelAndView modelAndView = new ModelAndView();
-		        modelAndView.addObject(returnNode);
-		        modelAndView.setViewName("/view/user/model.jsp");
+		        modelAndView.addObject(snsNo);
+		        System.out.println("modelAndView :"+modelAndView);
+		        modelAndView.setViewName("checkDuplication");
+		      
 		        
 		        return modelAndView;
 		    }
-		//이거 signUp 구현해야함.
-		//@RequestMapping(value="SignUpKakao")
-	}
+		@RequestMapping(value="checkDuplication", 	method= {RequestMethod.GET, RequestMethod.POST})
+		public ModelAndView checkDuplication(HttpSession session, Model model) throws Exception {
+			
+			System.out.println("/user/checkDuplication :POST");
+			
+			String snsNo = (String) session.getAttribute("snsNo");
+			
+			System.out.println(snsNo);
+			
+			boolean result = userService.checkDuplication(snsNo);
+			
+			model.addAttribute("result", new Boolean(result));
+			model.addAttribute("snsNo", snsNo);
+			
+			if(result==false) {
+				ModelAndView modelAndView = new ModelAndView();
+				modelAndView.addObject("result", new Boolean(result));
+				modelAndView.addObject("snsNo", snsNo);
+				modelAndView.setViewName("forward:/view/user/addUserView.jsp");
+				return modelAndView;
+				
+			}else {
+			
+			ModelAndView modelAndView = new ModelAndView();
+			modelAndView.addObject("result", new Boolean(result));
+			modelAndView.addObject("snsNo", snsNo);
+			modelAndView.setViewName("/view/user/model.jsp");
+			
+			return modelAndView;
+		}
+		
+		}
+		@RequestMapping(value="logout" , method= {RequestMethod.GET, RequestMethod.POST}) 
+		public ModelAndView logout(HttpSession session) throws Exception {
+			
+			session.getAttribute("response");
+			System.out.println(session);
+			
+			return null;
+		}
+			
+		}
+	
 
 	
 	

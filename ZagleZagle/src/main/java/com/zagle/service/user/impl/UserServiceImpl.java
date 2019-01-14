@@ -38,12 +38,19 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	public boolean checkDuplication(String snsNo) throws Exception {
+		System.out.println("ServiceImpl에서 snsNo 확인 "+snsNo);
+		
 		boolean result = true;
 		User user=userDao.getUser(snsNo);
-		if(user != null) {
-			result = false;
+		System.out.println("getUser 확인 "+user);
+		
+		if(user==null) {
+			
+			
+			return false;
 		}
-		return result;
+	
+		return  result;
 	}
 	
 	/*
