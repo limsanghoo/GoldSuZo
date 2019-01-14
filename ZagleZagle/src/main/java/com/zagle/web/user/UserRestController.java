@@ -1,30 +1,26 @@
 package com.zagle.web.user;
 
-import java.io.BufferedReader;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
+
 import java.net.URI;
-import java.net.URL;
+
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
-import javax.net.ssl.HttpsURLConnection;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
+
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.message.BasicNameValuePair;
+
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +32,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,7 +42,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.zagle.service.user.UserService;
 
-import sun.net.www.http.HttpClient;
+
 
 //==>ȸ������ RestController
 @Controller
@@ -197,13 +192,62 @@ public class UserRestController {
 		@RequestMapping(value="logout" , method= {RequestMethod.GET, RequestMethod.POST}) 
 		public ModelAndView logout(HttpSession session) throws Exception {
 			
-			session.getAttribute("response");
-			System.out.println(session);
 			
-			return null;
+			System.out.println("여기왔나 확인해야합니다.");
+			String accessToken = (String) session.getAttribute("response");
+			System.out.println(accessToken);
+			
+			  final String RequestUrl = "https://kapi.kakao.com/v1/user/logout"; // Host
+			  final CloseableHttpClient client = HttpClientBuilder.create().build();
+		        final HttpPost post = new HttpPost(RequestUrl);
+	
+		        
+		        
+		        MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+		
+		        params.add("Authorization", accessToken);
+		   
+		        // add header
+		        post.addHeader("Authorization", "Bearer " + accessToken);
+
+		        System.out.println(post+accessToken);
+		        JsonNode logoutID = null;
+		 
+		        try {
+		            final HttpResponse response = client.execute(post);
+		            final int responseCode = response.getStatusLine().getStatusCode();
+		 
+		            System.out.println("\nSending 'POST' request to URL : " + RequestUrl);
+		            System.out.println("Response Code : " + responseCode);
+		            
+		            
+		            // JSON 형태 반환값 처리
+		            ObjectMapper mapper = new ObjectMapper();
+		            logoutID = mapper.readTree(response.getEntity().getContent());
+		           
+		            logoutID.get("id");
+		            System.out.println(logoutID);
+		            
+		            
+		        } catch (ClientProtocolException e) {
+		            e.printStackTrace();
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        } finally {
+		            // clear resources
+		        }
+		        
+			
+		        ModelAndView modelAndView = new ModelAndView();
+		        modelAndView.setViewName("/index.jsp");
+		        
+		        return modelAndView;
+		        
 		}
 			
-		}
+		
+}
+
 	
 
 	

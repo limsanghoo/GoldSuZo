@@ -8,7 +8,10 @@ public interface UserService {
 	public void addUser(User user) throws Exception;
 	
 	///������ Ȯ��
-	public User getUser(String userNo) throws Exception;
+	public User getUser(String snsNo) throws Exception;
+	
+	///getUser userNo 방식
+	public User getUser2(String userNo) throws Exception;
 	
 	
 	///������ ����

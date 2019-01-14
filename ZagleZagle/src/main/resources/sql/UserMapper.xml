@@ -47,6 +47,16 @@
 		WHERE sns_no = #{value}
 	 </select>
 	 
+	 
+	 <!-- SQL : SELECT ONE -->
+	 <select 	id="getUser2"	parameterType="string"	resultMap="userSelectMap">
+		SELECT*
+			<!--user_name , phone , user_nickname , user_birth , user_addr, profile, total_active_score, 
+			reg_date,grade,account,bank_name	  -->
+		FROM users 
+		WHERE user_no = #{value}
+	 </select>
+	 
 	 <!-- SQL : UPDATE -->
 	 <update	id="updateUser"	parameterType="user" >
 	   	UPDATE users

@@ -32,9 +32,9 @@
 
 </head>
 <body>
-
+<form>
 <input type="button" id="logout" name="logout" value="로그아웃">
-
+</form>
 
 "${id}"
 컨트롤러 기능 확인용
