@@ -18,6 +18,7 @@
 		<typeAlias alias="board" type="com.zagle.service.domain.Board" />
 		<typeAlias alias="stream" type="com.zagle.service.domain.Stream" />
 		<typeAlias alias="search" type="com.zagle.common.Search" />
+		<typeAlias alias="local" type="com.zagle.common.Local" />
 	</typeAliases>
 	
 	 <!-- SQL Definition :: file include -->
@@ -25,6 +26,7 @@
 		<mapper resource="sql/UserMapper.xml"/>
 		<mapper resource="sql/BoardMapper.xml"/>
 		<mapper resource="sql/StreamMapper.xml"/>
+		<mapper resource="sql/MapMapper.xml"/>
 	</mappers>
 
 </configuration>
