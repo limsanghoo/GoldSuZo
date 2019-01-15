@@ -18,13 +18,29 @@
 <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
 
 <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+
+<style>
+	body{
+	 	padding-top : 100px;
+        padding-left:100px;
+        padding-right:100px;
+	}
+	
+	.thumbnail{
+        	width:500px;
+        	height:650px;
+        }
+</style>
+
 <script type="text/javascript">
 
 $(function(){
+	
 	$("input[value='수정']").bind("click",function(){
 		var boardNo=$(this).data('param1');
 		self.location="/board/updateBoard?boardNo="+boardNo;
 	})
+
 });
 
 </script>
@@ -37,12 +53,12 @@ $(function(){
 <c:forEach var="board" items="${list}">
 	<c:set var="i" value="${ i+1 }" />
 		
+	<c:if test="${board.boardStatus=='1'}"><!-- 정상 게시물만 보여주기 -->
+		
 	<div class="bs-example" data-example-id="thumbnails-with-custom-content">
 	<div class="col-sm-6 col-md-4">
-	
 	<div class="thumbnail" data-toggle="modal" data-target="#${board.boardNo}">
-
-	
+		
 	<p>
 	<img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px;" align="middle"/>
 	${board.user.userNickname}
@@ -60,10 +76,13 @@ $(function(){
 	
 	<p align="center">${board.boardDetailText}</p>
 	<p align="center">${board.hashTag}</p>
+	<p align="center">${board.boardStatus}</p>
 	
-	</div>	
 	</div>
-	
+	</div>
+	</div>
+	</div>
+
 <!-- 모달 시작 -->
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="${board.boardNo}" >
   <div class="modal-dialog" role="document">
@@ -83,7 +102,10 @@ $(function(){
 		
 		<div class="col-md-4 col-md-offset-4">
 		<input type="button" value="수정" data-param1="${board.boardNo}"/>
-        <input type="button" value="삭제"/>
+		
+        <%-- <input type="button" value="삭제"data-param2="${board.boardNo}"/> --%>
+        
+        <div class="btn btn-primary" data-toggle="modal" data-target="#myModal">삭제
         </div>
         
         </h4>
@@ -94,21 +116,40 @@ $(function(){
       <jsp:include page="/board/getBoard?boardNo=${board.boardNo}"/>
       </div>
       
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-      
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<!-- 모달 끝 -->	
-	
-	</div>
-	</div>
-	
+<!-- 모달 끝 -->
+
+<div class="modal" id="${board.boardNo}" aria-hidden="true" style="display: none; z-index: 1060;">
+    	<div class="modal-dialog modal-md">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title"></h4>
+            </div><div class="container"></div>
+            <div class="modal-body">
+             	삭제하시겠습니까?
+            </div>
+            <div class="modal-footer">
+              <a href="#" data-dismiss="modal" class="btn">Close</a>
+              <a href="/board/deleteBoard?boardNo=${board.boardNo}" class="btn btn-primary">삭제</a>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+
+
+
+</c:if>
+
 </c:forEach>
 <!-- 리스트 끝 -->
+
+<div class="confirm">
+</div>
 
 
 

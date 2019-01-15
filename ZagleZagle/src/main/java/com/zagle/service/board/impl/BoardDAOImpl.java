@@ -43,14 +43,12 @@ public class BoardDAOImpl implements BoardDAO{
 
 	@Override
 	public void updateBoard(Board board) throws Exception {
-		// TODO Auto-generated method stub
-		
+		sqlSession.update("BoardMapper.updateBoard", board);
 	}
 
 	@Override
 	public void deleteBoard(Board board) throws Exception {
-		// TODO Auto-generated method stub
-		
+		sqlSession.update("BoardMapper.deleteBoard", board);
 	}
 
 	@Override

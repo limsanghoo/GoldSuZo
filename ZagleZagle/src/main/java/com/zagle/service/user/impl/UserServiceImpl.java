@@ -29,8 +29,11 @@ public class UserServiceImpl implements UserService {
 		userDao.addUser(user);
 	}
 	
-	public User getUser(String userNo) throws Exception {
-		return userDao.getUser(userNo);
+	public User getUser(String snsNo) throws Exception {
+		return userDao.getUser(snsNo);
+	}
+	public User getUser2(String userNo) throws Exception {
+		return userDao.getUser2(userNo);
 	}
 	
 	public void updateUser(User user) throws Exception {

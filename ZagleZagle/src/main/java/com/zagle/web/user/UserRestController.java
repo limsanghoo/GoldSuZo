@@ -1,32 +1,32 @@
 package com.zagle.web.user;
 
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
-import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
+
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.message.BasicNameValuePair;
+
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
@@ -36,8 +36,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,7 +46,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.zagle.service.user.UserService;
 
-import sun.net.www.http.HttpClient;
+
 
 //==>ȸ������ RestController
 @Controller
@@ -197,13 +196,133 @@ public class UserRestController {
 		@RequestMapping(value="logout" , method= {RequestMethod.GET, RequestMethod.POST}) 
 		public ModelAndView logout(HttpSession session) throws Exception {
 			
-			session.getAttribute("response");
-			System.out.println(session);
 			
-			return null;
+			System.out.println("여기왔나 확인해야합니다.");
+			String accessToken = (String) session.getAttribute("response");
+			System.out.println(accessToken);
+			
+			  final String RequestUrl = "https://kapi.kakao.com/v1/user/logout"; // Host
+			  final CloseableHttpClient client = HttpClientBuilder.create().build();
+		        final HttpPost post = new HttpPost(RequestUrl);
+	
+		        
+		        
+		        MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+		
+		        params.add("Authorization", accessToken);
+		   
+		        // add header
+		        post.addHeader("Authorization", "Bearer " + accessToken);
+
+		        System.out.println(post+accessToken);
+		        JsonNode logoutID = null;
+		 
+		        try {
+		            final HttpResponse response = client.execute(post);
+		            final int responseCode = response.getStatusLine().getStatusCode();
+		 
+		            System.out.println("\nSending 'POST' request to URL : " + RequestUrl);
+		            System.out.println("Response Code : " + responseCode);
+		            
+		            
+		            // JSON 형태 반환값 처리
+		            ObjectMapper mapper = new ObjectMapper();
+		            logoutID = mapper.readTree(response.getEntity().getContent());
+		           
+		            logoutID.get("id");
+		            System.out.println(logoutID);
+		            
+		            
+		        } catch (ClientProtocolException e) {
+		            e.printStackTrace();
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        } finally {
+		            // clear resources
+		        }
+		        
+			
+		        ModelAndView modelAndView = new ModelAndView();
+		        modelAndView.setViewName("/index.jsp");
+		        
+		        return modelAndView;
+		        
+		}
+		@RequestMapping(value = "getNaverInfo")
+		public ModelAndView getNaverInfo(@RequestParam("code") String code, RedirectAttributes ra, HttpSession session) throws Exception {
+		        
+				
+				String Ncode = (String) session.getAttribute("Ncode");
+				
+				System.out.println("get네이버정보 token값"+Ncode);
+			
+		        String header = "Bearer " + Ncode; // Bearer 다음에 공백 추가
+		        
+		        System.out.println("getnaverinfo에서 코드 확인"+code);
+		        
+		        System.out.println("헤더 확인"+header);
+		        
+		        try {
+		            String apiURL = "https://openapi.naver.com/v1/nid/me";
+		            URL url = new URL(apiURL);
+		            HttpURLConnection con = (HttpURLConnection)url.openConnection();
+		            con.setRequestMethod("GET");
+		            con.setRequestProperty("Authorization", header);
+		            int responseCode = con.getResponseCode();
+		            BufferedReader br;
+		            if(responseCode==200) { // 정상 호출
+		                br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+		            } else {  // 에러 발생
+		                br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+		            }
+		            System.out.println("responseCode :"+responseCode);
+		            
+		            String inputLine;
+		            StringBuffer response = new StringBuffer();
+		            while ((inputLine = br.readLine()) != null) {
+		                response.append(inputLine);
+		            }
+		            br.close();
+		            System.out.println(response.toString());
+		            
+		            
+		    	    JSONParser parser = new JSONParser();
+		    	    Object obj = parser.parse(response.toString());
+		    	    JSONObject jsonObj = (JSONObject) obj;
+		    	    
+		    	    Object Naverid =jsonObj.get("response");
+		    	    
+		    	    
+		    	    JSONParser parser1 = new JSONParser();
+		    	    Object obj1 = parser1.parse(Naverid.toString());
+		    	    JSONObject jsonObj1 = (JSONObject) obj1;
+		    	    
+		    	    String NaverNo = (String) jsonObj1.get("id");
+		    	    System.out.println("네이버확인 : "+NaverNo);
+		    	 
+		    	    
+		    	    session.setAttribute("snsNo", NaverNo);
+		    	    
+		            
+		            
+		    	    ModelAndView modelAndView = new ModelAndView();
+			        modelAndView.addObject(NaverNo);
+			        System.out.println("modelAndView :"+modelAndView);
+			        modelAndView.setViewName("checkDuplication");
+			        return modelAndView;
+		    	
+		        } catch (Exception e) {
+		            System.out.println(e);
+		        }
+		        
+		        
+		    	
+		    	return null;
 		}
 			
-		}
+	
+
+}
 	
 
 	

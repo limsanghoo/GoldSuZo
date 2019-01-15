@@ -56,21 +56,19 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public void updateBoard(Board board) throws Exception {
-		// TODO Auto-generated method stub
-		
+		boardDAO.updateBoard(board);
 	}
 
 	@Override
 	public void deleteBoard(Board board) throws Exception {
-		// TODO Auto-generated method stub
-		
+		boardDAO.deleteBoard(board);
 	}
 
 	@Override
 	public Map<String, Object> listBoard(SearchBoard searchBoard) throws Exception {
 		List<Board> list=boardDAO.listBoard(searchBoard);
 		
-		System.out.println("******"+list);
+		System.out.println(list);
 		
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("list", list);
@@ -79,8 +77,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public Board getBoard(String boardNo) throws Exception {
-		
+	public Board getBoard(String boardNo) throws Exception {	
 		return boardDAO.getBoard(boardNo);
 	}
 
