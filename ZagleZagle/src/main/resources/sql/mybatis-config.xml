@@ -18,7 +18,7 @@
 		<typeAlias alias="board" type="com.zagle.service.domain.Board" />
 		<typeAlias alias="stream" type="com.zagle.service.domain.Stream" />
 		<typeAlias alias="search" type="com.zagle.common.Search" />
-		<typeAlias alias="local" type="com.zagle.common.Local" />
+		<typeAlias alias="local" type="com.zagle.service.domain.Local" />
 	</typeAliases>
 	
 	 <!-- SQL Definition :: file include -->
