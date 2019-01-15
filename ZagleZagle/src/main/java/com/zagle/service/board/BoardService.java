@@ -1,11 +1,14 @@
 package com.zagle.service.board;
 
+import java.util.List;
 import java.util.Map;
 
+import com.zagle.common.Search;
 import com.zagle.service.domain.Board;
 import com.zagle.service.domain.Comment;
 import com.zagle.service.domain.Like;
 import com.zagle.service.domain.Link;
+import com.zagle.service.domain.Local;
 import com.zagle.service.domain.Report;
 import com.zagle.service.domain.Scrap;
 import com.zagle.service.domain.SearchBoard;
@@ -49,6 +52,14 @@ public interface BoardService {
 	public void addBoardDaumMap(Board board) throws Exception;
 	
 	public Map<String, Object> listMap(SearchBoard searchBoard) throws Exception;
+
+	public List<Local> getState() throws Exception;
+
+	public List<Local> getCity(Local local) throws Exception;
+
+	public List<Local> getTown(Local local) throws Exception;
+
+	public List<Board> getMapList(Search search);
 	
 	
 	

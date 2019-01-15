@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.aop.ThrowsAdvice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,6 +27,7 @@ import com.zagle.service.board.BoardService;
 import com.zagle.service.chat.ChatService;
 import com.zagle.service.domain.Board;
 import com.zagle.service.domain.Comment;
+import com.zagle.service.domain.Local;
 import com.zagle.service.domain.Report;
 import com.zagle.service.domain.SearchBoard;
 import com.zagle.service.domain.User;
@@ -60,6 +63,8 @@ public class BoardController {
 	
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
+	
+	
 	
 	@RequestMapping(value="addBoard", method=RequestMethod.GET)
 	public ModelAndView addBoard() throws Exception{
@@ -334,6 +339,31 @@ public class BoardController {
 		
 		ModelAndView modelAndView=new ModelAndView();
 		modelAndView.setViewName("forward:/view/board/getBoard.jsp");
+		
+		return modelAndView;
+	}
+
+	@RequestMapping(value="getImgur")
+	public ModelAndView getImgur(@RequestParam("link") String link) throws Exception{
+		
+		System.out.println("imgru link : "+link);
+		
+		
+		ModelAndView modelAndView=new ModelAndView();
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping( value="listMap", method=RequestMethod.GET)
+	public ModelAndView listMap (HttpSession session) throws Exception{
+		
+		System.out.println("*****listMap");
+		
+		List<Local> list = boardService.getState();
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("list",list);
+		modelAndView.setViewName("forward:/view/board/listMap.jsp");
 		
 		return modelAndView;
 	}
