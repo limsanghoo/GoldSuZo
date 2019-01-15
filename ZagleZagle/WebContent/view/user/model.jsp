@@ -32,10 +32,10 @@
  			
  			var userNo =$(this).data("param");
  			
- 			console.log(userName);
+ 			console.log(userNo);
  			
- 			self.location="/view/user/getUser?userNo="+userNo
- 			
+ 			self.location="/user/getUser2?userNo="+userNo
+ 		
  		});
  	});
   	
@@ -48,8 +48,9 @@
 <input type="button" id="logout" name="logout" value="로그아웃">
 </form>
 
-	<h3 class=getUserInfo title="내정보확인" data-param="${user.userNo}">${user.userName}</h3>
-  
+<h3 class=getUserInfo data-param="${user.userNo}">${user.userName}</h3>님 환영합니다.
+<p>${user.snsNo}</p>
+<p>${user.userNo}</p>
 
 컨트롤러 기능 확인용
 </body>

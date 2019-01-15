@@ -85,11 +85,12 @@ public class UserController {
  	
 	
 	@RequestMapping(value="getUser", method=RequestMethod.GET)
-	public ModelAndView getUser(@RequestParam("userNo") String userNo) throws Exception {
+	public ModelAndView getUser(@RequestParam("snsNo") String snsNo) throws Exception {
 		
 		System.out.println("getUser Start!!!!!!!!");
 		
-		User user = userService.getUser(userNo);
+		User user = userService.getUser(snsNo);
+		System.out.println("user"+user);
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject(user);
@@ -99,35 +100,60 @@ public class UserController {
 		
 	}
 	
+	@RequestMapping(value="getUser2", method=RequestMethod.GET)
+	public ModelAndView getUser2(@RequestParam("userNo") String userNo) throws Exception {
+		
+		System.out.println("getUser2(userNo) Start!!!!!!!!");
+		
+		User user = userService.getUser2(userNo);
+		System.out.println("user"+user);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject(user);
+		modelAndView.setViewName("/view/user/getUser.jsp");
+		
+		return modelAndView;
+		
+	}
+	
+	
 	@RequestMapping(value="updateUser", method=RequestMethod.GET)
 	public ModelAndView updateUser(@RequestParam("userNo") String userNo) throws Exception {
 		
 		System.out.println(":==>/updateUserView.start");
 		
-		User user = userService.getUser(userNo);
+		User user = userService.getUser2(userNo);
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject(user);
-		modelAndView.setViewName("/user/updateUserView.jsp");
+		modelAndView.setViewName("/view/user/updateUserView.jsp");
 		
 		return modelAndView;
 	}
 	@RequestMapping(value="updateUser", method=RequestMethod.POST)
-	public ModelAndView updateUser(@ModelAttribute("user") User user, Model model, HttpSession session) throws Exception {
+	public ModelAndView updateUser(@ModelAttribute("user") User user, @RequestParam("snsNo") String snsNo,
+															@RequestParam("userNo") String userNo,Model model, HttpSession session) throws Exception {
 		
 		System.out.println("/user/updateUser : POST");
+		System.out.println(user);
+		
+		user.setSnsNo(snsNo);
+		user.setUserNo(userNo);
 		
 		//Business Logic 
 		userService.updateUser(user);
-		
+		/*
 		String sessionId=((User)session.getAttribute("user")).getUserNo();
 		if(sessionId.equals(user.getUserNo())) {
 			session.setAttribute("user", user);
 		}
+		*/
+		System.out.println("updateUser확인" +user);
+		System.out.println(user.getUserNo());
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject(user);
-		modelAndView.setViewName("redirect:/user/`etUser?userNo="+user.getUserNo());
+		modelAndView.setViewName("redirect:/user/getUser2?userNo="+user.getUserNo());
 		
 		return modelAndView;
 	}
