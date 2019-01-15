@@ -115,7 +115,7 @@ public class BoardController {
         	board.setPhoto3(photo[2]);
         }
 
-		board.setUser(userService.getUser(userNo));
+		board.setUser(userService.getUser2(userNo));//getUser2
 		board.setBoardStatus("1");//정상 게시물
 		
 		System.out.println(board);
@@ -188,6 +188,7 @@ public class BoardController {
 	@RequestMapping(value="deleteBoard", method=RequestMethod.GET)
 	public ModelAndView deleteBoard(@ModelAttribute("board") Board board) throws Exception{
 		
+		
 		System.out.println("/deleteBoard");
 		
 		board.setBoardStatus("2");//게시물 삭제
@@ -217,7 +218,7 @@ public class BoardController {
 		
 		Board board=boardService.getBoard(boardNo);
 		
-		User user=userService.getUser(board.getUser().getUserNo());
+		User user=userService.getUser2(board.getUser().getUserNo());//getUser2
 		
 		board.setUser(user);
 		
@@ -324,7 +325,7 @@ public class BoardController {
         	board.setPhoto3(photo[2]);
         }
 
-		board.setUser(userService.getUser("4"));//userNo으로 바꿔야함
+		board.setUser(userService.getUser2("userNo"));//userNo으로 바꿔야함
 		board.setBoardStatus("1");//정상 게시물
 		
 		System.out.println(board);

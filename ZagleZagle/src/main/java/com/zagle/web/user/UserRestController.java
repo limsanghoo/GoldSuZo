@@ -44,6 +44,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.zagle.service.domain.User;
 import com.zagle.service.user.UserService;
 
 
@@ -185,8 +186,12 @@ public class UserRestController {
 			}else {
 			
 			ModelAndView modelAndView = new ModelAndView();
+			User user = new User();
+		
+			user = userService.getUser(snsNo);
+			
 			modelAndView.addObject("result", new Boolean(result));
-			modelAndView.addObject("snsNo", snsNo);
+			modelAndView.addObject("user", user);
 			modelAndView.setViewName("/view/user/model.jsp");
 			
 			return modelAndView;
@@ -297,7 +302,7 @@ public class UserRestController {
 		    	    Object obj1 = parser1.parse(Naverid.toString());
 		    	    JSONObject jsonObj1 = (JSONObject) obj1;
 		    	    
-		    	    String NaverNo = (String) jsonObj1.get("id");
+		    	    String NaverNo = "N@"+(String) jsonObj1.get("id");
 		    	    System.out.println("네이버확인 : "+NaverNo);
 		    	 
 		    	    

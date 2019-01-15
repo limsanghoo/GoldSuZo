@@ -25,8 +25,20 @@
 		
 	});
 	
- 	
- 	
+ 	$(function() {
+ 		
+ 		$(".getUserInfo").on("click", function() {
+ 			
+ 			
+ 			var userNo =$(this).data("param");
+ 			
+ 			console.log(userNo);
+ 			
+ 			self.location="/user/getUser2?userNo="+userNo
+ 		
+ 		});
+ 	});
+  	
 </script>
 
 
@@ -36,7 +48,10 @@
 <input type="button" id="logout" name="logout" value="로그아웃">
 </form>
 
-"${id}"
+<h3 class=getUserInfo data-param="${user.userNo}">${user.userName}</h3>님 환영합니다.
+<p>${user.snsNo}</p>
+<p>${user.userNo}</p>
+
 컨트롤러 기능 확인용
 </body>
 </html>

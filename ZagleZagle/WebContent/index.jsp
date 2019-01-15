@@ -28,6 +28,25 @@
    	
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	 	
+	 <script type="text/javascript">
+	 
+	 //========로그인창 연결
+	 $(function() {
+
+			 $("#snsLogin").on("click" , function() {
+					self.location = "http://localhost:8080/view/user/loginView.jsp"
+				});
+		});
+	 
+	 
+	 
+	 
+	 
+	 
+	 </script>	
+	 	
+	 	
+	 	
 	
 </head>
 	
@@ -42,8 +61,14 @@
   	 
   	 <div class="container">
   	 <img src="/common/images/login.png" style="width: 100px; height: 100px; overflow: hidden"/>
-  	 <h3>Login</h3>
+  	 
+  	 <div>
+  	 <h3 id="snsLogin">Login</h3>
+  	 </div>
+  	 
   	 <br/>
+  	 
+  	 
   	 <h4><a href="/board/listBoard">요즘뜨는 게시물</a></h4>
   	 </div>
 

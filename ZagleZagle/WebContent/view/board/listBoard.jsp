@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <link href="/css/animate.min.css" rel="stylesheet">
 <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
@@ -29,7 +30,8 @@
 	.thumbnail{
         	width:500px;
         	height:650px;
-        }
+    }
+
 </style>
 
 <script type="text/javascript">
@@ -43,7 +45,9 @@ $(function(){
 
 });
 
+
 </script>
+
 </head>
 
 <body>
@@ -105,7 +109,7 @@ $(function(){
 		
         <%-- <input type="button" value="삭제"data-param2="${board.boardNo}"/> --%>
         
-        <div class="btn btn-primary" data-toggle="modal" data-target="#myModal">삭제
+        <div class="btn btn-primary" data-toggle="modal" data-target="#${board.user.userNickname}">삭제
         </div>
         
         </h4>
@@ -121,7 +125,8 @@ $(function(){
 </div><!-- /.modal -->
 <!-- 모달 끝 -->
 
-<div class="modal" id="${board.boardNo}" aria-hidden="true" style="display: none; z-index: 1060;">
+<!-- 모달2 시작 -->
+<div class="modal"  aria-hidden="true" style="display: none; z-index: 1060;" id="${board.user.userNickname}">
     	<div class="modal-dialog modal-md">
           <div class="modal-content">
             <div class="modal-header">
@@ -132,13 +137,12 @@ $(function(){
              	삭제하시겠습니까?
             </div>
             <div class="modal-footer">
-              <a href="#" data-dismiss="modal" class="btn">Close</a>
               <a href="/board/deleteBoard?boardNo=${board.boardNo}" class="btn btn-primary">삭제</a>
             </div>
           </div>
         </div>
-    </div>
-
+</div>
+<!-- 모달2 끝 -->
 
 
 
