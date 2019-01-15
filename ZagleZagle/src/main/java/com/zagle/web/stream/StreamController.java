@@ -93,10 +93,10 @@ public class StreamController {
 	ModelAndView modelAndView = new ModelAndView();
 	modelAndView.addObject("streamer",stream.getUser().getUserNo());
 	modelAndView.addObject("userNo",stream.getUser().getUserNo());
-	modelAndView.setViewName("redirect:https://192.168.0.26:443/stream/add");
+	modelAndView.setViewName("redirect:http://localhost:5005/stream/add");
 	return modelAndView;
 	}
-	 
+	  
 	
 	
 	
