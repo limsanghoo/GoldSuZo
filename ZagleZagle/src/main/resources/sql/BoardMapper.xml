@@ -71,5 +71,9 @@
 		</set>
 		WHERE board_no=#{boardNo}
 	</update>
+	
+	<select id="getMapList" parameterType="string" resultMap="boardSelectMap">
+		select * from board where address like '${searchKeyword}%'
+	</select>
 	 
 </mapper>

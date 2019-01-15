@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.zagle.common.Search;
 import com.zagle.service.board.BoardDAO;
 import com.zagle.service.board.BoardService;
 import com.zagle.service.board.RestBoardDAO;
@@ -17,6 +18,7 @@ import com.zagle.service.domain.Board;
 import com.zagle.service.domain.Comment;
 import com.zagle.service.domain.Like;
 import com.zagle.service.domain.Link;
+import com.zagle.service.domain.Local;
 import com.zagle.service.domain.SearchBoard;
 
 @Service("boardServiceImpl")
@@ -156,6 +158,32 @@ public class BoardServiceImpl implements BoardService{
 	public void cancelScrap(Scrap scrap) throws Exception {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public List<Local> getState() throws Exception {
+		List<Local> list = boardDAO.getState();
+		
+		return list;
+	}
+
+	@Override
+	public List<Local> getCity(Local local) throws Exception {
+		List<Local> list = boardDAO.getCity(local);
+		
+		return list;
+	}
+
+	@Override
+	public List<Local> getTown(Local local) throws Exception {
+		List<Local> list = boardDAO.getTown(local);
+		return list;
+	}
+
+	@Override
+	public List<Board> getMapList(Search search) {
+		List<Board> board = boardDAO.getMapList(search);
+		return board;
 	}
 
 }
