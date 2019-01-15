@@ -39,6 +39,14 @@
 		});
 	 
 	 
+	 //========admin로그인창 연결
+	 $(function() {
+
+			 $("#adminLogin").on("click" , function() {
+					self.location = "http://localhost:8080/view/user/adminLoginView.jsp"
+				});
+		});
+	 
 	 
 	 
 	 
@@ -56,9 +64,20 @@
 
 	<!-- 참조 : http://getbootstrap.com/css/   : container part..... -->
 	<div class="container">
-	<p><img src='/common/images/LOGO.png' style="width: 1100px; height: 500px; overflow: hidden" /></p>
+	<p><img src='/common/images/LOGO.png' style="width: 1100px; height: 500px; overflow: hidden" />
+
+  	 <img src="/common/images/adminlogin.png" id="adminLogin" style="width:30px; height:30px;">
+  	 
+	
+	</p>
+	
+	
+  	  
+	
   	 </div>
   	 
+  	 
+  	  
   	 <div class="container">
   	 <img src="/common/images/login.png" style="width: 100px; height: 100px; overflow: hidden"/>
   	 

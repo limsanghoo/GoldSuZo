@@ -2,16 +2,28 @@ package com.zagle.web.user;
 
 
 import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.security.SecureRandom;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonParser;
@@ -32,7 +44,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import org.springframework.http.HttpEntity;
+
 
 import com.zagle.service.domain.User;
 import com.zagle.service.user.UserService;
@@ -56,6 +68,40 @@ public class UserController {
 	int pageUnit;
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
+	
+	
+	@RequestMapping(value="adminLogin", method=RequestMethod.POST)
+	public ModelAndView adminLogin(@ModelAttribute("user") User user, HttpSession session) throws Exception {
+		
+		System.out.println("/user/adminLogin : POST");
+		
+		User dbUser = userService.getUser2(user.getUserNo());
+		System.out.println("첫번째 dbUser 값"+dbUser);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
+		
+		if( user.getSnsNo().equals(dbUser.getSnsNo())) {
+			
+		
+			session.setAttribute("admin", dbUser);
+			
+			modelAndView.setViewName("redirect:/view/admin/siteManage.jsp");
+			
+		}else {
+			
+			modelAndView.setViewName("redirect:/index.jsp");
+			
+		}
+		
+	
+		
+		
+		return modelAndView;
+		
+		
+	}
+	
 	
 	@RequestMapping(value="addUser", method=RequestMethod.GET)
 	public ModelAndView addUser() throws Exception {
@@ -186,6 +232,48 @@ public class UserController {
 	
 	}
 	
+	/*
+	@RequestMapping(value="generateState")
+	public String generateState(HttpSession session) throws Exception {
+		
+		System.out.println("여기왔나 보겠습니다");
+		
+			String clientId = "ICC6WpwdQLzHUQn5KfEC"; 
+		    String redirectURI = URLEncoder.encode("http://localhost:8080/user/naverCallback", "UTF-8");
+		    SecureRandom random = new SecureRandom();
+		    String state = new BigInteger(130, random).toString();
+		    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+		    apiURL += "&client_id=" + clientId;
+		    apiURL += "&redirect_uri=" + redirectURI;
+		    apiURL += "&state=" + state;
+		    session.setAttribute("state", state);
+		
+		    System.out.println(apiURL);
+		    
+		 
+		    HttpClient httpClient = new DefaultHttpClient();
+		 
+		   HttpGet get = new HttpGet(apiURL);
+		    get.setHeader("Accept", "applicaion/json");
+		    get.setHeader("Content-Type", "application/json");
+		    
+		    HttpResponse httpResponse = httpClient.execute(get);
+		    
+		    System.out.println(httpResponse);
+		    
+		    
+	            
+		 ModelAndView modelAndView = new ModelAndView();
+	
+		
+		
+		    
+	return apiURL;
+	}
+	*/
+	
+	
+	
 	@RequestMapping(value = "naverCallback")
 	public ModelAndView navLogin(@RequestParam("code") String code, RedirectAttributes ra,  HttpServletResponse response, 
 																																					HttpSession session,	HttpServletRequest request) throws Exception {	
@@ -265,7 +353,23 @@ public class UserController {
 	    return null;
 		
 	}	
+	@RequestMapping(value="getGGToken")
+	public ModelAndView getGGToken(@RequestParam("id") String id, RedirectAttributes ra,  HttpServletResponse response, 
+			HttpSession session,	HttpServletRequest request) throws Exception {	
 	
+		System.out.println("google CallBack 오는지 확인");
+		
+		System.out.println(id);
+		
+		String snsNo = "G@"+id;
+		
+		session.setAttribute("snsNo", snsNo);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject(snsNo);
+		modelAndView.setViewName("checkDuplication");
+		
+		return modelAndView;
 	
-
+	}
 }
