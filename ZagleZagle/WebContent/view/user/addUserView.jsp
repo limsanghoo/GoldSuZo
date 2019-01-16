@@ -36,7 +36,7 @@
 	$(function() {
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		$("a[href='#' ]").on("click" , function() {
-			self.location = "http://192.168.0.16:8080/index.jsp"
+			self.location = "/"
 		});
 	});	
 	
