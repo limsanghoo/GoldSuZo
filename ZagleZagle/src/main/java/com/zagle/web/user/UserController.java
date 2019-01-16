@@ -3,31 +3,23 @@ package com.zagle.web.user;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.math.BigInteger;
+
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.security.SecureRandom;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.io.JsonStringEncoder;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -36,6 +28,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,22 +63,47 @@ public class UserController {
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 	
+	@RequestMapping(value="login", method=RequestMethod.GET)
+	public ModelAndView login() throws Exception {
+		
+		System.out.println("/user/login : GET");
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("redirect:/view/user/loginView.jsp");
+		
+		return modelAndView;
+	}
+	
+	
+	@RequestMapping(value="adminLogin", method=RequestMethod.GET)
+	public ModelAndView adminLogin() throws Exception {
+		
+		System.out.println("/user/adminLogin: GET");
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("redirect:/view/user/adminLoginView.jsp");
+		
+		return modelAndView;
+	}
+	
+	
+	
 	
 	@RequestMapping(value="adminLogin", method=RequestMethod.POST)
 	public ModelAndView adminLogin(@ModelAttribute("user") User user, HttpSession session) throws Exception {
 		
 		System.out.println("/user/adminLogin : POST");
 		
-		User dbUser = userService.getUser2(user.getUserNo());
-		System.out.println("첫번째 dbUser 값"+dbUser);
+		User admin= userService.getUser2(user.getUserNo());
+		System.out.println("첫번째 dbUser 값"+admin);
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
 		
-		if( user.getSnsNo().equals(dbUser.getSnsNo())) {
+		if( user.getSnsNo().equals(admin.getSnsNo())) {
 			
 		
-			session.setAttribute("admin", dbUser);
+			session.setAttribute("admin", admin);
 			
 			modelAndView.setViewName("redirect:/view/admin/siteManage.jsp");
 			
@@ -115,7 +134,7 @@ public class UserController {
 		
 	}
 	@RequestMapping(value="addUser", method=RequestMethod.POST)
-	public ModelAndView addUser(@ModelAttribute("user") User user)throws Exception {
+	public ModelAndView addUser(@RequestParam("snsNo") String snsNo,@ModelAttribute("user") User user)throws Exception {
 		
 		System.out.println("/user/addUser : POST");
 		
@@ -311,7 +330,7 @@ public class UserController {
 	 
           
           System.out.println(NaverToken);
-	      
+        
 	      if(responseCode==200) { // 정상 호출
 	        br = new BufferedReader(new InputStreamReader(con.getInputStream()));
 	      } else {  // 에러 발생
@@ -372,4 +391,78 @@ public class UserController {
 		return modelAndView;
 	
 	}
+	
+	@RequestMapping( value="logout", method=RequestMethod.GET )
+	public ModelAndView logout(HttpSession session ) throws Exception{
+		
+		System.out.println("/user/logout : GET");
+		
+		session.invalidate();
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("redirect:/index.jsp");
+		return modelAndView;
+	
+	}
+	
+	@RequestMapping(value="Nlogout", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView Nlogout(HttpSession session) throws Exception {
+		
+		System.out.println("네이버 로그아웃");
+		
+		String accessToken = (String) session.getAttribute("Ncode");
+		
+		System.out.println(accessToken);
+		
+	
+		  final String RequestUrl = "https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id=ICC6WpwdQLzHUQn5KfEC&client_secret=NggQgvQjib&access_token="+accessToken+"&service_provider=NAVER";
+		  	                               
+		  
+		final CloseableHttpClient client = HttpClientBuilder.create().build();
+	       final HttpPost post = new HttpPost(RequestUrl);
+	       
+	        MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+			
+	        params.add("Authorization", accessToken);
+	   
+	        // add header
+	        post.addHeader("Authorization", "Bearer " + accessToken);
+
+	        System.out.println(post+accessToken);
+	        JsonNode logoutID = null;
+	        try {
+	            final HttpResponse response = client.execute(post);
+	            final int responseCode = response.getStatusLine().getStatusCode();
+	 
+	            System.out.println("\nSending 'POST' request to URL : " + RequestUrl);
+	            System.out.println("Response Code : " + responseCode);
+	            
+	            
+	            // JSON 형태 반환값 처리
+	            ObjectMapper mapper = new ObjectMapper();
+	            logoutID = mapper.readTree(response.getEntity().getContent());
+	           
+	            logoutID.get("id");
+	            System.out.println(logoutID);
+	            
+	            session.invalidate();
+	            
+	            
+	        } catch (ClientProtocolException e) {
+	            e.printStackTrace();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        } finally {
+	            // clear resources
+	        }
+	        
+		  
+		ModelAndView modelAndView = new ModelAndView();
+	      modelAndView.setViewName("/index.jsp");
+	        
+	      return modelAndView;
+		
+		
+	}
+	
 }

@@ -1,9 +1,12 @@
 package com.zagle.web.board;
 
 import java.net.URI;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
@@ -64,7 +68,8 @@ public class BoardRestController {
 	}
 	
 	@RequestMapping(value="json/addBoardVisionTag", method=RequestMethod.GET)
-	public ModelAndView addBoardVisionTag(@RequestParam("link")String link) throws Exception{
+	@ResponseBody
+	public String addBoardVisionTag(@RequestParam("link")String link) throws Exception{
 		
 		System.out.println(link);
 		
@@ -83,26 +88,27 @@ public class BoardRestController {
        
         System.out.println(response);
         
-        System.out.println(response.get("result"));
-        
-        /*String tag="{label=[food, sushi], label_kr=[음식, 초밥]}";
-
-		String[] split=tag.split("\\[");
+        String result=response.get("result").toString();
+                
+        String[] split=result.split("\\[");
 		
 		String aaa=split[2];
 		
 		String bbb=aaa.replace("]", "").replace("}", "").replace(", ", "#");
 		
-		String ccc="#";
+		String ddd="#"+bbb;
 		
-		String ddd=ccc+bbb;
+		String eee=URLEncoder.encode(ddd, "utf-8");
 		
-		System.out.println(ddd);*/
+		System.out.println(ddd);
+
 		
-		ModelAndView modelAndView=new ModelAndView();
-		
-		return modelAndView;
+		return eee;
 	}
+	
+	
+	
+	
 	
 	@RequestMapping(value="json/listMap", method=RequestMethod.GET)
 	public ModelAndView listMap() throws Exception{

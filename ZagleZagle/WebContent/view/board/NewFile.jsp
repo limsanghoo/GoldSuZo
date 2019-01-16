@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>updateBoard</title>
 
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 
@@ -35,9 +34,14 @@ file.onchange = function (event) {
         			data : {
         				link : result.data.link
         			},
-        			success : function(){
-        				console.log("어어어어");
-        				alert("와라");
+        			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+        			dataTypa : "text",
+        			success : function (data,status){
+        				var decode=decodeURIComponent(data);
+        				alert("decode : "+decode);
+        				
+        				$("#tag").val(decode);
+        				
         			}
         		});
       
@@ -89,6 +93,8 @@ file.onchange = function (event) {
 	<input multiple="multiple" type="file" style="width:500px;" accept="image/*" multiple onchange="fileInfo(this)" name="file"/><br>
 	<div id="img_box"></div>
 </div> -->
+
+<textarea id="tag"></textarea>
 
 </body>
 

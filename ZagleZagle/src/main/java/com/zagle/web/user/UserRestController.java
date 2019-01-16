@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.http.HttpResponse;
@@ -79,7 +79,7 @@ public class UserRestController {
 				        MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 				        params.add("grant_type", "authorization_code");
 				        params.add("client_id", "c3883a306a9faad67b127d7631568b29");
-				        params.add("redirect_uri", "http://localhost:8080/user/kakaologin");
+				        params.add("redirect_uri", "http://192.168.0.16:8080/user/kakaologin");
 				        params.add("code", code);
 				   
 				        
@@ -190,6 +190,9 @@ public class UserRestController {
 		
 			user = userService.getUser(snsNo);
 			
+			
+			session.setAttribute("user", user);
+			
 			modelAndView.addObject("result", new Boolean(result));
 			modelAndView.addObject("user", user);
 			modelAndView.setViewName("/view/user/model.jsp");
@@ -198,11 +201,14 @@ public class UserRestController {
 		}
 		
 		}
-		@RequestMapping(value="logout" , method= {RequestMethod.GET, RequestMethod.POST}) 
+		@RequestMapping(value="/logout/json" , method= {RequestMethod.GET, RequestMethod.POST}) 
 		public ModelAndView logout(HttpSession session) throws Exception {
 			
 			
 			System.out.println("여기왔나 확인해야합니다.");
+			
+			
+			
 			String accessToken = (String) session.getAttribute("response");
 			System.out.println(accessToken);
 			
@@ -237,6 +243,7 @@ public class UserRestController {
 		            logoutID.get("id");
 		            System.out.println(logoutID);
 		            
+		            session.invalidate();
 		            
 		        } catch (ClientProtocolException e) {
 		            e.printStackTrace();
@@ -245,6 +252,7 @@ public class UserRestController {
 		        } finally {
 		            // clear resources
 		        }
+		        
 		        
 			
 		        ModelAndView modelAndView = new ModelAndView();

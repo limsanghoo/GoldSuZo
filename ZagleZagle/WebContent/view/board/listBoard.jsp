@@ -31,6 +31,12 @@
         	width:500px;
         	height:650px;
     }
+    
+    #goAddBoard{
+    	position: static;
+    	float:right;
+    }
+    
 
 </style>
 
@@ -52,7 +58,22 @@ $(function(){
 
 <body>
 
+
+<a href="/board/listMap">지도로 보기</a>
+
+
+
+<a href="/board/addBoard">
+<input type="button" value="게시물 등록" id="goAddBoard">
+</a>
+
+
+
+<br/>
+<hr/>
+
 <!-- 리스트 시작 -->
+<div>
 <c:set var="i" value="0" />
 <c:forEach var="board" items="${list}">
 	<c:set var="i" value="${ i+1 }" />
@@ -70,17 +91,25 @@ $(function(){
 	
 	<div class="caption">
 	
-	<c:if test="${board.coord !=null && board.photo1 !=null}">
+
+	<%-- <c:if test="${board.coord !=null && board.photo1 !=null}">
 	<p align="center">${board.coord}</p>
 	</c:if>
 	
 	<c:if test="${board.coord ==null && board.photo1 !=null}">
 	<img src="/common/images/board/${board.photo1}" style="width:100%;" align="middle"/>
-	</c:if>
+	</c:if>	
+	--%>
+	
+	<c:if test="${board.photo1 !=null}">
+	<img src="/common/images/board/${board.photo1}" style="width:100%;" align="middle"/>
+	</c:if><!-- 삭제해야됨 -->
+	
+	<p align="center">${board.coord}</p><!-- 삭제해야됨 -->
 	
 	<p align="center">${board.boardDetailText}</p>
 	<p align="center">${board.hashTag}</p>
-	<p align="center">${board.boardStatus}</p>
+	<%-- <p align="center">${board.boardStatus}</p> --%>
 	
 	</div>
 	</div>
@@ -106,8 +135,6 @@ $(function(){
 		
 		<div class="col-md-4 col-md-offset-4">
 		<input type="button" value="수정" data-param1="${board.boardNo}"/>
-		
-        <%-- <input type="button" value="삭제"data-param2="${board.boardNo}"/> --%>
         
         <div class="btn btn-primary" data-toggle="modal" data-target="#${board.user.userNickname}">삭제
         </div>
@@ -151,9 +178,8 @@ $(function(){
 
 </c:forEach>
 <!-- 리스트 끝 -->
-
-<div class="confirm">
 </div>
+
 
 
 

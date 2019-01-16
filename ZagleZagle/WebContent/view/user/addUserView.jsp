@@ -36,7 +36,7 @@
 	$(function() {
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		$("a[href='#' ]").on("click" , function() {
-			$("form")[0].reset();
+			self.location = "http://192.168.0.16:8080/index.jsp"
 		});
 	});	
 	
@@ -54,11 +54,26 @@
 
 		$("input:hidden[name='phone']").val( value );
 		
-		$("form").attr("method" , "POST").attr("action" , "/user/addUser").submit();
+		$("form").attr("method" , "POST").attr("action" , "/user/addUser?snsNo=${snsNo}").submit();
 	}
 		
-		
+	/////라디오 박스값 DB에 넘기기
 	
+	
+      $(document).ready(function () {
+        $('#userSex').click(function () {
+          // getter
+          var userSex = $('input[name="userSex"]:checked').val();
+          alert(userSex);
+        });
+
+        $('#userSex1').click(function () {
+          // setter
+          // 선택한 부분을 세팅할 수 있다.
+          $('input[name="userSex"]').val(['여']);
+        });
+      });
+    
 
 	
 	</script>
@@ -75,15 +90,6 @@
 	
 	<form class="form-horizontal">
 	
-	
-	 <div class="form-group">
-	   <label for="snsNo" class="col-sm-offset-1 col-sm-3 control-label">snsNo</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="snsNo" name="snsNo" value="${snsNo}" readonly>
-		  
-		    </div>
-	
-	</div>
 	
 	 <div class="form-group">
 		    <label for="profile" class="col-sm-offset-1 col-sm-3 control-label">프로필사진</label>
@@ -106,7 +112,7 @@
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="userNickname" name="userNickname" placeholder="중복확인하세요">
 		  		 <span id="helpBlock" class="help-block">
-		      	<strong class="text-danger">입력전 중복확인 부터..</strong>
+		      	<strong class="text-danger">입력전 중복확인 부터..(구현해야함!)</strong>
 		      </span>
 		    </div>
 		    
@@ -116,8 +122,14 @@
 	 <div class="form-group">
 	   <label for="userSex" class="col-sm-offset-1 col-sm-3 control-label">성별</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userSex" name="userSex">
+		       <input type = "radio" name = "userSex" value = "남" id="userSex"> 남    
+       			<input type = "radio" name = "userSex" value = "여" id="userSex1"> 여<br>
+
+		      <br>
 		      
+		
+
+
 		  
 		    </div>
 	

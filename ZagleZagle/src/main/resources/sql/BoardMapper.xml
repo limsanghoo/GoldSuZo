@@ -53,7 +53,7 @@
 			board_detail_text=#{boardDetailText},
 			hash_tag=#{hashTag:VARCHAR},
 			user_theme=#{userTheme},
-			board_status=#{boardStatus}
+			board_status=#{boardStatus},
 			photo1=#{photo1:VARCHAR},
 			photo2=#{photo2:VARCHAR},
 			photo3=#{photo3:VARCHAR},

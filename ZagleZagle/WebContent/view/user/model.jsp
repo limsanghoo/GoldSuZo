@@ -1,24 +1,54 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html >
+<html lang="ko">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+
+<link href="/css/animate.min.css" rel="stylesheet">
+   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
 				
+  <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+	
+
 
 <script type="text/javascript">
 	
-	console.log('${KakaoId}')
+
+
+	
+	
 	
 	$(function() {
-		
+	    
 		
 		$("#logout").on("click",function() {
 			
-			alert("Ŭ����")
+			alert("클릭됨")
 			
-			$("form").attr("method" , "POST").attr("action" , "/user/logout").submit();
+				var snsNo = $(this).data("param");
+				
+				alert(snsNo)
+			
+			if(snsNo.startsWith("K")) {
+				
+				alert("K로시작하는거 인식")
+				$("form").attr("method" , "POST").attr("action" , "/user/logout/json").submit();
+				
+			}else if(snsNo.startsWith("N")){
+				alert("N으로시작하는거 인식")
+				$("form").attr("method" , "POST").attr("action" , "/user/Nlogout").submit();
+			}
+	
+			
+		
 			
 		});
 	
@@ -30,7 +60,7 @@
  		$(".getUserInfo").on("click", function() {
  			
  			
- 			var userNo =$(this).data("param");
+ 			var userNo =$(this).data("param1");
  			
  			console.log(userNo);
  			
@@ -45,13 +75,13 @@
 </head>
 <body>
 <form>
-<input type="button" id="logout" name="logout" value="�α׾ƿ�">
+<input type="button" id="logout" name="logout" value="로그아웃" data-param="${user.snsNo}">
 </form>
 
-<h3 class=getUserInfo data-param="${user.userNo}">${user.userName}</h3>�� ȯ���մϴ�.
+<h3 class=getUserInfo data-param1="${user.userNo}">${user.userName} 님 환영합니다.</h3>
 <p>${user.snsNo}</p>
 <p>${user.userNo}</p>
 
-��Ʈ�ѷ� ��� Ȯ�ο�
+컨트롤러 기능 확인용
 </body>
 </html>
