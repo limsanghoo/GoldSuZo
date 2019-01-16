@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -124,9 +126,9 @@ public class StreamController {
 	
 	
 	@RequestMapping(value="spon",method=RequestMethod.GET)
-	public ModelAndView sponStream(@RequestParam("userNo")String userNo,@RequestParam("streamerNo")String streamerNo) throws Exception{
+	public ModelAndView sponStream(@RequestParam("userNo")String userNo,@RequestParam("streamerNo")String streamerNo,HttpSession session) throws Exception{
 		
-	 
+	 session.setAttribute("뭐야","대체");
      	ModelAndView modelandview = new ModelAndView();
      	modelandview.setViewName("/view/stream/sponStream.jsp");
      	
