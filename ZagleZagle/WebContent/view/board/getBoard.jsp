@@ -9,9 +9,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <title>getBoard</title>
+
+<style>
+	#goListBoard{
+		position: static;
+    	float:right;
+	}
+</style>
+
+
 </head>
 
 <body>
+
+
+<a href="/board/listBoard">
+<input type="button" value="전체 게시물" id="goListBoard">
+</a>
+
+<br/>
 
 <div>
 ${board.coord}

@@ -119,13 +119,15 @@ public class BoardRestController {
 		
 		String ddd=ccc+bbb;
 		
+		String eee=URLEncoder.encode(ddd, "utf-8");
+		
 		System.out.println(ddd);
         
         /*JSONObject obj=new JSONObject();
         obj.put("result", URLEncoder.encode(ddd, "utf-8"));*/
 
 		
-		return ddd;
+		return eee;
 	}
 	
 	
