@@ -52,7 +52,15 @@ $(function(){
 
 <body>
 
+<div>
+<a href="/board/listMap">지도로 보기</a>
+</div>
+
+<br/>
+<hr/>
+
 <!-- 리스트 시작 -->
+<div>
 <c:set var="i" value="0" />
 <c:forEach var="board" items="${list}">
 	<c:set var="i" value="${ i+1 }" />
@@ -159,9 +167,8 @@ $(function(){
 
 </c:forEach>
 <!-- 리스트 끝 -->
-
-<div class="confirm">
 </div>
+
 
 
 
