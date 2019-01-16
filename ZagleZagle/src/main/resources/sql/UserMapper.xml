@@ -72,4 +72,14 @@
 	   	</set>
 	   	WHERE user_no = #{userNo}
 	 </update>
+	 
+	 <!--  SQL : UPDATE SCORE -->
+	 <update id="updateAddActiveScore" parameterType="user">
+	 UPDATE users
+	 <set>
+	 total_active_score =#{totalActiveScore:INTEGER}
+	 </set>
+	 WHERE sns_no = #{snsNo}
+	 </update>
+	 
 </mapper>

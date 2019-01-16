@@ -60,6 +60,7 @@ public class UserRestController {
 	@Autowired
 	@Qualifier("userServiceImpl")
 	private UserService userService;
+	
     private RestTemplate restTemplate = new RestTemplate(); 
 	
 	public UserRestController() {
@@ -191,9 +192,19 @@ public class UserRestController {
 			User user = new User();
 		
 			user = userService.getUser(snsNo);
+			int value = user.getTotalActiveScore();
+			user.setTotalActiveScore(value+5);
+			
+			userService.addActiveScore(user);
+			
 			
 			
 			session.setAttribute("user", user);
+			
+			
+			
+			//userService.addActiveScore(user);
+			
 			
 			modelAndView.addObject("result", new Boolean(result));
 			modelAndView.addObject("user", user);
