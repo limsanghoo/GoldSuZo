@@ -85,7 +85,7 @@ public class StreamController {
 		String stringdate = "2018-01-11";
 		Date date = new SimpleDateFormat("yyyy-MM-dd").parse(stringdate);
 		System.out.println(date);
-		User user = userService.getUser("2");
+		User user = userService.getUser2("US10001");
 		System.out.println(user);
 		stream.setUser(user);  
 		stream.setStreamDate(date);
