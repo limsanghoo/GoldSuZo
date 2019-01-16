@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -120,5 +121,19 @@ public class StreamController {
      	
 	return modelandview;
 	}
+	
+	
+	@RequestMapping(value="spon",method=RequestMethod.GET)
+	public ModelAndView sponStream(@RequestParam("userNo")String userNo,@RequestParam("streamerNo")String streamerNo) throws Exception{
+		
+	 
+     	ModelAndView modelandview = new ModelAndView();
+     	modelandview.setViewName("/view/stream/sponStream.jsp");
+     	
+	return modelandview;
+	}
+	
+	
+	
 	
 }

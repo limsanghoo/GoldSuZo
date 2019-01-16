@@ -27,24 +27,24 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
 <div class="row">
-				<select name="state" class="ct_input_g" style="width: 100px; height: 19px" onchange="fncGetState(this)">
-					<option value='' selected>시·도</option>
+				<select name="state" class="ct_input_g" style="width: 200px; height: 40px" onchange="fncGetState(this)">
+					<option value='' selected style="font-size:20px;">시·도</option>
 					<c:set var="i" value="0"/>
 					<c:forEach var="local" items="${list}">
 					<c:set var="i" value="${i+1}"/>
-					<option value='${local.stateCode}'>${local.stateName}</option>
+					<option value='${local.stateCode}' style="font-size:20px;">${local.stateName}</option>
 					</c:forEach>
 				</select>
 				
-				<select name="city"  class="ct_input_g" style="width: 100px; height: 19px" onchange="fncGetCity(this)">
-					<option value="" >시·군·구</option>
+				<select name="city"  class="ct_input_g" style="width: 200px; height: 40px" onchange="fncGetCity(this)">
+					<option value="" style="font-size:20px;">시·군·구</option>
 				</select>
         
-				<select name="town"  class="ct_input_g" style="width: 100px; height: 19px" onchange="fncGetTown(this)">
-					<option value="" >읍·면·동</option>
+				<select name="town"  class="ct_input_g" style="width: 200px; height: 40px" onchange="fncGetTown(this)">
+					<option value="" style="font-size:20px;">읍·면·동</option>
 				</select>  
 				
-				<a href="/board/listBoard">리스트로 보기</a>
+				<a href="/board/listBoard" style='font-size:20px;'>리스트로 보기</a>
 				            
 			</div>
 
@@ -85,7 +85,7 @@ function fncGetState(){
 				
 				if(data.length>0){
 					$.each(data, function(index){
-						temp = "<option value='"+data[index].cityCode+"'>"+data[index].cityName+"</option>";
+						temp = "<option value='"+data[index].cityCode+"' style='font-size:20px;'>"+data[index].cityName+"</option>";
 						display += temp;
 					});
 					
@@ -119,7 +119,7 @@ function fncGetCity(){
 				
 				if(data.length>0){
 					$.each(data, function(index){
-						temp = "<option value='"+data[index].townCode+"'>"+data[index].townName+"</option>";
+						temp = "<option value='"+data[index].townCode+"' style='font-size:20px;'>"+data[index].townName+"</option>";
 						display += temp;
 					});
 					
@@ -163,8 +163,8 @@ function fncGetTown(){
 				}
 				
 			});
-
 }
+
 var markers = [];
 var infowindow = [];
 var marker;
