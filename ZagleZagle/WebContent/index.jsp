@@ -22,7 +22,7 @@
         body {
             padding-top : 70px;
         }
-       
+        
 		div { text-align: center; }
    	</style>
    	
@@ -60,11 +60,11 @@
 	
 <body>
 
-
+	<jsp:include page="/view/layout/toolbar.jsp" />
 
 	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   : container part..... -->
 	<div class="container">
-	<p><img src='/common/images/LOGO.png' style="width: 1100px; height: 500px; overflow: hidden" />
+	<p><img src='/common/images/LOGO2.png' style="width: 1300px; height: 300px; overflow: hidden" id="logo" />
 
   	 <img src="/common/images/adminlogin.png" id="adminLogin" style="width:30px; height:30px;">
   	 
