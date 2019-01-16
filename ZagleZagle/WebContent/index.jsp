@@ -34,7 +34,7 @@
 	 $(function() {
 
 			 $("#snsLogin").on("click" , function() {
-					self.location = "http://localhost:8080/view/user/loginView.jsp"
+					self.location = "/user/login"
 				});
 		});
 	 
@@ -43,7 +43,7 @@
 	 $(function() {
 
 			 $("#adminLogin").on("click" , function() {
-					self.location = "http://localhost:8080/view/user/adminLoginView.jsp"
+					self.location = "/user/adminLogin"
 				});
 		});
 	 
@@ -64,29 +64,21 @@
 
 	<!-- 참조 : http://getbootstrap.com/css/   : container part..... -->
 	<div class="container">
-	<p><img src='/common/images/LOGO2.png' style="width: 1300px; height: 300px; overflow: hidden" id="logo" />
+		<p>
+		<br/><br/><br/><br/><br/><br/>
+		<img src='/common/images/LOGO2.png' style="width: 1300px; height: 300px; overflow: hidden" id="logo" />
+	  	<img src="/common/images/adminlogin.png" id="adminLogin" style="width:30px; height:30px;">
+		</p>
+  	</div>
 
-  	 <img src="/common/images/adminlogin.png" id="adminLogin" style="width:30px; height:30px;">
-  	 
-	
-	</p>
-	
-	
-  	  
-	
-  	 </div>
-  	 
-  	 
-  	  
   	 <div class="container">
-  	 <img src="/common/images/login.png" style="width: 100px; height: 100px; overflow: hidden"/>
+  	 	<img src="/common/images/login.png" style="width: 100px; height: 100px; overflow: hidden"/>
   	 
   	 <div>
-  	 <h3 id="snsLogin">Login</h3>
+  	 	<h3 id="snsLogin">Login</h3>
   	 </div>
   	 
   	 <br/>
-  	 
   	 
   	 <h4><a href="/board/listBoard">요즘뜨는 게시물</a></h4>
   	 </div>

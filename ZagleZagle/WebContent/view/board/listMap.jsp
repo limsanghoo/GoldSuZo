@@ -28,7 +28,7 @@
 
 <div class="row">
 				<select name="state" class="ct_input_g" style="width: 200px; height: 40px" onchange="fncGetState(this)">
-					<option value='' selected style="font-size:20px;">시·도</option>
+					<option value='' style="font-size:20px;"  selected>시·도</option>
 					<c:set var="i" value="0"/>
 					<c:forEach var="local" items="${list}">
 					<c:set var="i" value="${i+1}"/>
@@ -68,7 +68,7 @@ var map = new daum.maps.Map(mapContainer, mapOption);
 function fncGetState(){
 	
 	var stateCode = $("select[name=state]").val();
-	alert(stateCode);
+	//alert(stateCode);
 	
 	$.ajax(
 		{
@@ -102,7 +102,7 @@ function fncGetCity(){
 	
 	var stateCode = $("select[name=state]").val();
 	var cityCode = $("select[name=city]").val();
-	alert(cityCode);
+	//alert(cityCode);
 	
 	$.ajax(
 		{
@@ -139,7 +139,7 @@ function fncGetTown(){
 	
 	local = stateName+" "+cityName+" "+townName;
 	
-	alert(local);
+	//alert(local);
 	
 	$.ajax(
 			{
@@ -151,12 +151,12 @@ function fncGetTown(){
 				},
 				success : function(data, status){
 					
-					alert("다녀옴");
-					alert(data);
+					//alert("다녀옴");
+					//alert(data);
 					
 					hideMarkers();
 					if (data=='') {
-					alert("없음");	
+					//alert("없음");	
 					}else{
 					markerMake(data);
 					}
@@ -181,7 +181,7 @@ function markerMake(data){
 	
 	var markerPosition  = new daum.maps.LatLng(coordy, coordx); 
 	var boardNo = data[i].boardNo;
-	alert(boardNo);
+	//alert(boardNo);
 	bounds.extend(markerPosition);
 	
 	// 마커를 생성합니다
