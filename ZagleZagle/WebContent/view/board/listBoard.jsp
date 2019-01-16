@@ -31,6 +31,12 @@
         	width:500px;
         	height:650px;
     }
+    
+    #goAddBoard{
+    	position: static;
+    	float:right;
+    }
+    
 
 </style>
 
@@ -52,9 +58,16 @@ $(function(){
 
 <body>
 
-<div>
+
 <a href="/board/listMap">지도로 보기</a>
-</div>
+
+
+
+<a href="/board/addBoard">
+<input type="button" value="게시물 등록" id="goAddBoard">
+</a>
+
+
 
 <br/>
 <hr/>

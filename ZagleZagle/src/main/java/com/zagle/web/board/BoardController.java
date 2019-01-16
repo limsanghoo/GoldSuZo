@@ -70,6 +70,7 @@ public class BoardController {
 	public ModelAndView addBoard() throws Exception{
 		
 		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.setViewName("forward:/view/board/addBoard.jsp");
 		
 		return modelAndView;
 	}

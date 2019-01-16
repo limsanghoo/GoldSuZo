@@ -37,9 +37,9 @@ file.onchange = function (event) {
         			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
         			dataTypa : "text",
         			success : function (data,status){
-        				alert(data);
+        				alert("data : "+data);
         				var decode=decodeURI(data);
-        				alert(decode);
+        				alert("decode : "+decode);
         				
         			}
         		});
