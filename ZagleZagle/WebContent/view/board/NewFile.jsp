@@ -37,9 +37,10 @@ file.onchange = function (event) {
         			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
         			dataTypa : "text",
         			success : function (data,status){
-        				alert("data : "+data);
-        				var decode=decodeURI(data);
+        				var decode=decodeURIComponent(data);
         				alert("decode : "+decode);
+        				
+        				$("#tag").val(decode);
         				
         			}
         		});
@@ -93,7 +94,7 @@ file.onchange = function (event) {
 	<div id="img_box"></div>
 </div> -->
 
-<textarea id="tag">ddd</textarea>
+<textarea id="tag"></textarea>
 
 </body>
 

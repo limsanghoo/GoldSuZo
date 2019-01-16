@@ -135,8 +135,6 @@ $(function(){
 		
 		<div class="col-md-4 col-md-offset-4">
 		<input type="button" value="수정" data-param1="${board.boardNo}"/>
-		
-        <%-- <input type="button" value="삭제"data-param2="${board.boardNo}"/> --%>
         
         <div class="btn btn-primary" data-toggle="modal" data-target="#${board.user.userNickname}">삭제
         </div>
