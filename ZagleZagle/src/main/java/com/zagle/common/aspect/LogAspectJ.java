@@ -3,8 +3,7 @@ package com.zagle.common.aspect;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /*
- * FileName : PojoAspectJ.java
- *	:: XML �� ���������� aspect �� ����   
+ * FileName : PojoAspectJ.java   
   */
 public class LogAspectJ {
 

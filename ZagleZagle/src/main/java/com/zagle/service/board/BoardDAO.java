@@ -3,10 +3,12 @@ package com.zagle.service.board;
 import java.util.List;
 import java.util.Map;
 
+import com.zagle.common.Search;
 import com.zagle.service.domain.Board;
 import com.zagle.service.domain.Comment;
 import com.zagle.service.domain.Like;
 import com.zagle.service.domain.Link;
+import com.zagle.service.domain.Local;
 import com.zagle.service.domain.Report;
 import com.zagle.service.domain.SearchBoard;
 
@@ -35,6 +37,16 @@ public void addBoard(Board board) throws Exception;
 	public void addLike(Like like) throws Exception;
 	
 	public void cancelLike(Like like) throws Exception;
+	
+	public List<Local> getState() throws Exception;
+
+	public int getStateCount() throws Exception;
+
+	public List<Local> getCity(Local local) throws Exception;
+
+	public List<Local> getTown(Local local) throws Exception;
+
+	public List<Board> getMapList(Search search);
 	
 
 }

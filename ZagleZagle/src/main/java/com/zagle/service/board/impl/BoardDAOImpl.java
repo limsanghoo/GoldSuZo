@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import com.zagle.common.Search;
 import com.zagle.service.board.BoardDAO;
 import com.zagle.service.domain.Board;
 import com.zagle.service.domain.Comment;
 import com.zagle.service.domain.Like;
 import com.zagle.service.domain.Link;
+import com.zagle.service.domain.Local;
 import com.zagle.service.domain.Report;
 import com.zagle.service.domain.SearchBoard;
 
@@ -97,6 +99,31 @@ public class BoardDAOImpl implements BoardDAO{
 	public void cancelLike(Like like) throws Exception {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public List<Local> getState() throws Exception {
+		return sqlSession.selectList("MapMapper.getState");
+	}
+
+	@Override
+	public int getStateCount() throws Exception {
+		return sqlSession.selectOne("MapMapper.getStateCount");
+	}
+
+	@Override
+	public List<Local> getCity(Local local) throws Exception {
+		return sqlSession.selectList("MapMapper.getCity",local);
+	}
+
+	@Override
+	public List<Local> getTown(Local local) throws Exception {
+		return sqlSession.selectList("MapMapper.getTown",local);
+	}
+
+	@Override
+	public List<Board> getMapList(Search search) {
+		return sqlSession.selectList("BoardMapper.getMapList",search);
 	}
 
 }
