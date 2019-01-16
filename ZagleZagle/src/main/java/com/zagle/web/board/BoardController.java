@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,6 +26,7 @@ import com.zagle.service.board.BoardService;
 import com.zagle.service.chat.ChatService;
 import com.zagle.service.domain.Board;
 import com.zagle.service.domain.Comment;
+import com.zagle.service.domain.Local;
 import com.zagle.service.domain.Report;
 import com.zagle.service.domain.SearchBoard;
 import com.zagle.service.domain.User;
@@ -334,6 +336,19 @@ public class BoardController {
 		
 		ModelAndView modelAndView=new ModelAndView();
 		modelAndView.setViewName("forward:/view/board/getBoard.jsp");
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping( value="listMap" )
+	public ModelAndView listMap (HttpSession session) throws Exception{
+		System.out.println("commoncontroller ����??");
+		
+		List<Local> list = boardService.getState();
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("list",list);
+		modelAndView.setViewName("forward:/view/board/listMap.jsp");
 		
 		return modelAndView;
 	}
