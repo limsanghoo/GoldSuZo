@@ -88,43 +88,19 @@ public class BoardRestController {
        
         System.out.println(response);
         
-        System.out.println(response.get("result"));
-        
-        /*String tag="{label=[food, sushi], label_kr=[음식, 초밥]}";
-
-		String[] split=tag.split("\\[");
-		
-		String aaa=split[2];
-		
-		String bbb=aaa.replace("]", "").replace("}", "").replace(", ", "#");
-		
-		String ccc="#";
-		
-		String ddd=ccc+bbb;
-		
-		System.out.println(ddd);*/
-        
-
-        
         String result=response.get("result").toString();
-        
-        
+                
         String[] split=result.split("\\[");
 		
 		String aaa=split[2];
 		
 		String bbb=aaa.replace("]", "").replace("}", "").replace(", ", "#");
 		
-		String ccc="#";
-		
-		String ddd=ccc+bbb;
+		String ddd="#"+bbb;
 		
 		String eee=URLEncoder.encode(ddd, "utf-8");
 		
 		System.out.println(ddd);
-        
-        /*JSONObject obj=new JSONObject();
-        obj.put("result", URLEncoder.encode(ddd, "utf-8"));*/
 
 		
 		return eee;
