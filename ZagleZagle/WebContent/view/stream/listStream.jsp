@@ -93,7 +93,6 @@ $(function() {
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin:15px; padding:15px;">
 스트리밍 방 업로드 하기
 </button>
-	<button class="ban" name="banname">강퇴하기</button>
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

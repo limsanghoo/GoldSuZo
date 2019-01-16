@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -83,7 +85,7 @@ public class StreamController {
 		String stringdate = "2018-01-11";
 		Date date = new SimpleDateFormat("yyyy-MM-dd").parse(stringdate);
 		System.out.println(date);
-		User user = userService.getUser("2");
+		User user = userService.getUser2("US10001");
 		System.out.println(user);
 		stream.setUser(user);  
 		stream.setStreamDate(date);
@@ -124,9 +126,9 @@ public class StreamController {
 	
 	
 	@RequestMapping(value="spon",method=RequestMethod.GET)
-	public ModelAndView sponStream(@RequestParam("userNo")String userNo,@RequestParam("streamerNo")String streamerNo) throws Exception{
+	public ModelAndView sponStream(@RequestParam("userNo")String userNo,@RequestParam("streamerNo")String streamerNo,HttpSession session) throws Exception{
 		
-	 
+	 session.setAttribute("뭐야","대체");
      	ModelAndView modelandview = new ModelAndView();
      	modelandview.setViewName("/view/stream/sponStream.jsp");
      	

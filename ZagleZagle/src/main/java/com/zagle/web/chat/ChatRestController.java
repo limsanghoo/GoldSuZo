@@ -18,7 +18,7 @@ public class ChatRestController {
 		// TODO Auto-generated constructor stub
 		System.out.println(this.getClass());
 	}
-
+	
 	@RequestMapping(value="json/uploadFile/",method=RequestMethod.POST)
 	public String uploadFile(MultipartHttpServletRequest multipartFile) throws Exception{
 		String path = "C:\\Users\\Bit\\git\\GoldSuZo\\ZagleZagle\\WebContent\\common\\images\\chat\\";

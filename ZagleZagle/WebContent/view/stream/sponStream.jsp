@@ -10,14 +10,8 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	
-	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-   
-    <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script> 
-   
-   
+
+    
    
 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
@@ -56,8 +50,8 @@ $(function(){
 <title>Insert title here</title>
 </head>
 <body>
-<form>
-      <h3>여러분의 후원이 큰 힘이 됩니다^^ ${param.userNo}${param.streamerNo}</h3>
+<form> 
+      <h3>여러분의 후원이 큰 힘이 됩니다^^  ${param.userNo}${param.streamerNo}</h3>  
                  금액<input type="text" id="price" name="price"></input>원  
       	 <input type="hidden" id="streamerNo" name="streamerNo" value="${param.streamerNo}"></input>
     	 <input type="hidden" id="userNo" name="userNo" value="${param.userNo}"></input>
