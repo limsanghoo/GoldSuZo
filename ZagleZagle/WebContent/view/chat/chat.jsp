@@ -72,6 +72,7 @@
 			////소켓 서버로 부터 in_msg를 통해 이벤트를 받을 경우 
 			socket.on('send_user_name',function(msg){
 				$("<div></div>").text(msg+"님이 입장하셧습니다.").appendTo("#chat_box");
+				 $('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
 			});
 			//소켓 서버로 부터 send_msg를 통해 이벤트를 받을 경우 
 			socket.on('send_msg', function(data) {
@@ -97,14 +98,17 @@
 				}*/
 				if (data.ms.substring(data.ms.length-3)=='jpg'||data.ms.substring(data.ms.length-3)=='png') {
 					$("<div>"+data.id+" : <img src='/common/images/chat/"+data.ms+"' style='width: 100px; height: 80px;'/></div>").appendTo("#chat_box");
+					$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
 				}else{
 					$("<div></div>").text(data.id+" : "+data.ms).appendTo("#chat_box");
+					$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
 				}
 				
 			});
 			//
 			socket.on('out_msg',function(msg){
 				$('<div></div>').text(msg).appendTo("#chat_box");
+				$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
 			});
 			
 
@@ -143,7 +147,9 @@
 		            });
 		
 			});
-				
+			
+			
+			
 		});
 		
 		
@@ -164,7 +170,7 @@
 		            }                              
 		        });
 		});*/
-		 
+		
 	</script>
 </body>
 </html>
