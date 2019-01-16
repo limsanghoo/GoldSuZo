@@ -34,7 +34,7 @@
 	 $(function() {
 
 			 $("#snsLogin").on("click" , function() {
-					self.location = "http://localhost:8080/view/user/loginView.jsp"
+					self.location = "/user/login"
 				});
 		});
 	 
@@ -43,7 +43,7 @@
 	 $(function() {
 
 			 $("#adminLogin").on("click" , function() {
-					self.location = "http://localhost:8080/view/user/adminLoginView.jsp"
+					self.location = "/user/adminLogin"
 				});
 		});
 	 
