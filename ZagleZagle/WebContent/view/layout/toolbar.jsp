@@ -77,7 +77,7 @@
 
 	</script>
 <body>
-<div class="navbar  navbar-inverse navbar-fixed-top">
+<div class="navbar  navbar-default navbar-fixed-top">
 	
 	<div class="container">
 	       
