@@ -70,17 +70,25 @@ $(function(){
 	
 	<div class="caption">
 	
-	<c:if test="${board.coord !=null && board.photo1 !=null}">
+
+	<%-- <c:if test="${board.coord !=null && board.photo1 !=null}">
 	<p align="center">${board.coord}</p>
 	</c:if>
 	
 	<c:if test="${board.coord ==null && board.photo1 !=null}">
 	<img src="/common/images/board/${board.photo1}" style="width:100%;" align="middle"/>
-	</c:if>
+	</c:if>	
+	--%>
+	
+	<c:if test="${board.photo1 !=null}">
+	<img src="/common/images/board/${board.photo1}" style="width:100%;" align="middle"/>
+	</c:if><!-- 삭제해야됨 -->
+	
+	<p align="center">${board.coord}</p><!-- 삭제해야됨 -->
 	
 	<p align="center">${board.boardDetailText}</p>
 	<p align="center">${board.hashTag}</p>
-	<p align="center">${board.boardStatus}</p>
+	<%-- <p align="center">${board.boardStatus}</p> --%>
 	
 	</div>
 	</div>

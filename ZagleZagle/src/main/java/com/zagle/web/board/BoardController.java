@@ -342,17 +342,6 @@ public class BoardController {
 		
 		return modelAndView;
 	}
-
-	@RequestMapping(value="getImgur")
-	public ModelAndView getImgur(@RequestParam("link") String link) throws Exception{
-		
-		System.out.println("imgru link : "+link);
-		
-		
-		ModelAndView modelAndView=new ModelAndView();
-		
-		return modelAndView;
-	}
 	
 	@RequestMapping( value="listMap", method=RequestMethod.GET)
 	public ModelAndView listMap (HttpSession session) throws Exception{
@@ -367,5 +356,6 @@ public class BoardController {
 		
 		return modelAndView;
 	}
+	
 
 }
