@@ -73,7 +73,7 @@ $(function() {
 		alert(streamer);
 		  window.open("http://localhost:3000/stream/join?streamer="+streamer+"&userNo=US10002&userNickname=user02&userProfile=default.jpg", "popup_window", "width=1450, height=900, scrollbars=no");
 	}); 
-	  
+	   
 	   $('button[name="banname"]').on('click',function(){
 
 	    	alert('ddd');	
