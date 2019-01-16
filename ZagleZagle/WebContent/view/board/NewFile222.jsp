@@ -11,7 +11,7 @@
 <script type="text/javascript">
 
 
-
+$(function(){
 function fileInfo(f){
 	var file = f.files; // files 를 사용하면 파일의 정보를 알 수 있음
 
@@ -21,9 +21,28 @@ function fileInfo(f){
 		var reader = new FileReader(); // FileReader 객체 사용
 		
 		reader.onload = function(rst){
+			
+			var target = event.currentTarget;
+			  var xmlHttpRequest = new XMLHttpRequest();
+			  xmlHttpRequest.open('POST', 'https://api.imgur.com/3/image/', true);
+			  xmlHttpRequest.setRequestHeader("Authorization", "Client-ID c764d6730f6f9a6");
+			  xmlHttpRequest.onreadystatechange = function () {
+			    if (xmlHttpRequest.readyState == 4) {
+			      if (xmlHttpRequest.status == 200) {
+			        var result = JSON.parse(xmlHttpRequest.responseText);
+			        image.src = result.data.link;
+			        console.log(result);
+			      }
+			      else {
+			      	alert("업로드 실패");
+			        image.src = "http://dy.gnch.or.kr/img/no-image.jpg";
+			      }
+			    }
+			
+			
+			
 			$('#img_box').append('<img src="'+rst.target.result+'">'); // append 메소드를 사용해서 이미지 추가
-			// 이미지는 base64 문자열로 추가
-			// 이 방법을 응용하면 선택한 이미지를 미리보기 할 수 있음
+
 			
 		}	
 		
@@ -32,6 +51,7 @@ function fileInfo(f){
 	}
 
 }
+});
 
 
 </script>
