@@ -36,7 +36,7 @@
 	$(function() {
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		$("a[href='#' ]").on("click" , function() {
-			$("form")[0].reset();
+			self.location = "http://192.168.0.16:8080/index.jsp"
 		});
 	});	
 	
@@ -112,7 +112,7 @@
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="userNickname" name="userNickname" placeholder="중복확인하세요">
 		  		 <span id="helpBlock" class="help-block">
-		      	<strong class="text-danger">입력전 중복확인 부터..</strong>
+		      	<strong class="text-danger">입력전 중복확인 부터..(구현해야함!)</strong>
 		      </span>
 		    </div>
 		    

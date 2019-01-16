@@ -56,7 +56,7 @@
 
 <body>
 
-	<a href="https://kauth.kakao.com/oauth/authorize?client_id=c3883a306a9faad67b127d7631568b29&redirect_uri=http://localhost:8080/user/kakaologin&response_type=code">
+	<a href="https://kauth.kakao.com/oauth/authorize?client_id=c3883a306a9faad67b127d7631568b29&redirect_uri=http://192.168.0.16:8080/user/kakaologin&response_type=code">
 	   <img src="/common/images/kakao_login_btn_small.png" width="100" />
 	</a>
 	
