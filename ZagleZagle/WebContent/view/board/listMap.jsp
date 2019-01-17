@@ -62,7 +62,7 @@ mapOption = {
 
 //지도를 생성합니다    
 var map = new daum.maps.Map(mapContainer, mapOption); 
-
+var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 
 
 function fncGetState(){
@@ -171,6 +171,7 @@ var marker;
 
 
 function markerMake(data){
+	
 	var bounds = new daum.maps.LatLngBounds();
 	
 	for (var i = 0; i < data.length; i ++) {
@@ -184,10 +185,17 @@ function markerMake(data){
 	//alert(boardNo);
 	bounds.extend(markerPosition);
 	
+	 // 마커 이미지의 이미지 크기 입니다
+    var imageSize = new daum.maps.Size(24, 35); 
+    
+    // 마커 이미지를 생성합니다    
+    var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize); 
+    
 	// 마커를 생성합니다
 	marker = new daum.maps.Marker({
 		map: map,
 	    position: markerPosition,
+	    image : markerImage // 마커 이미지 
 	});
 	
 	var content = '<div class="wrap">' + 
