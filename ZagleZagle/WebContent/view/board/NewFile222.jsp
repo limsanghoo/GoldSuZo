@@ -78,7 +78,7 @@ $(function(){
 <form name="fileForm" enctype="multipart/form-data">
 <input type="hidden" name="userNo" value="US10003"/>
 <!-- <img id=image src="http://dy.gnch.or.kr/img/no-image.jpg"> -->
-<img id=image>
+<!-- <img id=image> -->
 <br>
 <input id=file type=file multiple="multiple">
 

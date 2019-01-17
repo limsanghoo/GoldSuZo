@@ -12,6 +12,55 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
 
+$(function(){
+	var file = document.getElementById('file');
+	var image = document.getElementById('image');
+
+	file.onchange = function (event) {
+	  var target = event.currentTarget;
+	  var xmlHttpRequest = new XMLHttpRequest();
+	  xmlHttpRequest.open('POST', 'https://api.imgur.com/3/image/', true);
+	  xmlHttpRequest.setRequestHeader("Authorization", "Client-ID c764d6730f6f9a6");
+	  xmlHttpRequest.onreadystatechange = function () {
+	    if (xmlHttpRequest.readyState == 4) {
+	      if (xmlHttpRequest.status == 200) {
+	        var result = JSON.parse(xmlHttpRequest.responseText);
+	        $("#img_box").append("<img src="+result.data.link+">");//이미지 미리보기
+	        
+	        var linkArea=$("#link");
+			linkArea.val(linkArea.val()+result.data.link+",");//이미지 링크 append
+			
+	        console.log(result);        
+	        
+	        $.ajax(	
+	        		{
+	        			url : "http://192.168.0.36:8080/board/json/addBoardVisionTag",
+	        			method : "GET",
+	        			data : {
+	        				link : result.data.link
+	        			},
+	        			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+	        			dataType : "text",
+	        			success : function (data,status){
+	        				var decode=decodeURIComponent(data);//특수문자 포함 디코딩
+	        				alert("decode : "+decode);
+	        				
+	        				var tagArea=$("#hashTag");
+	        				tagArea.val(tagArea.val()+decode);//해시태그 append
+	        				
+	        			}
+	        		});
+	      
+	      }
+	      else {
+	      	alert("업로드 실패");
+	      }
+	    }
+	  };//()function 끝
+	  xmlHttpRequest.send(target.files[0]);
+	};//(event)function 끝
+	});
+
 
 //등록 클릭
 $(function(){
@@ -21,6 +70,7 @@ $(function(){
       
       if(boardDetailText==""){
          alert("내용을 입력해라");
+         return;
       }
          //$("form").attr("method" , "POST").attr("enctype","multipart/form-data").attr("action" , "/board/addBoard").submit();
          $("form").attr("method" , "POST").attr("action" , "/board/addBoard").submit();
@@ -29,28 +79,6 @@ $(function(){
 });
 
 
-
-//다중 이미지 미리보기
-function fileInfo(f){
-   var file = f.files; // files 를 사용하면 파일의 정보를 알 수 있음
-
-   // 파일의 갯수만큼 반복
-   for(var i=0; i<file.length; i++){
-
-      var reader = new FileReader(); // FileReader 객체 사용
-      
-      reader.onload = function(rst){
-         $('#img_box').append('<img src="'+rst.target.result+'">'); // append 메소드를 사용해서 이미지 추가
-         // 이미지는 base64 문자열로 추가
-         // 이 방법을 응용하면 선택한 이미지를 미리보기 할 수 있음
-         
-      }   
-      
-      reader.readAsDataURL(file[i]); // 파일을 읽는다
-            
-   }
-
-}
 </script>
 
 </head>
@@ -61,9 +89,9 @@ function fileInfo(f){
 
 <input type="hidden" name="userNo" value="${user.userNo}"/><!-- value 수정해야함 -->
 
-<div style="text-align:center;">
-   <input multiple="multiple" type="file" style="width:500px;" accept="image/*" multiple onchange="fileInfo(this)" name="file"/><br>
-   <div id="img_box"></div>
+<div>
+	<input id=file type=file multiple="multiple">사진은 한장씩 올려주세요^^*<br/>
+	<div id="img_box"></div>
 </div>
 
 <div>
@@ -148,10 +176,11 @@ function fileInfo(f){
 
 해시태그
 <div>
-   <input type="text" name="hashTag"/>
+   <input type="text" name="hashTag" id="hashTag" value=""/>
 </div>
 <br/>
 
+<input type="hidden" id="link" value="" name="photo1"></input>
 
 </form>
 

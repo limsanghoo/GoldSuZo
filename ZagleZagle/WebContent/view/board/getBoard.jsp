@@ -35,16 +35,16 @@ ${board.coord}
 
 <div>
 	<c:if test="${board.photo1 !=null}">
-	<img src="/common/images/board/${board.photo1}" style="width: 500px"/>
+	<img src="${board.photo1}" style="width: 500px"/>
 	<input type="button" value="링크추가"/>
 	</c:if>
 
 	<c:if test="${board.photo2 !=null}">
-	<img src="/common/images/board/${board.photo2}" style="width: 500px"/>
+	<img src="${board.photo2}" style="width: 500px"/>
 	</c:if>
 	
 	<c:if test="${board.photo3 !=null}">
-	<img src="/common/images/board/${board.photo3}" style="width: 500px"/>
+	<img src="${board.photo3}" style="width: 500px"/>
 	</c:if>
 </div>
 

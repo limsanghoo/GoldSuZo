@@ -38,6 +38,11 @@
     	position: static;
     	float:right;
     }
+    
+    #sessionTest{
+    	position: static;
+    	;
+    }
 
 </style>
 
@@ -62,12 +67,13 @@ $(function(){
 
 <a href="/board/listMap">지도로 보기</a>
 
-
+<center>
 <a href="/board/testUser">
-<input type="button" value="세션 테스트">
+<input id="sessionTest" type="button" value="세션 테스트">
 </a>
-
 userNickname : ${user.userNickname}
+</center>
+
 
 <c:if test="${user.userNo!=null}">
 <a href="/board/addBoard">
@@ -110,7 +116,7 @@ userNickname : ${user.userNickname}
 	--%>
 	
 	<c:if test="${board.photo1 !=null}">
-	<img src="/common/images/board/${board.photo1}" style="width:100%;" align="middle"/>
+	<img src="${board.photo1}" style="width:100%;" align="middle"/>
 	</c:if><!-- 삭제해야됨 -->
 	
 	<p align="center">${board.coord}</p><!-- 삭제해야됨 -->

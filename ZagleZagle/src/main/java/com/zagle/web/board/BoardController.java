@@ -80,63 +80,18 @@ public class BoardController {
 		
 		System.out.println("/addBoard POST");
 		
-		System.out.println("photo1 : "+board.getPhoto1());
-		System.out.println("hashTag : "+board.getHashTag());
-		
-		/*String finalFileName="";
-		
-		List<MultipartFile> fileList = mtfRequest.getFiles("file");
-
-        String path = "C:\\Users\\Bit\\git\\GoldSuZo\\ZagleZagle\\WebContent\\common\\images\\board";
-
-        for (MultipartFile mf : fileList) {
-            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-            long fileSize = mf.getSize(); // 파일 사이즈
-            
-            System.out.println("originFileName : " + originFileName);
-            System.out.println("fileSize : " + fileSize);
-            
-            if(originFileName!="") {
-            	try {
-            		mf.transferTo(new File(path, originFileName));
-            	} catch (IllegalStateException e) {
-            		e.printStackTrace();
-            	} catch (IOException e) {
-            		e.printStackTrace();
-            	}
-            }//사진 있는 경우만
-            
-        finalFileName+=originFileName+",";
-    		
-        }
-        
-        System.out.println("finalFileName : "+finalFileName);
-  
-        String[] photo=finalFileName.split(",");
-        
-        if(photo.length==1) {
-        	board.setPhoto1(photo[0]);
-        }else if(photo.length==2) {
-        	board.setPhoto1(photo[0]);
-        	board.setPhoto2(photo[1]);
-        }else if(photo.length==3) {
-        	board.setPhoto1(photo[0]);
-        	board.setPhoto2(photo[1]);
-        	board.setPhoto3(photo[2]);
-        }*/
-		
-		String[] photo=board.getPhoto1().split(",");
-		
-		 if(photo.length==1) {
-	        	board.setPhoto1(photo[0]);
-	        }else if(photo.length==2) {
-	        	board.setPhoto1(photo[0]);
-	        	board.setPhoto2(photo[1]);
-	        }else if(photo.length==3) {
-	        	board.setPhoto1(photo[0]);
-	        	board.setPhoto2(photo[1]);
-	        	board.setPhoto3(photo[2]);
-	        }
+		String[] photo=board.getPhoto1().split(",");//이미지 링크 파싱
+	
+		if(photo.length==1) {
+			board.setPhoto1(photo[0]);
+	    }else if(photo.length==2) {
+	    	board.setPhoto1(photo[0]);
+	    	board.setPhoto2(photo[1]);
+	    }else if(photo.length==3) {
+	        board.setPhoto1(photo[0]);
+	        board.setPhoto2(photo[1]);
+	        board.setPhoto3(photo[2]);
+	    }
 		
         
         User user=userService.getUser2(userNo);//getUser2
