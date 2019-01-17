@@ -5,6 +5,8 @@ import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +71,7 @@ public class BoardRestController {
 	
 	@RequestMapping(value="json/addBoardVisionTag", method=RequestMethod.GET)
 	@ResponseBody
-	public String addBoardVisionTag(@RequestParam("link")String link) throws Exception{
+	public String addBoardVisionTag(@RequestParam("link")String link, HttpSession session) throws Exception{
 		
 		System.out.println(link);
 		

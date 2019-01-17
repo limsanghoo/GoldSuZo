@@ -80,7 +80,10 @@ public class BoardController {
 		
 		System.out.println("/addBoard POST");
 		
-		String finalFileName="";
+		System.out.println("photo1 : "+board.getPhoto1());
+		System.out.println("hashTag : "+board.getHashTag());
+		
+		/*String finalFileName="";
 		
 		List<MultipartFile> fileList = mtfRequest.getFiles("file");
 
@@ -111,10 +114,6 @@ public class BoardController {
   
         String[] photo=finalFileName.split(",");
         
-        /*if(photo.length==0) {
-        	board.setPhoto1("photo1.jpg");
-        }*/
-        
         if(photo.length==1) {
         	board.setPhoto1(photo[0]);
         }else if(photo.length==2) {
@@ -124,7 +123,21 @@ public class BoardController {
         	board.setPhoto1(photo[0]);
         	board.setPhoto2(photo[1]);
         	board.setPhoto3(photo[2]);
-        }
+        }*/
+		
+		String[] photo=board.getPhoto1().split(",");
+		
+		 if(photo.length==1) {
+	        	board.setPhoto1(photo[0]);
+	        }else if(photo.length==2) {
+	        	board.setPhoto1(photo[0]);
+	        	board.setPhoto2(photo[1]);
+	        }else if(photo.length==3) {
+	        	board.setPhoto1(photo[0]);
+	        	board.setPhoto2(photo[1]);
+	        	board.setPhoto3(photo[2]);
+	        }
+		
         
         User user=userService.getUser2(userNo);//getUser2
         

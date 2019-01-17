@@ -24,8 +24,11 @@ file.onchange = function (event) {
       if (xmlHttpRequest.status == 200) {
         var result = JSON.parse(xmlHttpRequest.responseText);
         $("#img_box").append("<img src="+result.data.link+">");
-        console.log(result);
         
+        var linkArea=$("#link");
+		linkArea.val(linkArea.val()+result.data.link+",");
+		
+        console.log(result);        
         
         $.ajax(	
         		{
@@ -49,12 +52,12 @@ file.onchange = function (event) {
       }
       else {
       	alert("업로드 실패");
-        image.src = "http://dy.gnch.or.kr/img/no-image.jpg";
+        //image.src = "http://dy.gnch.or.kr/img/no-image.jpg";
       }
     }
   };
   xmlHttpRequest.send(target.files[0]);
-  image.src = "https://nrm.dfg.ca.gov/images/image-loader.gif";
+  //image.src = "https://nrm.dfg.ca.gov/images/image-loader.gif";
 };
 });
 
@@ -71,16 +74,22 @@ $(function(){
 </head>
 
 <body>
-<form>
+
+<form name="fileForm" enctype="multipart/form-data">
 <input type="hidden" name="userNo" value="US10003"/>
-<img id=image src="http://dy.gnch.or.kr/img/no-image.jpg">
+<!-- <img id=image src="http://dy.gnch.or.kr/img/no-image.jpg"> -->
+<img id=image>
 <br>
-<input id=file type=file>
+<input id=file type=file multiple="multiple">
 
-<div id="img_box" name="photo1"></div>
+<div id="img_box"></div>
 
-<input type="text" id="tag" value=""></input>
+<input type="text" id="tag" value="" name="hashTag"></input>
+<input type="text" id="link" value="" name="photo1"></input>
+<input type="text" name="boardDetailText" value="테스트텍스트"/>
+<input name="userTheme" value="H_spoon"/>
 </form>
+
   <input type="button" id="submit" value="등록"/>
 
 </body>

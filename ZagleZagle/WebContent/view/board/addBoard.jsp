@@ -17,7 +17,6 @@
 $(function(){
    $('#submit').bind("click",function(){
       
-      var userTheme=$("input[name='userTheme']").val();
       var boardDetailText=$("input[name='boardDetailText']").val();
       
       if(boardDetailText==""){
