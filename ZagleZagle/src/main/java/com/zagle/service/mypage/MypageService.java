@@ -3,6 +3,7 @@ package com.zagle.service.mypage;
 import java.util.Map;
 
 import com.zagle.common.Search;
+import com.zagle.service.domain.SearchMypage;
 import com.zagle.service.domain.User;
 
 public interface MypageService {
@@ -11,13 +12,15 @@ public interface MypageService {
 	
 	public void updateAccount(User user) throws Exception;
 	
-	public Map<String, Object> listComment(Search search) throws Exception;
+	public Map<String, Object> listComment(SearchMypage search) throws Exception;
 	
-	public Map<String, Object> listLike(Search search) throws Exception;
+	public Map<String, Object> listLike(SearchMypage search) throws Exception;
 	
-	public Map<String, Object> listScrap(Search search) throws Exception;
+	public Map<String, Object> listScrap(SearchMypage search) throws Exception;
 	
-	public User getAccountCheck(User user) throws Exception;
+	public Map<String, Object> listMyBoard(SearchMypage search) throws Exception;
+	
+	//public User getAccountCheck(User user) throws Exception;
 	
 	
 
