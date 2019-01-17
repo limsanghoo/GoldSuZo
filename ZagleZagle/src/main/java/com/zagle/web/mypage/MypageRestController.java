@@ -53,9 +53,9 @@ public class MypageRestController {
 	    HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer "+accessToken);
 	    
-	    params.add("bank_code_std", "097");
-        params.add("account_num", "0001230000678");
-        params.add("account_holder_info", "8801012");
+	    params.add("bank_code_std", "002");
+        params.add("account_num", "1234567890123456");
+        params.add("account_holder_info", "880101");
         params.add("tran_dtime", "20160310101921");
    
        
