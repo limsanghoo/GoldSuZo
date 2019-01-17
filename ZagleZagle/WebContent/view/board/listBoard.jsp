@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.net.URLEncoder" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -36,7 +38,6 @@
     	position: static;
     	float:right;
     }
-    
 
 </style>
 
@@ -45,7 +46,7 @@
 $(function(){
 	
 	$("input[value='수정']").bind("click",function(){
-		var boardNo=$(this).data('param1');
+		var boardNo=$(this).data('update');
 		self.location="/board/updateBoard?boardNo="+boardNo;
 	})
 
@@ -62,10 +63,17 @@ $(function(){
 <a href="/board/listMap">지도로 보기</a>
 
 
+<a href="/board/testUser">
+<input type="button" value="세션 테스트">
+</a>
 
+userNickname : ${user.userNickname}
+
+<c:if test="${user.userNo!=null}">
 <a href="/board/addBoard">
 <input type="button" value="게시물 등록" id="goAddBoard">
 </a>
+</c:if>
 
 
 
@@ -82,7 +90,7 @@ $(function(){
 		
 	<div class="bs-example" data-example-id="thumbnails-with-custom-content">
 	<div class="col-sm-6 col-md-4">
-	<div class="thumbnail" data-toggle="modal" data-target="#${board.boardNo}">
+	<div class="thumbnail" data-toggle="modal" data-target="#${board.boardNo}modal1">
 		
 	<p>
 	<img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px;" align="middle"/>
@@ -109,7 +117,6 @@ $(function(){
 	
 	<p align="center">${board.boardDetailText}</p>
 	<p align="center">${board.hashTag}</p>
-	<%-- <p align="center">${board.boardStatus}</p> --%>
 	
 	</div>
 	</div>
@@ -117,7 +124,7 @@ $(function(){
 	</div>
 
 <!-- 모달 시작 -->
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="${board.boardNo}" >
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="${board.boardNo}modal1">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -133,12 +140,14 @@ $(function(){
 		${board.user.userNickname}
 		</div>
 		
+		<!-- 내 글만 수정, 삭제 -->
+		<c:if test="${user.userNo==board.user.userNo}">
 		<div class="col-md-4 col-md-offset-4">
-		<input type="button" value="수정" data-param1="${board.boardNo}"/>
+		<input type="button" value="수정" data-update="${board.boardNo}"/>
         
-        <div class="btn btn-primary" data-toggle="modal" data-target="#${board.user.userNickname}">삭제
+        <div class="btn btn-primary" data-toggle="modal" data-target="#${board.boardNo}modal2">삭제
         </div>
-        
+        </c:if>
         </h4>
         </div>
       </div>
@@ -153,7 +162,7 @@ $(function(){
 <!-- 모달 끝 -->
 
 <!-- 모달2 시작 -->
-<div class="modal"  aria-hidden="true" style="display: none; z-index: 1060;" id="${board.user.userNickname}">
+<div class="modal"  aria-hidden="true" style="display: none; z-index: 1060;" id="${board.boardNo}modal2">
     	<div class="modal-dialog modal-md">
           <div class="modal-content">
             <div class="modal-header">

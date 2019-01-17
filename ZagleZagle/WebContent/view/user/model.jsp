@@ -10,12 +10,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 
-<link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-				
-  <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
 	
 
 
@@ -61,7 +56,7 @@
  			
  			
  			var userNo =$(this).data("param1");
- 			
+ 			alert(userNo)
  			console.log(userNo);
  			
  			self.location="/user/getUser2?userNo="+userNo

@@ -18,9 +18,11 @@ import javax.servlet.http.HttpSession;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
-
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 import org.codehaus.jackson.JsonNode;
@@ -58,6 +60,7 @@ public class UserRestController {
 	@Autowired
 	@Qualifier("userServiceImpl")
 	private UserService userService;
+	
     private RestTemplate restTemplate = new RestTemplate(); 
 	
 	public UserRestController() {
@@ -189,9 +192,19 @@ public class UserRestController {
 			User user = new User();
 		
 			user = userService.getUser(snsNo);
+			int value = user.getTotalActiveScore();
+			user.setTotalActiveScore(value+5);
+			
+			userService.addActiveScore(user);
+			
 			
 			
 			session.setAttribute("user", user);
+			
+			
+			
+			//userService.addActiveScore(user);
+			
 			
 			modelAndView.addObject("result", new Boolean(result));
 			modelAndView.addObject("user", user);
@@ -332,8 +345,37 @@ public class UserRestController {
 		    	
 		    	return null;
 		}
-			
-	
+		/*
+		
+			@RequestMapping(value="kakaoLogin" ,method=RequestMethod.GET)
+			public ModelAndView kakaoLogin() throws Exception {
+				
+				System.out.println("Kakao : GET으로 쏘기");
+				
+				String apiURL="https://kauth.kakao.com/oauth/authorize?client_id=c3883a306a9faad67b127d7631568b29&redirect_uri=http://192.168.0.16:8080/user/kakaologin&response_type=code";
+				
+				
+				HttpClient httpClient = new DefaultHttpClient();
+				HttpGet get = new HttpGet(apiURL);
+				
+				
+				 get.setHeader("Accept", "applicaion/json");
+				    get.setHeader("Content-Type", "application/json");
+				
+				    HttpResponse httpResponse = httpClient.execute(get);  
+				    
+				    System.out.println(httpResponse);
+				    
+				    
+				ModelAndView modelAndView = new ModelAndView();
+				modelAndView.setViewName(apiURL);
+				
+				return modelAndView;
+				
+				
+			}
+		
+	*/
 
 }
 	
