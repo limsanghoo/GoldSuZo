@@ -38,7 +38,6 @@
     	position: static;
     	float:right;
     }
-    
 
 </style>
 
@@ -64,10 +63,17 @@ $(function(){
 <a href="/board/listMap">지도로 보기</a>
 
 
+<a href="/board/testUser">
+<input type="button" value="세션 테스트">
+</a>
 
+userNickname : ${user.userNickname}
+
+<c:if test="${user.userNo!=null}">
 <a href="/board/addBoard">
 <input type="button" value="게시물 등록" id="goAddBoard">
 </a>
+</c:if>
 
 
 
@@ -111,7 +117,6 @@ $(function(){
 	
 	<p align="center">${board.boardDetailText}</p>
 	<p align="center">${board.hashTag}</p>
-	<%-- <p align="center">${board.boardStatus}</p> --%>
 	
 	</div>
 	</div>
@@ -135,12 +140,14 @@ $(function(){
 		${board.user.userNickname}
 		</div>
 		
+		<!-- 내 글만 수정, 삭제 -->
+		<c:if test="${user.userNo==board.user.userNo}">
 		<div class="col-md-4 col-md-offset-4">
 		<input type="button" value="수정" data-update="${board.boardNo}"/>
         
         <div class="btn btn-primary" data-toggle="modal" data-target="#${board.boardNo}modal2">삭제
         </div>
-        
+        </c:if>
         </h4>
         </div>
       </div>

@@ -27,6 +27,7 @@
 		<mapper resource="sql/BoardMapper.xml"/>
 		<mapper resource="sql/StreamMapper.xml"/>
 		<mapper resource="sql/MapMapper.xml"/>
+		<mapper resource="sql/MypageMapper.xml"/>
 	</mappers>
 
 </configuration>
