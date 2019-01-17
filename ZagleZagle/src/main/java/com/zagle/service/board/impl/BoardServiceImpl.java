@@ -126,8 +126,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void addBoardVisionTag(Board board) throws Exception {
-		
+	public String addBoardVisionTag(String link) throws Exception {		
+		return kakaoRestDAOImpl.addBoardVisionTag(link);
 	}
 
 	@Override

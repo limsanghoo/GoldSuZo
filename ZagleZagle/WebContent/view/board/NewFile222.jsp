@@ -10,68 +10,88 @@
 
 <script type="text/javascript">
 
-
 $(function(){
-function fileInfo(f){
-	var file = f.files; // files 를 사용하면 파일의 정보를 알 수 있음
+var file = document.getElementById('file');
+var image = document.getElementById('image');
 
-	// 파일의 갯수만큼 반복
-	for(var i=0; i<file.length; i++){
-
-		var reader = new FileReader(); // FileReader 객체 사용
+file.onchange = function (event) {
+  var target = event.currentTarget;
+  var xmlHttpRequest = new XMLHttpRequest();
+  xmlHttpRequest.open('POST', 'https://api.imgur.com/3/image/', true);
+  xmlHttpRequest.setRequestHeader("Authorization", "Client-ID c764d6730f6f9a6");
+  xmlHttpRequest.onreadystatechange = function () {
+    if (xmlHttpRequest.readyState == 4) {
+      if (xmlHttpRequest.status == 200) {
+        var result = JSON.parse(xmlHttpRequest.responseText);
+        $("#img_box").append("<img src="+result.data.link+">");
+        
+        var linkArea=$("#link");
+		linkArea.val(linkArea.val()+result.data.link+",");
 		
-		reader.onload = function(rst){
-			
-			var target = event.currentTarget;
-			  var xmlHttpRequest = new XMLHttpRequest();
-			  xmlHttpRequest.open('POST', 'https://api.imgur.com/3/image/', true);
-			  xmlHttpRequest.setRequestHeader("Authorization", "Client-ID c764d6730f6f9a6");
-			  xmlHttpRequest.onreadystatechange = function () {
-			    if (xmlHttpRequest.readyState == 4) {
-			      if (xmlHttpRequest.status == 200) {
-			        var result = JSON.parse(xmlHttpRequest.responseText);
-			        image.src = result.data.link;
-			        console.log(result);
-			      }
-			      else {
-			      	alert("업로드 실패");
-			        image.src = "http://dy.gnch.or.kr/img/no-image.jpg";
-			      }
-			    }
-			
-			
-			
-			$('#img_box').append('<img src="'+rst.target.result+'">'); // append 메소드를 사용해서 이미지 추가
-
-			
-		}	
-		
-		reader.readAsDataURL(file[i]); // 파일을 읽는다
-				
-	}
-
-}
+        console.log(result);        
+        
+        $.ajax(	
+        		{
+        			url : "http://192.168.0.36:8080/board/json/addBoardVisionTag",
+        			method : "GET",
+        			data : {
+        				link : result.data.link
+        			},
+        			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+        			dataType : "text",
+        			success : function (data,status){
+        				var decode=decodeURIComponent(data);
+        				alert("decode : "+decode);
+        				
+        				var tagArea=$("#tag");
+        				tagArea.val(tagArea.val()+decode);
+        				
+        			}
+        		});
+      
+      }
+      else {
+      	alert("업로드 실패");
+        //image.src = "http://dy.gnch.or.kr/img/no-image.jpg";
+      }
+    }
+  };
+  xmlHttpRequest.send(target.files[0]);
+  //image.src = "https://nrm.dfg.ca.gov/images/image-loader.gif";
+};
 });
 
-
+$(function(){
+	   $('#submit').bind("click",function(){
+		   
+	         //$("form").attr("method" , "POST").attr("enctype","multipart/form-data").attr("action" , "/board/addBoard").submit();
+	         $("form").attr("method" , "POST").attr("action" , "/board/addBoard").submit();
+	      
+	   })
+	});
 </script>
 
 </head>
 
 <body>
-<img id=image src="http://dy.gnch.or.kr/img/no-image.jpg">
+
+<form name="fileForm" enctype="multipart/form-data">
+<input type="hidden" name="userNo" value="US10003"/>
+<!-- <img id=image src="http://dy.gnch.or.kr/img/no-image.jpg"> -->
+<!-- <img id=image> -->
 <br>
+<input id=file type=file multiple="multiple">
 
-<div style="text-align:center;">
-	<input multiple="multiple" type="file" style="width:500px;" accept="image/*" multiple onchange="fileInfo(this)" name="file" id="file"/><br>
-	<div id="img_box"></div>
-</div>
+<div id="img_box"></div>
 
+<input type="text" id="tag" value="" name="hashTag"></input>
+<input type="text" id="link" value="" name="photo1"></input>
+<input type="text" name="boardDetailText" value="테스트텍스트"/>
+<input name="userTheme" value="H_spoon"/>
+</form>
 
-<textarea id="tag"></textarea>
+  <input type="button" id="submit" value="등록"/>
 
 </body>
 
 </html>
-
-

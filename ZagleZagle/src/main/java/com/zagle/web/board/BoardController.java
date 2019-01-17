@@ -80,53 +80,33 @@ public class BoardController {
 		
 		System.out.println("/addBoard POST");
 		
-		String finalFileName="";
+		String[] photo=board.getPhoto1().split(",");//이미지 링크 파싱
+	
+		if(photo.length==1) {
+			board.setPhoto1(photo[0]);
+	    }else if(photo.length==2) {
+	    	board.setPhoto1(photo[0]);
+	    	board.setPhoto2(photo[1]);
+	    }else if(photo.length==3) {
+	        board.setPhoto1(photo[0]);
+	        board.setPhoto2(photo[1]);
+	        board.setPhoto3(photo[2]);
+	    }
 		
-		List<MultipartFile> fileList = mtfRequest.getFiles("file");
-
-        String path = "C:\\Users\\Bit\\git\\GoldSuZo\\ZagleZagle\\WebContent\\common\\images\\board";
-
-        for (MultipartFile mf : fileList) {
-            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-            long fileSize = mf.getSize(); // 파일 사이즈
-
-            System.out.println("originFileName : " + originFileName);
-            System.out.println("fileSize : " + fileSize);
-
-            //String safeFile = path+ originFileName;
-            try {
-                mf.transferTo(new File(path, originFileName));
-            } catch (IllegalStateException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-                     
-        finalFileName+=originFileName+",";
-    		
-        }
         
-        System.out.println("finalFileName : "+finalFileName);
-  
-        String[] photo=finalFileName.split(",");
+        User user=userService.getUser2(userNo);//getUser2
         
-        if(photo.length==1) {
-        	board.setPhoto1(photo[0]);
-        }else if(photo.length==2) {
-        	board.setPhoto1(photo[0]);
-        	board.setPhoto2(photo[1]);
-        }else if(photo.length==3) {
-        	board.setPhoto1(photo[0]);
-        	board.setPhoto2(photo[1]);
-        	board.setPhoto3(photo[2]);
-        }
-
-		board.setUser(userService.getUser2(userNo));//getUser2
+		board.setUser(user);
 		board.setBoardStatus("1");//정상 게시물
 		
 		System.out.println(board);
 		
 		boardService.addBoard(board);
+		
+		int value = user.getTotalActiveScore();
+		user.setTotalActiveScore(value+10);//게시물 등록 10점	
+		
+		userService.addActiveScore(user);
         
 		ModelAndView modelAndView=new ModelAndView();
 	
@@ -250,7 +230,7 @@ public class BoardController {
 		
 		System.out.println("/listBoard");
 		
-		System.out.println(searchBoard);
+		//System.out.println(searchBoard);
 		
 		if(searchBoard.getCurrentPage()==0) {
 			searchBoard.setCurrentPage(1);
@@ -260,11 +240,11 @@ public class BoardController {
 		
 		Map<String , Object> map=boardService.listBoard(searchBoard);
 		
-		System.out.println("컨트롤러 map : "+map);
+		//System.out.println("컨트롤러 map : "+map);
 		
 		User user=(User)session.getAttribute("user");
 		
-		System.out.println("********user : "+user);
+		//System.out.println("********user : "+user); //로그인 정보 받아와야됨
 		
 		
 		ModelAndView modelAndView=new ModelAndView();
@@ -352,8 +332,6 @@ public class BoardController {
 	@RequestMapping( value="listMap", method=RequestMethod.GET)
 	public ModelAndView listMap (HttpSession session) throws Exception{
 		
-		System.out.println("*****listMap");
-		
 		List<Local> list = boardService.getState();
 		
 		ModelAndView modelAndView = new ModelAndView();
@@ -364,12 +342,23 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="testUser")
-	public String testUser() {
+	public String testUser(HttpSession session) {
 		
 		User testUser = new User();
+		testUser.setUserNo("US10003");
+		testUser.setUserName("최상아");
+		testUser.setUserNickname("Ivory");
+		testUser.setUserAddr("서울 용산구 이태원동 123-123");
+		testUser.setProfile("aaa.jpg");
 		
+		/*testUser.setUserNo("US10023");
+		testUser.setUserNickname("이노인호");
+		testUser.setUserAddr("서울 용산구 이태원동 123-123");
+		testUser.setProfile("dlsgh.jpg");*/
 		
-		return null;
+		session.setAttribute("user", testUser);
+		
+		return "redirect:/board/listBoard";
 	}
 
 }
