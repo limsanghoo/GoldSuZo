@@ -246,7 +246,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="listBoard", method=RequestMethod.GET)
-	public ModelAndView listBoard(@ModelAttribute("searchBoard") SearchBoard searchBoard, HttpServletRequest request) throws Exception{
+	public ModelAndView listBoard(@ModelAttribute("searchBoard") SearchBoard searchBoard, HttpSession session) throws Exception{
 		
 		System.out.println("/listBoard");
 		
@@ -261,6 +261,11 @@ public class BoardController {
 		Map<String , Object> map=boardService.listBoard(searchBoard);
 		
 		System.out.println("컨트롤러 map : "+map);
+		
+		User user=(User)session.getAttribute("user");
+		
+		System.out.println("********user : "+user);
+		
 		
 		ModelAndView modelAndView=new ModelAndView();
 		modelAndView.addObject("list", map.get("list"));
@@ -358,5 +363,13 @@ public class BoardController {
 		return modelAndView;
 	}
 	
+	@RequestMapping(value="testUser")
+	public String testUser() {
+		
+		User testUser = new User();
+		
+		
+		return null;
+	}
 
 }
