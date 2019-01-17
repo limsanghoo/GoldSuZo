@@ -35,7 +35,7 @@ file.onchange = function (event) {
         				link : result.data.link
         			},
         			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-        			dataTypa : "text",
+        			dataType : "text",
         			success : function (data,status){
         				var decode=decodeURIComponent(data);
         				alert("decode : "+decode);
@@ -56,28 +56,6 @@ file.onchange = function (event) {
   image.src = "https://nrm.dfg.ca.gov/images/image-loader.gif";
 };
 });
-
-//////////////////////////////////////////////////
-/* function fileInfo(f){
-	var file = f.files; // files 를 사용하면 파일의 정보를 알 수 있음
-
-	// 파일의 갯수만큼 반복
-	for(var i=0; i<file.length; i++){
-
-		var reader = new FileReader(); // FileReader 객체 사용
-		
-		reader.onload = function(rst){
-			$('#img_box').append('<img src="'+rst.target.result+'">'); // append 메소드를 사용해서 이미지 추가
-			// 이미지는 base64 문자열로 추가
-			// 이 방법을 응용하면 선택한 이미지를 미리보기 할 수 있음
-			
-		}	
-		
-		reader.readAsDataURL(file[i]); // 파일을 읽는다
-				
-	}
-
-} */
 
 
 </script>

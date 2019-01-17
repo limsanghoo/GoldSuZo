@@ -24,7 +24,7 @@ public class DaumRestDAOImpl implements RestBoardDAO{
 	}
 
 	@Override
-	public Object addBoardVisionTag(String url) throws Exception {
+	public String addBoardVisionTag(String link) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
