@@ -94,9 +94,9 @@ public class StreamController {
 		streamService.addStream(stream);
 	
 	ModelAndView modelAndView = new ModelAndView();
-	modelAndView.addObject("streamer",stream.getUser().getUserNo());
-	modelAndView.addObject("userNo",stream.getUser().getUserNo());
-	modelAndView.setViewName("redirect:http://localhost:3000/stream/add");
+	//modelAndView.addObject("streamer",stream.getUser().getUserNo());
+	//modelAndView.addObject("userNo",stream.getUser().getUserNo());
+	modelAndView.setViewName("redirect:https://192.168.0.12:443/stream/stream#streamer="+stream.getUser().getUserNo()+"?userNo="+stream.getUser().getUserNo());
 	return modelAndView;
 	}
 	  
