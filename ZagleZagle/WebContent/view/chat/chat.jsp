@@ -77,25 +77,6 @@
 			//소켓 서버로 부터 send_msg를 통해 이벤트를 받을 경우 
 			socket.on('send_msg', function(data) {
 				//div 태그를 만들어 텍스트를 msg로 지정을 한뒤 #chat_box에 추가를 시켜준다.
-				/*if (msg.substring(0,6)=='') {
-					//alert(msg.substring(msg.length-3));
-					if (msg.substring(msg.length-3)=='jpg') {
-						$("<div style='text-align : right;'><img src='/images/uploadFiles/"+msg.substring(9)+"' style='width: 100px; height: 80px;'/> : "+msg.substring(0,6)+"</div>").appendTo("#chat_box");
-					}else{
-						$("<div style='text-align : right;'>"+msg.substring(8)+" : "+msg.substring(0,6)+"</div>").appendTo("#chat_box");
-					}
-					
-					
-					//$("<img src='/images/uploadfiles/+"msg.substring(8)"+' style='text-align : right;'/>").appendTo("#chat_box");
-				}else{
-					//$('<div></div>').text(msg).appendTo("#chat_box");
-					if (msg.substring(msg.length-3)=='jpg') {
-						$("<div>"+msg.substring(0,6)+" : <img src='/images/uploadFiles/"+msg.substring(9)+"' style='width: 100px; height: 80px;'/></div>").appendTo("#chat_box");
-					}else{
-						$('<div></div>').text(msg).appendTo("#chat_box");
-					}
-					
-				}*/
 				if (data.ms.substring(data.ms.length-3)=='jpg'||data.ms.substring(data.ms.length-3)=='png') {
 					$("<div>"+data.id+" : <img src='/common/images/chat/"+data.ms+"' style='width: 100px; height: 80px;'/></div>").appendTo("#chat_box");
 					$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
@@ -143,12 +124,57 @@
 		             });
 		            
 		            ajaxReq.done(function(msg){
-		            	socket.emit("send_msg",msg);
+		           
+		            	while(true){
+		            		var path = 'http://192.168.0.25:8080/common/images/chat/'+msg;
+			            	var re = doesFileExist(path);
+		            		if (re) {
+		            			socket.emit("send_msg",msg);
+								break;
+							}
+		            	}
+		          
 		            });
-		
+		            
+		            $('asdgasdgasdgasdg').on("click",function(){
+		            	 $.ajax({
+								url : "/chat/json/checkFile/"+msg,
+								method : "GET" ,
+								dataType : "text" ,
+								headers : {
+									"Accept" : "application/json",
+									"Content-Type" : "application/json"
+								},
+								success : function(data , status) {
+									alert(data)
+									if (data=="false") {
+										socket.emit("send_msg",msg);
+										
+									}
+									
+								},error : function(error){
+									alert(error)
+									alert("채크파일실패!");
+								}
+							});		
+		            })
+		           
+		            
+		           function doesFileExist(urlToFile) {
+					    var xhr = new XMLHttpRequest();
+					    xhr.open('HEAD', urlToFile, false);
+					    xhr.send();
+					     
+					    if (xhr.status == "404") {
+					        return false;
+					    } else {
+					        return true;
+					    }
+					}
+		            
 			});
 			
-			
+		
 			
 		});
 		
