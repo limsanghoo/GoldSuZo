@@ -64,7 +64,6 @@ $(function(){
 <a href="/board/listMap">지도로 보기</a>
 
 
-
 <a href="/board/addBoard">
 <input type="button" value="게시물 등록" id="goAddBoard">
 </a>
