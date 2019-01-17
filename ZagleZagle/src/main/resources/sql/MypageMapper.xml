@@ -7,10 +7,21 @@
 <mapper namespace="MypageMapper">
  	
  	
-	<resultMap id="mypageSelectMap" type="user">
-		<result property="account" 			column="account" 			jdbcType="VARCHAR"/>
-		<result property="userName"	column="user_name" 		jdbcType="VARCHAR" />
+	<resultMap id="mypageSelectMap" type="com.zagle.service.domain.Mypage">
+		<result property="user.account" 			column="account" 			jdbcType="VARCHAR"/>
+		<result property="user.userName"	column="user_name" 		jdbcType="VARCHAR" />
+		<result property="user.userNo" 		column="user_no"				jdbcType="VARCHAR"/>
+		<result property="comment.commentNo" column="comment_no"		jdbcType="VARCHAR"/>
+		<result property="comment.commentRegDate"	column="comment_reg_date"	jdbcType="VARCHAR"/>
+		<result property="board.boardNo" column="board_no" jdbcType="VARCHAR"/>
+		<result property="comment.commentDetailText"	column="comment_detail_text" jdbcType="VARCHAR"/>
+		<result property="like.likeNo"		column="like_no"	jdbcType="VARCHAR"/>
+		<result property="like.checkLike"	column="check_like"	jdbcType="VARCHAR"/>
+		<result property="scrap.scrapNo"	column="scrap_no"	jdbcType="VARCHAR" />
+		<result property="scrap.checkScrap"	column="check_scrap"	jdbcType="VARCHAR" />
+	
 	</resultMap>
+	
 	
 	<!-- SQL : INSERT -->
 	<update 	id="addAccount"		parameterType="user" >
@@ -22,5 +33,46 @@
 	 	WHERE user_no =#{userNo}
 	
 	</update>
+	
+	<update 	id="updateAccount"		parameterType="user" >
+	 	UPDATE users
+	 	<set>
+	 	account = #{account:VARCHAR} ,
+	 	bank_name = #{bankName:VARCHAR}
+	 	</set>
+	 	WHERE user_no =#{userNo}
+	
+	</update>
+	 
+	 <select id="commentList"	parameterType="com.zagle.service.domain.SearchMypage" resultMap="mypageSelectMap">
+	 SELECT u.user_no, c.comment_no, c.comment_detail_text, c.comment_reg_date
+	 FROM users u, comments c
+	 WHERE u.user_no = c.user_no and u.user_no = #{myUser.userNo:VARCHAR}
+	 ORDER BY c.comment_reg_date DESC 
+	 </select>
+	 
+	 <select id="listLike"	parameterType="user" resultMap="mypageSelectMap">
+	 SELECT*
+	 FROM likes
+	 WHERE user_no = #{myUser.userNo:VARCHAR} and check_like = 1
+	 ORDER BY like_no
+	 </select>
+	 
+	 <select id="listScrap" parameterType="user" resultMap="mypageSelectMap">
+	 SELECT *
+	 FROM scrap
+	 WHERE user_no = #{myUser.userNo:VARCHAR} and check_scrap = 1
+	 ORDER BY scrap_no
+	 </select>
+	 
+	 <select id="listMyBoard" parameterType="com.zagle.service.domain.SearchBoard" resultMap="mypageSelectMap">
+		SELECT u.user_no, b.board_no, b.board_detail_text,  b.board_reg_date
+		FROM users u, board b
+		WHERE u.user_no=b.user_no and u.user_no = #{myUser.userNo} and b.board_status=1
+		ORDER BY b.board_reg_date DESC
+	 </select>
+	 
+	
+	 
 	 
 </mapper>
