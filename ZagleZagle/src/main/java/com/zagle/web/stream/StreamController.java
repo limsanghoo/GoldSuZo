@@ -97,7 +97,7 @@ public class StreamController {
 	//modelAndView.addObject("streamer",stream.getUser().getUserNo());
 	//modelAndView.addObject("userNo",stream.getUser().getUserNo());
 	System.out.println("왜 라스트로 안가니,,?");
-	modelAndView.setViewName("redirect:https://192.168.0.12:443/stream/last?streamer="+stream.getUser().getUserNo()+"&userNo="+stream.getUser().getUserNo());
+	modelAndView.setViewName("redirect:https://192.168.0.12:443/stream/add?streamer="+stream.getUser().getUserNo()+"&userNo="+stream.getUser().getUserNo());
 	return modelAndView;
 	}
 	  
