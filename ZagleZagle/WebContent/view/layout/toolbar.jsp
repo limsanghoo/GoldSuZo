@@ -69,13 +69,13 @@
 		 	
 		 	$("a:contains('전체게시물')").on("click" , function() {
 				//$(self.location).attr("href","http://localhost:3000/");
-				self.location = "/board/listBoard?view=all&local="
+				self.location = "/board/listBoard?view=all"
 		 		
 			});
 		 	
 		 	$("a:contains('동네게시물')").on("click" , function() {
 				//$(self.location).attr("href","http://localhost:3000/");
-				self.location = "/board/listBoard?view=town&local="
+				self.location = "/board/listBoard?view=town"
 		 		
 			});
 		 });

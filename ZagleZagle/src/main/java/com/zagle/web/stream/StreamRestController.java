@@ -181,7 +181,7 @@ public class StreamRestController {
 		    HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 		    Map response = restTemplate.postForObject(new URI(HOST + "/v1/payment/approve"), request, Map.class);
 		  	ModelAndView modelAndView = new ModelAndView();
-			modelAndView.setViewName("redirect:http://localhost:3000/stream/join?streamer="+spon.getStreamerNo()+"&userNo="+spon.getUserNo()+"&userNickname=user02&userProfile=default.jpg");
+			modelAndView.setViewName("redirect:https://192.168.0.12:443/stream/join?streamer="+spon.getStreamerNo()+"&userNo="+spon.getUserNo()+"&userNickname=user02&userProfile=default.jpg");
 		return modelAndView;
  
 	}

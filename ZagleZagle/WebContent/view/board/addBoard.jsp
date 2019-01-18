@@ -90,7 +90,7 @@ $(function(){
 <input type="hidden" name="userNo" value="${user.userNo}"/><!-- value 수정해야함 -->
 
 <div>
-	<input id=file type=file multiple="multiple">사진은 한장씩 올려주세요^^*<br/>
+	<input id=file type=file multiple="multiple">* 사진은 하나씩 등록해주세요!<br/>
 	<div id="img_box"></div>
 </div>
 
@@ -180,7 +180,7 @@ $(function(){
 </div>
 <br/>
 
-<input type="hidden" id="link" value="" name="photo1"></input>
+<input type="hidden" id="link" value="" name="photo1"/><!-- 이미지 링크 append 되는 부분 -->
 
 </form>
 

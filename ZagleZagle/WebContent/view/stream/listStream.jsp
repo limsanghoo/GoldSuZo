@@ -81,7 +81,7 @@ $(function() {
   
 	 
 });  
-</script>
+</script> 
 </head>
 
 
