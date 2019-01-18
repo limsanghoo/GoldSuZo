@@ -16,7 +16,7 @@
 		<result property="userSex" 							column="user_sex" 					jdbcType="VARCHAR" />
 		<result property="userAddr" 						column="user_addr" 					jdbcType="VARCHAR" />
 		<result property="profile" 								column="profile" 						jdbcType="VARCHAR"  />
-		<result property="grade" 								column="grade" 						jdbcType="VARCHAR" />
+		<result property="grade" 								column="grade_name" 			jdbcType="VARCHAR" />
 		<result property="snsName" 						column="sns_name"					jdbcType="VARCHAR"/>
 		<result property="bankName"						column="bank_name"				jdbcType="VARCHAR"/>
 		<result property="regDate"							column="reg_date"					jdbcType="DATE"/>
@@ -50,11 +50,11 @@
 	 
 	 <!-- SQL : SELECT ONE -->
 	 <select 	id="getUser2"	parameterType="string"	resultMap="userSelectMap">
-		SELECT*
-			<!--user_name , phone , user_nickname , user_birth , user_addr, profile, total_active_score, 
-			reg_date,grade,account,bank_name	  -->
-		FROM users 
-		WHERE user_no = #{value}
+		SELECT *
+		FROM users u,(select u2.user_no,g2.grade_name
+    	  FROM users u2,grade g2
+      	WHERE u2.total_active_score between g2.low_score and g2.high_score) g
+		WHERE u.user_no=g.user_no and u.user_no = #{user.userNo}
 	 </select>
 	 
 	 <!-- SQL : UPDATE -->

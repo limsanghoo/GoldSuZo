@@ -59,7 +59,7 @@ public class UserServiceTest {
 		
 	}
 	
-	@Test
+	//@Test
 	public void testGetUser() throws Exception {
 		
 		User user = new User();
@@ -93,13 +93,15 @@ public class UserServiceTest {
 		user = userService.getUser("US10005");
 		Assert.assertNotNull(user);
 	}
-	//@Test
+	@Test
 	public void testGetUser2() throws Exception {
 		User user = new User();
 		
-		user = userService.getUser2("US10005");
+		user = userService.getUser2("US10004");
 		
-		Assert.assertEquals("림상후", user.getUserName());
+		System.out.println(user);
+		
+		//Assert.assertEquals("림상후", user.getUserName());
 	}
 	
 	

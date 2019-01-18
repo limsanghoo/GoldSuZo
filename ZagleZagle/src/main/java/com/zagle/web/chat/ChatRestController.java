@@ -3,8 +3,10 @@ package com.zagle.web.chat;
 import java.io.File;
 import java.util.Iterator;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -50,5 +52,17 @@ public class ChatRestController {
 			}
         }
         return fileName;
+	}
+	
+	@RequestMapping(value="json/checkFile/{fileName}",method=RequestMethod.GET)
+	public String checkFile(@PathVariable String fileName) {
+		System.out.println("체크 파일네임!! "+fileName+".jpg");
+		String path = "C:\\Users\\Bit\\git\\GoldSuZo\\ZagleZagle\\WebContent\\common\\images\\chat\\"+fileName+".jpg";
+		File file = new File(path);
+		if (file.exists()) {
+			return "false";
+		}else {
+			return "true";
+		}
 	}
 }

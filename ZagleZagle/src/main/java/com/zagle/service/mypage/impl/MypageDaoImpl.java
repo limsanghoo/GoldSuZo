@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.zagle.common.Search;
+import com.zagle.service.domain.Board;
 import com.zagle.service.domain.Comment;
 import com.zagle.service.domain.Like;
 import com.zagle.service.domain.Scrap;
+import com.zagle.service.domain.SearchMypage;
 import com.zagle.service.domain.User;
 import com.zagle.service.mypage.MypageDao;
 
@@ -39,29 +41,35 @@ public class MypageDaoImpl implements MypageDao {
 		sqlSession.update("MypageMapper.updateAccount", user);
 	}
 	
-	public User getAccountCheck(User user) throws Exception {
-		
-		return sqlSession.selectOne("MypageMapper.getAccountCheck",  user);
-	}
+//	public User getAccountCheck(User user) throws Exception {
+//		
+//		return sqlSession.selectOne("MypageMapper.getAccountCheck",  user);
+//	}
 	
-	public List<Comment> commentList(Search search) throws Exception {
+	
+	public List<Comment> commentList(SearchMypage search) throws Exception {
 		return sqlSession.selectList("MypageMapper.commentList", search);
 	}
 	
-	public List<Like> likeList(Search search) throws Exception {
+	public List<Like> likeList(SearchMypage search) throws Exception {
 		return sqlSession.selectList("MypageMapper.listLike", search);
 	}
 	
-	public List<Scrap> ScrapList(Search search) throws Exception {
+	public List<Scrap> ScrapList(SearchMypage search) throws Exception {
 		return sqlSession.selectList("MypageMapper.listScrap", search);
 	}
 	
-
+	public List<Board> MyBoardList(SearchMypage search) throws Exception {
+		
+		return sqlSession.selectList("MypageMapper.listMyBoard", search);
+	}
+	
+	/*
 	public int getTotalCount(Search search) throws Exception {
 		
 		return sqlSession.selectOne("MypageMapper.getTotalCount", search);
 	}
-
+	*/
 	
 	
 

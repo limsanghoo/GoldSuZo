@@ -47,7 +47,7 @@ public interface BoardService {
 	
 	public void shareBoard(Board board) throws Exception;
 	
-	public void addBoardVisionTag(Board board) throws Exception;
+	public String addBoardVisionTag(String link) throws Exception;
 	
 	public void addBoardDaumMap(Board board) throws Exception;
 	

@@ -4,7 +4,7 @@ public interface RestBoardDAO {
 	
 	public void shareBoard(String boardNo) throws Exception;
 	
-	public Object addBoardVisionTag(String url) throws Exception;
+	public String addBoardVisionTag(String link) throws Exception;
 	
 	public void addBoardDaumMap() throws Exception;
 	

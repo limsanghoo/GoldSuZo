@@ -80,60 +80,33 @@ public class BoardController {
 		
 		System.out.println("/addBoard POST");
 		
-		String finalFileName="";
+		String[] photo=board.getPhoto1().split(",");//이미지 링크 파싱
+	
+		if(photo.length==1) {
+			board.setPhoto1(photo[0]);
+	    }else if(photo.length==2) {
+	    	board.setPhoto1(photo[0]);
+	    	board.setPhoto2(photo[1]);
+	    }else if(photo.length==3) {
+	        board.setPhoto1(photo[0]);
+	        board.setPhoto2(photo[1]);
+	        board.setPhoto3(photo[2]);
+	    }
 		
-		List<MultipartFile> fileList = mtfRequest.getFiles("file");
-
-        String path = "C:\\Users\\Bit\\git\\GoldSuZo\\ZagleZagle\\WebContent\\common\\images\\board";
-
-        for (MultipartFile mf : fileList) {
-            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-            long fileSize = mf.getSize(); // 파일 사이즈
-
-            System.out.println("originFileName : " + originFileName);
-            System.out.println("fileSize : " + fileSize);
-
-            //String safeFile = path+ originFileName;
-            try {
-                mf.transferTo(new File(path, originFileName));
-            } catch (IllegalStateException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-                     
-        finalFileName+=originFileName+",";
-    		
-        }
-        
-        System.out.println("finalFileName : "+finalFileName);
-  
-        String[] photo=finalFileName.split(",");
-        
-        if(photo.length==1) {
-        	board.setPhoto1(photo[0]);
-        }else if(photo.length==2) {
-        	board.setPhoto1(photo[0]);
-        	board.setPhoto2(photo[1]);
-        }else if(photo.length==3) {
-        	board.setPhoto1(photo[0]);
-        	board.setPhoto2(photo[1]);
-        	board.setPhoto3(photo[2]);
-        }
         
         User user=userService.getUser2(userNo);//getUser2
         
 		board.setUser(user);
 		board.setBoardStatus("1");//정상 게시물
 		
+		System.out.println(board);
+		
 		boardService.addBoard(board);
 		
 		int value = user.getTotalActiveScore();
-		System.out.println("********전 포인트 : "+value);
-		user.setTotalActiveScore(value+10);//게시물 등록 10점		
-		userService.addActiveScore(user);
+		user.setTotalActiveScore(value+10);//게시물 등록 10점	
 		
-		System.out.println("*****후 포인트 : "+user.getTotalActiveScore());
+		userService.addActiveScore(user);
         
 		ModelAndView modelAndView=new ModelAndView();
 	
@@ -211,7 +184,7 @@ public class BoardController {
 		boardService.deleteBoard(board);
 		
 		ModelAndView modelAndView=new ModelAndView();
-		modelAndView.setViewName("redirect:/board/listBoard");
+		modelAndView.setViewName("redirect:/board/listBoard?view=all&local=");
 		
 		return modelAndView;
 	}
@@ -235,8 +208,6 @@ public class BoardController {
 		
 		board.setUser(user);
 		
-		System.out.println(board);
-		
 		ModelAndView modelAndView=new ModelAndView();
 		modelAndView.addObject("board", board);
 		modelAndView.setViewName("forward:/view/board/getBoard.jsp");
@@ -252,12 +223,17 @@ public class BoardController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="listBoard", method=RequestMethod.GET)
+	@RequestMapping(value="listBoard")
 	public ModelAndView listBoard(@ModelAttribute("searchBoard") SearchBoard searchBoard, HttpSession session) throws Exception{
 		
 		System.out.println("/listBoard");
 		
-		//System.out.println(searchBoard);
+		System.out.println("**********searchBoard : "+searchBoard);
+		
+		if(searchBoard.getLocal()=="") {
+			searchBoard.setLocal(null);
+		}
+
 		
 		if(searchBoard.getCurrentPage()==0) {
 			searchBoard.setCurrentPage(1);
@@ -273,10 +249,12 @@ public class BoardController {
 		
 		//System.out.println("********user : "+user); //로그인 정보 받아와야됨
 		
+		List<Local> list = boardService.getState();//추가
 		
 		ModelAndView modelAndView=new ModelAndView();
-		modelAndView.addObject("list", map.get("list"));
+		modelAndView.addObject("boardList", map.get("boardList"));
 		//modelAndView.addObject("searchBoard", searchBoard);//아직 사용 안함
+		modelAndView.addObject("list",list);//동네  리스트
 		modelAndView.setViewName("forward:/view/board/listBoard.jsp");
 		
 		return modelAndView;
@@ -385,7 +363,7 @@ public class BoardController {
 		
 		session.setAttribute("user", testUser);
 		
-		return "redirect:/board/listBoard";
+		return "redirect:/board/listBoard?view=all&local=";
 	}
 
 }

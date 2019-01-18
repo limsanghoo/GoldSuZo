@@ -69,7 +69,13 @@
 		 	
 		 	$("a:contains('전체게시물')").on("click" , function() {
 				//$(self.location).attr("href","http://localhost:3000/");
-				self.location = "/board/listBoard"
+				self.location = "/board/listBoard?view=all&local="
+		 		
+			});
+		 	
+		 	$("a:contains('동네게시물')").on("click" , function() {
+				//$(self.location).attr("href","http://localhost:3000/");
+				self.location = "/board/listBoard?view=town&local="
 		 		
 			});
 		 });
@@ -107,7 +113,17 @@
 	                         <span >전체게시물</span>
 	                     </a>
 	                     
-	                 </li>
+	              </li>
+	              
+	              <c:if test="${sessionScope.user.userNo != null}">
+	              <li class="dropdown">
+	                     <a  href="#" class="dropdown-toggle" >
+	                         <span >동네게시물</span>
+	                     </a>
+	                     
+	              </li>
+	              </c:if>
+	               
 	                 
 	              <!-- 중고장터 DrowDown -->
 	              <c:if test="${sessionScope.user.userNo != null}">
@@ -142,6 +158,13 @@
 	               <li><a href="#">강남2</a></li>
 	               <li><a href="#">서초3</a></li>
 	             </ul>
+	             
+	            <center>
+					<a href="/board/testUser">
+					<input id="sessionTest" type="button" value="세션 테스트">
+					</a>
+					userNickname : ${user.userNickname}
+				</center>
 	             
 	             
 	             <ul class="nav navbar-nav navbar-right">

@@ -23,7 +23,7 @@ public class BoardServiceTest {
 	@Qualifier("boardServiceImpl")
 	private BoardService boardService;
 	
-	@Test
+	//@Test
 	public void testAddBoard() throws Exception{
 		
 		User user=new User();
@@ -55,6 +55,14 @@ public class BoardServiceTest {
 		board.setBoardStatus("1");
 		
 		boardService.addBoard(board);
+	}
+	
+	@Test
+	public void listBoardMap() throws Exception{
+		
+		
+		
+		
 	}
 
 }

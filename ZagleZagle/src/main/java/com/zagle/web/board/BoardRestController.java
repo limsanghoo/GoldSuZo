@@ -5,6 +5,8 @@ import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,47 +71,15 @@ public class BoardRestController {
 	
 	@RequestMapping(value="json/addBoardVisionTag", method=RequestMethod.GET)
 	@ResponseBody
-	public String addBoardVisionTag(@RequestParam("link")String link) throws Exception{
+	public String addBoardVisionTag(@RequestParam("link")String link, HttpSession session) throws Exception{
 		
 		System.out.println(link);
 		
-		RestTemplate restTemplate = new RestTemplate();
-
-        //Body
-        MultiValueMap<String,String> params = new LinkedMultiValueMap<String,String>();
-        params.add("image_url",link);
-        
-        //Header
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization","KakaoAK "+"ad82a4d95c664fc2c5f0355fc6a70df7");
-       
-        HttpEntity<MultiValueMap<String,String>> request = new HttpEntity<MultiValueMap<String,String>>(params, headers);
-        Map response = restTemplate.postForObject(new URI("https://kapi.kakao.com/v1/vision/multitag/generate"), request, Map.class);
-       
-        System.out.println(response);
-        
-        String result=response.get("result").toString();
-                
-        String[] split=result.split("\\[");
+		String resultTag=boardService.addBoardVisionTag(link);
 		
-		String aaa=split[2];
-		
-		String bbb=aaa.replace("]", "").replace("}", "").replace(", ", "#");
-		
-		String ddd="#"+bbb;
-		
-		String eee=URLEncoder.encode(ddd, "utf-8");
-		
-		System.out.println(ddd);
-
-		
-		return eee;
+		return resultTag;
 	}
-	
-	
-	
-	
-	
+
 	@RequestMapping(value="json/listMap", method=RequestMethod.GET)
 	public ModelAndView listMap() throws Exception{
 		
