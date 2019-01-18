@@ -8,6 +8,7 @@ public class SearchBoard {
 	private int endRowNum;
 	private int startRowNum;
 	private int searchLike;
+	private String local;
 	
 	public SearchBoard() {
 	}
@@ -60,10 +61,19 @@ public class SearchBoard {
 		this.searchLike = searchLike;
 	}
 
+	public String getLocal() {
+		return local;
+	}
+
+	public void setLocal(String local) {
+		this.local = local;
+	}
+
 	@Override
 	public String toString() {
 		return "SearchBoard [currentPage=" + currentPage + ", searchKeyword=" + searchKeyword + ", pageSize=" + pageSize
-				+ ", endRowNum=" + endRowNum + ", startRowNum=" + startRowNum + ", searchLike=" + searchLike + "]";
+				+ ", endRowNum=" + endRowNum + ", startRowNum=" + startRowNum + ", searchLike=" + searchLike
+				+ ", local="+local+"]";
 	}
 	
 	

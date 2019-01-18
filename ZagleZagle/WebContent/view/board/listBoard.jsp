@@ -41,13 +41,13 @@
     
     #sessionTest{
     	position: static;
-    	;
+    	align-content: center;
     }
 
 </style>
 
 <script type="text/javascript">
-
+//수정 시작
 $(function(){
 	
 	$("input[value='수정']").bind("click",function(){
@@ -56,6 +56,88 @@ $(function(){
 	})
 
 });
+//수정 끝
+
+function fncGetState(){
+	
+	var stateCode = $("select[name=state]").val();
+	//alert(stateCode);
+	
+	$.ajax(
+		{
+			url : "/board/json/listMap/getCity/"+stateCode,
+			method : "GET",
+			header : {
+				"Accept" : "application/json",
+				"Content-Type" : "application/json"
+			},
+			success : function(data, status){
+				
+				var temp ="";
+				var display ="";
+				
+				if(data.length>0){
+					$.each(data, function(index){
+						temp = "<option value='"+data[index].cityCode+"' style='font-size:20px;'>"+data[index].cityName+"</option>";
+						display += temp;
+					});
+					
+					$("select[name=city]").children("option").not("option:nth-child(1)").remove();
+					$("select[name=city]").append(display);
+				}
+				
+			}
+			
+		});
+}
+
+function fncGetCity(){
+	
+	var stateCode = $("select[name=state]").val();
+	var cityCode = $("select[name=city]").val();
+	//alert(cityCode);
+	
+	$.ajax(
+		{
+			url : "/board/json/listMap/getTown/"+cityCode+"/"+stateCode,
+			method : "GET",
+			header : {
+				"Accept" : "application/json",
+				"Content-Type" : "application/json"
+			},
+			success : function(data, status){
+				
+				var temp ="";
+				var display ="";
+				
+				if(data.length>0){
+					$.each(data, function(index){
+						temp = "<option value='"+data[index].townCode+"' style='font-size:20px;'>"+data[index].townName+"</option>";
+						display += temp;
+					});
+					
+					$("select[name=town]").children("option").not("option:nth-child(1)").remove();
+					$("select[name=town]").append(display);
+				}
+				
+			}
+			
+		});
+}
+
+function fncGetTown(){
+	var stateName = $("select[name=state] option:checked").text();
+	var cityName = $("select[name=city] option:checked").text();
+	var townName = $("select[name=town] option:checked").text();
+	
+	local = stateName+" "+cityName+" "+townName;
+	
+	alert(local);
+	
+	$("input[name='local']").val(local);
+			
+	$("form").attr("method" , "POST").attr("action" , "/board/listBoard?view=town").submit();
+}
 
 
 </script>
@@ -64,16 +146,14 @@ $(function(){
 
 <body>
 
+<form name="listBoard">
 
 <a href="/board/listMap">지도로 보기</a>
 
-<center>
 <a href="/board/testUser">
 <input id="sessionTest" type="button" value="세션 테스트">
 </a>
 userNickname : ${user.userNickname}
-</center>
-
 
 <c:if test="${user.userNo!=null}">
 <a href="/board/addBoard">
@@ -81,15 +161,40 @@ userNickname : ${user.userNickname}
 </a>
 </c:if>
 
+<!-- 동네 선택 -->
+<div>
+<c:if test="${param.view=='town'}">
+<div class="row">
+				<select name="state" class="ct_input_g" style="width: 200px; height: 40px" onchange="fncGetState(this)">
+					<option value='' style="font-size:20px;"  selected>시·도</option>
+					<c:set var="i" value="0"/>
+					<c:forEach var="local" items="${list}">
+					<c:set var="i" value="${i+1}"/>
+					<option value='${local.stateCode}' style="font-size:20px;">${local.stateName}</option>
+					</c:forEach>
+				</select>
+				
+				<select name="city"  class="ct_input_g" style="width: 200px; height: 40px" onchange="fncGetCity(this)">
+					<option value="" style="font-size:20px;">시·군·구</option>
+				</select>
+        
+				<select name="town"  class="ct_input_g" style="width: 200px; height: 40px" onchange="fncGetTown(this)">
+					<option value="" style="font-size:20px;">읍·면·동</option>
+				</select> 
+				
+				<input type="hidden" name="local" value="${searchBoard.local}"/>
+	           
+</div>
+</c:if>
+</div>
+<!-- 동네 선택  끝-->
 
-
-<br/>
 <hr/>
 
 <!-- 리스트 시작 -->
 <div>
 <c:set var="i" value="0" />
-<c:forEach var="board" items="${list}">
+<c:forEach var="board" items="${boardList}">
 	<c:set var="i" value="${ i+1 }" />
 		
 	<c:if test="${board.boardStatus=='1'}"><!-- 정상 게시물만 보여주기 -->
@@ -105,7 +210,46 @@ userNickname : ${user.userNickname}
 	
 	<div class="caption">
 	
+	
+<!-- 지도 시작 -->
+<c:if test="${board.coord !=null && board.photo1 !=null}">
+<div id="staticMap${board.boardNo}" style="width:100%;height:350px;"></div>
 
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc9c3216a02c263f1acc2c4187e96443"></script>
+<script type="text/javascript">
+var staticMapContainer  = document.getElementById('staticMap${board.boardNo}'); // 이미지 지도를 표시할 div  
+var staticMapOption = {};
+var marker = {};
+
+var coord = ('${board.coord}');
+
+if (coord==null || coord=='') {
+
+}else{
+   var coordArray = coord.split(',');
+   var coordy = Number(coordArray[0]);
+   var coordx = Number(coordArray[1]);
+   
+   var markerPosition  = new daum.maps.LatLng(coordy, coordx); 
+
+   marker = {
+         position: markerPosition
+   };
+   
+   staticMapOption = { 
+        center: new daum.maps.LatLng(coordy, coordx), // 이미지 지도의 중심좌표
+        level: 3, // 이미지 지도의 확대 레벨
+        marker: marker
+    };
+   var staticMap = new daum.maps.StaticMap(staticMapContainer, staticMapOption);
+}
+
+</script>
+</c:if>
+<!-- 지도 끝 -->
+	
+	
+<c:if test="${board.coord ==null && board.photo1 !=null}">
 	<%-- <c:if test="${board.coord !=null && board.photo1 !=null}">
 	<p align="center">${board.coord}</p>
 	</c:if>
@@ -114,11 +258,11 @@ userNickname : ${user.userNickname}
 	<img src="/common/images/board/${board.photo1}" style="width:100%;" align="middle"/>
 	</c:if>	
 	--%>
+
 	
-	<c:if test="${board.photo1 !=null}">
 	<img src="${board.photo1}" style="width:100%;" align="middle"/>
-	</c:if><!-- 삭제해야됨 -->
-	
+
+</c:if>	
 	<p align="center">${board.coord}</p><!-- 삭제해야됨 -->
 	
 	<p align="center">${board.boardDetailText}</p>
@@ -197,7 +341,7 @@ userNickname : ${user.userNickname}
 
 
 
-
+</form>
 </body>
 
 
