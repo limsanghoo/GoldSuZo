@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <html>
 <head>
     <meta charset="UTF-8">
@@ -20,6 +21,8 @@
     .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
     .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
     .info .link {color: #5085BB;}
+
+
 </style>
     
 </head>
@@ -157,7 +160,7 @@ function fncGetTown(){
 					hideMarkers();
 					if (data=='') {
 					moveMap(local);
-					alert("아직 등록된 정보가 없습니다! 정보를 등록해 주세요");
+					alert("등록된정보가없습니다.게시물을 등록해주세요")
 					}else{
 					markerMake(data);
 					}
