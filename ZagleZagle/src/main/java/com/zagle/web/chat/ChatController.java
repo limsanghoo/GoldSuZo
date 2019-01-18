@@ -47,30 +47,11 @@ public class ChatController {
 
         return "forward:/view/chat/chat.jsp";
     }
-//	
-//	@RequestMapping(value="chat/{value}",method=RequestMethod.GET)
-//	public ModelAndView getChat(@PathVariable String userNo) throws Exception {
-//		
-//		User chatUser = (User)userService.getUser(userNo);
-//		
-//		System.out.println(chatUser.getUserName()+"님 채팅방입장");
-//		
-//		Chat chat = new Chat();
-//		
-//		chat.setChatAddress(chatUser.getUserAddr());
-//		chat.setNickName(chatUser.getUserNickname());
-//		chat.setProfile(chatUser.getProfile());
-//		
-//		ModelAndView modelAndView = new ModelAndView();
-//		modelAndView.addObject("chat", chat);
-//		modelAndView.setViewName("forward:chat/json/chat");
-//		
-//		return modelAndView;
-//	}
 	
 	@RequestMapping(value="testUser")
 	public String testUser(HttpServletRequest request,HttpSession session) {
 		User user = new User();
+		user.setProfile("default.png");
 		user.setUserNickname("유저1");
 		user.setUserAddr("강남");
 		
@@ -82,6 +63,7 @@ public class ChatController {
 	@RequestMapping(value="testUser2")
 	public String testUser2(HttpServletRequest request,HttpSession session) {
 		User user = new User();
+		user.setProfile("default.png");
 		user.setUserNickname("유저2");
 		user.setUserAddr("강남");
 		
@@ -93,6 +75,7 @@ public class ChatController {
 	@RequestMapping(value="testUser3")
 	public String testUser3(HttpServletRequest request,HttpSession session) {
 		User user = new User();
+		user.setProfile("default.png");
 		user.setUserNickname("유저3");
 		user.setUserAddr("서초");
 		

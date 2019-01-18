@@ -6,6 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>ZagleZagle</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" integrity="sha384-PmY9l28YgO4JwMKbTvgaS7XNZJ30MK9FAZjjzXtlqyZCqBY6X6bXIkM++IkyinN+" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap-theme.min.css" integrity="sha384-jzngWsPS6op3fgRCDTESqrEJwRKck+CILhJVO5VvaAZCq8JYf8HsR/HPpBOOPZfR" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js" integrity="sha384-vhJnz1OVIdLktyixHY4Uk3OHEwdQqPppqYR8+5mjsauETgLOcEynD9oPHhhz18Nw" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js" integrity="sha384-vhJnz1OVIdLktyixHY4Uk3OHEwdQqPppqYR8+5mjsauETgLOcEynD9oPHhhz18Nw" crossorigin="anonymous"></script>
 
 <style>
 .progress { position:relative; width:400px; border: 1px solid #ddd; padding: 1px; border-radius: 3px; }
@@ -28,23 +38,6 @@
 	width: 90px;
 }
 </style>
-</head>
-<body>
-	<div id="chat_box" ></div>
-	<input type="text" id="msg"/>
-	<button id="msg_process">전송</button>
-	<form enctype="multipart/form-data" id="frm">
-	<input type="file" name="imageFile" class="ct_input_g" style="width: 200px; height: 19px" maxLength="13" />
-	<button type='button' id='file_up'>등록</button>
-	</form>
-	<div class="progress">
-    <div class="bar"></div>
-    <div class="percent">0%</div>
-	</div>
-	<div id="status"></div>
-	
-	
-	
 	<script src="http://192.168.0.25:82/socket.io/socket.io.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script>
@@ -78,7 +71,10 @@
 			socket.on('send_msg', function(data) {
 				//div 태그를 만들어 텍스트를 msg로 지정을 한뒤 #chat_box에 추가를 시켜준다.
 				if (data.ms.substring(data.ms.length-3)=='jpg'||data.ms.substring(data.ms.length-3)=='png') {
-					$("<div>"+data.id+" : <img src='/common/images/chat/"+data.ms+"' style='width: 100px; height: 80px;'/></div>").appendTo("#chat_box");
+					$("<div>"+data.id+" : <img src='http://192.168.0.25:8080/common/images/chat/"+data.ms+"' style='width: 200px; height: 180px;'/></div>").appendTo("#chat_box");
+					$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
+				}else if(data.ms.substring(data.ms.length-3)=='mp4'||data.ms.substring(data.ms.length-3)=='wmv'){
+					$("<div>"+data.id+" : <video controls controlsList='nodownload' width='320' height='240' muted><source src='http://192.168.0.25:8080/common/images/chat/"+data.ms+"' type='video/mp4'><a href='http://192.168.0.25:8080/common/images/chat/"+data.ms+"'>download video</a></video></div>").appendTo("#chat_box");
 					$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
 				}else{
 					$("<div></div>").text(data.id+" : "+data.ms).appendTo("#chat_box");
@@ -125,41 +121,34 @@
 		            
 		            ajaxReq.done(function(msg){
 		           
-		            	while(true){
-		            		var path = 'http://192.168.0.25:8080/common/images/chat/'+msg;
-			            	var re = doesFileExist(path);
-		            		if (re) {
-		            			socket.emit("send_msg",msg);
-								break;
-							}
-		            	}
+		            	if (msg.substring(msg.length-3)=='mp4') {
+		            		setTimeout(function() {
+			            		while(true){
+				            		var path = 'http://192.168.0.25:8080/common/images/chat/'+msg;
+				            		var re = doesFileExist(path);
+				            		if (re) {
+				            			socket.emit("send_msg",msg);
+										break;
+									}
+				            	}
+			            	},5000);
+						}else{
+							setTimeout(function() {
+			            		while(true){
+				            		var path = 'http://192.168.0.25:8080/common/images/chat/'+msg;
+				            		var re = doesFileExist(path);
+				            		if (re) {
+				            			socket.emit("send_msg",msg);
+										break;
+									}
+				            	}
+			            	},2000);
+						}
+		            	
+		            	
 		          
 		            });
-		            
-		            $('asdgasdgasdgasdg').on("click",function(){
-		            	 $.ajax({
-								url : "/chat/json/checkFile/"+msg,
-								method : "GET" ,
-								dataType : "text" ,
-								headers : {
-									"Accept" : "application/json",
-									"Content-Type" : "application/json"
-								},
-								success : function(data , status) {
-									alert(data)
-									if (data=="false") {
-										socket.emit("send_msg",msg);
-										
-									}
-									
-								},error : function(error){
-									alert(error)
-									alert("채크파일실패!");
-								}
-							});		
-		            })
-		           
-		            
+
 		           function doesFileExist(urlToFile) {
 					    var xhr = new XMLHttpRequest();
 					    xhr.open('HEAD', urlToFile, false);
@@ -174,29 +163,47 @@
 		            
 			});
 			
-		
+			$(function(){
+			    $("#msg_trans").on("click",function(){
+			        	var inputData = $('#msg').val();
+			        	alert(inputData);
+				        $.ajax({
+				                 type : 'post',
+				                 url : '/chat/json/translate/',
+				                 data : { "text" : inputData},
+				                 success : function(data) {	         		                	 
+				                //	 $("#msg").val(data);
+				                	alert("번역성공!!")
+				                	 $('#msg').val(data);
+				                 },
+				                 error : function(error) {
+				                     alert("번역실패.");
+				                 }	
+			        
+			        });
+			        
+				});
+			});
 			
 		});
 		
 		
-/*		$(function(){
-		    //ajax form submit
-		    $('#frm').ajaxForm({
-		            beforeSubmit: function (data,form,option) {
-		                //validation체크
-		                //막기위해서는 return false를 잡아주면됨
-		                return true;
-		            },
-		            success: function(response,status){
-		                //성공후 서버에서 받은 데이터 처리
-		                alert("업로드 성공!!");
-		            },
-		            error: function(){
-		                //에러발생을 위한 code페이지
-		            }                              
-		        });
-		});*/
-		
 	</script>
+</head>
+<body>
+	<div id="chat_box" ></div>
+	<input type="text" id="msg"/>
+	<button id="msg_trans">번역</button>
+	<button id="msg_process">전송</button>
+	<form enctype="multipart/form-data" id="frm">
+	<input type="file" name="imageFile" class="ct_input_g" style="width: 200px; height: 19px" maxLength="13" />
+	<button type='button' id='file_up'>등록</button>
+	</form>
+	<div class="progress">
+    <div class="bar"></div>
+    <div class="percent">0%</div>
+	</div>
+	<div id="status"></div>
+
 </body>
 </html>

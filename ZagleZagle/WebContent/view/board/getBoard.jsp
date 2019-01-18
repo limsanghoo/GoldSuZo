@@ -22,7 +22,7 @@
 
 <body>
 
-
+  
 <a href="/board/listBoard">
 <input type="button" value="전체 게시물" id="goListBoard">
 </a>
