@@ -70,10 +70,8 @@ public class BoardServiceImpl implements BoardService{
 	public Map<String, Object> listBoard(SearchBoard searchBoard) throws Exception {
 		List<Board> list=boardDAO.listBoard(searchBoard);
 		
-		System.out.println(list);
-		
 		Map<String, Object> map=new HashMap<String, Object>();
-		map.put("list", list);
+		map.put("boardList", list);
 		
 		return map;
 	}
