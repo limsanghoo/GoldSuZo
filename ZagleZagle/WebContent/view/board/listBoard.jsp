@@ -39,10 +39,11 @@
     	float:right;
     }
     
-    #sessionTest{
-    	position: static;
-    	align-content: center;
+    #searchKeyword{
+    	position: absolute;
+    	left:45%;
     }
+
     
 	/* 지도 클릭 안되게 */
 	.disabled{
@@ -58,6 +59,10 @@ $(function(){
 	$("input[value='수정']").bind("click",function(){
 		var boardNo=$(this).data('update');
 		self.location="/board/updateBoard?boardNo="+boardNo;
+	})
+	
+	$("input[value='검색']").bind("click",function(){
+		$("form").attr("method" , "POST").attr("action" , "/board/listBoard?view=${param.view}").submit();
 	})
 
 });
@@ -141,7 +146,7 @@ function fncGetTown(){
 	
 	$("input[name='local']").val(local);
 			
-	$("form").attr("method" , "POST").attr("action" , "/board/listBoard?view=town").submit();
+	$("form").attr("method" , "POST").attr("action" , "/board/listBoard?view=${param.view}").submit();
 }
 
 
@@ -153,18 +158,31 @@ function fncGetTown(){
 
 <form name="listBoard">
 
-<a href="/board/listMap">지도로 보기</a>
 
+<!-- 지도로 보기 -->
+<c:if test="${user.userNo!=null}">
+<a href="/board/listMap">지도로 보기</a>
+</c:if>
+
+<!-- 세션 테스트 -->
 <a href="/board/testUser">
-<input id="sessionTest" type="button" value="세션 테스트">
+<input type="button" value="세션 테스트">
 </a>
 userNickname : ${user.userNickname}
 
+<!-- 검색 -->
+<span id="searchKeyword">
+<input type="text" name="searchKeyword" value="${! empty searchBoard.searchKeyword ? searchBoard.searchKeyword : ''}" />
+<!-- <input type="button" name="search" value="검색"/> -->
+</span>
+
+<!-- 게시물 등록 -->
 <c:if test="${user.userNo!=null}">
 <a href="/board/addBoard">
 <input type="button" value="게시물 등록" id="goAddBoard">
 </a>
 </c:if>
+
 
 <!-- 동네 선택 -->
 <div>
@@ -217,9 +235,9 @@ userNickname : ${user.userNickname}
 	
 	
 <!-- 지도 시작 -->
-<c:if test="${board.coord !=null && board.photo1 !=null}">
+<c:if test="${board.coord !=null}">
 <div id="staticMap${board.boardNo}" style="width:100%;height:350px;" class="disabled"></div> <!-- 지도 클릭 안되게 -->
-
+<br/>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc9c3216a02c263f1acc2c4187e96443"></script>
 <script type="text/javascript">
 var staticMapContainer  = document.getElementById('staticMap${board.boardNo}'); // 이미지 지도를 표시할 div  
@@ -248,16 +266,17 @@ if (coord==null || coord=='') {
     };
    var staticMap = new daum.maps.StaticMap(staticMapContainer, staticMapOption);
 }
-
 </script>
 </c:if>
 <!-- 지도 끝 -->
 	
 	
 <c:if test="${board.coord ==null && board.photo1 !=null}">
-	<img src="${board.photo1}" style="width:100%;" align="middle"/>
+	<div><img src="${board.photo1}" style="width:100%;" align="middle"/></div>
+	<br/>
 </c:if>	
-	
+
+	<p align="center">${board.address}</p>
 	<p align="center">${board.boardDetailText}</p>
 	<p align="center">${board.hashTag}</p>
 	
@@ -303,25 +322,24 @@ if (coord==null || coord=='') {
 
 		<div>
 			<c:if test="${board.photo1 !=null}">
-			<img src="${board.photo1}" style="width: 500px"/>
+			<div><img src="${board.photo1}" style="width: 500px"/></div>
+			<br/>
 			</c:if>
 
 			<c:if test="${board.photo2 !=null}">
-			<img src="${board.photo2}" style="width: 500px"/>
+			<div><img src="${board.photo2}" style="width: 500px"/></div>
+			<br/>
 			</c:if>
 	
 			<c:if test="${board.photo3 !=null}">
-			<img src="${board.photo3}" style="width: 500px"/>
+			<div><img src="${board.photo3}" style="width: 500px"/></div>
+			<br/>
 			</c:if>
 		</div>
 
-		<div>
-			${board.address}
-		</div>
-
-		<div>
+		<p>
 			${board.boardDetailText}
-		</div>
+		</p>
      
        
       </div>

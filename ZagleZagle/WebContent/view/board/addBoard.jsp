@@ -34,7 +34,7 @@ $(function(){
 	        
 	        $.ajax(	
 	        		{
-	        			url : "http://192.168.0.36:8080/board/json/addBoardVisionTag",
+	        			url : "http://localhost:8080/board/json/addBoardVisionTag",
 	        			method : "GET",
 	        			data : {
 	        				link : result.data.link
@@ -72,7 +72,7 @@ $(function(){
          alert("내용을 입력해라");
          return;
       }
-         //$("form").attr("method" , "POST").attr("enctype","multipart/form-data").attr("action" , "/board/addBoard").submit();
+      
          $("form").attr("method" , "POST").attr("action" , "/board/addBoard").submit();
       
    })
