@@ -153,7 +153,9 @@ function fncGetTown(){
 
 <form name="listBoard">
 
+<c:if test="${user.userNo!=null}">
 <a href="/board/listMap">지도로 보기</a>
+</c:if>
 
 <a href="/board/testUser">
 <input id="sessionTest" type="button" value="세션 테스트">
@@ -217,9 +219,9 @@ userNickname : ${user.userNickname}
 	
 	
 <!-- 지도 시작 -->
-<c:if test="${board.coord !=null && board.photo1 !=null}">
+<c:if test="${board.coord !=null}">
 <div id="staticMap${board.boardNo}" style="width:100%;height:350px;" class="disabled"></div> <!-- 지도 클릭 안되게 -->
-
+<br/>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc9c3216a02c263f1acc2c4187e96443"></script>
 <script type="text/javascript">
 var staticMapContainer  = document.getElementById('staticMap${board.boardNo}'); // 이미지 지도를 표시할 div  
@@ -248,16 +250,17 @@ if (coord==null || coord=='') {
     };
    var staticMap = new daum.maps.StaticMap(staticMapContainer, staticMapOption);
 }
-
 </script>
 </c:if>
 <!-- 지도 끝 -->
 	
 	
 <c:if test="${board.coord ==null && board.photo1 !=null}">
-	<img src="${board.photo1}" style="width:100%;" align="middle"/>
+	<div><img src="${board.photo1}" style="width:100%;" align="middle"/></div>
+	<br/>
 </c:if>	
-	
+
+	<p align="center">${board.address}</p>
 	<p align="center">${board.boardDetailText}</p>
 	<p align="center">${board.hashTag}</p>
 	
@@ -303,25 +306,24 @@ if (coord==null || coord=='') {
 
 		<div>
 			<c:if test="${board.photo1 !=null}">
-			<img src="${board.photo1}" style="width: 500px"/>
+			<div><img src="${board.photo1}" style="width: 500px"/></div>
+			<br/>
 			</c:if>
 
 			<c:if test="${board.photo2 !=null}">
-			<img src="${board.photo2}" style="width: 500px"/>
+			<div><img src="${board.photo2}" style="width: 500px"/></div>
+			<br/>
 			</c:if>
 	
 			<c:if test="${board.photo3 !=null}">
-			<img src="${board.photo3}" style="width: 500px"/>
+			<div><img src="${board.photo3}" style="width: 500px"/></div>
+			<br/>
 			</c:if>
 		</div>
 
-		<div>
-			${board.address}
-		</div>
-
-		<div>
+		<p>
 			${board.boardDetailText}
-		</div>
+		</p>
      
        
       </div>

@@ -197,7 +197,7 @@ public class BoardController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="getBoard", method=RequestMethod.GET)
+	/*@RequestMapping(value="getBoard", method=RequestMethod.GET)
 	public ModelAndView getBoard(@RequestParam("boardNo") String boardNo) throws Exception{
 		
 		System.out.println("/getBoard");		
@@ -213,7 +213,7 @@ public class BoardController {
 		modelAndView.setViewName("forward:/view/board/getBoard.jsp");
 		
 		return modelAndView;
-	}
+	}*/
 	
 	@RequestMapping(value="getHotTag", method=RequestMethod.GET)
 	public ModelAndView getHotTag() throws Exception{
@@ -279,8 +279,6 @@ public class BoardController {
 		
 		System.out.println("updateBoard POST");
 		
-		System.out.println("**********"+board.getPhoto1());
-		
 		String[] photo=board.getPhoto1().split(",");//이미지 링크 파싱
 		
 		if(photo.length==1) {
@@ -302,7 +300,7 @@ public class BoardController {
 		boardService.updateBoard(board);
 		
 		ModelAndView modelAndView=new ModelAndView();
-		modelAndView.setViewName("forward:/view/board/getBoard.jsp");
+		modelAndView.setViewName("redirect:/board/listBoard?view=all");
 		
 		return modelAndView;
 	}
