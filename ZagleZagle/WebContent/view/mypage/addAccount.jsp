@@ -9,5 +9,8 @@
 <body>
 여기서 계좌등록 수행. 내일 진행
 ${user}
+
+${realName}
+
 </body>
 </html>

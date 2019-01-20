@@ -184,7 +184,7 @@ public class BoardController {
 		boardService.deleteBoard(board);
 		
 		ModelAndView modelAndView=new ModelAndView();
-		modelAndView.setViewName("redirect:/board/listBoard?view=all&local=");
+		modelAndView.setViewName("redirect:/board/listBoard?view=all");
 		
 		return modelAndView;
 	}
@@ -230,10 +230,9 @@ public class BoardController {
 		
 		System.out.println("**********searchBoard : "+searchBoard);
 		
-		if(searchBoard.getLocal()=="") {
+		/*if(searchBoard.getLocal()=="") {
 			searchBoard.setLocal(null);
-		}
-
+		}*/
 		
 		if(searchBoard.getCurrentPage()==0) {
 			searchBoard.setCurrentPage(1);
@@ -253,7 +252,7 @@ public class BoardController {
 		
 		ModelAndView modelAndView=new ModelAndView();
 		modelAndView.addObject("boardList", map.get("boardList"));
-		//modelAndView.addObject("searchBoard", searchBoard);//아직 사용 안함
+		modelAndView.addObject("searchBoard", searchBoard);
 		modelAndView.addObject("list",list);//동네  리스트
 		modelAndView.setViewName("forward:/view/board/listBoard.jsp");
 		
@@ -278,48 +277,22 @@ public class BoardController {
 	@RequestMapping(value="updateBoard", method=RequestMethod.POST)
 	public ModelAndView updateBoard(@ModelAttribute("board") Board board, @RequestParam("userNo") String userNo, MultipartHttpServletRequest mtfRequest) throws Exception{
 		
-		System.out.println("updateBoard POST");	
+		System.out.println("updateBoard POST");
 		
-		String finalFileName="";
+		System.out.println("**********"+board.getPhoto1());
 		
-		List<MultipartFile> fileList = mtfRequest.getFiles("file");
-
-        String path = "C:\\Users\\Bit\\git\\GoldSuZo\\ZagleZagle\\WebContent\\common\\images\\board";
-
-        for (MultipartFile mf : fileList) {
-            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-            long fileSize = mf.getSize(); // 파일 사이즈
-
-            System.out.println("originFileName : " + originFileName);
-            System.out.println("fileSize : " + fileSize);
-
-            //String safeFile = path+ originFileName;
-            try {
-                mf.transferTo(new File(path, originFileName));
-            } catch (IllegalStateException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }        
-            
-        finalFileName+=originFileName+",";
-          		
-        }
-        
-        System.out.println("finalFileName : "+finalFileName);
-  
-        String[] photo=finalFileName.split(",");
-        
-        if(photo.length==1) {
-        	board.setPhoto1(photo[0]);
-        }else if(photo.length==2) {
-        	board.setPhoto1(photo[0]);
-        	board.setPhoto2(photo[1]);
-        }else if(photo.length==3) {
-        	board.setPhoto1(photo[0]);
-        	board.setPhoto2(photo[1]);
-        	board.setPhoto3(photo[2]);
-        }
+		String[] photo=board.getPhoto1().split(",");//이미지 링크 파싱
+		
+		if(photo.length==1) {
+			board.setPhoto1(photo[0]);
+	    }else if(photo.length==2) {
+	    	board.setPhoto1(photo[0]);
+	    	board.setPhoto2(photo[1]);
+	    }else if(photo.length==3) {
+	        board.setPhoto1(photo[0]);
+	        board.setPhoto2(photo[1]);
+	        board.setPhoto3(photo[2]);
+	    }
 
 		board.setUser(userService.getUser2("userNo"));//userNo으로 바꿔야함
 		board.setBoardStatus("1");//정상 게시물
@@ -363,7 +336,7 @@ public class BoardController {
 		
 		session.setAttribute("user", testUser);
 		
-		return "redirect:/board/listBoard?view=all&local=";
+		return "redirect:/board/listBoard?view=all";
 	}
 
 }

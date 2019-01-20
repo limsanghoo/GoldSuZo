@@ -43,6 +43,11 @@
     	position: static;
     	align-content: center;
     }
+    
+	/* 지도 클릭 안되게 */
+	.disabled{
+		pointer-events:none;
+	}
 
 </style>
 
@@ -204,8 +209,8 @@ userNickname : ${user.userNickname}
 	<div class="thumbnail" data-toggle="modal" data-target="#${board.boardNo}modal1">
 		
 	<p>
-	<img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px;" align="middle"/>
-	${board.user.userNickname}
+	<img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px;" align="middle"/>
+		${board.user.userNickname}
 	</p>
 	
 	<div class="caption">
@@ -213,7 +218,7 @@ userNickname : ${user.userNickname}
 	
 <!-- 지도 시작 -->
 <c:if test="${board.coord !=null && board.photo1 !=null}">
-<div id="staticMap${board.boardNo}" style="width:100%;height:350px;"></div>
+<div id="staticMap${board.boardNo}" style="width:100%;height:350px;" class="disabled"></div> <!-- 지도 클릭 안되게 -->
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc9c3216a02c263f1acc2c4187e96443"></script>
 <script type="text/javascript">
@@ -250,33 +255,23 @@ if (coord==null || coord=='') {
 	
 	
 <c:if test="${board.coord ==null && board.photo1 !=null}">
-	<%-- <c:if test="${board.coord !=null && board.photo1 !=null}">
-	<p align="center">${board.coord}</p>
-	</c:if>
-	
-	<c:if test="${board.coord ==null && board.photo1 !=null}">
-	<img src="/common/images/board/${board.photo1}" style="width:100%;" align="middle"/>
-	</c:if>	
-	--%>
-
-	
 	<img src="${board.photo1}" style="width:100%;" align="middle"/>
-
 </c:if>	
-	<p align="center">${board.coord}</p><!-- 삭제해야됨 -->
 	
 	<p align="center">${board.boardDetailText}</p>
 	<p align="center">${board.hashTag}</p>
 	
-	</div>
+	</div><!-- /caption -->
 	</div>
 	</div>
 	</div>
 
-<!-- 모달 시작 -->
+<!-- 모달1 시작 -->
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="${board.boardNo}modal1">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
+    
+	<!-- 모달1 헤더 시작 -->
       <div class="modal-header">
       <div class="row">
       
@@ -294,22 +289,47 @@ if (coord==null || coord=='') {
 		<c:if test="${user.userNo==board.user.userNo}">
 		<div class="col-md-4 col-md-offset-4">
 		<input type="button" value="수정" data-update="${board.boardNo}"/>
-        
-        <div class="btn btn-primary" data-toggle="modal" data-target="#${board.boardNo}modal2">삭제
+        <div class="btn btn-primary" data-toggle="modal" data-target="#${board.boardNo}modal2">삭제</div>
         </div>
         </c:if>
+        
         </h4>
         </div>
       </div>
+     <!-- 모달1 헤더 끝 -->
       
-      <div class="modal-body">     
-      <jsp:include page="/board/getBoard?boardNo=${board.boardNo}"/>
+     <!-- 모달1 바디 시작 -->
+      <div class="modal-body" style="text-align: center">  
+
+		<div>
+			<c:if test="${board.photo1 !=null}">
+			<img src="${board.photo1}" style="width: 500px"/>
+			</c:if>
+
+			<c:if test="${board.photo2 !=null}">
+			<img src="${board.photo2}" style="width: 500px"/>
+			</c:if>
+	
+			<c:if test="${board.photo3 !=null}">
+			<img src="${board.photo3}" style="width: 500px"/>
+			</c:if>
+		</div>
+
+		<div>
+			${board.address}
+		</div>
+
+		<div>
+			${board.boardDetailText}
+		</div>
+     
+       
       </div>
-      
+      <!-- 모달1 바디 끝 -->
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<!-- 모달 끝 -->
+<!-- 모달1 끝 -->
 
 <!-- 모달2 시작 -->
 <div class="modal"  aria-hidden="true" style="display: none; z-index: 1060;" id="${board.boardNo}modal2">
@@ -329,9 +349,6 @@ if (coord==null || coord=='') {
         </div>
 </div>
 <!-- 모달2 끝 -->
-
-
-
 
 </c:if>
 

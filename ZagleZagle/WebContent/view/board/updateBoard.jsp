@@ -17,9 +17,6 @@ $(function(){
 		
 		var userTheme=$("input[name='userTheme']").val();
 		var boardDetailText=$("input[name='boardDetailText']").val();
-		/* var photo2 = $("img[name='photo1']").data("param1");
-		
-		alert(photo2); */
 		
 		if(boardDetailText==""){
 			alert("내용을 입력해라");
@@ -28,31 +25,66 @@ $(function(){
 			$("form").attr("method" , "POST").attr("action" , "/board/updateBoard").submit();
 		
 	})
-});
-
-//다중 이미지 미리보기
-function fileInfo(f){
-	var file = f.files; // files 를 사용하면 파일의 정보를 알 수 있음
-
-	$('#img_box').empty();
 	
-	// 파일의 갯수만큼 반복
-	for(var i=0; i<file.length; i++){
+	$('#edit').bind("click",function(){
+		$("#img_box").empty();//원래 이미지 비우기
+		$("#newPhoto").append('<input id="file" type="file" multiple="multiple">* 사진은 하나씩 등록해주세요!<br/>');	//파일 첨부 버튼 생성
+		$("#hashTag").val("");//원래 해시태그 비우기
+		$("#link").val("");//원래 링크 비우기		
+		
+		var file = document.getElementById('file');
+		var image = document.getElementById('image');
 
-		var reader = new FileReader(); // FileReader 객체 사용
-		
-		reader.onload = function(rst){
-			$('#img_box').append('<img src="'+rst.target.result+'">'); // append 메소드를 사용해서 이미지 추가
-			// 이미지는 base64 문자열로 추가
-			// 이 방법을 응용하면 선택한 이미지를 미리보기 할 수 있음
-			
-		}	
-		
-		reader.readAsDataURL(file[i]); // 파일을 읽는다
+		file.onchange = function (event) {
+		  var target = event.currentTarget;
+		  var xmlHttpRequest = new XMLHttpRequest();
+		  xmlHttpRequest.open('POST', 'https://api.imgur.com/3/image/', true);
+		  xmlHttpRequest.setRequestHeader("Authorization", "Client-ID c764d6730f6f9a6");
+		  xmlHttpRequest.onreadystatechange = function () {
+		    if (xmlHttpRequest.readyState == 4) {
+		      if (xmlHttpRequest.status == 200) {
+		        var result = JSON.parse(xmlHttpRequest.responseText);
+
+		        $("#img_box").append("<img src="+result.data.link+">");//이미지 미리보기
+		        
+		        var linkArea=$("#link");
+				linkArea.val(linkArea.val()+result.data.link+",");//이미지 링크 append
 				
-	}
+		        console.log(result);        
+		        
+		        $.ajax(	
+		        		{
+		        			url : "http://192.168.0.36:8080/board/json/addBoardVisionTag",
+		        			method : "GET",
+		        			data : {
+		        				link : result.data.link
+		        			},
+		        			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		        			dataType : "text",
+		        			success : function (data,status){
+		        				var decode=decodeURIComponent(data);//특수문자 포함 디코딩
+		        				alert("decode : "+decode);
+		        				
+		        				var tagArea=$("#hashTag");
+		        				tagArea.val(tagArea.val()+decode);//해시태그 append
+		        				
+		        			}
+		        		});
+		      
+		      }
+		      else {
+		      	alert("업로드 실패");
+		      }
+		    }
+		  };//()function 끝
+		  xmlHttpRequest.send(target.files[0]);
+		};//(event)function 끝
+		
+		
+	})//edit 끝
+	
+});//function 끝
 
-}
 
 </script>
 </head>
@@ -63,27 +95,35 @@ function fileInfo(f){
 <input type="hidden" name="userNo" value="${board.user.userNo}"/>
 <input type="hidden" name="boardNo" value="${board.boardNo}"/>
 
-<div style="text-align:center;">
-	<input multiple="multiple" type="file" style="width:500px;" accept="image/*" multiple onchange="fileInfo(this)" name="file"/><br>
-</div>
- 
-<div id="img_box">
-
+<div id="newPhoto">
+	
+	<input type="hidden" name="photo1" value="${board.photo1}" id="link"/>
+	
+	<div id="img_box">
+	
+	<input type="button" value="사진 수정하기" id="edit"/>
+	
+	<!-- 원래 이미지 보여주는 부분 시작-->
 	<c:if test="${board.photo1 !=null}">
-	<img src="/common/images/board/${board.photo1}"/>
-	<input type="hidden" name="photo1" value="${board.photo1}"/>
+	<img src="${board.photo1}"/>
 	</c:if>
 
 	<c:if test="${board.photo2 !=null}">
-	<img src="/common/images/board/${board.photo2}" name="photo2" value="${board.photo2}"/>
+	<img src="${board.photo2}" name="photo2" value="${board.photo2}"/>
 	<input type="hidden" name="photo2" value="${board.photo2}"/>
 	</c:if>
 	
 	<c:if test="${board.photo3 !=null}">
-	<img src="/common/images/board/${board.photo3}" name="photo3" value="${board.photo3}"/>
+	<img src="${board.photo3}" name="photo3" value="${board.photo3}"/>
 	<input type="hidden" name="photo3" value="${board.photo3}"/>
 	</c:if>
+	<!-- 원래 이미지 보여주는 부분 끝-->
+	
+	
+	</div><!-- /img_box -->
 </div>
+
+<br/>
 
 <div>
 	<input type="button" value="지도첨부"/>
@@ -108,7 +148,7 @@ function fileInfo(f){
 
 해시태그
 <div>
-	<input type="text" name="hashTag" value="${board.hashTag}"/>
+	<input type="text" name="hashTag" id="hashTag" value="${board.hashTag}"/>
 </div>
 <br/>
 
