@@ -20,6 +20,23 @@
   background-image: url("https://images.pexels.com/photos/1022921/pexels-photo-1022921.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
   }
   
+  button{
+     align-items: center;
+     display: inline-block;
+     padding: 25px 40px;
+     margin:  320px 70px;
+     border: 3px solid #d9cbb3;
+ 	 color: #d9cbb3;
+ 	 text-align: center;     
+  }
+  
+   button:hover{
+    background-color:#d9cbb3;
+                color:black;
+  }
+       
+     
+  
   </style>  
 
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -118,15 +135,12 @@ $(function() {
    	<!-- ToolBar End /////////////////////////////////////-->
 
 
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin:15px; padding:15px;">
-스트리밍 방 업로드 하기
-</button>
+	<button type="button" data-toggle="modal" data-target="#myModal" style="margin:15px; padding:15px;">스트리밍 방 업로드 하기</button>   
+  
+   
+	<button type="button" name="refundbtn" data-toggle="modal" data-target="#myModal2" style="margin:15px; padding:15px;">환급하기</button>
 
-	<button type="button" class="btn btn-primary" name="refundbtn" data-toggle="modal" data-target="#myModal2" style="margin:15px; padding:15px;">
-		환급하기
-</button>
-
-
+ 
 
 
 
