@@ -230,9 +230,11 @@ public class BoardController {
 		
 		System.out.println("**********searchBoard : "+searchBoard);
 		
-		/*if(searchBoard.getLocal()=="") {
+		System.out.println("=====local : "+searchBoard.getLocal());
+		
+		if(searchBoard.getLocal()=="") {
 			searchBoard.setLocal(null);
-		}*/
+		}
 		
 		if(searchBoard.getCurrentPage()==0) {
 			searchBoard.setCurrentPage(1);
@@ -251,7 +253,7 @@ public class BoardController {
 		List<Local> list = boardService.getState();//추가
 		
 		ModelAndView modelAndView=new ModelAndView();
-		modelAndView.addObject("boardList", map.get("boardList"));
+		modelAndView.addObject("boardList", map.get("boardList"));//게시물 리스트
 		modelAndView.addObject("searchBoard", searchBoard);
 		modelAndView.addObject("list",list);//동네  리스트
 		modelAndView.setViewName("forward:/view/board/listBoard.jsp");

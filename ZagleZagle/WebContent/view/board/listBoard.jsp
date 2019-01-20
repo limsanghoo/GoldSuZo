@@ -39,10 +39,11 @@
     	float:right;
     }
     
-    #sessionTest{
-    	position: static;
-    	align-content: center;
+    #searchKeyword{
+    	position: absolute;
+    	left:45%;
     }
+
     
 	/* 지도 클릭 안되게 */
 	.disabled{
@@ -58,6 +59,10 @@ $(function(){
 	$("input[value='수정']").bind("click",function(){
 		var boardNo=$(this).data('update');
 		self.location="/board/updateBoard?boardNo="+boardNo;
+	})
+	
+	$("input[value='검색']").bind("click",function(){
+		$("form").attr("method" , "POST").attr("action" , "/board/listBoard?view=${param.view}").submit();
 	})
 
 });
@@ -141,7 +146,7 @@ function fncGetTown(){
 	
 	$("input[name='local']").val(local);
 			
-	$("form").attr("method" , "POST").attr("action" , "/board/listBoard?view=town").submit();
+	$("form").attr("method" , "POST").attr("action" , "/board/listBoard?view=${param.view}").submit();
 }
 
 
@@ -153,20 +158,31 @@ function fncGetTown(){
 
 <form name="listBoard">
 
+
+<!-- 지도로 보기 -->
 <c:if test="${user.userNo!=null}">
 <a href="/board/listMap">지도로 보기</a>
 </c:if>
 
+<!-- 세션 테스트 -->
 <a href="/board/testUser">
-<input id="sessionTest" type="button" value="세션 테스트">
+<input type="button" value="세션 테스트">
 </a>
 userNickname : ${user.userNickname}
 
+<!-- 검색 -->
+<span id="searchKeyword">
+<input type="text" name="searchKeyword" value="${! empty searchBoard.searchKeyword ? searchBoard.searchKeyword : ''}" />
+<!-- <input type="button" name="search" value="검색"/> -->
+</span>
+
+<!-- 게시물 등록 -->
 <c:if test="${user.userNo!=null}">
 <a href="/board/addBoard">
 <input type="button" value="게시물 등록" id="goAddBoard">
 </a>
 </c:if>
+
 
 <!-- 동네 선택 -->
 <div>

@@ -21,7 +21,7 @@ $(function(){
 		if(boardDetailText==""){
 			alert("내용을 입력해라");
 		}
-			//$("form").attr("method" , "POST").attr("enctype","multipart/form-data").attr("action" , "/board/addBoard").submit();
+			
 			$("form").attr("method" , "POST").attr("action" , "/board/updateBoard").submit();
 		
 	})
