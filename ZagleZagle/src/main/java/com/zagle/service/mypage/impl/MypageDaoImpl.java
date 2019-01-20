@@ -41,10 +41,10 @@ public class MypageDaoImpl implements MypageDao {
 		sqlSession.update("MypageMapper.updateAccount", user);
 	}
 	
-//	public User getAccountCheck(User user) throws Exception {
-//		
-//		return sqlSession.selectOne("MypageMapper.getAccountCheck",  user);
-//	}
+	public User checkAccount(User user) throws Exception {
+		
+		return sqlSession.selectOne("MypageMapper.checkAccount",  user);
+	}
 	
 	
 	public List<Comment> commentList(SearchMypage search) throws Exception {

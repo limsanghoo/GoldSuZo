@@ -1,50 +1,43 @@
 package com.zagle.web.mypage;
 
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
+
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
+
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.sql.Date;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.http.HttpResponse;
+
 import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
+
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.client.utils.DateUtils;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
+
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
+
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
+
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
@@ -76,7 +69,7 @@ public class MypageRestController {
 		
 		System.out.println("인증 코드 요청 시작");
 		
-		HttpClient httpClient = new DefaultHttpClient();
+		//HttpClient httpClient = new DefaultHttpClient();
 		final String RequestUrl = "https://testapi.open-platform.or.kr/oauth/2.0/token";
 		final String client_id ="l7xx60c67b59db9e4130aad0b4d113a9e890";
 		final  String client_secret="1efe286e56a94d85a44d7c0d7d19a144";
@@ -89,14 +82,14 @@ public class MypageRestController {
 	        params.add("scope", "oob");
 		
 
-			//HttpPost httpPost = new HttpPost(RequestUrl);
+			HttpPost httpPost = new HttpPost(RequestUrl);
 			//httpPost.setHeader("Accept", "application/json");
 			//httpPost.setHeader("Content-Type", "application/json");
 	
-			//httpPost.addHeader("Content-Type", "x-www-form-urlencoded; charset=UTF-8");
+		httpPost.addHeader("Content-Type", "x-www-form-urlencoded; charset=UTF-8");
 	       HttpHeaders headers = new HttpHeaders();
-	       //headers.add("Accept", "application/json");
-	       headers.add("Content-Type",MediaType.APPLICATION_FORM_URLENCODED_VALUE +";charset=UTF-8");
+	       headers.add("Accept", "application/json");
+	       //headers.add("Content-Type",MediaType.APPLICATION_FORM_URLENCODED_VALUE +";charset=UTF-8");
 	    
 	       HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 	        Map response1 = restTemplate.postForObject(new URI(RequestUrl), request, Map.class);
@@ -106,66 +99,6 @@ public class MypageRestController {
 	       
 	       session.setAttribute("BankAccessToken", response1.get("access_token"));
 	       
-	    	
-
-		
-	        
-		/*
-		try {
-		
-		String client_id ="l7xx60c67b59db9e4130aad0b4d113a9e890";
-		String callBackURL ="http://localhost:8080/mypage/bankCallback";
-		
-		
-		String RequestURL ="https://testapi.open-platform.or.kr/oauth/2.0/authorize2";
-		RequestURL += "?response_type=code";
-		RequestURL += "&client_id="+client_id;
-		RequestURL += "&redirect_uri="+callBackURL;
-		RequestURL += "&scope=login inquiry";
-		RequestURL += "&client_info=ZagleZagle";
-		RequestURL += "&auth_type=0";
-		
-		String encodedurl = URLEncoder.encode(RequestURL,"UTF-8");
-		
-		
-	
-
-		HttpGet httpGet = new HttpGet(encodedurl);
-		httpGet.setHeader("Accept", "application/json");
-		httpGet.setHeader("Content-Type", "x-www-form-urlencoded; charset=UTF-8");
-		
-		URL url = new URL(RequestURL);			
-		  HttpURLConnection con = (HttpURLConnection)url.openConnection();
-		  con.setRequestMethod("GET");
-		
-       System.out.println("\nSending 'GET' request to URL : " + RequestURL);
-      
-     
-       BufferedReader br;
-       int responseCode = con.getResponseCode();
-       if(responseCode==200) { // 정상 호출
-              br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-          } else {  // 에러 발생
-              br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-          }
-          System.out.println("responseCode :"+responseCode);
-       
-          String inputLine;
-          StringBuffer response = new StringBuffer();
-          while ((inputLine = br.readLine()) != null) {
-              response.append(inputLine);
-          }
-          br.close();
-          System.out.println(response.toString());
-
-
-		} catch (UnsupportedEncodingException e) {
-		    e.printStackTrace();
-		}
-		
-		
-	         
-		*/
 	        ModelAndView modelAndView = new ModelAndView();
 	        modelAndView.setViewName("confirmName");
 	        
@@ -258,9 +191,9 @@ public class MypageRestController {
        
        System.out.println("br 값"+br);
        System.out.println("parse값 확인 :"+json1);
-       Object realName = json1.get("account_holder_name");
+       Object userName = json1.get("account_holder_name");
        
-       System.out.println(realName);
+       System.out.println(userName);
        
        String inputLine;
        while((inputLine = br.readLine()) != null) {
@@ -270,17 +203,14 @@ public class MypageRestController {
        osw.close();
        br.close();
        
-    
+  
        
-     
-       
-       
-     
+      
        ModelAndView modelAndView = new ModelAndView();
        
        
-       modelAndView.addObject("realName", (String)realName);
-       modelAndView.setViewName("/view/mypage/addAccount.jsp");
+       //modelAndView.addObject("realName", realName);
+       modelAndView.setViewName("checkAccount?userName="+userName);
      
        return modelAndView;
  	}

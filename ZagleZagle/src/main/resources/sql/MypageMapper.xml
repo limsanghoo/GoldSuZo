@@ -30,7 +30,7 @@
 	 	account = #{account:VARCHAR} ,
 	 	bank_name = #{bankName:VARCHAR}
 	 	</set>
-	 	WHERE user_no =#{userNo}
+	 	WHERE sns_no =#{snsNo}
 	
 	</update>
 	

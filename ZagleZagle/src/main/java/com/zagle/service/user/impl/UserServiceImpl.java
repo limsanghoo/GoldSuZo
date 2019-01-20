@@ -35,6 +35,9 @@ public class UserServiceImpl implements UserService {
 	public User getUser2(String userNo) throws Exception {
 		return userDao.getUser2(userNo);
 	}
+	public User getUser3(String userName) throws Exception {
+		return userDao.getUser3(userName);
+	}
 	
 	public void updateUser(User user) throws Exception {
 		userDao.updateUser(user);

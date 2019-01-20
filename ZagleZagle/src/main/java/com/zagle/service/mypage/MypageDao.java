@@ -29,7 +29,7 @@ public interface MypageDao {
 	
 	public List<Board> MyBoardList(SearchMypage search) throws Exception;
 	
-	//public User getAccountCheck(User user) throws Exception;
+	public User checkAccount(User user) throws Exception;
 	
 	//public int getTotalCount(Search search) throws Exception ;
 }
