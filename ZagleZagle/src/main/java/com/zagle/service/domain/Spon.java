@@ -4,7 +4,8 @@ public class Spon {
 
 	private String userNo;
 	private String streamerNo;
-	private String price;
+	private int price;
+	private String paymentNo;
 	public String getUserNo() {
 		return userNo;
 	}
@@ -17,16 +18,26 @@ public class Spon {
 	public void setStreamerNo(String streamerNo) {
 		this.streamerNo = streamerNo;
 	}
-	public String getPrice() {
+	public int getPrice() {
 		return price;
 	}
-	public void setPrice(String price) {
+	public void setPrice(int price) {
 		this.price = price;
+	}
+	public String getPaymentNo() {
+		return paymentNo;
+	}
+	public void setPaymentNo(String paymentNo) {
+		this.paymentNo = paymentNo;
 	}
 	@Override
 	public String toString() {
-		return "Spon [userNo=" + userNo + ", streamerNo=" + streamerNo + ", price=" + price + "]";
+		return "Spon [userNo=" + userNo + ", streamerNo=" + streamerNo + ", price=" + price + ", paymentNo=" + paymentNo
+				+ "]";
 	}
+
+	
+	
 	
 	
 }

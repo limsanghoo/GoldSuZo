@@ -19,6 +19,8 @@
 		<typeAlias alias="stream" type="com.zagle.service.domain.Stream" />
 		<typeAlias alias="search" type="com.zagle.common.Search" />
 		<typeAlias alias="local" type="com.zagle.service.domain.Local" />
+		<typeAlias alias="refund" type="com.zagle.service.domain.Refund" />
+		<typeAlias alias="spon" type="com.zagle.service.domain.Spon" />
 	</typeAliases>
 	
 	 <!-- SQL Definition :: file include -->
@@ -28,6 +30,8 @@
 		<mapper resource="sql/StreamMapper.xml"/>
 		<mapper resource="sql/MapMapper.xml"/>
 		<mapper resource="sql/MypageMapper.xml"/>
+		<mapper resource="sql/RefundMapper.xml"/>
+		<mapper resource="sql/SponMapper.xml"/>
 	</mappers>
 
 </configuration>

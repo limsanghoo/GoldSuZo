@@ -16,7 +16,11 @@
     cursor: pointer;
     padding: 5px;
   }
-  </style>
+  body{
+  background-image: url("https://images.pexels.com/photos/1022921/pexels-photo-1022921.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  }
+  
+  </style>  
 
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -54,8 +58,8 @@ $(function() {
 		   alert("전송됩니다~");
 		   window.open("", "popup_window", "width=1450, height=900, scrollbars=no");
 		   addStream();
-	 
 	});
+	
 	$('span[class="close"]').on("click", function() {
 		 var span = document.getElementsByClassName("close")[0];  
 	            modal.style.display = "none";
@@ -78,6 +82,30 @@ $(function() {
 
 	    	alert('ddd');	
 	    });
+	   
+	   $('button[name="refundbtn"]').on('click',function(){
+
+	    	alert('안냥');	
+	    	 $.ajax({
+	             url : '/stream/json/listSpon', 
+	             method : 'get', 
+	             headers: {
+	   	            "Accept": "application/json",
+	   	            "Content-Type": "application/json"
+	   	        }, 
+	             success : function (data,status) {
+	                 alert("보내기 성공");
+	            alert(JSON.stringify(data)); 
+	            //    alert(stringify(data));    
+	            //   alert(data.list.STREAMER_NO);     
+	                alert(status);  
+	             }, 
+	             error : function (err) {
+	             	alert('실패 ㅠㅠ');
+	                 }
+	         });
+	    	
+	    });
   
 	 
 });  
@@ -93,7 +121,17 @@ $(function() {
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin:15px; padding:15px;">
 스트리밍 방 업로드 하기
 </button>
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+	<button type="button" class="btn btn-primary" name="refundbtn" data-toggle="modal" data-target="#myModal2" style="margin:15px; padding:15px;">
+		환급하기
+</button>
+
+
+
+
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -119,9 +157,48 @@ $(function() {
       </form>
     </div>
   </div></div>	
+  
+
+	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+        <h4 class="modal-title" id="myModalLabel">환급하기</h4>
+      </div>
+      <form id="addStreamForm" method="post" target="popup_window" enctype="multipart/form-data">
+      <div class="modal-body">
+       			<label for="txt-user-text" class="col-form-label">후원받은 총 금액</label><br/> 
+       			   <div class="refund" id="refundPrice"></div><br/>
+ 				
+       			<label for="txt-user-text" class="col-form-label">환급가능한 총 금액</label> <br/> 
+       			   <div class="refund" id="refundPrice"></div>
+ 			<div></div>
+       </div>  
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-default" data-dismiss="modal" id="refund">환급하기</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+      </div> 
+      </form>
+    </div>
+  </div></div>	
 		
 	 
 		
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
 		
 <div class="row" id="list">
 <c:set var="i" value="0" />
