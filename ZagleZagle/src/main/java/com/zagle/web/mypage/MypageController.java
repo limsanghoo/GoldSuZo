@@ -5,12 +5,14 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,6 +55,8 @@ public class MypageController {
 		
 		User user = (User) session.getAttribute("user");
 		
+		System.out.println("addAccount User info :"+user);
+		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject(user);
 		modelAndView.setViewName("forward:/view/mypage/addAccount.jsp");
@@ -64,8 +68,10 @@ public class MypageController {
 	public ModelAndView addAccount( @ModelAttribute("user") User user) throws Exception {
 		
 		System.out.println("/mypage/addAccount : POST");
+	 
 	    
-	mypageService.addAccount(user);
+	    
+		mypageService.addAccount(user);
 		
 	   ModelAndView modelAndView = new ModelAndView();
 	   modelAndView.addObject("accUser", user);
@@ -90,15 +96,12 @@ public class MypageController {
 		
 	}
 	@RequestMapping(value="updateAccount", method=RequestMethod.POST)
-	public ModelAndView updateAccount(@ModelAttribute("user") User user) throws Exception {
+	public ModelAndView updateAccount(@RequestParam("snsNo") String snsNo, @ModelAttribute("user") User user) throws Exception {
 		
 		System.out.println("/mypage/updateAccount : POST");
-		System.out.println(user);
-	
 		
-		System.out.println(user.getUserNo());
-				
 		mypageService.addAccount(user);
+
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject(user);
@@ -143,6 +146,8 @@ public class MypageController {
 	public ModelAndView listMyBoard(@ModelAttribute("SearchMypage") SearchMypage search, HttpServletRequest request, HttpSession session)throws Exception {
 		
 		System.out.println("/mypage/listMyboard : GET/POST");
+		
+		
 		
 		User user = (User) session.getAttribute("user");
 		search.setMyUser(user);
@@ -202,4 +207,28 @@ public class MypageController {
 		
 		return modelAndView;
 	}
+	@RequestMapping(value="checkAccount", method=RequestMethod.POST)
+	public ModelAndView checkAccount(HttpServletRequest req) throws Exception {
+		
+		System.out.println("=============계좌 실명 인증 마지막 단계===================");
+		
+		String userName = (String) req.getParameter("userName");
+		
+		System.out.println("리얼 이름 :"+userName);
+		
+		boolean result = mypageService.checkAccount(userName);
+		
+		System.out.println("result 콜백 확인"+result);
+		
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("result", new Boolean(result));
+		modelAndView.setViewName("forward:/view/mypage/nameCheck.jsp");
+		
+		return modelAndView;
+		
+	}
+		
+	
+	
 }

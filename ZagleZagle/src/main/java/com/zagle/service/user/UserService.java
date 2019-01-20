@@ -13,7 +13,7 @@ public interface UserService {
 
 	public User getUser2(String userNo) throws Exception;
 	
-	
+	public User getUser3(String realName) throws Exception;
 
 	public void updateUser(User user) throws Exception;
 

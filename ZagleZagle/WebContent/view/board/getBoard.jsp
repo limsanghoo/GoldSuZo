@@ -29,9 +29,6 @@
 
 <br/>
 
-<div>
-${board.coord}
-</div>
 
 <div>
 	<c:if test="${board.photo1 !=null}">
@@ -46,6 +43,10 @@ ${board.coord}
 	<c:if test="${board.photo3 !=null}">
 	<img src="${board.photo3}" style="width: 500px"/>
 	</c:if>
+</div>
+
+<div>
+${board.address}
 </div>
 
 <div>

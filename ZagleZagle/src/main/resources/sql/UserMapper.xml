@@ -57,6 +57,12 @@
 		WHERE u.user_no=g.user_no and u.user_no = #{user.userNo}
 	 </select>
 	 
+	 <select id="getUser3" parameterType="string" resultMap="userSelectMap">
+	 	SELECT *
+	 	FROM users
+	 	WHERE user_name = #{userName}
+	 </select>
+	 
 	 <!-- SQL : UPDATE -->
 	 <update	id="updateUser"	parameterType="user" >
 	   	UPDATE users
