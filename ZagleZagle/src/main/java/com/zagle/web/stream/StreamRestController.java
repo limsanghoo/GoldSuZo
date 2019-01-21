@@ -204,8 +204,8 @@ public class StreamRestController {
 		Refund refund = new Refund();
 		refund.setAccount(streamer.getAccount());
 		refund.setBankname(streamer.getBankName());
-		refund.setStreamTotalPrice(spon.getPrice());
-		refund.setUserNickname(user.getUserNickname());
+		refund.setPrice(spon.getPrice()); 
+		refund.setStreamerNickname(user.getUserNickname());
 		
 	 	ModelAndView modelAndView = new ModelAndView(); 
 		
@@ -216,18 +216,19 @@ public class StreamRestController {
 	@RequestMapping(value="listSpon", method = RequestMethod.GET)   
 	@ResponseBody 
 	public Map<String,Object>listSpon(HttpSession session) throws Exception{
-		 
-		
+	
 		//User user = (User)session.getAttribute("user");
 		User user = new User();
 		user.setUserNo("US10001");
 		Map<String,Object> map= new HashMap();
 		List<String>list = streamService.listSpon(user.getUserNo());
-		System.out.println(list);
-		System.out.println(list.get(2));
+		System.out.println(list); 
 		//int price = Integer.parseInt(list.get(2));
 		//int realprice = (int) (price * 0.3);
 		//System.out.println(realprice); 
+		int price=0;
+	
+	 
 		map.put("list",list);
 	 	ModelAndView modelAndView = new ModelAndView(); 
 		modelAndView.addObject("list", list);

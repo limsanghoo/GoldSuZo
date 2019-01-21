@@ -5,10 +5,10 @@ import java.util.Date;
 public class Refund {
 
 	private String refundNo;
-	private String userNo;
-	private String userNickname;
+	private String streamerNo;
+	private String streamerNickname;
 	private String account;
-	private int streamTotalPrice;
+	private int price;
 	private String bankname;
 	private String checkRefund;
 	private Date refundDate;
@@ -18,17 +18,17 @@ public class Refund {
 	public void setRefundNo(String refundNo) {
 		this.refundNo = refundNo;
 	}
-	public String getUserNo() {
-		return userNo;
+	public String getStreamerNo() {
+		return streamerNo;
 	}
-	public void setUserNo(String userNo) {
-		this.userNo = userNo;
+	public void setStreamerNo(String streamerNo) {
+		this.streamerNo = streamerNo;
 	}
-	public String getUserNickname() {
-		return userNickname;
+	public String getStreamerNickname() {
+		return streamerNickname;
 	}
-	public void setUserNickname(String userNickname) {
-		this.userNickname = userNickname;
+	public void setStreamerNickname(String streamerNickname) {
+		this.streamerNickname = streamerNickname;
 	}
 	public String getAccount() {
 		return account;
@@ -36,11 +36,11 @@ public class Refund {
 	public void setAccount(String account) {
 		this.account = account;
 	}
-	public int getStreamTotalPrice() {
-		return streamTotalPrice;
+	public int getPrice() {
+		return price;
 	}
-	public void setStreamTotalPrice(int streamTotalPrice) {
-		this.streamTotalPrice = streamTotalPrice;
+	public void setPrice(int price) {
+		this.price = price;
 	}
 	public String getBankname() {
 		return bankname;
@@ -62,10 +62,15 @@ public class Refund {
 	}
 	@Override
 	public String toString() {
-		return "Refund [refundNo=" + refundNo + ", userNo=" + userNo + ", userNickname=" + userNickname + ", account="
-				+ account + ", streamTotalPrice=" + streamTotalPrice + ", bankname=" + bankname + ", checkRefund="
+		return "Refund [refundNo=" + refundNo + ", streamerNo=" + streamerNo + ", streamerNickname=" + streamerNickname
+				+ ", account=" + account + ", price=" + price + ", bankname=" + bankname + ", checkRefund="
 				+ checkRefund + ", refundDate=" + refundDate + "]";
 	}
+
+	
+	
+	
+	
 	
 	
 }

@@ -10,17 +10,37 @@
 <head>
 <title>스트리밍 목록조회</title>
 <style>
-  #color {
-    background: yellow;
-    font-weight: bold;
-    cursor: pointer;
-    padding: 5px;
-  }
+ 
   body{
   background-image: url("https://images.pexels.com/photos/1022921/pexels-photo-1022921.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
-  }
-  
+  } 
+  @import url(https://fonts.googleapis.com/css?family=Patrick+Hand+SC);
+*{
+  box-sizing:border-box;
+}
+ 
+    button{
+      align-self:center;
+      background:transparent;
+      padding:1rem 1rem;
+      margin:0 1rem;
+      transition:all .5s ease;
+      color:#5D3B3B;     
+      font-size:5rem;  
+      letter-spacing:1px;
+      outline:none;
+      box-shadow: 20px 38px 34px -26px hsla(0,0%,0%,.2);
+      border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+   } 
+       button:hover{
+         box-shadow:2px 8px 4px -6px hsla(0,0%,0%,.3);
+      } 
+      button.lined.thick{
+         border:solid 6px #41403E;        
+      }  
+ 
   </style>  
+
 
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -43,6 +63,11 @@ function addStream(){
 	
     $("#addStreamForm").attr("method", "POST").attr("action", "/stream/addStream").submit();
  }
+		
+function addRefund(){
+		
+	    $("#addStreamForm").attr("method", "POST").attr("action", "/stream/addRefund").submit();
+}
  
 $(function() {
 	var modal = document.getElementById('myModal');
@@ -60,11 +85,19 @@ $(function() {
 		   addStream();
 	});
 	
+	$("#refund").on("click", function() {
+		   alert("환급합니다~");
+		   addRefund();
+	});
+	
+	
 	$('span[class="close"]').on("click", function() {
 		 var span = document.getElementsByClassName("close")[0];  
 	            modal.style.display = "none";
 	    
 	}); 
+	
+	
 	
 	$("#upload2").on("click", function() {
 		
@@ -83,9 +116,7 @@ $(function() {
 	    	alert('ddd');	
 	    });
 	   
-	   $('button[name="refundbtn"]').on('click',function(){
-
-	    	alert('안냥');	
+	   $('button[name="refundbtn"]').on('click',function(){ 
 	    	 $.ajax({
 	             url : '/stream/json/listSpon', 
 	             method : 'get', 
@@ -93,13 +124,20 @@ $(function() {
 	   	            "Accept": "application/json",
 	   	            "Content-Type": "application/json"
 	   	        }, 
-	             success : function (data,status) {
-	                 alert("보내기 성공");
-	            alert(JSON.stringify(data)); 
-	            //    alert(stringify(data));    
-	            //   alert(data.list.STREAMER_NO);     
-	                alert(status);  
-	             }, 
+	             success : function (JSONData,status) {
+	              //   alert("보내기 성공");
+	          //    alert(JSON.stringify(JSONData.list)); 
+	         //   alert(JSON.stringify(JSONData.list.STREAMERNO)); 
+	          	//alert(JSONData.list);       
+	        		// 	alert(JSONData.list.STREAMERNO);   
+	           $.each(JSONData.list,function(i,v){
+	            	//alert(v);   
+	            $('#streamerNo').text(v.STREAMERNO);
+	            $('#streamerNickname').text(v.USERNAME);
+	            $('#price').text(v.POSSIBLEPRICE);
+	            $('#totalPrice').text(v.TOTALPRICE);   
+	          });   	                    
+	             },  
 	             error : function (err) {
 	             	alert('실패 ㅠㅠ');
 	                 }
@@ -118,18 +156,14 @@ $(function() {
    	<!-- ToolBar End /////////////////////////////////////-->
 
 
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin:15px; padding:15px;">
-스트리밍 방 업로드 하기
-</button>
+		<!--<button type="button" data-toggle="modal" data-target="#myModal" style="margin:15px; padding:15px;">스트리밍 방 업로드 하기</button>   -->
+   
+   
+  <button class='lined thick' data-toggle="modal" data-target="#myModal" style="margin:15px; padding:15px;">스트리밍방 업로드 하기</button>
 
-	<button type="button" class="btn btn-primary" name="refundbtn" data-toggle="modal" data-target="#myModal2" style="margin:15px; padding:15px;">
-		환급하기
-</button>
-
-
-
-
-
+		<!--<button type="button" name="refundbtn" data-toggle="modal" data-target="#myModal2" style="margin:15px; padding:15px;">환급하기</button>  -->
+   <button class='lined thick'  name="refundbtn" data-toggle="modal" data-target="#myModal2" style="margin:15px; padding:15px;">환급하기</button>
+    
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -168,11 +202,19 @@ $(function() {
       </div>
       <form id="addStreamForm" method="post" target="popup_window" enctype="multipart/form-data">
       <div class="modal-body">
+      
+      			<label for="txt-user-text" class="col-form-label">유저No</label><br/> 
+       			   <div class="refund" id="streamerNo" name="streamerNo"></div><br/>
+       			   
+      			<label for="txt-user-text" class="col-form-label">닉네임</label><br/> 
+       			   <div class="refund" id="streamerNickname" name="streamerNickname"></div><br/>
+      
+      
        			<label for="txt-user-text" class="col-form-label">후원받은 총 금액</label><br/> 
-       			   <div class="refund" id="refundPrice"></div><br/>
+       			   <div class="refund" id="totalPrice" name="totalPrice"></div><br/>
  				
        			<label for="txt-user-text" class="col-form-label">환급가능한 총 금액</label> <br/> 
-       			   <div class="refund" id="refundPrice"></div>
+       			   <div class="refund" id="price" name="price"></div> 
  			<div></div>
        </div>  
       <div class="modal-footer">
