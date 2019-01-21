@@ -166,7 +166,7 @@ public class UserRestController {
 		        return modelAndView;
 		    }
 		@RequestMapping(value="checkDuplication", 	method= {RequestMethod.GET, RequestMethod.POST})
-		public ModelAndView checkDuplication(HttpSession session, Model model) throws Exception {
+		public ModelAndView checkDuplication(HttpSession session) throws Exception {
 			
 			System.out.println("/user/checkDuplication :POST");
 			
@@ -176,8 +176,8 @@ public class UserRestController {
 			
 			boolean result = userService.checkDuplication(snsNo);
 			
-			model.addAttribute("result", new Boolean(result));
-			model.addAttribute("snsNo", snsNo);
+			//model.addAttribute("result", new Boolean(result));
+			//model.addAttribute("snsNo", snsNo);
 			
 			if(result==false) {
 				ModelAndView modelAndView = new ModelAndView();
@@ -206,9 +206,9 @@ public class UserRestController {
 			//userService.addActiveScore(user);
 			
 			
-			modelAndView.addObject("result", new Boolean(result));
-			modelAndView.addObject("user", user);
-			modelAndView.setViewName("/view/user/model.jsp");
+			//modelAndView.addObject("result", new Boolean(result));
+			//modelAndView.addObject("user", user);
+			modelAndView.setViewName("redirect:/board/listBoard");
 			
 			return modelAndView;
 		}

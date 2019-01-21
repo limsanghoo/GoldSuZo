@@ -111,7 +111,7 @@ public class MypageServiceTest {
 		//System.out.println(totalCount);
 		
 	}
-	@Test
+	//@Test
 	public void testLikeList() throws  Exception{
 		
 		SearchMypage search = new SearchMypage();
@@ -129,7 +129,7 @@ public class MypageServiceTest {
 		System.out.println(list);
 		System.out.println(list.size());
 	}
-	//@Test
+	@Test
 	public void testListScrap() throws Exception {
 		
 		SearchMypage search = new SearchMypage();
@@ -152,7 +152,7 @@ public class MypageServiceTest {
 		
 		System.out.println("===============MYBOARD============");
 		
-		User user  = userService.getUser2("US10003");
+		User user  = userService.getUser2("US10004");
 		search.setMyUser(user);
 		
 		Map<String, Object> map = mypageService.listMyBoard(search);
