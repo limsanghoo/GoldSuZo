@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.zagle.common.Page;
 import com.zagle.common.Search;
+import com.zagle.service.board.BoardService;
 import com.zagle.service.domain.SearchMypage;
 import com.zagle.service.domain.User;
 import com.zagle.service.mypage.MypageService;
@@ -38,6 +39,9 @@ public class MypageController {
 	@Autowired
 	@Qualifier("userServiceImpl")
 	private UserService userService;
+	@Autowired
+	@Qualifier("boardServiceImpl")
+	private BoardService boardService;
 	
 	public MypageController() {
 		System.out.println(this.getClass());
@@ -111,7 +115,7 @@ public class MypageController {
 	}
 	
 	@RequestMapping( value="listComment")
-	public ModelAndView listComment(@ModelAttribute("SearchMypage") SearchMypage search, HttpSession session, HttpServletRequest request)throws Exception {
+	public ModelAndView listComment(@ModelAttribute("SearchMypage") SearchMypage searchMypage, HttpSession session, HttpServletRequest request)throws Exception {
 		
 		System.out.println("/mypage/listComment : GET/POST");
 		
@@ -122,12 +126,12 @@ public class MypageController {
 		
 		User user = (User) session.getAttribute("user");
 		
-		search.setMyUser(user);
-				
+		 searchMypage.setMyUser(user);
+		System.out.println("유저 누군지 확인 :"+ searchMypage);		
 		
-		Map<String, Object> map = mypageService.listComment(search);
+		Map<String, Object> map = mypageService.listComment(searchMypage);
 		
-		
+		System.out.println(map);
 		
 //		Page resultPage = new Page(search.getCurrentPage(),((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 //		System.out.println(resultPage);
@@ -135,7 +139,7 @@ public class MypageController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("list", map.get("list"));
 //		modelAndView.addObject("resultPage", resultPage);
-		modelAndView.addObject("search", search);
+		modelAndView.addObject(" searchMypage",  searchMypage);
 		modelAndView.setViewName("forward:/view/mypage/listComment.jsp");
 	
 	
@@ -143,14 +147,14 @@ public class MypageController {
 	
 	}
 	@RequestMapping( value="listMyBoard")
-	public ModelAndView listMyBoard(@ModelAttribute("SearchMypage") SearchMypage search, HttpServletRequest request, HttpSession session)throws Exception {
+	public ModelAndView listMyBoard(@ModelAttribute("SearchMypage") SearchMypage searchMypage, HttpServletRequest request, HttpSession session)throws Exception {
 		
 		System.out.println("/mypage/listMyboard : GET/POST");
 		
 		
 		
 		User user = (User) session.getAttribute("user");
-		search.setMyUser(user);
+		searchMypage.setMyUser(user);
 		
 		
 		System.out.println();
@@ -161,32 +165,38 @@ public class MypageController {
 //		search.setPageSize(pageSize);
 		
 		
-		Map<String, Object> map = mypageService.listMyBoard(search);
+		Map<String, Object> map = mypageService.listMyBoard(searchMypage);
 //		Page resultPage = new Page(search.getCurrentPage(),((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 //		System.out.println(resultPage);
 //		
+		System.out.println(map);
+		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("list", map.get("list"));
+		modelAndView.addObject("myBoardlist", map.get("myBoardlist"));
 //		modelAndView.addObject("resultPage", resultPage);
-		modelAndView.addObject("search", search);
+		modelAndView.addObject("searchMypage", searchMypage);
 		modelAndView.setViewName("forward:/view/mypage/listMyBoard.jsp");
 	
 	
 		return modelAndView;
 	}
 	@RequestMapping(value="listScrap")
-	public ModelAndView listScrap(@ModelAttribute("SearchMypage") SearchMypage search, HttpSession session) throws Exception {
+	public ModelAndView listScrap(@ModelAttribute("SearchMypage") SearchMypage searchMypage, HttpSession session) throws Exception {
 		
 		System.out.println("/mypage/listScrap : GET/POST");
 		User user = (User) session.getAttribute("user");
-		search.setMyUser(user);
 		
-		Map<String, Object> map = mypageService.listScrap(search);
+		System.out.println("user 확인 :"+user);
 		
+		searchMypage.setMyUser(user);
+	
+		
+		Map<String, Object> map = mypageService.listScrap(searchMypage);
+	
 				
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("list", map.get("list"));
-		modelAndView.addObject("search", search);
+		modelAndView.addObject("listScrap", map.get("list"));
+		modelAndView.addObject("searchMypage", searchMypage);
 		modelAndView.setViewName("forward:/view/mypage/listScrap.jsp");
 		
 		return modelAndView;

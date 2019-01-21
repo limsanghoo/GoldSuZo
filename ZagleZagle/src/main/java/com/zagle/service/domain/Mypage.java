@@ -25,8 +25,8 @@ public class Mypage {
 	public Comment getComment() {
 		return comment;
 	}
-	public void setCommnet(Comment commnet) {
-		this.comment = commnet;
+	public void setCommnet(Comment comment) {
+		this.comment = comment;
 	}
 	public Like getLike() {
 		return like;
@@ -40,11 +40,12 @@ public class Mypage {
 	public void setScrap(Scrap scrap) {
 		this.scrap = scrap;
 	}
-	
-	
 	@Override
 	public String toString() {
-		return "Mypage [user=" + user + ", commnet=" + comment + ", like=" + like + ", scrap=" + scrap + "]";
+		return "Mypage [user=" + user + ", comment=" + comment + ", like=" + like + ", scrap=" + scrap + ", board="
+				+ board + "]";
 	}
 	
+	
+
 }

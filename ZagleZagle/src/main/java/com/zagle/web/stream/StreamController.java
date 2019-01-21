@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -139,9 +140,31 @@ public class StreamController {
 	
 	
 	@RequestMapping(value="addRefund",method=RequestMethod.POST)
-	public void addRefund(@ModelAttribute("refund")Refund refund,@RequestParam("streamerNo")String streamerNo,HttpSession session) throws Exception{
-		
+	public void addRefund(@ModelAttribute("refund")Refund refund) throws Exception{
+		User user = userService.getUser2(refund.getStreamerNo());
+		refund.setAccount(user.getAccount());
+		refund.setBankname(user.getBankName());
+		streamService.addRefund(refund);
 		System.out.println(refund);
+	}
+	
+	@RequestMapping(value="listRefund",method=RequestMethod.GET)
+	public ModelAndView listRefund(HttpSession session) throws Exception{
+		System.out.println("listRefund==========");
+	//	User user = session.getAttribute("user");
+		SearchStream searchStream = new SearchStream();
+		searchStream.setCurrentPage(1);
+		searchStream.setPageSize(3);
+		searchStream.setSearchUserNo("US10001");
+		System.out.println("왜 안바뀌지????"+searchStream);
+		System.out.println(searchStream.getEndRowNum());
+		System.out.println(searchStream.getStartRowNum());
+		Map<String,Object> map = streamService.listRefund(searchStream);
+		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.addObject("list",map.get("list"));
+		modelAndView.addObject("count",map.get("count"));
+		modelAndView.setViewName("forward:/view/stream/listRefund.jsp");	
+	return modelAndView;
 	}
 	
 	

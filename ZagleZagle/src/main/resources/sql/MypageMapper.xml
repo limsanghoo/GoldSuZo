@@ -51,14 +51,14 @@
 	 ORDER BY c.comment_reg_date DESC 
 	 </select>
 	 
-	 <select id="listLike"	parameterType="user" resultMap="mypageSelectMap">
+	 <select id="listLike"	parameterType="com.zagle.service.domain.SearchMypage" resultMap="mypageSelectMap">
 	 SELECT*
 	 FROM likes
 	 WHERE user_no = #{myUser.userNo:VARCHAR} and check_like = 1
 	 ORDER BY like_no
 	 </select>
 	 
-	 <select id="listScrap" parameterType="user" resultMap="mypageSelectMap">
+	 <select id="listScrap" parameterType="com.zagle.service.domain.SearchMypage" resultMap="mypageSelectMap">
 	 SELECT *
 	 FROM scrap
 	 WHERE user_no = #{myUser.userNo:VARCHAR} and check_scrap = 1

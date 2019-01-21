@@ -4,39 +4,41 @@
 		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="StreamMapper">
+<mapper namespace="RefundMapper">
  	
  	
 	<resultMap id="refundSelectMap" type="refund">
-		<result property="refundNo" 			column="refund_no" 			jdbcType="VARCHAR"/>
-		<result property="userNo"			    column="user_no" 		    jdbcType="VARCHAR" />
-		<result property="userNickname"			column="user_nickname" 		jdbcType="VARCHAR" />
-		<result property="streamTotalPrice"   	column="refund_price" 		jdbcType="NUMERIC" />
-		<result property="refundDate" 			column="refund_date"  		jdbcType="DATE" />
-		<result property="bankname" 			column="bank_name" 			jdbcType="VARCHAR" />
-		<result property="account" 				column="account" 			jdbcType="VARCHAR" />
-		<result property="checkRefund" 			column="check_refund" 		jdbcType="VARCHAR" />
+		<result property="refundNo" 				column="refund_no" 			jdbcType="VARCHAR"/>
+		<result property="streamerNo"			    column="user_no" 		    jdbcType="VARCHAR" />
+		<result property="streamerNickname"			column="user_nickname" 		jdbcType="VARCHAR" />
+		<result property="price"   					column="refund_price" 		jdbcType="NUMERIC" />
+		<result property="refundDate" 				column="refund_date"  		jdbcType="DATE" />
+		<result property="bankname" 				column="bank_name" 			jdbcType="VARCHAR" />
+		<result property="account" 					column="account" 			jdbcType="VARCHAR" />
+		<result property="checkRefund" 				column="check_refund" 		jdbcType="VARCHAR" />
 	</resultMap>
-	
+	 
 	<!-- SQL : INSERT -->
 	<insert 	id="addRefund"		parameterType="refund" >
 	 INSERT INTO refund(refund_no,user_no,user_nickname,refund_price,refund_date,bank_name,account,check_refund)
-	 VALUES('RE'||seq_re.nextval,#{userNo},#{userNickname},#{streamTotalPrice},#{refundDate},#{bankname},#{account},'0')	
+	 VALUES('RE'||seq_re.nextval,#{streamerNo},#{streamerNickname},#{price},sysdate,#{bankname},#{account},'0')	
 	</insert>
 	 	 
-	 <select id="listRefund"	parameterType="refund" resultMap="refundSelectMap">
-	 SELECT*
-	 FROM refund
-	 WHERE user_no = #{userNo}
+	 	 
+	 <select id="listRefund"	parameterType="com.zagle.service.domain.SearchStream" resultMap="refundSelectMap">
+	 SELECT *
+	 FROM ( SELECT inner_table.* , ROWNUM AS row_seq
+	 FROM (SELECT * from refund
+	 
+	 <if test= "searchUserNo != 'US10000'">	
+	 WHERE user_no = #{searchUserNo} 
+	 </if>
+	 	 ) inner_table
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
-	 
-	 
-	  <select id="listRefund2"	parameterType="refund" resultMap="refundSelectMap">
-	 SELECT*
-	 FROM refund
-	 order by check_refund
-	 </select>
-	 
+	  
+
 	  <update	id="updateRefund"	parameterType="refund">
 	   	UPDATE refund
 	   	<set>
@@ -45,4 +47,11 @@
 	   	WHERE refund_no = #{refundNo}
 	 </update>
 	 
+	 <select  id="getTotalCount"  parameterType="com.zagle.service.domain.SearchStream"	 resultType="int">
+	  SELECT count(*) 
+	  FROM( select * from refund					
+		 <if test= "searchUserNo != 'US10000'">		
+			WHERE user_no = #{searchUserNo}
+						</if> ) countTable						
+	 </select> 
 </mapper>
