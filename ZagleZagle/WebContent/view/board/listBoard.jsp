@@ -64,7 +64,7 @@ $(function(){
 
 	$("input[value='게시물 등록']").bind("click",function(){
 		var boardNo=$(this).data('update');
-		self.location="http://192.168.0.36:8080/board/addBoard";
+		self.location="http://192.168.0.36:8080/board/addBoard?userNo=${user.userNo}";
 	})
 	
 });

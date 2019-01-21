@@ -67,7 +67,10 @@ public class BoardController {
 	
 	
 	@RequestMapping(value="addBoard", method=RequestMethod.GET)
-	public ModelAndView addBoard() throws Exception{
+	public ModelAndView addBoard(@RequestParam("userNo") String userNo) throws Exception{
+		
+		System.out.println("/addBoard GET");
+		System.out.println("userNo : "+userNo);
 		
 		ModelAndView modelAndView=new ModelAndView();
 		modelAndView.setViewName("forward:/view/board/addBoard.jsp");
