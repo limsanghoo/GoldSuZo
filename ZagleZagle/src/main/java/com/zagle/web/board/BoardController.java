@@ -110,7 +110,7 @@ public class BoardController {
         
 		ModelAndView modelAndView=new ModelAndView();
 	
-		modelAndView.setViewName("forward:/view/board/getBoard.jsp");
+		modelAndView.setViewName("redirect:http://localhost:8080/board/listBoard?view=all");
 		
 		return modelAndView;
 	}
@@ -223,7 +223,47 @@ public class BoardController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="listBoard")
+	@RequestMapping(value="listBoard", method=RequestMethod.GET)
+	public ModelAndView listBoard(HttpSession session) throws Exception{
+		
+		System.out.println("/listBoard");
+		
+		//System.out.println("**********searchBoard : "+searchBoard);
+		
+		//System.out.println("=====local : "+searchBoard.getLocal());
+		
+		/*if(searchBoard.getLocal()=="") {
+			searchBoard.setLocal(null);
+		}
+		
+		if(searchBoard.getCurrentPage()==0) {
+			searchBoard.setCurrentPage(1);
+		}
+		
+		searchBoard.setPageSize(pageSize);*/
+		
+		SearchBoard searchBoard=new SearchBoard();
+		
+		Map<String , Object> map=boardService.listBoard(searchBoard);
+		
+		//System.out.println("컨트롤러 map : "+map);
+		
+		User user=(User)session.getAttribute("user");
+		
+		//System.out.println("********user : "+user); //로그인 정보 받아와야됨
+		
+		List<Local> list = boardService.getState();//추가
+		
+		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.addObject("boardList", map.get("boardList"));//게시물 리스트
+		//modelAndView.addObject("searchBoard", searchBoard);
+		modelAndView.addObject("list",list);//동네  리스트
+		modelAndView.setViewName("forward:/view/board/listBoard.jsp");
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="listBoard", method=RequestMethod.POST)
 	public ModelAndView listBoard(@ModelAttribute("searchBoard") SearchBoard searchBoard, HttpSession session) throws Exception{
 		
 		System.out.println("/listBoard");
