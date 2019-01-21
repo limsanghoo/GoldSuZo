@@ -10,7 +10,7 @@
 -->
 <html>
 	<head>
-		<title>Identity by HTML5 UP</title>
+		<title>Zagle Zagle</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="common/css/assets/css/main.css" />
@@ -73,7 +73,7 @@
 						<footer>
 							<ul class="icons">
 								<a href="/user/snsLogin" ><img src="http://www.playtimetokyo.com/images/exposer/logo-login.png" style="width: 60px;height:60px;"/><br/>-login-</a>
-								<br/><br/><a href="/board/listBoard">요즘뜨는게시물</a>
+								<br/><br/><a href="/board/listBoard">온 동네 소식보기</a>
 							</ul>
 						</footer>
 					</section>
