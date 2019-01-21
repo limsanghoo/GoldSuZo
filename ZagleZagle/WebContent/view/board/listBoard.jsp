@@ -23,8 +23,8 @@
 <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
 
 <style>
-	body{
-	 	padding-top : 100px;
+	form{
+	 	padding-top : 150px;
         padding-left:100px;
         padding-right:100px;
 	}
@@ -53,6 +53,7 @@
 </style>
 
 <script type="text/javascript">
+
 //수정 시작
 $(function(){
 	
@@ -60,13 +61,30 @@ $(function(){
 		var boardNo=$(this).data('update');
 		self.location="/board/updateBoard?boardNo="+boardNo;
 	})
-	
-	$("input[value='검색']").bind("click",function(){
-		$("form").attr("method" , "POST").attr("action" , "/board/listBoard?view=${param.view}").submit();
-	})
 
+	$("input[value='게시물 등록']").bind("click",function(){
+		var boardNo=$(this).data('update');
+		
+		alert("${user.userNo}");
+		
+		self.location="http://192.168.0.36:8080/board/addBoard?userNo=${user.userNo}";
+	})
+	
 });
 //수정 끝
+
+
+//검색 엔터
+function enter() {
+        if (window.event.keyCode == 13) {
+             // 엔터키가 눌렸을 때 실행할 내용
+        	$("form").attr("method" , "POST").attr("action" , "/board/listBoard?view=${param.view}").submit();
+        }
+}
+ 
+
+
+
 
 function fncGetState(){
 	
@@ -142,7 +160,7 @@ function fncGetTown(){
 	
 	local = stateName+" "+cityName+" "+townName;
 	
-	alert(local);
+	//alert(local);
 	
 	$("input[name='local']").val(local);
 			
@@ -156,6 +174,10 @@ function fncGetTown(){
 
 <body>
 
+
+<jsp:include page="/view/layout/toolbar.jsp" />
+
+
 <form name="listBoard">
 
 
@@ -164,21 +186,13 @@ function fncGetTown(){
 <a href="/board/listMap">지도로 보기</a>
 </c:if>
 
-<!-- 세션 테스트 -->
-<a href="/board/testUser">
-<input type="button" value="세션 테스트">
-</a>
-userNickname : ${user.userNickname}
-
 <!-- 검색 -->
 <span id="searchKeyword">
-<input type="text" name="searchKeyword" value="${! empty searchBoard.searchKeyword ? searchBoard.searchKeyword : ''}" />
-<!-- <input type="button" name="search" value="검색"/> -->
+<input type="text" name="searchKeyword" value="${! empty searchBoard.searchKeyword ? searchBoard.searchKeyword : ''}"/>
 </span>
 
 <!-- 게시물 등록 -->
 <c:if test="${user.userNo!=null}">
-<a href="/board/addBoard">
 <input type="button" value="게시물 등록" id="goAddBoard">
 </a>
 </c:if>
