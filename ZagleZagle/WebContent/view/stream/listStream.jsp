@@ -66,8 +66,8 @@ function addStream(){
 		
 function addRefund(){
 		
-	    $("#addStreamForm").attr("method", "POST").attr("action", "/stream/addRefund").submit();
-}
+	    $("#addRefundForm").attr("method", "POST").attr("action", "/stream/addRefund").submit();
+} 
  
 $(function() {
 	var modal = document.getElementById('myModal');
@@ -133,9 +133,14 @@ $(function() {
 	           $.each(JSONData.list,function(i,v){
 	            	//alert(v);   
 	            $('#streamerNo').text(v.STREAMERNO);
+	            $('input[name="streamerNo"]').val(v.STREAMERNO);
 	            $('#streamerNickname').text(v.USERNAME);
+	            $('input[name="streamerNickname"]').val(v.USERNAME);
 	            $('#price').text(v.POSSIBLEPRICE);
+	            $('input[name="price"]').val(v.POSSIBLEPRICE);
 	            $('#totalPrice').text(v.TOTALPRICE);   
+	            $('input[name="totalPrice"]').val(v.TOTALPRICE);  
+	             
 	          });   	                    
 	             },  
 	             error : function (err) {
@@ -200,21 +205,22 @@ $(function() {
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
         <h4 class="modal-title" id="myModalLabel">환급하기</h4>
       </div>
-      <form id="addStreamForm" method="post" target="popup_window" enctype="multipart/form-data">
+      <form id="addRefundForm" method="post" target="popup_window">
       <div class="modal-body">
       
       			<label for="txt-user-text" class="col-form-label">유저No</label><br/> 
        			   <div class="refund" id="streamerNo" name="streamerNo"></div><br/>
-       			   
+       			   <input type="hidden" name="streamerNo">
       			<label for="txt-user-text" class="col-form-label">닉네임</label><br/> 
        			   <div class="refund" id="streamerNickname" name="streamerNickname"></div><br/>
-      
+      				 <input type="hidden" name="streamerNickname">
       
        			<label for="txt-user-text" class="col-form-label">후원받은 총 금액</label><br/> 
        			   <div class="refund" id="totalPrice" name="totalPrice"></div><br/>
- 				
+ 						 <input type="hidden" name="totalPrice">
        			<label for="txt-user-text" class="col-form-label">환급가능한 총 금액</label> <br/> 
        			   <div class="refund" id="price" name="price"></div> 
+       			   		 <input type="hidden" name="price">
  			<div></div>
        </div>  
       <div class="modal-footer">

@@ -29,6 +29,12 @@
 		GROUP BY s.streamer_no, u.user_name
 	 </select> 
 	 
-
+		  <update	id="updateSpon"	parameterType="spon">
+	   	UPDATE refund 
+	   	<set>
+	   	check_refund = '1'
+	   	</set>
+	   	WHERE refund_no = #{refundNo}
+	 </update>
 	 
 </mapper>
