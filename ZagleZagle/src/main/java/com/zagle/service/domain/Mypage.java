@@ -25,8 +25,8 @@ public class Mypage {
 	public Comment getComment() {
 		return comment;
 	}
-	public void setCommnet(Comment commnet) {
-		this.comment = commnet;
+	public void setCommnet(Comment comment) {
+		this.comment = comment;
 	}
 	public Like getLike() {
 		return like;

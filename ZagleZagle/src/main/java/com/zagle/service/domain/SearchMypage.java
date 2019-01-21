@@ -4,14 +4,9 @@ package com.zagle.service.domain;
 public class SearchMypage {
 	
 	private int currentPage;
-	public User getMyUser() {
-		return myUser;
-	}
-
-	public void setMyUser(User myUser) {
-		this.myUser = myUser;
-	}
-
+	
+	
+	Board myBoard;
 	User myUser;
 	private int pageSize;
 	private int endRowNum;
@@ -41,6 +36,23 @@ public class SearchMypage {
 
 	public int getStartRowNum() {
 		return (getCurrentPage()-1)*getPageSize()+1;
+	}
+	
+	public User getMyUser() {
+		return myUser;
+	}
+
+	public void setMyUser(User myUser) {
+		this.myUser = myUser;
+	}
+	
+
+	public Board getMyBoard() {
+		return myBoard;
+	}
+
+	public void setMyBoard(Board myBoard) {
+		this.myBoard = myBoard;
 	}
 
 	@Override
