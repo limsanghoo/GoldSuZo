@@ -243,7 +243,7 @@ public class BoardController {
 		modelAndView.addObject("boardList", map.get("boardList"));//게시물 리스트
 		modelAndView.addObject("searchBoard", searchBoard);
 		modelAndView.addObject("list",list);//동네  리스트
-		modelAndView.setViewName("forward:/view/board/listBoard.jsp");
+		modelAndView.setViewName("forward:/view/board/scroll.jsp");
 		
 		return modelAndView;
 	}

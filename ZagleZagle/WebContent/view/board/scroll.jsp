@@ -7,8 +7,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>listBoard</title>
-
+        <title>Pure CSS Masonary Grid</title>
+        
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
@@ -20,38 +20,88 @@
 <link href="/css/animate.min.css" rel="stylesheet">
 <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
 
-<script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-
+<script src="/javascript/bootstrap-dropdownhover.min.js"></script>        
+        
 <style>
-	form{
+
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+form{
 	 	padding-top : 150px;
-        padding-left:100px;
-        padding-right:100px;
+	 	padding-left:150px;
+        padding-right:150px;
+        background-color: #000000;
 	}
-	
-	.thumbnail{
-        	width:500px;
-        	height:650px;
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #333;
+}
+.container {
+    width: 1200px;
+    margin: 20px auto;
+    columns: 4;
+    column-gap: 40px;
+}
+.container .box {
+    width: 100%;
+    margin: 0 0 20px;
+    padding: 10px;
+    background: #fff;
+    overflow: hidden;
+    break-inside: avoid;
+}
+
+.container .box img {
+    max-width: 100%;
+    background-size: cover;
+}
+.container .box h2 {
+    margin: 10px 0 0;
+    padding: 0;
+    font-size: 20px;
+}
+.container .box p {
+    margin: 0;
+    padding: 0 0 10px;
+    font-size: 16px;
+}
+@media (max-width: 1200px) {
+    .container {
+        columns: 3;
+        width: calc(100% - 40px);
+        box-sizing: border-box;
+        padding: 20px 20px 20px 0;
     }
-    
-    #goAddBoard{
+}
+@media (max-width: 768px) {
+    .container {
+        columns: 2;
+    }
+}
+@media (max-width: 480px) {
+    .container {
+        columns: 1;
+    }
+}
+
+#goAddBoard{
     	position: static;
     	float:right;
-    }
-    
-    #searchKeyword{
+}
+
+#searchKeyword{
     	position: absolute;
     	left:45%;
-    }
+}
 
-    
-	/* 지도 클릭 안되게 */
-	.disabled{
+.disabled{
 		pointer-events:none;
-	}
+}
 
 </style>
-
 <script type="text/javascript">
 
 //수정 시작
@@ -169,19 +219,19 @@ function fncGetTown(){
 	$("form").attr("method" , "POST").attr("action" , "/board/listBoard?view=${param.view}").submit();
 }
 
-
 </script>
+
+
+     
 
 </head>
 
-<body>
 
+<body>
 
 <jsp:include page="/view/layout/toolbar.jsp" />
 
-
 <form name="listBoard">
-
 
 <!-- 지도로 보기 -->
 <c:if test="${user.userNo!=null}">
@@ -228,26 +278,20 @@ function fncGetTown(){
 </div>
 <!-- 동네 선택  끝-->
 
-<hr/>
+<br/>
 
-<!-- 리스트 시작 -->
-<div>
-<c:set var="i" value="0" />
-<c:forEach var="board" items="${boardList}">
+ <div class="container">
+ <c:forEach var="board" items="${boardList}">
 	<c:set var="i" value="${ i+1 }" />
 		
 	<c:if test="${board.boardStatus=='1'}"><!-- 정상 게시물만 보여주기 -->
 		
-	<div class="bs-example" data-example-id="thumbnails-with-custom-content">
-	<div class="col-sm-6 col-md-4">
-	<div class="thumbnail" data-toggle="modal" data-target="#${board.boardNo}modal1">
+	<div class="box" data-toggle="modal" data-target="#${board.boardNo}modal1">
 		
 	<p>
 	<img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px;" align="middle"/>
 		${board.user.userNickname}
 	</p>
-	
-	<div class="caption">
 	
 	
 <!-- 지도 시작 -->
@@ -296,9 +340,7 @@ if (coord==null || coord=='') {
 	<p align="center">${board.boardDetailText}</p>
 	<p align="center">${board.hashTag}</p>
 	
-	</div><!-- /caption -->
-	</div>
-	</div>
+
 	</div>
 
 <!-- 모달1 시작 -->
@@ -389,16 +431,17 @@ if (coord==null || coord=='') {
 </div>
 <!-- 모달2 끝 -->
 
+
 </c:if>
 
-</c:forEach>
-<!-- 리스트 끝 -->
-</div>
-
-
-
+</c:forEach>       
+        
+        
+  
+</div><!-- /container -->
 </form>
-</body>
-
-
+        
+    </body>
 </html>
+
+
