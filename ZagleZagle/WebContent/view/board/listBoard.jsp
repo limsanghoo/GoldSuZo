@@ -77,6 +77,8 @@ $(function(){
 //검색 엔터
 function enter() {
         if (window.event.keyCode == 13) {
+        	
+        	alert("뭔데");
              // 엔터키가 눌렸을 때 실행할 내용
         	$("form").attr("method" , "POST").attr("action" , "/board/listBoard?view=${param.view}").submit();
         }
@@ -188,7 +190,7 @@ function fncGetTown(){
 
 <!-- 검색 -->
 <span id="searchKeyword">
-<input type="text" name="searchKeyword" value="${! empty searchBoard.searchKeyword ? searchBoard.searchKeyword : ''}"/>
+<input type="text" name="searchKeyword" value="${! empty searchBoard.searchKeyword ? searchBoard.searchKeyword : ''}" onkeypress="enter()";/>
 </span>
 
 <!-- 게시물 등록 -->
