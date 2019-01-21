@@ -28,7 +28,7 @@ form{
 	 	padding-top : 150px;
 	 	padding-left:150px;
         padding-right:150px;
-        background-color:#cca8e9;
+        background-color:#ffffff;
 
 	}
 
