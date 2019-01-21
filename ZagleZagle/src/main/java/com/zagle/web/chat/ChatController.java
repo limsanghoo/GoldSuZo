@@ -63,8 +63,8 @@ public class ChatController {
 	@RequestMapping(value="testUser2")
 	public String testUser2(HttpServletRequest request,HttpSession session) {
 		User user = new User();
-		user.setProfile("default.png");
-		user.setUserNickname("유저2");
+		user.setProfile("dlsgh.jpg");
+		user.setUserNickname("백인호");
 		user.setUserAddr("강남");
 		
 		session.setAttribute("user", user);
@@ -75,9 +75,9 @@ public class ChatController {
 	@RequestMapping(value="testUser3")
 	public String testUser3(HttpServletRequest request,HttpSession session) {
 		User user = new User();
-		user.setProfile("default.png");
-		user.setUserNickname("유저3");
-		user.setUserAddr("서초");
+		user.setProfile("juh.jpg");
+		user.setUserNickname("주현");
+		user.setUserAddr("강남");
 		
 		session.setAttribute("user", user);
 		System.out.println("세션에 유저넣음3");
