@@ -87,7 +87,7 @@ $(function(){
 
 <form name="fileForm" class="form-horizontal" enctype="multipart/form-data">
 
-<input type="hidden" name="userNo" value="${user.userNo}"/><!-- value 수정해야함 -->
+<input type="hidden" name="userNo" value="${param.userNo}"/><!-- value 수정해야함 -->
 
 <div>
 	<input id=file type=file multiple="multiple">* 사진은 하나씩 등록해주세요!<br/>
