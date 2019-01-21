@@ -26,9 +26,16 @@
 		SELECT s.streamer_no as streamerNo, u.user_name as userName, sum(s.spon_price) as totalPrice,sum(s.spon_price)*0.7 as possiblePrice
 		FROM users u, spon s
 		WHERE s.streamer_no=u.user_no and s.streamer_no=#{value}
-		GROUP BY s.streamer_no, u.user_name
+		GROUP BY s.streamer_no, u.user_name,s.check_spon
+		HAVING s.check_spon = '0'
 	 </select> 
 	 
-
+	 <update id="updateSpon"	parameterType="string">
+	   	UPDATE spon 
+	   	<set>
+	   	check_spon  = '1'
+	   	</set>
+	   	WHERE streamer_no  = #{value}
+	 </update>
 	 
 </mapper>

@@ -5,7 +5,15 @@ public class SearchStream {
 	private int pageSize;
 	private int endRowNum;
 	private int startRowNum;
+	private String searchUserNo;
 	
+	
+	public String getSearchUserNo() {
+		return searchUserNo;
+	}
+	public void setSearchUserNo(String searchUserNo) {
+		this.searchUserNo = searchUserNo;
+	}
 	public int getCurrentPage() {
 		return currentPage;
 	}
@@ -21,16 +29,15 @@ public class SearchStream {
 	public int getEndRowNum() {
 		return getCurrentPage()*getPageSize();
 	}
-
 	public int getStartRowNum() {
 		return (getCurrentPage()-1)*getPageSize()+1;
 	}
-	
 	@Override
 	public String toString() {
 		return "SearchStream [currentPage=" + currentPage + ", pageSize=" + pageSize + ", endRowNum=" + endRowNum
-				+ ", startRowNum=" + startRowNum + "]";
+				+ ", startRowNum=" + startRowNum + ", searchUserNo=" + searchUserNo + "]";
 	}
+	
 	
 	
 }

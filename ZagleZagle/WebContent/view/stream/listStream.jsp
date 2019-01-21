@@ -13,19 +13,22 @@
  
   body{
   background-image: url("https://images.pexels.com/photos/1022921/pexels-photo-1022921.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
-  } 
+  }  
   @import url(https://fonts.googleapis.com/css?family=Patrick+Hand+SC);
-*{
+*{ 
   box-sizing:border-box;
+ 	 margin: 0;
+   	 padding: 0;
+   	 font-family: 'Poppins', sans-serif; 
 }
- 
+  
     button{
       align-self:center;
       background:transparent;
       padding:1rem 1rem;
       margin:0 1rem;
       transition:all .5s ease;
-      color:#5D3B3B;     
+      color:red;        
       font-size:5rem;  
       letter-spacing:1px;
       outline:none;
@@ -38,7 +41,51 @@
       button.lined.thick{
          border:solid 6px #41403E;        
       }  
+      .container {
+    width: 1200px;
+    margin: 20px auto;
+    columns: 4;
+    column-gap: 40px;
+} 
+      .container .box {
+    width: 100%;
+    margin: 0 0 20px;
+    padding: 10px;
+    background: #fff;
+    overflow: hidden;
+    break-inside: avoid;
+	}
  
+.container .box img {
+    max-width: 100%;
+     background-size: cover;   
+  }
+  .container .box h2 {
+    margin: 10px 0 0;
+    padding: 0;
+    font-size: 20px;
+}
+@media (max-width: 1200px) {
+    .container {
+        columns: 3;
+        width: calc(100% - 40px);
+        box-sizing: border-box;
+        padding: 20px 20px 20px 0;
+    }
+}
+@media (max-width: 768px) {
+    .container {
+        columns: 2;
+    }
+}
+@media (max-width: 480px) {
+    .container {
+        columns: 1;
+    }
+
+  
+   
+  
   </style>  
 
 
@@ -66,8 +113,8 @@ function addStream(){
 		
 function addRefund(){
 		
-	    $("#addStreamForm").attr("method", "POST").attr("action", "/stream/addRefund").submit();
-}
+	    $("#addRefundForm").attr("method", "POST").attr("action", "/stream/addRefund").submit();
+} 
  
 $(function() {
 	var modal = document.getElementById('myModal');
@@ -88,15 +135,25 @@ $(function() {
 	$("#refund").on("click", function() {
 		   alert("환급합니다~");
 		   addRefund();
-	});
+		  var result = confirm("환급신청 완료! 환급리스트 화면으로 이동 하시겠습니까?");
+		  if(result){
+			  alert("환급리스트 공사중....")
+			  self.location="192.168.0.12:8080/stream/listStream";
+		  }else{
+			  self.location="192.168.0.12:8080/stream/listStream";
+		  }
+	}); 
 	
-	
+	$("#listRefund").on("click", function() {
+		   alert("환급리스트로 이동합니다~");
+		self.location="/stream/listRefund";  
+	}); 
+	 
 	$('span[class="close"]').on("click", function() {
 		 var span = document.getElementsByClassName("close")[0];  
 	            modal.style.display = "none";
 	    
 	}); 
-	
 	
 	
 	$("#upload2").on("click", function() {
@@ -133,9 +190,14 @@ $(function() {
 	           $.each(JSONData.list,function(i,v){
 	            	//alert(v);   
 	            $('#streamerNo').text(v.STREAMERNO);
+	            $('input[name="streamerNo"]').val(v.STREAMERNO);
 	            $('#streamerNickname').text(v.USERNAME);
+	            $('input[name="streamerNickname"]').val(v.USERNAME);
 	            $('#price').text(v.POSSIBLEPRICE);
+	            $('input[name="price"]').val(v.POSSIBLEPRICE);
 	            $('#totalPrice').text(v.TOTALPRICE);   
+	            $('input[name="totalPrice"]').val(v.TOTALPRICE);  
+	             
 	          });   	                    
 	             },  
 	             error : function (err) {
@@ -163,7 +225,8 @@ $(function() {
 
 		<!--<button type="button" name="refundbtn" data-toggle="modal" data-target="#myModal2" style="margin:15px; padding:15px;">환급하기</button>  -->
    <button class='lined thick'  name="refundbtn" data-toggle="modal" data-target="#myModal2" style="margin:15px; padding:15px;">환급하기</button>
-    
+    <button class='lined thick' id="listRefund" name="listRefund">환급리스트이동</button> 
+  
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -200,21 +263,22 @@ $(function() {
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
         <h4 class="modal-title" id="myModalLabel">환급하기</h4>
       </div>
-      <form id="addStreamForm" method="post" target="popup_window" enctype="multipart/form-data">
+      <form id="addRefundForm" method="post" target="popup_window">
       <div class="modal-body">
       
       			<label for="txt-user-text" class="col-form-label">유저No</label><br/> 
        			   <div class="refund" id="streamerNo" name="streamerNo"></div><br/>
-       			   
+       			   <input type="hidden" name="streamerNo">
       			<label for="txt-user-text" class="col-form-label">닉네임</label><br/> 
        			   <div class="refund" id="streamerNickname" name="streamerNickname"></div><br/>
-      
+      				 <input type="hidden" name="streamerNickname">
       
        			<label for="txt-user-text" class="col-form-label">후원받은 총 금액</label><br/> 
        			   <div class="refund" id="totalPrice" name="totalPrice"></div><br/>
- 				
+ 						 <input type="hidden" name="totalPrice">
        			<label for="txt-user-text" class="col-form-label">환급가능한 총 금액</label> <br/> 
        			   <div class="refund" id="price" name="price"></div> 
+       			   		 <input type="hidden" name="price">
  			<div></div>
        </div>  
       <div class="modal-footer">
@@ -227,28 +291,13 @@ $(function() {
 		
 	 
 		
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-		
 <div class="row" id="list">
 <c:set var="i" value="0" />
 <c:forEach var="obj" items="${list}">
-<div class="col-sm-6 col-md-4"> <div class="thumbnail"> 
+<div class="container"> <div class="box"> 
 <img alt="50x50" data-src="holder.js/100x200" src='/common/images/stream/${obj.streamSum}' style="height: 250px; width: 50%; display: block;">
-<div class="caption"> <h1>${obj.streamTitle}</h1><img id="profile" src="/common/images/stream/${obj.streamerProfile}" style="height:100px; width:100px;"><h2>${obj.streamNickname}</h2><h3>${obj.streamer}</h3><p>내용:${obj.streamContent}</p><p>시청자수:${obj.streamViewCount}<p><p>좋아요수:${obj.streamLikeCount}</p><a class="btn btn-default" name="get" role="button" data-param="${obj.streamer}">들어가기</a> 
-</div>  
+<h2>${obj.streamTitle}</h2><img id="profile" src="/common/images/stream/${obj.streamerProfile}" style="height:100px; width:100px;"><h2>${obj.streamNickname}</h2><h3>${obj.streamer}</h3><p>내용:${obj.streamContent}</p><p>시청자수:${obj.streamViewCount}<p><p>좋아요수:${obj.streamLikeCount}</p><a class="btn btn-default" name="get" role="button" data-param="${obj.streamer}">들어가기</a> 
+  
 </div> </div>
 </c:forEach>  
 </div>   

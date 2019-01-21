@@ -46,16 +46,16 @@ public class StreamDAOImpl  implements StreamDAO{
 	}
 
 	@Override
-	public List<Stream> listRefund(SearchStream search, String grade) throws Exception {
+	public List<Refund> listRefund(SearchStream search) throws Exception {
 		// TODO Auto-generated method stub
-		
-		return null;
+	
+		return sqlSession.selectList("RefundMapper.listRefund", search);
 	}
 
 	@Override
 	public int getTotalCount(SearchStream search) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne("RefundMapper.getTotalCount", search);
 	}
 
 	@Override
@@ -75,6 +75,18 @@ public class StreamDAOImpl  implements StreamDAO{
 		// TODO Auto-generated method stub
 		//Map map =(Map) 
 		return sqlSession.selectList("SponMapper.listSpon", userNo);
+	}
+
+	@Override
+	public void updateSpon(String userNo) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update("SponMapper.updateSpon",userNo);
+	}
+
+	@Override
+	public void addRefund(Refund refund) {
+		// TODO Auto-generated method stub 
+		sqlSession.insert("StreamMapper.addRefund", refund);
 	}
 
 	
