@@ -8,99 +8,50 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>listBoard</title>
-        
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+<link href="/css/animate.min.css" rel="stylesheet">
 <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
 
-<script src="/javascript/bootstrap-dropdownhover.min.js"></script>        
-        
+<script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+
 <style>
-
-@import url('https://fonts.googleapis.com/css?family=Poppins');
-
-form{
+	form{
 	 	padding-top : 150px;
-	 	padding-left:150px;
-        padding-right:150px;
-        background-color:#cca8e9;
-
+        padding-left:100px;
+        padding-right:100px;
 	}
-
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-    background: #333;
-}
-.containerList {
-    width: 1200px;
-    margin: 20px auto;
-    columns: 4;
-    column-gap: 40px;
-}
-.containerList .box {
-    width: 100%;
-    margin: 0 0 20px;
-    padding: 10px;
-    background: #cadefc;
-    overflow: hidden;
-    break-inside: avoid;
-}
-
-.containerList .box img {
-    max-width: 100%;
-    background-size: cover;
-}
-.containerList .box h2 {
-    margin: 10px 0 0;
-    padding: 0;
-    font-size: 20px;
-}
-.containerList .box p {
-    margin: 0;
-    padding: 0 0 10px;
-    font-size: 16px;
-}
-@media (max-width: 1200px) {
-    .containerList {
-        columns: 3;
-        width: calc(100% - 40px);
-        box-sizing: border-box;
-        padding: 20px 20px 20px 0;
+	
+	.thumbnail{
+        	width:500px;
+        	height:650px;
     }
-}
-@media (max-width: 768px) {
-    .containerList {
-        columns: 2;
-    }
-}
-@media (max-width: 480px) {
-    .containerList {
-        columns: 1;
-    }
-}
-
-#goAddBoard{
+    
+    #goAddBoard{
     	position: static;
     	float:right;
-}
-
-#searchKeyword{
+    }
+    
+    #searchKeyword{
     	position: absolute;
     	left:45%;
-}
+    }
 
-.disabled{
+    
+	/* 지도 클릭 안되게 */
+	.disabled{
 		pointer-events:none;
-}
+	}
 
 </style>
+
 <script type="text/javascript">
 
 //수정 시작
@@ -114,12 +65,9 @@ $(function(){
 	$("input[value='게시물 등록']").bind("click",function(){
 		var boardNo=$(this).data('update');
 		
-		self.location="http://192.168.0.36:8080/board/addBoard?userNo=${user.userNo}";
-	})
-	
-	$("input[value='지도로 보기']").bind("click",function(){
+		alert("${user.userNo}");
 		
-		self.location="/board/listMap";
+		self.location="http://192.168.0.36:8080/board/addBoard?userNo=${user.userNo}";
 	})
 	
 });
@@ -221,23 +169,23 @@ function fncGetTown(){
 	$("form").attr("method" , "POST").attr("action" , "/board/listBoard?view=${param.view}").submit();
 }
 
+
 </script>
-
-
-     
 
 </head>
 
-
 <body>
+
 
 <jsp:include page="/view/layout/toolbar.jsp" />
 
+
 <form name="listBoard">
+
 
 <!-- 지도로 보기 -->
 <c:if test="${user.userNo!=null}">
-<input type="button" value="지도로 보기"/>
+<a href="/board/listMap">지도로 보기</a>
 </c:if>
 
 <!-- 검색 -->
@@ -280,25 +228,32 @@ function fncGetTown(){
 </div>
 <!-- 동네 선택  끝-->
 
-<br/>
+<hr/>
 
- <div class="containerList">
- <c:forEach var="board" items="${boardList}">
+<!-- 리스트 시작 -->
+<div>
+<c:set var="i" value="0" />
+<c:forEach var="board" items="${boardList}">
 	<c:set var="i" value="${ i+1 }" />
 		
 	<c:if test="${board.boardStatus=='1'}"><!-- 정상 게시물만 보여주기 -->
 		
-	<div class="box" data-toggle="modal" data-target="#${board.boardNo}modal1">
+	<div class="bs-example" data-example-id="thumbnails-with-custom-content">
+	<div class="col-sm-6 col-md-4">
+	<div class="thumbnail" data-toggle="modal" data-target="#${board.boardNo}modal1">
 		
 	<p>
 	<img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px;" align="middle"/>
 		${board.user.userNickname}
 	</p>
 	
+	<div class="caption">
+	
 	
 <!-- 지도 시작 -->
 <c:if test="${board.coord !=null}">
 <div id="staticMap${board.boardNo}" style="width:100%;height:350px;" class="disabled"></div> <!-- 지도 클릭 안되게 -->
+<br/>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc9c3216a02c263f1acc2c4187e96443"></script>
 <script type="text/javascript">
 var staticMapContainer  = document.getElementById('staticMap${board.boardNo}'); // 이미지 지도를 표시할 div  
@@ -334,13 +289,16 @@ if (coord==null || coord=='') {
 	
 <c:if test="${board.coord ==null && board.photo1 !=null}">
 	<div><img src="${board.photo1}" style="width:100%;" align="middle"/></div>
+	<br/>
 </c:if>	
 
-	<p align="center" style="font-size: small">${board.address}</p>
+	<p align="center">${board.address}</p>
 	<p align="center">${board.boardDetailText}</p>
-	<p align="center" style="text-align: left; font-size: small">${board.hashTag}</p>
+	<p align="center">${board.hashTag}</p>
 	
-
+	</div><!-- /caption -->
+	</div>
+	</div>
 	</div>
 
 <!-- 모달1 시작 -->
@@ -431,17 +389,16 @@ if (coord==null || coord=='') {
 </div>
 <!-- 모달2 끝 -->
 
-
 </c:if>
 
-</c:forEach>       
-        
-        
-  
-</div><!-- /container -->
+</c:forEach>
+<!-- 리스트 끝 -->
+</div>
+
+
+
 </form>
-        
-    </body>
+</body>
+
+
 </html>
-
-

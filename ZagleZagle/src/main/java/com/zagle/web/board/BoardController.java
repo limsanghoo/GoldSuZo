@@ -229,37 +229,19 @@ public class BoardController {
 	@RequestMapping(value="listBoard", method=RequestMethod.GET)
 	public ModelAndView listBoard(HttpSession session) throws Exception{
 		
-		System.out.println("/listBoard");
-		
-		//System.out.println("**********searchBoard : "+searchBoard);
-		
-		//System.out.println("=====local : "+searchBoard.getLocal());
-		
-		/*if(searchBoard.getLocal()=="") {
-			searchBoard.setLocal(null);
-		}
-		
-		if(searchBoard.getCurrentPage()==0) {
-			searchBoard.setCurrentPage(1);
-		}
-		
-		searchBoard.setPageSize(pageSize);*/
+		System.out.println("/listBoard GET");
 		
 		SearchBoard searchBoard=new SearchBoard();
 		
 		Map<String , Object> map=boardService.listBoard(searchBoard);
-		
-		//System.out.println("컨트롤러 map : "+map);
-		
+
 		User user=(User)session.getAttribute("user");
-		
-		//System.out.println("********user : "+user); //로그인 정보 받아와야됨
 		
 		List<Local> list = boardService.getState();//추가
 		
 		ModelAndView modelAndView=new ModelAndView();
 		modelAndView.addObject("boardList", map.get("boardList"));//게시물 리스트
-		//modelAndView.addObject("searchBoard", searchBoard);
+		modelAndView.addObject("searchBoard", searchBoard);
 		modelAndView.addObject("list",list);//동네  리스트
 		modelAndView.setViewName("forward:/view/board/listBoard.jsp");
 		
@@ -269,7 +251,7 @@ public class BoardController {
 	@RequestMapping(value="listBoard", method=RequestMethod.POST)
 	public ModelAndView listBoard(@ModelAttribute("searchBoard") SearchBoard searchBoard, HttpSession session) throws Exception{
 		
-		System.out.println("/listBoard");
+		System.out.println("/listBoard POST");
 		
 		System.out.println("**********searchBoard : "+searchBoard);
 		
@@ -366,16 +348,17 @@ public class BoardController {
 	public String testUser(HttpSession session) {
 		
 		User testUser = new User();
-		testUser.setUserNo("US10003");
+		
+		/*testUser.setUserNo("US10003");
 		testUser.setUserName("최상아");
 		testUser.setUserNickname("Ivory");
 		testUser.setUserAddr("서울 용산구 이태원동 123-123");
-		testUser.setProfile("aaa.jpg");
+		testUser.setProfile("aaa.jpg");*/
 		
-		/*testUser.setUserNo("US10023");
+		testUser.setUserNo("US10023");
 		testUser.setUserNickname("이노인호");
 		testUser.setUserAddr("서울 용산구 이태원동 123-123");
-		testUser.setProfile("dlsgh.jpg");*/
+		testUser.setProfile("dlsgh.jpg");
 		
 		session.setAttribute("user", testUser);
 		

@@ -67,7 +67,7 @@ $("a:contains('계좌번호 수정')").on("click" , function() {
 
 });
 </script>
-
+</head>
 
 <style>
   /* 사이드바 래퍼 스타일 */
@@ -127,14 +127,21 @@ $("a:contains('계좌번호 수정')").on("click" , function() {
   <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
       <li class="sidebar-brand">
-        <a href="#">Mypage</a>
+      </br>
+        <a href="#"><h1>Mypage</h1></a>
+        </br>
       </li>
-      <li><a href="#">작성 게시물 모아보기</a></li>
-      <li><a href="#">작성 댓글 모아보기</a></li>
-      <li><a href="#">스크랩 게시물 모아보기</a></li>
-      <li><a href="#">좋아요한 게시물 모아보기</a></li>
-      <li><a href="#">계좌번호 등록</a></li>
-      <li><a href="#">계좌번호 수정</a></li>
+      <li><a href="#"><h2>작성 게시물 모아보기</h2></a></li>
+      <br><br>
+      <li><a href="#"><h2>작성 댓글 모아보기</h2></a></li>
+      </br><br>
+      <li><a href="#"><h2>스크랩 게시물 모아보기</h2></a></li>
+      </br><br>
+      <li><a href="#"><h2>좋아요한 게시물 모아보기</h2></a></li>
+      </br><br>
+      <li><a href="#"><h2>계좌번호 등록</a></h2></li>
+      </br><br>
+      <li><a href="#"><h2>계좌번호 수정</a></h2></li>
  
     </ul>
   </div>
@@ -143,8 +150,7 @@ $("a:contains('계좌번호 수정')").on("click" , function() {
   <!-- 본문 -->
   <div id="page-content-wrapper">
     <div class="container-fluid">
-      <h1>완성</h1>
-      <p>굿</p>
+  
     </div>
   </div>
   <!-- /본문 -->
