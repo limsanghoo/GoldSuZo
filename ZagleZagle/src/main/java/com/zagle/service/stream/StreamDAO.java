@@ -14,13 +14,17 @@ public interface StreamDAO {
 	
 	public void addSpon(Spon spon)throws Exception;
 	
-	public List<Stream> listRefund(SearchStream search,String grade)throws Exception;
+	public void updateSpon(String userNo)throws Exception;
+	
+	public List<Refund> listRefund(SearchStream search)throws Exception;
 	
 	public int getTotalCount(SearchStream search)throws Exception;
 	
 	public void refundStream(Refund refund)throws Exception;
 	
 	public List<String> listSpon(String userNo)throws Exception;
+
+	public void addRefund(Refund refund)throws Exception; 
 	
 	
 }
