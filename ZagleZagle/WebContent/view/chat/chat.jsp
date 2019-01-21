@@ -319,11 +319,12 @@ lable:active
 					$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer'><img src='http://192.168.0.25:8080/common/images/chat/"+data.ms+"' style='width: 200px; height: 180px;' class='img-thumbnail'/><span class='msg_time'></span></div></div>").appendTo("#chat_box");
 					$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
 				}else if(data.ms.substring(data.ms.length-3)=='mp4'||data.ms.substring(data.ms.length-3)=='wmv'){
-					$("<div>"+data.id+" : <video controls controlsList='nodownload' width='320' height='240' muted><source src='http://192.168.0.25:8080/common/images/chat/"+data.ms+"' type='video/mp4'><a href='http://192.168.0.25:8080/common/images/chat/"+data.ms+"'>download video</a></video></div>").appendTo("#chat_box");
+					$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer'><video controls controlsList='nodownload' width='320' height='240' muted><source src='http://192.168.0.25:8080/common/images/chat/"+data.ms+"' type='video/mp4'><a href='http://192.168.0.25:8080/common/images/chat/"+data.ms+"'>download video</a></video><span class='msg_time'></span></div></div>").appendTo("#chat_box");
 					$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
 				}else{
-					$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer'>"+data.ms+"<span class='msg_time'></span></div></div>").appendTo("#chat_box");
+					$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer'>"+data.ms+"<span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
 					$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
+					
 				}
 				
 			});
