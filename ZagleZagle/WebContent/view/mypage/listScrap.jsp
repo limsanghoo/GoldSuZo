@@ -23,32 +23,12 @@
 
 		<script>
 		
+		
+	
 		//==> Board 정보 요청 Ajax 부분
 		
-		
-		
-		
-		var boardNo = 
-		
-	 $.ajax(
-		{
-		url : "/board/json/getBoard/"+boardNo,	
-		method : "GET",
-		dataType : "json",
-		headers : {
-			"Accept" : "application/json",
-			"Content-Tpye" : "application/json"
-		},
-			success : function(JSONData , status) {
-				
-				
-			}
-		}		 
-	 )
-		
-		
-		
-		
+	
+
 		
 		</script>
 
@@ -80,26 +60,24 @@
           </tr>
         </thead>
 	    
-	       
+	    
       <c:set var="i" value="0" />
-		   <c:forEach var="mypage" items="${listScrap}">
+		   <c:forEach var="board" items="${listBoard}">
 		   	
 		   	<tr>
 		   <c:set var="i" value="${ i+1 }" />
 		 
 		     <td align="left">${ i }</td>
 		   	
-		      <td align="left" data-board="${mypage.board.boardNo}"></td>
-		      <td align="left"> 							</td>
-		      <td align="left"> 							 </td>
+		      <td align="left" >${board.boardDetailText}</td>
+		      <td align="left">${board.boardRegDate} 				</td>
+		      <td align="left"> 						 </td>
 		      
 		    </tr>
 	    </c:forEach>
 	    
 	    </table>
 		    
-		  
-	
 	
 	</div>
 </body>

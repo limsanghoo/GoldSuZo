@@ -91,12 +91,20 @@ $(function() {
       
       <c:set var="i" value="0" />
 		  
+		    <c:forEach var="board" items="${listBoard}">
+		  
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
 			  <td align="left">${ i }</td>
-			  <td align="left"  title="Click : 게시물 상세정보" data-param="${mypage.boardNo}">${board.boardDetailText}</td>
-			  <td align="left">${board.regDate}</td>
+			  <td align="left"  title="Click : 게시물 상세정보">${board.boardDetailText}</td>
+			  <td align="left">${board.boardRegDate}</td>
+			  
+			  	</c:forEach>
+			  
 			</table>
+			
+			
+			
 	</div>
 
 </body>
