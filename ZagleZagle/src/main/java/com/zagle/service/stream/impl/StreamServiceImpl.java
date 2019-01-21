@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 
 import com.zagle.common.Search;
+import com.zagle.service.domain.Refund;
 import com.zagle.service.domain.SearchStream;
 import com.zagle.service.domain.Spon;
 import com.zagle.service.domain.Stream;
@@ -72,9 +73,14 @@ public class StreamServiceImpl implements StreamService{
 	}
 
 	@Override
-	public Map<String, Object> listRefund(SearchStream search, String grade) throws Exception {
+	public Map<String, Object> listRefund(SearchStream search) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		List<Refund> list = streamDAO.listRefund(search);
+		int count = streamDAO.getTotalCount(search);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("count", count);
+		return map;
 	}
 
 	@Override
@@ -130,6 +136,12 @@ public class StreamServiceImpl implements StreamService{
 		// TODO Auto-generated method stub
 		List<String> map = streamDAO.listSpon(userNo);
 		return map;
+	}
+
+	@Override
+	public void addRefund(Refund refund) throws Exception {
+		streamDAO.updateSpon(refund.getStreamerNo());
+		streamDAO.addRefund(refund);
 	}
 	
 	
