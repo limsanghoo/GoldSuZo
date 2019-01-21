@@ -348,16 +348,17 @@ public class BoardController {
 	public String testUser(HttpSession session) {
 		
 		User testUser = new User();
-		testUser.setUserNo("US10003");
+		
+		/*testUser.setUserNo("US10003");
 		testUser.setUserName("최상아");
 		testUser.setUserNickname("Ivory");
 		testUser.setUserAddr("서울 용산구 이태원동 123-123");
-		testUser.setProfile("aaa.jpg");
+		testUser.setProfile("aaa.jpg");*/
 		
-		/*testUser.setUserNo("US10023");
+		testUser.setUserNo("US10023");
 		testUser.setUserNickname("이노인호");
 		testUser.setUserAddr("서울 용산구 이태원동 123-123");
-		testUser.setProfile("dlsgh.jpg");*/
+		testUser.setProfile("dlsgh.jpg");
 		
 		session.setAttribute("user", testUser);
 		

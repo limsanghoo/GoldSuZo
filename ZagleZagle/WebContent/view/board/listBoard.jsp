@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Pure CSS Masonary Grid</title>
+<title>listBoard</title>
         
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -15,9 +15,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-<link href="/css/animate.min.css" rel="stylesheet">
 <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
 
 <script src="/javascript/bootstrap-dropdownhover.min.js"></script>        
@@ -30,7 +28,7 @@ form{
 	 	padding-top : 150px;
 	 	padding-left:150px;
         padding-right:150px;
-        background-color:#005792;
+        background-color:#cca8e9;
 
 	}
 
@@ -50,7 +48,7 @@ body {
     width: 100%;
     margin: 0 0 20px;
     padding: 10px;
-    background: #fff;
+    background: #cadefc;
     overflow: hidden;
     break-inside: avoid;
 }
@@ -116,9 +114,12 @@ $(function(){
 	$("input[value='게시물 등록']").bind("click",function(){
 		var boardNo=$(this).data('update');
 		
-		alert("${user.userNo}");
-		
 		self.location="http://192.168.0.36:8080/board/addBoard?userNo=${user.userNo}";
+	})
+	
+	$("input[value='지도로 보기']").bind("click",function(){
+		
+		self.location="/board/listMap";
 	})
 	
 });
@@ -236,7 +237,7 @@ function fncGetTown(){
 
 <!-- 지도로 보기 -->
 <c:if test="${user.userNo!=null}">
-<a href="/board/listMap">지도로 보기</a>
+<input type="button" value="지도로 보기"/>
 </c:if>
 
 <!-- 검색 -->
@@ -298,7 +299,6 @@ function fncGetTown(){
 <!-- 지도 시작 -->
 <c:if test="${board.coord !=null}">
 <div id="staticMap${board.boardNo}" style="width:100%;height:350px;" class="disabled"></div> <!-- 지도 클릭 안되게 -->
-<br/>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc9c3216a02c263f1acc2c4187e96443"></script>
 <script type="text/javascript">
 var staticMapContainer  = document.getElementById('staticMap${board.boardNo}'); // 이미지 지도를 표시할 div  
@@ -334,12 +334,11 @@ if (coord==null || coord=='') {
 	
 <c:if test="${board.coord ==null && board.photo1 !=null}">
 	<div><img src="${board.photo1}" style="width:100%;" align="middle"/></div>
-	<br/>
 </c:if>	
 
-	<p align="center">${board.address}</p>
+	<p align="center" style="font-size: small">${board.address}</p>
 	<p align="center">${board.boardDetailText}</p>
-	<p align="center">${board.hashTag}</p>
+	<p align="center" style="text-align: left; font-size: small">${board.hashTag}</p>
 	
 
 	</div>
