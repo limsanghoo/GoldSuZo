@@ -1,8 +1,11 @@
 package com.zagle.service.stream;
 
 import com.zagle.service.domain.SearchStream;
+import com.zagle.service.domain.Spon;
 import com.zagle.service.domain.Stream;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public interface StreamService {
@@ -10,10 +13,13 @@ public interface StreamService {
 
 	public void addStream(Stream stream)throws Exception;
 	
+	public void addSpon(Spon spon)throws Exception;
+	
 	public void joinStream(Map<String,Object> map)throws Exception;
 	
-	
 	public Map<String,Object> listStream(SearchStream search)throws Exception;
+	
+	public List<String> listSpon(String userNo)throws Exception;
 	
 	public Map<String,Object> listRefund(SearchStream search,String grade)throws Exception; 
 	

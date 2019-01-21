@@ -13,6 +13,9 @@ public interface UserDao {
 	
 	////
 	public User getUser2(String userNo) throws Exception;
+	////
+	
+	public User getUser3(String userName) throws Exception;
 	
 	//USER INFO UPDATE
 	public void updateUser(User user) throws Exception;

@@ -39,6 +39,9 @@
 		<if test="local!=null">
 		AND b.address LIKE '%'||#{local}||'%'
 		</if>
+		<if test="searchKeyword!=null">
+		AND b.hash_tag LIKE '%'||#{searchKeyword}||'%'
+		</if>
 		ORDER BY b.board_reg_date DESC
 	 </select>
 	 

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import com.zagle.service.domain.SearchMypage;
 import com.zagle.service.domain.User;
 import com.zagle.service.mypage.MypageDao;
 import com.zagle.service.mypage.MypageService;
+import com.zagle.service.user.UserDao;
 
 @Service("mypageServiceImpl")
 public class MypageServiceImpl implements MypageService {
@@ -25,6 +28,10 @@ public class MypageServiceImpl implements MypageService {
 	@Autowired
 	@Qualifier("mypageDAOImpl")
 	private MypageDao mypageDao;
+	@Autowired
+	@Qualifier("userDAOImpl")
+	private UserDao userDao;
+	
 	public void setMypageDao(MypageDao mypageDao) {
 		this.mypageDao = mypageDao;
 	}
@@ -88,10 +95,29 @@ public class MypageServiceImpl implements MypageService {
 		return map;
 	}
 
-//	public User getAccountCheck(User user) throws Exception {
-//		
-//		return mypageDao.getAccountCheck(user);
-//	}
+	public Boolean checkAccount(String userName) throws Exception {
+		
+		System.out.println("checkAccount Service 실행 확인하고");
+		System.out.println("리얼 네임 값 확인"+userName);
+		
+		////////////////////////////////////////////////////////////////////////////////////////
+		
+		
+		User user = userDao.getUser3(userName);
+
+		System.out.println("user 누구냐 :"+user);
+		
+		boolean result = false;
+		
+		
+		if(user.getUserName().equals(userName)) {
+			result = true;
+		}
+		return result;
+
+	
+		
+	}
 
 	
 

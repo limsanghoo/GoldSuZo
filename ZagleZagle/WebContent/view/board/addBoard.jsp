@@ -72,7 +72,7 @@ $(function(){
          alert("내용을 입력해라");
          return;
       }
-         //$("form").attr("method" , "POST").attr("enctype","multipart/form-data").attr("action" , "/board/addBoard").submit();
+      
          $("form").attr("method" , "POST").attr("action" , "/board/addBoard").submit();
       
    })
@@ -87,7 +87,7 @@ $(function(){
 
 <form name="fileForm" class="form-horizontal" enctype="multipart/form-data">
 
-<input type="hidden" name="userNo" value="${user.userNo}"/><!-- value 수정해야함 -->
+<input type="hidden" name="userNo" value="${param.userNo}"/><!-- value 수정해야함 -->
 
 <div>
 	<input id=file type=file multiple="multiple">* 사진은 하나씩 등록해주세요!<br/>

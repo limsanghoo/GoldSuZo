@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.zagle.service.domain.Refund;
 import com.zagle.service.domain.SearchStream;
+import com.zagle.service.domain.Spon;
 import com.zagle.service.domain.Stream;
 import com.zagle.service.stream.StreamDAO;
 
@@ -61,6 +62,19 @@ public class StreamDAOImpl  implements StreamDAO{
 	public void refundStream(Refund refund) throws Exception {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void addSpon(Spon spon) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.insert("SponMapper.addSpon",spon);
+	}
+
+	@Override
+	public List<String> listSpon(String userNo) throws Exception {
+		// TODO Auto-generated method stub
+		//Map map =(Map) 
+		return sqlSession.selectList("SponMapper.listSpon", userNo);
 	}
 
 	

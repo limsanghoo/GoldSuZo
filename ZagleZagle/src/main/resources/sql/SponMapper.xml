@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SponMapper">
+ 	
+ 	
+	<resultMap id="sponSelectMap" type="spon">
+		<result property="streamerNo"	column="streamer_no" 		jdbcType="VARCHAR" />
+		<result property="userNo" 		column="user_no" 			jdbcType="VARCHAR"/>
+		<result property="price" 		column="spon_price" 		jdbcType="NUMERIC" />
+		<result property="paymentNo" 	column="payment_no" 		jdbcType="VARCHAR" />
+	</resultMap> 
+	
+	
+
+	<!-- SQL : INSERT -->
+	<insert 	id="addSpon"		parameterType="spon" >
+	 INSERT INTO spon(spon_no,streamer_no,user_no,spon_price,spon_date,payment_no,check_spon)
+	 VALUES('SP'||seq_sp.nextval,#{streamerNo},#{userNo},#{price},sysdate,#{paymentNo},'0')	
+	</insert>
+	 	  
+	 <select id="listSpon"	parameterType="string" resultType="java.util.HashMap">
+		SELECT s.streamer_no as streamerNo, u.user_name as userName, sum(s.spon_price) as totalPrice,sum(s.spon_price)*0.7 as possiblePrice
+		FROM users u, spon s
+		WHERE s.streamer_no=u.user_no and s.streamer_no=#{value}
+		GROUP BY s.streamer_no, u.user_name
+	 </select> 
+	 
+
+	 
+</mapper>

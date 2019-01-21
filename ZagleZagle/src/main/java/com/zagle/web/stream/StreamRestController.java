@@ -1,7 +1,9 @@
 package com.zagle.web.stream;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -28,10 +30,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.zagle.service.domain.Refund;
 import com.zagle.service.domain.Spon;
 import com.zagle.service.domain.Stream;
 import com.zagle.service.domain.User;
 import com.zagle.service.stream.StreamService;
+import com.zagle.service.stream.impl.StreamServiceImpl;
 import com.zagle.service.user.UserService;
 
 @Controller
@@ -42,6 +46,7 @@ public class StreamRestController {
 	@Autowired
 	@Qualifier("streamServiceImpl")
 	private StreamService streamService;
+
 	
 	@Autowired
 	@Qualifier("userServiceImpl")
@@ -66,9 +71,10 @@ public class StreamRestController {
 		System.out.println("price가 찍히니..??"+price+streamerNo+userNo);
 		// System.out.println(body);
 		Spon spon = new Spon();
-		spon.setPrice(price);
+		spon.setPrice(Integer.parseInt(price));
 		spon.setStreamerNo(streamerNo);
 		spon.setUserNo(userNo);
+		spon.setPaymentNo("0"); 
 	      RestTemplate restTemplate = new RestTemplate();
 	      
 		    // 서버로 요청할 Body
@@ -103,6 +109,7 @@ public class StreamRestController {
 	@RequestMapping(value = "start", method = RequestMethod.POST)
 	public String startStream(@ModelAttribute("spon") Spon spon,HttpSession session) throws Exception{
 			System.out.println(spon);
+			spon.setPaymentNo("0");
 		// System.out.println(body);
 	      RestTemplate restTemplate = new RestTemplate();
 	      
@@ -113,7 +120,7 @@ public class StreamRestController {
 		    params.add("partner_user_id",spon.getUserNo());
 		    params.add("item_name","스트리밍후원");
 		    params.add("quantity","1");
-		    params.add("total_amount",spon.getPrice());
+		    params.add("total_amount",spon.getPrice()+"");
 		    params.add("tax_free_amount","0");
 		    params.add("approval_url","http://localhost:8080/stream/json/kakaoOkStream?");
 		    params.add("cancel_url","http://192.168.0.12:8080");
@@ -180,11 +187,57 @@ public class StreamRestController {
 
 		    HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 		    Map response = restTemplate.postForObject(new URI(HOST + "/v1/payment/approve"), request, Map.class);
+		   streamService.addSpon(spon);
 		  	ModelAndView modelAndView = new ModelAndView();
 			modelAndView.setViewName("redirect:https://192.168.0.12:443/stream/join?streamer="+spon.getStreamerNo()+"&userNo="+spon.getUserNo()+"&userNickname=user02&userProfile=default.jpg");
+			return modelAndView;
+	}
+	
+	@RequestMapping(value="inicisStream", method = RequestMethod.POST)   
+	public ModelAndView inicisStream(@RequestBody Spon spon,HttpSession session) throws Exception{
+		System.out.println("inicisStream==== ");
+		System.out.println("inicisStream==== spon =>"+spon);
+		String userNo = spon.getUserNo();
+		String streamerNo = spon.getStreamerNo();
+		User user = userService.getUser2(userNo);
+		User streamer = userService.getUser2(streamerNo);
+		Refund refund = new Refund();
+		refund.setAccount(streamer.getAccount());
+		refund.setBankname(streamer.getBankName());
+		refund.setPrice(spon.getPrice()); 
+		refund.setStreamerNickname(user.getUserNickname());
+		
+	 	ModelAndView modelAndView = new ModelAndView(); 
+		
 		return modelAndView;
  
 	}
+	
+	@RequestMapping(value="listSpon", method = RequestMethod.GET)   
+	@ResponseBody 
+	public Map<String,Object>listSpon(HttpSession session) throws Exception{
+	
+		//User user = (User)session.getAttribute("user");
+		User user = new User();
+		user.setUserNo("US10001");
+		Map<String,Object> map= new HashMap();
+		List<String>list = streamService.listSpon(user.getUserNo());
+		System.out.println(list); 
+		//int price = Integer.parseInt(list.get(2));
+		//int realprice = (int) (price * 0.3);
+		//System.out.println(realprice); 
+		int price=0;
+	
+	 
+		map.put("list",list);
+	 	ModelAndView modelAndView = new ModelAndView(); 
+		modelAndView.addObject("list", list);
+		 
+		return map;
+ 
+	}
+	
+	
 
 }
 	

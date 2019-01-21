@@ -1,5 +1,6 @@
 package com.zagle.service.stream.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.zagle.common.Search;
 import com.zagle.service.domain.SearchStream;
+import com.zagle.service.domain.Spon;
 import com.zagle.service.domain.Stream;
 import com.zagle.service.stream.StreamDAO;
 import com.zagle.service.stream.StreamRestDAO;
@@ -115,6 +117,19 @@ public class StreamServiceImpl implements StreamService{
 	public void joinStream(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		mongoRestDAOImpl.joinMongo(map);
+	}
+
+	@Override
+	public void addSpon(Spon spon) throws Exception {
+		streamDAO.addSpon(spon);
+		
+	}
+
+	@Override
+	public List<String> listSpon(String userNo) throws Exception {
+		// TODO Auto-generated method stub
+		List<String> map = streamDAO.listSpon(userNo);
+		return map;
 	}
 	
 	

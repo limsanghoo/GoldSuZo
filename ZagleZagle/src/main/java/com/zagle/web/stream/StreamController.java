@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.zagle.service.domain.Refund;
 import com.zagle.service.domain.SearchStream;
 import com.zagle.service.domain.Stream;
 import com.zagle.service.domain.User;
@@ -137,6 +138,11 @@ public class StreamController {
 	}
 	
 	
+	@RequestMapping(value="addRefund",method=RequestMethod.POST)
+	public void addRefund(@ModelAttribute("refund")Refund refund,@RequestParam("streamerNo")String streamerNo,HttpSession session) throws Exception{
+		
+		System.out.println(refund);
+	}
 	
 	
 }
