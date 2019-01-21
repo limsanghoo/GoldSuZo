@@ -185,16 +185,17 @@ public class MypageController {
 		
 		System.out.println("/mypage/listScrap : GET/POST");
 		User user = (User) session.getAttribute("user");
+		
+		System.out.println("user 확인 :"+user);
+		
 		searchMypage.setMyUser(user);
-		
-		
+	
 		
 		Map<String, Object> map = mypageService.listScrap(searchMypage);
-		
-		
+	
 				
 		ModelAndView modelAndView = new ModelAndView();
-		//modelAndView.addObject("listComment", map.get("listComment"));
+		modelAndView.addObject("listScrap", map.get("list"));
 		modelAndView.addObject("searchMypage", searchMypage);
 		modelAndView.setViewName("forward:/view/mypage/listScrap.jsp");
 		

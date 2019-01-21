@@ -21,55 +21,86 @@
 	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
+		<script>
+		
+		//==> Board 정보 요청 Ajax 부분
+		
+		
+		
+		
+		var boardNo = 
+		
+	 $.ajax(
+		{
+		url : "/board/json/getBoard/"+boardNo,	
+		method : "GET",
+		dataType : "json",
+		headers : {
+			"Accept" : "application/json",
+			"Content-Tpye" : "application/json"
+		},
+			success : function(JSONData , status) {
+				
+				
+			}
+		}		 
+	 )
+		
+		
+		
+		
+		
+		</script>
+
+
+
 </head>
+
+
+
 <body>
 
 <jsp:include page="/view/mypage/mypageToolbar.jsp" />
 
-
 <div class="container">
-	
-	<div class="page-header text-info">
-	       <h5>스크랩 게시물 보기</h5>
+
+<div class="page-header text-info">
+	       <h5>스크랩 게시물</h5>
 	    </div>
 	    
+	         <table class="table table-hover table-striped" >
 	    
-	    
-	    <table class="table table-hover table-striped" >
-	    <thead>
-	     <tr>
+	         <thead>
+          <tr>
             <th align="center">No</th>
-            <th align="left" >스크랩 게시물 내용</th>
-            <th align="left">스크랩 날짜</th>
-            
+            <th align="left" >스크랩 내용</th>
+            <th align="left">작성 날짜</th>
             <th align="left">취소 여부</th>
-            
+  
           </tr>
         </thead>
-		
-			  <tbody>
-      
+	    
+	       
       <c:set var="i" value="0" />
-		   <c:forEach var="mypage" items="${list}">
-		
-		   
-		   
-			<c:set var="i" value="${ i+1 }" />
-			<tr>
-			  <td align="left">${ i }</td>
-			  <td align="left"  title="Click : 댓글 작성한 게시물로 이동" data-param="${mypage.scrap.scrapNo}">${mypage.scrap.userNo}</td>
-			  <td align="left">${mypage.scrap.userNo}</td>
-			  
-			  
-			  
-			  	</c:forEach>
-			  
-			  
-			</table>
-			
-	</div>
-		
-	    ${list}
+		   <c:forEach var="mypage" items="${listScrap}">
+		   	
+		   	<tr>
+		   <c:set var="i" value="${ i+1 }" />
+		 
+		     <td align="left">${ i }</td>
+		   	
+		      <td align="left" data-board="${mypage.board.boardNo}"></td>
+		      <td align="left"> 							</td>
+		      <td align="left"> 							 </td>
+		      
+		    </tr>
+	    </c:forEach>
+	    
+	    </table>
+		    
+		  
 	
+	
+	</div>
 </body>
 </html>
