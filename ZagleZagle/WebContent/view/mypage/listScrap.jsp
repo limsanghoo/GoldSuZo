@@ -40,7 +40,7 @@
 
 <body>
 
-<jsp:include page="/view/mypage/mypageToolbar.jsp" />
+<jsp:include page="/view/layout/mypageToolbar.jsp" />
 
 <div class="container">
 

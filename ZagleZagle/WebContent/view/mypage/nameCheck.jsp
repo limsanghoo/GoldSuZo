@@ -39,11 +39,14 @@
 				if( $("#account").val() != null && $("#account").val().length >0) {
 					$("form").attr("method" , "POST");
 				    $("form").attr("action" , "/mypage/getBankCode");
+				   
+				    
 				    $("form").submit();
 				}else {
 					alert('계좌번호를 입력하세요');
 				}
 				$("#account").focus();
+				$("#bankName").focus();
 			});
 		});
 	
@@ -57,6 +60,7 @@
 			if(opener) {
 				opener.$("input[name='account']").val("${account}");
 				
+				opener.$("input[name='bankName']").val("${BankName}");
 			}
 			
 			window.close();
@@ -89,10 +93,26 @@
 		    <label for="account">계좌번호</label>
 		      <input type="text" class="form-control" name="account" id="account"  placeholder="계좌번호"
 		    																		value="${ ! empty result && result ? account : '' }" >
+		   
+		       
+		       </br>
+		       
+		 <div class="form-group">
+		    <label for="bankName">은행이름</label>
+		      <select class="form-control" name="bankName" id="bankName"  placeholder="은행이름">
+		      		<option value="097" >신한은행</option>
+					<option value="011" >국민은행</option>
+					<option value="016" >하나은행</option>
+					<option value="018" >비트은행</option>
+					<option value="019" >코인은행</option>
+		    	</select>
 		    																		
 		      </div>
-		       <button type="button" class="btn btn-info">계좌실명확인</button>				
-		       
+		      	
+		       																		
+		      </div>
+		       <button type="button" class="btn btn-info">계좌실명확인</button>			
+		        
 		       
 		      <c:if test="${ ! empty result }">
 		  	<c:if test="${ result =='true' }">

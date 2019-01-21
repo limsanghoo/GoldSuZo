@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
@@ -42,6 +43,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.zagle.service.domain.User;
 import com.zagle.service.mypage.MypageService;
 import com.zagle.service.user.UserService;
 
@@ -65,9 +67,13 @@ public class MypageRestController {
 	
 	
 	@RequestMapping(value="getBankCode", produces="application/json")
-	public ModelAndView getBankCode(HttpSession session) throws Exception {
+	public ModelAndView getBankCode(@RequestParam("account") String account, @RequestParam("bankName") int bankName, 
+																								HttpSession session) throws Exception {
 		
+		
+		System.out.println("account :"+account);
 		System.out.println("인증 코드 요청 시작");
+		System.out.println("은행 이름 확인 :"+bankName);
 		
 		//HttpClient httpClient = new DefaultHttpClient();
 		final String RequestUrl = "https://testapi.open-platform.or.kr/oauth/2.0/token";
@@ -76,6 +82,7 @@ public class MypageRestController {
 		 final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
 		
 		    MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+		    
 		    params.add("grant_type", "client_credentials");
 	        params.add("client_id", client_id);
 	        params.add("client_secret", client_secret);
@@ -99,7 +106,10 @@ public class MypageRestController {
 	       
 	       session.setAttribute("BankAccessToken", response1.get("access_token"));
 	       
+	       
 	        ModelAndView modelAndView = new ModelAndView();
+	        modelAndView.addObject("bankName", bankName);
+	        modelAndView.addObject("account", account);
 	        modelAndView.setViewName("confirmName");
 	        
 	        return modelAndView;
@@ -151,7 +161,7 @@ public class MypageRestController {
 	}
 	
 	@RequestMapping(value="confirmName")
-	public ModelAndView confrimName(HttpSession session) throws Exception {
+	public ModelAndView confrimName(HttpSession session, HttpServletRequest req) throws Exception {
 		
 		System.out.println("===================제발 되라 시바===============");
 		
@@ -169,12 +179,23 @@ public class MypageRestController {
        
        OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
        
+       String account = (String) req.getAttribute("account");
+       System.out.println(account);
+       
+       
+       int bankName = (int) req.getAttribute("bankName");
+       
+       User user = new User();
+       
+       user = (User) session.getAttribute("user");
+       user.getUserBirth();
+       
        
        
       JSONObject json = new JSONObject();
-       json.put("bank_code_std", "097");
-       json.put("account_num", "110406555105");
-       json.put("account_holder_info", "911205 ");
+       json.put("bank_code_std", bankName);
+       json.put("account_num", account);
+       json.put("account_holder_info",  user.getUserBirth());
        json.put("tran_dtime", "20190118191633");
        
        
@@ -209,7 +230,9 @@ public class MypageRestController {
        ModelAndView modelAndView = new ModelAndView();
        
        
-       //modelAndView.addObject("realName", realName);
+       modelAndView.addObject("account", account);
+
+       modelAndView.addObject("bankName", bankName);
        modelAndView.setViewName("checkAccount?userName="+userName);
      
        return modelAndView;

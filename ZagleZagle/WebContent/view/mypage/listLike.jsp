@@ -40,7 +40,7 @@
 
 <body>
 
-<jsp:include page="/view/mypage/mypageToolbar.jsp" />
+<jsp:include page="/view/layout/mypageToolbar.jsp" />
 
 <div class="container">
 
@@ -64,8 +64,14 @@
       <c:set var="i" value="0" />
 		   <c:forEach var="board" items="${listBoard}">
 		   	
+		   	
+		   	
+		   	
 		   	<tr>
 		   <c:set var="i" value="${ i+1 }" />
+		 
+		 	<div class="box" data-toggle="modal" data-target="#${board.boardDetailText}modal1">
+		 
 		 
 		     <td align="left">${ i }</td>
 		   	
@@ -74,6 +80,80 @@
 		      <td align="left"> 						 </td>
 		      
 		    </tr>
+		    
+		    
+		    <!-- 모달1 시작 -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="${board.boardDetailText}modal1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    
+	<!-- 모달1 헤더 시작 -->
+      <div class="modal-header">
+      <div class="row">
+      
+      	<div class="col-md-11 col-md-offset-1">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        
+        <h4 class="modal-title" id="gridSystemModalLabel">
+        <div class="col-md-4">
+        <img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px;" align="middle"/>
+		${board.user.userNickname}
+		</div>
+		
+		<!-- 내 글만 수정, 삭제 -->
+		<c:if test="${user.userNo==board.user.userNo}">
+		<div class="col-md-4 col-md-offset-4">
+		<input type="button" value="수정" data-update="${board.boardNo}"/>
+        <div class="btn btn-primary" data-toggle="modal" data-target="#${board.boardNo}modal2">삭제</div>
+        </div>
+        </c:if>
+        
+        </h4>
+        </div>
+      </div>
+     <!-- 모달1 헤더 끝 -->
+      
+     <!-- 모달1 바디 시작 -->
+      <div class="modal-body" style="text-align: center">  
+
+		<div>
+			<c:if test="${board.photo1 !=null}">
+			<div><img src="${board.photo1}" style="width: 500px"/></div>
+			<br/>
+			</c:if>
+
+			<c:if test="${board.photo2 !=null}">
+			<div><img src="${board.photo2}" style="width: 500px"/></div>
+			<br/>
+			</c:if>
+	
+			<c:if test="${board.photo3 !=null}">
+			<div><img src="${board.photo3}" style="width: 500px"/></div>
+			<br/>
+			</c:if>
+		</div>
+
+		<p>
+			${board.boardDetailText}
+		</p>
+     
+       
+      </div>
+      <!-- 모달1 바디 끝 -->
+      
+      <div class="modal-footer">
+      댓글............
+      </div>
+      
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- 모달1 끝 -->
+
+		    
+		    
+		    
 	    </c:forEach>
 	    
 	    </table>

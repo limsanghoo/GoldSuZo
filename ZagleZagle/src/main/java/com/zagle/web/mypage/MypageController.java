@@ -1,5 +1,7 @@
 package com.zagle.web.mypage;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.zagle.common.Page;
 import com.zagle.common.Search;
 import com.zagle.service.board.BoardService;
+import com.zagle.service.domain.Board;
+import com.zagle.service.domain.Mypage;
 import com.zagle.service.domain.SearchMypage;
 import com.zagle.service.domain.User;
 import com.zagle.service.mypage.MypageService;
@@ -171,8 +175,19 @@ public class MypageController {
 //		
 		System.out.println(map);
 		
+		ArrayList list = (ArrayList) map.get("list");
+		System.out.println(list);
+		List<Board> bdList = new ArrayList<Board>();
+		for (int i = 0; i < list.size(); i++) {
+		
+			Mypage mp = (Mypage)list.get(i);
+			String bdNo = mp.getBoard().getBoardNo();
+			Board bd = boardService.getBoard(bdNo);
+			bdList.add(bd);
+		}
+		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("myBoardlist", map.get("myBoardlist"));
+		modelAndView.addObject("listBoard", bdList);
 //		modelAndView.addObject("resultPage", resultPage);
 		modelAndView.addObject("searchMypage", searchMypage);
 		modelAndView.setViewName("forward:/view/mypage/listMyBoard.jsp");
@@ -192,10 +207,21 @@ public class MypageController {
 	
 		
 		Map<String, Object> map = mypageService.listScrap(searchMypage);
-	
+		
+		ArrayList list = (ArrayList) map.get("list");
+		System.out.println(list);
+		List<Board> bdList = new ArrayList<Board>();
+		for (int i = 0; i < list.size(); i++) {
+		
+			Mypage mp = (Mypage)list.get(i);
+			String bdNo = mp.getBoard().getBoardNo();
+			Board bd = boardService.getBoard(bdNo);
+			bdList.add(bd);
+		}
 				
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("listScrap", map.get("list"));
+		modelAndView.addObject("listBoard", bdList);
+		modelAndView.addObject("count", list.size());
 		modelAndView.addObject("searchMypage", searchMypage);
 		modelAndView.setViewName("forward:/view/mypage/listScrap.jsp");
 		
@@ -210,8 +236,21 @@ public class MypageController {
 		
 		Map<String, Object> map = mypageService.listLike(search);
 		
+		ArrayList list = (ArrayList) map.get("list");
+		System.out.println(list);
+		List<Board> bdList = new ArrayList<Board>();
+		for (int i = 0; i < list.size(); i++) {
+		
+			Mypage mp = (Mypage)list.get(i);
+			String bdNo = mp.getBoard().getBoardNo();
+			Board bd = boardService.getBoard(bdNo);
+			bdList.add(bd);
+		}
+				
+		
+		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("list", map.get("list"));
+		modelAndView.addObject("listBoard", bdList);
 		modelAndView.addObject("search", search);
 		modelAndView.setViewName("forward:/view/mypage/listLike.jsp");
 		
@@ -223,15 +262,28 @@ public class MypageController {
 		System.out.println("=============계좌 실명 인증 마지막 단계===================");
 		
 		String userName = (String) req.getParameter("userName");
+		String account = (String) req.getAttribute("account");
 		
 		System.out.println("리얼 이름 :"+userName);
+		System.out.println("계좌 넘어 온거 확인"+account);
 		
 		boolean result = mypageService.checkAccount(userName);
 		
 		System.out.println("result 콜백 확인"+result);
 		
+		int nameBank = (int) req.getAttribute("bankName");	
+		
+		String testBank="";
+		
+		if(nameBank==97) {
+			
+			testBank ="신한은행";
+		}
+		
 		
 		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("account", account);
+		modelAndView.addObject("BankName", testBank);
 		modelAndView.addObject("result", new Boolean(result));
 		modelAndView.setViewName("forward:/view/mypage/nameCheck.jsp");
 		

@@ -62,11 +62,12 @@ $(function() {
 
 
 
+
 </head>
 <body>
 
+<jsp:include page="/view/layout/mypageToolbar.jsp" />
 
-<jsp:include page="/view/mypage/mypageToolbar.jsp" />
 
 
 <div class="container">
@@ -96,7 +97,9 @@ $(function() {
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
 			  <td align="left">${ i }</td>
-			  <td align="left"  title="Click : 게시물 상세정보">${board.boardDetailText}</td>
+			 	 
+			  <td align="left"  title="Click : 게시물 상세정보" style="">${board.boardDetailText}</td>
+			  	
 			  <td align="left">${board.boardRegDate}</td>
 			  
 			  	</c:forEach>
