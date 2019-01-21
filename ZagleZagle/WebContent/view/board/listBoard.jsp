@@ -28,7 +28,7 @@ form{
 	 	padding-top : 150px;
 	 	padding-left:150px;
         padding-right:150px;
-        background-color:#cca8e9;
+        background-color:#fb9e96;
 
 	}
 
@@ -48,7 +48,7 @@ body {
     width: 100%;
     margin: 0 0 20px;
     padding: 10px;
-    background: #cadefc;
+    background: #ffffff;
     overflow: hidden;
     break-inside: avoid;
 }
@@ -404,9 +404,9 @@ if (coord==null || coord=='') {
       <!-- 모달1 바디 끝 -->
       
       <div class="modal-footer">
-      댓글............
+      <input type="text" value>
       </div>
-      
+      <!-- 모달1 푸터 끝 -->
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
