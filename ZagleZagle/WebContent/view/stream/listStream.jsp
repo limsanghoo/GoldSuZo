@@ -63,6 +63,11 @@ function addStream(){
 	
     $("#addStreamForm").attr("method", "POST").attr("action", "/stream/addStream").submit();
  }
+		
+function addRefund(){
+		
+	    $("#addStreamForm").attr("method", "POST").attr("action", "/stream/addRefund").submit();
+}
  
 $(function() {
 	var modal = document.getElementById('myModal');
@@ -82,7 +87,7 @@ $(function() {
 	
 	$("#refund").on("click", function() {
 		   alert("환급합니다~");
-		   addStream();
+		   addRefund();
 	});
 	
 	
@@ -129,9 +134,9 @@ $(function() {
 	            	//alert(v);   
 	            $('#streamerNo').text(v.STREAMERNO);
 	            $('#streamerNickname').text(v.USERNAME);
-	            $('#possiblePrice').text(v.POSSIBLEPRICE);
-	            $('#totalPrice').text(v.TOTALPRICE); 
-	          });   	                  
+	            $('#price').text(v.POSSIBLEPRICE);
+	            $('#totalPrice').text(v.TOTALPRICE);   
+	          });   	                    
 	             },  
 	             error : function (err) {
 	             	alert('실패 ㅠㅠ');
@@ -209,7 +214,7 @@ $(function() {
        			   <div class="refund" id="totalPrice" name="totalPrice"></div><br/>
  				
        			<label for="txt-user-text" class="col-form-label">환급가능한 총 금액</label> <br/> 
-       			   <div class="refund" id="possiblePrice"></div>
+       			   <div class="refund" id="price" name="price"></div> 
  			<div></div>
        </div>  
       <div class="modal-footer">
