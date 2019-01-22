@@ -58,15 +58,15 @@
 		<form class="form-horizontal" method="post" enctype="multipart/form-data">
 		
 		  <div class="form-group">
-		    <label for="sellName" class="col-sm-3">상 품 명</label>
-		    <div class="container col-sm-6">
+		    <label for="sellName" class="col-sm-4 text-center">상 품 명</label>
+		    <div class="container col-sm-7">
 		      <input type="text" class="form-control" id="sellName" name="sellName" placeholder="상품명">
 		    </div>
 		  </div>
 
 		  <div class="form-group">
-		    <label for="status" class="col-sm-3">판매상태</label>
-			<div class="container col-sm-6">
+		    <label for="status" class="col-sm-4 text-center">판매방법</label>
+			<div class="container col-sm-7">
 			<select class="form-control" name="sellStyle">
 				<option value="00" >택배거래</option>
 				<option value="01" >직거래</option>
@@ -75,17 +75,18 @@
 		  </div>
 
 		  <div class="form-group">
-		    <label for="sellPrice" class="col-sm-3 text-center">가 격</label>
-		    <div class="col-sm-6">
+		    <label for="sellPrice" class="col-sm-4 text-center">가 격</label>
+		    <div class="col-sm-7">
 		      <input type="text" class="form-control" id="sellPrice" name="sellPrice" placeholder="가격">
 		    </div>
 		  </div>
 
 		  <div class="form-group">
-		  <label for="sellText" class="col-sm-3 text-center">상세정보</label>
-		  <div class="container col-sm-6">
-        <div class="editable" id="sellText" name="sellText">
-        	여기에 내용과 사진을 입력하세요
+		  <label for="sellText" class="col-sm-4 text-center">상세정보</label>
+		  <div class="container col-sm-7">
+        <div class="editable" id="sellText">
+		여기에 글을 작성 해 주세요<br>+버튼을 눌러서 이미지를 업로드 할 수 있습니다.
+		
         </div>
 	</div>
 	</div>
@@ -93,8 +94,12 @@
     
     <script src="/common/js/medium-editor/dist/js/medium-editor.js"></script>
     <script>
+  
     var editor = new MediumEditor('.editable');
     $(function () {
+    	$('.editable').click(function(){
+    		$('.editable').empty();
+    	});
         $('.editable').mediumInsert({
             editor: editor
         });
