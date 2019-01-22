@@ -62,7 +62,8 @@
 	
 
 			
-<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=ICC6WpwdQLzHUQn5KfEC&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fuser%2FnaverCallback&state=state"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=ICC6WpwdQLzHUQn5KfEC&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fuser%2FnaverCallback&state=state">
+<img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
 
 	
   <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
