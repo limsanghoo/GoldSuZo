@@ -101,7 +101,7 @@ body {
 		pointer-events:none;
 }
 
-#menu{
+#selectMenu{
 		padding-top : 100px;
 }
 
@@ -241,7 +241,7 @@ function fncGetTown(){
 <form name="listBoard">
 
 
-<div id="menu">
+<div id="selectMenu">
 <!-- 지도로 보기 -->
 <c:if test="${user.userNo!=null}">
 <input type="button" value="지도로 보기"/>
@@ -260,7 +260,7 @@ function fncGetTown(){
 </div>
 
 <!-- 동네 선택 -->
-<div>
+<div id="selectTown">
 <c:if test="${param.view=='town'}">
 <div class="row">
 				<select name="state" class="ct_input_g" style="width: 200px; height: 40px" onchange="fncGetState(this)">
