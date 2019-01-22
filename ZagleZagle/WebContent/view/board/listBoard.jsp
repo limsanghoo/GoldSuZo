@@ -28,17 +28,18 @@ form{
 	 	padding-top : 150px;
 	 	padding-left:150px;
         padding-right:150px;
-        background-color:#fb9e96;
+        background-color:#f2f2f2;
 
 	}
 
 body {
-    margin: 0;
+   	margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
     background: #333;
 }
 .containerList {
+	padding-top : 150px; /* 리스트 맨 위 */
     width: 1200px;
     margin: 20px auto;
     columns: 4;
@@ -100,6 +101,11 @@ body {
 		pointer-events:none;
 }
 
+#menu{
+		padding-top : 100px;
+}
+
+
 </style>
 <script type="text/javascript">
 
@@ -129,8 +135,6 @@ $(function(){
 //검색 엔터
 function enter() {
         if (window.event.keyCode == 13) {
-        	
-        	alert("뭔데");
              // 엔터키가 눌렸을 때 실행할 내용
         	$("form").attr("method" , "POST").attr("action" , "/board/listBoard?view=${param.view}").submit();
         }
@@ -228,13 +232,16 @@ function fncGetTown(){
 
 </head>
 
+<jsp:include page="/view/layout/toolbar.jsp" />
 
 <body>
 
-<jsp:include page="/view/layout/toolbar.jsp" />
+
 
 <form name="listBoard">
 
+
+<div id="menu">
 <!-- 지도로 보기 -->
 <c:if test="${user.userNo!=null}">
 <input type="button" value="지도로 보기"/>
@@ -250,7 +257,7 @@ function fncGetTown(){
 <input type="button" value="게시물 등록" id="goAddBoard">
 </a>
 </c:if>
-
+</div>
 
 <!-- 동네 선택 -->
 <div>
