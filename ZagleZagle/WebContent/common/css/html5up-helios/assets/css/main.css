@@ -65,7 +65,7 @@ input::-moz-focus-inner {
 	padding: 0;
 }
 
-input, select, textarea {
+ input, textarea {
 	-moz-appearance: none;
 	-webkit-appearance: none;
 	-ms-appearance: none;
@@ -102,13 +102,13 @@ input, select, textarea {
 			transition: none !important;
 		}
 
-	input, textarea, select {
+	 input, textarea, select {
 		font-size: 15pt;
 		line-height: 1.85em;
 		font-family: 'Source Sans Pro', sans-serif;
 		font-weight: 300;
 	}
-
+ 
 	h1, h2, h3, h4, h5, h6 {
 		font-weight: 400;
 		color: #483949;
@@ -276,7 +276,7 @@ input, select, textarea {
 
 /* Row */
 
-	.row {
+/* 	.row {
 		display: flex;
 		flex-wrap: wrap;
 		box-sizing: border-box;
@@ -1741,7 +1741,7 @@ input, select, textarea {
 						}
 
 		}
-
+  */
 /* Sections/Article */
 
 	section, article {
@@ -1756,9 +1756,9 @@ input, select, textarea {
 			text-align: center;
 		}
 
-	.row > section, .row > article {
+/* 	.row > section, .row > article {
 		margin-bottom: 0;
-	}
+	} */
 
 	header {
 		margin: 0 0 1em 0;
@@ -1952,14 +1952,17 @@ input, select, textarea {
 	form input[type="password"],
 	form select,
 	form textarea {
+		height:40px;
+		width:100%;
+		font-size:15px;
+	
 		-webkit-appearance: none;
-		display: block;
+		/* display: block; */
 		border: 0;
 		background: #fafafa;
-		width: 100%;
 		border-radius: 0.5em;
 		border: solid 1px #E5E5E5;
-		padding: 1em;
+		/* padding: 1em; */
 		-moz-transition: background-color 0.35s ease-in-out, border-color 0.35s ease-in-out;
 		-webkit-transition: background-color 0.35s ease-in-out, border-color 0.35s ease-in-out;
 		-ms-transition: background-color 0.35s ease-in-out, border-color 0.35s ease-in-out;
@@ -1975,7 +1978,7 @@ input, select, textarea {
 			border-color: #df7366;
 		}
 
-	form input[type="text"],
+ 	form input[type="text"],
 	form input[type="email"],
 	form input[type="password"],
 	form select {
@@ -2053,6 +2056,9 @@ input, select, textarea {
 	input[type="reset"],
 	button,
 	.button {
+		height:40px;
+		width:130px;
+	
 		position: relative;
 		display: inline-block;
 		background: #df7366;
@@ -2060,11 +2066,12 @@ input, select, textarea {
 		text-align: center;
 		border-radius: 0.5em;
 		text-decoration: none;
-		padding: 0.65em 3em 0.65em 3em;
+		/* padding: 0.65em 3em 0.65em 3em; */
 		border: 0;
 		cursor: pointer;
 		outline: 0;
 		font-weight: 300;
+		font-size:15px;
 		-moz-transition: background-color 0.35s ease-in-out, color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
 		-webkit-transition: background-color 0.35s ease-in-out, color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
 		-ms-transition: background-color 0.35s ease-in-out, color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
@@ -2610,10 +2617,10 @@ input, select, textarea {
 
 		/* Basic */
 
-			body, input, textarea, select {
+			 body, input, textarea, select {
 				font-size: 14pt;
 				line-height: 1.75em;
-			}
+			} 
 
 		/* Carousel */
 
@@ -2638,10 +2645,10 @@ input, select, textarea {
 
 		/* Basic */
 
-			body, input, textarea, select {
+			 body, input, textarea, select {
 				font-size: 12pt;
 				line-height: 1.5em;
-			}
+			} 
 
 		/* Wrapper */
 
@@ -2685,7 +2692,7 @@ input, select, textarea {
 
 		/* Basic */
 
-			body, input, textarea, select {
+			 body, input, textarea, select {
 				font-size: 13pt;
 				line-height: 1.65em;
 			}
@@ -2760,9 +2767,9 @@ input, select, textarea {
 					margin-bottom: 0;
 				}
 
-			.row > section, .row > article {
+			/* .row > section, .row > article {
 				margin-bottom: 2em;
-			}
+			} */
 
 			header > p {
 				font-size: 1.25em;

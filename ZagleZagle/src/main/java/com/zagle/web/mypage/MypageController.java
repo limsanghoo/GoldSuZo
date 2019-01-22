@@ -24,6 +24,7 @@ import com.zagle.common.Page;
 import com.zagle.common.Search;
 import com.zagle.service.board.BoardService;
 import com.zagle.service.domain.Board;
+import com.zagle.service.domain.Comment;
 import com.zagle.service.domain.Mypage;
 import com.zagle.service.domain.SearchMypage;
 import com.zagle.service.domain.User;
@@ -129,20 +130,40 @@ public class MypageController {
 //		search.setPageSize(pageSize);
 		
 		User user = (User) session.getAttribute("user");
+		user.getUserNo();
+		user = userService.getUser2(user.getUserNo());
+		
+		System.out.println("getUser 값 :"+user);
 		
 		 searchMypage.setMyUser(user);
-		System.out.println("유저 누군지 확인 :"+ searchMypage);		
+		
+		
 		
 		Map<String, Object> map = mypageService.listComment(searchMypage);
 		
 		System.out.println(map);
+		
+		ArrayList list = (ArrayList) map.get("list");
+		System.out.println(list);
+		System.out.println(list.size());
+		List<Board> bdList = new ArrayList<Board>();
+		for (int i = 0; i < list.size(); i++) {
+		
+			Mypage mp = (Mypage)list.get(i);
+			String bdNo = mp.getBoard().getBoardNo();
+			Board bd = boardService.getBoard(bdNo);
+			bdList.add(bd);
+
+		}
+		System.out.println(bdList);
+		
 		
 //		Page resultPage = new Page(search.getCurrentPage(),((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 //		System.out.println(resultPage);
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("list", map.get("list"));
-//		modelAndView.addObject("resultPage", resultPage);
+		modelAndView.addObject("Cboard", bdList);
 		modelAndView.addObject(" searchMypage",  searchMypage);
 		modelAndView.setViewName("forward:/view/mypage/listComment.jsp");
 	
@@ -158,6 +179,7 @@ public class MypageController {
 		
 		
 		User user = (User) session.getAttribute("user");
+		
 		searchMypage.setMyUser(user);
 		
 		
@@ -173,6 +195,7 @@ public class MypageController {
 //		Page resultPage = new Page(search.getCurrentPage(),((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 //		System.out.println(resultPage);
 //		
+		
 		System.out.println(map);
 		
 		ArrayList list = (ArrayList) map.get("list");
@@ -250,6 +273,7 @@ public class MypageController {
 		
 		
 		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("user", user);
 		modelAndView.addObject("listBoard", bdList);
 		modelAndView.addObject("search", search);
 		modelAndView.setViewName("forward:/view/mypage/listLike.jsp");

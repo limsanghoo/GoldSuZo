@@ -52,6 +52,27 @@
    	-->
    	
    	<!-- echoHandler 선언-->
+   	
+   	
+   	
+   	  <bean id="googleConnectionFactory"
+  class="org.springframework.social.google.connect.GoogleConnectionFactory">
+  <constructor-arg
+    value="770357560919-aul509lnf1546sjm4dpb8jdf48jk1ook.apps.googleusercontent.com" />
+  <constructor-arg value="kpsY-DIe7NHeZI1ELrZ2Or-f" />
+</bean>
+<!-- 승인된 자바스크립트 원본과 승인된 리디렉션 URI -->
+<bean id="googleOAuth2Parameters"
+  class="org.springframework.social.oauth2.OAuth2Parameters">
+  <property name="scope"
+    value="https://www.googleapis.com/auth/plus.login" />
+  <property name="redirectUri"
+    value="http://localhost:8080/user/getGGToken"/>
+</bean> 
+   	
+   	
+   	
+   	
 	
 
 	<!--  :: ViewResolver 선언 -->	
@@ -72,10 +93,7 @@
 	     <mvc:resources mapping="/resources/**" location="/resources/" />
 	--> 
 	<mvc:resources mapping="/common/**" location="/common/" />
-  <mvc:resources mapping="/css/**" location="/css/" />
-   	<mvc:resources mapping="/images/**" location="/images/" />
-   	<mvc:resources mapping="/js/**" location="/js/" />
-   	<mvc:resources mapping="/error/**" location="/err/" />
+
 
 	<!-- 	:: exception resolver  선언 :: 서술적 / 선언적 예외처리 
 			:: Servlet 에서의 선언적 예외처리를 다시 생각하며....  -->

@@ -95,8 +95,7 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public void addComment(Comment comment) throws Exception {
-		// TODO Auto-generated method stub
-		
+		boardDAO.addComment(comment);
 	}
 
 	@Override

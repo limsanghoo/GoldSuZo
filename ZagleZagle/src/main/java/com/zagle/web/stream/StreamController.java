@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.zagle.common.Page;
 import com.zagle.service.domain.Refund;
 import com.zagle.service.domain.SearchStream;
 import com.zagle.service.domain.Stream;
@@ -141,6 +142,7 @@ public class StreamController {
 	
 	@RequestMapping(value="addRefund",method=RequestMethod.POST)
 	public void addRefund(@ModelAttribute("refund")Refund refund) throws Exception{
+		System.out.println("addRefund=========");
 		User user = userService.getUser2(refund.getStreamerNo());
 		refund.setAccount(user.getAccount());
 		refund.setBankname(user.getBankName());
@@ -157,12 +159,17 @@ public class StreamController {
 		searchStream.setPageSize(3);
 		searchStream.setSearchUserNo("US10001");
 		System.out.println("왜 안바뀌지????"+searchStream);
+		
 		System.out.println(searchStream.getEndRowNum());
 		System.out.println(searchStream.getStartRowNum());
 		Map<String,Object> map = streamService.listRefund(searchStream);
+		Page resultPage = new Page( searchStream.getCurrentPage(), ((Integer)map.get("count")).intValue(), pageUnit, pageSize);
+		System.out.println("resultPage======="+resultPage);
 		ModelAndView modelAndView=new ModelAndView();
 		modelAndView.addObject("list",map.get("list"));
 		modelAndView.addObject("count",map.get("count"));
+		modelAndView.addObject("resultPage",resultPage); 
+		
 		modelAndView.setViewName("forward:/view/stream/listRefund.jsp");	
 	return modelAndView;
 	}

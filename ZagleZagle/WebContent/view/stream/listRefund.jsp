@@ -53,7 +53,14 @@
 
 <script type="text/javascript">
 
-
+function fncGetRefundList(currentPage) {
+	var list = "${list}";
+	alert(list);  
+    $("#currentPage").val(currentPage)
+   
+    
+    $("form").attr("method", "POST").attr("action", "/stream/listRefund").submit();
+}
   
 </script> 
 </head>
@@ -61,6 +68,8 @@
 
 
 <body>
+  <input type="hidden" id="currentPage" name="currentPage" value=""/>
+		
    	<!-- ToolBar End /////////////////////////////////////-->
  <table class="table table-hover table-striped" >
       
@@ -89,12 +98,16 @@
 			  <td align="left">${refund.bankname}</td>
 			  <td align="left">${refund.account}</td>
 			  <td align="left">${refund.price}</td>
-              <td align="left">${refund.checkRefund}</td>
+			  <c:if test="${refund.checkRefund =='0'}">
+              <td align="left">환급진행중</td>
+              </c:if>
+              <c:if test="${refund.checkRefund =='1'}">
+               <td align="left">환급완료</td>
+              </c:if> 
 		    </tr>
           </c:forEach>
         </tbody>
-      
-      </table>
- 
+      </table> 
+ 	  <jsp:include page="/view/stream/pageNavigator.jsp"/> 
 </body>
 </html>
