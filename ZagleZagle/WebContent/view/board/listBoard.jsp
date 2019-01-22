@@ -244,7 +244,7 @@ function fncGetTown(){
 
 <body>
 
-<jsp:include page="/view/layout/toolbar.jsp" />
+<jsp:include page="/view/layout/toolbar.jsp"/>
 
 
 <form name="listBoard">
@@ -420,7 +420,9 @@ if (coord==null || coord=='') {
       <!-- 모달1 바디 끝 -->
       
       <div class="modal-footer">
-      <input type="text" value>
+      
+     	<jsp:include page="/view/board/listComment.jsp" />
+     	
       </div>
       <!-- 모달1 푸터 끝 -->
     </div><!-- /.modal-content -->
