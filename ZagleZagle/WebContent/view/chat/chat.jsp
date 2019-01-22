@@ -4,30 +4,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<title>Chat</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
-	
-	 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  
-<meta charset="UTF-8">
-<title>ZagleZagle</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" integrity="sha384-PmY9l28YgO4JwMKbTvgaS7XNZJ30MK9FAZjjzXtlqyZCqBY6X6bXIkM++IkyinN+" crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap-theme.min.css" integrity="sha384-jzngWsPS6op3fgRCDTESqrEJwRKck+CILhJVO5VvaAZCq8JYf8HsR/HPpBOOPZfR" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js" integrity="sha384-vhJnz1OVIdLktyixHY4Uk3OHEwdQqPppqYR8+5mjsauETgLOcEynD9oPHhhz18Nw" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js" integrity="sha384-vhJnz1OVIdLktyixHY4Uk3OHEwdQqPppqYR8+5mjsauETgLOcEynD9oPHhhz18Nw" crossorigin="anonymous"></script>
 <style>
-	body,html{
+body,html{
 			height: 100%;
 			margin: 0;
 			background: #7F7FD5;
@@ -74,7 +61,7 @@
 		     box-shadow:none !important;
            outline:0px !important;
 		}
-		#msg{
+		.type_msg{
 			background-color: rgba(0,0,0,0.3) !important;
 			border:0 !important;
 			color:white !important;
@@ -280,6 +267,8 @@ lable:active
 #msg_process {
 	width: 90px;
 }
+div label { display: inline-block; padding: .5em .75em; color: #999; font-size: inherit; line-height: normal; vertical-align: middle; background-color: #fdfdfd; cursor: pointer; border: 1px solid #ebebeb; border-bottom-color: #e2e2e2; border-radius: .25em; } 
+div input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
 
 
 </style>
@@ -302,7 +291,11 @@ lable:active
 			//msg_process를 클릭할 때
 			$("#msg_process").click(function() {
 				//소켓에 send_msg라는 이벤트로 input에 #msg의 벨류를 담고 보내준다.
-				socket.emit("send_msg",$("#msg").val());
+				var msg = $("#msg").val();
+				if (msg!="") {
+					socket.emit("send_msg",$("#msg").val());
+				}
+				
 				//#msg에 벨류값을 비워준다.
 				$("#msg").val("");
 			});
@@ -316,10 +309,10 @@ lable:active
 			socket.on('send_msg', function(data) {
 				//div 태그를 만들어 텍스트를 msg로 지정을 한뒤 #chat_box에 추가를 시켜준다.
 				if (data.ms.substring(data.ms.length-3)=='jpg'||data.ms.substring(data.ms.length-3)=='png') {
-					$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer'><img src='http://192.168.0.25:8080/common/images/chat/"+data.ms+"' style='width: 200px; height: 180px;' class='img-thumbnail'/><span class='msg_time'></span></div></div>").appendTo("#chat_box");
+					$("<a href='#' data-value='"+data.ms+"'><div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer'><img src='http://192.168.0.25:8080/common/images/chat/"+data.ms+"' style='width: 200px; height: 180px;' class='img-thumbnail' /><span class='msg_time'>"+data.rt+"</span></div></div></a>").appendTo("#chat_box");
 					$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
 				}else if(data.ms.substring(data.ms.length-3)=='mp4'||data.ms.substring(data.ms.length-3)=='wmv'){
-					$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer'><video controls controlsList='nodownload' width='320' height='240' muted><source src='http://192.168.0.25:8080/common/images/chat/"+data.ms+"' type='video/mp4'><a href='http://192.168.0.25:8080/common/images/chat/"+data.ms+"'>download video</a></video><span class='msg_time'></span></div></div>").appendTo("#chat_box");
+					$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer'><video controls controlsList='nodownload' width='320' height='240' muted><source src='http://192.168.0.25:8080/common/images/chat/"+data.ms+"' type='video/mp4'><a href='http://192.168.0.25:8080/common/images/chat/"+data.ms+"'>download video</a></video><span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
 					$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
 				}else{
 					$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer'>"+data.ms+"<span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
@@ -330,12 +323,12 @@ lable:active
 			});
 			//
 			socket.on('out_msg',function(msg){
-				$('<div></div>').text(msg).appendTo("#chat_box");
+				$("<div style='text-align:center; color : white;'></div>").text(msg).appendTo("#chat_box");
 				$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
 			});
 			
 
-			$('#file_up').on('click',function(){
+			$('#image_name').on('change',function(){
 		         var formData = new FormData($('form')[0]);
 		         var bar = $('.bar');
 				    var percent = $('.percent');
@@ -357,7 +350,8 @@ lable:active
 		                     bar.width(percentVal);
 		                     percent.html(percentVal);
 		                     status.html(xhr.responseText);
-		                     $("#image_name").val("");
+		                     msg_process.click();
+		                     
 		                 },
 		                 error : function(error) {
 		                     alert("파일 업로드에 실패하였습니다.");
@@ -421,7 +415,7 @@ lable:active
 				                 success : function(data) {	         		                	 
 				                //	 $("#msg").val(data);
 				                	alert("번역성공!!")
-				                	 $('#msg').val(data);
+				                	 $('#msg').val(data).focus();
 				                 },
 				                 error : function(error) {
 				                     alert("번역실패.");
@@ -434,7 +428,22 @@ lable:active
 			
 		});
 		
+		$(document).ready(function(){
+			$('#action_menu_btn').click(function(){
+				$('.action_menu').toggle();
+			});
+				});
 		
+		
+		$(function(){
+			
+			$("a[data-value] div").on("click",function(){
+				alert("요기는?");
+				var dt = "<img src='http://192.168.0.25:8080/common/images/chat/"+$("a[data-value]").data("value")+"' class='img-thumbnail''/>"
+				$("#modal-body").text(dt);
+				$("#myModal").modal();
+			})
+		});
 	</script>
 </head>
 <body>
@@ -464,7 +473,6 @@ lable:active
 								</ul>
 							</div>
 						</div>
-						
 						<div class="card-body msg_card_body" id="chat_box">
 						
 						</div>
@@ -473,11 +481,14 @@ lable:active
 						<div class="card-footer">
 							<div class="input-group">
 							<form enctype="multipart/form-data" id="frm">
+								
+
 								<div class="input-group-append">
-									<span class="input-group-text attach_btn"><label for="#image_name" class="fas fa-paperclip"></label>
+									<label for="image_name" class="fas fa-paperclip"></label>
 									<input type="file" name="imageFile" id="image_name"/>
-									<button type='button' id='file_up'>등록</button></span>
+									
 								</div>
+								
 								</form>
 								<div class="input-group-append">
 								<input type="text" class="form-control type_msg" placeholder="여기에 입력하세요.." id="msg"/>
@@ -492,6 +503,22 @@ lable:active
 				</div>
 			</div>
 		</div>
+		
+		<div class="modal fade" id="myModal" role="dialog">
+		    <div class="modal-dialog">
+		    
+		      <!-- Modal content-->
+		      <div class="modal-content">
+		        <div class="modal-body">
+		          
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+		      </div>
+		      
+		    </div>
+		  </div>
 	</body>
 	
 </html>

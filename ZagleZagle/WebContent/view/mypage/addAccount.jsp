@@ -85,10 +85,30 @@
 	
 	
 	</script>
+	
+	<style>
+	
+	
+	
+	</style>
+
 
 </head>
 <body>
+
+
+
+
+
+
+	
+	<jsp:include page="/view/layout/mypageToolbar.jsp" />
+
+
 	<div class="container">
+	
+	
+	
 	
 	<h1 class="bg-primary text-center">계 좌 등 록</h1>
 
@@ -111,7 +131,10 @@
 		<div class="form-group">
 		    <label for="bankName" class="col-sm-offset-1 col-sm-3 control-label">은행이름</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="bankName" name="bankName" placeholder="은행이름을 입력하세요"> 
+		      <input type="text" class="form-control" id="bankName" name="bankName" placeholder="은행이름을 입력하세요" readonly> 
+		         <span id="helpBlock" class="help-block">
+		      	<strong class="text-danger">입력전 실명인증 부터 해야 합니다.</strong>
+		      </span>
 		     
 		    </div>
 		  </div>
@@ -128,12 +151,6 @@
 		
 	</div>
 		
-
-여기서 계좌등록 수행. 내일 진행
-
-${user}
-
-${realName}
 
 </body>
 </html>

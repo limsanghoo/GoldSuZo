@@ -1,2 +1,6 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
 encoding//WebContent/view/trade/addSell_mediumeditor.jsp=UTF-8
+=======
+encoding//WebContent/view/board/listBoard.jsp=UTF-8
+>>>>>>> refs/remotes/origin/master

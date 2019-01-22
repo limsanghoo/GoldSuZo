@@ -25,7 +25,7 @@ $(function(){
 	    if (xmlHttpRequest.readyState == 4) {
 	      if (xmlHttpRequest.status == 200) {
 	        var result = JSON.parse(xmlHttpRequest.responseText);
-	        $("#img_box").append("<img src="+result.data.link+">");//이미지 미리보기
+	        $("#img_box").append("<img src='"+result.data.link+"' name='img'>");//이미지 미리보기
 	        
 	        var linkArea=$("#link");
 			linkArea.val(linkArea.val()+result.data.link+",");//이미지 링크 append
@@ -65,11 +65,18 @@ $(function(){
 //등록 클릭
 $(function(){
    $('#submit').bind("click",function(){
+	   
+	  var imgLength=$("img[name='img']").length;
       
+	  if(imgLength>3){
+		alert("사진은 세 장까지 등록 가능합니다.");
+		return;
+	  }
+	   
       var boardDetailText=$("input[name='boardDetailText']").val();
       
       if(boardDetailText==""){
-         alert("내용을 입력해라");
+         alert("내용을 입력해주세요.");
          return;
       }
       
@@ -85,18 +92,14 @@ $(function(){
 
 <body>
 
-<form name="fileForm" class="form-horizontal" enctype="multipart/form-data">
+<form name="fileForm" class="form-horizontal" enctype="multipart/form-data" style="text-align: center;">
 
 <input type="hidden" name="userNo" value="${param.userNo}"/><!-- value 수정해야함 -->
 
-<div>
-	<input id=file type=file multiple="multiple">* 사진은 하나씩 등록해주세요!<br/>
-	<div id="img_box"></div>
-</div>
 
 <div>
 <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"/>
-<input type="button" onclick="sample4_execDaumPostCode()" value="지명 검색"/><hr/>
+<input type="button" onclick="sample4_execDaumPostCode()" value="지명 검색"/>
 <input type="text" name="address" id="sample5_address" placeholder="검색버튼을 눌러주세요" readOnly/><br/>
 <input type="hidden" name="coord" value=""/><!-- 좌표 -->
 <div id="map" style="width:500px;height:500px;margin-top:10px;display:none"></div>
@@ -170,7 +173,8 @@ $(function(){
 
 내용
 <div>
-   <input type="text" name="boardDetailText" value=""/>
+   <!-- <input type="text" name="boardDetailText" value=""/> -->
+   <textarea cols="50px" rows="10px" name="boardDetailText" value=""></textarea>
 </div>
 <br/>
 
@@ -180,11 +184,16 @@ $(function(){
 </div>
 <br/>
 
+<div>
+	<input id=file type=file multiple="multiple">* 사진은 하나씩 등록해주세요!<br/>
+	<div id="img_box"></div>
+</div>
+
 <input type="hidden" id="link" value="" name="photo1"/><!-- 이미지 링크 append 되는 부분 -->
 
 </form>
 
-<div>
+<div style="text-align: center">
    <input type="button" id="submit" value="등록"/>
    <input type="button" id="cancel" value="취소"/>
 </div>
