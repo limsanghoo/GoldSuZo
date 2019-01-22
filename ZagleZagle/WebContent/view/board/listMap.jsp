@@ -23,10 +23,19 @@
     .info .link {color: #5085BB;}
 
 
+        div.row{
+        	padding-top : 150px;
+        }
+
+
 </style>
     
 </head>
+
+<jsp:include page="/view/layout/toolbar.jsp" />
+
 <body>
+
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
 <div class="row">
