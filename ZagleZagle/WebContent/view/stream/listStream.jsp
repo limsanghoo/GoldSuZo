@@ -5,23 +5,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
 
-
 <html>
 <head>
 <title>스트리밍 목록조회</title>
-<style>
- 
+<link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
+<style> 
   body{
   background-image: url("https://images.pexels.com/photos/1022921/pexels-photo-1022921.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
-  }  
-  @import url(https://fonts.googleapis.com/css?family=Patrick+Hand+SC);
-*{ 
-  box-sizing:border-box;
- 	 margin: 0;
-   	 padding: 0;
-   	 font-family: 'Poppins', sans-serif; 
-}
-  
+  font-family: 'Do Hyeon', sans-serif;
+  }   
     button{
       align-self:center;
       background:transparent;
@@ -35,7 +27,8 @@
       box-shadow: 20px 38px 34px -26px hsla(0,0%,0%,.2);
       border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
    } 
-       button:hover{
+   
+    button:hover{
          box-shadow:2px 8px 4px -6px hsla(0,0%,0%,.3);
       } 
       button.lined.thick{
@@ -97,8 +90,8 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 
-
 <script type="text/javascript">
+
 
 /*var auto_refresh = setInterval(
 		function ()
@@ -112,7 +105,7 @@ function addStream(){
  }
 		
 function addRefund(){
-		
+		alert('addRefund()');
 	    $("#addRefundForm").attr("method", "POST").attr("action", "/stream/addRefund").submit();
 } 
  
@@ -134,14 +127,14 @@ $(function() {
 	
 	$("#refund").on("click", function() {
 		   alert("환급합니다~");
-		   addRefund();
+		   addRefund(); 
 		  var result = confirm("환급신청 완료! 환급리스트 화면으로 이동 하시겠습니까?");
 		  if(result){
-			  alert("환급리스트 공사중....")
-			  self.location="192.168.0.12:8080/stream/listStream";
+			  //alert("환급리스트 공사중....") 
+			  self.location="/stream/listRefund";
 		  }else{
 			  self.location="192.168.0.12:8080/stream/listStream";
-		  }
+		  } 
 	}); 
 	
 	$("#listRefund").on("click", function() {
@@ -211,15 +204,12 @@ $(function() {
 });  
 </script> 
 </head>
-
-
-
 <body>
    	<!-- ToolBar End /////////////////////////////////////-->
 
 
 		<!--<button type="button" data-toggle="modal" data-target="#myModal" style="margin:15px; padding:15px;">스트리밍 방 업로드 하기</button>   -->
-   
+<div>왜 안바껴어어어어</div>   
    
   <button class='lined thick' data-toggle="modal" data-target="#myModal" style="margin:15px; padding:15px;">스트리밍방 업로드 하기</button>
 

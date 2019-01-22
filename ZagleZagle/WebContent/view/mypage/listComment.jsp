@@ -20,6 +20,23 @@
 	 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+<script type="text/javascript">
+
+
+ $(function() {
+	
+	 $("span.glyphicon.glyphicon-ok").on("click", function() {
+	 
+	 alert("확인용")
+ });
+
+ });
+
+
+</script>
+
+
+
 
 </head>
 <body>
@@ -30,7 +47,7 @@
 <div class="container">
 	
 	<div class="page-header text-info">
-	       <h5>작성 댓글 보기</h5>
+	       <h5>댓글 작성한 게시물</h5>
 	    </div>
 	    
 	    
@@ -39,9 +56,8 @@
 	    <thead>
 	     <tr>
             <th align="center">No</th>
-            <th align="left" >댓글 내용</th>
+            <th align="left" >게시물 내용</th>
             <th align="left">작성 날짜</th>
-            
             <th align="left">삭제 여부</th>
             
           </tr>
@@ -50,20 +66,23 @@
 			  <tbody>
       
       <c:set var="i" value="0" />
-		   <c:forEach var="mypage" items="${list}">
+		   <c:forEach var="board" items="${Cboard}" >
 		   
-		   <div class="moal" data-toggle="modal" data-target="#${board.boardNo}modal1"></div>
 		   
 		   
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
 			  <td align="left">${ i }</td>
-			  <td align="left"  title="Click : 댓글 작성한 게시물로 이동" data-param="${mypage.comment.commentNo}">${mypage.comment.commentDetailText}</td>
-			  <td align="left">${mypage.comment.commentRegDate}</td>
-			  
+			  <td align="left"  title="Click : 댓글 작성한 게시물로 이동" data-toggle="modal" data-target="#${board.boardNo}modal">${board.boardDetailText}</td>
+			  <td align="left">${board.boardRegDate}</td>
+			  <td align="left"><span class="glyphicon glyphicon-ok">Click</span> </td>
 		
+				</tr>
+				
+	
+	
 <!-- 모달1 시작 -->
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="${board.boardNo}modal1">
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="${board.boardNo}modal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     
@@ -77,9 +96,11 @@
         
         <h4 class="modal-title" id="gridSystemModalLabel">
         <div class="col-md-4">
-        <img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px;" align="middle"/>
-		${board.user.userNickname}
+        <img src="/common/images/profile/${user.profile}" style="height: 60px; width:60px;" align="middle"/>
+		${user.userNickname}
 		</div>
+		
+		
 		
 		<!-- 내 글만 수정, 삭제 -->
 		<c:if test="${user.userNo==board.user.userNo}">
@@ -99,17 +120,17 @@
 
 		<div>
 			<c:if test="${board.photo1 !=null}">
-			<div><img src="${board.photo1}" style="width: 500px"/></div>
+			<div><img src="${board.photo1}" style="width: 450px"/></div>
 			<br/>
 			</c:if>
 
 			<c:if test="${board.photo2 !=null}">
-			<div><img src="${board.photo2}" style="width: 500px"/></div>
+			<div><img src="${board.board.photo2}" style="width: 450px"/></div>
 			<br/>
 			</c:if>
 	
 			<c:if test="${board.photo3 !=null}">
-			<div><img src="${board.photo3}" style="width: 500px"/></div>
+			<div><img src="${board.board.photo3}" style="width: 450px"/></div>
 			<br/>
 			</c:if>
 		</div>

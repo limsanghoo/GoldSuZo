@@ -86,7 +86,9 @@ public class StreamDAOImpl  implements StreamDAO{
 	@Override
 	public void addRefund(Refund refund) {
 		// TODO Auto-generated method stub 
-		sqlSession.insert("StreamMapper.addRefund", refund);
+		System.out.println("addRefundDAOIMPL");
+		sqlSession.insert("RefundMapper.addRefund", refund);
+		sqlSession.update("SponMapper.updateSpon", refund.getStreamerNo());
 	}
 
 	

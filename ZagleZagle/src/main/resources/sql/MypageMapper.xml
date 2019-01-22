@@ -45,7 +45,7 @@
 	</update>
 	 
 	 <select id="commentList"	parameterType="com.zagle.service.domain.SearchMypage" resultMap="mypageSelectMap">
-	 SELECT u.user_no, c.comment_no, c.comment_detail_text, c.comment_reg_date
+	 SELECT u.user_no, c.comment_no, c.comment_detail_text, c.comment_reg_date, c.board_no
 	 FROM users u, comments c
 	 WHERE u.user_no = c.user_no and u.user_no = #{myUser.userNo:VARCHAR}
 	 ORDER BY c.comment_reg_date DESC 

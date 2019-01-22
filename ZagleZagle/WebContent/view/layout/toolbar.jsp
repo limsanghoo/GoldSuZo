@@ -86,10 +86,89 @@
    
 		 	$("li:contains('작성 게시물 보기')").on("click" , function() {
 				//$(self.location).attr("href","http://localhost:3000/");
-				self.location = "/mypage/listMyBoard"
+				self.location = "/mypage/listScrap"
 		 		
 			});
    
+		 	$("li:contains('좋아요 게시물 보기')").on("click" , function() {
+				//$(self.location).attr("href","http://localhost:3000/");
+				self.location = "/mypage/listLike"
+		 		
+			});
+		 	
+		 	$("li:contains('스크랩 게시물 보기')").on("click" , function() {
+				//$(self.location).attr("href","http://localhost:3000/");
+				self.location = "/mypage/listMyBoard"
+		 		
+			});
+		 	
+		 	$("li:contains('댓글 작성한 게시물 보기')").on("click" , function() {
+				//$(self.location).attr("href","http://localhost:3000/");
+				self.location = "/mypage/listComment"
+		 		
+			});
+		 	
+		 	$("li:contains('계좌번호 등록(신규)')").on("click" , function() {
+				//$(self.location).attr("href","http://localhost:3000/");
+				self.location = "/mypage/addAccount"
+		 		
+			});
+		 	
+		 	$("li:contains('계좌번호 수정')").on("click" , function() {
+				//$(self.location).attr("href","http://localhost:3000/");
+				self.location = "/mypage/updateAccount"
+		 		
+			});
+   ////////////////////////////////////////////////////회원정보보기, Logout//////////////////////////////////////////////////////////
+   
+   
+   		$(function() {
+	    
+		
+   			
+   			
+		$("li:contains('로그아웃')").on("click",function() {
+			
+			alert("클릭됨")
+			
+				var snsNo = $(this).data("param");
+				
+				alert(snsNo)
+			
+			if(snsNo.startsWith("K")) {
+				
+				alert("K로시작하는거 인식")
+				$("form").attr("method" , "POST").attr("action" , "/user/logout/json").submit();
+				
+			}else if(snsNo.startsWith("N")){
+				alert("N으로시작하는거 인식")
+				$("form").attr("method" , "POST").attr("action" , "/user/Nlogout").submit();
+			}
+	
+			
+		
+			
+		});
+	
+		
+	});
+   
+   
+   
+
+		 	$(function() {
+		 		
+		 		$(".getUserInfo").on("click", function() {
+		 			
+		 			
+		 			var userNo =$(this).data("param1");
+		 			alert(userNo)
+		 			console.log(userNo);
+		 			
+		 			self.location="/user/getUser2?userNo="+userNo
+		 		
+		 		});
+		 	});
    
    
 		 });
@@ -147,7 +226,7 @@
 								<li>My Page
 									<ul>
 										<li><a>작성 게시물 보기</a></li>
-										<li><a>작성 댓글 보기</a></li>
+										<li><a>댓글 작성한 게시물 보기</a></li>
 										<li><a>스크랩 게시물 보기</a></li>
 										<li><a>좋아요 게시물 보기</a></li>
 										<li><a>계좌번호 등록(신규)</a></li>
@@ -161,11 +240,20 @@
 	                <li>강남1</li>
 	                <li>강남2</li>
 	                <li>서초3</li>
-							
+					
+					<li>
+					<h4 class=getUserInfo data-param1="${user.userNo}" style="font-style: italic;">${user.userName} 님 환영합니다.</h4></li>
 							
 					<c:if test="${sessionScope.user.userNo==null}"><li>로그인</li></c:if>
-	                <c:if test="${sessionScope.user.userNo!=null}"><li>로그아웃</li></c:if>		
-								
+					
+					<li>
+					<a id="logout">
+	                <c:if test="${sessionScope.user.userNo!=null}"><li data-param="${user.snsNo}">로그아웃</li></c:if>		
+	                </a>
+					</li>
+					
+		
+					
 							</ul>
 						</nav>
 
@@ -182,6 +270,9 @@
 			<script src="/common/css/html5up-helios/assets/js/breakpoints.min.js"></script>
 			<script src="/common/css/html5up-helios/assets/js/util.js"></script>
 			<script src="/common/css/html5up-helios/assets/js/main.js"></script>
-
+		
+		
+				
+		
 	</body>
 </html>

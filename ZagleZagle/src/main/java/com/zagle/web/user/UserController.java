@@ -14,6 +14,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
+import org.springframework.social.connect.Connection;
+import org.springframework.social.google.api.Google;
+import org.springframework.social.google.api.impl.GoogleTemplate;
+import org.springframework.social.google.api.plus.Person;
+import org.springframework.social.google.api.plus.PlusOperations;
+import org.springframework.social.google.connect.GoogleConnectionFactory;
+import org.springframework.social.oauth2.AccessGrant;
+import org.springframework.social.oauth2.GrantType;
+import org.springframework.social.oauth2.OAuth2Operations;
+import org.springframework.social.oauth2.OAuth2Parameters;
+
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpPost;
@@ -26,6 +39,13 @@ import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.social.connect.Connection;
+import org.springframework.social.google.api.Google;
+import org.springframework.social.google.api.impl.GoogleTemplate;
+import org.springframework.social.google.api.plus.Person;
+import org.springframework.social.google.api.plus.PlusOperations;
+import org.springframework.social.oauth2.AccessGrant;
+import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
@@ -53,6 +73,13 @@ public class UserController {
 	@Autowired
 	@Qualifier("userServiceImpl")
 	private UserService userService;
+	
+	 @Autowired
+     private GoogleConnectionFactory googleConnectionFactory;
+
+     @Autowired
+     private OAuth2Parameters googleOAuth2Parameters;
+	
 	
 	public UserController() {
 		System.out.println(this.getClass());
@@ -372,6 +399,8 @@ public class UserController {
 	    return null;
 		
 	}	
+	
+	/*
 	@RequestMapping(value="getGGToken")
 	public ModelAndView getGGToken(@RequestParam("id") String id, RedirectAttributes ra,  HttpServletResponse response, 
 			HttpSession session,	HttpServletRequest request) throws Exception {	
@@ -391,6 +420,50 @@ public class UserController {
 		return modelAndView;
 	
 	}
+	*/
+	
+	@RequestMapping(value = "getGGToken", method = { RequestMethod.GET, RequestMethod.POST })
+	public void doSessionAssignActionPage(HttpServletRequest request, HttpServletResponse response)throws Exception{
+		   System.out.println("Google login success");
+		   
+		   String code = request.getParameter("code");
+		   	System.out.println("code==="+code);
+		   OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
+		   
+		   System.out.println("getRedirectUri==="+googleOAuth2Parameters.getRedirectUri());
+		   AccessGrant accessGrant = oauthOperations.exchangeForAccess(code , googleOAuth2Parameters.getRedirectUri(),
+		       null);
+		   String accessToken = accessGrant.getAccessToken();
+		   System.out.println("accessToken==="+accessToken);
+		   Long expireTime = accessGrant.getExpireTime();
+		   System.out.println("expireTime==="+expireTime);
+		   if (expireTime != null && expireTime < System.currentTimeMillis()) {
+			    accessToken = accessGrant.getRefreshToken();
+			    System.out.printf("accessToken is expired. refresh token = {}", accessToken);
+			  }
+			  Connection<Google> connection = googleConnectionFactory.createConnection(accessGrant);
+			  Google google = connection == null ? new GoogleTemplate(accessToken) : connection.getApi();
+
+			  PlusOperations plusOperations = google.plusOperations();
+			  Person profile = plusOperations.getGoogleProfile();
+			  System.out.println(profile.getDisplayName());
+
+			  response.sendRedirect("/board/listBoard");
+			  
+	}
+	
+	@RequestMapping( value="googleLogin", method = { RequestMethod.GET, RequestMethod.POST } )
+	public void google(HttpServletResponse response, Model model) throws Exception{
+		  OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
+		  String url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
+		  System.out.println("/member/googleSignIn, url : " + url);
+		  model.addAttribute("url",url); 
+		//  return "forward:/login/googleLogin.jsp";  
+		  //return url;
+		  response.sendRedirect(url);
+		}
+	
+	
 	
 	@RequestMapping( value="logout", method=RequestMethod.GET )
 	public ModelAndView logout(HttpSession session ) throws Exception{
