@@ -33,37 +33,37 @@
 		//============= logout Event  처리 =============	
 		 $(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$("a:contains('로그인')").on("click" , function() {
+			$("li:contains('로그인')").on("click" , function() {
 				$(self.location).attr("href","/user/loginView");
 				
 				//self.location = "/user/logout"
 			}); 
-		 	$("a:contains('로그아웃')").on("click" , function() {
+		 	$("li:contains('로그아웃')").on("click" , function() {
 				//$(self.location).attr("href","/user/logout");
 				//self.location = "/user/logout"
 			});
-		 	$("a:contains('채팅')").on("click" , function() {
+		 	$("li:contains('채팅')").on("click" , function() {
 				//$(self.location).attr("href","http://localhost:3000/");
 				self.location = "/chat/getChat"
 		 		
 			}); 
-		 	$("a:contains('강남1')").on("click" , function() {
+		 	$("li:contains('강남1')").on("click" , function() {
 				//$(self.location).attr("href","http://localhost:3000/");
 				self.location = "/chat/testUser"
 		 		
 			}); 
-		 	$("a:contains('강남2')").on("click" , function() {
+		 	$("li:contains('강남2')").on("click" , function() {
 				//$(self.location).attr("href","http://localhost:3000/");
 				self.location = "/chat/testUser2"
 		 		
 			}); 
-		 	$("a:contains('서초3')").on("click" , function() {
+		 	$("li:contains('서초3')").on("click" , function() {
 				//$(self.location).attr("href","http://localhost:3000/");
 				self.location = "/chat/testUser3"
 		 		
 			}); 
 		 	
-		 	$("a:contains('전체 게시물')").on("click" , function() {
+		 	$("li:contains('전체 게시물')").on("click" , function() {
 				//$(self.location).attr("href","http://localhost:3000/");
 				self.location = "/board/listBoard?view=all"
 		 		
@@ -75,10 +75,16 @@
 		 		
 			});
 		 	
+		 	$("li:contains('방송 목록 보기')").on("click" , function() {
+				//$(self.location).attr("href","http://localhost:3000/");
+				self.location = "http://192.168.0.12:8080/stream/listStream"
+		 		
+			});
+		 	
 		 	
    //////////////////////////////////마이 페이지 Navigation 영역///////////////////////////////////////
    
-		 	$("a:contains('작성 게시물 보기')").on("click" , function() {
+		 	$("li:contains('작성 게시물 보기')").on("click" , function() {
 				//$(self.location).attr("href","http://localhost:3000/");
 				self.location = "/mypage/listMyBoard"
 		 		
@@ -107,15 +113,15 @@
 								<li><a>전체 게시물</a></li>
 															
 								<c:if test="${sessionScope.user.userNo != null}">
-								<li>동네 게시물</li>
+								<li><a>동네 게시물</a></li>
 								</c:if>
 								
 							<!-- 중고장터 -->	
 								<c:if test="${sessionScope.user.userNo != null}">
-								<li><a href="#">중고장터</a>
+								<li><a>중고장터</a>
 									<ul>
-										<li><a href="#">판매상품목록</a></li>
-										<li><a href="#">구매상품목록</a></li>
+										<li><a>판매상품목록</a></li>
+										<li><a>구매상품목록</a></li>
 										<!-- <ul>
 												<li><a href="#">Lorem ipsum dolor</a></li>
 												<li><a href="#">Phasellus consequat</a></li>
@@ -128,37 +134,37 @@
 								
 							<!-- 스트리밍 -->
 								<c:if test="${sessionScope.user.userNo != null}">
-								<li><a href="#">ON동네 Air</a>
+								<li>ON동네 Air
 									<ul>
-										<li><a href="#">방송목록보기</a></li>
-										<li><a href="#">후원환급하기</a></li>
+										<li><a>방송 목록 보기</a></li>
+										<li><a>후원 환급하기</a></li>
 									</ul>
 								</li>
 								</c:if>
 	
 							<!-- 마이페이지 -->
 								<c:if test="${sessionScope.user.userNo != null}">
-								<li><a href="#">My Page</a>
+								<li>My Page
 									<ul>
-										<li><a href="#">작성 게시물 보기</a></li>
-										<li><a href="#">작성 댓글 보기</a></li>
-										<li><a href="#">스크랩 게시물 보기</a></li>
-										<li><a href="#">좋아요 게시물 보기</a></li>
-										<li><a href="#">계좌번호 등록(신규)</a></li>
-										<li><a href="#">계좌번호 수정</a></li>										
+										<li><a>작성 게시물 보기</a></li>
+										<li><a>작성 댓글 보기</a></li>
+										<li><a>스크랩 게시물 보기</a></li>
+										<li><a>좋아요 게시물 보기</a></li>
+										<li><a>계좌번호 등록(신규)</a></li>
+										<li><a>계좌번호 수정</a></li>										
 									</ul>
 								</li>
 								</c:if>
 							
 							
-					<li><a href="#">채팅</a></li>
-	                <li><a href="#">강남1</a></li>
-	                <li><a href="#">강남2</a></li>
-	                <li><a href="#">서초3</a></li>
+					<li>채팅</li>
+	                <li>강남1</li>
+	                <li>강남2</li>
+	                <li>서초3</li>
 							
 							
-					<c:if test="${sessionScope.user.userNo==null}"><li><a href="#">로그인</a></li></c:if>
-	                <c:if test="${sessionScope.user.userNo!=null}"><li><a href="#">로그아웃</a></li></c:if>		
+					<c:if test="${sessionScope.user.userNo==null}"><li>로그인</li></c:if>
+	                <c:if test="${sessionScope.user.userNo!=null}"><li>로그아웃</li></c:if>		
 								
 							</ul>
 						</nav>

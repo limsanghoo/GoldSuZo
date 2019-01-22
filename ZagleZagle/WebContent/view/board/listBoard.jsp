@@ -39,7 +39,7 @@ body {
     background: #333;
 }
 .containerList {
-	padding-top : 150px; /* 리스트 맨 위 */
+	padding-top : 20px; /* 리스트 맨 위 */
     width: 1200px;
     margin: 20px auto;
     columns: 4;
@@ -94,7 +94,8 @@ body {
 
 #searchKeyword{
     	position: absolute;
-    	left:45%;
+    	left:40%;
+    	width:300px;
 }
 
 .disabled{
@@ -103,6 +104,13 @@ body {
 
 #selectMenu{
 		padding-top : 100px;
+		padding-left: 300px;
+		padding-right: 300px;
+}
+
+#selectTown{
+	padding-top : 40px;
+	text-align: center;
 }
 
 
@@ -265,7 +273,7 @@ function fncGetTown(){
 <c:if test="${param.view=='town'}">
 <div class="row">
 				<select name="state" class="ct_input_g" style="width: 200px; height: 40px" onchange="fncGetState(this)">
-					<option value='' style="font-size:20px;"  selected>시·도</option>
+					<option value='' style="font-size:20px;"  selected>시·도 ▼</option>
 					<c:set var="i" value="0"/>
 					<c:forEach var="local" items="${list}">
 					<c:set var="i" value="${i+1}"/>
@@ -274,11 +282,11 @@ function fncGetTown(){
 				</select>
 				
 				<select name="city"  class="ct_input_g" style="width: 200px; height: 40px" onchange="fncGetCity(this)">
-					<option value="" style="font-size:20px;">시·군·구</option>
+					<option value="" style="font-size:20px;">시·군·구 ▼</option>
 				</select>
         
 				<select name="town"  class="ct_input_g" style="width: 200px; height: 40px" onchange="fncGetTown(this)">
-					<option value="" style="font-size:20px;">읍·면·동</option>
+					<option value="" style="font-size:20px;">읍·면·동 ▼</option>
 				</select> 
 				
 				<input type="hidden" name="local" value="${searchBoard.local}"/>
