@@ -3,12 +3,5 @@
 >>>>>>>=refs/remotes/origin/master
 eclipse.preferences.version=1
 encoding//WebContent/view/board/listBoard.jsp=UTF-8
-<<<<<<< HEAD
-encoding//WebContent/view/trade/addSell.jsp=UTF-8
-=======
-<<<<<<< HEAD
-=======
 encoding//WebContent/view/stream/pageNavigator.jsp=UTF-8
->>>>>>> refs/remotes/origin/master
-encoding//WebContent/view/trade/addSell_mediumeditor.jsp=UTF-8
->>>>>>> refs/remotes/origin/master
+encoding//WebContent/view/trade/addSell.jsp=UTF-8
