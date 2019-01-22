@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="ko">
+<html lang="ko" >
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -69,19 +69,29 @@ $(function() {
 </script>
 
 
+<style>
+	div.page-header {
+		padding-top : 50px:
+	}
+	
+</style>
 
 
 </head>
-<body>
+<body style="background-color: #f2f2f2;">
+
+
+<jsp:include page="/view/layout/toolbar.jsp" />
+
+
 
 <jsp:include page="/view/layout/mypageToolbar.jsp" />
 
 
-
-<div class="container">
+<div class="container" style="background-color: #f2f2f2;">
 	
-	<div class="page-header text-info">
-	       <h5>작성 게시물 보기</h5>
+	<div class="page-header text-info" style="font-style: italic;">
+	       <h5 style="font-size: x-large;">작성 게시물 보기</h5>
 	    </div>
 	
 	<table class="table table-hover table-striped" >
@@ -89,9 +99,9 @@ $(function() {
 		<thead>
 		
 		 <tr>
-            <th align="center">No</th>
-            <th align="left" >글 내용</th>
-            <th align="left">작성 날짜</th>
+            <th align="center" style="font-size: large;">No</th>
+            <th align="left" style="font-size: large;">글 내용</th>
+            <th align="left"style="font-size: large;">작성 날짜</th>
           </tr>
         </thead>
 
@@ -106,11 +116,11 @@ $(function() {
 		  
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
-			  <td align="left">${ i }</td>
+			  <td align="left" style="font-size: medium;">${ i }</td>
 			 	 
-			  <td align="left"  title="Click : 게시물 상세정보" data-toggle="modal" data-target="#${board.boardNo}aaa">${board.boardDetailText}</td>
+			  <td align="left"  style="font-size: medium;" title="Click : 게시물 상세정보" data-toggle="modal" data-target="#${board.boardNo}aaa">${board.boardDetailText}</td>
 			  	
-			  <td align="left">${board.boardRegDate}</td>
+			  <td align="left" style="font-size: medium;" >${board.boardRegDate}</td>
 			  
 			 
 			  
@@ -190,8 +200,8 @@ $(function() {
 			
 	</div>
 
-
-
-
+	
+	<jsp:include page="/common/pageNavigation.jsp" />
+	
 </body>
 </html>

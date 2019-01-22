@@ -72,8 +72,12 @@ $("a:contains('계좌번호 수정')").on("click" , function() {
 <style>
   /* 사이드바 래퍼 스타일 */
   
+  
+
+  
   #page-wrapper {
     padding-left: 250px;
+   	padding-top : 50px;
   }
   
   #sidebar-wrapper {
@@ -81,7 +85,7 @@ $("a:contains('계좌번호 수정')").on("click" , function() {
     width: 250px;
     height: 100%;
     margin-left: -250px;
-    background: #000;
+    background: #f2f2f2;;
     overflow-x: hidden;
     overflow-y: auto;
   }
