@@ -7,6 +7,16 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 		<title>Chat</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
@@ -66,6 +76,7 @@ body,html{
 			border:0 !important;
 			color:white !important;
 			height: 60px !important;
+			width:100%;
 			overflow-y: auto;
 		}
 			.type_msg:focus{
@@ -81,6 +92,20 @@ body,html{
 		}
 		.send_btn{
 	border-radius: 0 15px 15px 0 !important;
+	background-color: rgba(0,0,0,0.3) !important;
+			border:0 !important;
+			color: white !important;
+			cursor: pointer;
+		}
+		#msg_trans{
+	border-radius: 15px 0 0 15px !important;
+	background-color: rgba(0,0,0,0.3) !important;
+			border:0 !important;
+			color: white !important;
+			cursor: pointer;
+		}
+		#la-bel{
+	border-radius: 15px 15px 15px 15px !important;
 	background-color: rgba(0,0,0,0.3) !important;
 			border:0 !important;
 			color: white !important;
@@ -152,16 +177,7 @@ body,html{
 	font-size: 10px;
 	color: rgba(255,255,255,0.6);
 	}
-	.video_cam{
-		margin-left: 50px;
-		margin-top: 5px;
-	}
-	.video_cam span{
-		color: white;
-		font-size: 20px;
-		cursor: pointer;
-		margin-right: 20px;
-	}
+	
 	.msg_cotainer{
 		margin-top: auto;
 		margin-bottom: auto;
@@ -239,19 +255,20 @@ body,html{
 		margin-bottom: 15px !important;
 	}
 	}
-	
+	#me{
+		text-align: right;
+	}
 #chat_box::-webkit-scrollbar-track
 {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
+	background-color: rgba(0,0,0,0.0) !important;
 }
 
 #chat_box::-webkit-scrollbar
 {
 	width: 10px;
-	background-color: #F5F5F5;
+	background-color: rgba(0,0,0,0.0) !important;;
 }
-lable:active
 #chat_box::-webkit-scrollbar-thumb
 {
 	background-color: #0ae;
@@ -267,9 +284,9 @@ lable:active
 #msg_process {
 	width: 90px;
 }
-div label { display: inline-block; padding: .5em .75em; color: #999; font-size: inherit; line-height: normal; vertical-align: middle; background-color: #fdfdfd; cursor: pointer; border: 1px solid #ebebeb; border-bottom-color: #e2e2e2; border-radius: .25em; } 
-div input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
 
+input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
+#mdStart {position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
 
 </style>
 	<script src="http://192.168.0.25:82/socket.io/socket.io.js"></script>
@@ -308,17 +325,31 @@ div input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width
 			//소켓 서버로 부터 send_msg를 통해 이벤트를 받을 경우 
 			socket.on('send_msg', function(data) {
 				//div 태그를 만들어 텍스트를 msg로 지정을 한뒤 #chat_box에 추가를 시켜준다.
-				if (data.ms.substring(data.ms.length-3)=='jpg'||data.ms.substring(data.ms.length-3)=='png') {
-					$("<a href='#' data-value='"+data.ms+"'><div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer'><img src='http://192.168.0.25:8080/common/images/chat/"+data.ms+"' style='width: 200px; height: 180px;' class='img-thumbnail' /><span class='msg_time'>"+data.rt+"</span></div></div></a>").appendTo("#chat_box");
-					$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
-				}else if(data.ms.substring(data.ms.length-3)=='mp4'||data.ms.substring(data.ms.length-3)=='wmv'){
-					$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer'><video controls controlsList='nodownload' width='320' height='240' muted><source src='http://192.168.0.25:8080/common/images/chat/"+data.ms+"' type='video/mp4'><a href='http://192.168.0.25:8080/common/images/chat/"+data.ms+"'>download video</a></video><span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
-					$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
+				if (data.id=="${user.userNickname}") {
+					if (data.ms.substring(data.ms.length-3)=='jpg'||data.ms.substring(data.ms.length-3)=='png') {
+						$("<div class='d-flex justify-content-start mb-4 flex-row-reverse'><div class='img_cont_msg' style='padding-left: 10px;'><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg' onclick='javascript:mdmd(/@"+data.pro+"/);'></div><div class='msg_cotainer' onclick='javascript:mdmd(/"+data.ms+"/);'><img src='/common/images/chat/"+data.ms+"' style='width: 200px; height: 180px;' class='img-thumbnail' /><span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
+						$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
+					}else if(data.ms.substring(data.ms.length-3)=='mp4'||data.ms.substring(data.ms.length-3)=='wmv'){
+						$("<div class='d-flex justify-content-start mb-4 flex-row-reverse'><div class='img_cont_msg' style='padding-left: 10px;'><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg' onclick='javascript:mdmd(/@"+data.pro+"/);'></div><div class='msg_cotainer'><video controls controlsList='nodownload' width='320' height='240' muted><source src='http://192.168.0.25:8080/common/images/chat/"+data.ms+"' type='video/mp4'><a href='http://192.168.0.25:8080/common/images/chat/"+data.ms+"'>download video</a></video><span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
+						$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
+					}else{
+						$("<div class='d-flex justify-content-start mb-4 flex-row-reverse'><div class='img_cont_msg' style='padding-left: 10px;'><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg' onclick='javascript:mdmd(/@"+data.pro+"/);'></div><div class='msg_cotainer'>"+data.ms+"<span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
+						$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);	
+					}
 				}else{
-					$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer'>"+data.ms+"<span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
-					$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
-					
+					if (data.ms.substring(data.ms.length-3)=='jpg'||data.ms.substring(data.ms.length-3)=='png') {
+						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg' onclick='javascript:mdmd(/@"+data.pro+"/);'></div><div class='msg_cotainer' onclick='javascript:mdmd(/"+data.ms+"/);'><img src='/common/images/chat/"+data.ms+"' style='width: 200px; height: 180px;' class='img-thumbnail' /><span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
+						$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
+					}else if(data.ms.substring(data.ms.length-3)=='mp4'||data.ms.substring(data.ms.length-3)=='wmv'){
+						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg' onclick='javascript:mdmd(/@"+data.pro+"/);'></div><div class='msg_cotainer'><video controls controlsList='nodownload' width='320' height='240' muted><source src='http://192.168.0.25:8080/common/images/chat/"+data.ms+"' type='video/mp4'><a href='http://192.168.0.25:8080/common/images/chat/"+data.ms+"'>download video</a></video><span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
+						$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
+					}else{
+						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'dddd><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg' onclick='javascript:mdmd(/@"+data.pro+"/);'></div><div class='msg_cotainer'>"+data.ms+"<span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
+						$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
+						
+					}
 				}
+				
 				
 			});
 			//
@@ -407,7 +438,6 @@ div input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width
 			$(function(){
 			    $("#msg_trans").on("click",function(){
 			        	var inputData = $('#msg').val();
-			        	alert(inputData);
 				        $.ajax({
 				                 type : 'post',
 				                 url : '/chat/json/translate/',
@@ -434,16 +464,18 @@ div input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width
 			});
 				});
 		
-		
-		$(function(){
+		function mdmd(data){
+			var a = data.toString();
+			var b = a.substring(0,a.length-1);
+			if (a.substring(1,2)=="@") {
+				$(".modal-body").html("<img src='/common/images/profile/"+b.substring(2)+"' class='img-thumbnail' style='height: auto;'/>");
+			}else{
+				$(".modal-body").html("<img src='/common/images/chat"+b+"' class='img-thumbnail' style='height: auto;'/>");
+			}
 			
-			$("a[data-value] div").on("click",function(){
-				alert("요기는?");
-				var dt = "<img src='http://192.168.0.25:8080/common/images/chat/"+$("a[data-value]").data("value")+"' class='img-thumbnail''/>"
-				$("#modal-body").text(dt);
-				$("#myModal").modal();
-			})
-		});
+			mdStart.click();
+		}
+	
 	</script>
 </head>
 <body>
@@ -466,10 +498,10 @@ div input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width
 							<span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
 							<div class="action_menu">
 								<ul>
-									<li><i class="fas fa-user-circle"></i> View profile</li>
-									<li><i class="fas fa-users"></i> Add to close friends</li>
-									<li><i class="fas fa-plus"></i> Add to group</li>
-									<li><i class="fas fa-ban"></i> Block</li>
+									<li><i class="fas fa-user-circle"></i> 메뉴1</li>
+									<li><i class="fas fa-users"></i> 메뉴2</li>
+									<li><i class="fas fa-plus"></i> 메뉴3</li>
+									<li><i class="fas fa-ban"></i> 메뉴4</li>
 								</ul>
 							</div>
 						</div>
@@ -484,9 +516,8 @@ div input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width
 								
 
 								<div class="input-group-append">
-									<label for="image_name" class="fas fa-paperclip"></label>
+									<label for="image_name" class="fas fa-paperclip" id="la-bel"></label>
 									<input type="file" name="imageFile" id="image_name"/>
-									
 								</div>
 								
 								</form>
@@ -503,22 +534,22 @@ div input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width
 				</div>
 			</div>
 		</div>
-		
-		<div class="modal fade" id="myModal" role="dialog">
-		    <div class="modal-dialog">
-		    
-		      <!-- Modal content-->
-		      <div class="modal-content">
-		        <div class="modal-body">
-		          <p>이거뜨는지만!</p>
-		        </div>
-		        <div class="modal-footer">
-		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		        </div>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal" id="mdStart">
+  			Launch demo modal
+		</button>
+		<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		  aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-body">
 		      </div>
-		      
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		      </div>
 		    </div>
 		  </div>
+		</div>
+		
 	</body>
 	
 </html>

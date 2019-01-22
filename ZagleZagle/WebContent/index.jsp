@@ -13,12 +13,12 @@
 		<title>Zagle Zagle</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="common/css/assets/css/main.css" />
-		<link rel="stylesheet" href="common/css/assets/css/noscript.css" />
-		
+		<link rel="stylesheet" href="/common/css/assets/css/main.css" />
+		<link rel="stylesheet" href="/common/css/assets/css/noscript.css" />
 	</head>
 	<style>
-	body { background: url("https://images.wallpaperscraft.com/image/window_sunset_trees_132266_3840x2160.jpg") no-repeat center center fixed; -webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;}
+	body,html { background: url("https://images.wallpaperscraft.com/image/window_sunset_trees_132266_3840x2160.jpg") no-repeat center center fixed; -webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;}
+
 	
 	</style>
 	<body class="is-preload">

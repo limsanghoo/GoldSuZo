@@ -86,7 +86,7 @@ public class StreamRestController {
 		    params.add("quantity","1");
 		    params.add("total_amount",price);
 		    params.add("tax_free_amount","0");
-		    params.add("approval_url","http://localhost:8080/stream/json/kakaoOkStream");
+		    params.add("approval_url","http://192.168.0.12:8080/stream/json/kakaoOkStream");
 		    params.add("cancel_url","http://192.168.0.12:8080");
 		    params.add("fail_url","http://192.168.0.12:8080");
 
