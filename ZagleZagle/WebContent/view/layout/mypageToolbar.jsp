@@ -21,7 +21,7 @@ $("a:contains('작성 게시물 모아보기')").on("click" , function() {
 });
 
 
-$("a:contains('작성 댓글 모아보기')").on("click" , function() {
+$("a:contains('댓글 작성한 게시물 보기')").on("click" , function() {
 	alert("클릭됨")
 	
 	$(self.location).attr("href","/mypage/listComment");
@@ -133,7 +133,7 @@ $("a:contains('계좌번호 수정')").on("click" , function() {
       </li>
       <li><a href="#"><h2>작성 게시물 모아보기</h2></a></li>
       <br><br>
-      <li><a href="#"><h2>작성 댓글 모아보기</h2></a></li>
+      <li><a href="#"><h2>댓글 작성한 게시물 보기</h2></a></li>
       </br><br>
       <li><a href="#"><h2>스크랩 게시물 모아보기</h2></a></li>
       </br><br>

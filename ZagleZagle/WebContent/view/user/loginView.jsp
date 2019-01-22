@@ -4,6 +4,12 @@
 <%@ page import="java.math.BigInteger" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%
+   
+    SecureRandom random = new SecureRandom();
+    String state = new BigInteger(130, random).toString();
+    session.setAttribute("state", state);
+ %>   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -19,6 +25,8 @@
 	   
 	   <script>
       function onSignIn(googleUser) {
+    	  
+    
         // Useful data for your client-side scripts:
         var profile = googleUser.getBasicProfile();
         console.log("ID: " + profile.getId()); // Don't send this directly to your server!
@@ -27,7 +35,8 @@
         console.log('Family Name: ' + profile.getFamilyName());
         console.log("Image URL: " + profile.getImageUrl());
         console.log("Email: " + profile.getEmail());
-
+        
+  
         // The ID token you need to pass to your backend:
         var id_token = googleUser.getAuthResponse().id_token;
         var id= profile.getId();
@@ -39,12 +48,7 @@
       }
     </script> 
 	   
-<%
-   
-    SecureRandom random = new SecureRandom();
-    String state = new BigInteger(130, random).toString();
-    session.setAttribute("state", state);
- %>
+
 
 
 
@@ -57,16 +61,18 @@
 <body>
 
 	<a href="https://kauth.kakao.com/oauth/authorize?client_id=c3883a306a9faad67b127d7631568b29&redirect_uri=http://192.168.0.16:8080/user/kakaologin&response_type=code">
-	   <img src="/common/images/kakao_login_btn_small.png" width="100" />
+	   <img src="/common/images/kakao_login_btn_small.png" width="115" />
 	</a>
 	
+<br>
 
 			
 <a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=ICC6WpwdQLzHUQn5KfEC&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fuser%2FnaverCallback&state=state">
-<img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+<img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG" width="115" ></a>
 
-	
-  <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+<br>
+
+  <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"  data-width="115" data-height="50"></div>	
 
 </body>
 </html>

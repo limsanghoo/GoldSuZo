@@ -27,6 +27,17 @@
 	
 		//==> Board 정보 요청 Ajax 부분
 		
+		
+		//==> 스크랩 취소 기능
+		 $(function() {
+	
+	 $("span.glyphicon.glyphicon-ok").on("click", function() {
+	 
+	 alert("확인용")
+ });
+
+ });
+		//==>스크랩 취소 끝
 	
 
 		
@@ -55,7 +66,7 @@
             <th align="center">No</th>
             <th align="left" >스크랩 내용</th>
             <th align="left">작성 날짜</th>
-            <th align="left">취소 여부</th>
+            <th align="left">취소</th>
   
           </tr>
         </thead>
@@ -69,11 +80,70 @@
 		 
 		     <td align="left">${ i }</td>
 		   	
-		      <td align="left" >${board.boardDetailText}</td>
+		      <td align="left" title="Click : 게시물 상세정보" data-toggle="modal" data-target="#${board.boardNo}bbb">${board.boardDetailText}</td>
 		      <td align="left">${board.boardRegDate} 				</td>
-		      <td align="left"> 						 </td>
+		      <td align="left"> <span class="glyphicon glyphicon-ok" aria-hidden="true">Click</span>
+				 </td>
 		      
 		    </tr>
+		    
+		    
+		      <!-- Modal -->
+<div class="modal fade" id="${board.boardNo}bbb" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog"  role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      <div class="row">
+      
+   
+     
+     <h4 class="modal-title" id="gridSystemModalLabel">
+       <div class="col-md-4">
+      <img src="/common/images/profile/${user.profile}" style="height: 60px; width:60px;" align="left"/>
+		${user.userNickname}
+		</div>
+		
+		<c:if test="${user.userNo==board.user.userNo}">
+		<div class="col-md-4 col-md-offset-4">
+		<input type="button" value="수정" data-update="${board.boardNo}"/>
+        <div class="btn btn-primary" data-toggle="modal" data-target="#${board.boardNo}modal2">삭제</div>
+        </div>
+        </c:if>
+        
+           </h4>
+        </div>
+      </div>
+     <!-- 모달1 헤더 끝 -->
+      
+		<div class="modal-body" style="text-align: center">  
+
+		<div>
+			<c:if test="${board.photo1 !=null}">
+			<div><img src="${board.photo1}" style="width: 450px"/></div>
+			<br/>
+			</c:if>
+
+			<c:if test="${board.photo2 !=null}">
+			<div><img src="${board.photo2}" style="width: 450px"/></div>
+			<br/>
+			</c:if>
+	
+			<c:if test="${board.photo3 !=null}">
+			<div><img src="${board.photo3}" style="width: 450px"/></div>
+			<br/>
+			</c:if>
+		</div>
+
+		<p>
+			${board.boardDetailText}
+		</p>
+     
+       
+      </div>
+      <!-- 모달1 바디 끝 -->
+		    
+		    
+		    
 	    </c:forEach>
 	    
 	    </table>

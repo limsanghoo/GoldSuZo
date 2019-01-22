@@ -67,7 +67,58 @@ public class UserRestController {
 	public UserRestController() {
 		System.out.println(this.getClass());
 	}
-	
+	/*
+	@RequestMapping(value="KakaoLogin", produces="application/json")
+	public ModelAndView KakaoLogin() throws Exception {
+		
+		System.out.println("===============kakao login get방식 시작===============");
+		
+		
+		String client_id ="c3883a306a9faad67b127d7631568b29";
+		String redirect_uri="http://192.168.0.16:8080/user/kakaologin";
+		
+		String RequestUrl = "https://kauth.kakao.com/oauth/authorize";
+		RequestUrl +="?client_id="+client_id;
+		RequestUrl +="&redirect_uri="+redirect_uri;
+		RequestUrl +="&response_type=code";
+		
+		
+		HttpGet httpGet = new HttpGet(RequestUrl);
+		httpGet.setHeader("Accept", "application/json");
+		
+		
+		URL url = new URL(RequestUrl);			
+		  HttpURLConnection con = (HttpURLConnection)url.openConnection();
+		  con.setRequestMethod("GET");
+		
+     System.out.println("\nSending 'GET' request to URL : " + RequestUrl);
+    
+   
+     BufferedReader br;
+     int responseCode = con.getResponseCode();
+     if(responseCode==200) { // 정상 호출
+            br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        } else {  // 에러 발생
+            br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+        }
+        System.out.println("responseCode :"+responseCode);
+     
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+        while ((inputLine = br.readLine()) != null) {
+            response.append(inputLine);
+        }
+        br.close();
+        System.out.println(response.toString());
+        
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject(response);
+        modelAndView.setViewName(response.toString());
+        
+        
+        return modelAndView;
+	}
+	*/
 	@RequestMapping(value="getAccessToken",  produces="application/json",
 			method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView getAccessToken(@RequestParam("code") String code, RedirectAttributes ra, HttpSession session) throws Exception {
