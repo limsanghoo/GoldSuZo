@@ -232,10 +232,11 @@ function fncGetTown(){
 
 </head>
 
-<jsp:include page="/view/layout/toolbar.jsp" />
+
 
 <body>
 
+<jsp:include page="/view/layout/toolbar.jsp" />
 
 
 <form name="listBoard">

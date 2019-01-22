@@ -69,7 +69,7 @@
 		 		
 			});
 		 	
-		 	$("a:contains('동네 게시물')").on("click" , function() {
+		 	$("li:contains('동네 게시물')").on("click" , function() {
 				//$(self.location).attr("href","http://localhost:3000/");
 				self.location = "/board/listBoard?view=town"
 		 		
@@ -104,10 +104,10 @@
 							<ul>
 							
 							<!-- 게시물 -->
-								<li><a href="#">전체 게시물</a></li>
+								<li><a>전체 게시물</a></li>
 															
 								<c:if test="${sessionScope.user.userNo != null}">
-								<li><a href="#">동네 게시물</a></li>
+								<li>동네 게시물</li>
 								</c:if>
 								
 							<!-- 중고장터 -->	
