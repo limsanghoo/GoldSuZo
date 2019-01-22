@@ -510,7 +510,7 @@ div input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width
 		      <!-- Modal content-->
 		      <div class="modal-content">
 		        <div class="modal-body">
-		          
+		          <p>이거뜨는지만!</p>
 		        </div>
 		        <div class="modal-footer">
 		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
