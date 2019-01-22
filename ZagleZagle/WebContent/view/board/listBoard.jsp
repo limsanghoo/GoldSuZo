@@ -28,17 +28,18 @@ form{
 	 	padding-top : 150px;
 	 	padding-left:150px;
         padding-right:150px;
-        background-color:#fb9e96;
+        background-color:#f2f2f2;
 
 	}
 
 body {
-    margin: 0;
+   	margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
     background: #333;
 }
 .containerList {
+	padding-top : 20px; /* 리스트 맨 위 */
     width: 1200px;
     margin: 20px auto;
     columns: 4;
@@ -93,12 +94,25 @@ body {
 
 #searchKeyword{
     	position: absolute;
-    	left:45%;
+    	left:40%;
+    	width:300px;
 }
 
 .disabled{
 		pointer-events:none;
 }
+
+#selectMenu{
+		padding-top : 100px;
+		padding-left: 300px;
+		padding-right: 300px;
+}
+
+#selectTown{
+	padding-top : 40px;
+	text-align: center;
+}
+
 
 </style>
 <script type="text/javascript">
@@ -114,7 +128,7 @@ $(function(){
 	$("input[value='게시물 등록']").bind("click",function(){
 		var boardNo=$(this).data('update');
 		
-		self.location="http://192.168.0.36:8080/board/addBoard?userNo=${user.userNo}";
+		self.location="http://127.0.0.1:8080/board/addBoard?userNo=${user.userNo}";
 	})
 	
 	$("input[value='지도로 보기']").bind("click",function(){
@@ -129,8 +143,6 @@ $(function(){
 //검색 엔터
 function enter() {
         if (window.event.keyCode == 13) {
-        	
-        	alert("뭔데");
              // 엔터키가 눌렸을 때 실행할 내용
         	$("form").attr("method" , "POST").attr("action" , "/board/listBoard?view=${param.view}").submit();
         }
@@ -229,12 +241,16 @@ function fncGetTown(){
 </head>
 
 
+
 <body>
 
 <jsp:include page="/view/layout/toolbar.jsp" />
 
+
 <form name="listBoard">
 
+
+<div id="selectMenu">
 <!-- 지도로 보기 -->
 <c:if test="${user.userNo!=null}">
 <input type="button" value="지도로 보기"/>
@@ -250,14 +266,14 @@ function fncGetTown(){
 <input type="button" value="게시물 등록" id="goAddBoard">
 </a>
 </c:if>
-
+</div>
 
 <!-- 동네 선택 -->
-<div>
+<div id="selectTown">
 <c:if test="${param.view=='town'}">
 <div class="row">
 				<select name="state" class="ct_input_g" style="width: 200px; height: 40px" onchange="fncGetState(this)">
-					<option value='' style="font-size:20px;"  selected>시·도</option>
+					<option value='' style="font-size:20px;"  selected>시·도 ▼</option>
 					<c:set var="i" value="0"/>
 					<c:forEach var="local" items="${list}">
 					<c:set var="i" value="${i+1}"/>
@@ -266,11 +282,11 @@ function fncGetTown(){
 				</select>
 				
 				<select name="city"  class="ct_input_g" style="width: 200px; height: 40px" onchange="fncGetCity(this)">
-					<option value="" style="font-size:20px;">시·군·구</option>
+					<option value="" style="font-size:20px;">시·군·구 ▼</option>
 				</select>
         
 				<select name="town"  class="ct_input_g" style="width: 200px; height: 40px" onchange="fncGetTown(this)">
-					<option value="" style="font-size:20px;">읍·면·동</option>
+					<option value="" style="font-size:20px;">읍·면·동 ▼</option>
 				</select> 
 				
 				<input type="hidden" name="local" value="${searchBoard.local}"/>

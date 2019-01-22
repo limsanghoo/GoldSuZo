@@ -15,10 +15,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="/common/css/assets/css/main.css" />
 		<link rel="stylesheet" href="/common/css/assets/css/noscript.css" />
+		
 	</head>
 	<style>
-	body,html { background: url("https://images.wallpaperscraft.com/image/window_sunset_trees_132266_3840x2160.jpg") no-repeat center center fixed; -webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;}
-
+	body { background: url("https://images.wallpaperscraft.com/image/window_sunset_trees_132266_3840x2160.jpg") no-repeat center center fixed; -webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;}
 	
 	</style>
 	<body class="is-preload">
@@ -72,7 +72,7 @@
 						-->
 						<br/><br/>
 						<footer>
-								<a href="#" id="mod"><img src="http://www.playtimetokyo.com/images/exposer/logo-login.png" style="width: 60px;height:60px;"/><br/>-login-</a>
+								<a href="#" id="mod"><img src="/common/images/icons8-lock-50 (1).png" style="width: 60px;height:60px;"/><br/>-login-</a>
 								<br/><br/><a href="/board/listBoard">온 동네 소식보기</a>
 							</ul>
 						</footer>

@@ -25,7 +25,7 @@ $(function(){
 	    if (xmlHttpRequest.readyState == 4) {
 	      if (xmlHttpRequest.status == 200) {
 	        var result = JSON.parse(xmlHttpRequest.responseText);
-	        $("#img_box").append("<img src='"+result.data.link+"' name='img'>");//이미지 미리보기
+	        $("#img_box").append("<img src='"+result.data.link+"' name='img' style='width: 500px;'>");//이미지 미리보기
 	        
 	        var linkArea=$("#link");
 			linkArea.val(linkArea.val()+result.data.link+",");//이미지 링크 append

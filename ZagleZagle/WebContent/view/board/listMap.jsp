@@ -23,11 +23,22 @@
     .info .link {color: #5085BB;}
 
 
+        div.row{
+        	padding-top : 150px;
+        }
+
+
 </style>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     
 </head>
+
+
+
 <body>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<jsp:include page="/view/layout/toolbar.jsp" />
+
 
 <div class="row">
 				<select name="state" class="ct_input_g" style="width: 200px; height: 40px" onchange="fncGetState(this)">
