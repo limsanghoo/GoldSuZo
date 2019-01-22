@@ -15,6 +15,8 @@
 	<link rel="stylesheet" href="/common/js/medium-editor/dist/css/themes/beagle.css">
 	<link rel="stylesheet" href="/common/js/medium-editor-insert-plugin/dist/css/medium-editor-insert-plugin.min.css">
 	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<!-- JS -->
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	
@@ -29,37 +31,65 @@
 	<script src="/common/js/blueimp-file-upload/js/jquery.fileupload.js"></script>
 	
 	<script src="/common/js/medium-editor-insert-plugin/dist/js/medium-editor-insert-plugin.min.js"></script>
+	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+
+	<style>
+       body > div.container{
+        	border: 3px solid #D6CDB7;
+            margin-top: 10px;
+        }
+        
+        div.editable{
+        	border: 1px solid #D6CDB7;
+            margin-top: 10px;
+        }
+    </style>
 
 </head>
 
 <body>
 
-    <div id="container">
-        <h1>상품등록</h1>
-        <div>
-        	상품명
-   			<input type="text" name="sellName" id="sellName" value=""/>
-		</div>
-		<div>
-			휴대폰번호
-  			<input type="text" name="sellPhone" id="sellPhone" value=""/>
-		</div>
-		<div>
-			가격
-  			<input type="text" name="sellPrice" id="sellPrice" value=""/>
-		</div>
-		<div>
-			판매방법
-			<select name="sellStyle"  class="ct_input_g">
+<div class="container">
+	
+		<h1 class="text-center">상 품 등 록</h1>
+		
+		<!-- form Start /////////////////////////////////////-->
+		<form class="form-horizontal" method="post" enctype="multipart/form-data">
+		
+		  <div class="form-group">
+		    <label for="sellName" class="col-sm-3">상 품 명</label>
+		    <div class="container col-sm-6">
+		      <input type="text" class="form-control" id="sellName" name="sellName" placeholder="상품명">
+		    </div>
+		  </div>
+
+		  <div class="form-group">
+		    <label for="status" class="col-sm-3">판매상태</label>
+			<div class="container col-sm-6">
+			<select class="form-control" name="sellStyle">
 				<option value="00" >택배거래</option>
 				<option value="01" >직거래</option>
 			</select>
-		</div>
-		<hr/>
-        <div class="editable">
-        asdfffffffffffffffffffffffffffffffff
+				</div>
+		  </div>
+
+		  <div class="form-group">
+		    <label for="sellPrice" class="col-sm-3 text-center">가 격</label>
+		    <div class="col-sm-6">
+		      <input type="text" class="form-control" id="sellPrice" name="sellPrice" placeholder="가격">
+		    </div>
+		  </div>
+
+		  <div class="form-group">
+		  <label for="sellText" class="col-sm-3 text-center">상세정보</label>
+		  <div class="container col-sm-6">
+        <div class="editable" id="sellText" name="sellText">
+        	여기에 내용과 사진을 입력하세요
         </div>
 	</div>
+	</div>
+
     
     <script src="/common/js/medium-editor/dist/js/medium-editor.js"></script>
     <script>
@@ -70,5 +100,14 @@
         });
     });
     </script>
+    
+    <div class="form-group">
+		    <div class="col-sm-offset-4  col-sm-4 text-center">
+		      <button type="button" class="btn btn-inverse bt"  >등&nbsp;록</button>
+			  <a class="btn btn-inverse btn" href="#" role="button">취&nbsp;소</a>
+		    </div>
+		  </div>
+		</form>
+</div>
 </body>
 </html>

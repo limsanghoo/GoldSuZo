@@ -1,88 +1,90 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="ko">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Helios by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/common/css/html5up-helios/assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="/common/css/html5up-helios/assets/css/noscript.css" /></noscript>
 	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	
-	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-   
-    <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-	
-	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
- 		body {
-            padding-top : 50px;
-        }
-     
-     </style>
-<link rel="stylesheet" href="/css/admin.css" type="text/css">
-<link type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script type="text/javascript">
+		/* #page-wrapper{
+			height:80px;
+			background-image: url("/common/css/html5up-helios/images/header.jpg");
+			background-repeat: no-repeat;
+			background-size: 100%;
+		} */
+	</style>
+
+
+
+	<script type="text/javascript">
 	
-		//============= logout Event  Ã³¸® =============	
+		//============= logout Event  ì²˜ë¦¬ =============	
 		 $(function() {
-			//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$("a:contains('·Î±×ÀÎ')").on("click" , function() {
+			//==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$("li:contains('ë¡œê·¸ì¸')").on("click" , function() {
 				$(self.location).attr("href","/user/loginView");
 				
 				//self.location = "/user/logout"
 			}); 
-		 	$("a:contains('·Î±×¾Æ¿ô')").on("click" , function() {
+		 	$("li:contains('ë¡œê·¸ì•„ì›ƒ')").on("click" , function() {
 				//$(self.location).attr("href","/user/logout");
 				//self.location = "/user/logout"
 			});
-		 	$("a:contains('Ã¤ÆÃ')").on("click" , function() {
+		 	$("li:contains('ì±„íŒ…')").on("click" , function() {
 				//$(self.location).attr("href","http://localhost:3000/");
 				self.location = "/chat/getChat"
 		 		
 			}); 
-		 	$("a:contains('°­³²1')").on("click" , function() {
+		 	$("li:contains('ê°•ë‚¨1')").on("click" , function() {
 				//$(self.location).attr("href","http://localhost:3000/");
 				self.location = "/chat/testUser"
 		 		
 			}); 
-		 	$("a:contains('°­³²2')").on("click" , function() {
+		 	$("li:contains('ê°•ë‚¨2')").on("click" , function() {
 				//$(self.location).attr("href","http://localhost:3000/");
 				self.location = "/chat/testUser2"
 		 		
 			}); 
-		 	$("a:contains('¼­ÃÊ3')").on("click" , function() {
+		 	$("li:contains('ì„œì´ˆ3')").on("click" , function() {
 				//$(self.location).attr("href","http://localhost:3000/");
 				self.location = "/chat/testUser3"
 		 		
 			}); 
 		 	
-		 	$("a:contains('ÀüÃ¼°Ô½Ã¹°')").on("click" , function() {
+		 	$("li:contains('ì „ì²´ ê²Œì‹œë¬¼')").on("click" , function() {
 				//$(self.location).attr("href","http://localhost:3000/");
 				self.location = "/board/listBoard?view=all"
 		 		
 			});
 		 	
-		 	$("a:contains('µ¿³×°Ô½Ã¹°')").on("click" , function() {
+		 	$("li:contains('ë™ë„¤ ê²Œì‹œë¬¼')").on("click" , function() {
 				//$(self.location).attr("href","http://localhost:3000/");
 				self.location = "/board/listBoard?view=town"
 		 		
 			});
 		 	
+		 	$("li:contains('ë°©ì†¡ ëª©ë¡ ë³´ê¸°')").on("click" , function() {
+				//$(self.location).attr("href","http://localhost:3000/");
+				self.location = "http://192.168.0.12:8080/stream/listStream"
+		 		
+			});
 		 	
-   //////////////////////////////////¸¶ÀÌ ÆäÀÌÁö Navigation ¿µ¿ª///////////////////////////////////////
+		 	
+   //////////////////////////////////ë§ˆì´ í˜ì´ì§€ Navigation ì˜ì—­///////////////////////////////////////
    
-		 	$("a:contains('ÀÛ¼º °Ô½Ã¹° º¸±â')").on("click" , function() {
+		 	$("li:contains('ì‘ì„± ê²Œì‹œë¬¼ ë³´ê¸°')").on("click" , function() {
 				//$(self.location).attr("href","http://localhost:3000/");
 				self.location = "/mypage/listMyBoard"
 		 		
@@ -94,121 +96,92 @@
 		
 
 	</script>
+		
 	</head>
-<body>
-<div class="navbar  navbar-default navbar-fixed-top">
+	<body class="homepage is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<!-- <div id="header"> --> <!-- ë°°ê²½ ìƒê¹€ -->
+				<div>
+
+					<!-- Nav -->
+						<nav id="nav">
+							<ul>
+							
+							<!-- ê²Œì‹œë¬¼ -->
+								<li><a>ì „ì²´ ê²Œì‹œë¬¼</a></li>
+															
+								<c:if test="${sessionScope.user.userNo != null}">
+								<li><a>ë™ë„¤ ê²Œì‹œë¬¼</a></li>
+								</c:if>
+								
+							<!-- ì¤‘ê³ ì¥í„° -->	
+								<c:if test="${sessionScope.user.userNo != null}">
+								<li><a>ì¤‘ê³ ì¥í„°</a>
+									<ul>
+										<li><a>íŒë§¤ìƒí’ˆëª©ë¡</a></li>
+										<li><a>êµ¬ë§¤ìƒí’ˆëª©ë¡</a></li>
+										<!-- <ul>
+												<li><a href="#">Lorem ipsum dolor</a></li>
+												<li><a href="#">Phasellus consequat</a></li>
+												<li><a href="#">Magna phasellus</a></li>
+												<li><a href="#">Etiam dolore nisl</a></li>
+										</ul> -->										
+									</ul>
+								</li>
+								</c:if>
+								
+							<!-- ìŠ¤íŠ¸ë¦¬ë° -->
+								<c:if test="${sessionScope.user.userNo != null}">
+								<li>ONë™ë„¤ Air
+									<ul>
+										<li><a>ë°©ì†¡ ëª©ë¡ ë³´ê¸°</a></li>
+										<li><a>í›„ì› í™˜ê¸‰í•˜ê¸°</a></li>
+									</ul>
+								</li>
+								</c:if>
 	
-	<div class="container">
-	       
-		<a class="navbar-brand" href="/index.jsp">ZagleZagle</a>
-		
-		<!-- toolBar Button Start //////////////////////// -->
-		<div class="navbar-header">
-		    <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#target">
-		        <span class="sr-only">Toggle navigation</span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		    </button>
+							<!-- ë§ˆì´í˜ì´ì§€ -->
+								<c:if test="${sessionScope.user.userNo != null}">
+								<li>My Page
+									<ul>
+										<li><a>ì‘ì„± ê²Œì‹œë¬¼ ë³´ê¸°</a></li>
+										<li><a>ì‘ì„± ëŒ“ê¸€ ë³´ê¸°</a></li>
+										<li><a>ìŠ¤í¬ë© ê²Œì‹œë¬¼ ë³´ê¸°</a></li>
+										<li><a>ì¢‹ì•„ìš” ê²Œì‹œë¬¼ ë³´ê¸°</a></li>
+										<li><a>ê³„ì¢Œë²ˆí˜¸ ë“±ë¡(ì‹ ê·œ)</a></li>
+										<li><a>ê³„ì¢Œë²ˆí˜¸ ìˆ˜ì •</a></li>										
+									</ul>
+								</li>
+								</c:if>
+							
+							
+					<li>ì±„íŒ…</li>
+	                <li>ê°•ë‚¨1</li>
+	                <li>ê°•ë‚¨2</li>
+	                <li>ì„œì´ˆ3</li>
+							
+							
+					<c:if test="${sessionScope.user.userNo==null}"><li>ë¡œê·¸ì¸</li></c:if>
+	                <c:if test="${sessionScope.user.userNo!=null}"><li>ë¡œê·¸ì•„ì›ƒ</li></c:if>		
+								
+							</ul>
+						</nav>
+
+				</div>
+
 		</div>
-		<!-- toolBar Button End //////////////////////// -->
-		
-	    <!--  dropdown hover Start -->
-		<div 	class="collapse navbar-collapse" id="target" 
-	       			data-hover="dropdown" data-animations="fadeInDownNew fadeInRightNew fadeInUpNew fadeInLeftNew">
-	         
-	         	<!-- Tool Bar ¸¦ ´Ù¾çÇÏ°Ô »ç¿ëÇÏ¸é.... -->
-	             <ul class="nav navbar-nav">
-	             
-	              <!--  °Ô½Ã¹°°ü¸® -->
-	              <li class="dropdown">
-	                     <a  href="#" class="dropdown-toggle" >
-	                         <span >ÀüÃ¼°Ô½Ã¹°</span>
-	                     </a>
-	                     
-	              </li>
-	              
-	              <c:if test="${sessionScope.user.userNo != null}">
-	              <li class="dropdown">
-	                     <a  href="#" class="dropdown-toggle" >
-	                         <span >µ¿³×°Ô½Ã¹°</span>
-	                     </a>
-	                     
-	              </li>
-	              </c:if>
-	               
-	                 
-	              <!-- Áß°íÀåÅÍ DrowDown -->
-	              <c:if test="${sessionScope.user.userNo != null}">
-	              <li class="dropdown">
-	                     <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-	                         <span >Áß°íÀåÅÍ</span>
-	                         <span class="caret"></span>
-	                     </a>
-	                     <ul class="dropdown-menu">
-	                         <li><a href="#">ÆÇ¸Å»óÇ°¸ñ·Ï</a></li>
-	                         <li><a href="#">±¸¸Å»óÇ°¸ñ·Ï</a></li>
-	                         <li class="divider"></li>
-	                         <li><a href="#">etc..</a></li>
-	                     </ul>
-	                 </li>
-	                 <!-- onAir DrowDown -->
-	                 <li class="dropdown">
-	                     <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-	                         <span >onAir</span>
-	                         <span class="caret"></span>
-	                     </a>
-	                     <ul class="dropdown-menu">
-	                         <li><a href="#">¹æ¼Û¸ñ·Ïº¸±â</a></li>
-	                         <li><a href="#">ÈÄ¿øÈ¯±ŞÇÏ±â</a></li>
-	                         <li class="divider"></li>
-	                     </ul>
-	                 </li>
-	                 
-	                 <!--  MyPage DrowDown -->
-	                  <li class="dropdown">
-	                  <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-	                  <span >¸¶ÀÌÆäÀÌÁö</span>
-	                     <span class="caret"></span>
-	                     </a>
-	                      <ul class="dropdown-menu">
-	                       <li><a href="#">ÀÛ¼º °Ô½Ã¹° º¸±â</a></li>
-	                        <li><a href="#">ÀÛ¼º ´ñ±Û º¸±â</a></li>
-	                         <li><a href="#">½ºÅ©·¦ °Ô½Ã¹° º¸±â</a></li>
-	                          <li><a href="#">ÁÁ¾Æ¿ä °Ô½Ã¹° º¸±â</a></li>
-	                           <li><a href="#">°èÁÂ¹øÈ£ µî·Ï(½Å±Ô)</a></li>
-	                           <li><a href="#">°èÁÂ¹øÈ£ ¼öÁ¤</a></li>
-	                         <li class="divider"></li>
-	                             </ul>
-	                 		</li>
-	                 
-	                 
-	               </c:if>
-	               <li><a href="#">Ã¤ÆÃ</a></li>
-	               <li><a href="#">°­³²1</a></li>
-	               <li><a href="#">°­³²2</a></li>
-	               <li><a href="#">¼­ÃÊ3</a></li>
-	             </ul>
-	             
-	            <center>
-					<a href="/board/testUser">
-					<input id="sessionTest" type="button" value="¼¼¼Ç Å×½ºÆ®">
-					</a>
-					userNickname : ${user.userNickname}
-				</center>
-	             
-	             
-	             <ul class="nav navbar-nav navbar-right">
-	             	<c:if test="${sessionScope.user.userNo==null}"><li><a href="#">·Î±×ÀÎ</a></li></c:if>
-	                <c:if test="${sessionScope.user.userNo!=null}"><li><a href="#">·Î±×¾Æ¿ô</a></li></c:if>
-	            </ul>
-		</div>
-		<!-- dropdown hover END -->	       
-	    
-	    
-	    
-	    
-	</div>
-</div>
-</body>
+
+		<!-- Scripts -->
+			<script src="/common/css/html5up-helios/assets/js/jquery.min.js"></script>
+			<script src="/common/css/html5up-helios/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/common/css/html5up-helios/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/common/css/html5up-helios/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/common/css/html5up-helios/assets/js/browser.min.js"></script>
+			<script src="/common/css/html5up-helios/assets/js/breakpoints.min.js"></script>
+			<script src="/common/css/html5up-helios/assets/js/util.js"></script>
+			<script src="/common/css/html5up-helios/assets/js/main.js"></script>
+
+	</body>
 </html>
