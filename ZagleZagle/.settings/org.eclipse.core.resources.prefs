@@ -1,6 +1,7 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=refs/remotes/origin/master
 eclipse.preferences.version=1
-<<<<<<< HEAD
-encoding//WebContent/view/trade/addSell_mediumeditor.jsp=UTF-8
-=======
 encoding//WebContent/view/board/listBoard.jsp=UTF-8
->>>>>>> refs/remotes/origin/master
+encoding//WebContent/view/stream/pageNavigator.jsp=UTF-8
+encoding//WebContent/view/trade/addSell_mediumeditor.jsp=UTF-8
