@@ -18,17 +18,36 @@
 <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
 <style>  
   
-#real{
-padding-top :100px;
-background-color:#000000;     
-} 
-   
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+    color: white !important;
+    line-height: 1.25em;
+}
+  
+.homepage{
+	padding-top :100px;
+    background-color: #935d8c;
+    background-image: url(images/overlay.png), -moz-linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
+    background-image: url(images/overlay.png), -webkit-linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
+    background-image: url(images/overlay.png), -ms-linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
+    background-image: url(images/overlay.png), linear-gradient(45deg, #e37682 15%, #5f4d93 85%);    
+	color: rgba(255, 255, 255, 0.65);
+ 
+}   
+
+.box{ 
+ width: 300px;   
+   border: 1px solid black; 
+	border-radius: 15px !important;
+	background-color: rgba(0,0,0,0.4) !important; 
+	display: block;  
+}
+     
        
     button:hover{
          box-shadow:2px 8px 4px -6px hsla(0,0%,0%,.3);
       } 
-       
- 
+   
   </style>  
    
 <script type="text/javascript">
@@ -148,17 +167,16 @@ $(function() {
 <body>  
    	<!-- ToolBar End /////////////////////////////////////-->
 <jsp:include page="/view/layout/toolbar.jsp" /> 
- <div id="real">
+
 		<!--<button type="button" data-toggle="modal" data-target="#myModal" style="margin:15px; padding:15px;">스트리밍 방 업로드 하기</button>   -->
-   
-        
+    
   <button class='lined thick' data-toggle="modal" data-target="#myModal"  style="width:200px;">스트리밍방업로드 하기</button> 
    
 		<!--<button type="button" name="refundbtn" data-toggle="modal" data-target="#myModal2" style="margin:15px; padding:15px;">환급하기</button>  -->
    <button class='lined thick'  name="refundbtn" data-toggle="modal" data-target="#myModal2">환급하기</button>
     <button class='lined thick' id="listRefund" name="listRefund">환급리스트이동</button> 
   
-
+					
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -221,17 +239,16 @@ $(function() {
   </div></div>	
 		
 	 
-		
-<div class="row" id="list">
+		 
+<div class="row" id="list" "position: relative; z-index: 2;">
 <c:set var="i" value="0" />
 <c:forEach var="obj" items="${list}">
-<div class="container"> <div class="box"> 
-<img alt="50x50" data-src="holder.js/100x200" src='/common/images/stream/${obj.streamSum}' style="height: 250px; width: 50%; display: block;">
-<h2>${obj.streamTitle}</h2><img id="profile" src="/common/images/stream/${obj.streamerProfile}" style="height:100px; width:100px;"><h2>${obj.streamNickname}</h2><h3>${obj.streamer}</h3><p>내용:${obj.streamContent}</p><p>시청자수:${obj.streamViewCount}<p><p>좋아요수:${obj.streamLikeCount}</p><a class="btn btn-default" name="get" role="button" data-param="${obj.streamer}">들어가기</a> 
-  
-</div> </div>
+<div class="container"> <div class="box">
+<h2><img id="profile" src="/common/images/stream/${obj.streamerProfile}" style="height:30px; width:30px;">${obj.streamNickname}</h2><img alt="50x50" data-src="holder.js/100x200" src='/common/images/stream/${obj.streamSum}' style="height: 250px; width: 50%; display: block;">
+<h2>${obj.streamTitle}</h2><p>내용:${obj.streamContent}</p><p>시청자수:${obj.streamViewCount}<p><p>좋아요수:${obj.streamLikeCount}</p><a class="btn btn-default" name="get" role="button" data-param="${obj.streamer}">들어가기</a> 
+    
+</div> </div> 
 </c:forEach>  
 </div>   
- </div>
 </body>
 </html>
