@@ -10,75 +10,18 @@
 <title>스트리밍 목록조회</title>
 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
 <style> 
-  body{
-  background-image: url("https://images.pexels.com/photos/1022921/pexels-photo-1022921.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
-  font-family: 'Do Hyeon', sans-serif;
-  }   
-    button{
-      align-self:center;
-      background:transparent;
-      padding:1rem 1rem;
-      margin:0 1rem;
-      transition:all .5s ease;
-      color:red;        
-      font-size:5rem;  
-      letter-spacing:1px;
-      outline:none;
-      box-shadow: 20px 38px 34px -26px hsla(0,0%,0%,.2);
-      border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
-   } 
-   
+ 
+#real{
+padding-top :150px;
+backgroud-color:black !important;  
+}
+ 
+       
     button:hover{
          box-shadow:2px 8px 4px -6px hsla(0,0%,0%,.3);
       } 
-      button.lined.thick{
-         border:solid 6px #41403E;        
-      }  
-      .container {
-    width: 1200px;
-    margin: 20px auto;
-    columns: 4;
-    column-gap: 40px;
-} 
-      .container .box {
-    width: 100%;
-    margin: 0 0 20px;
-    padding: 10px;
-    background: #fff;
-    overflow: hidden;
-    break-inside: avoid;
-	}
+       
  
-.container .box img {
-    max-width: 100%;
-     background-size: cover;   
-  }
-  .container .box h2 {
-    margin: 10px 0 0;
-    padding: 0;
-    font-size: 20px;
-}
-@media (max-width: 1200px) {
-    .container {
-        columns: 3;
-        width: calc(100% - 40px);
-        box-sizing: border-box;
-        padding: 20px 20px 20px 0;
-    }
-}
-@media (max-width: 768px) {
-    .container {
-        columns: 2;
-    }
-}
-@media (max-width: 480px) {
-    .container {
-        columns: 1;
-    }
-
-  
-   
-  
   </style>  
 
 
@@ -204,17 +147,17 @@ $(function() {
 });  
 </script> 
 </head>
-<body>
+<body>  
    	<!-- ToolBar End /////////////////////////////////////-->
-
-
+<jsp:include page="/view/layout/toolbar.jsp" /> 
+ <div id="real">
 		<!--<button type="button" data-toggle="modal" data-target="#myModal" style="margin:15px; padding:15px;">스트리밍 방 업로드 하기</button>   -->
-<div>왜 안바껴어어어어</div>   
    
-  <button class='lined thick' data-toggle="modal" data-target="#myModal" style="margin:15px; padding:15px;">스트리밍방 업로드 하기</button>
-
+        
+  <button class='lined thick' data-toggle="modal" data-target="#myModal"  style="width:200px;">스트리밍방업로드 하기</button> 
+   
 		<!--<button type="button" name="refundbtn" data-toggle="modal" data-target="#myModal2" style="margin:15px; padding:15px;">환급하기</button>  -->
-   <button class='lined thick'  name="refundbtn" data-toggle="modal" data-target="#myModal2" style="margin:15px; padding:15px;">환급하기</button>
+   <button class='lined thick'  name="refundbtn" data-toggle="modal" data-target="#myModal2">환급하기</button>
     <button class='lined thick' id="listRefund" name="listRefund">환급리스트이동</button> 
   
 
@@ -291,6 +234,6 @@ $(function() {
 </div> </div>
 </c:forEach>  
 </div>   
- 
+ </div>
 </body>
 </html>
