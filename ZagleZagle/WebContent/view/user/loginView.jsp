@@ -158,6 +158,30 @@ margin-left: 4px;
 				});
 			}); 
 	      
+	      
+	      /////=========Kakao Login View popup ==========////////////
+
+	       $(function() {
+	      	
+	    	  $("#Kakao").on("click", function() {
+	    		  
+	    		  alert("클릭 완료")
+	    		  
+	    		  popWin
+	    		  = window.open("https://kauth.kakao.com/oauth/authorize?client_id=c3883a306a9faad67b127d7631568b29&redirect_uri=http://192.168.0.36:8080/user/kakaologin&response_type=code",
+	    				  "popWin",
+	    				  "left=300,top=200,width=780,height=130,marginwidth=0,marginheight=0,"+
+							"scrollbars=no,scrolling=no,menubar=no,resizable=no")
+							
+							
+	    	  });
+				
+
+
+
+	    	  
+	    	
+	       }); 
 	
 	
 	</script>
@@ -182,8 +206,10 @@ margin-left: 4px;
 				<br><br>
 					
 	<div class="snsLoginButton" align="center">		
-	<a href="https://kauth.kakao.com/oauth/authorize?client_id=c3883a306a9faad67b127d7631568b29&redirect_uri=http://192.168.0.16:8080/user/kakaologin&response_type=code">
-	   <img src="/common/images/KakaoTalk.png" height="50" width="50" />
+	
+	
+	<a href=# id="Kakao">
+	   <img src="/common/images/kakao_login_btn_small.png" width="100"/>
 	</a>
 	
 
