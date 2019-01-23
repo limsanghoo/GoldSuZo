@@ -107,8 +107,10 @@ public class StreamRestController {
 	}
 	
 	@RequestMapping(value = "start", method = RequestMethod.POST)
-	public String startStream(@ModelAttribute("spon") Spon spon,HttpSession session) throws Exception{
-			System.out.println(spon);
+	@ResponseBody 
+	public Map startStream(@RequestBody Spon spon,HttpSession session) throws Exception{
+			System.out.println("start메소드입니다..............");
+		System.out.println(spon); 
 			spon.setPaymentNo("0");
 		// System.out.println(body);
 	      RestTemplate restTemplate = new RestTemplate();
@@ -122,7 +124,7 @@ public class StreamRestController {
 		    params.add("quantity","1");
 		    params.add("total_amount",spon.getPrice()+"");
 		    params.add("tax_free_amount","0");
-		    params.add("approval_url","http://localhost:8080/stream/json/kakaoOkStream?");
+		    params.add("approval_url","http://192.168.0.12:8080/stream/json/kakaoOkStream?");
 		    params.add("cancel_url","http://192.168.0.12:8080");
 		    params.add("fail_url","http://192.168.0.12:8080");
 
@@ -138,13 +140,15 @@ public class StreamRestController {
 		    session.setAttribute("tid",response.get("tid"));
 		    session.setAttribute("spon",spon);
 		    session.setAttribute("아니","왜");
-		  //  ModelAndView modelAndView = new ModelAndView();
-		   // modelAndView.setViewName("jsonView");
-		  //  String url =(String) response.get("next_redirect_pc_url");
-		  //  modelAndView.addObject("purchase",purchase);
-		 //   modelAndView.addObject("url", response.get("next_redirect_pc_url"));
-		    return "redirect:"+response.get("next_redirect_pc_url");
-				}
+		//   ModelAndView modelAndView = new ModelAndView();
+		 //  modelAndView.setViewName("jsonView");  
+		   String url =(String) response.get("next_redirect_pc_url");
+		 // modelAndView.addObject("purchase",purchase);
+		 //  modelAndView.addObject("url", response.get("next_redirect_pc_url"));
+		  // return modelAndView;
+		  //  return "redirect:"+response.get("next_redirect_pc_url");
+		   return response;
+				} 
 	 
 	@RequestMapping(value="addStream",method=RequestMethod.GET)
 	public ModelAndView addStream(@RequestParam("userNo")String userNo) throws Exception{
@@ -189,8 +193,11 @@ public class StreamRestController {
 		    Map response = restTemplate.postForObject(new URI(HOST + "/v1/payment/approve"), request, Map.class);
 		   streamService.addSpon(spon);
 		  	ModelAndView modelAndView = new ModelAndView();
-			modelAndView.setViewName("redirect:https://192.168.0.12:443/stream/join?streamer="+spon.getStreamerNo()+"&userNo="+spon.getUserNo()+"&userNickname=user02&userProfile=default.jpg");
-			return modelAndView;
+			//modelAndView.setViewName("redirect:https://192.168.0.12:443/stream/join?streamer="+spon.getStreamerNo()+"&userNo="+spon.getUserNo()+"&userNickname=user02&userProfile=default.jpg");
+		  	//modelAndView.setViewName("/stream/Close");
+		  	System.out.println("close.jsp로 갑니다");
+		  	modelAndView.setViewName("/view/stream/close.jsp");
+		  	return modelAndView;
 	}
 	
 	@RequestMapping(value="inicisStream", method = RequestMethod.POST)   
