@@ -39,11 +39,11 @@
 	 </insert>
 	 
 	 
-	<!--  <insert id="addComment" parameterType="comment">
+	<insert id="addComment" parameterType="comment">
 	 	INSERT
 	 	INTO comments(comment_no, board_no, user_no, comment_detail_text, comment_reg_date)
 	 	VALUES('CM'||seq_cm.nextval,#{board.boardNo},#{user.userNo},#{commentDetailText},sysdate)
-	 </insert> -->
+	 </insert>
 	 
 	 
 	<select id="listBoard" parameterType="com.zagle.service.domain.SearchBoard" resultMap="boardSelectMap">
@@ -57,6 +57,13 @@
 		AND b.hash_tag LIKE '%'||#{searchKeyword}||'%'
 		</if>
 		ORDER BY b.board_reg_date DESC
+	 </select>
+	 
+	 <select id="listComment" parameterType="string" resultMap="commentSelectMap">
+	 	SELECT * 
+	 	FROM comments
+	 	WHERE board_no=#{board.boardNo}
+	 	ORDER BY comment_reg_date
 	 </select>
 	 
 	 
@@ -107,11 +114,11 @@
     </insert> -->
    
    <!-- SQL : INSERT -->
-   <insert id="addComment" parameterType="comment">
+   <!-- <insert id="addComment" parameterType="comment">
        INSERT
       INTO comments( comment_no, community_no, comment_writer_id, comment_detail, comment_write_date, comment_target_no, comment_view_condition ) 
       VALUES( seq_comment_no.nextval, #{commentComuNo}, #{commentWriterId}, #{commentDetail}, SYSDATE, seq_comment_no.currval, #{viewCondition} )
-   </insert>
+   </insert> -->
     
     <!-- SQL : SELECT ONE -->
     <!-- <select id="getComment" parameterType="int" resultMap="commentSelectMap">

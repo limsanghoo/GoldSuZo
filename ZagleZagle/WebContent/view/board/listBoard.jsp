@@ -143,30 +143,30 @@ $(function(){
 		self.location="/board/listMap";
 	})
 	
-	$("input[value='등록']").bind("click",function(){
+	/* $("input[value='등록']").bind("click",function(){
 		var boardNo=$(this).data('comment');
 		alert(boardNo);
 		
 		var userNo="${user.userNo}";
 		alert(userNo);
-		
-		
-		
+				
 		replyInsert(boardNo, userNo);
 		
-	});
+	}); */
 	
 });
 
 //댓글 등록 : start
-function replyInsert(boardNo,userNo){
+/* function replyInsert(boardNo,userNo){
 	
 	var data={
-            "commentDetailText" : /* $("input[name='commentDetailText']").val() */"왜안돼"
+			"userNo" : userNo,
+			"boardNo" : boardNo,
+            "commentDetailText" : $("input[name='commentDetailText']").val()
 	};
 
      $.ajax({
-        url : '/board/json/addComment/'+boardNo+'/'+userNo,
+        url : '/board/json/addComment',
         type : 'post',
         data : JSON.stringify(data),
         dataType:"json",
@@ -177,12 +177,12 @@ function replyInsert(boardNo,userNo){
         success : function(data){
         	
         	alert("성공");
-             /* if(data == 1) {
-                replyList(); //댓글 작성 후 댓글 목록 reload
-            }  */
+             if(data == 1) {
+                //replyList(); //댓글 작성 후 댓글 목록 reload
+            }  
         }
     }); 
-} 
+}  */
 //댓글 등록 : end
 
 
@@ -296,7 +296,14 @@ function fncGetTown(){
 <form name="listBoard">
 
 
+
 <div id="selectMenu">
+
+<a href="/board/testUser">
+<input type="button" value="세션">
+</a>
+
+
 <!-- 지도로 보기 -->
 <c:if test="${user.userNo!=null}">
 <input type="button" value="지도로 보기"/>
@@ -348,7 +355,8 @@ function fncGetTown(){
 	<c:set var="i" value="${ i+1 }" />
 		
 	<c:if test="${board.boardStatus=='1'}"><!-- 정상 게시물만 보여주기 -->
-		
+	
+<!-- 썸네일 박스 시작 -->	
 	<div class="box" data-toggle="modal" data-target="#${board.boardNo}modal1">
 		
 	<p>
@@ -404,7 +412,9 @@ window.addEventListener('load', function(event) {
 	<p align="center" style="text-align: left; font-size: small">${board.hashTag}</p>
 	
 
-	</div>
+</div>
+<!-- 썸네일 박스 끝 -->
+
 
 <!-- 모달1 시작 -->
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="${board.boardNo}modal1">
@@ -469,12 +479,14 @@ window.addEventListener('load', function(event) {
       <!-- 모달1 푸터 시작 -->
       <div class="modal-footer">
       
-     	<%-- <jsp:include page="/view/board/listComment.jsp" /> --%>
-     	<input type="text" name="commentDetailText" placeholder="댓글을 입력해주세요" value="">
-		<input type="button" value="등록" data-comment="${board.boardNo}">
-     	
+		<!-- listComment로 파라미터 보내기 -->      
+     	<jsp:include page="/view/board/listComment.jsp">
+     		<jsp:param name="boardNo" value="${board.boardNo}"/>
+     	</jsp:include>
+    	
       </div>
       <!-- 모달1 푸터 끝 -->
+      
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
