@@ -17,6 +17,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.zagle.common.Search;
 import com.zagle.service.board.BoardService;
 import com.zagle.service.domain.Board;
+import com.zagle.service.domain.Comment;
 import com.zagle.service.domain.Local;
 import com.zagle.service.user.UserService;
 
@@ -123,8 +125,8 @@ public class BoardRestController {
 	}
 	
 	 /*댓글등록 : start*/
-	  /* @RequestMapping(value="/rest/addComment/{communityNo}", method=RequestMethod.POST)
-	   public int addComment(@PathVariable("communityNo") int communityNo, @RequestBody Comment comment) throws Exception{
+	  /*@RequestMapping(value="/rest/addComment/{communityNo}", method=RequestMethod.POST)
+	   public int addComment(@PathVariable("boardNo") int communityNo, @RequestBody Comment comment) throws Exception{
 	      System.out.println("CommentRestController/addComment():POST 실행==========================");
 	      
 	      comment.setViewCondition("DEF");
@@ -137,10 +139,10 @@ public class BoardRestController {
 	      System.out.println("comment : "+comment);
 	      
 	      return 1;
-	   }
-	   댓글등록 : end
+	   }*/
+	   //댓글등록 : end
 	   
-	   댓글 리스트 : start
+	  /* 댓글 리스트 : start
 	   @RequestMapping(value="/rest/getCommentList/{communityNo}", method=RequestMethod.GET)
 	   public List<Comment> getCommentList(@PathVariable int communityNo) throws Exception{
 	      System.out.println("/rest/listComment/ : GET");

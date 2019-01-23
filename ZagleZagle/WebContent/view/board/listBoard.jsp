@@ -36,7 +36,8 @@ body {
    	margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
-    background: #333;
+	background: #333;
+    
 }
 .containerList {
 	padding-top : 20px; /* 리스트 맨 위 */
@@ -117,7 +118,7 @@ body {
 </style>
 <script type="text/javascript">
 
-//수정 시작
+
 $(function(){
 	
 	$("input[value='수정']").bind("click",function(){
@@ -136,8 +137,42 @@ $(function(){
 		self.location="/board/listMap";
 	})
 	
+	$("input[value='등록']").bind("click",function(){
+		var boardNo=$(this).data('comment');
+		alert(boardNo);
+		
+		replyInsert(boardNo);
+		
+	});
+	
 });
-//수정 끝
+
+//댓글 등록 : start
+/* function replyInsert(boardNo){
+	
+	alert("${user.userNo}");
+	
+    $.ajax({
+        url : '/comment/rest/addComment/'+boardNo,
+        type : 'post',
+        data : JSON.stringify({
+                 user.userNo : ${user.userNo}, //하드코딩 수정
+                 commentComuNo : communityNo,
+                 commentDetail : $('[name=commentDetail]').val()
+                 }),
+        dataType:"json",
+       headers:{
+                   "Accept":"application/json",
+                   "Content-Type": "application/json"
+                },
+        success : function(data){
+            if(data == 1) {
+                replyList(); //댓글 작성 후 댓글 목록 reload
+            }
+        }
+    });
+} */
+//댓글 등록 : end
 
 
 //검색 엔터
@@ -147,7 +182,7 @@ function enter() {
         	$("form").attr("method" , "POST").attr("action" , "/board/listBoard?view=${param.view}").submit();
         }
 }
- 
+//검색 엔터 끝 
 
 
 
@@ -263,8 +298,7 @@ function fncGetTown(){
 
 <!-- 게시물 등록 -->
 <c:if test="${user.userNo!=null}">
-<input type="button" value="게시물 등록" id="goAddBoard">
-</a>
+<input type="button" value="게시물 등록" id="goAddBoard"/>
 </c:if>
 </div>
 
@@ -317,32 +351,34 @@ function fncGetTown(){
 <div id="staticMap${board.boardNo}" style="width:100%;height:350px;" class="disabled"></div> <!-- 지도 클릭 안되게 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc9c3216a02c263f1acc2c4187e96443"></script>
 <script type="text/javascript">
-var staticMapContainer  = document.getElementById('staticMap${board.boardNo}'); // 이미지 지도를 표시할 div  
-var staticMapOption = {};
-var marker = {};
 
-var coord = ('${board.coord}');
+window.addEventListener('load', function(event) {
+	var staticMapContainer  = document.getElementById('staticMap${board.boardNo}'); // 이미지 지도를 표시할 div  
+	var staticMapOption = {};
+	var marker = {};
 
-if (coord==null || coord=='') {
+	var coord = ('${board.coord}');
+	
+	   var coordArray = coord.split(',');
+	   var coordy = Number(coordArray[0]);
+	   var coordx = Number(coordArray[1]);
+	   
+	   var markerPosition  = new daum.maps.LatLng(coordy, coordx); 
 
-}else{
-   var coordArray = coord.split(',');
-   var coordy = Number(coordArray[0]);
-   var coordx = Number(coordArray[1]);
-   
-   var markerPosition  = new daum.maps.LatLng(coordy, coordx); 
+	   marker = {
+	         position: markerPosition
+	   };
+	   
+	   staticMapOption = { 
+	        center: new daum.maps.LatLng(coordy, coordx), // 이미지 지도의 중심좌표
+	        level: 3, // 이미지 지도의 확대 레벨
+	        marker: marker
+	    };
+	   var staticMap = new daum.maps.StaticMap(staticMapContainer, staticMapOption);
 
-   marker = {
-         position: markerPosition
-   };
-   
-   staticMapOption = { 
-        center: new daum.maps.LatLng(coordy, coordx), // 이미지 지도의 중심좌표
-        level: 3, // 이미지 지도의 확대 레벨
-        marker: marker
-    };
-   var staticMap = new daum.maps.StaticMap(staticMapContainer, staticMapOption);
-}
+});
+
+
 </script>
 </c:if>
 <!-- 지도 끝 -->
@@ -419,9 +455,14 @@ if (coord==null || coord=='') {
       </div>
       <!-- 모달1 바디 끝 -->
       
+      <!-- 모달1 푸터 시작 -->
       <div class="modal-footer">
       
-     	<jsp:include page="/view/board/listComment.jsp" />
+     	<%-- <jsp:include page="/view/board/listComment.jsp" /> --%>
+     	<input type="text" name="commentDetailText" placeholder="댓글을 입력해주세요">
+	<input type="button" value="등록" data-comment="${board.boardNo}">
+	<input type="hidden" name="userNo" value="${sessionScope.user.userNo}">
+	<input type="hidden" name="boardNo" value="${board.boardNo}">
      	
       </div>
       <!-- 모달1 푸터 끝 -->
