@@ -289,7 +289,7 @@ function fncGetTown(){
 
 
 <body>
-
+커밋 테스트
 <jsp:include page="/view/layout/toolbar.jsp"/>
 
 
