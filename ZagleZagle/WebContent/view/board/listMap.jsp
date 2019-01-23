@@ -40,7 +40,7 @@
 <jsp:include page="/view/layout/toolbar.jsp" />
 
 
-<div class="row">
+<div class="row"style="text-align: center">
 				<select name="state" class="ct_input_g" style="width: 200px; height: 40px" onchange="fncGetState(this)">
 					<option value='' style="font-size:20px;"  selected>시·도</option>
 					<c:set var="i" value="0"/>
@@ -58,11 +58,10 @@
 					<option value="" style="font-size:20px;">읍·면·동</option>
 				</select>  
 				
-				<a href="/board/listBoard" style='font-size:20px;'>리스트로 보기</a>
 				            
 			</div>
-
-<div id="map" style="width:100%;height:100%;"></div>
+<br/>
+<div id="map" style="width:1500px;height:900px;margin: auto"></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc9c3216a02c263f1acc2c4187e96443&libraries=services"></script>
 <script>
