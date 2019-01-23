@@ -317,32 +317,34 @@ function fncGetTown(){
 <div id="staticMap${board.boardNo}" style="width:100%;height:350px;" class="disabled"></div> <!-- 지도 클릭 안되게 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc9c3216a02c263f1acc2c4187e96443"></script>
 <script type="text/javascript">
-var staticMapContainer  = document.getElementById('staticMap${board.boardNo}'); // 이미지 지도를 표시할 div  
-var staticMapOption = {};
-var marker = {};
 
-var coord = ('${board.coord}');
+window.addEventListener('load', function(event) {
+	var staticMapContainer  = document.getElementById('staticMap${board.boardNo}'); // 이미지 지도를 표시할 div  
+	var staticMapOption = {};
+	var marker = {};
 
-if (coord==null || coord=='') {
+	var coord = ('${board.coord}');
+	
+	   var coordArray = coord.split(',');
+	   var coordy = Number(coordArray[0]);
+	   var coordx = Number(coordArray[1]);
+	   
+	   var markerPosition  = new daum.maps.LatLng(coordy, coordx); 
 
-}else{
-   var coordArray = coord.split(',');
-   var coordy = Number(coordArray[0]);
-   var coordx = Number(coordArray[1]);
-   
-   var markerPosition  = new daum.maps.LatLng(coordy, coordx); 
+	   marker = {
+	         position: markerPosition
+	   };
+	   
+	   staticMapOption = { 
+	        center: new daum.maps.LatLng(coordy, coordx), // 이미지 지도의 중심좌표
+	        level: 3, // 이미지 지도의 확대 레벨
+	        marker: marker
+	    };
+	   var staticMap = new daum.maps.StaticMap(staticMapContainer, staticMapOption);
 
-   marker = {
-         position: markerPosition
-   };
-   
-   staticMapOption = { 
-        center: new daum.maps.LatLng(coordy, coordx), // 이미지 지도의 중심좌표
-        level: 3, // 이미지 지도의 확대 레벨
-        marker: marker
-    };
-   var staticMap = new daum.maps.StaticMap(staticMapContainer, staticMapOption);
-}
+});
+
+
 </script>
 </c:if>
 <!-- 지도 끝 -->
