@@ -97,6 +97,13 @@ public class BoardServiceImpl implements BoardService{
 	public void addComment(Comment comment) throws Exception {
 		boardDAO.addComment(comment);
 	}
+	
+	@Override
+	public List<Comment> listComment(String boardNo) throws Exception {		
+		List<Comment> list=boardDAO.listComment(boardNo);
+		
+		return list;
+	}
 
 	@Override
 	public void deleteComment(Comment comment) throws Exception {
@@ -182,5 +189,7 @@ public class BoardServiceImpl implements BoardService{
 		List<Board> board = boardDAO.getMapList(search);
 		return board;
 	}
+
+	
 
 }

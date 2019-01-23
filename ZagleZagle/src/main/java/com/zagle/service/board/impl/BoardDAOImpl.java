@@ -81,6 +81,11 @@ public class BoardDAOImpl implements BoardDAO{
 	public void addComment(Comment comment) throws Exception {
 		sqlSession.insert("BoardMapper.addComment", comment);
 	}
+	
+	@Override
+	public List<Comment> listComment(String boardNo) throws Exception {
+		return sqlSession.selectList("BoardMapper.listComment", boardNo);
+	}
 
 	@Override
 	public void deleteComment(Comment comment) throws Exception {
@@ -124,5 +129,7 @@ public class BoardDAOImpl implements BoardDAO{
 	public List<Board> getMapList(Search search) {
 		return sqlSession.selectList("BoardMapper.getMapList",search);
 	}
+
+	
 
 }
