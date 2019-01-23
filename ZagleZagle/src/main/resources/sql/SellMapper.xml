@@ -24,9 +24,8 @@
 	
 	<insert 	id="addSell"	parameterType="sell" >
 	 	INSERT
-		INTO sell 
-		VALUES	 ( 'TS'||seq_ts.nextval, #{userNo}, #{sellName}, #{sellPrice}, #{sellText}, #{sellPhoto1}, #{sellPhoto2}, #{sellPhoto3}, 
-						#{sellPhone}, #{sellStyle}, 10, sysdate)
+		INTO sell(sell_no, user_no, sell_name, sell_price, sell_text, sell_photo1, sell_photo2, sell_photo3, sell_phone, sell_style, sell_state, sell_date)
+		VALUES	 ( 'TS'||seq_ts.nextval,#{userNo},#{sellName},#{sellPrice},#{sellText},#{sellPhoto1:VARCHAR},#{sellPhoto2:VARCHAR},#{sellPhoto3:VARCHAR},#{sellPhone:VARCHAR},#{sellStyle},10,sysdate)
 	 </insert>
 
 </mapper>
