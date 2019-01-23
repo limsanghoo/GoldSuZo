@@ -52,9 +52,23 @@
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$( "button.btn.btn-inverse.btn" ).on("click" , function() {
 
-				$("form").attr("method" , "POST").attr("action" , "/trade/addSell").submit();
+				addSell();
 			});
 		});	
+		 
+		 function addSell(){
+			 
+			 var value = "";	
+				if( $("input:text[name='phone1']").val() != ""  && $("input:text[name='phone2']").val() != ""  &&  $("input:text[name='phone3']").val() != "") {
+					var value = $("input[name='phone1']").val() 
+										+ $("input[name='phone2']").val() 
+										+ $("input[name='phone3']").val();
+				}
+
+				$("input:hidden[name='sellPhone']").val( value );
+				
+				$("form").attr("method" , "POST").attr("action" , "/trade/addSell").submit();
+		 }
 
 	</script>
 
@@ -92,23 +106,41 @@
 		      <input type="text" class="form-control" id="sellPrice" name="sellPrice" placeholder="가격">
 		    </div>
 		  </div>
-
+		  
 		  <div class="form-group">
-		  <label for="sellText" class="col-sm-4 text-center">상세정보</label>
-		  <div class="container col-sm-7">
-<textarea class="editable" id="sellText" name="sellText"></textarea>
-	</div>
-	</div>
+		    <label for="sellPhone" class="col-sm-4 text-center">전화번호</label>
+		     <div class="col-sm-2">
+		      <input type="text" class="form-control" id="phone1" name="phone1">
+		    </div>
+		    <div class="col-sm-2">
+		      <input type="text" class="form-control" id="phone2" name="phone2">
+		    </div>
+		    <div class="col-sm-2">
+		      <input type="text" class="form-control" id="phone3" name="phone3">
+		    </div>
+		    <input type="hidden" name="sellPhone"  />
+		  </div>
+
+		<div class="form-group">
+			<label for="sellText" class="col-sm-4 text-center">상세정보</label>
+			<div class="container col-sm-7">
+				<textarea class="editable" id="sellText" name="sellText"></textarea>
+			</div>
+		</div>
 
     
     <script src="/common/js/medium-editor/dist/js/medium-editor.js"></script>
     <script>
   
     var editor = new MediumEditor('.editable', {
+    	extensions: {
+            'imageDragging': {}
+        },
         placeholder: {
-            text: '여기에 글을 작성 해 주세요 드래그 해서 이미지를 업로드 할 수 있습니다.',
+            text: '여기에 글을 작성 해 주세요',
             hideOnClick: true
         }
+    
     });
     
 //     $(function () {
