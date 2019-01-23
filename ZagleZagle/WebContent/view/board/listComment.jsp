@@ -8,13 +8,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>listComment</title>
+<script type="text/javascript">
+
+
+
+
+
+</script>
+
 </head>
 <body>
 
 <form name="addComment">
 
 	<input type="text" name="commentDetailText" placeholder="댓글을 입력해주세요">
-	<input type="button" name="addComment" value="등록">
+	<input type="button" value="등록" data-comment="${board.boardNo}">
 	<input type="hidden" name="userNo" value="${user.userNo}">
 	<input type="hidden" name="boardNo" value="${board.boardNo}">
 </form>

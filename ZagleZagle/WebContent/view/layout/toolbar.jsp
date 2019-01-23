@@ -18,12 +18,9 @@
 	
 	
 	<style>
-		/* #page-wrapper{
-			height:80px;
-			background-image: url("/common/css/html5up-helios/images/header.jpg");
-			background-repeat: no-repeat;
-			background-size: 100%;
-		} */
+		#page-wrapper{
+		 height: 120px;
+		}
 	</style>
 
 

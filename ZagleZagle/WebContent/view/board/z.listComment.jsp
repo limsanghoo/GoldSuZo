@@ -217,15 +217,16 @@
    <form>
       
       <div class="form-group commentForm">
-         <input type="text" class="form-control commentInput" name="commentDetailText" placeholder="댓글을 입력해주세요">
+         <input type="text" class="form-control commentInput" name="commentDetail" placeholder="댓글을 입력해주세요">
          <button type="button" class="btn btn-default btn-md commentSave" id="save">등록</button>
-         <input type="hidden" id="userNo" name="userNo" value="${user.userNo}">
-         <input type="hidden" id="boardNo" name="boardNo" value="${board.boardNo}">
+         <input type="hidden" id="userId" name="userId" value="${ me.userId }">
+         <input type="hidden" id="nickName" name="nickName" value="${ me.nickName }">
       </div>
       
         <div class="replyList"></div>
            
    </form>
+
    </div>
       
    
