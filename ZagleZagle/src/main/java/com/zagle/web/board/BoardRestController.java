@@ -143,34 +143,29 @@ public class BoardRestController {
 	      
 	      comment.setUser(userService.getUser2(userNo));
 	      comment.setBoard(boardService.getBoard(boardNo));
-
+	      comment.setCommentDetailText(commentDetailText);
 	      
-	      
-	      /*comment.setUser(comment.getUser());
-	      comment.setBoard(boardService.getBoard(boardNo));
-	      comment.setCommentDetailText(comment.getCommentDetailText());*/
-	      
-	      //boardService.addComment(comment);
-	      
-	      //System.out.println("comment : "+comment);
+	      boardService.addComment(comment);
 	      
 	      return 1;
 	   }
 	   //댓글등록 : end
 	   
-	  /* 댓글 리스트 : start
-	   @RequestMapping(value="/rest/getCommentList/{communityNo}", method=RequestMethod.GET)
-	   public List<Comment> getCommentList(@PathVariable int communityNo) throws Exception{
-	      System.out.println("/rest/listComment/ : GET");
-	      System.out.println("communityNo : "+communityNo);
+	  //댓글 리스트 : start
+	   @RequestMapping(value="json/listComment/{boardNo}", method=RequestMethod.GET)
+	   public List<Comment> getCommentList(@PathVariable String boardNo) throws Exception{
+	      System.out.println("/listComment GET");
+	      System.out.println("boardNo : "+boardNo);
 	      
-	      List<Comment> list = commentService.getCommentList(communityNo);
+	      List<Comment> list = boardService.listComment(boardNo);
+
 	      System.out.println("list : "+list);
+	      
 	      return list;
 	   }
-	   댓글 리스트 : end
+	   //댓글 리스트 : end
 	   
-	   댓글 수정 : start
+	   /*댓글 수정 : start
 	   @RequestMapping(value="/rest/updateComment", method=RequestMethod.POST)
 	   public int updateComment(@ModelAttribute("comment") Comment comment) throws Exception{
 	      
