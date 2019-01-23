@@ -16,6 +16,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -125,21 +126,26 @@ public class BoardRestController {
 	}
 	
 	 /*댓글등록 : start*/
-	  /*@RequestMapping(value="/rest/addComment/{communityNo}", method=RequestMethod.POST)
-	   public int addComment(@PathVariable("boardNo") int communityNo, @RequestBody Comment comment) throws Exception{
+	  @RequestMapping(value="json/addComment/{boardNo}/{userNo}", method=RequestMethod.POST)
+	   public int addComment(@PathVariable String boardNo, @PathVariable String userNo, @ModelAttribute("comment") Comment comment) throws Exception{
 	      System.out.println("CommentRestController/addComment():POST 실행==========================");
 	      
-	      comment.setViewCondition("DEF");
-	      comment.setCommentComuNo(communityNo);
-	      comment.setCommentWriterId(comment.getCommentWriterId());
-	      comment.setCommentDetail(comment.getCommentDetail());
 	      
-	      commentService.addComment(comment);
+	      System.out.println("comment : "+comment);
+	      
+	      System.out.println("boardNo : "+boardNo);
+	      System.out.println("userNo : "+userNo);
+	      
+	      /*comment.setUser(comment.getUser());
+	      comment.setBoard(boardService.getBoard(boardNo));
+	      comment.setCommentDetailText(comment.getCommentDetailText());*/
+	      
+	      //boardService.addComment(comment);
 	      
 	      System.out.println("comment : "+comment);
 	      
 	      return 1;
-	   }*/
+	   }
 	   //댓글등록 : end
 	   
 	  /* 댓글 리스트 : start
