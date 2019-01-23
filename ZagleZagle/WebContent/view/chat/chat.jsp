@@ -76,7 +76,6 @@ body,html{
 			border:0 !important;
 			color:white !important;
 			height: 60px !important;
-			width:100%;
 			overflow-y: auto;
 		}
 			.type_msg:focus{
@@ -476,9 +475,15 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 			mdStart.click();
 		}
 	
+		$(function(){
+			$("btn").on("click",function(){
+				$("iframe").hide();
+			})
+		});
 	</script>
 </head>
 <body>
+
 		<div class="container-fluid h-100">
 			<div class="row justify-content-center h-100">
 				
@@ -522,7 +527,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 								
 								</form>
 								<div class="input-group-append">
-								<input type="text" class="form-control type_msg" placeholder="여기에 입력하세요.." id="msg"/>
+								<input type="text" class="form-control type_msg" placeholder="여기에 입력하세요.." id="msg"></input>
 								<button type='button' id='msg_trans'>번역</button>
 								</div>
 								<div class="input-group-append" id="msg_process">
