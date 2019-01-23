@@ -5,7 +5,14 @@
 <html lang="ko">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+	
+       
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="CSS/MiStilo.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
@@ -74,19 +81,19 @@ body{
 }
 
 p{
-    font-family: "Homer Simpson", cursive;
- font-size:30px;
+    font-family: serif;
+ font-size:40px;
  text-shadow: 1px 2px #000;
-   color: blue;
+   color: black;
  
 }
 label{
-    font-family: "Homer Simpson", cursive;
+    font-family: monospace;
     font-size:15px;
 }
 
 button{
-    font-family: "Homer Simpson", cursive;
+    font-family: monospace;
  text-shadow: 1px 2px #000;
    
 }
@@ -110,38 +117,50 @@ button{
 <!------ Include the above in your HEAD tag ---------->
 </style>
 
-<html>
-    <head>
-        <title>Login</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="CSS/MiStilo.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    </head>
+
     <body>
         <section class="container-fluid">
             <div class="row justify-content-center  ">
+            
+       		
 
                 <div class="col-3 rounded border shadow p-3 mb-5 bg-white " id="col-Login" >
-                            <p class="text-center"><strong>Admin Login</strong></p>
+                
+
+                
+                            <p class="text-center" style="font-style: oblique;"><strong>Admin Login</strong></p>
+                            
+                                 
                         
                             <form class="login-form"  method="POST">
                                 <div class="form-group" id="errorLogin" >
+                                
+                                     
+            			
+                                
                                 </div>
                                 <div class="form-group">
                                     <label >관리자 아이디</label>
                                     <input type="text" id="userNo" name="userNo" class="form-control" placeholder="관리자번호" required>    
                                 </div>
+                                
+                                     
+            					<br>
+                                
                                 <div class="form-group">
                                     <label >비밀번호</label>
                                     <input type="password" class="form-control"  id="snsNo" name="snsNo"  placeholder="Password" onkeydown='javascript:onEnterSubmit()'>
                                 </div>
+                                
+                                
+                                     
+          						 <br><br><br>
+          						 
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary float-right">로그인</button>                              
                                 </div>
+                                
+                       
                             </form>
                         </div>
                 </div>

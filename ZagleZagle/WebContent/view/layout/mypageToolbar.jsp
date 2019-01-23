@@ -85,7 +85,7 @@ $("a:contains('계좌번호 수정')").on("click" , function() {
     width: 250px;
     height: 100%;
     margin-left: -250px;
-    background: #f2f2f2;;
+    background: lightblue;;
     overflow-x: hidden;
     overflow-y: auto;
   }
@@ -111,7 +111,7 @@ $("a:contains('계좌번호 수정')").on("click" , function() {
   .sidebar-nav li a {
     display: block;
     text-decoration: none;
-    color: #999;
+    color: white;
   }
   
   .sidebar-nav li a:hover {
@@ -132,20 +132,20 @@ $("a:contains('계좌번호 수정')").on("click" , function() {
     <ul class="sidebar-nav">
       <li class="sidebar-brand">
       </br>
-        <a href="#"><h1>Mypage</h1></a>
+        <a href="#" style="font-size: x-large; font-weight: bold;">Mypage</a>
         </br>
       </li>
-      <li><a href="#"><h2>작성 게시물 모아보기</h2></a></li>
+      <li><a href="#" style="font-size: large;">작성 게시물 모아보기</a></li>
       <br><br>
-      <li><a href="#"><h2>댓글 작성한 게시물 보기</h2></a></li>
+      <li><a href="#" style="font-size: large;">댓글 작성한 게시물 보기</a></li>
       </br><br>
-      <li><a href="#"><h2>스크랩 게시물 모아보기</h2></a></li>
+      <li><a href="#" style="font-size: large;">스크랩 게시물 모아보기</a></li>
       </br><br>
-      <li><a href="#"><h2>좋아요한 게시물 모아보기</h2></a></li>
+      <li><a href="#" style="font-size: large;">좋아요한 게시물 모아보기</a></li>
       </br><br>
-      <li><a href="#"><h2>계좌번호 등록</a></h2></li>
+      <li><a href="#" style="font-size: large;">계좌번호 등록</a></li>
       </br><br>
-      <li><a href="#"><h2>계좌번호 수정</a></h2></li>
+      <li><a href="#" style="font-size: large;">계좌번호 수정</a></li>
  
     </ul>
   </div>
