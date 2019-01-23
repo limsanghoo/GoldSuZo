@@ -23,6 +23,10 @@
     color: white !important;
     line-height: 1.25em;
 }
+
+#addRefundForm{
+color:black !important; 
+}
   
 .homepage{
 	padding-top :100px;
@@ -65,10 +69,10 @@ function addStream(){
  }
 		
 function addRefund(){
-		alert('addRefund()');
+		//alert('addRefund()');
 	    $("#addRefundForm").attr("method", "POST").attr("action", "/stream/addRefund").submit();
 } 
- 
+  
 $(function() {
 	var modal = document.getElementById('myModal');
 	var moda2 = document.getElementById('myModal2');
@@ -87,16 +91,17 @@ $(function() {
 	
 	$("#refund").on("click", function() {
 		   alert("환급합니다~");
-		   addRefund(); 
+		   addRefund();    
+		// $("#addRefundForm").attr("method", "POST").attr("action", "/stream/addRefund").submit();
 		  var result = confirm("환급신청 완료! 환급리스트 화면으로 이동 하시겠습니까?");
+		     
 		  if(result){
 			  //alert("환급리스트 공사중....") 
 			  self.location="/stream/listRefund";
-		  }else{
-			  self.location="192.168.0.12:8080/stream/listStream";
+		  }else{ 
+			  self.location="/stream/listStream";
 		  } 
-	}); 
-	
+	});  
 	$("#listRefund").on("click", function() {
 		   alert("환급리스트로 이동합니다~");
 		self.location="/stream/listRefund";  
@@ -213,7 +218,7 @@ $(function() {
         <h4 class="modal-title" id="myModalLabel">환급하기</h4>
       </div>
       <form id="addRefundForm" method="post" target="popup_window">
-      <div class="modal-body">
+      <div class="modal-body"> 
       
       			<label for="txt-user-text" class="col-form-label">유저No</label><br/> 
        			   <div class="refund" id="streamerNo" name="streamerNo"></div><br/>
@@ -237,14 +242,12 @@ $(function() {
       </form>
     </div>
   </div></div>	
-		
 	 
-		 
 <div class="row" id="list" "position: relative; z-index: 2;">
 <c:set var="i" value="0" />
 <c:forEach var="obj" items="${list}">
 <div class="container"> <div class="box">
-<h2><img id="profile" src="/common/images/stream/${obj.streamerProfile}" style="height:30px; width:30px;">${obj.streamNickname}</h2><img alt="50x50" data-src="holder.js/100x200" src='/common/images/stream/${obj.streamSum}' style="height: 250px; width: 50%; display: block;">
+<h2><img id="profile" src="/common/images/stream/${obj.streamerProfile}" style="height:30px; width:30px;">${obj.streamNickname}</h2><img alt="50x50" data-src="holder.js/100x200" src='/common/images/stream/${obj.streamSum}' style=" width:80%;margin:auto; display: block;">
 <h2>${obj.streamTitle}</h2><p>내용:${obj.streamContent}</p><p>시청자수:${obj.streamViewCount}<p><p>좋아요수:${obj.streamLikeCount}</p><a class="btn btn-default" name="get" role="button" data-param="${obj.streamer}">들어가기</a> 
     
 </div> </div> 

@@ -127,7 +127,7 @@ public class MypageRestController {
 	 final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
 	 
 	final String client_id ="l7xx60c67b59db9e4130aad0b4d113a9e890";
-	final String callBackURL ="http://localhost:8080/mypage/bankCallback";
+	final String callBackURL ="http://192.168.0.36:8080/mypage/bankCallback";
 	
 	  HttpHeaders headers = new HttpHeaders();
 	headers.add("Accept", "application/json");
@@ -137,7 +137,7 @@ public class MypageRestController {
        params.add("grant_type", "authorization_code");
        params.add("client_id", client_id);
        params.add("client_secret", "1efe286e56a94d85a44d7c0d7d19a144");
-       params.add("redirect_uri", "http://localhost:8080/mypage/bankCallback");
+       params.add("redirect_uri", "http://192.168.0.36:8080/mypage/bankCallback");
        params.add("code", code);
   
        

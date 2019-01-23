@@ -45,7 +45,7 @@ public class MongoRestDAOImpl implements StreamRestDAO{
 		List<String> list = new ArrayList<String>();	
 		List<JSONObject> list2 = new ArrayList<JSONObject>();
 			try {
-			
+			 
 			MongoClientURI uri  = new MongoClientURI("mongodb://localhost:27017/stream"); 
 	        MongoClient mongoClient = new MongoClient(uri);
 	        DB db = mongoClient.getDB(uri.getDatabase());

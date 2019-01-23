@@ -29,30 +29,35 @@
 
 <br/>
 
+<div id="content">
 
 <div>
 	<c:if test="${board.photo1 !=null}">
 	<img src="${board.photo1}" style="width: 500px"/>
-	<input type="button" value="링크추가"/>
+	<br/>
 	</c:if>
 
 	<c:if test="${board.photo2 !=null}">
 	<img src="${board.photo2}" style="width: 500px"/>
+	<br/>
 	</c:if>
 	
 	<c:if test="${board.photo3 !=null}">
 	<img src="${board.photo3}" style="width: 500px"/>
+	<br/>
 	</c:if>
 </div>
 
 <div>
 ${board.address}
 </div>
+<br/>
 
 <div>
 ${board.boardDetailText}
 </div>
 
+</div>
 
 
 
