@@ -45,6 +45,18 @@
             margin-top: 10px;
         }
     </style>
+    
+    <script type="text/javascript">
+	
+		 $(function() {
+			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$( "button.btn.btn-inverse.btn" ).on("click" , function() {
+
+				$("form").attr("method" , "POST").attr("action" , "/trade/addSell").submit();
+			});
+		});	
+
+	</script>
 
 </head>
 
@@ -68,8 +80,8 @@
 		    <label for="status" class="col-sm-4 text-center">판매방법</label>
 			<div class="container col-sm-7">
 			<select class="form-control" name="sellStyle">
-				<option value="00" >택배거래</option>
-				<option value="01" >직거래</option>
+				<option value="10" >택배거래</option>
+				<option value="20" >직거래</option>
 			</select>
 				</div>
 		  </div>
@@ -84,10 +96,7 @@
 		  <div class="form-group">
 		  <label for="sellText" class="col-sm-4 text-center">상세정보</label>
 		  <div class="container col-sm-7">
-        <div class="editable" id="sellText">
-		여기에 글을 작성 해 주세요<br>+버튼을 눌러서 이미지를 업로드 할 수 있습니다.
-		
-        </div>
+<textarea class="editable" id="sellText" name="sellText"></textarea>
 	</div>
 	</div>
 
@@ -95,15 +104,21 @@
     <script src="/common/js/medium-editor/dist/js/medium-editor.js"></script>
     <script>
   
-    var editor = new MediumEditor('.editable');
-    $(function () {
-    	$('.editable').click(function(){
-    		$('.editable').empty();
-    	});
-        $('.editable').mediumInsert({
-            editor: editor
-        });
+    var editor = new MediumEditor('.editable', {
+        placeholder: {
+            text: '여기에 글을 작성 해 주세요 드래그 해서 이미지를 업로드 할 수 있습니다.',
+            hideOnClick: true
+        }
     });
+    
+//     $(function () {
+//     	$('.editable').click(function(){
+//     		$('.editable').empty();
+//     	});
+//         $('.editable').mediumInsert({
+//             editor: editor
+//         });
+//     });
     </script>
     
     <div class="form-group">

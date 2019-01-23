@@ -74,11 +74,21 @@ $(function() {
 		padding-top : 50px:
 	}
 	
+	
+
+
+	
+	
+	
+	
+	
+	
+	
 </style>
 
 
 </head>
-<body style="background-color: #f2f2f2;">
+<body>
 
 
 <jsp:include page="/view/layout/toolbar.jsp" />
@@ -88,7 +98,7 @@ $(function() {
 <jsp:include page="/view/layout/mypageToolbar.jsp" />
 
 
-<div class="container" style="background-color: #f2f2f2;">
+<div class="container" >
 	
 	<div class="page-header text-info" style="font-style: italic;">
 	       <h5 style="font-size: x-large;">작성 게시물 보기</h5>
@@ -106,7 +116,7 @@ $(function() {
         </thead>
 
 
-		  <tbody>
+		  <tbody class="tt">
       
       <c:set var="i" value="0" />
 		  
@@ -118,7 +128,7 @@ $(function() {
 			<tr>
 			  <td align="left" style="font-size: medium;">${ i }</td>
 			 	 
-			  <td align="left"  style="font-size: medium;" title="Click : 게시물 상세정보" data-toggle="modal" data-target="#${board.boardNo}aaa">${board.boardDetailText}</td>
+			  <td class="abcd" align="left"  style="font-size: medium;" title="Click : 게시물 상세정보" data-toggle="modal" data-target="#${board.boardNo}aaa">${board.boardDetailText}</td>
 			  	
 			  <td align="left" style="font-size: medium;" >${board.boardRegDate}</td>
 			  
