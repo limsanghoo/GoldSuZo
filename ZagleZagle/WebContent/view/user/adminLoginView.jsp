@@ -160,7 +160,7 @@ button{
                                     <button type="submit" class="btn btn-primary float-right">로그인</button>                              
                                 </div>
                                 
-                                <br><br> <br><br> <br><br>
+                       
                             </form>
                         </div>
                 </div>

@@ -33,14 +33,16 @@
  });
 
 
+ 
+ 
+ 
 </script>
-
-
 
 
 </head>
 <body>
 
+<jsp:include page="/view/layout/toolbar.jsp" />
 <jsp:include page="/view/layout/mypageToolbar.jsp" />
 
 
