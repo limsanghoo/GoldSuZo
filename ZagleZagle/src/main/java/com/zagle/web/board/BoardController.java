@@ -200,7 +200,7 @@ public class BoardController {
 		return modelAndView;
 	}
 	
-	/*@RequestMapping(value="getBoard", method=RequestMethod.GET)
+	@RequestMapping(value="getBoard", method=RequestMethod.GET)
 	public ModelAndView getBoard(@RequestParam("boardNo") String boardNo) throws Exception{
 		
 		System.out.println("/getBoard");		
@@ -216,7 +216,7 @@ public class BoardController {
 		modelAndView.setViewName("forward:/view/board/getBoard.jsp");
 		
 		return modelAndView;
-	}*/
+	}
 	
 	@RequestMapping(value="getHotTag", method=RequestMethod.GET)
 	public ModelAndView getHotTag() throws Exception{
