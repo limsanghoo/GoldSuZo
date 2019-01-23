@@ -122,5 +122,84 @@ public class BoardRestController {
 		return board;
 	}
 	
+	 /*댓글등록 : start*/
+	  /* @RequestMapping(value="/rest/addComment/{communityNo}", method=RequestMethod.POST)
+	   public int addComment(@PathVariable("communityNo") int communityNo, @RequestBody Comment comment) throws Exception{
+	      System.out.println("CommentRestController/addComment():POST 실행==========================");
+	      
+	      comment.setViewCondition("DEF");
+	      comment.setCommentComuNo(communityNo);
+	      comment.setCommentWriterId(comment.getCommentWriterId());
+	      comment.setCommentDetail(comment.getCommentDetail());
+	      
+	      commentService.addComment(comment);
+	      
+	      System.out.println("comment : "+comment);
+	      
+	      return 1;
+	   }
+	   댓글등록 : end
+	   
+	   댓글 리스트 : start
+	   @RequestMapping(value="/rest/getCommentList/{communityNo}", method=RequestMethod.GET)
+	   public List<Comment> getCommentList(@PathVariable int communityNo) throws Exception{
+	      System.out.println("/rest/listComment/ : GET");
+	      System.out.println("communityNo : "+communityNo);
+	      
+	      List<Comment> list = commentService.getCommentList(communityNo);
+	      System.out.println("list : "+list);
+	      return list;
+	   }
+	   댓글 리스트 : end
+	   
+	   댓글 수정 : start
+	   @RequestMapping(value="/rest/updateComment", method=RequestMethod.POST)
+	   public int updateComment(@ModelAttribute("comment") Comment comment) throws Exception{
+	      
+	      System.out.println("/rest/updateComment : POST");
+	      System.out.println("comment : "+comment);
+	      
+	      commentService.updateComment(comment);
+	      
+	      return 1;
+	   }
+	   댓글 수정 : start
+	   
+	   댓글 삭제 : start
+	   @RequestMapping(value="/rest/deleteComment/{commentNo}", method=RequestMethod.GET)
+	   public int deleteReply(@PathVariable int commentNo) throws Exception{
+	      System.out.println("/rest/deleteComment : GET");
+	      Comment comment = new Comment();
+	      commentService.getComment(commentNo);
+	      commentService.updateViewCondition(commentNo);
+	      System.out.println("comment : "+comment);
+	      
+	      return 1;
+	   }
+	   댓글 삭제 : end
+	   
+	   대댓글 등록 : start
+	   @RequestMapping(value="/rest/addReComment/{targetNo}", method=RequestMethod.POST)
+	   public int addReComment(@PathVariable("targetNo") int targetNo, @RequestBody Comment comment ) throws Exception{
+	      System.out.println("/rest/addReComment : POST");
+	      
+	      System.out.println("comment : "+comment);
+	      
+	      comment.setViewCondition("DEF");
+	      comment.setCommentComuNo(comment.getCommentComuNo());
+	      comment.setCommentWriterId(comment.getCommentWriterId());
+	      comment.setCommentDetail(comment.getCommentDetail());
+	      comment.setTargetNo(targetNo);
+	      
+	      System.out.println("comment : "+comment);
+	      commentService.addReComment(comment);
+	      System.out.println("comment11 : " + comment);
+
+	      return 1;
+	   }
+	   대댓글 등록 : end*/
+
+	
+	
 
 }

@@ -23,6 +23,13 @@
 		<result	property="address"	column="address"	jdbcType="VARCHAR"/>
 	</resultMap>
 	
+	<resultMap type="comment" id="commentSelectMap">
+		<result property="commentNo"	column="comment_no"	jdbcType="VARCHAR"/>
+		<result property="board.boardNo"	column="board_no"	jdbcType="VARCHAR"/>
+		<result property="user.userNo"	column="user_no"	jdbcType="VARCHAR"/>
+		<result property="commentDetailText"	column="comment_detail_text"	jdbcType="VARCHAR"/>
+		<result property="commentRegDate"	column="comment_reg_date"	jdbcType="DATE"/>
+	</resultMap>
 	
 	 
 	 <insert 	id="addBoard"	parameterType="board" >
@@ -30,6 +37,13 @@
 		INTO board(board_no, user_no, board_detail_text, hash_tag, user_theme, board_reg_date, board_status, photo1, photo2, photo3, coord, address)
 		VALUES('BD'||seq_bd.nextval,#{user.userNo},#{boardDetailText},#{hashTag:VARCHAR},#{userTheme},sysdate,#{boardStatus},#{photo1:VARCHAR},#{photo2:VARCHAR},#{photo3:VARCHAR},#{coord:VARCHAR},#{address:VARCHAR})
 	 </insert>
+	 
+	 
+	<!--  <insert id="addComment" parameterType="comment">
+	 	INSERT
+	 	INTO comments(comment_no, board_no, user_no, comment_detail_text, comment_reg_date)
+	 	VALUES('CM'||seq_cm.nextval,#{board.boardNo},#{user.userNo},#{commentDetailText},sysdate)
+	 </insert> -->
 	 
 	 
 	<select id="listBoard" parameterType="com.zagle.service.domain.SearchBoard" resultMap="boardSelectMap">
@@ -81,5 +95,75 @@
 	<select id="getMapList" parameterType="string" resultMap="boardSelectMap">
 		select * from board where address like '${searchKeyword}%' and board_status=1
 	</select>
+	
+<!-- ////////////////////////////////////// -->	
+	
+	
+	 <!-- SQL : INSERT -->
+   <!-- <insert id="addReComment" parameterType="com.destiny.service.domain.Comment">
+       INSERT
+      INTO comments ( comment_no, community_no, comment_writer_id, comment_detail, comment_write_date, comment_target_no, comment_view_condition ) 
+      VALUES ( seq_comment_no.nextval, #{commentComuNo}, #{commentWriterId}, #{commentDetail}, SYSDATE, #{targetNo}, #{viewCondition})
+    </insert> -->
+   
+   <!-- SQL : INSERT -->
+   <insert id="addComment" parameterType="comment">
+       INSERT
+      INTO comments( comment_no, community_no, comment_writer_id, comment_detail, comment_write_date, comment_target_no, comment_view_condition ) 
+      VALUES( seq_comment_no.nextval, #{commentComuNo}, #{commentWriterId}, #{commentDetail}, SYSDATE, seq_comment_no.currval, #{viewCondition} )
+   </insert>
+    
+    <!-- SQL : SELECT ONE -->
+    <!-- <select id="getComment" parameterType="int" resultMap="commentSelectMap">
+      SELECT
+      comment_no, community_no, comment_writer_id, comment_detail, comment_write_date, comment_target_no, comment_view_condition
+      FROM comments
+      WHERE comment_no = #{value}
+    </select> -->
+    
+    <!-- SQL : UPDATE -->
+   <!--  <update id="updateComment"   parameterType="com.destiny.service.domain.Comment" >
+         UPDATE comments
+         <set>
+            comment_detail = #{commentDetail}
+         </set>
+         WHERE comment_no = #{commentNo}
+    </update> -->
+    
+    <!-- SQL : VIEW_CONDITION UPDATE -->
+    <!-- <update id="updateViewCondition"   parameterType="com.destiny.service.domain.Comment" >
+         UPDATE comments
+         <set>
+            comment_view_condition = 'DEL'
+         </set>
+         WHERE comment_no = #{commentNo}
+    </update> -->
+   
+   <!-- SQL : SELECT LIST -->
+   <!-- <select  id="getCommentList"  parameterType="map"   resultMap="commentSelectMap">
+        SELECT comment_no , community_no , comment_writer_id , comment_detail , comment_write_date, comment_target_no, comment_view_condition
+      FROM comments
+      WHERE community_no = #{commentComuNo} and comment_view_condition = 'DEF' and parent_reply_no is NULL
+      ORDER BY comment_target_no, comment_no 
+        SELECT *
+        FROM (   SELECT inner_table.* , ROWNUM AS row_seq
+                    FROM      (   SELECT comment_no , community_no , comment_writer_id , comment_detail , comment_write_date, comment_target_no, comment_view_condition
+                                 FROM comments
+                                 WHERE community_no = #{commentComuNo} and parent_reply_no is NULL
+                                 ORDER BY comment_target_no, comment_no
+                               ) inner_table
+                  WHERE ROWNUM &lt;= #{search.endRowNum} )
+      WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
+    </select> -->
+    
+    <!-- SQL : SELECT ROW Count -->    
+    <!-- <select  id="getTotalCount"  parameterType="String"    resultType="int">
+        SELECT COUNT(*)
+        FROM(   SELECT comment_no , community_no , comment_writer_id , comment_detail , comment_write_date, comment_target_no, comment_view_condition
+                  FROM comments
+                  WHERE community_no = #{value} 
+                ) countTable                  
+    </select> -->
+	
 	 
 </mapper>

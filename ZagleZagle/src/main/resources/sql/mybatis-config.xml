@@ -21,6 +21,7 @@
 		<typeAlias alias="local" type="com.zagle.service.domain.Local" />
 		<typeAlias alias="refund" type="com.zagle.service.domain.Refund" />
 		<typeAlias alias="spon" type="com.zagle.service.domain.Spon" />
+		<typeAlias alias="comment" type="com.zagle.service.domain.Comment" />
 	</typeAliases>
 	
 	 <!-- SQL Definition :: file include -->

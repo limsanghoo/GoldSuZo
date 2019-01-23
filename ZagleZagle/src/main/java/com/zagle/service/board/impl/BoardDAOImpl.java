@@ -79,8 +79,7 @@ public class BoardDAOImpl implements BoardDAO{
 
 	@Override
 	public void addComment(Comment comment) throws Exception {
-		// TODO Auto-generated method stub
-		
+		sqlSession.insert("BoardMapper.addComment", comment);
 	}
 
 	@Override

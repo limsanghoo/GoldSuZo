@@ -9,7 +9,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.zagle.service.board.BoardService;
 import com.zagle.service.domain.Board;
+import com.zagle.service.domain.Comment;
 import com.zagle.service.domain.User;
+import com.zagle.service.user.UserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration	(locations = {	"classpath:config/context-common.xml",
@@ -22,6 +24,10 @@ public class BoardServiceTest {
 	@Autowired
 	@Qualifier("boardServiceImpl")
 	private BoardService boardService;
+	
+	@Autowired
+	@Qualifier("userServiceImpl")
+	private UserService userService;
 	
 	//@Test
 	public void testAddBoard() throws Exception{
@@ -58,11 +64,22 @@ public class BoardServiceTest {
 	}
 	
 	@Test
-	public void listBoardMap() throws Exception{
+	public void addComment() throws Exception{
 		
+		User user=new User();
+		user.setUserNo("US10027");
+		//user=userService.getUser2(user.getUserNo());
 		
+		Board board=new Board();
+		board.setBoardNo("BD10049");
 		
+		Comment comment=new Comment();
+		comment.setBoard(board);
+		comment.setUser(user);
+		comment.setCommentDetailText("댓글댓글댓글");
 		
+		boardService.addComment(comment);
+			
 	}
 
 }
