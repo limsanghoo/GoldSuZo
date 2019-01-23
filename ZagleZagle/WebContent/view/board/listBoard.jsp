@@ -149,9 +149,7 @@ $(function(){
 		
 		var userNo="${user.userNo}";
 		alert(userNo);
-		
-		
-		
+				
 		replyInsert(boardNo, userNo);
 		
 	});
@@ -162,11 +160,13 @@ $(function(){
 function replyInsert(boardNo,userNo){
 	
 	var data={
-            "commentDetailText" : /* $("input[name='commentDetailText']").val() */"왜안돼"
+			"userNo" : userNo,
+			"boardNo" : boardNo,
+            "commentDetailText" : $("input[name='commentDetailText']").val()
 	};
 
      $.ajax({
-        url : '/board/json/addComment/'+boardNo+'/'+userNo,
+        url : '/board/json/addComment',
         type : 'post',
         data : JSON.stringify(data),
         dataType:"json",

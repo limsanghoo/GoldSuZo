@@ -126,15 +126,25 @@ public class BoardRestController {
 	}
 	
 	 /*댓글등록 : start*/
-	  @RequestMapping(value="json/addComment/{boardNo}/{userNo}", method=RequestMethod.POST)
-	   public int addComment(@PathVariable String boardNo, @PathVariable String userNo, @ModelAttribute("comment") Comment comment) throws Exception{
-	      System.out.println("CommentRestController/addComment():POST 실행==========================");
+	  @RequestMapping(value="json/addComment", method=RequestMethod.POST)
+	   public int addComment(@RequestBody Map<String, String> map) throws Exception{
+		  
+	      System.out.println("addComment POST");
 	      
+	      System.out.println(map);
 	      
-	      System.out.println("comment : "+comment);
+	      //map에서 꺼내오기
+	      String userNo=map.get("userNo");	      
+	      String boardNo=map.get("boardNo");	      
+	      String commentDetailText=map.get("commentDetailText");
 	      
-	      System.out.println("boardNo : "+boardNo);
-	      System.out.println("userNo : "+userNo);
+	      //Comment 도메인에 set
+	      Comment comment=new Comment();
+	      
+	      comment.setUser(userService.getUser2(userNo));
+	      comment.setBoard(boardService.getBoard(boardNo));
+
+	      
 	      
 	      /*comment.setUser(comment.getUser());
 	      comment.setBoard(boardService.getBoard(boardNo));
@@ -142,7 +152,7 @@ public class BoardRestController {
 	      
 	      //boardService.addComment(comment);
 	      
-	      System.out.println("comment : "+comment);
+	      //System.out.println("comment : "+comment);
 	      
 	      return 1;
 	   }
