@@ -9,87 +9,47 @@
 <head>
 <title>스트리밍 목록조회</title>
 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
-<style> 
-  body{
-  background-image: url("https://images.pexels.com/photos/1022921/pexels-photo-1022921.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
-  font-family: 'Do Hyeon', sans-serif;
-  }   
-    button{
-      align-self:center;
-      background:transparent;
-      padding:1rem 1rem;
-      margin:0 1rem;
-      transition:all .5s ease;
-      color:red;        
-      font-size:5rem;  
-      letter-spacing:1px;
-      outline:none;
-      box-shadow: 20px 38px 34px -26px hsla(0,0%,0%,.2);
-      border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
-   } 
-   
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+
+<link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+<style>  
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+    color: white !important;
+    line-height: 1.25em;
+}
+  
+.homepage{
+	padding-top :100px;
+    background-color: #935d8c;
+    background-image: url(images/overlay.png), -moz-linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
+    background-image: url(images/overlay.png), -webkit-linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
+    background-image: url(images/overlay.png), -ms-linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
+    background-image: url(images/overlay.png), linear-gradient(45deg, #e37682 15%, #5f4d93 85%);    
+	color: rgba(255, 255, 255, 0.65);
+ 
+}   
+
+.box{ 
+ width: 300px;   
+   border: 1px solid black; 
+	border-radius: 15px !important;
+	background-color: rgba(0,0,0,0.4) !important; 
+	display: block;  
+}
+     
+       
     button:hover{
          box-shadow:2px 8px 4px -6px hsla(0,0%,0%,.3);
       } 
-      button.lined.thick{
-         border:solid 6px #41403E;        
-      }  
-      .container {
-    width: 1200px;
-    margin: 20px auto;
-    columns: 4;
-    column-gap: 40px;
-} 
-      .container .box {
-    width: 100%;
-    margin: 0 0 20px;
-    padding: 10px;
-    background: #fff;
-    overflow: hidden;
-    break-inside: avoid;
-	}
- 
-.container .box img {
-    max-width: 100%;
-     background-size: cover;   
-  }
-  .container .box h2 {
-    margin: 10px 0 0;
-    padding: 0;
-    font-size: 20px;
-}
-@media (max-width: 1200px) {
-    .container {
-        columns: 3;
-        width: calc(100% - 40px);
-        box-sizing: border-box;
-        padding: 20px 20px 20px 0;
-    }
-}
-@media (max-width: 768px) {
-    .container {
-        columns: 2;
-    }
-}
-@media (max-width: 480px) {
-    .container {
-        columns: 1;
-    }
-
-  
    
-  
   </style>  
-
-
-<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-
+   
 <script type="text/javascript">
 
 
@@ -204,20 +164,19 @@ $(function() {
 });  
 </script> 
 </head>
-<body>
+<body>  
    	<!-- ToolBar End /////////////////////////////////////-->
-
+<jsp:include page="/view/layout/toolbar.jsp" /> 
 
 		<!--<button type="button" data-toggle="modal" data-target="#myModal" style="margin:15px; padding:15px;">스트리밍 방 업로드 하기</button>   -->
-<div>왜 안바껴어어어어</div>   
+    
+  <button class='lined thick' data-toggle="modal" data-target="#myModal"  style="width:200px;">스트리밍방업로드 하기</button> 
    
-  <button class='lined thick' data-toggle="modal" data-target="#myModal" style="margin:15px; padding:15px;">스트리밍방 업로드 하기</button>
-
 		<!--<button type="button" name="refundbtn" data-toggle="modal" data-target="#myModal2" style="margin:15px; padding:15px;">환급하기</button>  -->
-   <button class='lined thick'  name="refundbtn" data-toggle="modal" data-target="#myModal2" style="margin:15px; padding:15px;">환급하기</button>
+   <button class='lined thick'  name="refundbtn" data-toggle="modal" data-target="#myModal2">환급하기</button>
     <button class='lined thick' id="listRefund" name="listRefund">환급리스트이동</button> 
   
-
+					
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -280,17 +239,16 @@ $(function() {
   </div></div>	
 		
 	 
-		
-<div class="row" id="list">
+		 
+<div class="row" id="list" "position: relative; z-index: 2;">
 <c:set var="i" value="0" />
 <c:forEach var="obj" items="${list}">
-<div class="container"> <div class="box"> 
-<img alt="50x50" data-src="holder.js/100x200" src='/common/images/stream/${obj.streamSum}' style="height: 250px; width: 50%; display: block;">
-<h2>${obj.streamTitle}</h2><img id="profile" src="/common/images/stream/${obj.streamerProfile}" style="height:100px; width:100px;"><h2>${obj.streamNickname}</h2><h3>${obj.streamer}</h3><p>내용:${obj.streamContent}</p><p>시청자수:${obj.streamViewCount}<p><p>좋아요수:${obj.streamLikeCount}</p><a class="btn btn-default" name="get" role="button" data-param="${obj.streamer}">들어가기</a> 
-  
-</div> </div>
+<div class="container"> <div class="box">
+<h2><img id="profile" src="/common/images/stream/${obj.streamerProfile}" style="height:30px; width:30px;">${obj.streamNickname}</h2><img alt="50x50" data-src="holder.js/100x200" src='/common/images/stream/${obj.streamSum}' style="height: 250px; width: 50%; display: block;">
+<h2>${obj.streamTitle}</h2><p>내용:${obj.streamContent}</p><p>시청자수:${obj.streamViewCount}<p><p>좋아요수:${obj.streamLikeCount}</p><a class="btn btn-default" name="get" role="button" data-param="${obj.streamer}">들어가기</a> 
+    
+</div> </div> 
 </c:forEach>  
 </div>   
- 
 </body>
 </html>
