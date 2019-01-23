@@ -476,14 +476,29 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 		}
 	
 		$(function(){
-			$("btn").on("click",function(){
-				$("iframe").hide();
-			})
+			$("#btn").hide();
+			$("#btn:contains('숨기기')").on("click",function(){
+				$("iframe").css("display","none");
+				$(this).hide();
+				$("#btn2").show();
+			});
+			
+		});
+		$(function(){
+			
+			$("#btn2:contains('보이기')").on("click",function(){
+				$("iframe").css("display","inline");
+				$(this).hide();
+				$("#btn").show();
+			});
 		});
 	</script>
 </head>
 <body>
 
+<iframe src="http://192.168.0.25:8080/board/listBoard" align="left" style="display:none; height:100%; width: 30%;"></iframe>
+<button id="btn">숨기기</button>
+<button id="btn2">보이기</button>
 		<div class="container-fluid h-100">
 			<div class="row justify-content-center h-100">
 				
