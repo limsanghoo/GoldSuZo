@@ -25,6 +25,13 @@
 	    
 		
 	
+		
+		window.opener.document.location.reload();
+
+
+		window.close();    //현재 팝업창 Close
+		
+	
 	
 		
 		
