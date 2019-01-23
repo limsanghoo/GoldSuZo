@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SellMapper">
+ 	
+ 	
+	<resultMap id="sellSelectMap" type="sell">
+		<result property="sellNo" 			column="sell_no" 			jdbcType="VARCHAR"/>
+		<result property="userNo"	column="user_no" 		jdbcType="VARCHAR" />
+		<result property="sellName" 	column="sell_name" 		jdbcType="VARCHAR" />
+		<result property="sellPrice" 				column="sell_price" 					jdbcType="NUMERIC" />
+		<result property="sellText" 				column="sell_text" 					jdbcType="VARCHAR" />
+		<result property="sellPhoto1" 			column="sell_Photo1" 		jdbcType="VARCHAR" />
+		<result property="sellPhoto2" 			column="sell_Photo2" 		jdbcType="VARCHAR" />
+		<result property="sellPhoto3" 			column="sell_Photo3" 		jdbcType="VARCHAR" />
+		<result property="sellPhone" 				column="sell_phone" 					jdbcType="VARCHAR" />
+		<result property="sellStyle" 			column="sell_style" 				jdbcType="NUMERIC"  />
+		<result property="sellState" 		column="sell_state" 			jdbcType="NUMERIC" />
+		<result property="sellDATE" 			column="sell_date" 		jdbcType="DATE" />
+	</resultMap>
+	
+	<insert 	id="addSell"	parameterType="sell" >
+	 	INSERT
+		INTO sell 
+		VALUES	 ( 'TS'||seq_ts.nextval, #{userNo}, #{sellName}, #{sellPrice}, #{sellText}, #{sellPhoto1}, #{sellPhoto2}, #{sellPhoto3}, 
+						#{sellPhone}, #{sellStyle}, 10, sysdate)
+	 </insert>
+
+</mapper>

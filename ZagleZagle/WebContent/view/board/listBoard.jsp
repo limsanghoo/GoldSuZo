@@ -24,12 +24,18 @@
 
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 
+
+#nav{
+ color: white; 
+}
+
 form{
 	 	padding-top : 150px;
 	 	padding-left:150px;
         padding-right:150px;
-        background-color:#f2f2f2;
-
+       /*  background-color:#f2f2f2; */
+        background-image: url(/common/css/html5up-helios/images/pic03.jpg);
+        background-size: cover;
 	}
 
 body {
@@ -129,7 +135,7 @@ $(function(){
 	$("input[value='게시물 등록']").bind("click",function(){
 		var boardNo=$(this).data('update');
 		
-		self.location="http://127.0.0.1:8080/board/addBoard?userNo=${user.userNo}";
+		self.location="http://192.168.0.36:8080/board/addBoard?userNo=${user.userNo}";
 	})
 	
 	$("input[value='지도로 보기']").bind("click",function(){
@@ -141,37 +147,42 @@ $(function(){
 		var boardNo=$(this).data('comment');
 		alert(boardNo);
 		
-		replyInsert(boardNo);
+		var userNo="${user.userNo}";
+		alert(userNo);
+		
+		
+		
+		replyInsert(boardNo, userNo);
 		
 	});
 	
 });
 
 //댓글 등록 : start
-/* function replyInsert(boardNo){
+function replyInsert(boardNo,userNo){
 	
-	alert("${user.userNo}");
-	
-    $.ajax({
-        url : '/comment/rest/addComment/'+boardNo,
+	var data={
+            "commentDetailText" : /* $("input[name='commentDetailText']").val() */"왜안돼"
+	};
+
+     $.ajax({
+        url : '/board/json/addComment/'+boardNo+'/'+userNo,
         type : 'post',
-        data : JSON.stringify({
-                 user.userNo : ${user.userNo}, //하드코딩 수정
-                 commentComuNo : communityNo,
-                 commentDetail : $('[name=commentDetail]').val()
-                 }),
+        data : JSON.stringify(data),
         dataType:"json",
        headers:{
                    "Accept":"application/json",
                    "Content-Type": "application/json"
                 },
         success : function(data){
-            if(data == 1) {
+        	
+        	alert("성공");
+             /* if(data == 1) {
                 replyList(); //댓글 작성 후 댓글 목록 reload
-            }
+            }  */
         }
-    });
-} */
+    }); 
+} 
 //댓글 등록 : end
 
 
@@ -459,10 +470,8 @@ window.addEventListener('load', function(event) {
       <div class="modal-footer">
       
      	<%-- <jsp:include page="/view/board/listComment.jsp" /> --%>
-     	<input type="text" name="commentDetailText" placeholder="댓글을 입력해주세요">
-	<input type="button" value="등록" data-comment="${board.boardNo}">
-	<input type="hidden" name="userNo" value="${sessionScope.user.userNo}">
-	<input type="hidden" name="boardNo" value="${board.boardNo}">
+     	<input type="text" name="commentDetailText" placeholder="댓글을 입력해주세요" value="">
+		<input type="button" value="등록" data-comment="${board.boardNo}">
      	
       </div>
       <!-- 모달1 푸터 끝 -->
