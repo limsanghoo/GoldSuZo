@@ -260,7 +260,7 @@ public class UserRestController {
 			
 			//modelAndView.addObject("result", new Boolean(result));
 			//modelAndView.addObject("user", user);
-			modelAndView.setViewName("redirect:/board/listBoard");
+			modelAndView.setViewName("redirect:/view/user/model.jsp");
 			
 			return modelAndView;
 		}
