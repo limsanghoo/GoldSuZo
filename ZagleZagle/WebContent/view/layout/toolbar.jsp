@@ -18,9 +18,9 @@
 	
 	
 	<style>
-		#page-wrapper{
+		/* #page-wrapper{
 		 height: 120px;
-		}
+		} */
 	</style>
 
 
