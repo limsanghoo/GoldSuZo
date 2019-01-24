@@ -101,6 +101,11 @@
 		WHERE board_no=#{boardNo}
 	</update>
 	
+	<delete id="deleteComment" parameterType="string">
+		DELETE FROM comments
+		WHERE comment_no=#{value}
+	</delete>
+	
 	<select id="getMapList" parameterType="string" resultMap="boardSelectMap">
 		select * from board where address like '${searchKeyword}%' and board_status=1
 	</select>

@@ -21,23 +21,22 @@ $(function(){
 	
 		var userNo="${user.userNo}";
 		
-		alert(boardNo);
-		alert(userNo);
-		alert($("input[name='commentDetailText']").val());
+		var text=$("#<%=boardNo%>commentDetailText").val();
 			
-		commentInsert(boardNo, userNo);
+		commentInsert(boardNo, userNo, text);
 	
 	});
 
 });
 
 //댓글 등록
-function commentInsert(boardNo,userNo){
+function commentInsert(boardNo,userNo, text){
+
 	
 	var data={
 			"userNo" : userNo,
 			"boardNo" : boardNo,
-            "commentDetailText" : $("input[name='commentDetailText']").val()
+            "commentDetailText" : text
 	};
 
      $.ajax({
@@ -58,10 +57,9 @@ function commentInsert(boardNo,userNo){
         }
     }); 
 } 
-
+  
 
 //댓글 리스트
-//댓글 목록 : start
    function commentList(boardNo){
 
        	$.ajax({
@@ -69,24 +67,45 @@ function commentInsert(boardNo,userNo){
            type : 'get',
           // data : {'postNo':postNo},
             success : function(JSONData){
-                var a =''; 
+            	
+            	var a='';
+            	var b='';
+            	
+                
                 $.each(JSONData, function(i){
-                  var list = JSONData[i];
-                  console.log("list : "+list);
-                   a += '<div class="commentArea'+list.commentNo+'" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
-                   a += '<div class="commentInfo'+list.commentNo+'">'+'댓글번호 : '+list.commentNo+' / 작성자 : '+list.user.userNickname;
-                   a += '<a onclick="commentUpdate('+list.commentNo+',\''+list.commentDetailText+'\')"> 수정 </a>';
-                   a += '<a onclick="commentDelete('+list.commentNo+')"> 삭제 </a>';
-                   a += '<a onclick="recommentInsert('+list.commentNo+',\''+list.user.userNickname+'\')"> 답글달기 </a></div>';
-                   a += '<div class="commentContent"  name="'+list.commentNo+'"> <p> 내용 : '+list.commentDetailText+'</p>';
-                   a += '</div></div>';
+                	
+                  var list = JSONData[i];  
+                  
+                  var commentNo="'"+list.commentNo+"'";
+                  var boardNo="'"+list.board.boardNo+"'";
+                  
+               		if("${user.userNo}"==list.user.userNo){
+              			b='<a onclick="commentDelete('+commentNo+','+boardNo+')" style="float:right;"> 삭제 </a>';
+              		}
+                                
+                   a += '<div class="commentArea'+list.commentNo+'" style="margin-bottom: 15px;">';                           
+                   a += '<img src="/common/images/profile/'+list.user.profile+'" style="width: 30px; height: 30px; border-radius: 70px;"/>'+list.user.userNickname;                 
+                   a += '&nbsp;&nbsp;&nbsp;&nbsp;'+list.commentDetailText;                   
+                   a += b;                                
+                   a += '</div>';
                });
                $(".commentList").html(a); 
            }
        });
    }
-   //댓글 목록 : end
-   
+
+ //댓글 삭제
+function commentDelete(commentNo, boardNo){
+   	
+         $.ajax({
+             url : '/board/json/deleteComment/'+commentNo,
+             type : 'get',
+             success : function(data){
+                 if(data == 1) commentList(boardNo); //댓글 삭제후 목록 출력 
+             }
+         });
+}
+
 
 
 </script>
@@ -94,11 +113,10 @@ function commentInsert(boardNo,userNo){
 </head>
 
 <body>
-		<div class="commentList"></div>
+		<div class="commentList" align="left"></div>
 	
-		<input type="text" name="commentDetailText" placeholder="댓글을 입력해주세요">
+		<input type="text" id="<%=boardNo%>commentDetailText" placeholder="댓글을 입력해주세요">
 		<input type="button" id="<%=boardNo%>Comment" value="등록">
-
 
 </body>
 </html>

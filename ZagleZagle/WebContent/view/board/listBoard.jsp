@@ -48,7 +48,7 @@ body {
 .containerList {
 	padding-top : 20px; /* 리스트 맨 위 */
     width: 1200px;
-    margin: 20px auto;
+    margin: auto;
     columns: 4;
     column-gap: 40px;
 }
@@ -143,14 +143,14 @@ $(function(){
 		self.location="/board/listMap";
 	})
 	
-	/* $(".box").bind("click",function(){
+	$(".box").bind("click",function(){
 		var preBoardNo=$(this).data('target');
 		
 		//#${board.boardNo}modal1 자르기
 		var boardNo=preBoardNo.substring(1,8);
 		
 		commentList(boardNo);
-	}) */
+	})
 	
 });
 
