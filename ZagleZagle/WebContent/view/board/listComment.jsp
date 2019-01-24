@@ -83,14 +83,17 @@ function commentInsert(boardNo,userNo, text){
                   var boardNo="'"+list.board.boardNo+"'";
                   
                		if("${user.userNo}"==list.user.userNo){
-              			b='<a onclick="commentDelete('+commentNo+','+boardNo+')" style="float:right;"> 삭제 </a>';
+              			b='<div class="col-sm-2" onclick="commentDelete('+commentNo+','+boardNo+')">[삭제]</div>';
+              		}else{
+              			b='<div class="col-sm-2"></div>';
               		}
                                 
-                   a += '<div class="commentArea'+list.commentNo+'" style="margin-bottom: 15px;">';                           
-                   a += '<img src="/common/images/profile/'+list.user.profile+'" style="width: 30px; height: 30px; border-radius: 70px;"/>'+list.user.userNickname;                 
-                   a += '<span style="margin-left:30px;">'+list.commentDetailText+'</span>';                   
+                   a += '<div class="commentArea'+list.commentNo+'">';                           
+                   a += '<div class="col-sm-1"><img src="/common/images/profile/'+list.user.profile+'" style="width: 30px; height: 30px; border-radius: 70px;"/></div>';                 
+                   a += '<div class="col-sm-3">'+list.user.userNickname+'</div>';                 
+                   a += '<div class="col-sm-6">'+list.commentDetailText+'</div>';                   
                    a += b;                                
-                   a += '</div>';
+                   a += '</div><br/>';
                });
                $(".commentList").html(a); 
            }
@@ -118,8 +121,8 @@ function commentDelete(commentNo, boardNo){
 <body>
 		<div class="commentList" align="left"></div>
 	
-		<input type="text" id="<%=boardNo%>commentDetailText" placeholder="댓글을 입력해주세요">
-		<input type="button" id="<%=boardNo%>Comment" value="등록">
+		<div class="col-sm-10"><input type="text" id="<%=boardNo%>commentDetailText" placeholder="댓글을 입력해주세요"></div>
+		<div class="col-sm-2" style="padding-left: 0;"><input type="button" id="<%=boardNo%>Comment" value="등록" style="width:80px;"></div>
 
 </body>
 </html>

@@ -67,6 +67,7 @@ body {
     background: #ffffff;
     overflow: hidden;
     break-inside: avoid;
+    border-radius: 15px;
 }
 
 .containerList .box img {
@@ -350,7 +351,7 @@ function fncGetTown(){
 	<p>
 	<img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px; display: inline; vertical-align: middle"/>
 	<span style="font-weight: bold; display: inline;">&nbsp;${board.user.userNickname}</span>
-	<span><img src="/common/images/board/emptyLike.png" style="height: 40px; width:40px; display: inline; vertical-align: middle; float:right"/></span>
+	<span><img src="/common/images/board/emptyLike.png" style="height: 60px; width:60px; display: inline; vertical-align: middle; float:right"/></span>
 	</p>
 
 	
