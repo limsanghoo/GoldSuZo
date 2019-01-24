@@ -20,20 +20,23 @@ $(function(){
  		var boardNo="<%=boardNo%>";
 	
 		var userNo="${user.userNo}";
+		
+		var text=$("#<%=boardNo%>commentDetailText").val();
 			
-		replyInsert(boardNo, userNo);
+		commentInsert(boardNo, userNo, text);
 	
 	});
 
 });
 
 //댓글 등록
-function replyInsert(boardNo,userNo){
+function commentInsert(boardNo,userNo, text){
+
 	
 	var data={
 			"userNo" : userNo,
 			"boardNo" : boardNo,
-            "commentDetailText" : $("input[name='commentDetailText']").val()
+            "commentDetailText" : text
 	};
 
      $.ajax({
@@ -49,41 +52,60 @@ function replyInsert(boardNo,userNo){
         	
         	alert("성공");
              if(data == 1) {
-                replyList(boardNo); //댓글 작성 후 댓글 목록 reload
+                commentList(boardNo); //댓글 작성 후 댓글 목록 reload
             }
         }
     }); 
 } 
-
+  
 
 //댓글 리스트
-//댓글 목록 : start
-   function replyList(boardNo){
-	
-	alert(boardNo);
-	
+   function commentList(boardNo){
+
        	$.ajax({
            url : '/board/json/listComment/'+boardNo,
            type : 'get',
           // data : {'postNo':postNo},
-           /* success : function(JSONData){
-                var a =''; 
+            success : function(JSONData){
+            	
+            	var a='';
+            	var b='';
+            	
+                
                 $.each(JSONData, function(i){
-                  var list = JSONData[i];
-                  console.log("list : "+list);
-                   a += '<div class="replyArea'+list.commentNo+'" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
-                   a += '<div class="replyInfo'+list.commentNo+'">'+'댓글번호 : '+list.commentNo+' / 작성자 : '+list.commentWriterId;
-                   a += '<a onclick="replyUpdate('+list.commentNo+',\''+list.commentDetail+'\')"> 수정 </a>';
-                   a += '<a onclick="replyDelete('+list.commentNo+')"> 삭제 </a>';
-                   a += '<a onclick="reReplyInsert('+list.commentNo+',\''+list.commentWriterId+'\')"> 답글달기 </a></div>';
-                   a += '<div class="replyContent"  name="'+list.commentNo+'"> <p> 내용 : '+list.commentDetail+'</p>';
-                   a += '</div></div>';
+                	
+                  var list = JSONData[i];  
+                  
+                  var commentNo="'"+list.commentNo+"'";
+                  var boardNo="'"+list.board.boardNo+"'";
+                  
+               		if("${user.userNo}"==list.user.userNo){
+              			b='<a onclick="commentDelete('+commentNo+','+boardNo+')" style="float:right;"> 삭제 </a>';
+              		}
+                                
+                   a += '<div class="commentArea'+list.commentNo+'" style="margin-bottom: 15px;">';                           
+                   a += '<img src="/common/images/profile/'+list.user.profile+'" style="width: 30px; height: 30px; border-radius: 70px;"/>'+list.user.userNickname;                 
+                   a += '&nbsp;&nbsp;&nbsp;&nbsp;'+list.commentDetailText;                   
+                   a += b;                                
+                   a += '</div>';
                });
-               $(".replyList").html(a); 
-           } */
+               $(".commentList").html(a); 
+           }
        });
    }
-   //댓글 목록 : end
+
+ //댓글 삭제
+function commentDelete(commentNo, boardNo){
+   	
+         $.ajax({
+             url : '/board/json/deleteComment/'+commentNo,
+             type : 'get',
+             success : function(data){
+                 if(data == 1) commentList(boardNo); //댓글 삭제후 목록 출력 
+             }
+         });
+}
+
 
 
 </script>
@@ -91,11 +113,10 @@ function replyInsert(boardNo,userNo){
 </head>
 
 <body>
-		<div class="replyList"></div>
+		<div class="commentList" align="left"></div>
 	
-		<input type="text" name="commentDetailText" placeholder="댓글을 입력해주세요" value="">
+		<input type="text" id="<%=boardNo%>commentDetailText" placeholder="댓글을 입력해주세요">
 		<input type="button" id="<%=boardNo%>Comment" value="등록">
-
 
 </body>
 </html>

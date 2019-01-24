@@ -34,7 +34,7 @@ public void addBoard(Board board) throws Exception;
 	
 	public List<Comment> listComment(String boardNo) throws Exception;
 	
-	public void deleteComment(Comment comment) throws Exception;
+	public void deleteComment(String commentNo) throws Exception;
 	
 	public void addLike(Like like) throws Exception;
 	

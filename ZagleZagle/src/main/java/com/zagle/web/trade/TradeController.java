@@ -1,5 +1,7 @@
 package com.zagle.web.trade;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.zagle.common.Search;
 import com.zagle.service.domain.Sell;
 import com.zagle.service.domain.User;
 import com.zagle.service.trade.TradeService;
@@ -25,20 +28,40 @@ public class TradeController {
 	public TradeController() {
 	}
 	
+	@RequestMapping(value="listTrade", method=RequestMethod.GET)
+	public ModelAndView listTrade(@ModelAttribute("search") Search search, HttpSession session) throws Exception{
+		
+		Map<String , Object> map=tradeService.listTrade(search);
+
+		User user=(User)session.getAttribute("user");
+
+		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.addObject("tradeList", map.get("tradeList"));//게시물 리스트
+		modelAndView.setViewName("forward:/view/trade/listTrade.jsp");
+		
+		return modelAndView;
+	}
+	
 	@RequestMapping(value="addSell", method=RequestMethod.POST)
 	public ModelAndView addSell(@ModelAttribute("sell") Sell sell, HttpSession session) throws Exception{
 		
-		User user =(User) session.getAttribute("user");
-		System.out.println("이고"+sell);
-		
-		sell.setUserNo(user.getUserNo());
-		
-		System.out.println("이거는?"+sell);
-		
+		User user =(User)session.getAttribute("user");
+		sell.setSeller(user);
 		tradeService.addSell(sell);
 	
-		return null;
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("redirect:/trade/listTrade");
 		
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="addSell", method=RequestMethod.GET)
+	public ModelAndView addSell() throws Exception{
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("forward:/view/trade/addSell.jsp");
+		
+		return modelAndView;
 	}
 	
 }

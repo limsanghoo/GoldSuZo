@@ -88,9 +88,8 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
-	public void deleteComment(Comment comment) throws Exception {
-		// TODO Auto-generated method stub
-		
+	public void deleteComment(String commentNo) throws Exception {
+		sqlSession.delete("BoardMapper.deleteComment", commentNo);
 	}
 
 	@Override
