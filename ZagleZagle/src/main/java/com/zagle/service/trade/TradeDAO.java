@@ -1,10 +1,15 @@
 package com.zagle.service.trade;
 
+import java.util.List;
+
+import com.zagle.common.Search;
 import com.zagle.service.domain.Sell;
 
 public interface TradeDAO {
 
 	public void addSell(Sell sell) throws Exception;
+
+	public List<Sell> listTrade(Search search) throws Exception;
 	
 //	addSell 판매상품올리기
 //	addBuy 구매요청했을때

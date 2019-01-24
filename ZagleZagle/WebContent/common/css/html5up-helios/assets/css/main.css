@@ -2320,7 +2320,7 @@ input::-moz-focus-inner {
 				display: inline-block;
 				margin: -9px 0.5em 0 0.5em;
 				border-radius: 0.5em;
-				padding: 0.85em;
+				padding: 0.5em;
 				border: solid 1px transparent;
 				-moz-transition: color 0.35s ease-in-out, border-color 0.35s ease-in-out;
 				-webkit-transition: color 0.35s ease-in-out, border-color 0.35s ease-in-out;
