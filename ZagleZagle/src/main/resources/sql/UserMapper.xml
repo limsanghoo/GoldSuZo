@@ -88,4 +88,73 @@
 	 WHERE sns_no = #{snsNo}
 	 </update>
 	 
+	 
+	 <!--  LIST USER -->
+	 
+	<select  id="listUser"  parameterType="com.zagle.service.domain.SearchAdmin"	resultMap="userSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	SELECT user_no , user_name , sns_no, reg_date, delete_count
+											FROM users
+											<if test="searchCondition != null">
+												<where>
+													<if test="searchCondition == 0 and searchKeyword !='' ">
+										 				user_name = #{searchKeyword}
+													</if>
+													<if test="searchCondition == 1 and searchKeyword !='' ">
+										 				delete_count = #{searchKeyword}
+													</if>
+												</where>
+											</if>
+											ORDER BY user_no ) inner_table
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	 </select>
+	 
+	 
+	<select id="listBlackObject" parameterType="com.zagle.service.domain.SearchAdmin" resultMap="userSelectMap">
+		SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	SELECT user_no , user_name , reg_date, delete_count
+											FROM users
+				     						WHERE black_code = '1'
+														
+											<if test="searchCondition != null">
+												
+													<if test="searchCondition == 0 and searchKeyword !='' ">
+										 				 and user_name = #{searchKeyword}
+													</if>
+													
+													<if test="searchCondition == 1 and searchKeyword !='' ">
+										 			    and delete_count = #{searchKeyword}
+													</if>
+										
+											</if>
+											ORDER BY user_no ) inner_table
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	 </select>
+	 
+	
+	 
+	 
+	 
+	 
+	
+	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT user_no , user_name , sns_no, reg_date, delete_count
+						FROM users
+						<if test="searchCondition != null">
+							<where>
+								<if test="searchCondition == 0 and searchKeyword !='' ">
+						 			user_name = #{searchKeyword}
+								</if>
+								<if test="searchCondition == 1 and searchKeyword !='' ">
+						 		delete_count = #{searchKeyword}
+								</if>
+							</where>
+						</if> ) countTable						
+	 </select>
+	 
 </mapper>

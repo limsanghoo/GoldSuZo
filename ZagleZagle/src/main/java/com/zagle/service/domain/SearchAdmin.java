@@ -9,6 +9,8 @@ public class SearchAdmin {
 	private int endRowNum;
 	private int startRowNum;
 	
+	
+	
 	public SearchAdmin() {
 		
 	}

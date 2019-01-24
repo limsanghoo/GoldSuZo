@@ -7,8 +7,8 @@ public class Report {
 	///Field
 	
 	private String reportNo;
-	private String reportingUserNo;
-	private String reprotedUserNo;
+	private User reportingUserNo;
+	private User reportedUserNo;
 	private String reportReason;
 	
 	private Board reportedBoard;
@@ -29,20 +29,20 @@ public class Report {
 		this.reportNo = reportNo;
 	}
 
-	public String getReportingUserNo() {
+	public User getReportingUserNo() {
 		return reportingUserNo;
 	}
 
-	public void setReportingUserNo(String reportingUserNo) {
+	public void setReportingUserNo(User reportingUserNo) {
 		this.reportingUserNo = reportingUserNo;
 	}
 
-	public String getReprotedUserNo() {
-		return reprotedUserNo;
+	public User getReportedUserNo() {
+		return reportedUserNo;
 	}
 
-	public void setReprotedUserNo(String reprotedUserNo) {
-		this.reprotedUserNo = reprotedUserNo;
+	public void setReportedUserNo(User reportedUserNo) {
+		this.reportedUserNo = reportedUserNo;
 	}
 
 	public String getReportReason() {
@@ -88,7 +88,7 @@ public class Report {
 	@Override
 	public String toString() {
 		return "Report [reportNo=" + reportNo + ", reportingUserNo=" + reportingUserNo + ", reprotedUserNo="
-				+ reprotedUserNo + ", reportReason=" + reportReason + ", handleCode=" + handleCode + ", reportDate="
+				+ reportedUserNo + ", reportReason=" + reportReason + ", handleCode=" + handleCode + ", reportDate="
 				+ reportDate + "]";
 	}
 	

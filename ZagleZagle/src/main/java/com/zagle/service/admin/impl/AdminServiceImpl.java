@@ -12,6 +12,8 @@ import com.zagle.common.Search;
 import com.zagle.service.admin.AdminDao;
 import com.zagle.service.admin.AdminService;
 import com.zagle.service.domain.Admin;
+import com.zagle.service.domain.BlackList;
+import com.zagle.service.domain.Blind;
 import com.zagle.service.domain.Board;
 import com.zagle.service.domain.Comment;
 import com.zagle.service.domain.Report;
@@ -46,14 +48,24 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Map<String, Object> listBlackList(SearchAdmin search) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<BlackList> list = adminDao.listBlackList(search);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		
+		return map;
 	}
 
+	public void addReport(Report report) throws Exception {
+		
+		adminDao.addReport(report);
+	}
+	
 	@Override
 	public void updateReport(Report report) throws Exception {
-		// TODO Auto-generated method stub
 		
+		
+		adminDao.updateReport(report);
 	}
 
 	@Override
@@ -66,47 +78,47 @@ public class AdminServiceImpl implements AdminService {
 		
 		return map;
 	}
+	
+	public void addBlind(Blind blind) throws Exception {
+		
+		adminDao.addBlind(blind);
+	}
+	
+//	@Override
+//	public void addBlind2(Comment comment) throws Exception {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 	@Override
-	public void addBlind(Board board) throws Exception {
-		// TODO Auto-generated method stub
+	public void cancelBlind(Blind blind) throws Exception {
 		
+		adminDao.cancelBlind(blind);
 	}
 
-	@Override
-	public void addBlind2(Comment comment) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
+//	@Override
+//	public void cancelComment(Comment comment) throws Exception {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 	@Override
-	public void cancelBlind(Board board) throws Exception {
-		// TODO Auto-generated method stub
+	public void deleteBlind(Blind blind) throws Exception {
 		
+		adminDao.deleteBlind(blind);
 	}
 
-	@Override
-	public void cancelComment(Comment comment) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteBlind(Board board) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delteBlind2(Comment comment) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
+//	@Override
+//	public void delteBlind2(Comment comment) throws Exception {
+//
+//		adminDao.deleteBlind2(comment);
+//	}
 
 	@Override
 	public void checkBlack(User BlackCode) throws Exception {
 		// TODO Auto-generated method stub
 		
+		adminDao.checkBlack(BlackCode);
 	}
 
 }

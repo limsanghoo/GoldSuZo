@@ -7,14 +7,27 @@
 <mapper namespace="AdminMapper">
  	
  	
-	<resultMap id="adminSelectMap" type="admin">
-		<result property="user.userNo" 			column="user_no" 			jdbcType="VARCHAR"/>
-		<result property="user.userName"	column="user_name" 		jdbcType="VARCHAR" />
-		<result property="user.snsNo" 	column="sns_no" 		jdbcType="VARCHAR" />
-		<result property="user.regDate" 				column="reg_date" 					jdbcType="DATE"/>
-		<result property="user.deleteCount" 				column="delete_count" 					jdbcType="NUMERIC"/>
-		
+	<resultMap id="adminSelectMap" type="com.zagle.service.domain.Admin">
+		<result property="user.userNo" 						column="user_no" 								jdbcType="VARCHAR"/>
+		<result property="user.userName"					column="user_name" 							jdbcType="VARCHAR" />
+		<result property="user.snsNo" 						column="sns_no" 									jdbcType="VARCHAR" />
+		<result property="user.regDate" 						column="reg_date" 								jdbcType="DATE"/>
+		<result property="user.deleteCount" 				column="delete_count" 				        jdbcType="NUMERIC"/>
+		<result property="user.blackCode"					column="black_code"							jdbcType="VARCHAR"/>
+		<result property="blackList.blackNo"				column="black_no"								jdbcType="VARCHAR"/>
+		<result property="blackList.banReason"		column="ban_reason"							jdbcType="VARCHAR"/>
+		<result property="blackList.blackCheckCode"	column="black_check_code"			jdbcType="VARCHAR"/>
+		<result property="report.reportNo"					column="report_no"								jdbcType="VARCHAR"/>
+		<result property="report.reportingUserNo"		column="reporting_user_no"				jdbcType="VARCHAR"/>
+		<result property="report.reportiedUserNo"		column="reportied_user_no"				jdbcType="VARCHAR"/>
+		<result property="report.reportedBoard.boardNo"			column="board_no"								jdbcType="VARCHAR"/>
+		<result property="report.reportReason"			column="report_reason"						jdbcType="VARCHAR"/>
+		<result property="report.reportedComment"	column="comment_no"						jdbcType="VARCHAR"/>
+		<result property="report.handleCode"				column="hardle_no"								jdbcType="VARCHAR"/>
+		<result property="report.reportDate"				column="report_date"							jdbcType="VARCHAR"/>								
 	</resultMap>
+	
+	
 	
 	
 	<!-- SQL : SELECT USER LIST -->
@@ -41,6 +54,90 @@
 	 </select>
 	 
 	<!--  
+	 <select id="listBlackObject" parameterType="com.zagle.service.domain.SearchAdmin" resultMap="adminSelectMap">
+		SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	SELECT user_no , user_name , reg_date, delete_count
+											FROM users
+											<if test="searchCondition != null">
+												<where>
+														black_code = '1'
+													<if test="searchCondition == 0 and searchKeyword !='' ">
+										 				 and user_name = #{searchKeyword}
+													</if>
+													<if test="searchCondition == 1 and searchKeyword !='' ">
+										 			    and delete_count = #{searchKeyword}
+													</if>
+												</where>
+											</if>
+											ORDER BY user_no ) inner_table
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+
+	
+	 </select>
+	-->
+	
+	<select id="listBlackList" parameterType="com.zagle.service.domain.SearchAdmin" resultMap="adminSelectMap">
+	SELECT
+	b.black_no, u.user_no, b.ban_reason
+	FROM blackList b, users u
+	WHERE b.user_no = u.user_no
+	ORDER BY user_no
+	</select>
+	  
+	  
+	 <select id="listBlackObject" parameterType="com.zagle.service.domain.SearchAdmin" resultMap="adminSelectMap">
+	 SELECT user_no , user_name , reg_date, delete_count
+	FROM users
+	WHERE black_code ='1'
+	ORDER BY user_no
+	 </select>
+	 
+	 <insert id="addReport" parameterType="com.zagle.service.domain.Admin">
+	 INSERT
+	 INTO report(report_no, reporting_user_no, reportied_user_no, board_no, 
+	 						report_reason, comment_no, hardle_no, report_date)
+	 						
+	 VALUES ('RP'||seq_rp.nextval, #{report.reportNo:VARCHAR), #{report.reportingUserNo}, #{report.reportiedUserNo}, #{boardNo},
+	 						#{reportReason}, #{commentNo}, '0', SYSDATE )
+	 
+	 </insert>
+	  
+	  <update id="updateReport"	parameterType="com.zagle.service.domain.Report">
+	  UPDATE report
+	  <set>
+	  hardle_no = #{handleNo}
+	  </set>
+	  </update>
+	  
+	 <insert id="addBlind"	parameterType="com.zagle.service.domain.Blind">
+	 INSERT
+	 INTO blind(blind_no, board_no, blind_code, comment_no)
+	 VALUES) ('BL'||seq.bl.nextval, #{blindNo:VARCHAR}, #{boardNo:VARCHAR}, #{blindCode}, #{commentNo}
+	 </insert>
+	 
+	 <update id="cancelBlind" parameterType="com.zagle.service.domain.Blind">
+	 UPDATE blind
+	 <set>
+	 blind_code = #{blindCode}
+	 </set>
+	 </update>
+	  	
+	  <update id="deleteBlind" parameterType="com.zagle.service.domain.Blind">
+	  UPDATE blind
+	  <set>
+	  blind_code = #{blindCode}
+	  </set>
+	  </update>	
+	  
+	  <select id="checkBlack" parameterType="int" resultMap="adminSelectMap">
+	  SELECT u.blackCode
+	  FROM users u
+	 WHERE black_code = '2'
+	  </select>
+	  	
+	<!--  
 	<select  id="listUser"  parameterType="com.zagle.service.domain.SearchAdmin"	resultMap="adminSelectMap">
 	  	SELECT
 	   	user_no , user_name , sns_no, reg_date, delete_count
@@ -48,6 +145,10 @@
 		ORDER BY user_no 
 	 </select>
 	-->
+		
+	
+	
+	
 	
 	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
 	  	SELECT COUNT(*)
