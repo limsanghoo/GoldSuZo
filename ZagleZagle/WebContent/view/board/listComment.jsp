@@ -30,6 +30,7 @@ $(function(){
 });
 
 //댓글 등록
+
 function commentInsert(boardNo,userNo, text){
 
 	
@@ -50,13 +51,15 @@ function commentInsert(boardNo,userNo, text){
                 },
         success : function(data){
         	
-        	alert("성공");
+        	$("input[type=text]").val("");
+        	
              if(data == 1) {
                 commentList(boardNo); //댓글 작성 후 댓글 목록 reload
             }
         }
     }); 
 } 
+
   
 
 //댓글 리스트

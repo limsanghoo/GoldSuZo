@@ -6,19 +6,25 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>listBoard</title>
-        
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<meta name="description" content="Loading Effects for Grid Items with CSS Animations" />
+<meta name="keywords" content="css animation, loading effect, google plus, grid items, masonry" />
+<meta name="author" content="Codrops" />
+
+<title>listBoard</title>  
+
+<link rel="shortcut icon" href="../favicon.ico"> 
+<link rel="stylesheet" type="text/css" href="/common/css/GridLoadingEffects/css/default.css" />
+<link rel="stylesheet" type="text/css" href="/common/css/GridLoadingEffects/css/component.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-
-<link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-
-<script src="/javascript/bootstrap-dropdownhover.min.js"></script>        
+<script src="/common/css/GridLoadingEffects/js/modernizr.custom.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>       
         
 <style>
 
@@ -45,13 +51,15 @@ body {
 	background: #333;
     
 }
-.containerList {
-	padding-top : 20px; /* 리스트 맨 위 */
+
+/* .containerList {
+	padding-top : 20px;
     width: 1200px;
     margin: auto;
     columns: 4;
     column-gap: 40px;
-}
+} */
+
 .containerList .box {
     width: 100%;
     margin: 0 0 20px;
@@ -75,7 +83,7 @@ body {
     padding: 0 0 10px;
     font-size: 16px;
 }
-@media (max-width: 1200px) {
+/* @media (max-width: 1200px) {
     .containerList {
         columns: 3;
         width: calc(100% - 40px);
@@ -92,7 +100,7 @@ body {
     .containerList {
         columns: 1;
     }
-}
+} */
 
 #goAddBoard{
     	position: static;
@@ -118,6 +126,10 @@ body {
 #selectTown{
 	padding-top : 40px;
 	text-align: center;
+}
+
+.profile{
+	display: none;
 }
 
 
@@ -323,53 +335,74 @@ function fncGetTown(){
 <br/>
 
  <div class="containerList">
+ 
+ <ul class="grid effect-2" id="grid">
+ 
  <c:forEach var="board" items="${boardList}">
 	<c:set var="i" value="${ i+1 }" />
 		
 	<c:if test="${board.boardStatus=='1'}"><!-- 정상 게시물만 보여주기 -->
 	
-<!-- 썸네일 박스 시작 -->	
+<!-- 썸네일 박스 시작 -->
+<li>	
 	<div class="box" data-toggle="modal" data-target="#${board.boardNo}modal1" data-boardNo="${board.boardNo}">
 		
 	<p>
-	<img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px;" align="middle"/>
-		${board.user.userNickname}
+	<img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px; display: inline; vertical-align: middle"/>
+	<span style="font-weight: bold; display: inline;">&nbsp;${board.user.userNickname}</span>
+	<span><img src="/common/images/board/emptyLike.png" style="height: 40px; width:40px; display: inline; vertical-align: middle; float:right"/></span>
 	</p>
-	
+
 	
 <!-- 지도 시작 -->
 <c:if test="${board.coord !=null}">
-<div id="staticMap${board.boardNo}" style="width:100%;height:350px;" class="disabled"></div> <!-- 지도 클릭 안되게 -->
+<div id="map${board.boardNo}" style="width:100%;height:350px;"></div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc9c3216a02c263f1acc2c4187e96443"></script>
 <script type="text/javascript">
 
-window.addEventListener('load', function(event) {
-	var staticMapContainer  = document.getElementById('staticMap${board.boardNo}'); // 이미지 지도를 표시할 div  
-	var staticMapOption = {};
-	var marker = {};
+   
+   var mapContainer = document.getElementById('map${board.boardNo}'), // 이미지 지도를 표시할 div  
+   mapOption = { 
+           center: new daum.maps.LatLng(37.49463908698535, 127.02799333430488), // 이미지 지도의 중심좌표
+           level: 3, // 이미지 지도의 확대 레벨
+           disableDoubleClick: true
+       };
+   
+   var map = new daum.maps.Map(mapContainer, mapOption); 
+   var imageSrc = "/common/images/icons8-place-marker-filled-64 (2).png";
 
-	var coord = ('${board.coord}');
-	
-	   var coordArray = coord.split(',');
-	   var coordy = Number(coordArray[0]);
-	   var coordx = Number(coordArray[1]);
-	   
-	   var markerPosition  = new daum.maps.LatLng(coordy, coordx); 
+   var bounds = new daum.maps.LatLngBounds();
+   
+   var coord = ('${board.coord}');
+   
+      var coordArray = coord.split(',');
+      var coordy = Number(coordArray[0]);
+      var coordx = Number(coordArray[1]);
+      
+      var markerPosition  = new daum.maps.LatLng(coordy, coordx); 
 
-	   marker = {
-	         position: markerPosition
-	   };
-	   
-	   staticMapOption = { 
-	        center: new daum.maps.LatLng(coordy, coordx), // 이미지 지도의 중심좌표
-	        level: 3, // 이미지 지도의 확대 레벨
-	        marker: marker
-	    };
-	   var staticMap = new daum.maps.StaticMap(staticMapContainer, staticMapOption);
+      bounds.extend(markerPosition);
+      
+   // 마커 이미지의 이미지 크기 입니다
+       var imageSize = new daum.maps.Size(50, 50); 
+       var imageOption = {offset: new daum.maps.Point(25, 40)};
+       
+      // 마커 이미지를 생성합니다    
+          var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption); 
+          
+         // 마커를 생성합니다
+         var marker = new daum.maps.Marker({
+            map: map,
+             position: markerPosition,
+             image : markerImage // 마커 이미지 
+         });
 
-});
+         marker.setMap(map);
+         map.setBounds(bounds);
 
-
+      map.setDraggable(false);
+      map.setZoomable(false);
+   
 </script>
 </c:if>
 <!-- 지도 끝 -->
@@ -379,12 +412,13 @@ window.addEventListener('load', function(event) {
 	<div><img src="${board.photo1}" style="width:100%;" align="middle"/></div>
 </c:if>	
 
-	<p align="center" style="font-size: small">${board.address}</p>
-	<p align="center">${board.boardDetailText}</p>
-	<p align="center" style="text-align: left; font-size: small">${board.hashTag}</p>
+	<p style="font-size: small; text-align: center;">${board.address}</p>
+	<p style="text-align: center;">${board.boardDetailText}</p>
+	<p style="text-align: left; font-size: small">${board.hashTag}</p>
 	
 
 </div>
+</li>
 <!-- 썸네일 박스 끝 -->
 
 
@@ -403,7 +437,7 @@ window.addEventListener('load', function(event) {
         
         <h4 class="modal-title" id="gridSystemModalLabel">
         <div class="col-md-4">
-        <img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px;" align="middle"/>
+        <img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px;" align="middle; "/>
 		${board.user.userNickname}
 		</div>
 		
@@ -487,6 +521,19 @@ window.addEventListener('load', function(event) {
 </c:if>
 
 </c:forEach>       
+</ul>
+
+		<script src="/common/css/GridLoadingEffects/js/masonry.pkgd.min.js"></script>
+		<script src="/common/css/GridLoadingEffects/js/imagesloaded.js"></script>
+		<script src="/common/css/GridLoadingEffects/js/classie.js"></script>
+		<script src="/common/css/GridLoadingEffects/js/AnimOnScroll.js"></script>
+		<script>
+			new AnimOnScroll( document.getElementById( 'grid' ), {
+				minDuration : 0.4,
+				maxDuration : 0.7,
+				viewportFactor : 0.2
+			} );
+		</script>
         
         
   
