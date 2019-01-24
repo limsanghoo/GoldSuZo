@@ -125,9 +125,9 @@ public class BoardRestController {
 		return board;
 	}
 	
-	 /*댓글등록 : start*/
-	  @RequestMapping(value="json/addComment", method=RequestMethod.POST)
-	   public int addComment(@RequestBody Map<String, String> map) throws Exception{
+	
+	@RequestMapping(value="json/addComment", method=RequestMethod.POST)
+	public int addComment(@RequestBody Map<String, String> map) throws Exception{
 		  
 	      System.out.println("addComment POST");
 	      
@@ -149,9 +149,9 @@ public class BoardRestController {
 	      
 	      return 1;
 	   }
-	   //댓글등록 : end
+
 	   
-	  //댓글 리스트 : start
+
 	   @RequestMapping(value="json/listComment/{boardNo}", method=RequestMethod.GET)
 	   public List<Comment> getCommentList(@PathVariable String boardNo) throws Exception{
 	      System.out.println("/listComment GET");
@@ -163,7 +163,7 @@ public class BoardRestController {
 	      
 	      return list;
 	   }
-	   //댓글 리스트 : end
+
 	   
 	   /*댓글 수정 : start
 	   @RequestMapping(value="/rest/updateComment", method=RequestMethod.POST)
@@ -176,22 +176,22 @@ public class BoardRestController {
 	      
 	      return 1;
 	   }
-	   댓글 수정 : start
+	   댓글 수정 : start*/
 	   
-	   댓글 삭제 : start
-	   @RequestMapping(value="/rest/deleteComment/{commentNo}", method=RequestMethod.GET)
-	   public int deleteReply(@PathVariable int commentNo) throws Exception{
-	      System.out.println("/rest/deleteComment : GET");
-	      Comment comment = new Comment();
-	      commentService.getComment(commentNo);
-	      commentService.updateViewCondition(commentNo);
-	      System.out.println("comment : "+comment);
+
+	   @RequestMapping(value="json/deleteComment/{commentNo}", method=RequestMethod.GET)
+	   public int deleteComment(@PathVariable String commentNo) throws Exception{
+		   
+	      System.out.println("deleteComment GET");
+	      
+	      System.out.println("commentNo : "+commentNo);
+	      
+	      boardService.deleteComment(commentNo);
 	      
 	      return 1;
 	   }
-	   댓글 삭제 : end
-	   
-	   대댓글 등록 : start
+
+	   /*대댓글 등록
 	   @RequestMapping(value="/rest/addReComment/{targetNo}", method=RequestMethod.POST)
 	   public int addReComment(@PathVariable("targetNo") int targetNo, @RequestBody Comment comment ) throws Exception{
 	      System.out.println("/rest/addReComment : POST");
@@ -209,8 +209,8 @@ public class BoardRestController {
 	      System.out.println("comment11 : " + comment);
 
 	      return 1;
-	   }
-	   대댓글 등록 : end*/
+	   }*/
+
 
 	
 	
