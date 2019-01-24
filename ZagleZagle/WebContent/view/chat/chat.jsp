@@ -14,7 +14,8 @@
 
 <!-- Popper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 		<title>Chat</title>
@@ -25,7 +26,7 @@
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
 <style>
 body,html{
-			height: 100%;
+			height: auto;
 			margin: 0;
 			background: #7F7FD5;
 	       background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
@@ -38,7 +39,10 @@ body,html{
 			margin-bottom: auto;
 		}
 		.card{
-			height: 500px;
+			margin-top: auto;
+			margin-bottom: auto;
+			height: 900px;
+			overflow-y: auto;
 			border-radius: 15px !important;
 			background-color: rgba(0,0,0,0.4) !important;
 		}
@@ -46,6 +50,7 @@ body,html{
 			padding:  0.75rem 0 !important;
 			overflow-y: auto;
 			white-space: nowrap;
+			height : auto;
 		}
 		.msg_card_body{
 			overflow-y: auto;
@@ -287,6 +292,18 @@ body,html{
 input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
 #mdStart {position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
 
+#dropzone
+    {
+        border:2px dotted #3292A2;
+        width:90%;
+        height:50px;
+        color:#92AAB0;
+        text-align:center;
+        font-size:24px;
+        padding-top:12px;
+        margin-top:10px;
+    }
+
 </style>
 	<script src="http://192.168.0.25:82/socket.io/socket.io.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -337,13 +354,13 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 					}
 				}else{
 					if (data.ms.substring(data.ms.length-3)=='jpg'||data.ms.substring(data.ms.length-3)=='png') {
-						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg' onclick='javascript:mdmd(/@"+data.pro+"/);'></div><div class='msg_cotainer' onclick='javascript:mdmd(/"+data.ms+"/);'><img src='/common/images/chat/"+data.ms+"' style='width: 200px; height: 180px;' class='img-thumbnail' /><span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
+						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg dropdown-toggle' data-toggle='dropdown'><ul class='dropdown-menu'><li><div onclick='javascript:sChat(/"+data.id+"/)'>1:1채팅하기</div></li></ul><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer' onclick='javascript:mdmd(/"+data.ms+"/);'><img src='/common/images/chat/"+data.ms+"' style='width: 200px; height: 180px;' class='img-thumbnail' /><span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
 						$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
 					}else if(data.ms.substring(data.ms.length-3)=='mp4'||data.ms.substring(data.ms.length-3)=='wmv'){
-						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg' onclick='javascript:mdmd(/@"+data.pro+"/);'></div><div class='msg_cotainer'><video controls controlsList='nodownload' width='320' height='240' muted><source src='http://192.168.0.25:8080/common/images/chat/"+data.ms+"' type='video/mp4'><a href='http://192.168.0.25:8080/common/images/chat/"+data.ms+"'>download video</a></video><span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
+						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg dropdown-toggle' data-toggle='dropdown'><ul class='dropdown-menu'><li><div onclick='javascript:sChat(/"+data.id+"/)'>1:1채팅하기</div></li></ul><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer'><video controls controlsList='nodownload' width='320' height='240' muted><source src='http://192.168.0.25:8080/common/images/chat/"+data.ms+"' type='video/mp4'><a href='http://192.168.0.25:8080/common/images/chat/"+data.ms+"'>download video</a></video><span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
 						$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
 					}else{
-						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'dddd><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg' onclick='javascript:mdmd(/@"+data.pro+"/);'></div><div class='msg_cotainer'>"+data.ms+"<span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
+						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg dropdown-toggle' data-toggle='dropdown'><ul class='dropdown-menu'><li><div onclick='javascript:sChat(/"+data.id+"/)'>1:1채팅하기</div></li></ul><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer'>"+data.ms+"<span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
 						$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
 						
 					}
@@ -351,13 +368,133 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 				
 				
 			});
-			//
+			////////////1:1채팅신청////////
+			$("#btn_one").on("click",function(){
+				var name = $(this).text();
+				socket.emit("one_msg",{a_user:"${user.userNickname}",b_user:name,b_pro:"${user.profile}"});
+			})
+			
+			
 			socket.on('out_msg',function(msg){
 				$("<div style='text-align:center; color : white;'></div>").text(msg).appendTo("#chat_box");
 				$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
 			});
 			
+			socket.on("one_msg",function(msg){
+				if (msg.b_user=="${user.userNickname}") {
+					$("#m_body2").html("<img src='/common/images/profile/"+msg.b_pro+"' class='img-thumbnail' style='height: auto;width:150px'/><div>"+msg.a_user+"님이 1:1채팅신청을 하셨슴다.</div>");
+					mdstart2.click();
+				}
+			});
+			///////////
+            	var obj = $("#chat_box");
 
+	   		     obj.on('dragenter', function (e) {
+	   		          e.stopPropagation();
+	   		          e.preventDefault();
+	   		          
+	   		     });
+
+	   		     obj.on('dragleave', function (e) {
+	   		          e.stopPropagation();
+	   		          e.preventDefault();
+	   		         
+	   		     });
+
+	   		     obj.on('dragover', function (e) {
+	   		          e.stopPropagation();
+	   		          e.preventDefault();
+	   		     });
+
+	   		     obj.on('drop', function (e) {
+	   		          e.preventDefault();
+	   		         
+
+	   		          var files = e.originalEvent.dataTransfer.files;
+	   		          if(files.length < 1)
+	   		               return;
+
+	   		          F_FileMultiUpload(files, obj);
+	   		     });
+	   		     
+	   		  function F_FileMultiUpload(files, obj) {
+				         var data = new FormData();
+				         for (var i = 0; i < files.length; i++) {
+				            data.append('file', files[i]);
+				         }
+				         var bar = $('.bar');
+						    var percent = $('.percent');
+						    var status = $('#status');  
+				            var testDrop = $.ajax({
+				                 type : 'post',
+				                 url : '/chat/json/uploadFile/',
+				                 data : data,
+				                 processData : false,
+				                 contentType : false,
+				                 uploadProgress: function(event, position, total, percentComplete) {
+							            var percentVal = percentComplete + '%';
+							            bar.width(percentVal);
+							            percent.html(percentVal);
+							        },
+				                 success : function(data, statusText, xhr) {	         		                	 
+				                //	 $("#msg").val(data);
+				                	 var percentVal = '100%';
+				                     bar.width(percentVal);
+				                     percent.html(percentVal);
+				                     status.html(xhr.responseText);
+				                     msg_process.click();
+				                     
+				                 },
+				                 error : function(error) {
+				                     alert("파일 업로드에 실패하였습니다.");
+				                     console.log(error);
+				                     console.log(error.status);
+				                 }
+				             });
+				         
+				         testDrop.done(function(msg){
+				            	if (msg.substring(msg.length-3)=='mp4') {
+				            		setTimeout(function() {
+					            		while(true){
+						            		var path = 'http://192.168.0.25:8080/common/images/chat/'+msg;
+						            		var re = doesFileExist2(path);
+						            		if (re) {
+						            			socket.emit("send_msg",msg);
+												break;
+											}
+						            	}
+					            	},5000);
+								}else{
+									setTimeout(function() {
+					            		while(true){
+						            		var path = 'http://192.168.0.25:8080/common/images/chat/'+msg;
+						            		var re = doesFileExist2(path);
+						            		if (re) {
+						            			socket.emit("send_msg",msg);
+												break;
+											}
+						            	}
+					            	},2000);
+								}
+				            	
+				            	 function doesFileExist2(urlToFile) {
+									    var xhr = new XMLHttpRequest();
+									    xhr.open('HEAD', urlToFile, false);
+									    xhr.send();
+									     
+									    if (xhr.status == "404") {
+									        return false;
+									    } else {
+									        return true;
+									    }
+									}
+				          
+				            }); 
+				}
+
+	           
+	   		     
+        
 			$('#image_name').on('change',function(){
 		         var formData = new FormData($('form')[0]);
 		         var bar = $('.bar');
@@ -419,8 +556,8 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 		            	
 		          
 		            });
-
-		           function doesFileExist(urlToFile) {
+		            
+		            function doesFileExist(urlToFile) {
 					    var xhr = new XMLHttpRequest();
 					    xhr.open('HEAD', urlToFile, false);
 					    xhr.send();
@@ -431,6 +568,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 					        return true;
 					    }
 					}
+		           
 		            
 			});
 			
@@ -456,25 +594,32 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 			});
 			
 		});
-		
+		function sChat(name,pro){
+			
+			var text1 = name.toString();
+			var name = text1.substring(1,text1.length-1);
+			$("#btn_one").text(name);
+			btn_one.click();
+		}
 		$(document).ready(function(){
 			$('#action_menu_btn').click(function(){
 				$('.action_menu').toggle();
 			});
 				});
-		
+		////채팅장 내의 이미지 모달로 띄우기////////////////
 		function mdmd(data){
 			var a = data.toString();
 			var b = a.substring(0,a.length-1);
 			if (a.substring(1,2)=="@") {
-				$(".modal-body").html("<img src='/common/images/profile/"+b.substring(2)+"' class='img-thumbnail' style='height: auto;'/>");
+				$("#m_body").html("<img src='/common/images/profile/"+b.substring(2)+"' class='img-thumbnail' style='height: auto;'/>");
 			}else{
-				$(".modal-body").html("<img src='/common/images/chat"+b+"' class='img-thumbnail' style='height: auto;'/>");
+				$("#m_body").html("<img src='/common/images/chat"+b+"' class='img-thumbnail' style='height: auto;'/>");
 			}
 			
 			mdStart.click();
 		}
-	
+		
+		//////////////////////////////////////////////
 		$(function(){
 			$("#btn").hide();
 			$("#btn:contains('숨기기')").on("click",function(){
@@ -485,13 +630,20 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 			
 		});
 		$(function(){
-			
+
 			$("#btn2:contains('보이기')").on("click",function(){
 				$("iframe").css("display","inline");
 				$(this).hide();
 				$("#btn").show();
 			});
 		});
+		
+	
+		
+
+		
+
+
 	</script>
 </head>
 <body>
@@ -499,6 +651,8 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 <iframe src="http://192.168.0.25:8080/board/listBoard" align="left" style="display:none; height:100%; width: 30%;"></iframe>
 <button id="btn">숨기기</button>
 <button id="btn2">보이기</button>
+<button id="btn_one" style="display: none;" value=""></button>
+
 		<div class="container-fluid h-100">
 			<div class="row justify-content-center h-100">
 				
@@ -561,7 +715,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 		  aria-hidden="true">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
-		      <div class="modal-body">
+		      <div class="modal-body" id="m_body">
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -569,7 +723,20 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 		    </div>
 		  </div>
 		</div>
-		
+		<button type="button" id="mdstart2" style="display: none;" data-toggle="modal" data-target="#basicExampleModalChat" ></button>
+		<div class="modal fade" id="basicExampleModalChat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		  aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-body" id="m_body2">
+		      </div>
+		      <div class="modal-footer">
+		      	<button type="button" class="btn btn-primary" data-dismiss="modal">승인</button>
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">거절</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 	</body>
 	
 </html>

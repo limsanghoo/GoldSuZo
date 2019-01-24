@@ -13,25 +13,11 @@
 	<!-- CSS -->
 	<link rel="stylesheet" href="/common/js/medium-editor/dist/css/medium-editor.min.css">
 	<link rel="stylesheet" href="/common/js/medium-editor/dist/css/themes/beagle.css">
-	<link rel="stylesheet" href="/common/js/medium-editor-insert-plugin/dist/css/medium-editor-insert-plugin.min.css">
-	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<!-- JS -->
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	
 	<script src="/common/js/medium-editor/dist/js/medium-editor.js"></script>
-	
-	<script src="https://cdn.jsdelivr.net/npm/handlebars@4.0.12/dist/handlebars.runtime.min.js"></script>
-	
-	<script src="/common/js/jquery-sortable/source/js/jquery-sortable-min.js"></script>
-	
-	<script src="/common/js/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
-	<script src="/common/js/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
-	<script src="/common/js/blueimp-file-upload/js/jquery.fileupload.js"></script>
-	
-	<script src="/common/js/medium-editor-insert-plugin/dist/js/medium-editor-insert-plugin.min.js"></script>
-	
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 
 	<style>

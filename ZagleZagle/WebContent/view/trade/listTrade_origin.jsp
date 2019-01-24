@@ -4,28 +4,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-<meta name="description" content="Loading Effects for Grid Items with CSS Animations" />
-<meta name="keywords" content="css animation, loading effect, google plus, grid items, masonry" />
-<meta name="author" content="Codrops" />
-		
+<meta charset="UTF-8">
 <title>listTrade</title>
-
-<link rel="shortcut icon" href="../favicon.ico"> 
-<link rel="stylesheet" type="text/css" href="/common/css/GridLoadingEffects/css/default.css" />
-<link rel="stylesheet" type="text/css" href="/common/css/GridLoadingEffects/css/component.css"/>
+        
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 
-<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="/common/css/GridLoadingEffects/js/modernizr.custom.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>  
 
+<link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+
+<script src="/javascript/bootstrap-dropdownhover.min.js"></script>        
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>  
 <style>
+
 @import url('https://fonts.googleapis.com/css?family=Poppins');
+
+
+#nav{
+ color: white; 
+}
 
 form{
 	 	padding-top : 150px;
@@ -41,8 +41,15 @@ body {
     padding: 0;
     font-family: 'Poppins', sans-serif;
 	background: #333;
+    
 }
-
+.containerList {
+	padding-top : 20px; /* 리스트 맨 위 */
+    width: 1200px;
+    margin: auto;
+    columns: 4;
+    column-gap: 40px;
+}
 .containerList .box {
     width: 100%;
     margin: 0 0 20px;
@@ -51,6 +58,7 @@ body {
     overflow: hidden;
     break-inside: avoid;
 }
+
 .containerList .box img {
     max-width: 100%;
     background-size: cover;
@@ -64,6 +72,24 @@ body {
     margin: 0;
     padding: 0 0 10px;
     font-size: 16px;
+}
+@media (max-width: 1200px) {
+    .containerList {
+        columns: 3;
+        width: calc(100% - 40px);
+        box-sizing: border-box;
+        padding: 20px 20px 20px 0;
+    }
+}
+@media (max-width: 768px) {
+    .containerList {
+        columns: 2;
+    }
+}
+@media (max-width: 480px) {
+    .containerList {
+        columns: 1;
+    }
 }
 
 #goAddSell{
@@ -91,6 +117,7 @@ body {
 	padding-top : 40px;
 	text-align: center;
 }
+
 
 </style>
 <script type="text/javascript">
@@ -130,6 +157,7 @@ function enter() {
 <jsp:include page="/view/layout/toolbar.jsp"/>
 
 <form name="listTrade">
+
 <div id="selectMenu">
 
 <!-- 검색 -->
@@ -144,22 +172,18 @@ function enter() {
 </div>
 
 <br/>
+
  <div class="containerList">
- 
- <ul class="grid effect-2" id="grid">
- 
  <c:forEach var="sell" items="${tradeList}">
 	<c:set var="i" value="${ i+1 }" />
 		
-<!-- 썸네일 박스 시작 -->
-	
-<li>
+<!-- 썸네일 박스 시작 -->	
 	<div class="box" data-toggle="modal" data-target="#${sell.sellNo}modal1">
 		
-	
+	<p>
 	<img src="/common/images/profile/${sell.seller.profile}" style="height: 60px; width:60px; border-radius: 70px;" align="middle"/>
 		${sell.seller.userNickname}
-
+	</p>
 	
 
 <c:if test="${sell.sellPhoto1 !=null}">
@@ -172,9 +196,9 @@ function enter() {
 	
 
 </div>
-</li>
+<!-- 썸네일 박스 끝 -->
 
-		
+
 <!-- 모달1 시작 -->
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="${sell.sellNo}modal1">
   <div class="modal-dialog" role="document">
@@ -259,24 +283,11 @@ function enter() {
 </div>
 <!-- 모달2 끝 -->
 
-</c:forEach>     
-</ul> 
 
-<script src="/common/css/GridLoadingEffects/js/masonry.pkgd.min.js"></script>
-		<script src="/common/css/GridLoadingEffects/js/imagesloaded.js"></script>
-		<script src="/common/css/GridLoadingEffects/js/classie.js"></script>
-		<script src="/common/css/GridLoadingEffects/js/AnimOnScroll.js"></script>
-		<script>
-			new AnimOnScroll( document.getElementById( 'grid' ), {
-				minDuration : 0.4,
-				maxDuration : 0.7,
-				viewportFactor : 0.2,
-				horizontalOrder: true
-			} );
-		</script>
+</c:forEach>      
 </div><!-- /container -->
 </form>
-</body>
+    </body>
 </html>
 
 
