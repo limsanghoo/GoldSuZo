@@ -3,19 +3,24 @@ package com.zagle.service.admin;
 import java.util.List;
 
 import com.zagle.common.Search;
+import com.zagle.service.domain.Admin;
 import com.zagle.service.domain.BlackList;
 import com.zagle.service.domain.Board;
 import com.zagle.service.domain.Comment;
 import com.zagle.service.domain.Report;
+import com.zagle.service.domain.SearchAdmin;
 import com.zagle.service.domain.User;
 
 public interface AdminDao {
 	
 	///SELECT BLACK OBJECT LIST
-	public List<User> listBlackObject(Search search) throws Exception;
+	public List<User> listBlackObject(SearchAdmin search) throws Exception;
 	
 	///SELECT BLACKLIST
-	public List<BlackList> listBlackList(Search search) throws Exception;
+	public List<BlackList> listBlackList(SearchAdmin search) throws Exception;
+	
+	///SELECT USERLIST
+	public List<User> listUser(SearchAdmin search) throws Exception;
 	
 	///UPDATE 
 	public void updateReport(Report report) throws Exception;

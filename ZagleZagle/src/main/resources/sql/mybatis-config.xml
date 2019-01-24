@@ -23,6 +23,7 @@
 		<typeAlias alias="spon" type="com.zagle.service.domain.Spon" />
 		<typeAlias alias="sell" type="com.zagle.service.domain.Sell" />
 		<typeAlias alias="comment" type="com.zagle.service.domain.Comment" />
+		<typeAlias alias="admin" 	type="com.zagle.service.domain.Admin" />
 	</typeAliases>
 	
 	 <!-- SQL Definition :: file include -->
@@ -35,6 +36,7 @@
 		<mapper resource="sql/RefundMapper.xml"/>
 		<mapper resource="sql/SponMapper.xml"/>
 		<mapper resource="sql/SellMapper.xml"/>
+		<mapper resource="sql/AdminMapper.xml"/>
 	</mappers>
 
 </configuration>

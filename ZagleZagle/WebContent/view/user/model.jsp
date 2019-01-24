@@ -22,20 +22,18 @@
 	
 	
 	$(function() {
-	    
-		
-	
-		
-		window.opener.document.location.reload();
+	   
+ 		alert('시사바바');
+ 		
+ 	
 
+ 		
+ 	
+ 		window.opener.document.location.reload();
+ 		
+		window.close();    //현재 팝업창 Close	
+ 		
 
-		window.close();    //현재 팝업창 Close
-		
-	
-	
-		
-		
-		
 		
 		$("#logout").on("click",function() {
 			
@@ -77,6 +75,12 @@
  		});
  	});
   	
+ 	$(function() {
+ 		
+ 	
+ 		
+ 	});
+ 	
 </script>
 
 

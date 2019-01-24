@@ -106,9 +106,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void deleteComment(Comment comment) throws Exception {
-		// TODO Auto-generated method stub
-		
+	public void deleteComment(String commentNo) throws Exception {
+		boardDAO.deleteComment(commentNo);
 	}
 
 	@Override
