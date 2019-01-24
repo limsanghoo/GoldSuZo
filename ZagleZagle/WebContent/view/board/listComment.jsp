@@ -20,15 +20,19 @@ $(function(){
  		var boardNo="<%=boardNo%>";
 	
 		var userNo="${user.userNo}";
+		
+		alert(boardNo);
+		alert(userNo);
+		alert($("input[name='commentDetailText']").val());
 			
-		replyInsert(boardNo, userNo);
+		commentInsert(boardNo, userNo);
 	
 	});
 
 });
 
 //댓글 등록
-function replyInsert(boardNo,userNo){
+function commentInsert(boardNo,userNo){
 	
 	var data={
 			"userNo" : userNo,
@@ -49,7 +53,7 @@ function replyInsert(boardNo,userNo){
         	
         	alert("성공");
              if(data == 1) {
-                replyList(boardNo); //댓글 작성 후 댓글 목록 reload
+                commentList(boardNo); //댓글 작성 후 댓글 목록 reload
             }
         }
     }); 
@@ -58,32 +62,31 @@ function replyInsert(boardNo,userNo){
 
 //댓글 리스트
 //댓글 목록 : start
-   function replyList(boardNo){
-	
-	alert(boardNo);
-	
+   function commentList(boardNo){
+
        	$.ajax({
            url : '/board/json/listComment/'+boardNo,
            type : 'get',
           // data : {'postNo':postNo},
-           /* success : function(JSONData){
+            success : function(JSONData){
                 var a =''; 
                 $.each(JSONData, function(i){
                   var list = JSONData[i];
                   console.log("list : "+list);
-                   a += '<div class="replyArea'+list.commentNo+'" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
-                   a += '<div class="replyInfo'+list.commentNo+'">'+'댓글번호 : '+list.commentNo+' / 작성자 : '+list.commentWriterId;
-                   a += '<a onclick="replyUpdate('+list.commentNo+',\''+list.commentDetail+'\')"> 수정 </a>';
-                   a += '<a onclick="replyDelete('+list.commentNo+')"> 삭제 </a>';
-                   a += '<a onclick="reReplyInsert('+list.commentNo+',\''+list.commentWriterId+'\')"> 답글달기 </a></div>';
-                   a += '<div class="replyContent"  name="'+list.commentNo+'"> <p> 내용 : '+list.commentDetail+'</p>';
+                   a += '<div class="commentArea'+list.commentNo+'" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
+                   a += '<div class="commentInfo'+list.commentNo+'">'+'댓글번호 : '+list.commentNo+' / 작성자 : '+list.user.userNickname;
+                   a += '<a onclick="commentUpdate('+list.commentNo+',\''+list.commentDetailText+'\')"> 수정 </a>';
+                   a += '<a onclick="commentDelete('+list.commentNo+')"> 삭제 </a>';
+                   a += '<a onclick="recommentInsert('+list.commentNo+',\''+list.user.userNickname+'\')"> 답글달기 </a></div>';
+                   a += '<div class="commentContent"  name="'+list.commentNo+'"> <p> 내용 : '+list.commentDetailText+'</p>';
                    a += '</div></div>';
                });
-               $(".replyList").html(a); 
-           } */
+               $(".commentList").html(a); 
+           }
        });
    }
    //댓글 목록 : end
+   
 
 
 </script>
@@ -91,9 +94,9 @@ function replyInsert(boardNo,userNo){
 </head>
 
 <body>
-		<div class="replyList"></div>
+		<div class="commentList"></div>
 	
-		<input type="text" name="commentDetailText" placeholder="댓글을 입력해주세요" value="">
+		<input type="text" name="commentDetailText" placeholder="댓글을 입력해주세요">
 		<input type="button" id="<%=boardNo%>Comment" value="등록">
 
 

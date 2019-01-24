@@ -129,11 +129,11 @@ $(function(){
 	
 	$("input[value='수정']").bind("click",function(){
 		var boardNo=$(this).data('update');
+		alert(boardNo);
 		self.location="/board/updateBoard?boardNo="+boardNo;
 	})
 
 	$("input[value='게시물 등록']").bind("click",function(){
-		var boardNo=$(this).data('update');
 		
 		self.location="http://192.168.0.36:8080/board/addBoard?userNo=${user.userNo}";
 	})
@@ -143,47 +143,16 @@ $(function(){
 		self.location="/board/listMap";
 	})
 	
-	/* $("input[value='등록']").bind("click",function(){
-		var boardNo=$(this).data('comment');
-		alert(boardNo);
+	/* $(".box").bind("click",function(){
+		var preBoardNo=$(this).data('target');
 		
-		var userNo="${user.userNo}";
-		alert(userNo);
-				
-		replyInsert(boardNo, userNo);
+		//#${board.boardNo}modal1 자르기
+		var boardNo=preBoardNo.substring(1,8);
 		
-	}); */
+		commentList(boardNo);
+	}) */
 	
 });
-
-//댓글 등록 : start
-/* function replyInsert(boardNo,userNo){
-	
-	var data={
-			"userNo" : userNo,
-			"boardNo" : boardNo,
-            "commentDetailText" : $("input[name='commentDetailText']").val()
-	};
-
-     $.ajax({
-        url : '/board/json/addComment',
-        type : 'post',
-        data : JSON.stringify(data),
-        dataType:"json",
-       headers:{
-                   "Accept":"application/json",
-                   "Content-Type": "application/json"
-                },
-        success : function(data){
-        	
-        	alert("성공");
-             if(data == 1) {
-                //replyList(); //댓글 작성 후 댓글 목록 reload
-            }  
-        }
-    }); 
-}  */
-//댓글 등록 : end
 
 
 //검색 엔터
@@ -279,6 +248,9 @@ function fncGetTown(){
 	$("form").attr("method" , "POST").attr("action" , "/board/listBoard?view=${param.view}").submit();
 }
 
+
+
+
 </script>
 
 
@@ -357,7 +329,7 @@ function fncGetTown(){
 	<c:if test="${board.boardStatus=='1'}"><!-- 정상 게시물만 보여주기 -->
 	
 <!-- 썸네일 박스 시작 -->	
-	<div class="box" data-toggle="modal" data-target="#${board.boardNo}modal1">
+	<div class="box" data-toggle="modal" data-target="#${board.boardNo}modal1" data-boardNo="${board.boardNo}">
 		
 	<p>
 	<img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px;" align="middle"/>
