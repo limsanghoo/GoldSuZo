@@ -85,7 +85,7 @@ function commentInsert(boardNo,userNo, text){
                                 
                    a += '<div class="commentArea'+list.commentNo+'" style="margin-bottom: 15px;">';                           
                    a += '<img src="/common/images/profile/'+list.user.profile+'" style="width: 30px; height: 30px; border-radius: 70px;"/>'+list.user.userNickname;                 
-                   a += '&nbsp;&nbsp;&nbsp;&nbsp;'+list.commentDetailText;                   
+                   a += '<span style="margin-left:30px;">'+list.commentDetailText+'</span>';                   
                    a += b;                                
                    a += '</div>';
                });
