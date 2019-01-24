@@ -61,7 +61,7 @@
 				            
 			</div>
 <br/>
-<div id="map" style="width:1500px;height:900px;margin: auto"></div>
+<div id="map" style="width:80%;height:70%;margin: auto"></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc9c3216a02c263f1acc2c4187e96443&libraries=services"></script>
 <script>

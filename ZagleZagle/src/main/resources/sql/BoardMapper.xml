@@ -27,6 +27,8 @@
 		<result property="commentNo"	column="comment_no"	jdbcType="VARCHAR"/>
 		<result property="board.boardNo"	column="board_no"	jdbcType="VARCHAR"/>
 		<result property="user.userNo"	column="user_no"	jdbcType="VARCHAR"/>
+		<result property="user.profile"	column="profile"	jdbcType="VARCHAR"/>
+		<result property="user.userNickname" column="user_nickname"	jdbcType="VARCHAR"/>
 		<result property="commentDetailText"	column="comment_detail_text"	jdbcType="VARCHAR"/>
 		<result property="commentRegDate"	column="comment_reg_date"	jdbcType="DATE"/>
 	</resultMap>
@@ -60,10 +62,10 @@
 	 </select>
 	 
 	 <select id="listComment" parameterType="string" resultMap="commentSelectMap">
-	 	SELECT * 
-	 	FROM comments
-	 	WHERE board_no=#{board.boardNo}
-	 	ORDER BY comment_reg_date
+	 	SELECT DISTINCT u.user_no, u.profile, u.user_nickname, c.board_no, c.comment_no, c.comment_detail_text, c.comment_reg_date 
+		FROM users u, comments c 
+		WHERE c.user_no=u.user_no AND c.board_no=#{value} 
+	 	ORDER BY c.comment_reg_date
 	 </select>
 	 
 	 
@@ -98,6 +100,11 @@
 		</set>
 		WHERE board_no=#{boardNo}
 	</update>
+	
+	<delete id="deleteComment" parameterType="string">
+		DELETE FROM comments
+		WHERE comment_no=#{value}
+	</delete>
 	
 	<select id="getMapList" parameterType="string" resultMap="boardSelectMap">
 		select * from board where address like '${searchKeyword}%' and board_status=1
