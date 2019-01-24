@@ -8,24 +8,30 @@
  	
  	
 	<resultMap id="sellSelectMap" type="sell">
-		<result property="sellNo" 			column="sell_no" 			jdbcType="VARCHAR"/>
-		<result property="userNo"	column="user_no" 		jdbcType="VARCHAR" />
-		<result property="sellName" 	column="sell_name" 		jdbcType="VARCHAR" />
-		<result property="sellPrice" 				column="sell_price" 					jdbcType="NUMERIC" />
-		<result property="sellText" 				column="sell_text" 					jdbcType="VARCHAR" />
-		<result property="sellPhoto1" 			column="sell_Photo1" 		jdbcType="VARCHAR" />
-		<result property="sellPhoto2" 			column="sell_Photo2" 		jdbcType="VARCHAR" />
-		<result property="sellPhoto3" 			column="sell_Photo3" 		jdbcType="VARCHAR" />
-		<result property="sellPhone" 				column="sell_phone" 					jdbcType="VARCHAR" />
-		<result property="sellStyle" 			column="sell_style" 				jdbcType="NUMERIC"  />
-		<result property="sellState" 		column="sell_state" 			jdbcType="NUMERIC" />
-		<result property="sellDATE" 			column="sell_date" 		jdbcType="DATE" />
+		<result property="sellNo" 							column="sell_no" 					jdbcType="VARCHAR"/>
+		<result property="seller.userNo"					column="user_no" 					jdbcType="VARCHAR" />
+		<result property="seller.profile"					column="profile" 						jdbcType="VARCHAR" />
+		<result property="seller.userNickname"		column="user_nickname" 			jdbcType="VARCHAR" />
+		<result property="sellName" 						column="sell_name" 				jdbcType="VARCHAR" />
+		<result property="sellPrice" 							column="sell_price" 					jdbcType="NUMERIC" />
+		<result property="sellText" 							column="sell_text" 					jdbcType="VARCHAR" />
+		<result property="sellPhoto1" 						column="sell_Photo1" 				jdbcType="VARCHAR" />
+		<result property="sellPhoto2" 						column="sell_Photo2" 				jdbcType="VARCHAR" />
+		<result property="sellPhoto3" 						column="sell_Photo3" 				jdbcType="VARCHAR" />
+		<result property="sellPhone" 						column="sell_phone" 				jdbcType="VARCHAR" />
+		<result property="sellStyle" 							column="sell_style" 					jdbcType="NUMERIC"  />
+		<result property="sellState" 							column="sell_state" 				jdbcType="NUMERIC" />
+		<result property="sellDate" 							column="sell_date" 					jdbcType="DATE" />
 	</resultMap>
 	
 	<insert 	id="addSell"	parameterType="sell" >
 	 	INSERT
 		INTO sell(sell_no, user_no, sell_name, sell_price, sell_text, sell_photo1, sell_photo2, sell_photo3, sell_phone, sell_style, sell_state, sell_date)
-		VALUES	 ( 'TS'||seq_ts.nextval,#{userNo},#{sellName},#{sellPrice},#{sellText},#{sellPhoto1:VARCHAR},#{sellPhoto2:VARCHAR},#{sellPhoto3:VARCHAR},#{sellPhone:VARCHAR},#{sellStyle},10,sysdate)
+		VALUES	 ( 'TS'||seq_ts.nextval,#{seller.userNo},#{sellName},#{sellPrice},#{sellText},#{sellPhoto1:VARCHAR},#{sellPhoto2:VARCHAR},#{sellPhoto3:VARCHAR},#{sellPhone:VARCHAR},#{sellStyle},10,sysdate)
 	 </insert>
 
+	<select id="listTrade" parameterType="Search" resultMap="sellSelectMap">
+		SELECT DISTINCT u.user_no, u.profile, u.user_nickname, s.* FROM sell s, users u WHERE u.user_no=s.user_no
+	</select>
+	 
 </mapper>

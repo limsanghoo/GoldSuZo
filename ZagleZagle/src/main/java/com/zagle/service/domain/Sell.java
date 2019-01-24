@@ -5,7 +5,7 @@ import java.util.Date;
 public class Sell {
 
 	private String sellNo;
-	private String userNo;
+	private User seller;
 	private String sellName;
 	private int sellPrice;
 	private String sellText;
@@ -21,14 +21,14 @@ public class Sell {
 		super();
 	}
 
-	public String getUserNo() {
-		return userNo;
+	public User getSeller() {
+		return seller;
 	}
 
-	public void setUserNo(String userNo) {
-		this.userNo = userNo;
+	public void setSeller(User seller) {
+		this.seller = seller;
 	}
-
+	
 	public String getSellNo() {
 		return sellNo;
 	}
@@ -119,10 +119,11 @@ public class Sell {
 
 	@Override
 	public String toString() {
-		return "Sell [sellNo=" + sellNo + ", userNo=" + userNo + ", sellName=" + sellName + ", sellPrice=" + sellPrice
+		return "Sell [sellNo=" + sellNo + ", seller=" + seller + ", sellName=" + sellName + ", sellPrice=" + sellPrice
 				+ ", sellText=" + sellText + ", SellPhoto1=" + SellPhoto1 + ", SellPhoto2=" + SellPhoto2
 				+ ", SellPhoto3=" + SellPhoto3 + ", sellPhone=" + sellPhone + ", sellStyle=" + sellStyle
 				+ ", sellState=" + sellState + ", sellDate=" + sellDate + "]";
 	}
+
 
 }
