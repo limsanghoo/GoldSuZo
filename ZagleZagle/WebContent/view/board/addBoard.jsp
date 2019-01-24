@@ -6,10 +6,31 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" href="css/demo.css">
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
+
 <title>addBoard</title>
 
-<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<link rel="stylesheet" href="/common/js/medium-editor/dist/css/medium-editor.min.css">
+<link rel="stylesheet" href="/common/js/medium-editor/dist/css/themes/beagle.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="/common/js/medium-editor/dist/js/medium-editor.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+<style>
+      
+        div.editable{
+        	border: 1px solid #D6CDB7;
+            margin-top: 10px;
+        }
+    </style>
+
 <script type="text/javascript">
 
 $(function(){
@@ -172,11 +193,34 @@ $(function(){
 <br/>
 
 내용
-<div>
-   <!-- <input type="text" name="boardDetailText" value=""/> -->
+<!-- <div>
+   <input type="text" name="boardDetailText" value=""/>
    <textarea cols="50px" rows="10px" name="boardDetailText" value=""></textarea>
 </div>
-<br/>
+<br/> -->
+
+
+			<div class="container">
+				<textarea class="editable" id="boardDetailText" name="boardDetailText"></textarea>
+			</div>
+
+    <script src="/common/js/medium-editor/dist/js/medium-editor.js"></script>
+    <script>
+  
+    var editor = new MediumEditor('.editable', {
+    	extensions: {
+            'imageDragging': {}
+        },
+        placeholder: {
+            text: '여기에 글을 작성 해 주세요',
+            hideOnClick: true
+        }
+    
+    });
+
+    </script>
+
+
 
 해시태그
 <div>

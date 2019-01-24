@@ -59,6 +59,20 @@ public class UserServiceImpl implements UserService {
 		return  result;
 	}
 	
+	public boolean checkBlack(String userNo) throws Exception {
+		
+		boolean result = true;
+		User user = userDao.getUser2(userNo);
+		
+		if(user.getBlackCode()==2) {
+			
+			return false;
+		}
+		
+		return result;
+		
+	}
+	
 	/*
 	public User addActiveScore(int totalActiveScore) throws Exception {
 		userDao.addActiveScore(totalActiveSocre);
