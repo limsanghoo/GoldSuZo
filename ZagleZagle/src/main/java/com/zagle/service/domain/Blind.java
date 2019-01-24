@@ -9,6 +9,7 @@ public class Blind {
 	private Board blindBoardNo;
 	private String blindCode;
 	private Comment blindCommentNo;
+	
 	public String getBlindNo() {
 		return blindNo;
 	}

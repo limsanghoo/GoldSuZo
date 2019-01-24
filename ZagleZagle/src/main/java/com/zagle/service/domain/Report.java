@@ -9,12 +9,20 @@ public class Report {
 	private String reportNo;
 	private User reportingUserNo;
 	private User reportedUserNo;
+	public int getHardleNo() {
+		return hardleNo;
+	}
+
+	public void setHardleNo(int hardleNo) {
+		this.hardleNo = hardleNo;
+	}
+
 	private String reportReason;
 	
 	private Board reportedBoard;
 	private Comment reportedComment;
 	
-	private int handleCode;
+	private int hardleNo;
 	private Date reportDate;
 	
 	///Constructor
@@ -69,14 +77,6 @@ public class Report {
 		this.reportedComment = reportedComment;
 	}
 
-	public int getHandleCode() {
-		return handleCode;
-	}
-
-	public void setHandleCode(int handleCode) {
-		this.handleCode = handleCode;
-	}
-
 	public Date getReportDate() {
 		return reportDate;
 	}
@@ -88,7 +88,7 @@ public class Report {
 	@Override
 	public String toString() {
 		return "Report [reportNo=" + reportNo + ", reportingUserNo=" + reportingUserNo + ", reprotedUserNo="
-				+ reportedUserNo + ", reportReason=" + reportReason + ", handleCode=" + handleCode + ", reportDate="
+				+ reportedUserNo + ", reportReason=" + reportReason + ", hardleNo=" + hardleNo + ", reportDate="
 				+ reportDate + "]";
 	}
 	

@@ -55,21 +55,21 @@ public class AdminDaoImpl implements AdminDao {
 	
 	public void addReport(Report report) throws Exception {
 		
-		sqlSession.insert("AdminMapper.addReport", report);
+		sqlSession.insert("ReportMapper.addReport", report);
 	}
 	
 	@Override
 	public void updateReport(Report report) throws Exception {
 		
 		
-		sqlSession.update("AdminMapper.updateReport", report);
+		sqlSession.update("ReportMapper.updateReport", report);
 	}
 
 	@Override
 	public void addBlind(Blind blind) throws Exception {
 		
 		
-		sqlSession.insert("AdminMapper.addBlind", blind);
+		sqlSession.insert("BlindMapper.addBlind", blind);
 	}
 
 	//@Override
@@ -77,12 +77,17 @@ public class AdminDaoImpl implements AdminDao {
 		// TODO Auto-generated method stub
 		
 	//}
-
-	@Override
-	public void cancelBlind(Blind blind) throws Exception {
-		// TODO Auto-generated method stub
-		sqlSession.update("AdminMapper.cancelBlind", blind);
+	
+	public void updateBlind(Blind blind) throws Exception {
+		
+		sqlSession.update("BlindMapper.updateBlind", blind);
 	}
+	
+//	@Override
+//	public void cancelBlind(Blind blind) throws Exception {
+//		// TODO Auto-generated method stub
+//		sqlSession.update("AdminMapper.cancelBlind", blind);
+//	}
 
 //	@Override
 //	public void cancelBlind2(Comment comment) throws Exception {
@@ -90,11 +95,11 @@ public class AdminDaoImpl implements AdminDao {
 //		
 //	}
 
-	@Override
-	public void deleteBlind(Blind blind) throws Exception {
-		
-		sqlSession.update("AdminMapper.deleteBlind", blind);
-	}
+//	@Override
+//	public void deleteBlind(Blind blind) throws Exception {
+//		
+//		sqlSession.update("AdminMapper.deleteBlind", blind);
+//	}
 
 //	@Override
 //	public void deleteBlind2(Comment commnet) throws Exception {
@@ -102,15 +107,14 @@ public class AdminDaoImpl implements AdminDao {
 //		
 //	}
 
-	@Override
-	public void checkBlack(User blackCode) throws Exception {
-		sqlSession.selectOne("AdminMapper.checkBlack", blackCode);
-		
-	}
-	
+
 	public int getTotalCount(SearchAdmin search) throws Exception {
 		
 		return sqlSession.selectOne("AdminMapper.getTotalCount", search);
+	}
+	public void addBlackList(BlackList blackList) throws Exception {
+		
+		sqlSession.insert("BlackListMapper.addBlackList", blackList);
 	}
 	
 }

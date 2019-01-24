@@ -20,7 +20,7 @@ public interface UserService {
 
 	public boolean checkDuplication(String snsNo) throws Exception;
 	
-
+	public boolean checkBlack(String userNo) throws Exception;
 	//public User addActiveScore(int totalActiveScore) throws Exception;
 	public void addActiveScore(User user) throws Exception;
 	

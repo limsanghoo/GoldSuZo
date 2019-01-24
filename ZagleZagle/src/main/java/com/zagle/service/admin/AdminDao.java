@@ -32,26 +32,32 @@ public interface AdminDao {
 	///보드 블라인드 처리
 	public void addBlind(Blind blind) throws Exception;
 	
+	///블라인드 코드 업데이트
+	public void updateBlind(Blind blind) throws Exception;
+	
 	///코맨트 블라인드 처리
 	//public void addBlind2(Comment comment) throws Exception;
 	
 	///보드 블라인드 해지
-	public void cancelBlind(Blind blind) throws Exception;
+	//public void cancelBlind(Blind blind) throws Exception;
 	
 	///코맨트 블라인드 해지
 	//public void cancelBlind2(Comment comment) throws Exception;
 	
 	///블라인드 보드 삭제
-	public void deleteBlind(Blind blind) throws Exception;
+	//public void deleteBlind(Blind blind) throws Exception;
 	
 	///블라인드 코맨트 삭제
 	///public void deleteBlind2(Comment commnet) throws Exception;
 	
-	///블랙리스트 코드 체크
-	public void checkBlack(User BlackCode) throws Exception;
+	
 	
 	///
 	public int getTotalCount(SearchAdmin search) throws Exception ;
 	
-
+	////블랙리스트 추가
+	
+	public void addBlackList(BlackList blackList) throws Exception;
+	
+	
 }

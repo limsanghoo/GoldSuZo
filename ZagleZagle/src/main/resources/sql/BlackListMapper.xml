@@ -18,11 +18,21 @@
 
 	</resultMap>
 	
+	<insert id="addBlackList" parameterType="com.zagle.service.domain.BlackList">
+	INSERT
+	INTO blackList(black_no, user_no, ban_start_day, ban_expire_day, ban_reason, black_check_code)
+	
+	VALUES('BK'||seq_bk.nextval, #{blackUser.userNo:VARCHAR}, 
+														SYSDATE, SYSDATE+7,#{banReason:VARCHAR}, '0')
+	
+	</insert>
+	
 	<select id="listBlackList" parameterType="com.zagle.service.domain.SearchAdmin" resultMap="blackListSelectMap">
-	SELECT b.black_no, b.user_no, b.ban_reason, b.ban_start_day, b.ban_expire_day, u.black_code
+	SELECT b.black_no, u.user_no, b.ban_reason, b.ban_start_day, b.ban_expire_day, u.black_code
 		FROM blackList b, users u
-		WHERE u.black_code ='2'
+		WHERE b.user_no = u.user_no and u.black_code ='2'
 	</select>
+	
 	
 	<!--  
 	<select id="listBlackList" parameterType="com.zagle.service.domain.SearchAdmin" resultMap="adminSelectMap">

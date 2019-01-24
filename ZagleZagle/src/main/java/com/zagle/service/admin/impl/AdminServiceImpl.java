@@ -8,14 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.zagle.common.Search;
+
 import com.zagle.service.admin.AdminDao;
 import com.zagle.service.admin.AdminService;
-import com.zagle.service.domain.Admin;
+
 import com.zagle.service.domain.BlackList;
 import com.zagle.service.domain.Blind;
-import com.zagle.service.domain.Board;
-import com.zagle.service.domain.Comment;
+
 import com.zagle.service.domain.Report;
 import com.zagle.service.domain.SearchAdmin;
 import com.zagle.service.domain.User;
@@ -84,17 +83,22 @@ public class AdminServiceImpl implements AdminService {
 		adminDao.addBlind(blind);
 	}
 	
+	public void updateBlind(Blind blind) throws Exception {
+		
+		adminDao.updateBlind(blind);
+	}
+	
 //	@Override
 //	public void addBlind2(Comment comment) throws Exception {
 //		// TODO Auto-generated method stub
 //		
 //	}
 
-	@Override
-	public void cancelBlind(Blind blind) throws Exception {
-		
-		adminDao.cancelBlind(blind);
-	}
+//	@Override
+//	public void cancelBlind(Blind blind) throws Exception {
+//		
+//		adminDao.cancelBlind(blind);
+//	}
 
 //	@Override
 //	public void cancelComment(Comment comment) throws Exception {
@@ -102,11 +106,11 @@ public class AdminServiceImpl implements AdminService {
 //		
 //	}
 
-	@Override
-	public void deleteBlind(Blind blind) throws Exception {
-		
-		adminDao.deleteBlind(blind);
-	}
+//	@Override
+//	public void deleteBlind(Blind blind) throws Exception {
+//		
+//		adminDao.deleteBlind(blind);
+//	}
 
 //	@Override
 //	public void delteBlind2(Comment comment) throws Exception {
@@ -114,11 +118,11 @@ public class AdminServiceImpl implements AdminService {
 //		adminDao.deleteBlind2(comment);
 //	}
 
-	@Override
-	public void checkBlack(User BlackCode) throws Exception {
-		// TODO Auto-generated method stub
+	
+	
+	public void addBlackList(BlackList blackList) throws Exception {
 		
-		adminDao.checkBlack(BlackCode);
+		adminDao.addBlackList(blackList);
 	}
 
 }

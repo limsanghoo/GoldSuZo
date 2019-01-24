@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+		
+<mapper namespace="BlindMapper">
+
+
+<resultMap id="blindSelectMap" type="com.zagle.service.domain.Blind">
+
+<result property="blindNo"		column="blind_no" jdbcType="VARCHAR"/>
+<result property="blindBoardNo.boardNo"		column="board_no"	jdbcType="VARCHAR"/>
+<result property="blindCode"	column="blind_code"		jdbcType="VARCHAR"/>
+<result property="blindCommentNo.commentNo"	column="comment_no"	jdbcType="VARCHAR"/>
+
+
+</resultMap>
+
+
+<insert id="addBlind" parameterType="com.zagle.service.domain.Blind">
+INSERT
+INTO blind(blind_no, board_no, blind_code, comment_no)
+VALUES ('BL'||seq_bl.nextval, #{blindBoardNo.boardNo:VARCHAR}, '0',
+					#{blindCommentNo.commentNo:VARCHAR}	)
+</insert>
+
+<update id="updateBlind" parameterType="com.zagle.service.domain.Blind">
+UPDATE blind
+<set>
+blind_code = #{blindCode}
+</set>
+WHERE blind_no = #{blindNo}
+</update>
+
+</mapper>

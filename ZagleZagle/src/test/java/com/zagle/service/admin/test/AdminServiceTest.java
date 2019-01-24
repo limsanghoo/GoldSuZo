@@ -11,6 +11,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.zagle.service.admin.AdminService;
+import com.zagle.service.domain.BlackList;
+import com.zagle.service.domain.Blind;
 import com.zagle.service.domain.Board;
 import com.zagle.service.domain.Report;
 import com.zagle.service.domain.SearchAdmin;
@@ -80,7 +82,7 @@ import junit.framework.Assert;
 		
 		SearchAdmin search = new SearchAdmin();
 		search.setCurrentPage(1);
-		search.setPageSize(3);
+		search.setPageSize(5);
 		
 		
 		System.out.println("====================listBlackObject====================");
@@ -116,7 +118,7 @@ import junit.framework.Assert;
 		System.out.println(totalCount);
 		*/
 	}
-	@Test
+	//@Test
 	public void testlistBlackList() throws Exception {
 		
 		SearchAdmin search = new SearchAdmin();
@@ -145,30 +147,101 @@ import junit.framework.Assert;
 		System.out.println("=======================addRport========================");
 		
 		Report report = new Report();
+		User reportingUserNo = new User();
+		reportingUserNo.setUserNo("US10004");
+		
+		User reportedUserNo = new User();
+		reportedUserNo.setUserNo("US10027");
+		
+		Board reportedBoard = new Board();
+		reportedBoard.setBoardNo("BD10038");
+		
+		
+		report.setReportNo("RP10002");
+		report.setReportingUserNo(reportingUserNo);
+		report.setReportedUserNo(reportedUserNo);
+		report.setReportedBoard(reportedBoard);
+		report.setReportReason("테스트용");
+	
+		
 
-		Board board = new Board();
-		
-		board.setBoardNo("BD10040");
-		
-		User user = new User();
-		user.setUserNo("US10004");
-		
-		User user01 = new User();
-		user01.setUserNo("US10003");
-		
-		report.setHandleCode('0');
-		report.setReportedBoard(board);
-		report.setReportingUserNo(user);
-		report.setReportedUserNo(user01);
-		report.setReportReason("욕설");
-		report.setReportNo("RP10000");
-		
 		adminService.addReport(report);
 		
-		report.getReportNo();
 		
 		Assert.assertEquals("RP10000", report.getReportNo());;
 	}
+	//@Test
+	public void testAddBlackList() throws Exception {
+		
+		System.out.println("==================AddBlackList=====================");
+		
+		BlackList bl = new BlackList();
+		
+		User blackUser = new User();
+		blackUser.setUserNo("US10004");
+		
+		bl.setBlackNo("BK10002");
+	
+		bl.setBlackUser(blackUser);
+		bl.setBanReason("욕설");
+		
+		adminService.addBlackList(bl);
+		
+		Assert.assertEquals("BK10002", bl.getBlackNo());;
+		
+	}
+	//@Test
+	public void testUpdateReport() throws Exception {
+		
+		System.out.println("====================UpdateReport==================");
+		
+		Report report = new Report();
+		report.setReportNo("RP10001");
+		report.setHardleNo(1);
+		
+		System.out.println("report :"+report);
+		
+		adminService.updateReport(report);
+		
+		System.out.println("update 후 report : "+report);
+		
+		System.out.println(report.getHardleNo());
 
-
+		Assert.assertNotNull(report);
+		
+	}
+	//@Test
+	public void testAddBlind() throws Exception {
+		
+		System.out.println("===================testAddBlind===================");
+		
+		Blind blind = new Blind();
+		Board blindBoardNo = new Board();
+		blindBoardNo.setBoardNo("BD10040");
+		
+		blind.setBlindNo("BL10000");
+		blind.setBlindBoardNo(blindBoardNo);
+		blind.setBlindCode("1");
+		
+		adminService.addBlind(blind);
+		
+	
+		Assert.assertEquals("BL10000", blind.getBlindNo());
+	}
+	//@Test
+	public void testUpdateBlind() throws Exception {
+		
+		System.out.println("===============updateBlindCode============");
+		
+		Blind blind = new Blind();
+		blind.setBlindNo("BL10000");
+		blind.setBlindCode("1");
+		
+		adminService.updateBlind(blind);
+		
+		System.out.println(blind);
+		
+		Assert.assertEquals("1", blind.getBlindCode());
+		
+	}
 }
