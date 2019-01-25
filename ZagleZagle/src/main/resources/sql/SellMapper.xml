@@ -33,5 +33,9 @@
 	<select id="listTrade" parameterType="Search" resultMap="sellSelectMap">
 		SELECT DISTINCT u.user_no, u.profile, u.user_nickname, s.* FROM sell s, users u WHERE u.user_no=s.user_no
 	</select>
+	
+	<select id="getSell" parameterType="string" resultMap="sellSelectMap">
+		SELECT DISTINCT u.user_no, u.profile, u.user_nickname, s.* FROM sell s, users u WHERE u.user_no=s.user_no and sell_no=#{sellNo}
+	</select>
 	 
 </mapper>

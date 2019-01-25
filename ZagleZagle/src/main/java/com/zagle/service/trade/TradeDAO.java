@@ -10,6 +10,8 @@ public interface TradeDAO {
 	public void addSell(Sell sell) throws Exception;
 
 	public List<Sell> listTrade(Search search) throws Exception;
+
+	public Sell getSell(String sellNo) throws Exception;
 	
 //	addSell 판매상품올리기
 //	addBuy 구매요청했을때
@@ -21,6 +23,4 @@ public interface TradeDAO {
 //	updateSell 상품수정
 //	updateBuy 구매요청수정
 //	deleteSell 상품삭제
-	
-
 }
