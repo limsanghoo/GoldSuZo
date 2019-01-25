@@ -90,11 +90,12 @@ function commentInsert(boardNo,userNo, text){
                                 
                    a += '<div class="row commentArea'+list.commentNo+'">';                           
                    a += '<div class="col-sm-1"><img src="/common/images/profile/'+list.user.profile+'" style="width: 30px; height: 30px; border-radius: 70px;"/></div>';                 
-                   a += '<div class="col-sm-3">'+list.user.userNickname+'</div>';                 
-                   a += '<div class="col-sm-6">'+list.commentDetailText+'</div>';                   
+                   a += '<div class="col-sm-2" style="font-size:medium">'+list.user.userNickname+'</div>';                 
+                   a += '<div class="col-sm-7" style="font-size:medium">'+list.commentDetailText+'</div>';                   
                    a += b+'<div class="w-100"></div>';                                
                    a += '</div>';
                });
+               a += '<br/>'; 
                $(".commentList").html(a); 
            }
        });

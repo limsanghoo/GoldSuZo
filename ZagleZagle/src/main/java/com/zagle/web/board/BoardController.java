@@ -239,8 +239,6 @@ public class BoardController {
 				
 			String loginUserNo=user.getUserNo();
 		
-			System.out.println("************로그인 유저 : "+loginUserNo);
-		
 			searchBoard.setLoginUserNo(loginUserNo);
 		}
 		
@@ -274,13 +272,20 @@ public class BoardController {
 			searchBoard.setCurrentPage(1);
 		}
 		
+		if(session.getAttribute("user")!=null) {
+			
+			User user=(User)session.getAttribute("user");
+				
+			String loginUserNo=user.getUserNo();
+		
+			searchBoard.setLoginUserNo(loginUserNo);
+		}
+		
 		searchBoard.setPageSize(pageSize);
 		
 		Map<String , Object> map=boardService.listBoard(searchBoard);
 		
 		//System.out.println("컨트롤러 map : "+map);
-		
-		User user=(User)session.getAttribute("user");
 		
 		List<Local> list = boardService.getState();//추가
 		

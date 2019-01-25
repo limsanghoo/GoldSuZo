@@ -81,12 +81,10 @@ body {
 .containerList .box h2 {
     margin: 10px 0 0;
     padding: 0;
-    font-size: 20px;
 }
 .containerList .box p {
     margin: 0;
     padding: 0 0 10px;
-    font-size: 16px;
 }
 /* @media (max-width: 1200px) {
     .containerList {
@@ -175,19 +173,47 @@ $(function(){
 	
 	//좋아요 등록
 	$("span[name='addLike']").on("click", function(){
+		
 		var userNo="${user.userNo}";
 		var boardNo=$(this).data('boardno');
+		var checkLike=$(this).data('checklike');
 		
-		$.ajax({
-			
-			url: '/board/json/addLike/'+userNo+'/'+boardNo,
-			type: 'get',
-			success: function(data){
-				alert('성공');
+		alert(checkLike);
+		
+		if(checkLike=='0'){
+			$.ajax({
 				
-				$("img[name='${board.boardNo}emptyLike']").attr("src","/common/images/board/fullLike.png");
-			}
-		})
+				url: '/board/json/addLike/'+userNo+'/'+boardNo,
+				type: 'get',
+				success: function(data){
+					
+					if(data==1){
+						alert('등록 성공');
+						$("img[name='"+boardNo+"emptyLike']").attr("src","/common/images/board/fullLike.png");
+					}
+				}
+			})			
+		}//0일때 끝
+		
+		if(checkLike=='1' || checkLike=='2'){
+			$.ajax({
+				
+				url: '/board/json/cancelLike/'+userNo+'/'+boardNo+'/'+checkLike,
+				type: 'get',
+				success: function(data){
+					
+					if(data==2){
+						alert('취소 성공');
+						$("img[name='"+boardNo+"fullLike']").attr("src","/common/images/board/emptyLike.png");
+					}else if(data==1){
+						alert('재등록 성공');
+						$("img[name='"+boardNo+"emptyLike']").attr("src","/common/images/board/fullLike.png");
+					}
+				}
+				
+			})
+		}//1일때 끝
+
 		
 	});
 	
@@ -380,11 +406,22 @@ function fncGetTown(){
 	<span style="font-weight: bold; display: inline;">&nbsp;${board.user.userNickname}</span>
 	
 	
-	<span name="addLike" data-boardNo="${board.boardNo}">
-		<img src="/common/images/board/emptyLike.png" style="display: inline; vertical-align: middle; float:right" name="${board.boardNo}emptyLike"/>
-	<c:if test="${user.userNo==board.likeUserNo && board.checkLike=='1'}">
-		<img src="/common/images/board/fullLike.png" style="display: inline; vertical-align: middle; float:right" name="${board.boardNo}fullLike"/>
-	</c:if>
+	<span name="addLike" data-boardNo="${board.boardNo}" data-checkLike="${board.checkLike}">	
+	<c:choose>
+		<c:when test="${user.userNo !=null}">
+			<c:if test="${user.userNo==board.likeUserNo && board.checkLike=='1'}">
+				<img src="/common/images/board/fullLike.png" style="display: inline; vertical-align: middle; float:right" name="${board.boardNo}fullLike"/>
+			</c:if>
+			
+			<c:if test="${board.likeUserNo==null && board.checkLike=='0'}">
+				<img src="/common/images/board/emptyLike.png" style="display: inline; vertical-align: middle; float:right" name="${board.boardNo}emptyLike"/>
+			</c:if>
+			
+			<c:if test="${user.userNo==board.likeUserNo && board.checkLike=='2'}">
+				<img src="/common/images/board/emptyLike.png" style="display: inline; vertical-align: middle; float:right" name="${board.boardNo}emptyLike"/>
+			</c:if>
+		</c:when>
+	</c:choose>
 	</span>
 	</p>
 

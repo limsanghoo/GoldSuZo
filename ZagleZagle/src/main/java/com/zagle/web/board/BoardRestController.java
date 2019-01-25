@@ -210,10 +210,37 @@ public class BoardRestController {
 		   like.setUser(userService.getUser2(userNo));
 		   like.setCheckLike("1");//좋아요 등록 상태
 		   
-		   //boardService.addLike(like);
+		   boardService.addLike(like);
 		   
 		   return 1;
 	   }
+	   
+	   @RequestMapping(value="json/cancelLike/{userNo}/{boardNo}/{checkLike}", method=RequestMethod.GET)
+	   public int cancelLike(@PathVariable String userNo, @PathVariable String boardNo, @PathVariable String checkLike) throws Exception{
+		   
+		   System.out.println("/cancelLike");
+		   System.out.println("userNo : "+userNo);
+		   System.out.println("boardNo : "+boardNo);
+		   System.out.println("checkLike : "+checkLike);
+		   
+		   Like like=new Like();
+		   like.setBoard(boardService.getBoard(boardNo));
+		   like.setUser(userService.getUser2(userNo));
+		   like.setCheckLike(checkLike);
+		   
+		   boardService.cancelLike(like);
+		   
+		   int result=0;
+		   
+		   if(checkLike.equals("1")) {
+			   result=2;
+		   }else if(checkLike.equals("2")) {
+			   result=1;
+		   }
+		   
+		   return result;
+	   }
+	   
 
 	
 	

@@ -70,7 +70,7 @@
 		SELECT DISTINCT u.user_no, u.profile, u.user_nickname, b.board_no, b.photo1, b.photo2, b.photo3, b.board_detail_text, b.hash_tag, b.user_theme, b.coord, b.board_reg_date, b.board_status, b.address		
 		
 		<if test="loginUserNo!=null">
-			, l.user_no as like_user_no, NVL(l.check_like,'0') check_like
+			, l.user_no AS like_user_no, NVL(l.check_like,'0') check_like
 		</if>	
 		
 		FROM users u, board b, likes l
@@ -90,6 +90,7 @@
 		
 		ORDER BY b.board_reg_date DESC
 	 </select>
+	 
 	 
 	 <select id="listComment" parameterType="string" resultMap="commentSelectMap">
 	 	SELECT DISTINCT u.user_no, u.profile, u.user_nickname, c.board_no, c.comment_no, c.comment_detail_text, c.comment_reg_date 
@@ -130,6 +131,22 @@
 		</set>
 		WHERE board_no=#{boardNo}
 	</update>
+	
+	
+	<update id="cancelLike" parameterType="like">
+		UPDATE likes
+		<set>
+			<if test="checkLike==1">
+			check_like='2'
+			</if>
+			<if test="checkLike==2">
+			check_like='1'
+			</if>
+		</set>
+		WHERE board_no=#{board.boardNo} 
+		AND user_no=#{user.userNo}
+	</update>
+	
 	
 	<delete id="deleteComment" parameterType="string">
 		DELETE FROM comments

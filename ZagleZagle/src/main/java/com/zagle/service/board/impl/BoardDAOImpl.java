@@ -99,7 +99,7 @@ public class BoardDAOImpl implements BoardDAO{
 
 	@Override
 	public void cancelLike(Like like) throws Exception {
-		
+		sqlSession.update("BoardMapper.cancelLike", like);
 	}
 	
 	@Override
