@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.zagle.common.Search;
@@ -29,11 +30,9 @@ public class TradeController {
 	}
 	
 	@RequestMapping(value="listTrade", method=RequestMethod.GET)
-	public ModelAndView listTrade(@ModelAttribute("search") Search search, HttpSession session) throws Exception{
+	public ModelAndView listTrade(@ModelAttribute("search") Search search) throws Exception{
 		
 		Map<String , Object> map=tradeService.listTrade(search);
-
-		User user=(User)session.getAttribute("user");
 
 		ModelAndView modelAndView=new ModelAndView();
 		modelAndView.addObject("tradeList", map.get("tradeList"));//게시물 리스트
@@ -60,6 +59,18 @@ public class TradeController {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("forward:/view/trade/addSell.jsp");
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="getSell")
+	public ModelAndView getSell(@RequestParam("sellNo") String sellNo) throws Exception{
+		
+		Sell sell = tradeService.getSell(sellNo);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("forward:/view/trade/getSell.jsp");
+		modelAndView.addObject("sell",sell);
 		
 		return modelAndView;
 	}

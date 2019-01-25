@@ -29,7 +29,47 @@
         	border: 1px solid #D6CDB7;
             margin-top: 10px;
         }
-    </style>
+        
+        div{
+        	margin:auto;
+        }
+
+
+.wrap-loading{ /*화면 전체를 어둡게 합니다.*/
+
+    position: fixed;
+
+    left:0;
+
+    right:0;
+
+    top:0;
+
+    bottom:0;
+
+    background: rgba(0,0,0,0.2); /*not in ie */
+
+    filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000', endColorstr='#20000000');    /* ie */
+
+    
+
+}
+
+     .wrap-loading div{ /*로딩 이미지*/
+
+        text-align: center;
+
+    }
+
+    .display-none{ /*감추기*/
+
+        display:none;
+
+    }
+
+
+
+</style>
 
 <script type="text/javascript">
 
@@ -38,11 +78,15 @@ $(function(){
 	var image = document.getElementById('image');
 
 	file.onchange = function (event) {
+		
+	  $('.wrap-loading').removeClass('display-none'); //로딩중 이미지 보여주기
+		
 	  var target = event.currentTarget;
 	  var xmlHttpRequest = new XMLHttpRequest();
-	  xmlHttpRequest.open('POST', 'https://api.imgur.com/3/image/', true);
+	  xmlHttpRequest.open('POST', 'https://api.imgur.com/3/image/', true); //원래 true
 	  xmlHttpRequest.setRequestHeader("Authorization", "Client-ID c764d6730f6f9a6");
 	  xmlHttpRequest.onreadystatechange = function () {
+
 	    if (xmlHttpRequest.readyState == 4) {
 	      if (xmlHttpRequest.status == 200) {
 	        var result = JSON.parse(xmlHttpRequest.responseText);
@@ -64,12 +108,15 @@ $(function(){
 	        			dataType : "text",
 	        			success : function (data,status){
 	        				var decode=decodeURIComponent(data);//특수문자 포함 디코딩
-	        				alert("decode : "+decode);
+	        				//alert("decode : "+decode);
 	        				
 	        				var tagArea=$("#hashTag");
 	        				tagArea.val(tagArea.val()+decode);//해시태그 append
-	        				
 	        			}
+	        			
+	        			,complete:function(){
+	        		        $('.wrap-loading').addClass('display-none'); //로딩중 이미지 감추기
+	        		    }
 	        		});
 	      
 	      }
@@ -106,7 +153,6 @@ $(function(){
    })
 });
 
-
 </script>
 
 </head>
@@ -117,13 +163,12 @@ $(function(){
 
 <input type="hidden" name="userNo" value="${param.userNo}"/><!-- value 수정해야함 -->
 
-
 <div>
 <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"/>
 <input type="button" onclick="sample4_execDaumPostCode()" value="지명 검색"/>
 <input type="text" name="address" id="sample5_address" placeholder="검색버튼을 눌러주세요" readOnly/><br/>
 <input type="hidden" name="coord" value=""/><!-- 좌표 -->
-<div id="map" style="width:500px;height:500px;margin-top:10px;display:none"></div>
+<div id="map" style="width:500px;height:500px;margin-top:10px;display:none;"></div>
    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc9c3216a02c263f1acc2c4187e96443&libraries=services"></script>
    <script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
@@ -229,18 +274,26 @@ $(function(){
 <br/>
 
 <div>
-	<input id=file type=file multiple="multiple">* 사진은 하나씩 등록해주세요!<br/>
+	<input id=file type=file multiple="multiple" style="display: inline;">* 사진은 하나씩 등록해주세요!<br/>
 	<div id="img_box"></div>
 </div>
 
 <input type="hidden" id="link" value="" name="photo1"/><!-- 이미지 링크 append 되는 부분 -->
 
+
 </form>
+
+<!-- 로딩중 이미지 -->
+<div class="wrap-loading display-none">
+    <div><img src="/common/images/board/giphy.gif"/></div>
+</div>    
+
 
 <div style="text-align: center">
    <input type="button" id="submit" value="등록"/>
    <input type="button" id="cancel" value="취소"/>
 </div>
+
 
 </body>
 

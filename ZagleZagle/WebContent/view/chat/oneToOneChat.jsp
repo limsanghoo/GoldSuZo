@@ -299,7 +299,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 	<script>
 		$(document).ready(function() {
 			var socket = io("http://192.168.0.25:82");
-			socket.emit("send_user",{id :"${user.userNickname}", addr : "${user.userAddr}",pro : "${user.profile}"});
+			socket.emit("send_user",{id :"${user.userNickname}", addr : "${room}",pro : "${user.profile}"});
 			
 			//msg에서 키를 누를떄
 			$("#msg").keydown(function(key) {
@@ -343,13 +343,13 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 					}
 				}else{
 					if (data.ms.substring(data.ms.length-3)=='jpg'||data.ms.substring(data.ms.length-3)=='png') {
-						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg dropdown-toggle' data-toggle='dropdown'><ul class='dropdown-menu'><li><div onclick='javascript:sChat(/"+data.id+"/)'>1:1채팅하기</div><div onclick='javascript:sChat(/"+data.id+"/)'>1:1화상채팅하기</div></li></ul><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer' onclick='javascript:mdmd(/"+data.ms+"/);'><img src='/common/images/chat/"+data.ms+"' style='width: 200px; height: 180px;' class='img-thumbnail' /><span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
+						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg' onclick='javascript:mdmd(/@"+data.pro+"/);'></div><div class='msg_cotainer' onclick='javascript:mdmd(/"+data.ms+"/);'><img src='/common/images/chat/"+data.ms+"' style='width: 200px; height: 180px;' class='img-thumbnail' /><span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
 						$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
 					}else if(data.ms.substring(data.ms.length-3)=='mp4'||data.ms.substring(data.ms.length-3)=='wmv'){
-						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg dropdown-toggle' data-toggle='dropdown'><ul class='dropdown-menu'><li><div onclick='javascript:sChat(/"+data.id+"/)'>1:1채팅하기</div><div onclick='javascript:sChat(/"+data.id+"/)'>1:1화상채팅하기</div></li></ul><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer'><video controls controlsList='nodownload' width='320' height='240' muted><source src='http://192.168.0.25:8080/common/images/chat/"+data.ms+"' type='video/mp4'><a href='http://192.168.0.25:8080/common/images/chat/"+data.ms+"'>download video</a></video><span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
+						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg' onclick='javascript:mdmd(/@"+data.pro+"/);'></div><div class='msg_cotainer'><video controls controlsList='nodownload' width='320' height='240' muted><source src='http://192.168.0.25:8080/common/images/chat/"+data.ms+"' type='video/mp4'><a href='http://192.168.0.25:8080/common/images/chat/"+data.ms+"'>download video</a></video><span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
 						$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
 					}else{
-						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg dropdown-toggle' data-toggle='dropdown'><ul class='dropdown-menu'><li><div onclick='javascript:sChat(/"+data.id+"/)'>1:1채팅하기</div><div onclick='javascript:sChat(/"+data.id+"/)'>1:1화상채팅하기</div></li></ul><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer'>"+data.ms+"<span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
+						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg' onclick='javascript:mdmd(/@"+data.pro+"/);'></div><div class='msg_cotainer'>"+data.ms+"<span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
 						$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
 						
 					}
@@ -376,9 +376,8 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 					$("#ok_chat").val(msg.a_user)
 					mdstart2.click();
 				}else if(msg.b_user=="${user.userNickname}"&&msg.ms=="ok"){
-					$('.modal').modal("hide");
-					window.open("http://192.168.0.25:8080/chat/getChat2?room="+msg.b_user,"_blank", "width=800, height=600, scrollbars=yes")
-					
+					alert(msg.b_user)
+					window.open("http://192.168.0.25:8080/chat/getChat2?room="+msg.b_user,"_blank", "width=400, height=300, scrollbars=no")
 				}else if(msg.b_user=="${user.userNickname}"&&msg.ms=="no"){
 					alert("상대방이 거절하셧슴다.")
 				}
@@ -387,7 +386,8 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 			$("#ok_chat").on("click",function(){
 				var name = $(this).val();
 				socket.emit("one_msg",{a_user:"${user.userNickname}",b_user:name,ms:"ok"});
-				window.open("http://192.168.0.25:8080/chat/getChat2?room="+name,"_blank", "width=800, height=600, scrollbars=yes")
+				alert(name)
+				window.open("http://192.168.0.25:8080/chat/getChat2?room="+name,"_blank", "width=400, height=300, scrollbars=no")
 			})
 			$("#no_chat").on("click",function(){
 				var name = $("#ok_chat").val();
@@ -601,13 +601,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 			});
 			
 		});
-		function sChat(name,pro){
-			
-			var text1 = name.toString();
-			var name = text1.substring(1,text1.length-1);
-			$("#btn_one").text(name);
-			btn_one.click();
-		}
+		
 		$(document).ready(function(){
 			$('#action_menu_btn').click(function(){
 				$('.action_menu').toggle();
@@ -648,99 +642,6 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 	
 	
 
-		function getLocation() {
-			  var output = document.getElementById("out");
-
-			  if (!navigator.geolocation){
-			    output.innerHTML = "<p>사용자의 브라우저는 지오로케이션을 지원하지 않습니다.</p>";
-			    return;
-			  }
-
-			  function success(position) {
-			    var latitude  = position.coords.latitude;
-			    var longitude = position.coords.longitude;
-
-			    output.innerHTML = '<p>위도 : ' + latitude + '° <br>경도 : ' + longitude + '°</p>';
-
-			    var img = new Image();
-			    img.src = "http://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
-
-			    output.appendChild(img);
-			  };
-
-			  function error() {
-			    output.innerHTML = "사용자의 위치를 찾을 수 없습니다.";
-			  };
-
-			  output.innerHTML = "<p>Locating…</p>";
-
-			  navigator.geolocation.getCurrentPosition(success, error);
-			}
-			
-			$(function(){
-				function prompt(window, pref, message, callback) {
-				    var branch = Components.classes["@mozilla.org/preferences-service;1"]
-				                           .getService(Components.interfaces.nsIPrefBranch);
-
-				    if (branch.getPrefType(pref) === branch.PREF_STRING) {
-				        switch (branch.getCharPref(pref)) {
-				        case "always":
-				            return callback(true);
-				        case "never":
-				            return callback(false);
-				        }
-				    }
-
-				    var done = false;
-
-				    function remember(value, result) {
-				        return function() {
-				            done = true;
-				            branch.setCharPref(pref, value);
-				            callback(result);
-				        }
-				    }
-
-				    var self = window.PopupNotifications.show(
-				        window.gBrowser.selectedBrowser,
-				        "geolocation",
-				        message,
-				        "geo-notification-icon",
-				        {
-				            label: "Share Location",
-				            accessKey: "S",
-				            callback: function(notification) {
-				                done = true;
-				                callback(true);
-				            }
-				        }, [
-				            {
-				                label: "Always Share",
-				                accessKey: "A",
-				                callback: remember("always", true)
-				            },
-				            {
-				                label: "Never Share",
-				                accessKey: "N",
-				                callback: remember("never", false)
-				            }
-				        ], {
-				            eventCallback: function(event) {
-				                if (event === "dismissed") {
-				                    if (!done) callback(false);
-				                    done = true;
-				                    window.PopupNotifications.remove(self);
-				                }
-				            },
-				            persistWhileVisible: true
-				        });
-				}
-
-				prompt(window,
-				       "extensions.foo-addon.allowGeolocation",
-				       "Foo Add-on wants to know your location.",
-				       function callback(allowed) { alert(allowed); });
-			})
 			
 	</script>
 </head>
@@ -751,7 +652,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 <button id="btn2">보이기</button>
 <button id="btn_one" style="display: none;" value=""></button>
 
-<div><h3>룸이름 : ${user.userAddr}</h3></div>
+<div><h3>룸이름 : ${room}</h3></div>
 		<div class="container-fluid h-100">
 		
 			<div class="row justify-content-center h-100">

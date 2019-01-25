@@ -52,6 +52,10 @@ body {
     
 }
 
+.grid{
+	margin-bottom: 0px;
+}
+
 /* .containerList {
 	padding-top : 20px;
     width: 1200px;
@@ -77,12 +81,10 @@ body {
 .containerList .box h2 {
     margin: 10px 0 0;
     padding: 0;
-    font-size: 20px;
 }
 .containerList .box p {
     margin: 0;
     padding: 0 0 10px;
-    font-size: 16px;
 }
 /* @media (max-width: 1200px) {
     .containerList {
@@ -140,23 +142,27 @@ body {
 
 $(function(){
 	
+	//게시물 수정
 	$("input[value='수정']").bind("click",function(){
 		var boardNo=$(this).data('update');
 		alert(boardNo);
 		self.location="/board/updateBoard?boardNo="+boardNo;
 	})
-
+	
+	//게시물 등록
 	$("input[value='게시물 등록']").bind("click",function(){
 		
 		self.location="http://192.168.0.36:8080/board/addBoard?userNo=${user.userNo}";
 	})
 	
+	//지도로 보기
 	$("input[value='지도로 보기']").bind("click",function(){
 		
 		self.location="/board/listMap";
 	})
 	
-	$(".box").bind("click",function(){
+	//댓글 리스트 불러오기
+	$(".realBox").bind("click",function(){
 		var preBoardNo=$(this).data('target');
 		
 		//#${board.boardNo}modal1 자르기
@@ -164,6 +170,52 @@ $(function(){
 		
 		commentList(boardNo);
 	})
+	
+	//좋아요 등록
+	$("span[name='addLike']").on("click", function(){
+		
+		var userNo="${user.userNo}";
+		var boardNo=$(this).data('boardno');
+		var checkLike=$(this).data('checklike');
+		
+		alert(checkLike);
+		
+		if(checkLike=='0'){
+			$.ajax({
+				
+				url: '/board/json/addLike/'+userNo+'/'+boardNo,
+				type: 'get',
+				success: function(data){
+					
+					if(data==1){
+						alert('등록 성공');
+						$("img[name='"+boardNo+"emptyLike']").attr("src","/common/images/board/fullLike.png");
+					}
+				}
+			})			
+		}//0일때 끝
+		
+		if(checkLike=='1' || checkLike=='2'){
+			$.ajax({
+				
+				url: '/board/json/cancelLike/'+userNo+'/'+boardNo+'/'+checkLike,
+				type: 'get',
+				success: function(data){
+					
+					if(data==2){
+						alert('취소 성공');
+						$("img[name='"+boardNo+"fullLike']").attr("src","/common/images/board/emptyLike.png");
+					}else if(data==1){
+						alert('재등록 성공');
+						$("img[name='"+boardNo+"emptyLike']").attr("src","/common/images/board/fullLike.png");
+					}
+				}
+				
+			})
+		}//1일때 끝
+
+		
+	});
 	
 });
 
@@ -175,11 +227,8 @@ function enter() {
         	$("form").attr("method" , "POST").attr("action" , "/board/listBoard?view=${param.view}").submit();
         }
 }
-//검색 엔터 끝 
 
-
-
-
+//시도 선택
 function fncGetState(){
 	
 	var stateCode = $("select[name=state]").val();
@@ -213,6 +262,8 @@ function fncGetState(){
 		});
 }
 
+
+//시군구 선택
 function fncGetCity(){
 	
 	var stateCode = $("select[name=state]").val();
@@ -247,6 +298,8 @@ function fncGetCity(){
 		});
 }
 
+
+//읍면동 선택
 function fncGetTown(){
 	var stateName = $("select[name=state] option:checked").text();
 	var cityName = $("select[name=city] option:checked").text();
@@ -346,15 +399,36 @@ function fncGetTown(){
 	
 <!-- 썸네일 박스 시작 -->
 <li>	
-	<div class="box" data-toggle="modal" data-target="#${board.boardNo}modal1" data-boardNo="${board.boardNo}">
+	<div class="box">
 		
 	<p>
 	<img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px; display: inline; vertical-align: middle"/>
 	<span style="font-weight: bold; display: inline;">&nbsp;${board.user.userNickname}</span>
-	<span><img src="/common/images/board/emptyLike.png" style="height: 60px; width:60px; display: inline; vertical-align: middle; float:right"/></span>
+	
+	
+	<span name="addLike" data-boardNo="${board.boardNo}" data-checkLike="${board.checkLike}">	
+	<c:choose>
+		<c:when test="${user.userNo !=null}">
+			<c:if test="${user.userNo==board.likeUserNo && board.checkLike=='1'}">
+				<img src="/common/images/board/fullLike.png" style="display: inline; vertical-align: middle; float:right" name="${board.boardNo}fullLike"/>
+			</c:if>
+			
+			<c:if test="${board.likeUserNo==null && board.checkLike=='0'}">
+				<img src="/common/images/board/emptyLike.png" style="display: inline; vertical-align: middle; float:right" name="${board.boardNo}emptyLike"/>
+			</c:if>
+			
+			<c:if test="${user.userNo==board.likeUserNo && board.checkLike=='2'}">
+				<img src="/common/images/board/emptyLike.png" style="display: inline; vertical-align: middle; float:right" name="${board.boardNo}emptyLike"/>
+			</c:if>
+		</c:when>
+	</c:choose>
+	</span>
 	</p>
 
 	
+<!-- 본문 시작 -->
+<div class="realBox" data-toggle="modal" data-target="#${board.boardNo}modal1">
+
 <!-- 지도 시작 -->
 <c:if test="${board.coord !=null}">
 <div id="map${board.boardNo}" style="width:100%;height:350px;"></div>
@@ -417,8 +491,8 @@ function fncGetTown(){
 	<p style="text-align: center;">${board.boardDetailText}</p>
 	<p style="text-align: left; font-size: small">${board.hashTag}</p>
 	
-
-</div>
+</div><!-- 본문 내용 끝 -->	
+</div><!-- box 끝 -->
 </li>
 <!-- 썸네일 박스 끝 -->
 

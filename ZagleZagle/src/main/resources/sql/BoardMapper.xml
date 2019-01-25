@@ -21,6 +21,8 @@
 		<result	property="photo3"	column="photo3"	jdbcType="VARCHAR"/>
 		<result	property="coord"	column="coord"	jdbcType="VARCHAR"/>
 		<result	property="address"	column="address"	jdbcType="VARCHAR"/>
+		<result	property="likeUserNo"	column="like_user_no"	jdbcType="VARCHAR"/>
+		<result	property="checkLike"	column="check_like"	jdbcType="VARCHAR"/>
 	</resultMap>
 	
 	<resultMap type="comment" id="commentSelectMap">
@@ -32,6 +34,14 @@
 		<result property="commentDetailText"	column="comment_detail_text"	jdbcType="VARCHAR"/>
 		<result property="commentRegDate"	column="comment_reg_date"	jdbcType="DATE"/>
 	</resultMap>
+	
+	<resultMap type="like" id="likeSelectMap">
+		<result property="likeNo"	column="like_no"	jdbcType="VARCHAR"/>
+		<result property="user.userNo"	column="user_no"	jdbcType="VARCHAR"/>
+		<result property="board.boardNo"	column="board_no"	jdbcType="VARCHAR"/>
+		<result property="checkLike"	column="check_like"	jdbcType="VARCHAR"/>
+	</resultMap>
+	
 	
 	 
 	 <insert 	id="addBoard"	parameterType="board" >
@@ -48,18 +58,39 @@
 	 </insert>
 	 
 	 
+	 <insert id="addLike" parameterType="like">
+	 	INSERT 
+	 	INTO likes(like_no, board_no, user_no, check_like) 
+	 	VALUES('LK'||seq_lk.nextval,#{board.boardNo},#{user.userNo},#{checkLike})
+	 </insert>
+	 
+	 
+	 
 	<select id="listBoard" parameterType="com.zagle.service.domain.SearchBoard" resultMap="boardSelectMap">
-		SELECT DISTINCT u.user_no, u.profile, u.user_nickname, b.board_no, b.photo1, b.photo2, b.photo3, b.board_detail_text, b.hash_tag, b.user_theme, b.coord, b.board_reg_date, b.board_status, b.address
-		FROM users u, board b
-		WHERE u.user_no=b.user_no
+		SELECT DISTINCT u.user_no, u.profile, u.user_nickname, b.board_no, b.photo1, b.photo2, b.photo3, b.board_detail_text, b.hash_tag, b.user_theme, b.coord, b.board_reg_date, b.board_status, b.address		
+		
+		<if test="loginUserNo!=null">
+			, l.user_no AS like_user_no, NVL(l.check_like,'0') check_like
+		</if>	
+		
+		FROM users u, board b, likes l
+		WHERE u.user_no=b.user_no AND b.board_no=l.board_no(+)
+		
 		<if test="local!=null">
 		AND b.address LIKE '%'||#{local}||'%'
 		</if>
+		
 		<if test="searchKeyword!=null">
 		AND b.hash_tag LIKE '%'||#{searchKeyword}||'%'
 		</if>
+		
+		<if test="loginUserNo!=null">
+		AND l.user_no(+)=#{loginUserNo}
+		</if>
+		
 		ORDER BY b.board_reg_date DESC
 	 </select>
+	 
 	 
 	 <select id="listComment" parameterType="string" resultMap="commentSelectMap">
 	 	SELECT DISTINCT u.user_no, u.profile, u.user_nickname, c.board_no, c.comment_no, c.comment_detail_text, c.comment_reg_date 
@@ -100,6 +131,22 @@
 		</set>
 		WHERE board_no=#{boardNo}
 	</update>
+	
+	
+	<update id="cancelLike" parameterType="like">
+		UPDATE likes
+		<set>
+			<if test="checkLike==1">
+			check_like='2'
+			</if>
+			<if test="checkLike==2">
+			check_like='1'
+			</if>
+		</set>
+		WHERE board_no=#{board.boardNo} 
+		AND user_no=#{user.userNo}
+	</update>
+	
 	
 	<delete id="deleteComment" parameterType="string">
 		DELETE FROM comments

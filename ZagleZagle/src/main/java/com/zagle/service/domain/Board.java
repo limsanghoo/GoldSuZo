@@ -18,6 +18,8 @@ public class Board {
 	private String coord;
 	private String boardStatus;
 	private int likeCount;
+	private int checkLike;
+	private String likeUserNo;
 	
 	public Board() {	
 	}
@@ -125,6 +127,23 @@ public class Board {
 	public void setLikeCount(int likeCount) {
 		this.likeCount = likeCount;
 	}
+	
+
+	public int getCheckLike() {
+		return checkLike;
+	}
+
+	public void setCheckLike(int checkLike) {
+		this.checkLike = checkLike;
+	}	
+
+	public String getLikeUserNo() {
+		return likeUserNo;
+	}
+
+	public void setLikeUserNo(String likeUserNo) {
+		this.likeUserNo = likeUserNo;
+	}
 
 	@Override
 	public String toString() {
@@ -132,7 +151,7 @@ public class Board {
 				+ ", boardDetailText=" + boardDetailText + ", hashTag=" + hashTag
 				+ ", userTheme=" + userTheme + ", boardRegDate=" + boardRegDate + ", photo1=" + photo1 + ", photo2="
 				+ photo2 + ", photo3=" + photo3 + ", address=" + address + ", coord=" + coord + ", boardStatus="
-				+ boardStatus + ", likeCount=" + likeCount + "]";
+				+ boardStatus + ", likeCount=" + likeCount + ", likeUserNo="+likeUserNo+", checkLike="+checkLike+"]";
 	}
 	
 	

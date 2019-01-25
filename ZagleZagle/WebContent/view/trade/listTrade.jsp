@@ -43,6 +43,10 @@ body {
 	background: #333;
 }
 
+.grid{
+   margin-bottom: 0px;
+}
+
 .containerList .box {
     width: 100%;
     margin: 0 0 20px;
@@ -50,21 +54,13 @@ body {
     background: #ffffff;
     overflow: hidden;
     break-inside: avoid;
+    border-radius: 15px;
 }
 .containerList .box img {
     max-width: 100%;
     background-size: cover;
 }
-.containerList .box h2 {
-    margin: 10px 0 0;
-    padding: 0;
-    font-size: 20px;
-}
-.containerList .box p {
-    margin: 0;
-    padding: 0 0 10px;
-    font-size: 16px;
-}
+
 
 #goAddSell{
     	position: static;
@@ -104,10 +100,10 @@ $(function(){
 	$("input[value='판매물품 등록']").bind("click",function(){
 		self.location="/trade/addSell";
 	})
-	
-	$("input[value='지도로 보기']").bind("click",function(){
-		
-		self.location="/board/listMap";
+
+	$(".box").bind("click",function(){
+		var sellNo=$(this).data('sellno');
+		self.location="/trade/getSell?sellNo="+sellNo;
 	})
 	
 });
@@ -154,17 +150,24 @@ function enter() {
 <!-- 썸네일 박스 시작 -->
 	
 <li>
-	<div class="box" data-toggle="modal" data-target="#${sell.sellNo}modal1">
+<!-- 	<div class="box" data-toggle="modal" data-target="#${sell.sellNo}modal1"> -->
+<div class="box" data-sellno="${sell.sellNo}">
 		
 	
-	<img src="/common/images/profile/${sell.seller.profile}" style="height: 60px; width:60px; border-radius: 70px;" align="middle"/>
-		${sell.seller.userNickname}
+	<p>
+	<img src="/common/images/profile/${sell.seller.profile}" style="height: 60px; width:60px; border-radius: 70px; display: inline; vertical-align: middle"/>
+	<span style="font-weight: bold; display: inline;">&nbsp;${sell.seller.userNickname}</span>
+	<span style="float:right">
+	<c:if test="${sell.sellStyle == 10}">
+	<img src="/common/images/trade/giveaway-filled.png" style="height: 80%; display: inline; vertical-align: middle; float:right"/>
+	</c:if>
+	<c:if test="${sell.sellStyle == 20}">
+	<img src="/common/images/trade/transit-filled.png" style="height: 80%; display: inline; vertical-align:text-top; float:right;"/>
+	</c:if>
+	</span>
+	</p>
 
-	
-
-<c:if test="${sell.sellPhoto1 !=null}">
 	<div><img src="${sell.sellPhoto1}" style="width:100%;" align="middle"/></div>
-</c:if>	
 
 	<p align="center" style="font-size: small">${sell.sellName}</p>
 	<p align="center">${sell.sellText}</p>
@@ -175,89 +178,87 @@ function enter() {
 </li>
 
 		
-<!-- 모달1 시작 -->
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="${sell.sellNo}modal1">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
+<!-- <!-- 모달1 시작 --> -->
+<%-- <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="${sell.sellNo}modal1"> --%>
+<!--   <div class="modal-dialog" role="document"> -->
+<!--     <div class="modal-content"> -->
     
-	<!-- 모달1 헤더 시작 -->
-      <div class="modal-header">
-      <div class="row">
+<!-- 	<!-- 모달1 헤더 시작 --> -->
+<!--       <div class="modal-header"> -->
+<!--       <div class="row"> -->
       
-      	<div class="col-md-11 col-md-offset-1">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        </div>
+<!--       	<div class="col-md-11 col-md-offset-1"> -->
+<!--         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+<!--         </div> -->
         
-        <h4 class="modal-title" id="gridSystemModalLabel">
-        <div class="col-md-4">
-        <img src="/common/images/profile/${sell.seller.profile}" style="height: 60px; width:60px;" align="middle"/>
-		${sell.seller.userNickname}
-		</div>
+<!--         <h4 class="modal-title" id="gridSystemModalLabel"> -->
+<!--         <div class="col-md-4"> -->
+<%--         <img src="/common/images/profile/${sell.seller.profile}" style="height: 60px; width:60px;" align="middle"/> --%>
+<%-- 		${sell.seller.userNickname} --%>
+<!-- 		</div> -->
 		
-		<!-- 내 글만 수정, 삭제 -->
-		<c:if test="${user.userNo==sell.seller.userNo}">
-		<div class="col-md-4 col-md-offset-4">
-		<input type="button" value="수정" data-update="${sell.sellNo}"/>
-        <div class="btn btn-primary" data-toggle="modal" data-target="#${sell.sellNo}modal2">삭제</div>
-        </div>
-        </c:if>
+<!-- 		<!-- 내 글만 수정, 삭제 --> -->
+<%-- 		<c:if test="${user.userNo==sell.seller.userNo}"> --%>
+<!-- 		<div class="col-md-4 col-md-offset-4"> -->
+<%-- 		<input type="button" value="수정" data-update="${sell.sellNo}"/> --%>
+<!--         <div class="btn btn-primary" data-toggle="modal" data-target="#${sell.sellNo}modal2">삭제</div> -->
+<!--         </div> -->
+<%--         </c:if> --%>
         
-        </h4>
-        </div>
-      </div>
-     <!-- 모달1 헤더 끝 -->
+<!--         </h4> -->
+<!--         </div> -->
+<!--       </div> -->
+<!--      모달1 헤더 끝 -->
       
-     <!-- 모달1 바디 시작 -->
-      <div class="modal-body" style="text-align: center">  
+<!--      모달1 바디 시작 -->
+<!--       <div class="modal-body">   -->
+<!-- 		<div> -->
+<%-- 			<c:if test="${sell.sellPhoto1 !=null}"> --%>
+<%-- 			<div><img src="${sell.sellPhoto1}" style="width: 500px"/></div> --%>
+<!-- 			<br/> -->
+<%-- 			</c:if> --%>
 
-		<div>
-			<c:if test="${sell.sellPhoto1 !=null}">
-			<div><img src="${sell.sellPhoto1}" style="width: 500px"/></div>
-			<br/>
-			</c:if>
-
-			<c:if test="${sell.sellPhoto2 !=null}">
-			<div><img src="${sell.sellPhoto2}" style="width: 500px"/></div>
-			<br/>
-			</c:if>
+<%-- 			<c:if test="${sell.sellPhoto2 !=null}"> --%>
+<%-- 			<div><img src="${sell.sellPhoto2}" style="width: 500px"/></div> --%>
+<!-- 			<br/> -->
+<%-- 			</c:if> --%>
 	
-			<c:if test="${sell.sellPhoto3 !=null}">
-			<div><img src="${sell.sellPhoto3}" style="width: 500px"/></div>
-			<br/>
-			</c:if>
-		</div>
+<%-- 			<c:if test="${sell.sellPhoto3 !=null}"> --%>
+<%-- 			<div><img src="${sell.sellPhoto3}" style="width: 500px"/></div> --%>
+<!-- 			<br/> -->
+<%-- 			</c:if> --%>
+<!-- 		</div> -->
+<%-- 		${sell.sellText} --%>
+<!--       </div> -->
+<!--       모달1 바디 끝 -->
+<!--       모달1 푸터 시작 -->
+<!--       <div class="modal-footer"> -->
+<!-- <div class="btn btn-primary" data-toggle="modal" data-target="#${sell.sellNo}modal2">삭제</div> -->
+<!--       </div> -->
+<!--       모달1 푸터 끝 -->
+<!--     </div>/.modal-content -->
+<!--   </div>/.modal-dialog -->
+<!-- </div>/.modal -->
+<!-- <!-- 모달1 끝 --> -->
 
-		<p>
-			${sell.sellText}
-		</p>
-     
-       
-      </div>
-      <!-- 모달1 바디 끝 -->
-      
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<!-- 모달1 끝 -->
-
-<!-- 모달2 시작 -->
-<div class="modal"  aria-hidden="true" style="display: none; z-index: 1060;" id="${sell.sellNo}modal2">
-    	<div class="modal-dialog modal-md">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h4 class="modal-title"></h4>
-            </div><div class="container"></div>
-            <div class="modal-body">
-             	삭제하시겠습니까?
-            </div>
-            <div class="modal-footer">
-              <a href="/board/deleteBoard?boardNo=${sell.sellNo}" class="btn btn-primary">삭제</a>
-            </div>
-          </div>
-        </div>
-</div>
-<!-- 모달2 끝 -->
+<!-- <!-- 모달2 시작 --> -->
+<%-- <div class="modal"  aria-hidden="true" style="display: none; z-index: 1060;" id="${sell.sellNo}modal2"> --%>
+<!--     	<div class="modal-dialog modal-md"> -->
+<!--           <div class="modal-content"> -->
+<!--             <div class="modal-header"> -->
+<!--               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> -->
+<!--               <h4 class="modal-title"></h4> -->
+<!--             </div><div class="container"></div> -->
+<!--             <div class="modal-body"> -->
+<!--              	삭제하시겠습니까? -->
+<!--             </div> -->
+<!--             <div class="modal-footer"> -->
+<%--               <a href="/board/deleteBoard?boardNo=${sell.sellNo}" class="btn btn-primary">삭제</a> --%>
+<!--             </div> -->
+<!--           </div> -->
+<!--         </div> -->
+<!-- </div> -->
+<!-- <!-- 모달2 끝 --> -->
 
 </c:forEach>     
 </ul> 
