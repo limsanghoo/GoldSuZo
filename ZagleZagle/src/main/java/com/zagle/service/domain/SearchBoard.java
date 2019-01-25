@@ -9,6 +9,7 @@ public class SearchBoard {
 	private int startRowNum;
 	private int searchLike;
 	private String local;
+	private String loginUserNo;
 	
 	public SearchBoard() {
 	}
@@ -67,13 +68,21 @@ public class SearchBoard {
 
 	public void setLocal(String local) {
 		this.local = local;
+	}	
+
+	public String getLoginUserNo() {
+		return loginUserNo;
+	}
+
+	public void setLoginUserNo(String loginUserNo) {
+		this.loginUserNo = loginUserNo;
 	}
 
 	@Override
 	public String toString() {
 		return "SearchBoard [currentPage=" + currentPage + ", searchKeyword=" + searchKeyword + ", pageSize=" + pageSize
 				+ ", endRowNum=" + endRowNum + ", startRowNum=" + startRowNum + ", searchLike=" + searchLike
-				+ ", local="+local+"]";
+				+ ", local="+local+", loginUserNo="+loginUserNo+"]";
 	}
 	
 	

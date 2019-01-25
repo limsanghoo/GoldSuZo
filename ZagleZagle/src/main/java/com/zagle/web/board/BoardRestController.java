@@ -31,6 +31,7 @@ import com.zagle.common.Search;
 import com.zagle.service.board.BoardService;
 import com.zagle.service.domain.Board;
 import com.zagle.service.domain.Comment;
+import com.zagle.service.domain.Like;
 import com.zagle.service.domain.Local;
 import com.zagle.service.user.UserService;
 
@@ -163,20 +164,6 @@ public class BoardRestController {
 	      
 	      return list;
 	   }
-
-	   
-	   /*댓글 수정 : start
-	   @RequestMapping(value="/rest/updateComment", method=RequestMethod.POST)
-	   public int updateComment(@ModelAttribute("comment") Comment comment) throws Exception{
-	      
-	      System.out.println("/rest/updateComment : POST");
-	      System.out.println("comment : "+comment);
-	      
-	      commentService.updateComment(comment);
-	      
-	      return 1;
-	   }
-	   댓글 수정 : start*/
 	   
 
 	   @RequestMapping(value="json/deleteComment/{commentNo}", method=RequestMethod.GET)
@@ -211,6 +198,22 @@ public class BoardRestController {
 	      return 1;
 	   }*/
 
+	   @RequestMapping(value="json/addLike/{userNo}/{boardNo}", method=RequestMethod.GET)
+	   public int addLike(@PathVariable String userNo, @PathVariable String boardNo) throws Exception{
+		   
+		   System.out.println("/addLike");
+		   System.out.println("userNo : "+userNo);
+		   System.out.println("boardNo : "+boardNo);
+		   
+		   Like like=new Like();
+		   like.setBoard(boardService.getBoard(boardNo));
+		   like.setUser(userService.getUser2(userNo));
+		   like.setCheckLike("1");//좋아요 등록 상태
+		   
+		   //boardService.addLike(like);
+		   
+		   return 1;
+	   }
 
 	
 	
