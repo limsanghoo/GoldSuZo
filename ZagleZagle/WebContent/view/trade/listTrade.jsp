@@ -43,6 +43,10 @@ body {
 	background: #333;
 }
 
+.grid{
+   margin-bottom: 0px;
+}
+
 .containerList .box {
     width: 100%;
     margin: 0 0 20px;
@@ -50,21 +54,13 @@ body {
     background: #ffffff;
     overflow: hidden;
     break-inside: avoid;
+    border-radius: 15px;
 }
 .containerList .box img {
     max-width: 100%;
     background-size: cover;
 }
-.containerList .box h2 {
-    margin: 10px 0 0;
-    padding: 0;
-    font-size: 20px;
-}
-.containerList .box p {
-    margin: 0;
-    padding: 0 0 10px;
-    font-size: 16px;
-}
+
 
 #goAddSell{
     	position: static;
@@ -157,14 +153,20 @@ function enter() {
 	<div class="box" data-toggle="modal" data-target="#${sell.sellNo}modal1">
 		
 	
-	<img src="/common/images/profile/${sell.seller.profile}" style="height: 60px; width:60px; border-radius: 70px;" align="middle"/>
-		${sell.seller.userNickname}
+	<p>
+	<img src="/common/images/profile/${sell.seller.profile}" style="height: 60px; width:60px; border-radius: 70px; display: inline; vertical-align: middle"/>
+	<span style="font-weight: bold; display: inline;">&nbsp;${sell.seller.userNickname}</span>
+	<span style="float:right">
+	<c:if test="${sell.sellStyle == 10}">
+	<img src="/common/images/trade/giveaway-filled.png" style="height: 80%; display: inline; vertical-align: middle; float:right"/>
+	</c:if>
+	<c:if test="${sell.sellStyle == 20}">
+	<img src="/common/images/trade/transit-filled.png" style="height: 80%; display: inline; vertical-align:text-top; float:right;"/>
+	</c:if>
+	</span>
+	</p>
 
-	
-
-<c:if test="${sell.sellPhoto1 !=null}">
 	<div><img src="${sell.sellPhoto1}" style="width:100%;" align="middle"/></div>
-</c:if>	
 
 	<p align="center" style="font-size: small">${sell.sellName}</p>
 	<p align="center">${sell.sellText}</p>
@@ -208,8 +210,7 @@ function enter() {
      <!-- 모달1 헤더 끝 -->
       
      <!-- 모달1 바디 시작 -->
-      <div class="modal-body" style="text-align: center">  
-
+      <div class="modal-body">  
 		<div>
 			<c:if test="${sell.sellPhoto1 !=null}">
 			<div><img src="${sell.sellPhoto1}" style="width: 500px"/></div>
@@ -226,15 +227,14 @@ function enter() {
 			<br/>
 			</c:if>
 		</div>
-
-		<p>
-			${sell.sellText}
-		</p>
-     
-       
+		${sell.sellText}
       </div>
       <!-- 모달1 바디 끝 -->
-      
+      <!-- 모달1 푸터 시작 -->
+      <div class="modal-footer">
+<div class="btn btn-primary" data-toggle="modal" data-target="#${sell.sellNo}modal2">삭제</div>
+      </div>
+      <!-- 모달1 푸터 끝 -->
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
