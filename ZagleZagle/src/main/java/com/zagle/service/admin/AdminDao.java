@@ -50,10 +50,15 @@ public interface AdminDao {
 	///블라인드 코맨트 삭제
 	///public void deleteBlind2(Comment commnet) throws Exception;
 	
+	public Report getReport(String userNo) throws Exception;
 	
-	
-	///
+	///////
 	public int getTotalCount(SearchAdmin search) throws Exception ;
+	
+	//////
+	public int getTotalCount2(SearchAdmin search) throws Exception;
+	
+	public int getTotalCount3(SearchAdmin search) throws Exception;
 	
 	////블랙리스트 추가
 	

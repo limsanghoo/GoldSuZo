@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-
+import com.zagle.service.domain.SearchAdmin;
 import com.zagle.service.domain.User;
 import com.zagle.service.user.UserDao;
 
@@ -49,7 +49,7 @@ public class UserDaoImpl implements UserDao {
 	}
 	
 	// �Խ��� Page ó���� ���� ��ü Row(totalCount)  return
-	//public int getTotalCount(Search search) throws Exception {
-	//	return sqlSession.selectOne("UserMapper.getTotalCount", search);
-	//}
+	public int getTotalCount(SearchAdmin search) throws Exception {
+	return sqlSession.selectOne("UserMapper.getTotalCount", search);
+	}
 }

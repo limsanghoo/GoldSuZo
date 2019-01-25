@@ -29,6 +29,8 @@ public interface AdminService {
 	
 	public void updateBlind(Blind blind) throws Exception;
 	
+	public Report getReport(String userNo) throws Exception;
+	
 	//public void addBlind2(Comment comment) throws Exception;
 	
 	//public void cancelBlind(Blind blind) throws Exception;

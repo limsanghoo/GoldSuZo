@@ -38,9 +38,11 @@ public class AdminServiceImpl implements AdminService {
 	public Map<String, Object> listBlackObject(SearchAdmin search) throws Exception {
 		
 		List<User> list = adminDao.listBlackObject(search);
+		int totalCount = adminDao.getTotalCount2(search);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
+		map.put("totalCount", new Integer(totalCount));
 		
 		return map;
 	}
@@ -49,8 +51,11 @@ public class AdminServiceImpl implements AdminService {
 	public Map<String, Object> listBlackList(SearchAdmin search) throws Exception {
 		
 		List<BlackList> list = adminDao.listBlackList(search);
+		int totalCount = adminDao.getTotalCount3(search);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
+		map.put("totalCount",  new Integer(totalCount));
 		
 		return map;
 	}
@@ -71,9 +76,11 @@ public class AdminServiceImpl implements AdminService {
 	public Map<String, Object> listUser(SearchAdmin search) throws Exception {
 		
 		List<User> list = adminDao.listUser(search);
+		int totalCount = adminDao.getTotalCount(search);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
+		map.put("totalCount", new Integer(totalCount));
 		
 		return map;
 	}
@@ -86,6 +93,11 @@ public class AdminServiceImpl implements AdminService {
 	public void updateBlind(Blind blind) throws Exception {
 		
 		adminDao.updateBlind(blind);
+	}
+	
+	public Report getReport(String userNo) throws Exception {
+		
+		return adminDao.getReport(userNo);
 	}
 	
 //	@Override
