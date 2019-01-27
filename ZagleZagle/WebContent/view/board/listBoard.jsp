@@ -135,6 +135,24 @@ body {
 	display: none;
 }
 
+#mydiv {
+  position: absolute;
+  z-index: 9;
+  background-color: #f1f1f1;
+  text-align: center;
+  background-color: rgba(0,0,0,0.1);
+  height: 800px;
+  width: 600px;
+}
+
+#mydivheader {
+  padding: 10px;
+  cursor: move;
+  z-index: 10;
+  background-color: rgba(0,0,0,0.3);
+  color: #fff;
+}
+
 
 </style>
 <script type="text/javascript">
@@ -315,7 +333,68 @@ function fncGetTown(){
 }
 
 
+$(function(){
+    dragElement(document.getElementById("mydiv"));
+    function dragElement(elmnt) {
+var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+if (document.getElementById(elmnt.id + "header")) {
+/* if present, the header is where you move the DIV from:*/
+document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+} else {
+/* otherwise, move the DIV from anywhere inside the DIV:*/
+elmnt.onmousedown = dragMouseDown;
+}
 
+function dragMouseDown(e) {
+e = e || window.event;
+e.preventDefault();
+// get the mouse cursor position at startup:
+pos3 = e.clientX;
+pos4 = e.clientY;
+document.onmouseup = closeDragElement;
+// call a function whenever the cursor moves:
+document.onmousemove = elementDrag;
+}
+
+function elementDrag(e) {
+e = e || window.event;
+e.preventDefault();
+// calculate the new cursor position:
+pos1 = pos3 - e.clientX;
+pos2 = pos4 - e.clientY;
+pos3 = e.clientX;
+pos4 = e.clientY;
+// set the element's new position:
+elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+}
+
+function closeDragElement() {
+/* stop moving when mouse button is released:*/
+document.onmouseup = null;
+document.onmousemove = null;
+}
+}
+ })
+ 
+ 
+ $(function(){
+         $("#btn").hide();
+         $("#btn:contains('숨기기')").on("click",function(){
+            $("#mydiv").css("display","none");
+            $(this).hide();
+            $("#btn2").show();
+         });
+         
+      });
+      $(function(){
+
+         $("#btn2:contains('보이기')").on("click",function(){
+            $("#mydiv").css("display","inline");
+            $(this).hide();
+            $("#btn").show();
+         });
+      });
 
 </script>
 
@@ -330,12 +409,21 @@ function fncGetTown(){
 
 <jsp:include page="/view/layout/toolbar.jsp"/>
 
+<div id="mydiv" style="display: none;">
+   <div id="mydivheader">-여기를 눌러 이동-</div>
+   <iframe src="http://192.168.0.36:8080/chat/getChat" align="right" style="height:100%; width: 100%;" frameborder="0" scrolling="no"></iframe>
+</div>
+
 
 <form name="listBoard">
 
 
 
 <div id="selectMenu">
+
+
+<button id="btn">숨기기</button>
+<button id="btn2">보이기</button>
 
 <a href="/board/testUser">
 <input type="button" value="세션">
@@ -388,8 +476,9 @@ function fncGetTown(){
 
 <br/>
 
+
  <div class="containerList">
- 
+
  <ul class="grid effect-2" id="grid">
  
  <c:forEach var="board" items="${boardList}">
@@ -398,6 +487,8 @@ function fncGetTown(){
 	<c:if test="${board.boardStatus=='1'}"><!-- 정상 게시물만 보여주기 -->
 	
 <!-- 썸네일 박스 시작 -->
+
+
 <li>	
 	<div class="box">
 		
@@ -410,15 +501,15 @@ function fncGetTown(){
 	<c:choose>
 		<c:when test="${user.userNo !=null}">
 			<c:if test="${user.userNo==board.likeUserNo && board.checkLike=='1'}">
-				<img src="/common/images/board/fullLike.png" style="display: inline; vertical-align: middle; float:right" name="${board.boardNo}fullLike"/>
+				<img src="/common/images/board/fullLike.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}fullLike"/>
 			</c:if>
 			
 			<c:if test="${board.likeUserNo==null && board.checkLike=='0'}">
-				<img src="/common/images/board/emptyLike.png" style="display: inline; vertical-align: middle; float:right" name="${board.boardNo}emptyLike"/>
+				<img src="/common/images/board/emptyLike.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}emptyLike"/>
 			</c:if>
 			
 			<c:if test="${user.userNo==board.likeUserNo && board.checkLike=='2'}">
-				<img src="/common/images/board/emptyLike.png" style="display: inline; vertical-align: middle; float:right" name="${board.boardNo}emptyLike"/>
+				<img src="/common/images/board/emptyLike.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}emptyLike"/>
 			</c:if>
 		</c:when>
 	</c:choose>
@@ -614,7 +705,9 @@ function fncGetTown(){
   
 </div><!-- /container -->
 </form>
-        
+
+
+  
     </body>
 </html>
 

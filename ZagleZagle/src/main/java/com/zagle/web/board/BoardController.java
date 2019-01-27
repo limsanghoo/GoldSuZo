@@ -381,7 +381,7 @@ public class BoardController {
 		
 		session.setAttribute("user", testUser);
 		
-		return "redirect:/board/listBoard?view=all";
+		return "redirect:/board/listBoard?view=town";
 	}
 
 }
