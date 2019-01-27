@@ -42,6 +42,7 @@ public class ChatController {
 			ip=request.getRemoteAddr();
 		}
         System.out.println(locale+" "+formattedDate+" "+ip+"유저 채팅방입장");
+        model.addAttribute("room", request.getParameter("room"));
         model.addAttribute("serverTime", formattedDate );
 
         return "forward:/view/chat/chat.jsp";
