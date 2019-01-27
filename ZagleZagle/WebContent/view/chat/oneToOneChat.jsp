@@ -31,7 +31,7 @@ body,html{
 			background: #7F7FD5;
 	       background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
 	        background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
-	        background: url("https://st.depositphotos.com/1011596/4159/i/950/depositphotos_41597777-stock-photo-hand-made-blank-paper-texture.jpg") no-repeat center center fixed; -webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;
+	        background: url("https://i.pinimg.com/345x/e5/39/a0/e539a00e8324eba1bac132dae05152d5.jpg") no-repeat center center fixed; -webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;
 		}
 
 		.chat{
