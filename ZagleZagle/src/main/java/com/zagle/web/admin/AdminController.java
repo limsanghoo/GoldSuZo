@@ -130,6 +130,16 @@ System.out.println(map.get("totalCount"));
 		
 		return modelAndView;
 	}
+	@RequestMapping(value="handleReport", method=RequestMethod.GET)
+	public ModelAndView handelReport() throws Exception {
+		
+		System.out.println("/admin/handelReport : GET ");
+		
+	 ModelAndView modelAndView = new ModelAndView();
+	 modelAndView.setViewName("/view/admin/handleReport.jsp");
+	 
+	 return modelAndView;
+	}
 	
 }
 

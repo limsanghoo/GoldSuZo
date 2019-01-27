@@ -62,6 +62,11 @@
 				self.location = "/user/logout"
 			});
 			
+			$("#handleReport").on("click" , function() {
+				
+				self.location = "/admin/handleReport"
+			});
+			
 			
 		
 		}); 
@@ -99,9 +104,9 @@
                             <li id="listBlackList"><a href="#"><i class="fa fa-edit"></i>블랙리스트 목록</a></li>
                         </ul>
                     </li>
-                    <li><a href="bootstrap.html"><i class="fa fa-magic"></i> Bootstrap Elements</a></li>
+                    <li id="handleReport"><a href="#"><i class="fa fa-magic"></i>신고 처리</a></li>
                     <li class="nav nav-list nav-list-expandable">
-                        <a><i class="fa fa-key"></i> Collapsed Menu Item <span class="caret"></span></a>
+                        <a><i class="fa fa-key"></i> Collapsed Menu Item<span class="caret"></span></a>
                         <ul class="nav navbar-nav">
                             <li><a href="#">Sub Item 1</a></li>
                             <li><a href="#">Sub Item 2</a></li>
