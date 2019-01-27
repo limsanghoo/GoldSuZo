@@ -258,7 +258,23 @@ body,html{
 					   color-stop(.5, transparent), to(transparent));
 }
 
+#mydiv {
+  position: absolute;
+  z-index: 9;
+  background-color: #f1f1f1;
+  text-align: center;
+  background-color: rgba(0,0,0,0.1);
+  height: 800px;
+  width: 600px;
+}
 
+#mydivheader {
+  padding: 10px;
+  cursor: move;
+  z-index: 10;
+  background-color: rgba(0,0,0,0.3);
+  color: #fff;
+}
 input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
 #mdStart {position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
 </style>
@@ -597,7 +613,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 		$(function(){
 			$("#btn").hide();
 			$("#btn:contains('숨기기')").on("click",function(){
-				$("iframe").css("display","none");
+				$("#mydiv").css("display","none");
 				$(this).hide();
 				$("#btn2").show();
 			});
@@ -606,114 +622,65 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 		$(function(){
 
 			$("#btn2:contains('보이기')").on("click",function(){
-				$("iframe").css("display","inline");
+				$("#mydiv").css("display","inline");
 				$(this).hide();
 				$("#btn").show();
 			});
 		});
 		
 	
-	
-
-		function getLocation() {
-			  var output = document.getElementById("out");
-
-			  if (!navigator.geolocation){
-			    output.innerHTML = "<p>사용자의 브라우저는 지오로케이션을 지원하지 않습니다.</p>";
-			    return;
-			  }
-
-			  function success(position) {
-			    var latitude  = position.coords.latitude;
-			    var longitude = position.coords.longitude;
-
-			    output.innerHTML = '<p>위도 : ' + latitude + '° <br>경도 : ' + longitude + '°</p>';
-
-			    var img = new Image();
-			    img.src = "http://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
-
-			    output.appendChild(img);
-			  };
-
-			  function error() {
-			    output.innerHTML = "사용자의 위치를 찾을 수 없습니다.";
-			  };
-
-			  output.innerHTML = "<p>Locating…</p>";
-
-			  navigator.geolocation.getCurrentPosition(success, error);
-			}
-			
 			$(function(){
-				function prompt(window, pref, message, callback) {
-				    var branch = Components.classes["@mozilla.org/preferences-service;1"]
-				                           .getService(Components.interfaces.nsIPrefBranch);
+				dragElement(document.getElementById("mydiv"));
+				function dragElement(elmnt) {
+	  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+	  if (document.getElementById(elmnt.id + "header")) {
+	    /* if present, the header is where you move the DIV from:*/
+	    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+	  } else {
+	    /* otherwise, move the DIV from anywhere inside the DIV:*/
+	    elmnt.onmousedown = dragMouseDown;
+	  }
 
-				    if (branch.getPrefType(pref) === branch.PREF_STRING) {
-				        switch (branch.getCharPref(pref)) {
-				        case "always":
-				            return callback(true);
-				        case "never":
-				            return callback(false);
-				        }
-				    }
+	  function dragMouseDown(e) {
+	    e = e || window.event;
+	    e.preventDefault();
+	    // get the mouse cursor position at startup:
+	    pos3 = e.clientX;
+	    pos4 = e.clientY;
+	    document.onmouseup = closeDragElement;
+	    // call a function whenever the cursor moves:
+	    document.onmousemove = elementDrag;
+	  }
 
-				    var done = false;
+	  function elementDrag(e) {
+	    e = e || window.event;
+	    e.preventDefault();
+	    // calculate the new cursor position:
+	    pos1 = pos3 - e.clientX;
+	    pos2 = pos4 - e.clientY;
+	    pos3 = e.clientX;
+	    pos4 = e.clientY;
+	    // set the element's new position:
+	    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+	    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+	  }
 
-				    function remember(value, result) {
-				        return function() {
-				            done = true;
-				            branch.setCharPref(pref, value);
-				            callback(result);
-				        }
-				    }
-
-				    var self = window.PopupNotifications.show(
-				        window.gBrowser.selectedBrowser,
-				        "geolocation",
-				        message,
-				        "geo-notification-icon",
-				        {
-				            label: "Share Location",
-				            accessKey: "S",
-				            callback: function(notification) {
-				                done = true;
-				                callback(true);
-				            }
-				        }, [
-				            {
-				                label: "Always Share",
-				                accessKey: "A",
-				                callback: remember("always", true)
-				            },
-				            {
-				                label: "Never Share",
-				                accessKey: "N",
-				                callback: remember("never", false)
-				            }
-				        ], {
-				            eventCallback: function(event) {
-				                if (event === "dismissed") {
-				                    if (!done) callback(false);
-				                    done = true;
-				                    window.PopupNotifications.remove(self);
-				                }
-				            },
-				            persistWhileVisible: true
-				        });
-				}
-
-				prompt(window,
-				       "extensions.foo-addon.allowGeolocation",
-				       "Foo Add-on wants to know your location.",
-				       function callback(allowed) { alert(allowed); });
+	  function closeDragElement() {
+	    /* stop moving when mouse button is released:*/
+	    document.onmouseup = null;
+	    document.onmousemove = null;
+	  }
+	}
 			})
 			
 	</script>
 </head>
 <body>
 
-<iframe src="http://192.168.0.25:8080/board/listBoard" align="left" style="display:none; height:100%; width: 30%;"></iframe>
+<div id="mydiv" style="display: none;">
+	<div id="mydivheader">-여기를 눌러 이동-</div>
+	<iframe src="http://192.168.0.25:8080/board/listBoard" align="right" style="height:100%; width: 100%;" frameborder="0" scrolling="no"></iframe>
+</div>
 <button id="btn">숨기기</button>
 <button id="btn2">보이기</button>
 <button id="btn_one" style="display: none;" value=""></button>
