@@ -417,7 +417,7 @@ document.onmousemove = null;
 
 <div id="mydiv" style="display: none;">
    <div id="mydivheader">-여기를 눌러 이동-</div>
-   <iframe src="http://192.168.0.36:8080/chat/getChat?room=${user.userAddr}" align="right" style="height:100%; width: 100%;" frameborder="0" scrolling="no"></iframe>
+   <iframe src="/chat/getChat?room=${user.userAddr}" align="right" style="height:100%; width: 100%;" frameborder="0" scrolling="no"></iframe>
 </div>
 
 <div class="row">
