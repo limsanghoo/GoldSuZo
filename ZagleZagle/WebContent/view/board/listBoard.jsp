@@ -409,21 +409,28 @@ document.onmousemove = null;
 
 <jsp:include page="/view/layout/toolbar.jsp"/>
 
-<div id="mydiv" style="display: none;">
-   <div id="mydivheader">-여기를 눌러 이동-</div>
-   <iframe src="http://192.168.0.36:8080/chat/getChat" align="right" style="height:100%; width: 100%;" frameborder="0" scrolling="no"></iframe>
-</div>
 
-
-<form name="listBoard">
-
-
-
-<div id="selectMenu">
-
-
+<!-- <div style="padding-top: 150px;">
 <button id="btn">숨기기</button>
 <button id="btn2">보이기</button>
+</div> -->
+
+<div id="mydiv" style="display: none;">
+   <div id="mydivheader">-여기를 눌러 이동-</div>
+   <iframe src="/chat/getChat?room=${user.userAddr}" align="right" style="height:100%; width: 100%;" frameborder="0" scrolling="no"></iframe>
+</div>
+
+<div class="row">
+
+<div class="col-sm-1">
+<button id="btn" style="margin-top: 200px;">숨기기</button>
+<button id="btn2" style="margin-top: 200px;">보이기</button>
+</div>
+
+<div class="col-sm-11">
+<form name="listBoard">
+
+<div id="selectMenu">
 
 <a href="/board/testUser">
 <input type="button" value="세션">
@@ -705,8 +712,8 @@ document.onmousemove = null;
   
 </div><!-- /container -->
 </form>
-
-
+</div><!-- 10 끝 -->
+</div><!-- row 끝 -->
   
     </body>
 </html>
