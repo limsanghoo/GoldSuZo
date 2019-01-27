@@ -612,12 +612,12 @@ document.onmousemove = null;
       <div class="row">
       
       	<div class="col-md-11 col-md-offset-1">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span aria-hidden="true" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: 30px; margin-right:5px; display: inline;">&times;</span>       
         </div>
         
         <h4 class="modal-title" id="gridSystemModalLabel">
-        <div class="col-md-4">
-        <img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px;" align="middle; "/>
+        <div class="col-md-4" style="display: inline;">
+        <img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px;" align="middle;"/>
 		${board.user.userNickname}
 		</div>
 		
