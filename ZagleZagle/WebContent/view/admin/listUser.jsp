@@ -86,15 +86,29 @@
 								},
 								success : function(JSONData , status) {
 									alert(JSONData.userName)
-
+									
+									var snsNo = JSONData.snsNo
+									alert(snsNo)
+									
+									if(snsNo.startsWith("K")) {
+										snsNo = "카카오"
+									}else if(snsNo.startsWith("N")) {
+										snsNo = "네이버"
+									}else {
+										snsNo = "구글"
+									}
+									
 									var displayValue = "<h6>"
-																+"   이름 : "+JSONData.userName+"<br/>"
 																+"   닉네임 : "+JSONData.userNickname+"<br/>"
-																+"   소셜No : "+JSONData.snsNo+"<br/>"
+																+"   생일 : "+JSONData.userBirth+"<br/>"
+																+"   성별 : "+JSONData.userSex+"<br/>"
+																+" SNS종류 :"+snsNo+"<br/>"
 																+"</h6>";
 									$("h6").remove();
 									$( "#"+userNo+"" ).html(displayValue);
 								}
+								
+								
 						});
 						////////////////////////////////////////////////////////////////////////////////////////////
 					
