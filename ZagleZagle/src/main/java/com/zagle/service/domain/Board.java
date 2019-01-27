@@ -18,8 +18,15 @@ public class Board {
 	private String coord;
 	private String boardStatus;
 	private int likeCount;
-	private int checkLike;
+	
+	private String checkLike;
 	private String likeUserNo;
+	
+	private String checkScrap;
+	private String scrapUserNo;
+	
+	
+
 	
 	public Board() {	
 	}
@@ -129,11 +136,11 @@ public class Board {
 	}
 	
 
-	public int getCheckLike() {
+	public String getCheckLike() {
 		return checkLike;
 	}
 
-	public void setCheckLike(int checkLike) {
+	public void setCheckLike(String checkLike) {
 		this.checkLike = checkLike;
 	}	
 
@@ -144,6 +151,23 @@ public class Board {
 	public void setLikeUserNo(String likeUserNo) {
 		this.likeUserNo = likeUserNo;
 	}
+	
+
+	public String getCheckScrap() {
+		return checkScrap;
+	}
+
+	public void setCheckScrap(String checkScrap) {
+		this.checkScrap = checkScrap;
+	}
+
+	public String getScrapUserNo() {
+		return scrapUserNo;
+	}
+
+	public void setScrapUserNo(String scrapUserNo) {
+		this.scrapUserNo = scrapUserNo;
+	}
 
 	@Override
 	public String toString() {
@@ -151,7 +175,7 @@ public class Board {
 				+ ", boardDetailText=" + boardDetailText + ", hashTag=" + hashTag
 				+ ", userTheme=" + userTheme + ", boardRegDate=" + boardRegDate + ", photo1=" + photo1 + ", photo2="
 				+ photo2 + ", photo3=" + photo3 + ", address=" + address + ", coord=" + coord + ", boardStatus="
-				+ boardStatus + ", likeCount=" + likeCount + ", likeUserNo="+likeUserNo+", checkLike="+checkLike+"]";
+				+ boardStatus + ", likeCount=" + likeCount + ", likeUserNo="+likeUserNo+", checkLike="+checkLike+", checkScrap="+checkScrap+", scrapUserNo="+scrapUserNo+"]";
 	}
 	
 	

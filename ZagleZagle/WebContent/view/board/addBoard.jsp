@@ -285,7 +285,7 @@ $(function(){
 
 <!-- 로딩중 이미지 -->
 <div class="wrap-loading display-none">
-    <div><img src="/common/images/board/giphy.gif"/></div>
+    <div><img src="/common/images/board/equalizes.gif"/></div>
 </div>    
 
 

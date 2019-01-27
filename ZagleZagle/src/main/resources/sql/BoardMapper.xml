@@ -23,6 +23,8 @@
 		<result	property="address"	column="address"	jdbcType="VARCHAR"/>
 		<result	property="likeUserNo"	column="like_user_no"	jdbcType="VARCHAR"/>
 		<result	property="checkLike"	column="check_like"	jdbcType="VARCHAR"/>
+		<result	property="scrapUserNo"	column="scrap_user_no"	jdbcType="VARCHAR"/>
+		<result	property="checkScrap"	column="check_scrap"	jdbcType="VARCHAR"/>
 	</resultMap>
 	
 	<resultMap type="comment" id="commentSelectMap">
@@ -42,6 +44,12 @@
 		<result property="checkLike"	column="check_like"	jdbcType="VARCHAR"/>
 	</resultMap>
 	
+	<resultMap type="scrap" id="scrapSelectMap">
+		<result property="scrapNo"	column="scrap_no"	jdbcType="VARCHAR"/>
+		<result property="user.userNo"	column="user_no"	jdbcType="VARCHAR"/>
+		<result property="board.boardNo"	column="board_no"	jdbcType="VARCHAR"/>
+		<result property="checkScrap"	column="check_scrap"	jdbcType="VARCHAR"/>
+	</resultMap>
 	
 	 
 	 <insert 	id="addBoard"	parameterType="board" >
@@ -70,11 +78,11 @@
 		SELECT DISTINCT u.user_no, u.profile, u.user_nickname, b.board_no, b.photo1, b.photo2, b.photo3, b.board_detail_text, b.hash_tag, b.user_theme, b.coord, b.board_reg_date, b.board_status, b.address		
 		
 		<if test="loginUserNo!=null">
-			, l.user_no AS like_user_no, NVL(l.check_like,'0') check_like
+		, l.user_no AS like_user_no, NVL(l.check_like,'0') check_like, s.user_no AS scrap_user_no, NVL(s.check_scrap,'0') check_scrap
 		</if>	
 		
-		FROM users u, board b, likes l
-		WHERE u.user_no=b.user_no AND b.board_no=l.board_no(+)
+		FROM users u, board b, likes l, scrap s
+		WHERE (u.user_no=b.user_no AND b.board_no=l.board_no(+)) AND (u.user_no=b.user_no AND b.board_no=s.board_no(+))
 		
 		<if test="local!=null">
 		AND b.address LIKE '%'||#{local}||'%'
@@ -85,7 +93,7 @@
 		</if>
 		
 		<if test="loginUserNo!=null">
-		AND l.user_no(+)=#{loginUserNo}
+		AND l.user_no(+)=#{loginUserNo} AND s.user_no(+)=#{loginUserNo}
 		</if>
 		
 		ORDER BY b.board_reg_date DESC
@@ -133,13 +141,13 @@
 	</update>
 	
 	
-	<update id="cancelLike" parameterType="like">
+	<update id="updateLike" parameterType="like">
 		UPDATE likes
 		<set>
-			<if test="checkLike==1">
+			<if test='checkLike=="1"'>
 			check_like='2'
 			</if>
-			<if test="checkLike==2">
+			<if test='checkLike=="2"'>
 			check_like='1'
 			</if>
 		</set>

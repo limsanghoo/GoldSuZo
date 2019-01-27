@@ -38,7 +38,7 @@ public void addBoard(Board board) throws Exception;
 	
 	public void addLike(Like like) throws Exception;
 	
-	public void cancelLike(Like like) throws Exception;
+	public void updateLike(Like like) throws Exception;
 	
 	public List<Local> getState() throws Exception;
 
