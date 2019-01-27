@@ -133,7 +133,7 @@
 	</update>
 	
 	
-	<update id="cancelLike" parameterType="like">
+	<update id="updateLike" parameterType="like">
 		UPDATE likes
 		<set>
 			<if test="checkLike==1">

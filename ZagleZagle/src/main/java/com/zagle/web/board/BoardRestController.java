@@ -215,10 +215,10 @@ public class BoardRestController {
 		   return 1;
 	   }
 	   
-	   @RequestMapping(value="json/cancelLike/{userNo}/{boardNo}/{checkLike}", method=RequestMethod.GET)
+	   @RequestMapping(value="json/updateLike/{userNo}/{boardNo}/{checkLike}", method=RequestMethod.GET)
 	   public int cancelLike(@PathVariable String userNo, @PathVariable String boardNo, @PathVariable String checkLike) throws Exception{
 		   
-		   System.out.println("/cancelLike");
+		   System.out.println("/updateLike");
 		   System.out.println("userNo : "+userNo);
 		   System.out.println("boardNo : "+boardNo);
 		   System.out.println("checkLike : "+checkLike);
@@ -228,7 +228,7 @@ public class BoardRestController {
 		   like.setUser(userService.getUser2(userNo));
 		   like.setCheckLike(checkLike);
 		   
-		   boardService.cancelLike(like);
+		   boardService.updateLike(like);
 		   
 		   int result=0;
 		   

@@ -41,7 +41,7 @@ public interface BoardService {
 	
 	public void addLike(Like like) throws Exception;
 	
-	public void cancelLike(Like like) throws Exception;
+	public void updateLike(Like like) throws Exception;
 	
 	public void addScrap(Scrap scrap) throws Exception;
 	

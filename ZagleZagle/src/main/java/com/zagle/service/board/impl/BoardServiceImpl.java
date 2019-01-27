@@ -116,8 +116,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void cancelLike(Like like) throws Exception {
-		boardDAO.cancelLike(like);
+	public void updateLike(Like like) throws Exception {
+		boardDAO.updateLike(like);
 	}
 
 	@Override

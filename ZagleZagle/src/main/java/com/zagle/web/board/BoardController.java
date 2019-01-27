@@ -376,7 +376,8 @@ public class BoardController {
 		testUser.setUserNo("US10027");
 		testUser.setUserNickname("주그린");
 		testUser.setUserName("김주현");
-		testUser.setProfile("default.png");
+		testUser.setProfile("joo.png");
+		testUser.setUserAddr("서울 서초구 서초동");
 		
 		
 		session.setAttribute("user", testUser);

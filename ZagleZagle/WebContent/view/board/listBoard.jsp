@@ -190,7 +190,7 @@ $(function(){
 	})
 	
 	//좋아요 등록
-	$("span[name='addLike']").on("click", function(){
+	$("span[name='like']").on("click", function(){
 		
 		var userNo="${user.userNo}";
 		var boardNo=$(this).data('boardno');
@@ -216,7 +216,7 @@ $(function(){
 		if(checkLike=='1' || checkLike=='2'){
 			$.ajax({
 				
-				url: '/board/json/cancelLike/'+userNo+'/'+boardNo+'/'+checkLike,
+				url: '/board/json/updateLike/'+userNo+'/'+boardNo+'/'+checkLike,
 				type: 'get',
 				success: function(data){
 					
@@ -417,7 +417,7 @@ document.onmousemove = null;
 
 <div id="mydiv" style="display: none;">
    <div id="mydivheader">-여기를 눌러 이동-</div>
-   <iframe src="/chat/getChat?room=${user.userAddr}" align="right" style="height:100%; width: 100%;" frameborder="0" scrolling="no"></iframe>
+   <iframe src="http://192.168.0.36:8080/chat/getChat?room=${user.userAddr}" align="right" style="height:100%; width: 100%;" frameborder="0" scrolling="no"></iframe>
 </div>
 
 <div class="row">
@@ -504,7 +504,7 @@ document.onmousemove = null;
 	<span style="font-weight: bold; display: inline;">&nbsp;${board.user.userNickname}</span>
 	
 	
-	<span name="addLike" data-boardNo="${board.boardNo}" data-checkLike="${board.checkLike}">	
+	<span name="like" data-boardNo="${board.boardNo}" data-checkLike="${board.checkLike}">	
 	<c:choose>
 		<c:when test="${user.userNo !=null}">
 			<c:if test="${user.userNo==board.likeUserNo && board.checkLike=='1'}">
@@ -521,6 +521,13 @@ document.onmousemove = null;
 		</c:when>
 	</c:choose>
 	</span>
+	
+	
+	<span name="bookmark">
+	
+	</span>
+	
+	
 	</p>
 
 	
