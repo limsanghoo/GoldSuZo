@@ -367,17 +367,17 @@ public class BoardController {
 		testUser.setUserAddr("서울 용산구 이태원동 123-123");
 		testUser.setProfile("aaa.jpg");*/
 		
-//		testUser.setUserNo("US10023");
-//		testUser.setUserNickname("이노인호");
-//		testUser.setUserName("이인호");
-//		testUser.setUserAddr("서울 용산구 이태원동 123-123");
-//		testUser.setProfile("dlsgh.jpg");
+		testUser.setUserNo("US10023");
+		testUser.setUserNickname("이노인호");
+		testUser.setUserName("이인호");
+		testUser.setUserAddr("서울 용산구 이태원동 123-123");
+		testUser.setProfile("dlsgh.jpg");
 		
-		testUser.setUserNo("US10027");
-		testUser.setUserNickname("주그린");
-		testUser.setUserName("김주현");
-		testUser.setProfile("joo.png");
-		testUser.setUserAddr("서울 서초구 서초동");
+//		testUser.setUserNo("US10027");
+//		testUser.setUserNickname("주그린");
+//		testUser.setUserName("김주현");
+//		testUser.setProfile("joo.png");
+//		testUser.setUserAddr("서울 서초구 서초동");
 		
 		
 		session.setAttribute("user", testUser);
