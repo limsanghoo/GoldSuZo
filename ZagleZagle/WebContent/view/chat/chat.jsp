@@ -283,7 +283,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 	<script>
 		$(document).ready(function() {
 			var socket = io("http://192.168.0.25:82");
-			socket.emit("send_user",{id :"${user.userNickname}", addr : "${user.userAddr}",pro : "${user.profile}"});
+			socket.emit("send_user",{id :"${user.userNickname}", addr : "${room}",pro : "${user.profile}"});
 			
 			//msg에서 키를 누를떄
 			$("#msg").keydown(function(key) {
@@ -679,7 +679,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 
 <div id="mydiv" style="display: none;">
 	<div id="mydivheader">-여기를 눌러 이동-</div>
-	<iframe src="http://192.168.0.25:8080/board/listBoard" align="right" style="height:100%; width: 100%;" frameborder="0" scrolling="no"></iframe>
+	<iframe src="/board/listBoard" align="right" style="height:100%; width: 100%;" frameborder="0" scrolling="no"></iframe>
 </div>
 <button id="btn">숨기기</button>
 <button id="btn2">보이기</button>
@@ -707,9 +707,6 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 							<div class="action_menu">
 								<ul>
 									<li><i class="fas fa-exchange-alt" id="msg_trans">&nbsp;&nbsp;번역</i></li>
-									<li><i class="fas fa-users"></i> 메뉴2</li>
-									<li><i class="fas fa-plus"></i> 메뉴3</li>
-									<li><i class="fas fa-ban"></i> 메뉴4</li>
 								</ul>
 							</div>
 						</div>
