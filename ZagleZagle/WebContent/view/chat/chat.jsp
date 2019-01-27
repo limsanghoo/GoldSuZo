@@ -28,10 +28,7 @@
 body,html{
 			height: auto;
 			margin: 0;
-			background: #7F7FD5;
-	       background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
-	        background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
-	        background: url("http://img.chuing.net/i/eyyJJe/Preview.x.jpg") no-repeat center center fixed; -webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;
+			background-color: rgba(0,0,0,0)
 		}
 
 		.chat{
@@ -308,7 +305,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 
 			////소켓 서버로 부터 in_msg를 통해 이벤트를 받을 경우 
 			socket.on('send_user_name',function(msg){
-				$("<div style='text-align:center; color : white;'></div>").text(msg+"님이 입장하셧습니다.").appendTo("#chat_box");
+				$("<div style='text-align:center; color : white;'></div>").text(msg+"님이 입장하셨습니다.").appendTo("#chat_box");
 				 $('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
 			});
 			//소켓 서버로 부터 send_msg를 통해 이벤트를 받을 경우 
@@ -610,25 +607,6 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 		}
 		
 		//////////////////////////////////////////////
-		$(function(){
-			$("#btn").hide();
-			$("#btn:contains('숨기기')").on("click",function(){
-				$("#mydiv").css("display","none");
-				$(this).hide();
-				$("#btn2").show();
-			});
-			
-		});
-		$(function(){
-
-			$("#btn2:contains('보이기')").on("click",function(){
-				$("#mydiv").css("display","inline");
-				$(this).hide();
-				$("#btn").show();
-			});
-		});
-		
-	
 			$(function(){
 				dragElement(document.getElementById("mydiv"));
 				function dragElement(elmnt) {
@@ -677,15 +655,9 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 </head>
 <body>
 
-<div id="mydiv" style="display: none;">
-	<div id="mydivheader">-여기를 눌러 이동-</div>
-	<iframe src="/board/listBoard" align="right" style="height:100%; width: 100%;" frameborder="0" scrolling="no"></iframe>
-</div>
-<button id="btn">숨기기</button>
-<button id="btn2">보이기</button>
 <button id="btn_one" style="display: none;" value=""></button>
 
-<div><h3>룸이름 : ${user.userAddr}</h3></div>
+<div style="text-align: center; color: white; font-style: oblique;"><h3><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;${user.userAddr}</h3></div>
 		<div class="container-fluid h-100">
 		
 			<div class="row justify-content-center h-100">
