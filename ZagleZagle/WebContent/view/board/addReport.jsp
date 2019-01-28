@@ -14,18 +14,31 @@
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>  -->
 
+
+<script type="text/javascript">
+
+$(function(){
+	
+	$("input[value='신고']").bind("click",function(){
+		alert("신고한당");
+	});
+	
+});
+
+</script>
+
 <title>addReport</title>
 </head>
 <body>
 <form name="addReport">
-<select class="form-control" id="reportReason" name="reportReason">
+	<select class="form-control" id="reportReason" name="reportReason">
 		      	<option value="0">신고 사유를 선택해주세요</option>
 		      	<option value="1">욕설</option>
 		      	<option value="2">광고</option>
-		      	<option value="3">음란</option>
-		      	
-		      	
-</select>
+		      	<option value="3">음란</option>		      	
+	</select>
 </form>
+
+<input type="button" value="신고"/>
 </body>
 </html>
