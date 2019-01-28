@@ -8,9 +8,17 @@ public class SearchAdmin {
 	private int pageSize;
 	private int endRowNum;
 	private int startRowNum;
+	private Report checkReport;
 	
 	
-	
+	public Report getCheckReport() {
+		return checkReport;
+	}
+
+	public void setCheckReport(Report checkReport) {
+		this.checkReport = checkReport;
+	}
+
 	public SearchAdmin() {
 		
 	}

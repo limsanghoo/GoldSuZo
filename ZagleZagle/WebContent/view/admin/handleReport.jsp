@@ -77,16 +77,16 @@
 			
 		
 			
-		//================userNo 에서 블랙리스트 대상 된 이유 출력 Event ================//
+		//================getBoard Ajax================//
 		
 	
 			
 			$("td:nth-child(2) i").on("click", function() {
 				alert("click 확인")
 				
-				var userNo = $(this).data("param")
+				var boardNo = $(this).data("param")
 				
-				alert(userNo)
+				alert(boardNo)
 				
 				$.ajax(
 					{
@@ -121,6 +121,48 @@
 			});
 			
 			
+		
+		
+			$("td:nth-child(3) i").on("click", function() {
+				alert("click 확인")
+				
+				var commentNo = $(this).data("param1")
+				
+				alert(commentNo)
+				
+				$.ajax(
+					{
+						url : "/admin/json/getReportList/"+userNo,
+						method : "GET",
+						dataType : "json",
+						headers : {
+							"Accept" : "application/json",
+							"Content-Type" : "application/json"
+						},
+						success : function(JSONData, status) {
+							alert(JSONData)
+							var displayValue ="";
+							var temp ="";
+							
+							$.each(JSONData,function(index) {
+							
+							temp = "<h6>"
+														+"   신고 사유 : "+JSONData[index].reportReason+"<br/>"
+														+"</h6>";
+							displayValue += temp;
+							
+							});
+							
+							$("h6")
+							$( "#"+userNo+"" ).html(displayValue);
+							
+						
+						}
+					});
+				////////////////////////////////////////////////////////////////////////////////////////////////////////
+			});
+		
+		
 		});
 		
 
@@ -205,47 +247,82 @@
         <div id="page-wrapper">
            
            <div class="container">
-           
-           <div class="page-header text-info">
-	       <h5>블랙리스트 후보</h5>
+           		
+          <div class="page-header text-info">
+	       <h5>신고 처리</h5>
 	    </div>
-	    
-	    <table class="table table-hover table-striped" >
-	    
-	    <thead>
-	     <tr>
+           		
+        <table class="table table-hover table-striped" >
+           
+            <thead>
+            <tr>
             <th align="center">No</th>
-            <th align="left" >회원No</th>
-            <th align="left">이름</th>
-            <th align="left">가입날짜</th>
-             <th align="left">삭제횟수</th>
-          
-          </tr>
+            <th align="left" >게시물No</th>
+            <th align="left">댓글No</th>
+            <th align="left">처리</th>           
+   			</tr>
         </thead>
         
-        	 <tbody>
+        <tbody>
    				
    			 <c:set var="i" value="0" />
-   			 <c:forEach var="user" items="${list}" >
-   				
-   			<c:set var="i" value="${ i+1 }" />	
+   			 <c:forEach var="blind" items="${list}" >
+   			 
+   			 	<c:set var="i" value="${ i+1 }" />	
    			<tr>
    			<td align="left">${ i }</td>
-			  <td align="left">${user.userNo}
-			   <div style="padding-left: 22px;"><i class="glyphicon glyphicon-chevron-down" id= "${user.userNo}" data-param="${user.userNo}"></i></div>
-			  <input type="hidden" value="${user.userNo}">
-			  </td>
-			  <td align="left">${user.userName}</td>
-			   <td align="left">${user.regDate}</td>
-			    <td align="left">${user.deleteCount}</td>
-		
-		   </tr>
    			
-   			  	</c:forEach>
+   			 <td align="left" >${blind.blindBoardNo.boardNo}
+   			 
+   			 <c:if test="${blind.blindBoardNo.boardNo != null}">
+   			 <div style="padding-left: 22px;"><i class="glyphicon glyphicon-chevron-down" id= "${blind.blindBoardNo.boardNo}" data-param="${blind.blindBoardNo.boardNo}"></i></div>
+   			 <input type="hidden" value="${blind.blindBoardNo.boardNo}">
+   			 </c:if>
+   			 
+   			 <c:if test="${blind.blindBoardNo.boardNo == null}">
+   			 
+   			 <div style="padding-left: 22px;"><i class="glyphicon glyphicon-option-horizontal"></i></div>
+   			 </c:if>
+   			 </td>
+   			 
+   			 
+   			 
+   			 
+   			 
+   			  <td align="left">${blind.blindCommentNo.commentNo}
+   			  
+   			  <c:if test="${blind.blindCommentNo.commentNo != null}">
+   			   <div style="padding-left: 22px;"><i class="glyphicon glyphicon-chevron-down" id= "${blind.blindCommentNo.commentNo}" data-param1="${blind.blindCommentNo.commentNo}"></i></div>
+   			 <input type="hidden" value="${blind.blindCommentNo.commentNo}">
+   			 </c:if>	
+   			 
+   			  <c:if test="${blind.blindCommentNo.commentNo == null}">
+   			  
+   				<div style="padding-left: 22px;"><i class="glyphicon glyphicon-option-horizontal"></i></div>
+   			 </c:if>	
+   			 	
+   			 	
+   		
+   			  </td>
+			  <td align="left">
+			  <div style="padding-left: 7px;"><i class="glyphicon glyphicon-ban-circle"></i></div>
 			  
+			  </td>
+			 
+   			  </tr>
+   			  
+   			</c:forEach>  
+   			
+   			  <form>
+			  	  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
+			  </form>
 			  
-			</table>
+			  </table>
+			
         </div>
+			  
+   			
         <!-- /#page-wrapper -->
         
        <!-- PageNavigation Start... -->
@@ -255,6 +332,87 @@
         
     </div>
     <!-- /#wrapper -->
+    
+    <div class="realBox" data-toggle="modal" data-target="#${board.boardNo}modal1">
+    
+    <!-- 모달1 시작 -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="${board.boardNo}modal1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    
+	<!-- 모달1 헤더 시작 -->
+      <div class="modal-header">
+      <div class="row">
+      
+      	<div class="col-md-11 col-md-offset-1">
+        <span aria-hidden="true" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: 30px; margin-right:5px; display: inline;">&times;</span>       
+        </div>
+        
+        <h4 class="modal-title" id="gridSystemModalLabel">
+        <div class="col-md-4" style="display: inline;">
+        <img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px;" align="middle;"/>
+		${board.user.userNickname}
+		</div>
+		
+		<!-- 내 글만 수정, 삭제 -->
+		<c:if test="${user.userNo==board.user.userNo}">
+		<div class="col-md-4 col-md-offset-4">
+		<input type="button" value="수정" data-update="${board.boardNo}"/>
+        <div class="btn btn-primary" data-toggle="modal" data-target="#${board.boardNo}modal2">삭제</div>
+        </div>
+        </c:if>
+        
+        </h4>
+        </div>
+      </div>
+     <!-- 모달1 헤더 끝 -->
+      
+     <!-- 모달1 바디 시작 -->
+      <div class="modal-body" style="text-align: center">  
+
+		<div>
+			<c:if test="${board.photo1 !=null}">
+			<div><img src="${board.photo1}" style="width: 500px"/></div>
+			<br/>
+			</c:if>
+
+			<c:if test="${board.photo2 !=null}">
+			<div><img src="${board.photo2}" style="width: 500px"/></div>
+			<br/>
+			</c:if>
+	
+			<c:if test="${board.photo3 !=null}">
+			<div><img src="${board.photo3}" style="width: 500px"/></div>
+			<br/>
+			</c:if>
+		</div>
+
+		<p>
+			${board.boardDetailText}
+		</p>
+     
+       
+      </div>
+      <!-- 모달1 바디 끝 -->
+      
+      <!-- 모달1 푸터 시작 -->
+      <div class="modal-footer">
+      
+		<!-- listComment로 파라미터 보내기 -->      
+     	<jsp:include page="/view/board/listComment.jsp">
+     		<jsp:param name="boardNo" value="${board.boardNo}"/>
+     	</jsp:include>
+    	
+      </div>
+      <!-- 모달1 푸터 끝 -->
+      
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- 모달1 끝 -->
+</div>
+    
+    
 
     <script type="text/javascript" src="/common/css/PBDashboard/js/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="/common/css/PBDashboard/bootstrap/js/bootstrap.min.js"></script>

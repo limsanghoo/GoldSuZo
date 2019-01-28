@@ -23,6 +23,9 @@ public interface AdminDao {
 	///SELECT USERLIST
 	public List<User> listUser(SearchAdmin search) throws Exception;
 	
+	public List<Report> getReportList(SearchAdmin search) throws Exception;
+	
+	public List<Blind> getBlindList(SearchAdmin search) throws Exception;
 	///ADD
 	public void addReport(Report report) throws Exception;
 	
@@ -50,7 +53,7 @@ public interface AdminDao {
 	///블라인드 코맨트 삭제
 	///public void deleteBlind2(Comment commnet) throws Exception;
 	
-	public Report getReport(String userNo) throws Exception;
+
 	
 	///////
 	public int getTotalCount(SearchAdmin search) throws Exception ;
@@ -59,6 +62,10 @@ public interface AdminDao {
 	public int getTotalCount2(SearchAdmin search) throws Exception;
 	
 	public int getTotalCount3(SearchAdmin search) throws Exception;
+	
+	public int getTotalCount4(SearchAdmin search) throws Exception;
+	
+	public int getTotalCountBlind(SearchAdmin search) throws Exception;
 	
 	////블랙리스트 추가
 	

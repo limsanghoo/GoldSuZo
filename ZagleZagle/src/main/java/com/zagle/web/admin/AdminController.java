@@ -130,15 +130,39 @@ System.out.println(map.get("totalCount"));
 		
 		return modelAndView;
 	}
-	@RequestMapping(value="handleReport", method=RequestMethod.GET)
-	public ModelAndView handelReport() throws Exception {
+	@RequestMapping(value="handleReport")
+	public ModelAndView handelReport(@ModelAttribute("SearchAdmin") SearchAdmin search, HttpServletRequest request) throws Exception {
 		
-		System.out.println("/admin/handelReport : GET ");
+		System.out.println("/admin/handelReport : GET, POST ");
+
+		if(search.getCurrentPage() ==0 ){
+			search.setCurrentPage(1);
+		}
+		search.setPageSize(pageSize);
 		
-	 ModelAndView modelAndView = new ModelAndView();
-	 modelAndView.setViewName("/view/admin/handleReport.jsp");
-	 
-	 return modelAndView;
+		
+		
+		Map<String, Object> map = adminService.getBlindList(search);
+		
+		
+		
+		System.out.println(search.getCurrentPage());
+		System.out.println(pageUnit);
+		System.out.println(pageSize);
+		
+		System.out.println(map.get("totalCount"));
+		
+		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+	    System.out.println(resultPage);
+		
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("list", map.get("list"));
+		modelAndView.addObject("resultPage", resultPage);
+		modelAndView.addObject("search",search);
+		modelAndView.setViewName("/view/admin/handleReport.jsp");
+		
+		return modelAndView;
 	}
 	
 }
