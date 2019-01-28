@@ -141,7 +141,7 @@ body {
   background-color: #f1f1f1;
   text-align: center;
   background-color: rgba(0,0,0,0.1);
-  height: 800px;
+  height: 700px;
   width: 600px;
 }
 
@@ -189,7 +189,7 @@ $(function(){
 		commentList(boardNo);
 	})
 	
-	//좋아요 등록
+	//좋아요
 	$("span[name='like']").on("click", function(){
 		
 		var userNo="${user.userNo}";
@@ -214,6 +214,8 @@ $(function(){
 		}//0일때 끝
 		
 		if(checkLike=='1' || checkLike=='2'){
+			
+			alert("수정간다");
 			$.ajax({
 				
 				url: '/board/json/updateLike/'+userNo+'/'+boardNo+'/'+checkLike,
@@ -233,7 +235,11 @@ $(function(){
 		}//1일때 끝
 
 		
-	});
+	});//좋아요 끝
+	
+	
+	
+	
 	
 });
 
@@ -409,16 +415,13 @@ document.onmousemove = null;
 
 <jsp:include page="/view/layout/toolbar.jsp"/>
 
-
-<!-- <div style="padding-top: 150px;">
-<button id="btn">숨기기</button>
-<button id="btn2">보이기</button>
-</div> -->
-
+<!-- 채팅창 시작 -->
 <div id="mydiv" style="display: none;">
    <div id="mydivheader">-여기를 눌러 이동-</div>
    <iframe src="/chat/getChat?room=${user.userAddr}" align="right" style="height:100%; width: 100%;" frameborder="0" scrolling="no"></iframe>
 </div>
+<!-- 채팅창 끝 -->
+
 
 <div class="row">
 
@@ -426,6 +429,8 @@ document.onmousemove = null;
 <button id="btn" style="margin-top: 200px;">숨기기</button>
 <button id="btn2" style="margin-top: 200px;">보이기</button>
 </div>
+
+
 
 <div class="col-sm-11">
 <form name="listBoard">
@@ -507,12 +512,13 @@ document.onmousemove = null;
 	<span name="like" data-boardNo="${board.boardNo}" data-checkLike="${board.checkLike}">	
 	<c:choose>
 		<c:when test="${user.userNo !=null}">
-			<c:if test="${user.userNo==board.likeUserNo && board.checkLike=='1'}">
-				<img src="/common/images/board/fullLike.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}fullLike"/>
-			</c:if>
-			
+		
 			<c:if test="${board.likeUserNo==null && board.checkLike=='0'}">
 				<img src="/common/images/board/emptyLike.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}emptyLike"/>
+			</c:if>
+			
+			<c:if test="${user.userNo==board.likeUserNo && board.checkLike=='1'}">
+				<img src="/common/images/board/fullLike.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}fullLike"/>
 			</c:if>
 			
 			<c:if test="${user.userNo==board.likeUserNo && board.checkLike=='2'}">
@@ -523,8 +529,23 @@ document.onmousemove = null;
 	</span>
 	
 	
-	<span name="bookmark">
-	
+	<span name="scrap">
+	<c:choose>
+		<c:when test="${user.userNo !=null}">
+			<c:if test="${board.scrapUserNo==null && board.checkScrap=='0'}">
+				<img src="/common/images/board/emptyScrap.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}emptyScrap"/>
+			</c:if>
+			
+			<c:if test="${user.userNo==board.scrapUserNo && board.checkScrap=='1'}">
+				<img src="/common/images/board/fullScrap.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}fullScrap"/>
+			</c:if>
+			
+			<c:if test="${user.userNo==board.scrapUserNo && board.checkScrap=='2'}">
+				<img src="/common/images/board/emptyScrap.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}emptyScrap"/>
+			</c:if>
+		
+		</c:when>
+	</c:choose>
 	</span>
 	
 	
@@ -612,12 +633,12 @@ document.onmousemove = null;
       <div class="row">
       
       	<div class="col-md-11 col-md-offset-1">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span aria-hidden="true" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: 30px; margin-right:5px; display: inline;">&times;</span>       
         </div>
         
         <h4 class="modal-title" id="gridSystemModalLabel">
-        <div class="col-md-4">
-        <img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px;" align="middle; "/>
+        <div class="col-md-4" style="display: inline;">
+        <img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px;" align="middle;"/>
 		${board.user.userNickname}
 		</div>
 		

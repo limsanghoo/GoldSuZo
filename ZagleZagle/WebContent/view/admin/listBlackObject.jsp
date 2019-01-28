@@ -19,7 +19,7 @@
     <link rel="stylesheet" type="text/css" href="/common/css/PBDashboard/css/dashboard.css" />
     
     
-    
+
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -58,25 +58,27 @@
 			
 		//================userNo 에서 블랙리스트 대상 된 이유 출력 Event ================//
 		
-		$(function() {
+	
 			
-			$("td:nth-child(2)").on("click", function() {
+			$("td:nth-child(2) i").on("click", function() {
 				alert("click 확인")
 				
-				var userNo = $(this).next().val();
+				var userNo = $(this).data("param")
 				
 				alert(userNo)
 				
 				$.ajax(
 					{
-						url:"/admin/json/getReport"+userNo,
-						mothod: "GET",
+						url : "/admin/json/getReport"+userNo,
+						method : "GET",
 						dataType : "json",
 						headers : {
 							"Accept" : "application/json",
 							"Content-Type" : "application/json"
 						},
 						success : function(JSONData, status) {
+							alert(JSONData.reportNo)
+							
 							
 							var displayValue ="<h6>"
 							+"신고 이유 :" +JSONData.reportReason
@@ -89,8 +91,8 @@
 			
 		});
 		
-			
-		}); 
+
+	
    
 	
 	
@@ -197,8 +199,10 @@
    			<c:set var="i" value="${ i+1 }" />	
    			<tr>
    			<td align="left">${ i }</td>
-			  <td align="left">${user.userNo}</td>
+			  <td align="left">${user.userNo}
+			   <div style="padding-left: 22px;"><i class="glyphicon glyphicon-chevron-down" id= "${user.userNo}" data-param="${user.userNo}"></i></div>
 			  <input type="hidden" value="${user.userNo}">
+			  </td>
 			  <td align="left">${user.userName}</td>
 			   <td align="left">${user.regDate}</td>
 			    <td align="left">${user.deleteCount}</td>
