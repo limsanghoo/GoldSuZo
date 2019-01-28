@@ -26,6 +26,8 @@ public interface StreamService {
 	
 	public Map<String,Object> listRefund(SearchStream search)throws Exception; 
 	
+	public void updateRefund(Map<String,Object> map)throws Exception;
+	
 	public String kakaopayStream(Map<String,Object> map)throws Exception;
 	
 	public String naverpayStream(Map<String,Object> map)throws Exception;

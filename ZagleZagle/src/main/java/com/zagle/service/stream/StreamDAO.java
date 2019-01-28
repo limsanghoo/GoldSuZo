@@ -16,6 +16,8 @@ public interface StreamDAO {
 	
 	public void updateSpon(String userNo)throws Exception;
 	
+	public void updateRefund(Map<String,Object> map)throws Exception;
+	
 	public List<Refund> listRefund(SearchStream search)throws Exception;
 	
 	public int getTotalCount(SearchStream search)throws Exception;
