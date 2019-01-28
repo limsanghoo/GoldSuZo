@@ -45,7 +45,7 @@ public interface BoardService {
 	
 	public void addScrap(Scrap scrap) throws Exception;
 	
-	public void cancelScrap(Scrap scrap) throws Exception;
+	public void updateScrap(Scrap scrap) throws Exception;
 	
 	public void shareBoard(Board board) throws Exception;
 	
