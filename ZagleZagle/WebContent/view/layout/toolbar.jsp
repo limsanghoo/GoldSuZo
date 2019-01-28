@@ -21,6 +21,11 @@
 		/* #page-wrapper{
 		 height: 120px;
 		} */
+		
+		div.modal-body-tool,.modal-content-tool{
+
+background-color: rgba(0,0,0,0.1);
+}
 	</style>
 
 
@@ -31,19 +36,12 @@
 		 $(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$("li:contains('로그인')").on("click" , function() {
-				$(self.location).attr("href","/user/loginView");
-				
-				//self.location = "/user/logout"
+				login.click();
 			}); 
 		 	$("li:contains('로그아웃')").on("click" , function() {
 				//$(self.location).attr("href","/user/logout");
 				//self.location = "/user/logout"
 			});
-		 	$("li:contains('채팅')").on("click" , function() {
-				//$(self.location).attr("href","http://localhost:3000/");
-				self.location = "/chat/getChat"
-		 		
-			}); 
 		 	$("li:contains('강남1')").on("click" , function() {
 				//$(self.location).attr("href","http://localhost:3000/");
 				self.location = "/chat/testUser"
@@ -77,7 +75,17 @@
 				self.location = "http://192.168.0.12:8080/stream/listStream"
 		 		
 			});
-		 	
+		 	$("li:contains('판매상품목록')").on("click" , function() {
+				//$(self.location).attr("href","http://localhost:3000/");
+				self.location = "/trade/listSell"
+		 		
+			});
+   
+		 	$("li:contains('구매상품목록')").on("click" , function() {
+				//$(self.location).attr("href","http://localhost:3000/");
+				self.location = "/trade/listBuy"
+		 		
+			});
 		 	
    //////////////////////////////////마이 페이지 Navigation 영역///////////////////////////////////////
    
@@ -153,19 +161,7 @@
    
    
 
-		 	$(function() {
-		 		
-		 		$(".getUserInfo").on("click", function() {
-		 			
-		 			
-		 			var userNo =$(this).data("param1");
-		 			alert(userNo)
-		 			console.log(userNo);
-		 			
-		 			self.location="/user/getUser2?userNo="+userNo
-		 		
-		 		});
-		 	});
+		 	
    
    
 		 });
@@ -233,21 +229,18 @@
 								</c:if>
 							
 							
-					<li>채팅</li>
 	                <li>강남1</li>
 	                <li>강남2</li>
-	                <li>서초3</li>
-					
-					<li>
-					<h4 class=getUserInfo data-param1="${user.userNo}" style="font-style: italic;">${user.userName} 님 환영합니다.</h4></li>
-							
+	                <li>봉천3</li>		
 					<c:if test="${sessionScope.user.userNo==null}"><li>로그인</li></c:if>
-					
+					<c:if test="${sessionScope.user.userNo!=null}">
+					<li>
+					<h4 style="font-style: italic; color: white;"><a href="/user/getUser2?userNo=${user.userNo}">${user.userName}</a> 님 환영합니다.</h4></li>
 					<li>
 					<a id="logout">
-	                <c:if test="${sessionScope.user.userNo!=null}"><li data-param="${user.snsNo}">로그아웃</li></c:if>		
+	                <li data-param="${user.snsNo}">로그아웃</li>		
 	                </a>
-					</li>
+					</li></c:if>
 					
 		
 					
@@ -267,8 +260,47 @@
 			<script src="/common/css/html5up-helios/assets/js/breakpoints.min.js"></script>
 			<script src="/common/css/html5up-helios/assets/js/util.js"></script>
 			<script src="/common/css/html5up-helios/assets/js/main.js"></script>
+		<button class="button primary" id="login" data-toggle="modal" data-target="#modal1" style="display: none;">-login-</button>
+		<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="modal1">
+  			<div class="modal-dialog" role="document">
+    		<div class="modal-content-tool">
+  
+   
+   			<!-- 모달 Body -->	  
+  			<div class="modal-body-tool" style="text-align: center">
 		
+				
+				<br><br>
+					
+			<div class="snsLoginButton" align="center">		
+			<a href="https://kauth.kakao.com/oauth/authorize?client_id=c3883a306a9faad67b127d7631568b29&redirect_uri=http://192.168.0.16:8080/user/kakaologin&response_type=code">
+	  	 <img src="/common/images/KakaoTalk.png" height="50" width="50" />
+			</a>
 		
+	
+		<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=ICC6WpwdQLzHUQn5KfEC&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fuser%2FnaverCallback&state=state">
+		<img height="50" src="/common/images/NaverSmall.jpg" height="50" width="50" ></a>
+	
+		<a herf="#">
+		<img src="/common/images/smallGoogle.jpg" height="50" width="50" id="GGG"/>
+		</a>
+		
+	  <div>
+				
+		<br>	<br>	<br>	<br>	<br/>
+				
+			<strong style="color: white; font-style: oblique;">SNS 로그인만 가능합니다.</strong>
+		</div>
+	  				
+  				
+  	</div>
+
+  					
+  					
+  	</div>
+  </div>			
+	</div>
+	</div>
 				
 		
 	</body>

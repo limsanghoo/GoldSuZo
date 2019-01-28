@@ -59,9 +59,9 @@
 	body,html { background: url("https://images.wallpaperscraft.com/image/window_sunset_trees_132266_3840x2160.jpg") no-repeat center center fixed; -webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;}
 	
 	
-	.modal-body{
+	div.modal-body,.modal-content{
 
-background-color: #F5F5F5
+background-color: rgba(0,0,0,0.1);
 }
 	
 	
@@ -121,9 +121,8 @@ background-color: #F5F5F5
 						-->
 						<br/><br/>
 						<footer>
-								<img src="http://www.playtimetokyo.com/images/exposer/logo-login.png" style="width: 60px;height:60px;"/><br/>
 								<button class="button primary" id="login" data-toggle="modal" data-target="#modal1" >-login-</button>
-								<br/><br/><a href="/board/listBoard">온 동네 소식보기</a>
+								<br/><br/><a href="/board/listBoard?view=all">온 동네 소식보기</a>
 							</ul>
 						</footer>
 					</section>
@@ -145,7 +144,7 @@ background-color: #F5F5F5
    
    			<!-- 모달 Body -->	  
   			<div class="modal-body" style="text-align: center">
-			<form>
+		
 				
 				<br><br>
 					
@@ -162,16 +161,16 @@ background-color: #F5F5F5
 		<img src="/common/images/smallGoogle.jpg" height="50" width="50" id="GGG"/>
 		</a>
 		
-	  <div style="font-style: inherit; color: black;">
+	  <div>
 				
 		<br>	<br>	<br>	<br>	<br/>
 				
-			<strong>SNS 로그인만 가능합니다.</strong>
+			<strong style="color: white; font-style: oblique;">SNS 로그인만 가능합니다.</strong>
 		</div>
 	  				
   				
   	</div>
-  	</form>
+
   					
   					
   	</div>
