@@ -21,6 +21,7 @@ $(function(){
 	
 	$("input[value='신고']").bind("click",function(){
 		alert("신고한당");
+		$("form").attr("method" , "POST").attr("action" , "/board/addReport").submit();
 	});
 	
 });
@@ -37,6 +38,12 @@ $(function(){
 		      	<option value="2">광고</option>
 		      	<option value="3">음란</option>		      	
 	</select>
+	
+	<input type="hidden" name="reportingUserNo" value="${user.userNo}"/>
+	
+	<input type="hidden" name="reportedBoard" value="BD10066"/>
+	<input type="hidden" name="reportedUserNo" value="US10025"/>
+	
 </form>
 
 <input type="button" value="신고"/>
