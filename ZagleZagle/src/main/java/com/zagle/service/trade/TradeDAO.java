@@ -13,9 +13,13 @@ public interface TradeDAO {
 
 	public Sell getSell(String sellNo) throws Exception;
 
-	public List<Sell> listSell(Search search, String userNo);
+	public List<Sell> listSell(Search search, String userNo) throws Exception;
 
-	public int getTotalCount(String userNo);
+	public int getTotalCount(String userNo) throws Exception;
+
+	public void updateSell(Sell sell) throws Exception;
+	
+	public void updateSellState(Sell sell) throws Exception;
 	
 //	addSell 판매상품올리기
 //	addBuy 구매요청했을때

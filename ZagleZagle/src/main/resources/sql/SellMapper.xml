@@ -51,4 +51,27 @@
 		SELECT COUNT(*)
 		FROM (SELECT * FROM sell WHERE user_no=#{userNo} ORDER BY sell_no) countTable
 	 </select>
+	 
+	 <update id="updateSell" parameterType="sell">
+		 UPDATE sell
+			<set>
+				sell_name=#{sellName},
+				sell_price=#{sellPrice},
+				sell_text=#{sellText},
+				sell_photo1=#{sellPhoto1:VARCHAR},
+				sell_photo2=#{sellPhoto2:VARCHAR},
+				sell_photo3=#{sellPhoto3:VARCHAR},
+				sell_style=#{sellStyle},
+				sell_phone=#{sellPhone}
+			</set>
+			WHERE sell_no=#{sellNo}
+	 </update>
+	 
+	 <update id="deleteSell" parameterType="string">
+	 	UPDATE sell
+	 	<set>
+	 		sell_state=#{sellState}
+	 	</set>
+	 	WHERE sell_no=#{sellNo}
+	 </update>
 </mapper>

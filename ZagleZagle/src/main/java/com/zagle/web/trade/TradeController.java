@@ -115,4 +115,42 @@ public class TradeController {
 		return modelAndView;
 	}
 	
+	@RequestMapping(value="updateSell", method=RequestMethod.GET)
+	public ModelAndView updateSell(HttpSession session, @ModelAttribute("sellNo") String sellNo) throws Exception{
+		
+		Sell sell = tradeService.getSell(sellNo);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("forward:/view/trade/updateSell.jsp");
+		modelAndView.addObject("sell",sell);
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="updateSell", method=RequestMethod.POST)
+	public ModelAndView updateSell(@ModelAttribute("sell") Sell sell) throws Exception{
+		
+		tradeService.updateSell(sell);
+	
+		ModelAndView modelAndView = new ModelAndView();
+		
+		modelAndView.setViewName("redirect:/trade/getSell?sellNo="+sell.getSellNo());
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="updateSellState")
+	public ModelAndView updateSellState(@ModelAttribute("sellNo") String sellNo, @ModelAttribute("sellState") int sellState) throws Exception{
+		Sell sell = new Sell();
+		sell.setSellNo(sellNo);
+		sell.setSellState(sellState);
+		
+		tradeService.updateSellState(sell);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("forward:/trade/listTrade");
+		
+		return modelAndView;
+	}
+	
 }

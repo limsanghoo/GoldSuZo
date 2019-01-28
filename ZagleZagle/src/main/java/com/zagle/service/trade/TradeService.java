@@ -15,4 +15,8 @@ public interface TradeService {
 
 	public Map<String, Object> listSell(Search search, String userNo) throws Exception;
 
+	public void updateSell(Sell sell) throws Exception;
+
+	public void updateSellState(Sell sell) throws Exception;
+
 }

@@ -56,5 +56,15 @@ public class TradeServiceImpl implements TradeService{
 		return map;
 	}
 
+	@Override
+	public void updateSell(Sell sell) throws Exception {
+		tradeDAO.updateSell(sell);
+	}
+
+	@Override
+	public void updateSellState(Sell sell) throws Exception {
+		tradeDAO.updateSellState(sell);		
+	}
+
 
 }
