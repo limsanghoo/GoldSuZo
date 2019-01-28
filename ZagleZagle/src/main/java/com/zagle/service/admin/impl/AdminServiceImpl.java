@@ -59,6 +59,32 @@ public class AdminServiceImpl implements AdminService {
 		
 		return map;
 	}
+	
+	public Map<String, Object> getReportList(SearchAdmin search) throws Exception {
+		
+		List<Report> list = adminDao.getReportList(search);
+		int totalCount = adminDao.getTotalCount4(search);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("totalCount", new Integer(totalCount));
+		
+		return map;
+		
+	}
+	
+	public Map<String, Object> getBlindList(SearchAdmin search) throws Exception {
+		
+		
+		List<Blind> list = adminDao.getBlindList(search);
+		int totalCount = adminDao.getTotalCountBlind(search);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("totalCount", new Integer(totalCount));
+		
+		return map;
+	}
 
 	public void addReport(Report report) throws Exception {
 		
@@ -95,10 +121,7 @@ public class AdminServiceImpl implements AdminService {
 		adminDao.updateBlind(blind);
 	}
 	
-	public Report getReport(String userNo) throws Exception {
-		
-		return adminDao.getReport(userNo);
-	}
+
 	
 //	@Override
 //	public void addBlind2(Comment comment) throws Exception {
