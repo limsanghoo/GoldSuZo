@@ -10,6 +10,7 @@ import com.zagle.service.domain.Like;
 import com.zagle.service.domain.Link;
 import com.zagle.service.domain.Local;
 import com.zagle.service.domain.Report;
+import com.zagle.service.domain.Scrap;
 import com.zagle.service.domain.SearchBoard;
 
 public interface BoardDAO {
@@ -39,6 +40,10 @@ public void addBoard(Board board) throws Exception;
 	public void addLike(Like like) throws Exception;
 	
 	public void updateLike(Like like) throws Exception;
+	
+	public void addScrap(Scrap scrap) throws Exception;
+	
+	public void updateScrap(Scrap scrap) throws Exception;
 	
 	public List<Local> getState() throws Exception;
 

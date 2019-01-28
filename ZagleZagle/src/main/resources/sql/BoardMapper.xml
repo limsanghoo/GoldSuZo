@@ -52,7 +52,7 @@
 	</resultMap>
 	
 	 
-	 <insert 	id="addBoard"	parameterType="board" >
+	 <insert id="addBoard"	parameterType="board" >
 	 	INSERT
 		INTO board(board_no, user_no, board_detail_text, hash_tag, user_theme, board_reg_date, board_status, photo1, photo2, photo3, coord, address)
 		VALUES('BD'||seq_bd.nextval,#{user.userNo},#{boardDetailText},#{hashTag:VARCHAR},#{userTheme},sysdate,#{boardStatus},#{photo1:VARCHAR},#{photo2:VARCHAR},#{photo3:VARCHAR},#{coord:VARCHAR},#{address:VARCHAR})
@@ -72,6 +72,11 @@
 	 	VALUES('LK'||seq_lk.nextval,#{board.boardNo},#{user.userNo},#{checkLike})
 	 </insert>
 	 
+	 <insert id="addScrap" parameterType="scrap">
+	 	INSERT 
+	 	INTO scrap(scrap_no, board_no, user_no, check_scrap) 
+	 	VALUES('SC'||seq_sc.nextval,#{board.boardNo},#{user.userNo},#{checkScrap})
+	 </insert>
 	 
 	 
 	<select id="listBoard" parameterType="com.zagle.service.domain.SearchBoard" resultMap="boardSelectMap">
@@ -149,6 +154,21 @@
 			</if>
 			<if test='checkLike=="2"'>
 			check_like='1'
+			</if>
+		</set>
+		WHERE board_no=#{board.boardNo} 
+		AND user_no=#{user.userNo}
+	</update>
+	
+	
+	<update id="updateScrap" parameterType="scrap">
+		UPDATE scrap
+		<set>
+			<if test='checkScrap=="1"'>
+			check_scrap='2'
+			</if>
+			<if test='checkScrap=="2"'>
+			check_scrap='1'
 			</if>
 		</set>
 		WHERE board_no=#{board.boardNo} 

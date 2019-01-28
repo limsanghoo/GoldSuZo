@@ -33,6 +33,7 @@ import com.zagle.service.domain.Board;
 import com.zagle.service.domain.Comment;
 import com.zagle.service.domain.Like;
 import com.zagle.service.domain.Local;
+import com.zagle.service.domain.Scrap;
 import com.zagle.service.user.UserService;
 
 @RestController
@@ -216,7 +217,7 @@ public class BoardRestController {
 	   }
 	   
 	   @RequestMapping(value="json/updateLike/{userNo}/{boardNo}/{checkLike}", method=RequestMethod.GET)
-	   public int cancelLike(@PathVariable String userNo, @PathVariable String boardNo, @PathVariable String checkLike) throws Exception{
+	   public int updateLike(@PathVariable String userNo, @PathVariable String boardNo, @PathVariable String checkLike) throws Exception{
 		   
 		   System.out.println("/updateLike");
 		   System.out.println("userNo : "+userNo);
@@ -241,7 +242,48 @@ public class BoardRestController {
 		   return result;
 	   }
 	   
-
+	   @RequestMapping(value="json/addScrap/{userNo}/{boardNo}", method=RequestMethod.GET)
+	   public int addScrap(@PathVariable String userNo, @PathVariable String boardNo) throws Exception{
+		   
+		   System.out.println("/addScrap");
+		   System.out.println("userNo : "+userNo);
+		   System.out.println("boardNo : "+boardNo);
+		   
+		   Scrap scrap=new Scrap();
+		   scrap.setBoard(boardService.getBoard(boardNo));
+		   scrap.setUser(userService.getUser2(userNo));
+		   scrap.setCheckScrap("1");//스크랩 등록 상태
+		   
+		   boardService.addScrap(scrap);
+		   
+		   return 1;
+	   }
+	   
+	   @RequestMapping(value="json/updateScrap/{userNo}/{boardNo}/{checkScrap}", method=RequestMethod.GET)
+	   public int updateScrap(@PathVariable String userNo, @PathVariable String boardNo, @PathVariable String checkScrap) throws Exception{
+		   
+		   System.out.println("/updateScrap");
+		   System.out.println("userNo : "+userNo);
+		   System.out.println("boardNo : "+boardNo);
+		   System.out.println("checkScrap : "+checkScrap);
+		   
+		   Scrap scrap=new Scrap();
+		   scrap.setBoard(boardService.getBoard(boardNo));
+		   scrap.setUser(userService.getUser2(userNo));
+		   scrap.setCheckScrap(checkScrap);
+		   
+		   boardService.updateScrap(scrap);
+		   
+		   int result=0;
+		   
+		   if(checkScrap.equals("1")) {
+			   result=2;
+		   }else if(checkScrap.equals("2")) {
+			   result=1;
+		   }
+		   
+		   return result;
+	   }
 	
 	
 

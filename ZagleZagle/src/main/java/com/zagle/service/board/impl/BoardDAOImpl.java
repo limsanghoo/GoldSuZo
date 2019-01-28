@@ -16,6 +16,7 @@ import com.zagle.service.domain.Like;
 import com.zagle.service.domain.Link;
 import com.zagle.service.domain.Local;
 import com.zagle.service.domain.Report;
+import com.zagle.service.domain.Scrap;
 import com.zagle.service.domain.SearchBoard;
 
 @Repository("boardDAOImpl")
@@ -103,6 +104,16 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 	
 	@Override
+	public void addScrap(Scrap scrap) throws Exception {
+		sqlSession.insert("BoardMapper.addScrap", scrap);
+	}
+
+	@Override
+	public void updateScrap(Scrap scrap) throws Exception {
+		sqlSession.update("BoardMapper.updateScrap", scrap);
+	}
+	
+	@Override
 	public List<Local> getState() throws Exception {
 		return sqlSession.selectList("MapMapper.getState");
 	}
@@ -126,6 +137,8 @@ public class BoardDAOImpl implements BoardDAO{
 	public List<Board> getMapList(Search search) {
 		return sqlSession.selectList("BoardMapper.getMapList",search);
 	}
+
+	
 
 	
 
