@@ -9,7 +9,7 @@
 
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Loading Effects for Grid Items with CSS Animations" />
 <meta name="keywords" content="css animation, loading effect, google plus, grid items, masonry" />
 <meta name="author" content="Codrops" />
@@ -26,6 +26,27 @@
 <script src="/common/css/GridLoadingEffects/js/modernizr.custom.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>       
         
+        
+        
+ <!--  --> 
+ <!-- Favicons -->
+  <link href="/common/css/estateagency-master/img/favicon.png" rel="icon">
+  <link href="/common/css/estateagency-master/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="/common/css/estateagency-master/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="/common/css/estateagency-master/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/common/css/estateagency-master/lib/animate/animate.min.css" rel="stylesheet">
+  <link href="/common/css/estateagency-master/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="/common/css/estateagency-master/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="/common/css/estateagency-master/css/style.css" rel="stylesheet">      
 <style>
 
 @import url('https://fonts.googleapis.com/css?family=Poppins');
@@ -40,9 +61,9 @@
 }
 
 form{
-	 	padding-top : 150px;
+	 	/* padding-top : 150px;
 	 	padding-left:150px;
-        padding-right:150px;
+        padding-right:150px; */
        /*  background-color:#f2f2f2; */
         /* background-image: url(/common/css/html5up-helios/images/pic03.jpg); */
         /* background-size: cover; */
@@ -122,11 +143,11 @@ body {
 		pointer-events:none;
 }
 
-#selectMenu{
+/* #selectMenu{
 		padding-top : 100px;
 		padding-left: 300px;
 		padding-right: 300px;
-}
+} */
 
 #selectTown{
 	padding-top : 40px;
@@ -209,7 +230,10 @@ $(function(){
 					
 					if(data==1){
 						alert('등록 성공');
+						
+						$("#"+boardNo+"like").data("checklike","1");
 						$("img[name='"+boardNo+"emptyLike']").attr("src","/common/images/board/fullLike.png");
+						$("img[name='"+boardNo+"emptyLike']").attr("name",boardNo+"fullLike");
 					}
 				}
 			})			
@@ -225,10 +249,16 @@ $(function(){
 					
 					if(data==2){
 						alert('취소 성공');
+						
+						$("#"+boardNo+"like").data("checklike","2");
 						$("img[name='"+boardNo+"fullLike']").attr("src","/common/images/board/emptyLike.png");
+						$("img[name='"+boardNo+"fullLike']").attr("name",boardNo+"emptyLike");
 					}else if(data==1){
 						alert('재등록 성공');
+
+						$("#"+boardNo+"like").data("checklike","1");
 						$("img[name='"+boardNo+"emptyLike']").attr("src","/common/images/board/fullLike.png");
+						$("img[name='"+boardNo+"emptyLike']").attr("name",boardNo+"fullLike");
 					}
 				}
 				
@@ -249,6 +279,7 @@ $(function(){
 		alert(checkScrap);
 		
 		if(checkScrap=='0'){
+			
 			$.ajax({
 				
 				url: '/board/json/addScrap/'+userNo+'/'+boardNo,
@@ -257,7 +288,10 @@ $(function(){
 					
 					if(data==1){
 						alert('등록 성공');
+						
+						$("#"+boardNo+"scrap").data("checkscrap","1");
 						$("img[name='"+boardNo+"emptyScrap']").attr("src","/common/images/board/fullScrap.png");
+						$("img[name='"+boardNo+"emptyScrap']").attr("name",boardNo+"fullScrap");
 					}
 				}
 			})			
@@ -265,7 +299,7 @@ $(function(){
 		
 		if(checkScrap=='1' || checkScrap=='2'){
 			
-			alert("수정갑니다");
+			alert("수정"+checkScrap);
 			
 			$.ajax({
 				
@@ -275,10 +309,17 @@ $(function(){
 					
 					if(data==2){
 						alert('취소 성공');
+						
+						$("#"+boardNo+"scrap").data("checkscrap","2");
 						$("img[name='"+boardNo+"fullScrap']").attr("src","/common/images/board/emptyScrap.png");
+						$("img[name='"+boardNo+"fullScrap']").attr("name",boardNo+"emptyScrap");
+						
 					}else if(data==1){
 						alert('재등록 성공');
+												
+						$("#"+boardNo+"scrap").data("checkscrap","1");
 						$("img[name='"+boardNo+"emptyScrap']").attr("src","/common/images/board/fullScrap.png");
+						$("img[name='"+boardNo+"emptyScrap']").attr("name",boardNo+"fullScrap");
 					}
 				}
 				
@@ -288,13 +329,6 @@ $(function(){
 		
 	});//스크랩 끝
 	
-	
-	//신고 시작
-	$("input[name='addReport']").on("click", function(){
-		
-	
-		
-	});//신고 끝
 	
 	
 	
@@ -484,9 +518,15 @@ $(document).ready(function() {
 		}, 500);
  
 	}).scroll();
- 
- 
+	
 });
+
+//신고 새창 띄우기
+function openWin(){  
+    window.open("/view/board/addReport.jsp", "네이버새창", "width=800, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" );  
+}  
+
+
 
 </script>
 
@@ -604,7 +644,7 @@ $(document).ready(function() {
 	<span style="font-weight: bold; display: inline;">&nbsp;${board.user.userNickname}</span>
 	
 	
-	<span name="like" data-boardNo="${board.boardNo}" data-checkLike="${board.checkLike}">	
+	<span name="like" id="${board.boardNo}like" data-boardNo="${board.boardNo}" data-checkLike="${board.checkLike}">	
 	<c:choose>
 		<c:when test="${user.userNo !=null}">
 		
@@ -624,19 +664,19 @@ $(document).ready(function() {
 	</span>
 	
 	
-	<span name="scrap" data-boardNo="${board.boardNo}" data-checkScrap="${board.checkScrap}">
+	<span name="scrap" id="${board.boardNo}scrap" data-boardNo="${board.boardNo}" data-checkScrap="${board.checkScrap}">
 	<c:choose>
 		<c:when test="${user.userNo !=null}">
 			<c:if test="${board.scrapUserNo==null && board.checkScrap=='0'}">
-				<img src="/common/images/board/emptyScrap.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}emptyScrap"/>
+				<img src="/common/images/board/emptyScrap.png" style="display: inline; vertical-align: middle; float:right; width: 50px; height: 40px;" name="${board.boardNo}emptyScrap"/>
 			</c:if>
 			
 			<c:if test="${user.userNo==board.scrapUserNo && board.checkScrap=='1'}">
-				<img src="/common/images/board/fullScrap.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}fullScrap"/>
+				<img src="/common/images/board/fullScrap.png" style="display: inline; vertical-align: middle; float:right; width: 50px; height: 40px;" name="${board.boardNo}fullScrap"/>
 			</c:if>
 			
 			<c:if test="${user.userNo==board.scrapUserNo && board.checkScrap=='2'}">
-				<img src="/common/images/board/emptyScrap.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}emptyScrap"/>
+				<img src="/common/images/board/emptyScrap.png" style="display: inline; vertical-align: middle; float:right; width: 50px; height: 40px;" name="${board.boardNo}emptyScrap"/>
 			</c:if>
 		
 		</c:when>
@@ -724,36 +764,47 @@ $(document).ready(function() {
     <div class="modal-content">
     
 	<!-- 모달1 헤더 시작 -->
-      <div class="modal-header">
+    
       <div class="row">
       
       	<div class="col-md-11 col-md-offset-1">
         <span aria-hidden="true" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: 30px; margin-right:5px; display: inline;">&times;</span>       
         </div>
-        
+      </div> 
+       
+      <div class="row">  
+       <div class="col-md-12">
         <h4 class="modal-title" id="gridSystemModalLabel">
-        <div class="col-md-4" style="display: inline;">
+         
+        <div class="col-md-2" style="display: inline;">
         <img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px;" align="middle;"/>
+        </div>
+        <div class="col-md-4" style="display: inline;">
 		${board.user.userNickname}
 		</div>
 		
 		<!-- 내 글만 수정, 삭제 -->
 		<c:if test="${user.userNo==board.user.userNo}">
-		<div class="col-md-4 col-md-offset-4">
+		<div class="col-md-3 col-md-offset-4 ">
 		<input type="button" value="수정" data-update="${board.boardNo}"/>
         <div class="btn btn-primary" data-toggle="modal" data-target="#${board.boardNo}modal2">삭제</div>
         </div>
         </c:if>
         
+        <!-- 신고 버튼 -->
         <c:if test="${user.userNo!=board.user.userNo}">
-        <div class="col-md-4 col-md-offset-4">
-		<input type="button" value="신고" data-toggle="modal" data-target="#${board.boardNo}modal3"/>
+        <div class="col-md-5 col-md-offset-1">
+        <input type="button" value="신고" onClick="javascript:openWin();"/>
         </div>
         </c:if>
         
+         
         </h4>
+        
+       </div>
+        
         </div>
-      </div>
+     
      <!-- 모달1 헤더 끝 -->
       
      <!-- 모달1 바디 시작 -->
@@ -785,7 +836,7 @@ $(document).ready(function() {
       <!-- 모달1 바디 끝 -->
       
       <!-- 모달1 푸터 시작 -->
-      <div class="modal-footer">
+      <div>
       
 		<!-- listComment로 파라미터 보내기 -->      
      	<jsp:include page="/view/board/listComment.jsp">
@@ -819,29 +870,6 @@ $(document).ready(function() {
 <!-- 모달2 끝 -->
 
 
-<!-- 모달3 시작 -->
-<div class="modal"  aria-hidden="true" style="display: none; z-index: 1060;" id="${board.boardNo}modal3">
-    	<div class="modal-dialog modal-md">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            </div>
-            <div class="modal-body">
-             	<select class="form-control" id="reportReason" name="reportReason">
-		      	<option value="0">신고 사유를 선택해주세요 ▼</option>
-		      	<option value="1">욕설</option>
-		      	<option value="2">광고</option>
-		      	<option value="3">음란</option>
-		      	</select>
-            </div>
-            <div class="modal-footer">
-              <input type="button" class="btn btn-primary" value="신고" name="addReport"/>
-            </div>
-          </div>
-        </div>
-</div>
-
-<!-- 모달3 끝 -->
 </c:if>
 
 </c:forEach>       

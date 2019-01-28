@@ -11,6 +11,7 @@
 <!-- listBoard에서 파리미터 받기 -->
 <%String boardNo=request.getParameter("boardNo");%>
 
+
 <script type="text/javascript">
 
 $(function(){
