@@ -95,6 +95,7 @@
 		  <c:set var="i" value="0" />
 		  <c:forEach var="sell" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
+			<c:if test="${sell.sellState!=0}">
 			<tr class="list" data-sellno="${sell.sellNo}">
 				<td align="left">${ i }</td>
 			  <td align="left">${sell.sellName}</td>
@@ -120,6 +121,7 @@
 			  </td>
 			  
 			</tr>
+			</c:if>
           </c:forEach>
         
         </tbody>

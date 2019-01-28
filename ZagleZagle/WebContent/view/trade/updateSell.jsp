@@ -35,16 +35,28 @@
 <script type="text/javascript">
 		
 $(function() {
+	
+	var phone = '${sell.sellPhone}'.split('-');
+	
+	$("input:text[name='phone1']").val(phone[0]);
+	$("input:text[name='phone2']").val(phone[1]);
+	$("input:text[name='phone3']").val(phone[2]);
+
 	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-	$( "button:contains('등록')"  ).on("click" , function() {
-		addSell();
+	$( "button:contains('수정')"  ).on("click" , function() {
+		updateSell();
 	});
+	
+	$("button:contains('이전')").on("click", function() {
+		self.location="/trade/getSell?sellNo="+'${sell.sellNo}';
+		});
+	
 });	
  
- function addSell(){
+ function updateSell(){
 	 
 	 var value = "";	
-		if( $("input:text[name='phone1']").val() != ""  && $("input:text[name='phone2']").val() != ""  &&  $("input:text[name='phone3']").val() != "") {
+	 if( $("input:text[name='phone1']").val() != ""  && $("input:text[name='phone2']").val() != ""  &&  $("input:text[name='phone3']").val() != "") {
 			var value = $("input[name='phone1']").val() 
 								+'-'
 								+ $("input[name='phone2']").val()
@@ -52,9 +64,9 @@ $(function() {
 								+ $("input[name='phone3']").val();
 		}
 
-		$("input:hidden[name='sellPhone']").val( value );
+		$("input:hidden[name='sellPhone']").val(value);
 		
-		$("form").attr("method" , "POST").attr("action" , "/trade/addSell").submit();
+		$("form").attr("method" , "POST").attr("action" , "/trade/updateSell").submit();
  }
 		
 	</script>
@@ -67,15 +79,16 @@ $(function() {
 	<jsp:include page="/view/layout/toolbar.jsp"/>
    	<!-- ToolBar End /////////////////////////////////////-->
 	<form class="form-horizontal" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="sellNo" value="${sell.sellNo}"/>
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
 	<div class="row">
 	<div class="col-lg-9">
-	<H2>상품등록</H2>
+	<H2>상품수정</H2>
 	</div>
 	<div class="col-lg-3 text-center">
-		<button type="button" class="btn-inverse">등록</button>
+		<button type="button" class="btn-inverse">수정</button>
 		<button type="button" class="btn-inverse">이전</button>
 	</div>
 </div>
@@ -86,10 +99,10 @@ $(function() {
 	    
 		<div class="row">
 	  		<div class="col-xs-8 col-md-1 text-center" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: darkgray;"><strong>상품명</strong></div>
-			<div class="col-xs-4 col-md-5"><input type="text" class="form-control" id="sellName" name="sellName" placeholder="상품명"></div>
+			<div class="col-xs-4 col-md-5"><input type="text" class="form-control" id="sellName" name="sellName" value="${sell.sellName}"></div>
 			
 			<div class="col-xs-8 col-md-1 text-center" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: darkgray;"><strong>가격</strong></div>
-			<div class="col-xs-3 col-md-4"><input type="text" class="form-control" id="sellPrice" name="sellPrice"></div>
+			<div class="col-xs-3 col-md-4"><input type="text" class="form-control" id="sellPrice" name="sellPrice" value="${sell.sellPrice}"></div>
 			<div class="col-xs-1 col-md-1">원</div>
 		</div>
 		
@@ -115,33 +128,31 @@ $(function() {
 		    <div class="col-xs-8 col-md-1 text-center" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: darkgray;"><strong>판매방식</strong></div>
 			<div class="col-xs-4 col-md-5">
 				<select class="form-control" name="sellStyle">
-				<option value="10" >택배거래</option>
-				<option value="20" >직거래</option>
+				<c:if test="${sell.sellStyle=='10'}">
+				<option value="10" selected>택배거래</option>
+				<option value="20">직거래</option>
+				</c:if>
+				<c:if test="${sell.sellStyle=='20'}">
+				<option value="10">택배거래</option>
+				<option value="20" selected>직거래</option>
+				</c:if>
 			</select>
 			</div>
 		</div>
 		
 		<br/>
 
-		<div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: Gray;"></div>
+		<div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: darkgray;"></div>
 		
 		<br/>
 	
 	  	<div class="row">
-	  		<div class="col-xs-4 col-md-4">
-	    	<img src="${board.photo1}"/>사진1
-			</div>
-			<div class="col-xs-4 col-md-4">
-	    	<img src="${board.photo2}" />사진2
-			</div>
-			<div class="col-xs-4 col-md-4">
-	    	<img src="${board.photo3}"/>사진3
-			</div>
+			사진
 		</div>
 		
 		<br/>
 		
-		<div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: Gray;"></div>
+		<div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: darkgray;"></div>
 		
 		<br/>
 		
@@ -150,6 +161,7 @@ $(function() {
 	
 			<div class="col-xs-4 col-md-11" style="border-left-width: 0.1em; border-left-style: solid; border-left-color: darkgray;">
 			<textarea class="editable" id="sellText" name="sellText">
+			${sell.sellText}
 			</textarea>
 			</div>
 		</div>

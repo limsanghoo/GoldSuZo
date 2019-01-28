@@ -50,4 +50,13 @@ public class TradeDAOImpl implements TradeDAO{
 	public int getTotalCount(String userNo) {
 		return sqlSession.selectOne("SellMapper.getTotalCount",userNo);
 	}
+	@Override
+	public void updateSell(Sell sell) throws Exception {
+		sqlSession.update("SellMapper.updateSell",sell);
+	}
+
+	@Override
+	public void updateSellState(Sell sell) throws Exception {
+		sqlSession.update("SellMapper.updateSellState",sell);		
+	}
 }
