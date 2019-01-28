@@ -241,6 +241,7 @@ public class BoardRestController {
 		   
 		   return result;
 	   }
+
 	   
 	   @RequestMapping(value="json/addScrap/{userNo}/{boardNo}", method=RequestMethod.GET)
 	   public int addScrap(@PathVariable String userNo, @PathVariable String boardNo) throws Exception{
@@ -284,6 +285,7 @@ public class BoardRestController {
 		   
 		   return result;
 	   }
+
 	
 	
 

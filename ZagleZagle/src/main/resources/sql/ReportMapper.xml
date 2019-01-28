@@ -40,10 +40,44 @@
 	</update>
 	
 	<!--  SQL : GET REPORT (신고 이유 추출) -->
-	<select id="getReport" parameterType="string" resultMap="reportSelectMap">
+	<select id="getReportList" parameterType="com.zagle.service.domain.SearchAdmin" resultMap="reportSelectMap">
 		SELECT *
-		FROM report r, users u
-		WHERE u.user_no = #{reportedUserNo.userNo}
+		FROM(SELECT inner_table.*, ROWNUM AS row_seq
+				FROM (SELECT *
+								FROM report r, users u
+								WHERE u.user_no = r.reportied_user_no and r.reportied_user_no = #{checkReport.reportedUserNo.userNo:VARCHAR}
+							   <if test="searchCondition != null">
+										
+										
+											<if test="searchCondition == 0 and searchKeyword !='' ">
+										 				 and user_name = #{searchKeyword}
+													</if>
+													<if test="searchCondition == 1 and searchKeyword !='' ">
+										 			    and delete_count = #{searchKeyword}
+													</if>
+												
+											</if>
+											ORDER BY r.report_no ) inner_table	
+												WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	</select>
+	
+	<select id="getTotalCount4" parameterType="com.zagle.service.domain.SearchAdmin" resultType="int">
+	SELECT COUNT(*)
+	FROM( SELECT * 
+				FROM report r, users u
+				WHERE u.user_no = r.reportied_user_no and r.reportied_user_no = #{checkReport.reportedUserNo.userNo:VARCHAR}
+					
+						<if test="searchCondition != null">
+						
+								<if test="searchCondition == 0 and searchKeyword !='' ">
+						 			and user_name = #{searchKeyword}
+								</if>
+								<if test="searchCondition == 1 and searchKeyword !='' ">
+						 		    and delete_count = #{searchKeyword}
+						 		    </if>
+								</if>	) countTable
 	
 	</select>
+	
 	</mapper>

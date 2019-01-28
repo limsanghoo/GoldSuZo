@@ -53,7 +53,28 @@
 				
 				self.location = "/admin/listUser"
 			});
-		//=============================================	
+		
+		//=================List Black Obejct=============
+			
+				$("li:contains('예비 블랙리스트')").on("click" , function() {
+				
+				alert("클릭")
+				
+				self.location = "/admin/listBlackObject"
+			});
+			
+		//================ListBlackList===================
+			
+			
+				$("li:contains('블랙리스트 목록')").on("click" , function() {
+				
+				alert("클릭")
+				
+				self.location = "/admin/listBlackList"
+			});
+			
+		
+			
 		
 			
 		//================userNo 에서 블랙리스트 대상 된 이유 출력 Event ================//
@@ -69,7 +90,7 @@
 				
 				$.ajax(
 					{
-						url : "/admin/json/getReport"+userNo,
+						url : "/admin/json/getReportList/"+userNo,
 						method : "GET",
 						dataType : "json",
 						headers : {
@@ -77,12 +98,23 @@
 							"Content-Type" : "application/json"
 						},
 						success : function(JSONData, status) {
-							alert(JSONData.reportNo)
+							alert(JSONData)
+							var displayValue ="";
+							var temp ="";
 							
+							$.each(JSONData,function(index) {
 							
-							var displayValue ="<h6>"
-							+"신고 이유 :" +JSONData.reportReason
-							$("#"+userNo+"").html(displayValue);
+							temp = "<h6>"
+														+"   신고 사유 : "+JSONData[index].reportReason+"<br/>"
+														+"</h6>";
+							displayValue += temp;
+							
+							});
+							
+							$("h6")
+							$( "#"+userNo+"" ).html(displayValue);
+							
+						
 						}
 					});
 				////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -113,7 +145,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="siteManage.jsp" title="ZagleZagle">ZagleZagle</a>
+                <a class="navbar-brand" href="/board/listBoard" title="ZagleZagle">ZagleZagle</a>
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
@@ -122,11 +154,11 @@
                         <a><i class="fa fa-user"></i> 회원목록 상세보기 <span class="caret"></span></a>
                         <ul class="nav navbar-nav">
                             <li><a href="#"><i class="fa fa-table"></i>회원목록</a></li>
-                            <li><a href="editor.html"><i class="fa fa-edit"></i>예비 블랙리스트</a></li>
+                            <li id="listBlackObject"><a href="#"><i class="fa fa-edit"></i>예비 블랙리스트</a></li>
                             <li><a href="editor.html"><i class="fa fa-edit"></i>블랙리스트 목록</a></li>
                         </ul>
                     </li>
-                    <li><a href="bootstrap.html"><i class="fa fa-magic"></i> Bootstrap Elements</a></li>
+                    <li><a href="bootstrap.html"><i class="fa fa-magic"></i>신고 처리</a></li>
                     <li class="nav nav-list nav-list-expandable">
                         <a><i class="fa fa-key"></i> Collapsed Menu Item <span class="caret"></span></a>
                         <ul class="nav navbar-nav">
