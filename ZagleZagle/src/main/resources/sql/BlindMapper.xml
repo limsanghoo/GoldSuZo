@@ -35,4 +35,21 @@ blind_code = #{blindCode}
 WHERE blind_no = #{blindNo}
 </update>
 
+<select id="getBlindList" parameterType="com.zagle.service.domain.SearchAdmin" resultMap="blindSelectMap">
+	SELECT *
+	FROM (SELECT inner_table.*, ROWNUM AS row_seq
+	FROM(SELECT *	
+				FROM blind
+				ORDER BY blind_no ) inner_table
+				WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+</select>
+
+<select id="getTotalCountBlind" parameterType="com.zagle.service.domain.SearchAdmin" resultType="int" >
+	SELECT COUNT(*)
+				FROM(SELECT *	
+					FROM blind ) countTable
+				
+</select>
+
 </mapper>
