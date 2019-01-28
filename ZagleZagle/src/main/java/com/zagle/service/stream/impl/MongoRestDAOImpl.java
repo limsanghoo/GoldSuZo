@@ -187,6 +187,22 @@ public class MongoRestDAOImpl implements StreamRestDAO{
 		long dbsize = dbcoll.count();
 		return dbsize;
 	}
+	@Override
+	public long checkBan(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		MongoClientURI uri  = new MongoClientURI("mongodb://192.168.0.12:27017/stream"); 
+        MongoClient mongoClient = new MongoClient(uri);
+        DB db = mongoClient.getDB(uri.getDatabase());
+		System.out.println("MONGODB SUCCESS");
+
+
+		DBCollection dbcoll = db.getCollection("streams");
+		BasicDBObject query = new BasicDBObject();
+		query.put("banList.userNo",map.get("userNo")); 
+		long dbsize = dbcoll.find(query).count();
+		return dbsize;
+	
+	}
 
 	
 }

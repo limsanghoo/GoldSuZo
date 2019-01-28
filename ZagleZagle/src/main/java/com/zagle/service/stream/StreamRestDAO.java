@@ -16,6 +16,8 @@ public interface StreamRestDAO {
 	
 	public void addMongo(Stream stream)throws Exception;
 	
+	public long  checkBan(Map<String,Object> map) throws Exception;
+	
 	public void joinMongo(Map<String,Object> map)throws Exception;
 	
 	public long getTotalCount(SearchStream search)throws Exception;

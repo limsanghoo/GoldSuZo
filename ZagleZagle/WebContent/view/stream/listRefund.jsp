@@ -10,7 +10,15 @@
 <head>
 <title>스트리밍 목록조회</title>
 <style>
- 
+
+ .container{
+   text-align: center;   
+ }
+ 	#margin{
+ 	margin :40 3rem; 
+ 	color : white;
+ padding-top :100px;
+ 	}
  .homepage{
 	padding-top :100px;
     background-color: #935d8c;
@@ -40,6 +48,14 @@
       button.lined.thick{
          border:solid 6px #41403E;        
       }  
+      
+      .h1{
+      padding: 20px; 
+      margin: 20; 
+       font-color:white;
+       font-size:60px;  
+       
+      }
  
   </style>  
 
@@ -103,6 +119,8 @@ $(function() {
 
 <body>
 <jsp:include page="/view/layout/toolbar.jsp" /> 
+<div class="h1">환급리스트</div>    
+<div id="margin">
 
   <input type="hidden" id="currentPage" name="currentPage" value=""/>
 		
@@ -143,6 +161,6 @@ $(function() {
           </c:forEach>
         </tbody>
       </table> 
- 	  <jsp:include page="/view/stream/pageNavigator.jsp"/> 
+ 	  <jsp:include page="/view/stream/pageNavigator.jsp"/> </div>
 </body>
 </html>

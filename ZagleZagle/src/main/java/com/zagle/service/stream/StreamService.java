@@ -16,6 +16,8 @@ public interface StreamService {
 	
 	public void addSpon(Spon spon)throws Exception;
 	
+	public long checkBan(Map<String,Object>map)throws Exception;
+	
 	public void addRefund(Refund refund)throws Exception; 
 	
 	public void joinStream(Map<String,Object> map)throws Exception;

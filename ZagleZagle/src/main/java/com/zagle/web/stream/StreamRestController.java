@@ -357,6 +357,22 @@ public class StreamRestController {
 	}
 	
 
+	@RequestMapping(value="json/checkBan", method = RequestMethod.GET)
+	@ResponseBody
+	public String checkBan(@RequestParam("userNo")String userNo,@RequestParam("streamer")String streamer) throws Exception{
+
+		System.out.println("@PathVariable===>"+userNo+streamer);
+		Map<String,Object>map = new HashMap(); 
+		map.put("userNo",userNo);
+		map.put("streamer",streamer);
+		int result = (int) streamService.checkBan(map);
+		String string = String.valueOf(result);
+		//ModelAndView modelAndView = new ModelAndView(); 
+		// modelAndView.setViewName("jsonView");  
+	return string; 
+	}
+	
+
 }
 	
 	
