@@ -35,34 +35,36 @@
  color: white; 
 }
 
+.getUserInfo{
+	color: white; 
+}
+
 form{
 	 	padding-top : 150px;
 	 	padding-left:150px;
         padding-right:150px;
        /*  background-color:#f2f2f2; */
-        background-image: url(/common/css/html5up-helios/images/pic03.jpg);
-        background-size: cover;
+        /* background-image: url(/common/css/html5up-helios/images/pic03.jpg); */
+        /* background-size: cover; */
 	}
 
 body {
    	margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
-	background: #333;
-    
+	/* background: #333; */
+}
+
+.fullScreen{
+	background-size: cover;
+	background-image: url(/common/css/html5up-helios/images/pic03.jpg);
+	margin-right: 0;
 }
 
 .grid{
 	margin-bottom: 0px;
 }
 
-/* .containerList {
-	padding-top : 20px;
-    width: 1200px;
-    margin: auto;
-    columns: 4;
-    column-gap: 40px;
-} */
 
 .containerList .box {
     width: 100%;
@@ -138,9 +140,8 @@ body {
 #mydiv {
   position: absolute;
   z-index: 9;
-  background-color: #f1f1f1;
   text-align: center;
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(0,0,0,0);
   height: 700px;
   width: 600px;
 }
@@ -189,7 +190,8 @@ $(function(){
 		commentList(boardNo);
 	})
 	
-	//좋아요
+	
+	//좋아요 시작
 	$("span[name='like']").on("click", function(){
 		
 		var userNo="${user.userNo}";
@@ -215,7 +217,6 @@ $(function(){
 		
 		if(checkLike=='1' || checkLike=='2'){
 			
-			alert("수정간다");
 			$.ajax({
 				
 				url: '/board/json/updateLike/'+userNo+'/'+boardNo+'/'+checkLike,
@@ -232,12 +233,68 @@ $(function(){
 				}
 				
 			})
-		}//1일때 끝
+		}//1, 2일때 끝
 
 		
 	});//좋아요 끝
 	
 	
+	//스크랩 시작
+	$("span[name='scrap']").on("click", function(){
+		
+		var userNo="${user.userNo}";
+		var boardNo=$(this).data('boardno');
+		var checkScrap=$(this).data('checkscrap');
+		
+		alert(checkScrap);
+		
+		if(checkScrap=='0'){
+			$.ajax({
+				
+				url: '/board/json/addScrap/'+userNo+'/'+boardNo,
+				type: 'get',
+				success: function(data){
+					
+					if(data==1){
+						alert('등록 성공');
+						$("img[name='"+boardNo+"emptyScrap']").attr("src","/common/images/board/fullScrap.png");
+					}
+				}
+			})			
+		}//0일때 끝
+		
+		if(checkScrap=='1' || checkScrap=='2'){
+			
+			alert("수정갑니다");
+			
+			$.ajax({
+				
+				url: '/board/json/updateScrap/'+userNo+'/'+boardNo+'/'+checkScrap,
+				type: 'get',
+				success: function(data){
+					
+					if(data==2){
+						alert('취소 성공');
+						$("img[name='"+boardNo+"fullScrap']").attr("src","/common/images/board/emptyScrap.png");
+					}else if(data==1){
+						alert('재등록 성공');
+						$("img[name='"+boardNo+"emptyScrap']").attr("src","/common/images/board/fullScrap.png");
+					}
+				}
+				
+			})
+		}//1, 2일때 끝
+		
+		
+	});//스크랩 끝
+	
+	
+	//신고 시작
+	$("input[name='addReport']").on("click", function(){
+		
+	
+		
+	});//신고 끝
 	
 	
 	
@@ -338,7 +395,7 @@ function fncGetTown(){
 	$("form").attr("method" , "POST").attr("action" , "/board/listBoard?view=${param.view}").submit();
 }
 
-
+//채팅
 $(function(){
     dragElement(document.getElementById("mydiv"));
     function dragElement(elmnt) {
@@ -396,11 +453,40 @@ document.onmousemove = null;
       $(function(){
 
          $("#btn2:contains('보이기')").on("click",function(){
+        	if(document.getElementById("chatting")==null){
+        		$("#mydiv").append('<iframe id="chatting" src="/chat/getChat?room=${user.userAddr}" align="right" style="height:100%; width: 100%;" frameborder="0" scrolling="no"></iframe>');
+        	 }
+        	 
             $("#mydiv").css("display","inline");
             $(this).hide();
             $("#btn").show();
          });
       });
+      
+//채팅 배너
+$(document).ready(function() {
+	 
+	// 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
+	var floatPosition = parseInt($("#floatMenu").css('top'));
+	// 250px 이런식으로 가져오므로 여기서 숫자만 가져온다. parseInt( 값 );
+ 
+	$(window).scroll(function() {
+		// 현재 스크롤 위치를 가져온다.
+		var scrollTop = $(window).scrollTop();
+		var newPosition = scrollTop + floatPosition + "px";
+ 
+		/*/애니메이션 없이 바로 따라감
+		 $("#floatMenu").css('top', newPosition);
+		 */
+ 
+		$("#floatMenu").stop().animate({
+			"top" : newPosition
+		}, 500);
+ 
+	}).scroll();
+ 
+ 
+});
 
 </script>
 
@@ -418,21 +504,30 @@ document.onmousemove = null;
 <!-- 채팅창 시작 -->
 <div id="mydiv" style="display: none;">
    <div id="mydivheader">-여기를 눌러 이동-</div>
-   <iframe src="/chat/getChat?room=${user.userAddr}" align="right" style="height:100%; width: 100%;" frameborder="0" scrolling="no"></iframe>
 </div>
 <!-- 채팅창 끝 -->
 
 
-<div class="row">
+<div class="row fullScreen">
 
-<div class="col-sm-1">
-<button id="btn" style="margin-top: 200px;">숨기기</button>
-<button id="btn2" style="margin-top: 200px;">보이기</button>
+
+<c:if test="${user.userNo!=null}">
+<div class="col-sm-1" id="floatMenu">
+<button id="btn" style="margin-top: 200px;">채팅 숨기기</button>
+<button id="btn2" style="margin-top: 200px;">채팅 보이기</button>
 </div>
+</c:if>
 
 
 
+<c:if test="${user.userNo!=null}">
 <div class="col-sm-11">
+</c:if>
+
+<c:if test="${user.userNo==null}">
+<div class="col-sm-12">
+</c:if>
+
 <form name="listBoard">
 
 <div id="selectMenu">
@@ -529,7 +624,7 @@ document.onmousemove = null;
 	</span>
 	
 	
-	<span name="scrap">
+	<span name="scrap" data-boardNo="${board.boardNo}" data-checkScrap="${board.checkScrap}">
 	<c:choose>
 		<c:when test="${user.userNo !=null}">
 			<c:if test="${board.scrapUserNo==null && board.checkScrap=='0'}">
@@ -650,6 +745,12 @@ document.onmousemove = null;
         </div>
         </c:if>
         
+        <c:if test="${user.userNo!=board.user.userNo}">
+        <div class="col-md-4 col-md-offset-4">
+		<input type="button" value="신고" data-toggle="modal" data-target="#${board.boardNo}modal3"/>
+        </div>
+        </c:if>
+        
         </h4>
         </div>
       </div>
@@ -705,8 +806,7 @@ document.onmousemove = null;
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h4 class="modal-title"></h4>
-            </div><div class="container"></div>
+            </div>
             <div class="modal-body">
              	삭제하시겠습니까?
             </div>
@@ -719,6 +819,29 @@ document.onmousemove = null;
 <!-- 모달2 끝 -->
 
 
+<!-- 모달3 시작 -->
+<div class="modal"  aria-hidden="true" style="display: none; z-index: 1060;" id="${board.boardNo}modal3">
+    	<div class="modal-dialog modal-md">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+             	<select class="form-control" id="reportReason" name="reportReason">
+		      	<option value="0">신고 사유를 선택해주세요 ▼</option>
+		      	<option value="1">욕설</option>
+		      	<option value="2">광고</option>
+		      	<option value="3">음란</option>
+		      	</select>
+            </div>
+            <div class="modal-footer">
+              <input type="button" class="btn btn-primary" value="신고" name="addReport"/>
+            </div>
+          </div>
+        </div>
+</div>
+
+<!-- 모달3 끝 -->
 </c:if>
 
 </c:forEach>       
@@ -740,7 +863,6 @@ document.onmousemove = null;
   
 </div><!-- /container -->
 </form>
-</div><!-- 10 끝 -->
 </div><!-- row 끝 -->
   
     </body>

@@ -151,14 +151,12 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public void addScrap(Scrap scrap) throws Exception {
-		// TODO Auto-generated method stub
-		
+		boardDAO.addScrap(scrap);
 	}
 
 	@Override
-	public void cancelScrap(Scrap scrap) throws Exception {
-		// TODO Auto-generated method stub
-		
+	public void updateScrap(Scrap scrap) throws Exception {
+		boardDAO.updateScrap(scrap);
 	}
 	
 	@Override
