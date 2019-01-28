@@ -63,6 +63,10 @@ public class AdminDaoImpl implements AdminDao {
 		
 		sqlSession.insert("ReportMapper.addReport", report);
 	}
+	public Blind getBlind(String blindNo) throws Exception {
+		return sqlSession.selectOne("BlindMapper.getBlind", blindNo);
+	}
+	
 	public List<Blind> getBlindList(SearchAdmin search) throws Exception {
 		
 		return sqlSession.selectList("BlindMapper.getBlindList", search);

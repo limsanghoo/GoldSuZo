@@ -30,16 +30,23 @@ VALUES ('BL'||seq_bl.nextval, #{blindBoardNo.boardNo:VARCHAR}, '0',
 <update id="updateBlind" parameterType="com.zagle.service.domain.Blind">
 UPDATE blind
 <set>
-blind_code = #{blindCode}
+blind_code = #{blindCode:VARCHAR}
 </set>
-WHERE blind_no = #{blindNo}
+WHERE blind_no = #{blindNo:VARCHAR}
 </update>
+
+<select id="getBlind" parameterType="string" resultMap="blindSelectMap">
+	SELECT*
+	FROM blind
+	WHERE blind_no = #{value}
+</select>
 
 <select id="getBlindList" parameterType="com.zagle.service.domain.SearchAdmin" resultMap="blindSelectMap">
 	SELECT *
 	FROM (SELECT inner_table.*, ROWNUM AS row_seq
 	FROM(SELECT *	
 				FROM blind
+				WHERE blind_code = '0'
 				ORDER BY blind_no ) inner_table
 				WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
@@ -48,7 +55,8 @@ WHERE blind_no = #{blindNo}
 <select id="getTotalCountBlind" parameterType="com.zagle.service.domain.SearchAdmin" resultType="int" >
 	SELECT COUNT(*)
 				FROM(SELECT *	
-					FROM blind ) countTable
+					FROM blind 
+					WHERE blind_code = '0' ) countTable
 				
 </select>
 

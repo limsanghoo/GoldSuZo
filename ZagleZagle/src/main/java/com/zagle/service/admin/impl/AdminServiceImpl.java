@@ -111,6 +111,10 @@ public class AdminServiceImpl implements AdminService {
 		return map;
 	}
 	
+	public Blind getBlind(String blindNo) throws Exception {
+		return adminDao.getBlind(blindNo);
+	}
+	
 	public void addBlind(Blind blind) throws Exception {
 		
 		adminDao.addBlind(blind);
@@ -121,7 +125,7 @@ public class AdminServiceImpl implements AdminService {
 		adminDao.updateBlind(blind);
 	}
 	
-
+	
 	
 //	@Override
 //	public void addBlind2(Comment comment) throws Exception {

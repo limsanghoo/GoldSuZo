@@ -25,6 +25,8 @@ public interface AdminDao {
 	
 	public List<Report> getReportList(SearchAdmin search) throws Exception;
 	
+	public Blind getBlind(String blindNo) throws Exception;
+	
 	public List<Blind> getBlindList(SearchAdmin search) throws Exception;
 	///ADD
 	public void addReport(Report report) throws Exception;

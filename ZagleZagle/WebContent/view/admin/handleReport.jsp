@@ -90,7 +90,7 @@
 				
 				$.ajax(
 					{
-						url : "/admin/json/getReportList/"+userNo,
+						url : "/board/json/getBoard/"+boardNo,
 						method : "GET",
 						dataType : "json",
 						headers : {
@@ -98,21 +98,19 @@
 							"Content-Type" : "application/json"
 						},
 						success : function(JSONData, status) {
-							alert(JSONData)
-							var displayValue ="";
-							var temp ="";
-							
-							$.each(JSONData,function(index) {
-							
-							temp = "<h6>"
-														+"   신고 사유 : "+JSONData[index].reportReason+"<br/>"
-														+"</h6>";
-							displayValue += temp;
-							
-							});
-							
-							$("h6")
-							$( "#"+userNo+"" ).html(displayValue);
+						alert(JSONData.photo1)
+						
+						var photo = JSONData.photo1
+						
+						
+							var displayValue ="<h6>"
+														+"작성자 :"+JSONData.user.userNo+"<br/>"
+														+"사진 정보 : <img src='"+photo+"'/><br/>"
+														+"작성 내용 :"+JSONData.boardDetailText+"<br/>"
+														+"해시태그 :"+JSONData.hashTag+"<br/>"
+														+"작성 날짜 :"+JSONData.boardRegDate+"<br/>"
+														+"</h6>"
+							$( "#"+boardNo+"" ).html(displayValue);
 							
 						
 						}
@@ -161,6 +159,43 @@
 					});
 				////////////////////////////////////////////////////////////////////////////////////////////////////////
 			});
+			
+			
+////////////////////////////////////블라인드 게시물,댓글 삭제 처리//////////////////////////////////////////////////
+			
+			$("td:nth-child(4) i").on("click" , function() {
+				
+				
+				var blindNo = $(this).data("param");
+			
+				
+				
+				alert(blindNo)
+				
+				
+			
+			self.location="/admin/updateBlind?blindCode=1&blindNo="+blindNo;
+			
+		
+		});
+		
+		
+		
+		$("td:nth-child(5) i").on("click" , function() {
+					
+				
+				var blindNo = $(this).data("param1");
+			
+				
+				
+				alert(blindNo)
+				
+				
+			
+			self.location="/admin/updateBlind?blindCode=2&blindNo="+blindNo;
+			
+		
+		});
 		
 		
 		});
@@ -259,7 +294,8 @@
             <th align="center">No</th>
             <th align="left" >게시물No</th>
             <th align="left">댓글No</th>
-            <th align="left">처리</th>           
+            <th align="left">삭제</th>           
+            <th align="left">해지</th>
    			</tr>
         </thead>
         
@@ -275,7 +311,8 @@
    			 <td align="left" >${blind.blindBoardNo.boardNo}
    			 
    			 <c:if test="${blind.blindBoardNo.boardNo != null}">
-   			 <div style="padding-left: 22px;"><i class="glyphicon glyphicon-chevron-down" id= "${blind.blindBoardNo.boardNo}" data-param="${blind.blindBoardNo.boardNo}"></i></div>
+   			 <div style="padding-left: 22px;"><i class="glyphicon glyphicon-chevron-down" id= "${blind.blindBoardNo.boardNo}" 
+   			 data-param="${blind.blindBoardNo.boardNo}"></i></div>
    			 <input type="hidden" value="${blind.blindBoardNo.boardNo}">
    			 </c:if>
    			 
@@ -305,7 +342,12 @@
    		
    			  </td>
 			  <td align="left">
-			  <div style="padding-left: 7px;"><i class="glyphicon glyphicon-ban-circle"></i></div>
+			  <div style="padding-left: 7px;"><i class="glyphicon glyphicon-fire" data-param="${blind.blindNo}"></i></div>
+			  
+			  </td>
+			  
+			  <td align="left">
+			  <div style="padding-left: 7px;"><i class="glyphicon glyphicon-leaf" data-param1="${blind.blindNo}"></i></div>
 			  
 			  </td>
 			 

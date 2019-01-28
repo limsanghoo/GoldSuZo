@@ -32,6 +32,41 @@
 	
 	<script type="text/javascript">
 	
+	$(function() {
+		
+
+		
+		$("#addBlackList").on("click", function() {
+			
+			alert("클릭")
+			
+			fncAddBlackList();
+		});
+		
+		
+		function fncAddBlackList() {
+			
+			var userNo = $("td:nth-child(5) i").data("param2");
+			
+			alert(userNo)
+			
+			var banReason=$("input[name='banReason']").val();
+			
+			alert(banReason)
+			
+			
+			$("form").attr("method" , "POST").attr("action" , "/admin/updateUser2?blackCode=2&userNo="+userNo).submit();
+		
+			
+		}
+		
+		
+	});
+	
+	
+	
+	
+	
 	
 	function fncGetList(currentPage) {
 		
@@ -120,9 +155,102 @@
 				////////////////////////////////////////////////////////////////////////////////////////////////////////
 			});
 			
-			
-		});
 		
+			$("td:nth-child(3) i").on("click", function() {
+				alert("click 확인")
+				
+				var userName = $(this).data("param1")
+				
+				alert(userName)
+				
+				$.ajax(
+					{
+						url : "/admin/json/getReportList/"+userNo,
+						method : "GET",
+						dataType : "json",
+						headers : {
+							"Accept" : "application/json",
+							"Content-Type" : "application/json"
+						},
+						success : function(JSONData, status) {
+							alert(JSONData)
+							var displayValue ="";
+							var temp ="";
+							
+							$.each(JSONData,function(index) {
+							
+							temp = "<h6>"
+														+"   신고 사유 : "+JSONData[index].reportReason+"<br/>"
+														+"</h6>";
+							displayValue += temp;
+							
+							});
+							
+							$("h6")
+							$( "#"+userNo+"" ).html(displayValue);
+							
+						
+						}
+					});
+				////////////////////////////////////////////////////////////////////////////////////////////////////////
+				
+				
+				/////////////////////////////////////블랙 리스트 등록 하기///////////////////////////////////////////		
+				
+			});
+			
+			/*
+			$("td:nth-child(5) i").on("click" , function() {
+					
+		
+
+				
+			
+					var userNo = $(this).data("param2");
+				
+					
+					
+			
+					
+					
+				
+				self.location="/admin/updateUser2?blackCode=2&userNo="+userNo;
+				
+			
+			});
+			
+			*/
+			
+			$("td:nth-child(6) i").on("click" , function() {
+				
+			
+			
+				
+				
+				var userNo = $(this).data("param3");
+				alert(userNo)
+				
+				
+		
+				
+				
+			
+			self.location="/admin/updateUser2?blackCode=3&userNo="+userNo;
+			
+		
+		});
+	
+			
+			
+			
+		
+			
+			});
+	 
+	 
+	 
+		
+	
 
 	
    
@@ -218,7 +346,8 @@
             <th align="left" >회원No</th>
             <th align="left">이름</th>
             <th align="left">가입날짜</th>
-             <th align="left">삭제횟수</th>
+             <th align="left">등록처리</th>
+             <th align="left">해지처리</th>
           
           </tr>
         </thead>
@@ -231,15 +360,54 @@
    			<c:set var="i" value="${ i+1 }" />	
    			<tr>
    			<td align="left">${ i }</td>
+   			
 			  <td align="left">${user.userNo}
 			   <div style="padding-left: 22px;"><i class="glyphicon glyphicon-chevron-down" id= "${user.userNo}" data-param="${user.userNo}"></i></div>
 			  <input type="hidden" value="${user.userNo}">
 			  </td>
-			  <td align="left">${user.userName}</td>
+			  
+			  <td align="left">${user.userName}
+			   <div style="padding-left: 22px;"><i class="glyphicon glyphicon-chevron-down" id= "${user.userNo}" data-param1="${user.userNo}"></i></div>
+			  <input type="hidden" value="${user.userNo}">
+			  </td>
+			  
 			   <td align="left">${user.regDate}</td>
-			    <td align="left">${user.deleteCount}</td>
+			   
+			    <td align="left">
+			    <i class="glyphicon glyphicon-plus-sign" style="padding-left: 17px;" data-param2="${user.userNo}"  data-toggle="modal" data-target="#${user.userNo}modal1"></i>
+			    </td>
+			    
+			     <td align="left">
+			     <i class="glyphicon glyphicon-minus-sign" style="padding-left: 17px;" data-param3="${user.userNo}"></i>
+			     </td>
 		
 		   </tr>
+		   
+		   
+		      <!--  신고 사유 모달창 -->
+    <div class="modal" aria-hidden="true" style="display: none; z-index: 1060;" id="${user.userNo}modal1">
+	<div class="modal-dialog modal-md">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+              <div class="modal-body">
+              <form>
+              <input type="text" style="width: 100%" name="banReason" placeholder="제제 사유를 입력하세요">
+              </div>
+              <div class="modal-footer">
+              
+              <button class="btn btn-primary" name="addBlackList" id="addBlackList">블랙리스트 등록</button>
+              </form>
+            </div>
+          </div>
+        </div>
+</div>
+
+	<!-- 모달3 끝 -->
+		   
+		   
+		   
    			
    			  	</c:forEach>
 			  
@@ -255,6 +423,9 @@
         
     </div>
     <!-- /#wrapper -->
+    
+ 
+
 
     <script type="text/javascript" src="/common/css/PBDashboard/js/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="/common/css/PBDashboard/bootstrap/js/bootstrap.min.js"></script>

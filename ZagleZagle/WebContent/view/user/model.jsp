@@ -22,8 +22,7 @@
 	
 	
 	$(function() {
-	   
- 		alert('시사바바');
+	 
  		
  		if('${userNo}' !=null) {
  			

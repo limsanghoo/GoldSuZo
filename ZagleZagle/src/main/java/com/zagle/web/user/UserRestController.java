@@ -410,6 +410,7 @@ public class UserRestController {
 		    	
 		    	return null;
 		}
+	
 		/*
 		
 			@RequestMapping(value="kakaoLogin" ,method=RequestMethod.GET)

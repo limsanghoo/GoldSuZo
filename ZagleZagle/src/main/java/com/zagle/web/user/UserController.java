@@ -534,8 +534,10 @@ public class UserController {
 	      modelAndView.setViewName("/index.jsp");
 	        
 	      return modelAndView;
-		
+	
 		
 	}
+	
+	
 	
 }

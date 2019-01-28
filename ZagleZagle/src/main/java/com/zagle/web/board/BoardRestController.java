@@ -286,7 +286,13 @@ public class BoardRestController {
 		   return result;
 	   }
 
-	
-	
+	 @RequestMapping(value="json/getBoard/{boardNo}", method=RequestMethod.GET )
+	 public Board getBoard(@PathVariable String boardNo) throws Exception {
+		 
+		 System.out.println("====================Rest getBoard start==================");
+		 
+		 return boardService.getBoard(boardNo);
+		 
+	 }
 
 }

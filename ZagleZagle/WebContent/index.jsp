@@ -48,7 +48,27 @@
 			});
 		}); 
     
-	
+    	   /////=========Kakao Login View popup ==========////////////
+
+	       $(function() {
+	      	
+	    	  $("#Kakao").on("click", function() {
+	    		  
+	    		  alert("클릭 완료")
+	    		  
+	    		  
+	    		  var  URL = "https://kauth.kakao.com/oauth/authorize?client_id=c3883a306a9faad67b127d7631568b29&redirect_uri=http://192.168.0.16:8080/user/kakaologin&response_type=code"
+	    		  popWin
+	    		  = window.open(URL,   "popWin",  "left=300,top=200,width=780,height=130,marginwidth=0,marginheight=0,"+
+							"scrollbars=no,scrolling=no,menubar=no,resizable=no")
+	    				
+							 opener.window.location = url;
+	    		  close();
+							
+							
+	    	  });
+			
+	       }); 
 	
 	</script>
 	
@@ -148,10 +168,9 @@ background-color: rgba(0,0,0,0.1);
 				
 				<br><br>
 					
-			<div class="snsLoginButton" align="center">		
-			<a href="https://kauth.kakao.com/oauth/authorize?client_id=c3883a306a9faad67b127d7631568b29&redirect_uri=http://192.168.0.16:8080/user/kakaologin&response_type=code">
-	  	 <img src="/common/images/KakaoTalk.png" height="50" width="50" />
-			</a>
+			<a href=# id="Kakao">
+	   <img src="/common/images/KakaoTalk.png" height="50" width="50"/>
+		</a>
 		
 	
 		<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=ICC6WpwdQLzHUQn5KfEC&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fuser%2FnaverCallback&state=state">
