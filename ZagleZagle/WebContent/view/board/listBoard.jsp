@@ -9,7 +9,7 @@
 
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Loading Effects for Grid Items with CSS Animations" />
 <meta name="keywords" content="css animation, loading effect, google plus, grid items, masonry" />
 <meta name="author" content="Codrops" />
@@ -26,6 +26,27 @@
 <script src="/common/css/GridLoadingEffects/js/modernizr.custom.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>       
         
+        
+        
+ <!--  --> 
+ <!-- Favicons -->
+  <link href="/common/css/estateagency-master/img/favicon.png" rel="icon">
+  <link href="/common/css/estateagency-master/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="/common/css/estateagency-master/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="/common/css/estateagency-master/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/common/css/estateagency-master/lib/animate/animate.min.css" rel="stylesheet">
+  <link href="/common/css/estateagency-master/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="/common/css/estateagency-master/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="/common/css/estateagency-master/css/style.css" rel="stylesheet">      
 <style>
 
 @import url('https://fonts.googleapis.com/css?family=Poppins');
@@ -40,9 +61,9 @@
 }
 
 form{
-	 	padding-top : 150px;
+	 	/* padding-top : 150px;
 	 	padding-left:150px;
-        padding-right:150px;
+        padding-right:150px; */
        /*  background-color:#f2f2f2; */
         /* background-image: url(/common/css/html5up-helios/images/pic03.jpg); */
         /* background-size: cover; */
@@ -122,11 +143,11 @@ body {
 		pointer-events:none;
 }
 
-#selectMenu{
+/* #selectMenu{
 		padding-top : 100px;
 		padding-left: 300px;
 		padding-right: 300px;
-}
+} */
 
 #selectTown{
 	padding-top : 40px;
@@ -743,22 +764,28 @@ function openWin(){
     <div class="modal-content">
     
 	<!-- 모달1 헤더 시작 -->
-      <div class="modal-header">
+    
       <div class="row">
       
       	<div class="col-md-11 col-md-offset-1">
         <span aria-hidden="true" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: 30px; margin-right:5px; display: inline;">&times;</span>       
         </div>
-        
+      </div> 
+       
+      <div class="row">  
+       <div class="col-md-12">
         <h4 class="modal-title" id="gridSystemModalLabel">
-        <div class="col-md-4" style="display: inline;">
+         
+        <div class="col-md-2" style="display: inline;">
         <img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px;" align="middle;"/>
+        </div>
+        <div class="col-md-4" style="display: inline;">
 		${board.user.userNickname}
 		</div>
 		
 		<!-- 내 글만 수정, 삭제 -->
 		<c:if test="${user.userNo==board.user.userNo}">
-		<div class="col-md-4 col-md-offset-4">
+		<div class="col-md-3 col-md-offset-4 ">
 		<input type="button" value="수정" data-update="${board.boardNo}"/>
         <div class="btn btn-primary" data-toggle="modal" data-target="#${board.boardNo}modal2">삭제</div>
         </div>
@@ -766,15 +793,18 @@ function openWin(){
         
         <!-- 신고 버튼 -->
         <c:if test="${user.userNo!=board.user.userNo}">
-        <div class="col-md-4 col-md-offset-4">
+        <div class="col-md-5 col-md-offset-1">
         <input type="button" value="신고" onClick="javascript:openWin();"/>
         </div>
         </c:if>
         
-        
+         
         </h4>
+        
+       </div>
+        
         </div>
-      </div>
+     
      <!-- 모달1 헤더 끝 -->
       
      <!-- 모달1 바디 시작 -->
@@ -806,7 +836,7 @@ function openWin(){
       <!-- 모달1 바디 끝 -->
       
       <!-- 모달1 푸터 시작 -->
-      <div class="modal-footer">
+      <div>
       
 		<!-- listComment로 파라미터 보내기 -->      
      	<jsp:include page="/view/board/listComment.jsp">

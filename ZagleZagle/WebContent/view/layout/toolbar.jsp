@@ -23,8 +23,6 @@
 
   <!-- Bootstrap CSS File -->
   <link href="/common/css/estateagency-master/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 
   <!-- Libraries CSS Files -->
   <link href="/common/css/estateagency-master/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -41,8 +39,8 @@
     Author: BootstrapMade.com
     License: https://bootstrapmade.com/license/
   ======================================================= -->
-  <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+
+
 <script type="text/javascript">
 //============= logout Event  처리 =============	
 $(function() {
@@ -174,6 +172,15 @@ $("li:contains('로그아웃')").on("click",function() {
 
 });
 </script>
+ 
+ 
+<style>
+
+html{
+font-size: 100%;
+}
+
+</style> 
   
   
   
