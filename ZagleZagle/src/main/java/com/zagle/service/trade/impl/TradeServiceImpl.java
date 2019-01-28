@@ -44,4 +44,17 @@ public class TradeServiceImpl implements TradeService{
 		return tradeDAO.getSell(sellNo);
 	}
 
+	@Override
+	public Map<String, Object> listSell(Search search, String userNo) throws Exception {
+		List<Sell> list = tradeDAO.listSell(search, userNo);
+		int totalCount = tradeDAO.getTotalCount(userNo);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("totalCount", new Integer(totalCount));
+		
+		return map;
+	}
+
+
 }

@@ -1,6 +1,8 @@
 package com.zagle.service.trade.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +38,16 @@ public class TradeDAOImpl implements TradeDAO{
 	public Sell getSell(String sellNo) throws Exception {
 		return sqlSession.selectOne("SellMapper.getSell",sellNo);
 	}
-
+	@Override
+	public List<Sell> listSell(Search search, String userNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("search", search);
+		map.put("userNo", userNo);
+		
+		return sqlSession.selectList("SellMapper.listSell", map);
+	}
+	@Override
+	public int getTotalCount(String userNo) {
+		return sqlSession.selectOne("SellMapper.getTotalCount",userNo);
+	}
 }

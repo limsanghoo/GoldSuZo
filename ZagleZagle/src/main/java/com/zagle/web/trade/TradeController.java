@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.zagle.common.Page;
 import com.zagle.common.Search;
 import com.zagle.service.domain.Sell;
 import com.zagle.service.domain.User;
@@ -28,6 +30,12 @@ public class TradeController {
 	
 	public TradeController() {
 	}
+	
+	@Value("#{commonProperties['pageUnit']}")
+	int pageUnit;
+
+	@Value("#{commonProperties['pageSize']}")
+	int pageSize;
 	
 	@RequestMapping(value="listTrade", method=RequestMethod.GET)
 	public ModelAndView listTrade(@ModelAttribute("search") Search search) throws Exception{
@@ -71,6 +79,38 @@ public class TradeController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("forward:/view/trade/getSell.jsp");
 		modelAndView.addObject("sell",sell);
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="listSell", method=RequestMethod.GET)
+	public ModelAndView listSell(HttpSession session, @ModelAttribute("search") Search search) throws Exception{
+		
+		User user = (User)session.getAttribute("user");
+		
+		if (search.getCurrentPage() == 0) {
+			search.setCurrentPage(1);
+		}
+		search.setPageSize(pageSize);
+		
+		Map<String , Object> map = tradeService.listSell(search, user.getUserNo());
+		
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize );
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("forward:/view/trade/listSell.jsp");
+		modelAndView.addObject("list",map.get("list"));
+		modelAndView.addObject("resultPage",resultPage);
+		modelAndView.addObject("search",search);
+		
+		return modelAndView;
+	}
+	
+	
+	@RequestMapping(value="listBuy")
+	public ModelAndView listBuy(@RequestParam("userNo") String userNo) throws Exception{
+		
+		ModelAndView modelAndView = new ModelAndView();
 		
 		return modelAndView;
 	}

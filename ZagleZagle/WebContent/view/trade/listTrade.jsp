@@ -130,8 +130,12 @@ function enter() {
 
 <!-- 검색 -->
 <span id="searchKeyword">
-<input type="text" name="searchKeyword" value="${! empty searchBoard.searchKeyword ? searchBoard.searchKeyword : ''}" onkeypress="enter()"; placeholder=""/>
+<input type="text" name="searchKeyword" value="${! empty searchBoard.searchKeyword ? searchBoard.searchKeyword : ''}" onkeypress="enter()" placeholder=""/>
 </span>
+
+<label>
+<input type="checkbox"> Remember me
+</label>
 
 <!-- 게시물 등록 -->
 <c:if test="${user.userNo!=null}">
