@@ -324,13 +324,13 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 					}
 				}else{
 					if (data.ms.substring(data.ms.length-3)=='jpg'||data.ms.substring(data.ms.length-3)=='png') {
-						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg dropdown-toggle' data-toggle='dropdown'><ul class='dropdown-menu'><li><div onclick='javascript:sChat(/"+data.id+"/)'>1:1채팅하기</div><div onclick='javascript:sChat(/"+data.id+"/)'>1:1화상채팅하기</div></li></ul><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer' onclick='javascript:mdmd(/"+data.ms+"/);'><img src='/common/images/chat/"+data.ms+"' style='width: 200px; height: 180px;' class='img-thumbnail' /><span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
+						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg dropdown-toggle' data-toggle='dropdown'><ul class='dropdown-menu'><li><div onclick='javascript:sChat(/"+data.id+"/)'>1:1채팅하기</div><div onclick='javascript:strChat(/"+data.id+"/)'>1:1화상채팅하기</div></li></ul><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer' onclick='javascript:mdmd(/"+data.ms+"/);'><img src='/common/images/chat/"+data.ms+"' style='width: 200px; height: 180px;' class='img-thumbnail' /><span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
 						$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
 					}else if(data.ms.substring(data.ms.length-3)=='mp4'||data.ms.substring(data.ms.length-3)=='wmv'){
-						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg dropdown-toggle' data-toggle='dropdown'><ul class='dropdown-menu'><li><div onclick='javascript:sChat(/"+data.id+"/)'>1:1채팅하기</div><div onclick='javascript:sChat(/"+data.id+"/)'>1:1화상채팅하기</div></li></ul><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer'><video controls controlsList='nodownload' width='320' height='240' muted><source src='http://192.168.0.25:8080/common/images/chat/"+data.ms+"' type='video/mp4'><a href='http://192.168.0.25:8080/common/images/chat/"+data.ms+"'>download video</a></video><span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
+						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg dropdown-toggle' data-toggle='dropdown'><ul class='dropdown-menu'><li><div onclick='javascript:sChat(/"+data.id+"/)'>1:1채팅하기</div><div onclick='javascript:strChat(/"+data.id+"/)'>1:1화상채팅하기</div></li></ul><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer'><video controls controlsList='nodownload' width='320' height='240' muted><source src='http://192.168.0.25:8080/common/images/chat/"+data.ms+"' type='video/mp4'><a href='http://192.168.0.25:8080/common/images/chat/"+data.ms+"'>download video</a></video><span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
 						$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
 					}else{
-						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg dropdown-toggle' data-toggle='dropdown'><ul class='dropdown-menu'><li><div onclick='javascript:sChat(/"+data.id+"/)'>1:1채팅하기</div><div onclick='javascript:sChat(/"+data.id+"/)'>1:1화상채팅하기</div></li></ul><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer'>"+data.ms+"<span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
+						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg dropdown-toggle' data-toggle='dropdown'><ul class='dropdown-menu'><li><div onclick='javascript:sChat(/"+data.id+"/)'>1:1채팅하기</div><div onclick='javascript:strChat(/"+data.id+"/)'>1:1화상채팅하기</div></li></ul><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer'>"+data.ms+"<span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
 						$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
 						
 					}
@@ -341,6 +341,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 			
 			////////////1:1채팅신청///////
 			$("#btn_one").on("click",function(){
+				alert("온클릭 요기")
 				var name = $(this).text();
 				socket.emit("one_msg",{a_user:"${user.userNickname}",b_user:name,ms:"${user.profile}"});
 			})
@@ -352,22 +353,39 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 			});
 			
 			socket.on("one_msg",function(msg){
+				alert(msg.b_user);
 				if (msg.b_user=="${user.userNickname}"&&msg.ms!="ok"&&msg.ms!="no") {
 					$("#m_body2").html("<img src='/common/images/profile/"+msg.ms+"' class='img-thumbnail' style='height: auto;width:150px'/><div >"+msg.a_user+"님이 1:1채팅신청을 하셨슴다.</div>");
 					$("#ok_chat").val(msg.a_user)
 					mdstart2.click();
 				}else if(msg.b_user=="${user.userNickname}"&&msg.ms=="ok"){
-					window.open("http://192.168.0.25:8080/chat/getChat?room="+msg.b_user,"_blank", "width=400, height=600, scrollbars=no ,location=no,resizable=yes,toolbar=no ")
+					window.open("/chat/getChat?room="+msg.b_user,"_blank", "width=400, height=600, scrollbars=no ,location=no,resizable=yes,toolbar=no ")
 					
 				}else if(msg.b_user=="${user.userNickname}"&&msg.ms=="no"){
 					alert("상대방이 거절하셧슴다.")
+				}else if(msg.b_user.substring(0,msg.b_user.length-2)=="${user.userNickname}"&&msg.ms!="ok"&&msg.ms!="no"){
+					$("#m_body2").html("<img src='/common/images/profile/"+msg.ms+"' class='img-thumbnail' style='height: auto;width:150px'/><div >"+msg.a_user+"님이 1:1화상채팅신청을 하셨슴다.</div>");
+					$("#ok_chat").val(msg.a_user)
+					mdstart2.click();
+				}else if(msg.b_user.substring(0,msg.b_user.length-2)=="${user.userNickname}"&&msg.ms=="ok"){
+					window.open("https://192.168.0.12/stream/videochat?applyuserNo="+msg.a_user+"&userName=${user.userNickname}","_blank", "width=400, height=300, scrollbars=no");
+				}else if(msg.b_user.substring(0,msg.b_user.length-2)=="${user.userNickname}"&&msg.ms=="no"){
+					alert("상대방이 거절하셧슴다.")
+				}else{
+					alert("해당사항없음")
+					alert(msg.b_user.substring(0,msg.b_user.length-2))
 				}
+				
 			});
 			///////////1:1채팅신청결과///////
 			$("#ok_chat").on("click",function(){
 				var name = $(this).val();
 				socket.emit("one_msg",{a_user:"${user.userNickname}",b_user:name,ms:"ok"});
-				window.open("http://192.168.0.25:8080/chat/getChat?room="+name,"_blank", "width=400, height=600, scrollbars=no ,location=no,resizable=yes,toolbar=no")
+				if (name.substring(name.length-2)=="@s") {
+					window.open("https://192.168.0.12/stream/videochat?applyuserNo="+name+"&userName=${user.userNickname}","_blank", "width=400, height=300, scrollbars=no");  
+				}else{
+					window.open("/chat/getChat?room="+name,"_blank", "width=400, height=600, scrollbars=no ,location=no,resizable=yes,toolbar=no")
+				}
 			})
 			$("#no_chat").on("click",function(){
 				var name = $("#ok_chat").val();
@@ -581,11 +599,18 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 			});
 			
 		});
-		function sChat(name,pro){
-			
+		function sChat(name){
 			var text1 = name.toString();
 			var name = text1.substring(1,text1.length-1);
 			$("#btn_one").text(name);
+			btn_one.click();
+		}
+		function strChat(name){
+			alert("젭라")
+			var text1 = name.toString();
+			var name = text1.substring(1,text1.length-1);
+			$("#btn_one").text(name+"@s");
+			
 			btn_one.click();
 		}
 		$(document).ready(function(){
