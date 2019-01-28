@@ -357,7 +357,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 					$("#ok_chat").val(msg.a_user)
 					mdstart2.click();
 				}else if(msg.b_user=="${user.userNickname}"&&msg.ms=="ok"){
-					window.open("http://192.168.0.25:8080/chat/getChat?room="+msg.b_user,"_blank", "width=400, height=600, scrollbars=yes")
+					window.open("http://192.168.0.25:8080/chat/getChat?room="+msg.b_user,"_blank", "width=400, height=600, scrollbars=no ,location=no,resizable=yes,toolbar=no ")
 					
 				}else if(msg.b_user=="${user.userNickname}"&&msg.ms=="no"){
 					alert("상대방이 거절하셧슴다.")
@@ -367,7 +367,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 			$("#ok_chat").on("click",function(){
 				var name = $(this).val();
 				socket.emit("one_msg",{a_user:"${user.userNickname}",b_user:name,ms:"ok"});
-				window.open("http://192.168.0.25:8080/chat/getChat?room="+name,"_blank", "width=400, height=600, scrollbars=yes")
+				window.open("http://192.168.0.25:8080/chat/getChat?room="+name,"_blank", "width=400, height=600, scrollbars=no ,location=no,resizable=yes,toolbar=no")
 			})
 			$("#no_chat").on("click",function(){
 				var name = $("#ok_chat").val();
