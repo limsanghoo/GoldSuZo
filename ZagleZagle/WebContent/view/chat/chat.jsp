@@ -212,21 +212,35 @@ body,html{
 		right: 15px;
 		display: none;
 	}
-	.action_menu ul{
+	.action_menu a{
 		list-style: none;
-		padding: 0;
+		padding-left: 10px;
 	margin: 0;
+	color: white;
 	}
-	.action_menu ul li{
+	.action_menu a ul{
 		width: 100%;
 		padding: 10px 15px;
 		margin-bottom: 5px;
 	}
-	.action_menu ul li i{
+	.action_menu a ul li{
 		padding-right: 10px;
 	
 	}
-	.action_menu ul li:hover{
+	.action_menu a ul:hover{
+		cursor: pointer;
+		background-color: rgba(0,0,0,0.2);
+	}
+	.action2_menu a ul{
+		width: 100%;
+		padding: 10px 15px;
+		margin-bottom: 5px;
+	}
+	.action2_menu a ul li i{
+		padding-right: 10px;
+	
+	}
+	.action2_menu a ul li:hover{
 		cursor: pointer;
 		background-color: rgba(0,0,0,0.2);
 	}
@@ -254,7 +268,8 @@ body,html{
 	                   color-stop(.5, rgba(255, 255, 255, .2)),
 					   color-stop(.5, transparent), to(transparent));
 }
-
+margin-top: -1px;
+}
 #mydiv {
   position: absolute;
   z-index: 9;
@@ -324,13 +339,13 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 					}
 				}else{
 					if (data.ms.substring(data.ms.length-3)=='jpg'||data.ms.substring(data.ms.length-3)=='png') {
-						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg dropdown-toggle' data-toggle='dropdown'><ul class='dropdown-menu'><li><div onclick='javascript:sChat(/"+data.id+"/)'>1:1채팅하기</div><div onclick='javascript:sChat(/"+data.id+"/)'>1:1화상채팅하기</div></li></ul><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer' onclick='javascript:mdmd(/"+data.ms+"/);'><img src='/common/images/chat/"+data.ms+"' style='width: 200px; height: 180px;' class='img-thumbnail' /><span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
+						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg dropdown-toggle' data-toggle='dropdown'><ul class='dropdown-menu'><li><div onclick='javascript:sChat(/"+data.id+"/)'>1:1채팅하기</div><div onclick='javascript:strChat(/"+data.id+"/)'>1:1화상채팅하기</div></li></ul><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer' onclick='javascript:mdmd(/"+data.ms+"/);'><img src='/common/images/chat/"+data.ms+"' style='width: 200px; height: 180px;' class='img-thumbnail' /><span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
 						$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
 					}else if(data.ms.substring(data.ms.length-3)=='mp4'||data.ms.substring(data.ms.length-3)=='wmv'){
-						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg dropdown-toggle' data-toggle='dropdown'><ul class='dropdown-menu'><li><div onclick='javascript:sChat(/"+data.id+"/)'>1:1채팅하기</div><div onclick='javascript:sChat(/"+data.id+"/)'>1:1화상채팅하기</div></li></ul><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer'><video controls controlsList='nodownload' width='320' height='240' muted><source src='http://192.168.0.25:8080/common/images/chat/"+data.ms+"' type='video/mp4'><a href='http://192.168.0.25:8080/common/images/chat/"+data.ms+"'>download video</a></video><span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
+						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg dropdown-toggle' data-toggle='dropdown'><ul class='dropdown-menu'><li><div onclick='javascript:sChat(/"+data.id+"/)'>1:1채팅하기</div><div onclick='javascript:strChat(/"+data.id+"/)'>1:1화상채팅하기</div></li></ul><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer'><video controls controlsList='nodownload' width='320' height='240' muted><source src='http://192.168.0.25:8080/common/images/chat/"+data.ms+"' type='video/mp4'><a href='http://192.168.0.25:8080/common/images/chat/"+data.ms+"'>download video</a></video><span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
 						$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
 					}else{
-						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg dropdown-toggle' data-toggle='dropdown'><ul class='dropdown-menu'><li><div onclick='javascript:sChat(/"+data.id+"/)'>1:1채팅하기</div><div onclick='javascript:sChat(/"+data.id+"/)'>1:1화상채팅하기</div></li></ul><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer'>"+data.ms+"<span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
+						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg dropdown-toggle' data-toggle='dropdown'><ul class='dropdown-menu'><li><div onclick='javascript:sChat(/"+data.id+"/)'>1:1채팅하기</div><div onclick='javascript:strChat(/"+data.id+"/)'>1:1화상채팅하기</div></li></ul><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer'>"+data.ms+"<span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
 						$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
 						
 					}
@@ -357,9 +372,17 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 					$("#ok_chat").val(msg.a_user)
 					mdstart2.click();
 				}else if(msg.b_user=="${user.userNickname}"&&msg.ms=="ok"){
-					window.open("http://192.168.0.25:8080/chat/getChat?room="+msg.b_user,"_blank", "width=400, height=600, scrollbars=yes")
+					window.open("/chat/getChat?room="+msg.b_user,"_blank", "width=400, height=600, scrollbars=no ,location=no,resizable=yes,toolbar=no ")
 					
 				}else if(msg.b_user=="${user.userNickname}"&&msg.ms=="no"){
+					alert("상대방이 거절하셧슴다.")
+				}else if(msg.b_user.substring(0,msg.b_user.length-2)=="${user.userNickname}"&&msg.ms!="ok"&&msg.ms!="no"){
+					$("#m_body2").html("<img src='/common/images/profile/"+msg.ms+"' class='img-thumbnail' style='height: auto;width:150px'/><div >"+msg.a_user+"님이 1:1화상채팅신청을 하셨슴다.</div>");
+					$("#ok_chat").val(msg.a_user+"@s")
+					mdstart2.click();
+				}else if(msg.b_user.substring(0,msg.b_user.length-2)=="${user.userNickname}"&&msg.ms=="ok"){
+					window.open("https://192.168.0.12/stream/videochat?applyuserNo="+msg.a_user+"&userName=${user.userNickname}","_blank", "width=400, height=300, scrollbars=no");
+				}else if(msg.b_user.substring(0,msg.b_user.length-2)=="${user.userNickname}"&&msg.ms=="no"){
 					alert("상대방이 거절하셧슴다.")
 				}
 			});
@@ -367,7 +390,11 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 			$("#ok_chat").on("click",function(){
 				var name = $(this).val();
 				socket.emit("one_msg",{a_user:"${user.userNickname}",b_user:name,ms:"ok"});
-				window.open("http://192.168.0.25:8080/chat/getChat?room="+name,"_blank", "width=400, height=600, scrollbars=yes")
+				if (name.substring(name.length-2)=="@s") {
+					window.open("https://192.168.0.12/stream/videochat?applyuserNo=${user.userNickname}&userName=${user.userNickname}","_blank", "width=400, height=300, scrollbars=no");  
+				}else{
+					window.open("/chat/getChat?room="+name,"_blank", "width=400, height=600, scrollbars=no ,location=no,resizable=yes,toolbar=no")
+				}
 			})
 			$("#no_chat").on("click",function(){
 				var name = $("#ok_chat").val();
@@ -560,11 +587,52 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 			});
 			
 			$(function(){
-			    $("#msg_trans").on("click",function(){
+			    $("#msg_trans li a").on("click",function(){
+			        	var inputData = $('#msg').val();
+			        	var target = $(this).data("val");
+			        	alert(target)
+				        $.ajax({
+				                 type : 'post',
+				                 url : '/chat/json/translate2/',
+				                 data : { 
+				                	 "text" : inputData,
+				                	"target" : 	target	 
+				                 },
+				                 success : function(data) {	         		                	 
+				                //	 $("#msg").val(data);
+				                	$.ajax({
+						                 type : 'post',
+						                 url : '/chat/json/translate/',
+						                 data : { 
+						                	 "text" : data.text,
+						                	"target" : data.target,
+						                	"tranCode" : data.tranCode
+						                 },
+						                 success : function(data) {
+						                	alert("번역성공!!")
+						                	alert(data)
+						                	 $('#msg').val(data).focus();
+						                 },
+						                 error : function(error) {
+						                     alert("번역실패.");
+						                 }	
+					        
+					        		});
+				                 },
+				                 error : function(error) {
+				                     alert("번역실패.");
+				                 }	
+			        
+			        });
+			        
+				});
+			});
+			$(function(){
+			    $("#msg_trans2").on("click",function(){
 			        	var inputData = $('#msg').val();
 				        $.ajax({
 				                 type : 'post',
-				                 url : '/chat/json/translate/',
+				                 url : '/chat/json/translate2/',
 				                 data : { "text" : inputData},
 				                 success : function(data) {	         		                	 
 				                //	 $("#msg").val(data);
@@ -581,11 +649,17 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 			});
 			
 		});
-		function sChat(name,pro){
-			
+		function sChat(name){
 			var text1 = name.toString();
 			var name = text1.substring(1,text1.length-1);
 			$("#btn_one").text(name);
+			btn_one.click();
+		}
+		function strChat(name){
+			var text1 = name.toString();
+			var name = text1.substring(1,text1.length-1);
+			$("#btn_one").text(name+"@s");
+			
 			btn_one.click();
 		}
 		$(document).ready(function(){
@@ -677,9 +751,12 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 							</div>
 							<span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
 							<div class="action_menu">
-								<ul>
-									<li><i class="fas fa-exchange-alt" id="msg_trans">&nbsp;&nbsp;번역</i></li>
-								</ul>
+									<a href="#" class="dropdown-toggle fas fa-retweet" data-toggle="dropdown">&emsp;번역<b class="caret"></b></a>
+                   					 <ul class="dropdown-menu" style="background-color: rgba(0,0,0,0); text-align: right; border: 0em; color: fuchsia;" id="msg_trans">
+				                        <li><a href="#" data-val="en">영어</a>&emsp;</li>
+				                        <li><a href="#" data-val="ja">일어</a>&emsp;</li>
+				                        <li><a href="#" data-val="ko">한국어</a>&emsp;</li>
+				                     </ul>
 							</div>
 						</div>
 						<div class="card-body msg_card_body" id="chat_box">

@@ -32,7 +32,7 @@ form{
 	 	padding-left:150px;
         padding-right:150px;
        /*  background-color:#f2f2f2; */
-        background-image: url(/common/css/html5up-helios/images/pic03.jpg);
+/*         background-image: url(/common/css/html5up-helios/images/pic03.jpg); */
         background-size: cover;
 	}
 
@@ -130,8 +130,12 @@ function enter() {
 
 <!-- 검색 -->
 <span id="searchKeyword">
-<input type="text" name="searchKeyword" value="${! empty searchBoard.searchKeyword ? searchBoard.searchKeyword : ''}" onkeypress="enter()"; placeholder=""/>
+<input type="text" name="searchKeyword" value="${! empty searchBoard.searchKeyword ? searchBoard.searchKeyword : ''}" onkeypress="enter()" placeholder=""/>
 </span>
+
+<label>
+<input type="checkbox"> Remember me
+</label>
 
 <!-- 게시물 등록 -->
 <c:if test="${user.userNo!=null}">
@@ -146,7 +150,7 @@ function enter() {
  
  <c:forEach var="sell" items="${tradeList}">
 	<c:set var="i" value="${ i+1 }" />
-		
+		<c:if test="${sell.sellState !=0}">
 <!-- 썸네일 박스 시작 -->
 	
 <li>
@@ -177,89 +181,7 @@ function enter() {
 </div>
 </li>
 
-		
-<!-- <!-- 모달1 시작 --> -->
-<%-- <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="${sell.sellNo}modal1"> --%>
-<!--   <div class="modal-dialog" role="document"> -->
-<!--     <div class="modal-content"> -->
-    
-<!-- 	<!-- 모달1 헤더 시작 --> -->
-<!--       <div class="modal-header"> -->
-<!--       <div class="row"> -->
-      
-<!--       	<div class="col-md-11 col-md-offset-1"> -->
-<!--         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
-<!--         </div> -->
-        
-<!--         <h4 class="modal-title" id="gridSystemModalLabel"> -->
-<!--         <div class="col-md-4"> -->
-<%--         <img src="/common/images/profile/${sell.seller.profile}" style="height: 60px; width:60px;" align="middle"/> --%>
-<%-- 		${sell.seller.userNickname} --%>
-<!-- 		</div> -->
-		
-<!-- 		<!-- 내 글만 수정, 삭제 --> -->
-<%-- 		<c:if test="${user.userNo==sell.seller.userNo}"> --%>
-<!-- 		<div class="col-md-4 col-md-offset-4"> -->
-<%-- 		<input type="button" value="수정" data-update="${sell.sellNo}"/> --%>
-<!--         <div class="btn btn-primary" data-toggle="modal" data-target="#${sell.sellNo}modal2">삭제</div> -->
-<!--         </div> -->
-<%--         </c:if> --%>
-        
-<!--         </h4> -->
-<!--         </div> -->
-<!--       </div> -->
-<!--      모달1 헤더 끝 -->
-      
-<!--      모달1 바디 시작 -->
-<!--       <div class="modal-body">   -->
-<!-- 		<div> -->
-<%-- 			<c:if test="${sell.sellPhoto1 !=null}"> --%>
-<%-- 			<div><img src="${sell.sellPhoto1}" style="width: 500px"/></div> --%>
-<!-- 			<br/> -->
-<%-- 			</c:if> --%>
-
-<%-- 			<c:if test="${sell.sellPhoto2 !=null}"> --%>
-<%-- 			<div><img src="${sell.sellPhoto2}" style="width: 500px"/></div> --%>
-<!-- 			<br/> -->
-<%-- 			</c:if> --%>
-	
-<%-- 			<c:if test="${sell.sellPhoto3 !=null}"> --%>
-<%-- 			<div><img src="${sell.sellPhoto3}" style="width: 500px"/></div> --%>
-<!-- 			<br/> -->
-<%-- 			</c:if> --%>
-<!-- 		</div> -->
-<%-- 		${sell.sellText} --%>
-<!--       </div> -->
-<!--       모달1 바디 끝 -->
-<!--       모달1 푸터 시작 -->
-<!--       <div class="modal-footer"> -->
-<!-- <div class="btn btn-primary" data-toggle="modal" data-target="#${sell.sellNo}modal2">삭제</div> -->
-<!--       </div> -->
-<!--       모달1 푸터 끝 -->
-<!--     </div>/.modal-content -->
-<!--   </div>/.modal-dialog -->
-<!-- </div>/.modal -->
-<!-- <!-- 모달1 끝 --> -->
-
-<!-- <!-- 모달2 시작 --> -->
-<%-- <div class="modal"  aria-hidden="true" style="display: none; z-index: 1060;" id="${sell.sellNo}modal2"> --%>
-<!--     	<div class="modal-dialog modal-md"> -->
-<!--           <div class="modal-content"> -->
-<!--             <div class="modal-header"> -->
-<!--               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> -->
-<!--               <h4 class="modal-title"></h4> -->
-<!--             </div><div class="container"></div> -->
-<!--             <div class="modal-body"> -->
-<!--              	삭제하시겠습니까? -->
-<!--             </div> -->
-<!--             <div class="modal-footer"> -->
-<%--               <a href="/board/deleteBoard?boardNo=${sell.sellNo}" class="btn btn-primary">삭제</a> --%>
-<!--             </div> -->
-<!--           </div> -->
-<!--         </div> -->
-<!-- </div> -->
-<!-- <!-- 모달2 끝 --> -->
-
+</c:if>
 </c:forEach>     
 </ul> 
 

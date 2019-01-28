@@ -143,7 +143,10 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="addReport", method=RequestMethod.GET)
-	public ModelAndView addReport() throws Exception{
+	public ModelAndView addReport(@RequestParam("reportReason") String reportReason) throws Exception{
+		
+		System.out.println("/addReport");
+		System.out.println("리즌 : "+reportReason);
 		
 		ModelAndView modelAndView=new ModelAndView();
 		
@@ -357,28 +360,18 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="testUser")
-	public String testUser(HttpSession session) {
+	public String testUser(HttpSession session) throws Exception{
 		
 		User testUser = new User();
+	
+		//상아
+		//testUser=userService.getUser2("US10003");
 		
-		/*testUser.setUserNo("US10003");
-		testUser.setUserName("최상아");
-		testUser.setUserNickname("Ivory");
-		testUser.setUserAddr("서울 용산구 이태원동 123-123");
-		testUser.setProfile("aaa.jpg");*/
+		//인호
+		//testUser=userService.getUser2("US10023");
 		
-		testUser.setUserNo("US10023");
-		testUser.setUserNickname("이노인호");
-		testUser.setUserName("이인호");
-		testUser.setUserAddr("서울 용산구 이태원동 123-123");
-		testUser.setProfile("dlsgh.jpg");
-		
-//		testUser.setUserNo("US10027");
-//		testUser.setUserNickname("주그린");
-//		testUser.setUserName("김주현");
-//		testUser.setProfile("joo.png");
-//		testUser.setUserAddr("서울 서초구 서초동");
-		
+		//주현
+		testUser=userService.getUser2("US10027");	
 		
 		session.setAttribute("user", testUser);
 		

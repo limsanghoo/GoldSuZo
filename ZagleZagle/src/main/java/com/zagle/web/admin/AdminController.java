@@ -11,11 +11,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.zagle.common.Page;
 import com.zagle.service.admin.AdminService;
+import com.zagle.service.board.BoardService;
+import com.zagle.service.domain.BlackList;
+import com.zagle.service.domain.Blind;
+import com.zagle.service.domain.Board;
 import com.zagle.service.domain.SearchAdmin;
+import com.zagle.service.domain.User;
+import com.zagle.service.user.UserService;
 
 //===>Admin Controller
 @Controller
@@ -26,6 +33,12 @@ public class AdminController {
 	@Autowired
 	@Qualifier("adminServiceImpl")
 	private AdminService adminService;
+	@Autowired
+	@Qualifier("boardServiceImpl")
+	private BoardService boardService;
+	@Autowired
+	@Qualifier("userServiceImpl")
+	private UserService userService;
 	
 	public AdminController() {
 		
@@ -130,16 +143,120 @@ System.out.println(map.get("totalCount"));
 		
 		return modelAndView;
 	}
-	@RequestMapping(value="handleReport", method=RequestMethod.GET)
-	public ModelAndView handelReport() throws Exception {
+	@RequestMapping(value="handleReport")
+	public ModelAndView handelReport(@ModelAttribute("SearchAdmin") SearchAdmin search, HttpServletRequest request) throws Exception {
 		
-		System.out.println("/admin/handelReport : GET ");
+		System.out.println("/admin/handelReport : GET, POST ");
+
+		if(search.getCurrentPage() ==0 ){
+			search.setCurrentPage(1);
+		}
+		search.setPageSize(pageSize);
 		
-	 ModelAndView modelAndView = new ModelAndView();
-	 modelAndView.setViewName("/view/admin/handleReport.jsp");
-	 
-	 return modelAndView;
+		
+		
+		Map<String, Object> map = adminService.getBlindList(search);
+		
+		
+		
+		System.out.println(search.getCurrentPage());
+		System.out.println(pageUnit);
+		System.out.println(pageSize);
+		
+		System.out.println(map.get("totalCount"));
+		
+		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+	    System.out.println(resultPage);
+		
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("list", map.get("list"));
+		modelAndView.addObject("resultPage", resultPage);
+		modelAndView.addObject("search",search);
+		modelAndView.setViewName("/view/admin/handleReport.jsp");
+		
+		return modelAndView;
 	}
+	@RequestMapping(value="updateBlind" , method=RequestMethod.GET)
+	public ModelAndView updateBlind(@RequestParam("blindNo") String blindNo,
+																	@RequestParam("blindCode") String blindCode,
+																	 HttpServletRequest request) throws Exception {
+		
+		System.out.println("===============updateBlind(blindCode)=======================");
+		
+		
+		
+		
+		System.out.println("blindNo"+blindNo);
+		System.out.println("blindCode"+blindCode);
+		
+		Blind blind = adminService.getBlind(blindNo);
+		
+		String boardNo = blind.getBlindBoardNo().getBoardNo();
+		
+		Board board = boardService.getBoard(boardNo);
+		
+		System.out.println("boardNo 확인"+board);
+		
+		
 	
+		
+		blind.setBlindNo(blindNo);
+		blind.setBlindCode(blindCode);
+		
+		if(blindCode.equals("1")) {
+		board.setBoardStatus("2");
+		}else {
+		board.setBoardStatus("4");	
+		}
+		
+		adminService.updateBlind(blind);
+		boardService.updateBoard(board);
+		
+		
+		System.out.println("blind 확인 :"+blind);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
+		modelAndView.setViewName("redirect:/admin/handleReport");
+		
+		return modelAndView;
+		
+		
+	}
+	@RequestMapping(value="updateUser2", method=RequestMethod.POST)
+	public ModelAndView updateUser(@RequestParam("userNo") String userNo, @RequestParam("blackCode") int blackCode,
+																@ModelAttribute("blackList") BlackList blackList) throws Exception {
+		
+		
+		System.out.println("updateUser2 Start");
+		
+		System.out.println(userNo);
+		System.out.println(blackCode);
+		System.out.println(blackList);
+		
+		
+		
+		User user = userService.getUser2(userNo);
+		user.setBlackCode(blackCode);
+		
+		
+
+		userService.updateUser(user);
+		
+		blackList.setBlackUser(user);
+		
+		
+		
+		System.out.println("업데이트 확인용 :"+user);
+		adminService.addBlackList(blackList);
+		
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject(user);
+		modelAndView.setViewName("redirect:/admin/listBlackObject");
+		
+		return modelAndView;
+	}
 }
 

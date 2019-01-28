@@ -48,7 +48,27 @@
 			});
 		}); 
     
-	
+    	   /////=========Kakao Login View popup ==========////////////
+
+	       $(function() {
+	      	
+	    	  $("#Kakao").on("click", function() {
+	    		  
+	    		  alert("클릭 완료")
+	    		  
+	    		  
+	    		  var  URL = "https://kauth.kakao.com/oauth/authorize?client_id=c3883a306a9faad67b127d7631568b29&redirect_uri=http://192.168.0.16:8080/user/kakaologin&response_type=code"
+	    		  popWin
+	    		  = window.open(URL,   "popWin",  "left=300,top=200,width=780,height=130,marginwidth=0,marginheight=0,"+
+							"scrollbars=no,scrolling=no,menubar=no,resizable=no")
+	    				
+							 opener.window.location = url;
+	    		  close();
+							
+							
+	    	  });
+			
+	       }); 
 	
 	</script>
 	
@@ -59,9 +79,9 @@
 	body,html { background: url("https://images.wallpaperscraft.com/image/window_sunset_trees_132266_3840x2160.jpg") no-repeat center center fixed; -webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;}
 	
 	
-	.modal-body{
+	div.modal-body,.modal-content{
 
-background-color: #F5F5F5
+background-color: rgba(0,0,0,0.1);
 }
 	
 	
@@ -121,9 +141,8 @@ background-color: #F5F5F5
 						-->
 						<br/><br/>
 						<footer>
-								<img src="http://www.playtimetokyo.com/images/exposer/logo-login.png" style="width: 60px;height:60px;"/><br/>
 								<button class="button primary" id="login" data-toggle="modal" data-target="#modal1" >-login-</button>
-								<br/><br/><a href="/board/listBoard">온 동네 소식보기</a>
+								<br/><br/><a href="/board/listBoard?view=all">온 동네 소식보기</a>
 							</ul>
 						</footer>
 					</section>
@@ -145,14 +164,13 @@ background-color: #F5F5F5
    
    			<!-- 모달 Body -->	  
   			<div class="modal-body" style="text-align: center">
-			<form>
+		
 				
 				<br><br>
 					
-			<div class="snsLoginButton" align="center">		
-			<a href="https://kauth.kakao.com/oauth/authorize?client_id=c3883a306a9faad67b127d7631568b29&redirect_uri=http://192.168.0.16:8080/user/kakaologin&response_type=code">
-	  	 <img src="/common/images/KakaoTalk.png" height="50" width="50" />
-			</a>
+			<a href=# id="Kakao">
+	   <img src="/common/images/KakaoTalk.png" height="50" width="50"/>
+		</a>
 		
 	
 		<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=ICC6WpwdQLzHUQn5KfEC&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fuser%2FnaverCallback&state=state">
@@ -162,16 +180,16 @@ background-color: #F5F5F5
 		<img src="/common/images/smallGoogle.jpg" height="50" width="50" id="GGG"/>
 		</a>
 		
-	  <div style="font-style: inherit; color: black;">
+	  <div>
 				
 		<br>	<br>	<br>	<br>	<br/>
 				
-			<strong>SNS 로그인만 가능합니다.</strong>
+			<strong style="color: white; font-style: oblique;">SNS 로그인만 가능합니다.</strong>
 		</div>
 	  				
   				
   	</div>
-  	</form>
+
   					
   					
   	</div>

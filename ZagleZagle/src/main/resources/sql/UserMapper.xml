@@ -73,7 +73,8 @@
 			user_birth				=	#{userBirth:INTEGER},
 			user_sex					= #{userSex:VARCHAR},
 			user_addr				=	#{userAddr:VARCHAR},
-			profile						=	#{profile:VARCHAR}
+			profile						=	#{profile:VARCHAR},
+			black_code				= #{blackCode:VARCHAR}
 			
 	   	</set>
 	   	WHERE user_no = #{userNo}

@@ -53,9 +53,23 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.selectList("UserMapper.listUser", search);
 	}
 	
+	@Override
+	public List<Report> getReportList(SearchAdmin search) throws Exception {
+		
+		return sqlSession.selectList("ReportMapper.getReportList", search);
+	}
+	
 	public void addReport(Report report) throws Exception {
 		
 		sqlSession.insert("ReportMapper.addReport", report);
+	}
+	public Blind getBlind(String blindNo) throws Exception {
+		return sqlSession.selectOne("BlindMapper.getBlind", blindNo);
+	}
+	
+	public List<Blind> getBlindList(SearchAdmin search) throws Exception {
+		
+		return sqlSession.selectList("BlindMapper.getBlindList", search);
 	}
 	
 	@Override
@@ -125,8 +139,23 @@ public class AdminDaoImpl implements AdminDao {
 		
 		sqlSession.insert("BlackListMapper.addBlackList", blackList);
 	}
-	public Report getReport(String userNo) throws Exception {
+	public Report getReport(SearchAdmin search) throws Exception {
 		
-		return sqlSession.selectOne("ReportMapper.getReport", userNo);
+		return sqlSession.selectOne("ReportMapper.getReportList", search);
 	}
+
+	@Override
+	public int getTotalCount4(SearchAdmin search) throws Exception {
+		
+		return sqlSession.selectOne("ReportMapper.getTotalCount4", search);
+	}
+	
+	public int getTotalCountBlind(SearchAdmin search) throws Exception {
+		
+		return sqlSession.selectOne("BlindMapper.getTotalCountBlind", search);
+
+	}
+	
+	
+	
 }

@@ -244,4 +244,67 @@ import junit.framework.Assert;
 		Assert.assertEquals("1", blind.getBlindCode());
 		
 	}
+		//@Test
+		public void testgetReportList() throws Exception {
+		
+		SearchAdmin search = new SearchAdmin();
+		search.setCurrentPage(1);
+		search.setPageSize(3);
+		
+		User user = new User();
+		user.setUserNo("US10027");
+		
+		Report checkReport = new Report();
+		
+		checkReport.setReportedUserNo(user);
+		
+		search.setCheckReport(checkReport);
+		
+		System.out.println("====================listgetReportList====================");
+		
+		Map<String, Object> map = adminService.getReportList(search);
+		
+	
+		
+		List<Object> list = (List<Object>) map.get("list");
+		
+		
+		
+		//Assert.assertEquals(3, list.size());
+		
+		System.out.println("List 확인 :"+list);
+		System.out.println("사이즈 확인 :"+list.size());
+		
+		System.out.println("==============================================");
+		}
+		
+		@Test
+		public void testGetBlindList() throws Exception {
+			
+			SearchAdmin search = new SearchAdmin();
+			search.setCurrentPage(1);
+			search.setPageSize(10);
+			
+			System.out.println("====================listBlindList====================");
+			
+			Map<String, Object> map = adminService.getBlindList(search);
+			
+			List<Object> list = (List<Object>) map.get("list");
+			
+			Assert.assertEquals(3, list.size());
+			
+			System.out.println("List 확인 :"+list);
+			System.out.println("사이즈 확인 :"+list.size());
+			
+			System.out.println("==============================================");
+			
+			Integer totalCount = (Integer) map.get("totalCount");
+			
+			System.out.println(totalCount);
+			
+			System.out.println("==============================================");
+			
+			
+		}
+		
 }

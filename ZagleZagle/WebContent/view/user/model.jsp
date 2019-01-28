@@ -22,14 +22,16 @@
 	
 	
 	$(function() {
-	   
- 		alert('시사바바');
+	 
  		
- 	
+ 		if('${userNo}' !=null) {
+ 			
+ 		opener.location.replace("/board/listBoard/");
+ 		}
 
  		
  	
- 		window.opener.document.location.reload();
+ 
  		
 		window.close();    //현재 팝업창 Close	
  		

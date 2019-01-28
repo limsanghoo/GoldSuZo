@@ -17,19 +17,27 @@ public interface AdminService {
 	
 	public Map <String, Object> listBlackList(SearchAdmin search) throws Exception;
 	
+	public Map <String, Object> getReportList(SearchAdmin search) throws Exception;
+	
+	public Map <String, Object> getBlindList(SearchAdmin search) throws Exception;
+	
+	
 	public void addReport(Report report) throws Exception;
 	
 	public void addBlackList(BlackList blackList) throws Exception;
 	
 	public void updateReport(Report report) throws Exception;
 	
+	
 	public Map<String, Object> listUser(SearchAdmin search) throws Exception;
+	
+	public Blind getBlind(String BlindNo) throws Exception;
 	
 	public void addBlind(Blind blind) throws Exception;
 	
 	public void updateBlind(Blind blind) throws Exception;
 	
-	public Report getReport(String userNo) throws Exception;
+	
 	
 	//public void addBlind2(Comment comment) throws Exception;
 	

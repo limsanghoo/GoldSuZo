@@ -9,7 +9,7 @@
 
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Loading Effects for Grid Items with CSS Animations" />
 <meta name="keywords" content="css animation, loading effect, google plus, grid items, masonry" />
 <meta name="author" content="Codrops" />
@@ -26,6 +26,27 @@
 <script src="/common/css/GridLoadingEffects/js/modernizr.custom.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>       
         
+        
+        
+ <!--  --> 
+ <!-- Favicons -->
+  <link href="/common/css/estateagency-master/img/favicon.png" rel="icon">
+  <link href="/common/css/estateagency-master/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="/common/css/estateagency-master/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="/common/css/estateagency-master/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/common/css/estateagency-master/lib/animate/animate.min.css" rel="stylesheet">
+  <link href="/common/css/estateagency-master/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="/common/css/estateagency-master/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="/common/css/estateagency-master/css/style.css" rel="stylesheet">      
 <style>
 
 @import url('https://fonts.googleapis.com/css?family=Poppins');
@@ -35,34 +56,36 @@
  color: white; 
 }
 
+.getUserInfo{
+	color: white; 
+}
+
 form{
-	 	padding-top : 150px;
+	 	/* padding-top : 150px;
 	 	padding-left:150px;
-        padding-right:150px;
+        padding-right:150px; */
        /*  background-color:#f2f2f2; */
-        background-image: url(/common/css/html5up-helios/images/pic03.jpg);
-        background-size: cover;
+        /* background-image: url(/common/css/html5up-helios/images/pic03.jpg); */
+        /* background-size: cover; */
 	}
 
 body {
    	margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
-	background: #333;
-    
+	/* background: #333; */
+}
+
+.fullScreen{
+	background-size: cover;
+	background-image: url(/common/css/html5up-helios/images/pic03.jpg);
+	margin-right: 0;
 }
 
 .grid{
 	margin-bottom: 0px;
 }
 
-/* .containerList {
-	padding-top : 20px;
-    width: 1200px;
-    margin: auto;
-    columns: 4;
-    column-gap: 40px;
-} */
 
 .containerList .box {
     width: 100%;
@@ -120,11 +143,11 @@ body {
 		pointer-events:none;
 }
 
-#selectMenu{
+/* #selectMenu{
 		padding-top : 100px;
 		padding-left: 300px;
 		padding-right: 300px;
-}
+} */
 
 #selectTown{
 	padding-top : 40px;
@@ -138,9 +161,8 @@ body {
 #mydiv {
   position: absolute;
   z-index: 9;
-  background-color: #f1f1f1;
   text-align: center;
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(0,0,0,0);
   height: 700px;
   width: 600px;
 }
@@ -189,7 +211,8 @@ $(function(){
 		commentList(boardNo);
 	})
 	
-	//좋아요
+	
+	//좋아요 시작
 	$("span[name='like']").on("click", function(){
 		
 		var userNo="${user.userNo}";
@@ -207,7 +230,10 @@ $(function(){
 					
 					if(data==1){
 						alert('등록 성공');
+						
+						$("#"+boardNo+"like").data("checklike","1");
 						$("img[name='"+boardNo+"emptyLike']").attr("src","/common/images/board/fullLike.png");
+						$("img[name='"+boardNo+"emptyLike']").attr("name",boardNo+"fullLike");
 					}
 				}
 			})			
@@ -215,7 +241,6 @@ $(function(){
 		
 		if(checkLike=='1' || checkLike=='2'){
 			
-			alert("수정간다");
 			$.ajax({
 				
 				url: '/board/json/updateLike/'+userNo+'/'+boardNo+'/'+checkLike,
@@ -224,19 +249,85 @@ $(function(){
 					
 					if(data==2){
 						alert('취소 성공');
+						
+						$("#"+boardNo+"like").data("checklike","2");
 						$("img[name='"+boardNo+"fullLike']").attr("src","/common/images/board/emptyLike.png");
+						$("img[name='"+boardNo+"fullLike']").attr("name",boardNo+"emptyLike");
 					}else if(data==1){
 						alert('재등록 성공');
+
+						$("#"+boardNo+"like").data("checklike","1");
 						$("img[name='"+boardNo+"emptyLike']").attr("src","/common/images/board/fullLike.png");
+						$("img[name='"+boardNo+"emptyLike']").attr("name",boardNo+"fullLike");
 					}
 				}
 				
 			})
-		}//1일때 끝
+		}//1, 2일때 끝
 
 		
 	});//좋아요 끝
 	
+	
+	//스크랩 시작
+	$("span[name='scrap']").on("click", function(){
+		
+		var userNo="${user.userNo}";
+		var boardNo=$(this).data('boardno');
+		var checkScrap=$(this).data('checkscrap');
+		
+		alert(checkScrap);
+		
+		if(checkScrap=='0'){
+			
+			$.ajax({
+				
+				url: '/board/json/addScrap/'+userNo+'/'+boardNo,
+				type: 'get',
+				success: function(data){
+					
+					if(data==1){
+						alert('등록 성공');
+						
+						$("#"+boardNo+"scrap").data("checkscrap","1");
+						$("img[name='"+boardNo+"emptyScrap']").attr("src","/common/images/board/fullScrap.png");
+						$("img[name='"+boardNo+"emptyScrap']").attr("name",boardNo+"fullScrap");
+					}
+				}
+			})			
+		}//0일때 끝
+		
+		if(checkScrap=='1' || checkScrap=='2'){
+			
+			alert("수정"+checkScrap);
+			
+			$.ajax({
+				
+				url: '/board/json/updateScrap/'+userNo+'/'+boardNo+'/'+checkScrap,
+				type: 'get',
+				success: function(data){
+					
+					if(data==2){
+						alert('취소 성공');
+						
+						$("#"+boardNo+"scrap").data("checkscrap","2");
+						$("img[name='"+boardNo+"fullScrap']").attr("src","/common/images/board/emptyScrap.png");
+						$("img[name='"+boardNo+"fullScrap']").attr("name",boardNo+"emptyScrap");
+						
+					}else if(data==1){
+						alert('재등록 성공');
+												
+						$("#"+boardNo+"scrap").data("checkscrap","1");
+						$("img[name='"+boardNo+"emptyScrap']").attr("src","/common/images/board/fullScrap.png");
+						$("img[name='"+boardNo+"emptyScrap']").attr("name",boardNo+"fullScrap");
+					}
+				}
+				
+			})
+		}//1, 2일때 끝
+		
+		
+	});//스크랩 끝
 	
 	
 	
@@ -338,7 +429,7 @@ function fncGetTown(){
 	$("form").attr("method" , "POST").attr("action" , "/board/listBoard?view=${param.view}").submit();
 }
 
-
+//채팅
 $(function(){
     dragElement(document.getElementById("mydiv"));
     function dragElement(elmnt) {
@@ -396,11 +487,46 @@ document.onmousemove = null;
       $(function(){
 
          $("#btn2:contains('보이기')").on("click",function(){
+        	if(document.getElementById("chatting")==null){
+        		$("#mydiv").append('<iframe id="chatting" src="/chat/getChat?room=${user.userAddr}" align="right" style="height:100%; width: 100%;" frameborder="0" scrolling="no"></iframe>');
+        	 }
+        	 
             $("#mydiv").css("display","inline");
             $(this).hide();
             $("#btn").show();
          });
       });
+      
+//채팅 배너
+$(document).ready(function() {
+	 
+	// 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
+	var floatPosition = parseInt($("#floatMenu").css('top'));
+	// 250px 이런식으로 가져오므로 여기서 숫자만 가져온다. parseInt( 값 );
+ 
+	$(window).scroll(function() {
+		// 현재 스크롤 위치를 가져온다.
+		var scrollTop = $(window).scrollTop();
+		var newPosition = scrollTop + floatPosition + "px";
+ 
+		/*/애니메이션 없이 바로 따라감
+		 $("#floatMenu").css('top', newPosition);
+		 */
+ 
+		$("#floatMenu").stop().animate({
+			"top" : newPosition
+		}, 500);
+ 
+	}).scroll();
+	
+});
+
+//신고 새창 띄우기
+function openWin(){  
+    window.open("/view/board/addReport.jsp", "네이버새창", "width=800, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" );  
+}  
+
+
 
 </script>
 
@@ -418,21 +544,30 @@ document.onmousemove = null;
 <!-- 채팅창 시작 -->
 <div id="mydiv" style="display: none;">
    <div id="mydivheader">-여기를 눌러 이동-</div>
-   <iframe src="/chat/getChat?room=${user.userAddr}" align="right" style="height:100%; width: 100%;" frameborder="0" scrolling="no"></iframe>
 </div>
 <!-- 채팅창 끝 -->
 
 
-<div class="row">
+<div class="row fullScreen">
 
-<div class="col-sm-1">
-<button id="btn" style="margin-top: 200px;">숨기기</button>
-<button id="btn2" style="margin-top: 200px;">보이기</button>
+
+<c:if test="${user.userNo!=null}">
+<div class="col-sm-1" id="floatMenu">
+<button id="btn" style="margin-top: 200px;">채팅 숨기기</button>
+<button id="btn2" style="margin-top: 200px;">채팅 보이기</button>
 </div>
+</c:if>
 
 
 
+<c:if test="${user.userNo!=null}">
 <div class="col-sm-11">
+</c:if>
+
+<c:if test="${user.userNo==null}">
+<div class="col-sm-12">
+</c:if>
+
 <form name="listBoard">
 
 <div id="selectMenu">
@@ -509,7 +644,7 @@ document.onmousemove = null;
 	<span style="font-weight: bold; display: inline;">&nbsp;${board.user.userNickname}</span>
 	
 	
-	<span name="like" data-boardNo="${board.boardNo}" data-checkLike="${board.checkLike}">	
+	<span name="like" id="${board.boardNo}like" data-boardNo="${board.boardNo}" data-checkLike="${board.checkLike}">	
 	<c:choose>
 		<c:when test="${user.userNo !=null}">
 		
@@ -529,19 +664,19 @@ document.onmousemove = null;
 	</span>
 	
 	
-	<span name="scrap">
+	<span name="scrap" id="${board.boardNo}scrap" data-boardNo="${board.boardNo}" data-checkScrap="${board.checkScrap}">
 	<c:choose>
 		<c:when test="${user.userNo !=null}">
 			<c:if test="${board.scrapUserNo==null && board.checkScrap=='0'}">
-				<img src="/common/images/board/emptyScrap.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}emptyScrap"/>
+				<img src="/common/images/board/emptyScrap.png" style="display: inline; vertical-align: middle; float:right; width: 50px; height: 40px;" name="${board.boardNo}emptyScrap"/>
 			</c:if>
 			
 			<c:if test="${user.userNo==board.scrapUserNo && board.checkScrap=='1'}">
-				<img src="/common/images/board/fullScrap.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}fullScrap"/>
+				<img src="/common/images/board/fullScrap.png" style="display: inline; vertical-align: middle; float:right; width: 50px; height: 40px;" name="${board.boardNo}fullScrap"/>
 			</c:if>
 			
 			<c:if test="${user.userNo==board.scrapUserNo && board.checkScrap=='2'}">
-				<img src="/common/images/board/emptyScrap.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}emptyScrap"/>
+				<img src="/common/images/board/emptyScrap.png" style="display: inline; vertical-align: middle; float:right; width: 50px; height: 40px;" name="${board.boardNo}emptyScrap"/>
 			</c:if>
 		
 		</c:when>
@@ -629,30 +764,47 @@ document.onmousemove = null;
     <div class="modal-content">
     
 	<!-- 모달1 헤더 시작 -->
-      <div class="modal-header">
+    
       <div class="row">
       
       	<div class="col-md-11 col-md-offset-1">
         <span aria-hidden="true" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: 30px; margin-right:5px; display: inline;">&times;</span>       
         </div>
-        
+      </div> 
+       
+      <div class="row">  
+       <div class="col-md-12">
         <h4 class="modal-title" id="gridSystemModalLabel">
-        <div class="col-md-4" style="display: inline;">
+         
+        <div class="col-md-2" style="display: inline;">
         <img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px;" align="middle;"/>
+        </div>
+        <div class="col-md-4" style="display: inline;">
 		${board.user.userNickname}
 		</div>
 		
 		<!-- 내 글만 수정, 삭제 -->
 		<c:if test="${user.userNo==board.user.userNo}">
-		<div class="col-md-4 col-md-offset-4">
+		<div class="col-md-3 col-md-offset-4 ">
 		<input type="button" value="수정" data-update="${board.boardNo}"/>
         <div class="btn btn-primary" data-toggle="modal" data-target="#${board.boardNo}modal2">삭제</div>
         </div>
         </c:if>
         
-        </h4>
+        <!-- 신고 버튼 -->
+        <c:if test="${user.userNo!=board.user.userNo}">
+        <div class="col-md-5 col-md-offset-1">
+        <input type="button" value="신고" onClick="javascript:openWin();"/>
         </div>
-      </div>
+        </c:if>
+        
+         
+        </h4>
+        
+       </div>
+        
+        </div>
+     
      <!-- 모달1 헤더 끝 -->
       
      <!-- 모달1 바디 시작 -->
@@ -660,17 +812,17 @@ document.onmousemove = null;
 
 		<div>
 			<c:if test="${board.photo1 !=null}">
-			<div><img src="${board.photo1}" style="width: 500px"/></div>
+			<div><img src="${board.photo1}" style="width: 100%"/></div>
 			<br/>
 			</c:if>
 
 			<c:if test="${board.photo2 !=null}">
-			<div><img src="${board.photo2}" style="width: 500px"/></div>
+			<div><img src="${board.photo2}" style="width: 100%"/></div>
 			<br/>
 			</c:if>
 	
 			<c:if test="${board.photo3 !=null}">
-			<div><img src="${board.photo3}" style="width: 500px"/></div>
+			<div><img src="${board.photo3}" style="width: 100%"/></div>
 			<br/>
 			</c:if>
 		</div>
@@ -684,7 +836,7 @@ document.onmousemove = null;
       <!-- 모달1 바디 끝 -->
       
       <!-- 모달1 푸터 시작 -->
-      <div class="modal-footer">
+      <div>
       
 		<!-- listComment로 파라미터 보내기 -->      
      	<jsp:include page="/view/board/listComment.jsp">
@@ -705,8 +857,7 @@ document.onmousemove = null;
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h4 class="modal-title"></h4>
-            </div><div class="container"></div>
+            </div>
             <div class="modal-body">
              	삭제하시겠습니까?
             </div>
@@ -740,7 +891,6 @@ document.onmousemove = null;
   
 </div><!-- /container -->
 </form>
-</div><!-- 10 끝 -->
 </div><!-- row 끝 -->
   
     </body>
