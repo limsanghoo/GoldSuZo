@@ -27,20 +27,22 @@
 	
 	</insert>
 	
+	
+	<!--  
 	<select id="listBlackList" parameterType="com.zagle.service.domain.SearchAdmin" resultMap="blackListSelectMap">
 	SELECT b.black_no, u.user_no, b.ban_reason, b.ban_start_day, b.ban_expire_day, u.black_code
 		FROM blackList b, users u
 		WHERE b.user_no = u.user_no and u.black_code ='2'
 	</select>
+	 -->
 	
-	
-	<!--  
-	<select id="listBlackList" parameterType="com.zagle.service.domain.SearchAdmin" resultMap="adminSelectMap">
+
+	<select id="listBlackList" parameterType="com.zagle.service.domain.SearchAdmin" resultMap="blackListSelectMap">
 	SELECT*
 	FROM ( SELECT inner_table.*, ROWNUM AS row_seq
 					FROM ( SELECT b.black_no, b.user_no, b.ban_reason, b.ban_start_day, b.ban_expire_day, u.black_code
 									FROM blackList b, users u
-									WHERE u.black_code ='2'
+									WHERE b.user_no=u.user_no and u.black_code ='2'
 									<if test="searchCondition != null">
 												
 			
@@ -57,20 +59,21 @@
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	</select>
 
-	-->
-	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
+	
+	 <select  id="getTotalCount3"  parameterType="com.zagle.service.domain.SearchAdmin"	 resultType="int">
 	  	SELECT COUNT(*)
-	  	FROM(	SELECT user_no , user_name , sns_no, reg_date, delete_count
-						FROM users
+	  	FROM(	SELECT b.black_no, b.user_no, b.ban_reason, b.ban_start_day, b.ban_expire_day, u.black_code
+						FROM  blackList b, users u
+						WHERE u.black_code ='2'
 						<if test="searchCondition != null">
-							<where>
+						
 								<if test="searchCondition == 0 and searchKeyword !='' ">
-						 			user_name = #{searchKeyword}
+						 			and user_name = #{searchKeyword}
 								</if>
 								<if test="searchCondition == 1 and searchKeyword !='' ">
-						 		delete_count = #{searchKeyword}
+						 		    and delete_count = #{searchKeyword}
 								</if>
-							</where>
+						
 						</if> ) countTable						
 	 </select>
 	 

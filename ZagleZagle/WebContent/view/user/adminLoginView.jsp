@@ -8,34 +8,22 @@
 	
        
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="CSS/MiStilo.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+      
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	
-	<link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	
-	 <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-   
-	 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-
+	
+	
 	<script type="text/javascript">
 	
 	
 	
 	$( function() {
 		
-		$("#userNd").focus();
-		
+	
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		$("button").on("click" , function() {
 			var id=$("input:text").val();
@@ -95,6 +83,7 @@ label{
 button{
     font-family: monospace;
  text-shadow: 1px 2px #000;
+ background-color: green;
    
 }
 
@@ -105,65 +94,79 @@ button{
   width: 100%;
   min-height: 100%;
   padding: 20px;
+  background-color: rgba( 255, 255, 255, 0.5 )
+}
+
+input {
+  margin: 40px 25px;
+  width: 200px;
+  display: block;
+  border: none;
+  padding: 10px 0;
+  border-bottom: solid 1px #1abc9c;
+  -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+  transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #1abc9c 4%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #1abc9c 4%);
+  background-position: -200px 0;
+  background-size: 200px 100%;
+  background-repeat: no-repeat;
+  color: #0e6252;
+}
+
+input:focus, input:valid {
+ box-shadow: none;
+ outline: none;
+ background-position: 0 0;
+}
+
+input::-webkit-input-placeholder {
+ font-family: 'roboto', sans-serif;
+ -webkit-transition: all 0.3s ease-in-out;
+ transition: all 0.3s ease-in-out;
+}
+
+input:focus::-webkit-input-placeholder, input:valid::-webkit-input-placeholder {
+ color: #1abc9c;
+ font-size: 11px;
+ -webkit-transform: translateY(-20px);
+ transform: translateY(-20px);
+ visibility: visible !important;
 }
 
 
-
-
-
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
 </style>
 
 
     <body>
+    
+    
+    
         <section class="container-fluid">
-            <div class="row justify-content-center  ">
+            <div class="row justify-content-center">
             
        		
 
-                <div class="col-3 rounded border shadow p-3 mb-5 bg-white " id="col-Login" >
-                
-
-                
-                            <p class="text-center" style="font-style: oblique;"><strong>Admin Login</strong></p>
-                            
-                                 
-                        
-                            <form class="login-form"  method="POST">
-                                <div class="form-group" id="errorLogin" >
+                <div class="col-2 rounded border shadow p-3 mb-3" id="col-Login">
+                <form>
+                                <div class="container" align="justify">
+								
+				
+						<input placeholder="            Admin ID"	 type="text" id="userNo" name="userNo" required >
+						<input placeholder="            Password" type="password" id="snsNo" name="snsNo" required>
+						
+                 		<div class="row justify-content-center" >
+					   	 <button type="submit" class="btn btn-success btn-xs">로그인</button>                              
+ 						</div>
+							</div>
                                 
                                      
-            			
-                                
-                                </div>
-                                <div class="form-group">
-                                    <label >관리자 아이디</label>
-                                    <input type="text" id="userNo" name="userNo" class="form-control" placeholder="관리자번호" required>    
-                                </div>
-                                
-                                     
-            					<br>
-                                
-                                <div class="form-group">
-                                    <label >비밀번호</label>
-                                    <input type="password" class="form-control"  id="snsNo" name="snsNo"  placeholder="Password" onkeydown='javascript:onEnterSubmit()'>
-                                </div>
-                                
-                                
-                                     
-          						 <br><br><br>
-          						 
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary float-right">로그인</button>                              
-                                </div>
-                                
+  
                        
-                            </form>
-                        </div>
+                            
                 </div>
+                
+              </form>  
             </section>
     </body>
 </html>

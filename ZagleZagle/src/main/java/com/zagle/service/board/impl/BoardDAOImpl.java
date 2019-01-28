@@ -94,14 +94,12 @@ public class BoardDAOImpl implements BoardDAO{
 
 	@Override
 	public void addLike(Like like) throws Exception {
-		// TODO Auto-generated method stub
-		
+		sqlSession.insert("BoardMapper.addLike", like);
 	}
 
 	@Override
-	public void cancelLike(Like like) throws Exception {
-		// TODO Auto-generated method stub
-		
+	public void updateLike(Like like) throws Exception {
+		sqlSession.update("BoardMapper.updateLike", like);
 	}
 	
 	@Override

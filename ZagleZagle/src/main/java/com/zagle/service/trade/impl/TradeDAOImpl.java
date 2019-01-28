@@ -32,5 +32,9 @@ public class TradeDAOImpl implements TradeDAO{
 	public List<Sell> listTrade(Search search) throws Exception {
 		return sqlSession.selectList("SellMapper.listTrade",search);
 	}
+	@Override
+	public Sell getSell(String sellNo) throws Exception {
+		return sqlSession.selectOne("SellMapper.getSell",sellNo);
+	}
 
 }

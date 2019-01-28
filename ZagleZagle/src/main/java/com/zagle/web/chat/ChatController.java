@@ -33,8 +33,9 @@ public class ChatController {
 	}
 
 	@RequestMapping(value = "getChat", method = RequestMethod.GET)
-    public String getChat(Locale locale, Model model,HttpServletRequest request) {
-
+    public String getChat(Locale locale, Model model,HttpServletRequest request,HttpSession session) {
+		User user = (User)session.getAttribute("user");
+		String room = request.getParameter("room");
         Date date = new Date();
         DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
         String formattedDate = dateFormat.format(date);
@@ -43,9 +44,15 @@ public class ChatController {
 			ip=request.getRemoteAddr();
 		}
         System.out.println(locale+" "+formattedDate+" "+ip+"유저 채팅방입장");
+        model.addAttribute("room", room);
         model.addAttribute("serverTime", formattedDate );
 
-        return "forward:/view/chat/chat.jsp";
+        if (room.equals(user.getUserAddr())) {
+            return "forward:/view/chat/chat.jsp";
+		}else {
+	        return "forward:/view/chat/oneToOneChat.jsp";
+		}
+        
     }
 	
 	@RequestMapping(value="testUser")
@@ -53,7 +60,7 @@ public class ChatController {
 		User user = new User();
 		user.setProfile("juh.jpg");
 		user.setUserNickname("주현");
-		user.setUserAddr("강남");
+		user.setUserAddr("서울시 서초구 서초동");
 		
 		session.setAttribute("user", user);
 		System.out.println("세션에 유저넣음1");
@@ -65,7 +72,7 @@ public class ChatController {
 		User user = new User();
 		user.setProfile("dlsgh.jpg");
 		user.setUserNickname("백인호");
-		user.setUserAddr("강남");
+		user.setUserAddr("서울시 서초구 서초동");
 		
 		session.setAttribute("user", user);
 		System.out.println("세션에 유저넣음2");
@@ -77,7 +84,7 @@ public class ChatController {
 		User user = new User();
 		user.setProfile("sanghoo.jpg");
 		user.setUserNickname("상후형");
-		user.setUserAddr("강남");
+		user.setUserAddr("서울시 관악구 봉천동");
 		
 		session.setAttribute("user", user);
 		System.out.println("세션에 유저넣음3");

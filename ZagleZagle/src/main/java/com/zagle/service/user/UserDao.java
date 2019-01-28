@@ -1,5 +1,6 @@
 package com.zagle.service.user;
 
+import com.zagle.service.domain.SearchAdmin;
 import com.zagle.service.domain.User;
 
 public interface UserDao {
@@ -27,6 +28,6 @@ public interface UserDao {
 	
 	
 	// �Խ��� Page ó���� ���� ��ü Row(totalCount) return
-	//public int getTotalCount(Search search) throws Exception;
+	public int getTotalCount(SearchAdmin search) throws Exception;
 	
 }

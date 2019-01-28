@@ -233,9 +233,16 @@ public class BoardController {
 		
 		SearchBoard searchBoard=new SearchBoard();
 		
-		Map<String , Object> map=boardService.listBoard(searchBoard);
-
-		User user=(User)session.getAttribute("user");
+		if(session.getAttribute("user")!=null) {
+		
+			User user=(User)session.getAttribute("user");
+				
+			String loginUserNo=user.getUserNo();
+		
+			searchBoard.setLoginUserNo(loginUserNo);
+		}
+		
+		Map<String , Object> map=boardService.listBoard(searchBoard);		
 		
 		List<Local> list = boardService.getState();//추가
 		
@@ -265,15 +272,20 @@ public class BoardController {
 			searchBoard.setCurrentPage(1);
 		}
 		
+		if(session.getAttribute("user")!=null) {
+			
+			User user=(User)session.getAttribute("user");
+				
+			String loginUserNo=user.getUserNo();
+		
+			searchBoard.setLoginUserNo(loginUserNo);
+		}
+		
 		searchBoard.setPageSize(pageSize);
 		
 		Map<String , Object> map=boardService.listBoard(searchBoard);
 		
 		//System.out.println("컨트롤러 map : "+map);
-		
-		User user=(User)session.getAttribute("user");
-		
-		//System.out.println("********user : "+user); //로그인 정보 받아와야됨
 		
 		List<Local> list = boardService.getState();//추가
 		
@@ -349,27 +361,28 @@ public class BoardController {
 		
 		User testUser = new User();
 		
-		testUser.setUserNo("US10003");
+		/*testUser.setUserNo("US10003");
 		testUser.setUserName("최상아");
 		testUser.setUserNickname("Ivory");
 		testUser.setUserAddr("서울 용산구 이태원동 123-123");
-		testUser.setProfile("aaa.jpg");
+		testUser.setProfile("aaa.jpg");*/
 		
-		/*testUser.setUserNo("US10023");
+		testUser.setUserNo("US10023");
 		testUser.setUserNickname("이노인호");
 		testUser.setUserName("이인호");
 		testUser.setUserAddr("서울 용산구 이태원동 123-123");
-		testUser.setProfile("dlsgh.jpg");*/
+		testUser.setProfile("dlsgh.jpg");
 		
-		/*testUser.setUserNo("US10027");
-		testUser.setUserNickname("주그린");
-		testUser.setUserName("김주현");
-		testUser.setProfile("default.png");*/
+//		testUser.setUserNo("US10027");
+//		testUser.setUserNickname("주그린");
+//		testUser.setUserName("김주현");
+//		testUser.setProfile("joo.png");
+//		testUser.setUserAddr("서울 서초구 서초동");
 		
 		
 		session.setAttribute("user", testUser);
 		
-		return "redirect:/board/listBoard?view=all";
+		return "redirect:/board/listBoard?view=town";
 	}
 
 }

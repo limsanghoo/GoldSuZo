@@ -112,14 +112,12 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public void addLike(Like like) throws Exception {
-		// TODO Auto-generated method stub
-		
+		boardDAO.addLike(like);
 	}
 
 	@Override
-	public void cancelLike(Like like) throws Exception {
-		// TODO Auto-generated method stub
-		
+	public void updateLike(Like like) throws Exception {
+		boardDAO.updateLike(like);
 	}
 
 	@Override

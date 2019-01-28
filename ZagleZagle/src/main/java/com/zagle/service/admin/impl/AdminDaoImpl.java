@@ -110,11 +110,23 @@ public class AdminDaoImpl implements AdminDao {
 
 	public int getTotalCount(SearchAdmin search) throws Exception {
 		
-		return sqlSession.selectOne("AdminMapper.getTotalCount", search);
+		return sqlSession.selectOne("UserMapper.getTotalCount", search);
 	}
+	public int getTotalCount2(SearchAdmin search) throws Exception {
+		
+		return sqlSession.selectOne("UserMapper.getTotalCount2", search);
+	}
+	public int getTotalCount3(SearchAdmin search) throws Exception {
+		
+		return sqlSession.selectOne("BlackListMapper.getTotalCount3", search);
+	}
+	
 	public void addBlackList(BlackList blackList) throws Exception {
 		
 		sqlSession.insert("BlackListMapper.addBlackList", blackList);
 	}
-	
+	public Report getReport(String userNo) throws Exception {
+		
+		return sqlSession.selectOne("ReportMapper.getReport", userNo);
+	}
 }

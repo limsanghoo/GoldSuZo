@@ -28,10 +28,7 @@
 body,html{
 			height: auto;
 			margin: 0;
-			background: #7F7FD5;
-	       background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
-	        background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
-	        background: url("http://img.chuing.net/i/eyyJJe/Preview.x.jpg") no-repeat center center fixed; -webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;
+			background-color: rgba(0,0,0,0)
 		}
 
 		.chat{
@@ -41,7 +38,7 @@ body,html{
 		.card{
 			margin-top: auto;
 			margin-bottom: auto;
-			height: 900px;
+			height: 600px;
 			overflow-y: auto;
 			border-radius: 15px !important;
 			background-color: rgba(0,0,0,0.4) !important;
@@ -96,20 +93,6 @@ body,html{
 		}
 		.send_btn{
 	border-radius: 0 15px 15px 0 !important;
-	background-color: rgba(0,0,0,0.3) !important;
-			border:0 !important;
-			color: white !important;
-			cursor: pointer;
-		}
-		#msg_trans{
-	border-radius: 15px 0 0 15px !important;
-	background-color: rgba(0,0,0,0.3) !important;
-			border:0 !important;
-			color: white !important;
-			cursor: pointer;
-		}
-		#la-bel{
-	border-radius: 15px 15px 15px 15px !important;
 	background-color: rgba(0,0,0,0.3) !important;
 			border:0 !important;
 			color: white !important;
@@ -191,15 +174,7 @@ body,html{
 		padding: 10px;
 		position: relative;
 	}
-	.msg_cotainer_send{
-		margin-top: auto;
-		margin-bottom: auto;
-		margin-right: 10px;
-		border-radius: 25px;
-		background-color: #78e08f;
-		padding: 10px;
-		position: relative;
-	}
+	
 	.msg_time{
 		position: absolute;
 		left: 0;
@@ -225,6 +200,7 @@ body,html{
 		cursor: pointer;
 		font-size: 20px;
 	}
+	
 	.action_menu{
 		z-index: 1;
 		position: absolute;
@@ -259,9 +235,6 @@ body,html{
 		margin-bottom: 15px !important;
 	}
 	}
-	#me{
-		text-align: right;
-	}
 #chat_box::-webkit-scrollbar-track
 {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
@@ -281,36 +254,33 @@ body,html{
 	                   color-stop(.5, rgba(255, 255, 255, .2)),
 					   color-stop(.5, transparent), to(transparent));
 }
-#msg {
-	width: 700px;
+
+#mydiv {
+  position: absolute;
+  z-index: 9;
+  background-color: #f1f1f1;
+  text-align: center;
+  background-color: rgba(0,0,0,0.1);
+  height: 800px;
+  width: 600px;
 }
 
-#msg_process {
-	width: 90px;
+#mydivheader {
+  padding: 10px;
+  cursor: move;
+  z-index: 10;
+  background-color: rgba(0,0,0,0.3);
+  color: #fff;
 }
-
 input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
 #mdStart {position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
-
-#dropzone
-    {
-        border:2px dotted #3292A2;
-        width:90%;
-        height:50px;
-        color:#92AAB0;
-        text-align:center;
-        font-size:24px;
-        padding-top:12px;
-        margin-top:10px;
-    }
-
 </style>
 	<script src="http://192.168.0.25:82/socket.io/socket.io.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script>
 		$(document).ready(function() {
 			var socket = io("http://192.168.0.25:82");
-			socket.emit("send_user",{id :"${user.userNickname}", addr : "${user.userAddr}",pro : "${user.profile}"});
+			socket.emit("send_user",{id :"${user.userNickname}", addr : "${room}",pro : "${user.profile}"});
 			
 			//msg에서 키를 누를떄
 			$("#msg").keydown(function(key) {
@@ -335,7 +305,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 
 			////소켓 서버로 부터 in_msg를 통해 이벤트를 받을 경우 
 			socket.on('send_user_name',function(msg){
-				$("<div style='text-align:center; color : white;'></div>").text(msg+"님이 입장하셧습니다.").appendTo("#chat_box");
+				$("<div style='text-align:center; color : white;'></div>").text(msg+"님이 입장하셨습니다.").appendTo("#chat_box");
 				 $('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
 			});
 			//소켓 서버로 부터 send_msg를 통해 이벤트를 받을 경우 
@@ -354,13 +324,13 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 					}
 				}else{
 					if (data.ms.substring(data.ms.length-3)=='jpg'||data.ms.substring(data.ms.length-3)=='png') {
-						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg dropdown-toggle' data-toggle='dropdown'><ul class='dropdown-menu'><li><div onclick='javascript:sChat(/"+data.id+"/)'>1:1채팅하기</div></li></ul><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer' onclick='javascript:mdmd(/"+data.ms+"/);'><img src='/common/images/chat/"+data.ms+"' style='width: 200px; height: 180px;' class='img-thumbnail' /><span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
+						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg dropdown-toggle' data-toggle='dropdown'><ul class='dropdown-menu'><li><div onclick='javascript:sChat(/"+data.id+"/)'>1:1채팅하기</div><div onclick='javascript:sChat(/"+data.id+"/)'>1:1화상채팅하기</div></li></ul><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer' onclick='javascript:mdmd(/"+data.ms+"/);'><img src='/common/images/chat/"+data.ms+"' style='width: 200px; height: 180px;' class='img-thumbnail' /><span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
 						$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
 					}else if(data.ms.substring(data.ms.length-3)=='mp4'||data.ms.substring(data.ms.length-3)=='wmv'){
-						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg dropdown-toggle' data-toggle='dropdown'><ul class='dropdown-menu'><li><div onclick='javascript:sChat(/"+data.id+"/)'>1:1채팅하기</div></li></ul><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer'><video controls controlsList='nodownload' width='320' height='240' muted><source src='http://192.168.0.25:8080/common/images/chat/"+data.ms+"' type='video/mp4'><a href='http://192.168.0.25:8080/common/images/chat/"+data.ms+"'>download video</a></video><span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
+						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg dropdown-toggle' data-toggle='dropdown'><ul class='dropdown-menu'><li><div onclick='javascript:sChat(/"+data.id+"/)'>1:1채팅하기</div><div onclick='javascript:sChat(/"+data.id+"/)'>1:1화상채팅하기</div></li></ul><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer'><video controls controlsList='nodownload' width='320' height='240' muted><source src='http://192.168.0.25:8080/common/images/chat/"+data.ms+"' type='video/mp4'><a href='http://192.168.0.25:8080/common/images/chat/"+data.ms+"'>download video</a></video><span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
 						$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
 					}else{
-						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg dropdown-toggle' data-toggle='dropdown'><ul class='dropdown-menu'><li><div onclick='javascript:sChat(/"+data.id+"/)'>1:1채팅하기</div></li></ul><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer'>"+data.ms+"<span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
+						$("<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg dropdown-toggle' data-toggle='dropdown'><ul class='dropdown-menu'><li><div onclick='javascript:sChat(/"+data.id+"/)'>1:1채팅하기</div><div onclick='javascript:sChat(/"+data.id+"/)'>1:1화상채팅하기</div></li></ul><img src='/common/images/profile/"+data.pro+"' class='rounded-circle user_img_msg'></div><div class='msg_cotainer'>"+data.ms+"<span class='msg_time'>"+data.rt+"</span></div></div>").appendTo("#chat_box");
 						$('#chat_box').animate({scrollTop: $('#chat_box').prop("scrollHeight")}, 500);
 						
 					}
@@ -368,10 +338,11 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 				
 				
 			});
-			////////////1:1채팅신청////////
+			
+			////////////1:1채팅신청///////
 			$("#btn_one").on("click",function(){
 				var name = $(this).text();
-				socket.emit("one_msg",{a_user:"${user.userNickname}",b_user:name,b_pro:"${user.profile}"});
+				socket.emit("one_msg",{a_user:"${user.userNickname}",b_user:name,ms:"${user.profile}"});
 			})
 			
 			
@@ -381,12 +352,28 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 			});
 			
 			socket.on("one_msg",function(msg){
-				if (msg.b_user=="${user.userNickname}") {
-					$("#m_body2").html("<img src='/common/images/profile/"+msg.b_pro+"' class='img-thumbnail' style='height: auto;width:150px'/><div>"+msg.a_user+"님이 1:1채팅신청을 하셨슴다.</div>");
+				if (msg.b_user=="${user.userNickname}"&&msg.ms!="ok"&&msg.ms!="no") {
+					$("#m_body2").html("<img src='/common/images/profile/"+msg.ms+"' class='img-thumbnail' style='height: auto;width:150px'/><div >"+msg.a_user+"님이 1:1채팅신청을 하셨슴다.</div>");
+					$("#ok_chat").val(msg.a_user)
 					mdstart2.click();
+				}else if(msg.b_user=="${user.userNickname}"&&msg.ms=="ok"){
+					window.open("http://192.168.0.25:8080/chat/getChat?room="+msg.b_user,"_blank", "width=400, height=600, scrollbars=yes")
+					
+				}else if(msg.b_user=="${user.userNickname}"&&msg.ms=="no"){
+					alert("상대방이 거절하셧슴다.")
 				}
 			});
-			///////////
+			///////////1:1채팅신청결과///////
+			$("#ok_chat").on("click",function(){
+				var name = $(this).val();
+				socket.emit("one_msg",{a_user:"${user.userNickname}",b_user:name,ms:"ok"});
+				window.open("http://192.168.0.25:8080/chat/getChat?room="+name,"_blank", "width=400, height=600, scrollbars=yes")
+			})
+			$("#no_chat").on("click",function(){
+				var name = $("#ok_chat").val();
+				socket.emit("one_msg",{a_user:"${user.userNickname}",b_user:name,ms:"no"});
+			})
+			//////////////////////////////
             	var obj = $("#chat_box");
 
 	   		     obj.on('dragenter', function (e) {
@@ -620,40 +607,59 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 		}
 		
 		//////////////////////////////////////////////
-		$(function(){
-			$("#btn").hide();
-			$("#btn:contains('숨기기')").on("click",function(){
-				$("iframe").css("display","none");
-				$(this).hide();
-				$("#btn2").show();
-			});
+			$(function(){
+				dragElement(document.getElementById("mydiv"));
+				function dragElement(elmnt) {
+	  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+	  if (document.getElementById(elmnt.id + "header")) {
+	    /* if present, the header is where you move the DIV from:*/
+	    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+	  } else {
+	    /* otherwise, move the DIV from anywhere inside the DIV:*/
+	    elmnt.onmousedown = dragMouseDown;
+	  }
+
+	  function dragMouseDown(e) {
+	    e = e || window.event;
+	    e.preventDefault();
+	    // get the mouse cursor position at startup:
+	    pos3 = e.clientX;
+	    pos4 = e.clientY;
+	    document.onmouseup = closeDragElement;
+	    // call a function whenever the cursor moves:
+	    document.onmousemove = elementDrag;
+	  }
+
+	  function elementDrag(e) {
+	    e = e || window.event;
+	    e.preventDefault();
+	    // calculate the new cursor position:
+	    pos1 = pos3 - e.clientX;
+	    pos2 = pos4 - e.clientY;
+	    pos3 = e.clientX;
+	    pos4 = e.clientY;
+	    // set the element's new position:
+	    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+	    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+	  }
+
+	  function closeDragElement() {
+	    /* stop moving when mouse button is released:*/
+	    document.onmouseup = null;
+	    document.onmousemove = null;
+	  }
+	}
+			})
 			
-		});
-		$(function(){
-
-			$("#btn2:contains('보이기')").on("click",function(){
-				$("iframe").css("display","inline");
-				$(this).hide();
-				$("#btn").show();
-			});
-		});
-		
-	
-		
-
-		
-
-
 	</script>
 </head>
 <body>
 
-<iframe src="http://192.168.0.25:8080/board/listBoard" align="left" style="display:none; height:100%; width: 30%;"></iframe>
-<button id="btn">숨기기</button>
-<button id="btn2">보이기</button>
 <button id="btn_one" style="display: none;" value=""></button>
 
+<div style="text-align: center; color: white; font-style: oblique;"><h3><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;${user.userAddr}</h3></div>
 		<div class="container-fluid h-100">
+		
 			<div class="row justify-content-center h-100">
 				
 				<div class="col-md-8 col-xl-6 chat">
@@ -672,10 +678,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 							<span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
 							<div class="action_menu">
 								<ul>
-									<li><i class="fas fa-user-circle"></i> 메뉴1</li>
-									<li><i class="fas fa-users"></i> 메뉴2</li>
-									<li><i class="fas fa-plus"></i> 메뉴3</li>
-									<li><i class="fas fa-ban"></i> 메뉴4</li>
+									<li><i class="fas fa-exchange-alt" id="msg_trans">&nbsp;&nbsp;번역</i></li>
 								</ul>
 							</div>
 						</div>
@@ -684,26 +687,23 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 						</div>
 					
 						
+						<form enctype="multipart/form-data" id="frm">
+							<input type="file" name="imageFile" id="image_name"/>
+						</form>
 						<div class="card-footer">
 							<div class="input-group">
-							<form enctype="multipart/form-data" id="frm">
-								
-
 								<div class="input-group-append">
-									<label for="image_name" class="fas fa-paperclip" id="la-bel"></label>
-									<input type="file" name="imageFile" id="image_name"/>
+									<span class="input-group-text attach_btn"><label for="image_name"><i class="fas fa-paperclip" for="image_name"></i></label></span>
+									
 								</div>
-								
-								</form>
-								<div class="input-group-append">
-								<input type="text" class="form-control type_msg" placeholder="여기에 입력하세요.." id="msg"></input>
-								<button type='button' id='msg_trans'>번역</button>
-								</div>
+								<input name="" class="form-control type_msg" placeholder="Type your message..." id="msg"></input>
 								<div class="input-group-append" id="msg_process">
 									<span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
 								</div>
 							</div>
 						</div>
+						
+					
 					</div>
 				</div>
 			</div>
@@ -731,8 +731,8 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 		      <div class="modal-body" id="m_body2">
 		      </div>
 		      <div class="modal-footer">
-		      	<button type="button" class="btn btn-primary" data-dismiss="modal">승인</button>
-		        <button type="button" class="btn btn-secondary" data-dismiss="modal">거절</button>
+		      	<button type="button" class="btn btn-primary" data-dismiss="modal" id="ok_chat" value="">승인</button>
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="no_chat">거절</button>
 		      </div>
 		    </div>
 		  </div>

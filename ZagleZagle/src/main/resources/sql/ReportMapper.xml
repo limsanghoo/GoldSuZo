@@ -39,5 +39,11 @@
 	where report_no = #{reportNo:VARCHAR}
 	</update>
 	
+	<!--  SQL : GET REPORT (신고 이유 추출) -->
+	<select id="getReport" parameterType="string" resultMap="reportSelectMap">
+		SELECT *
+		FROM report r, users u
+		WHERE u.user_no = #{reportedUserNo.userNo}
 	
+	</select>
 	</mapper>

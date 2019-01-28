@@ -38,7 +38,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -67,6 +67,19 @@ public class UserRestController {
 	public UserRestController() {
 		System.out.println(this.getClass());
 	}
+	
+	
+	
+	
+	@RequestMapping(value="json/getUser2/{userNo}", method=RequestMethod.GET)
+	public User getUser2(@PathVariable String userNo) throws Exception {
+		
+		System.out.println("==============RestController getUser2==============");
+		
+		return userService.getUser2(userNo);
+	}
+	
+	
 	/*
 	@RequestMapping(value="KakaoLogin", produces="application/json")
 	public ModelAndView KakaoLogin() throws Exception {

@@ -52,6 +52,10 @@ body {
     
 }
 
+.grid{
+	margin-bottom: 0px;
+}
+
 /* .containerList {
 	padding-top : 20px;
     width: 1200px;
@@ -77,12 +81,10 @@ body {
 .containerList .box h2 {
     margin: 10px 0 0;
     padding: 0;
-    font-size: 20px;
 }
 .containerList .box p {
     margin: 0;
     padding: 0 0 10px;
-    font-size: 16px;
 }
 /* @media (max-width: 1200px) {
     .containerList {
@@ -133,6 +135,24 @@ body {
 	display: none;
 }
 
+#mydiv {
+  position: absolute;
+  z-index: 9;
+  background-color: #f1f1f1;
+  text-align: center;
+  background-color: rgba(0,0,0,0.1);
+  height: 700px;
+  width: 600px;
+}
+
+#mydivheader {
+  padding: 10px;
+  cursor: move;
+  z-index: 10;
+  background-color: rgba(0,0,0,0.3);
+  color: #fff;
+}
+
 
 </style>
 <script type="text/javascript">
@@ -140,23 +160,27 @@ body {
 
 $(function(){
 	
+	//게시물 수정
 	$("input[value='수정']").bind("click",function(){
 		var boardNo=$(this).data('update');
 		alert(boardNo);
 		self.location="/board/updateBoard?boardNo="+boardNo;
 	})
-
+	
+	//게시물 등록
 	$("input[value='게시물 등록']").bind("click",function(){
 		
 		self.location="http://192.168.0.36:8080/board/addBoard?userNo=${user.userNo}";
 	})
 	
+	//지도로 보기
 	$("input[value='지도로 보기']").bind("click",function(){
 		
 		self.location="/board/listMap";
 	})
 	
-	$(".box").bind("click",function(){
+	//댓글 리스트 불러오기
+	$(".realBox").bind("click",function(){
 		var preBoardNo=$(this).data('target');
 		
 		//#${board.boardNo}modal1 자르기
@@ -164,6 +188,58 @@ $(function(){
 		
 		commentList(boardNo);
 	})
+	
+	//좋아요
+	$("span[name='like']").on("click", function(){
+		
+		var userNo="${user.userNo}";
+		var boardNo=$(this).data('boardno');
+		var checkLike=$(this).data('checklike');
+		
+		alert(checkLike);
+		
+		if(checkLike=='0'){
+			$.ajax({
+				
+				url: '/board/json/addLike/'+userNo+'/'+boardNo,
+				type: 'get',
+				success: function(data){
+					
+					if(data==1){
+						alert('등록 성공');
+						$("img[name='"+boardNo+"emptyLike']").attr("src","/common/images/board/fullLike.png");
+					}
+				}
+			})			
+		}//0일때 끝
+		
+		if(checkLike=='1' || checkLike=='2'){
+			
+			alert("수정간다");
+			$.ajax({
+				
+				url: '/board/json/updateLike/'+userNo+'/'+boardNo+'/'+checkLike,
+				type: 'get',
+				success: function(data){
+					
+					if(data==2){
+						alert('취소 성공');
+						$("img[name='"+boardNo+"fullLike']").attr("src","/common/images/board/emptyLike.png");
+					}else if(data==1){
+						alert('재등록 성공');
+						$("img[name='"+boardNo+"emptyLike']").attr("src","/common/images/board/fullLike.png");
+					}
+				}
+				
+			})
+		}//1일때 끝
+
+		
+	});//좋아요 끝
+	
+	
+	
+	
 	
 });
 
@@ -175,11 +251,8 @@ function enter() {
         	$("form").attr("method" , "POST").attr("action" , "/board/listBoard?view=${param.view}").submit();
         }
 }
-//검색 엔터 끝 
 
-
-
-
+//시도 선택
 function fncGetState(){
 	
 	var stateCode = $("select[name=state]").val();
@@ -213,6 +286,8 @@ function fncGetState(){
 		});
 }
 
+
+//시군구 선택
 function fncGetCity(){
 	
 	var stateCode = $("select[name=state]").val();
@@ -247,6 +322,8 @@ function fncGetCity(){
 		});
 }
 
+
+//읍면동 선택
 function fncGetTown(){
 	var stateName = $("select[name=state] option:checked").text();
 	var cityName = $("select[name=city] option:checked").text();
@@ -262,7 +339,68 @@ function fncGetTown(){
 }
 
 
+$(function(){
+    dragElement(document.getElementById("mydiv"));
+    function dragElement(elmnt) {
+var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+if (document.getElementById(elmnt.id + "header")) {
+/* if present, the header is where you move the DIV from:*/
+document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+} else {
+/* otherwise, move the DIV from anywhere inside the DIV:*/
+elmnt.onmousedown = dragMouseDown;
+}
 
+function dragMouseDown(e) {
+e = e || window.event;
+e.preventDefault();
+// get the mouse cursor position at startup:
+pos3 = e.clientX;
+pos4 = e.clientY;
+document.onmouseup = closeDragElement;
+// call a function whenever the cursor moves:
+document.onmousemove = elementDrag;
+}
+
+function elementDrag(e) {
+e = e || window.event;
+e.preventDefault();
+// calculate the new cursor position:
+pos1 = pos3 - e.clientX;
+pos2 = pos4 - e.clientY;
+pos3 = e.clientX;
+pos4 = e.clientY;
+// set the element's new position:
+elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+}
+
+function closeDragElement() {
+/* stop moving when mouse button is released:*/
+document.onmouseup = null;
+document.onmousemove = null;
+}
+}
+ })
+ 
+ 
+ $(function(){
+         $("#btn").hide();
+         $("#btn:contains('숨기기')").on("click",function(){
+            $("#mydiv").css("display","none");
+            $(this).hide();
+            $("#btn2").show();
+         });
+         
+      });
+      $(function(){
+
+         $("#btn2:contains('보이기')").on("click",function(){
+            $("#mydiv").css("display","inline");
+            $(this).hide();
+            $("#btn").show();
+         });
+      });
 
 </script>
 
@@ -277,10 +415,25 @@ function fncGetTown(){
 
 <jsp:include page="/view/layout/toolbar.jsp"/>
 
+<!-- 채팅창 시작 -->
+<div id="mydiv" style="display: none;">
+   <div id="mydivheader">-여기를 눌러 이동-</div>
+   <iframe src="/chat/getChat?room=${user.userAddr}" align="right" style="height:100%; width: 100%;" frameborder="0" scrolling="no"></iframe>
+</div>
+<!-- 채팅창 끝 -->
 
+
+<div class="row">
+
+<div class="col-sm-1">
+<button id="btn" style="margin-top: 200px;">숨기기</button>
+<button id="btn2" style="margin-top: 200px;">보이기</button>
+</div>
+
+
+
+<div class="col-sm-11">
 <form name="listBoard">
-
-
 
 <div id="selectMenu">
 
@@ -335,8 +488,9 @@ function fncGetTown(){
 
 <br/>
 
+
  <div class="containerList">
- 
+
  <ul class="grid effect-2" id="grid">
  
  <c:forEach var="board" items="${boardList}">
@@ -345,16 +499,62 @@ function fncGetTown(){
 	<c:if test="${board.boardStatus=='1'}"><!-- 정상 게시물만 보여주기 -->
 	
 <!-- 썸네일 박스 시작 -->
+
+
 <li>	
-	<div class="box" data-toggle="modal" data-target="#${board.boardNo}modal1" data-boardNo="${board.boardNo}">
+	<div class="box">
 		
 	<p>
 	<img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px; display: inline; vertical-align: middle"/>
 	<span style="font-weight: bold; display: inline;">&nbsp;${board.user.userNickname}</span>
-	<span><img src="/common/images/board/emptyLike.png" style="height: 60px; width:60px; display: inline; vertical-align: middle; float:right"/></span>
+	
+	
+	<span name="like" data-boardNo="${board.boardNo}" data-checkLike="${board.checkLike}">	
+	<c:choose>
+		<c:when test="${user.userNo !=null}">
+		
+			<c:if test="${board.likeUserNo==null && board.checkLike=='0'}">
+				<img src="/common/images/board/emptyLike.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}emptyLike"/>
+			</c:if>
+			
+			<c:if test="${user.userNo==board.likeUserNo && board.checkLike=='1'}">
+				<img src="/common/images/board/fullLike.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}fullLike"/>
+			</c:if>
+			
+			<c:if test="${user.userNo==board.likeUserNo && board.checkLike=='2'}">
+				<img src="/common/images/board/emptyLike.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}emptyLike"/>
+			</c:if>
+		</c:when>
+	</c:choose>
+	</span>
+	
+	
+	<span name="scrap">
+	<c:choose>
+		<c:when test="${user.userNo !=null}">
+			<c:if test="${board.scrapUserNo==null && board.checkScrap=='0'}">
+				<img src="/common/images/board/emptyScrap.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}emptyScrap"/>
+			</c:if>
+			
+			<c:if test="${user.userNo==board.scrapUserNo && board.checkScrap=='1'}">
+				<img src="/common/images/board/fullScrap.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}fullScrap"/>
+			</c:if>
+			
+			<c:if test="${user.userNo==board.scrapUserNo && board.checkScrap=='2'}">
+				<img src="/common/images/board/emptyScrap.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}emptyScrap"/>
+			</c:if>
+		
+		</c:when>
+	</c:choose>
+	</span>
+	
+	
 	</p>
 
 	
+<!-- 본문 시작 -->
+<div class="realBox" data-toggle="modal" data-target="#${board.boardNo}modal1">
+
 <!-- 지도 시작 -->
 <c:if test="${board.coord !=null}">
 <div id="map${board.boardNo}" style="width:100%;height:350px;"></div>
@@ -417,8 +617,8 @@ function fncGetTown(){
 	<p style="text-align: center;">${board.boardDetailText}</p>
 	<p style="text-align: left; font-size: small">${board.hashTag}</p>
 	
-
-</div>
+</div><!-- 본문 내용 끝 -->	
+</div><!-- box 끝 -->
 </li>
 <!-- 썸네일 박스 끝 -->
 
@@ -433,12 +633,12 @@ function fncGetTown(){
       <div class="row">
       
       	<div class="col-md-11 col-md-offset-1">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span aria-hidden="true" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: 30px; margin-right:5px; display: inline;">&times;</span>       
         </div>
         
         <h4 class="modal-title" id="gridSystemModalLabel">
-        <div class="col-md-4">
-        <img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px;" align="middle; "/>
+        <div class="col-md-4" style="display: inline;">
+        <img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px;" align="middle;"/>
 		${board.user.userNickname}
 		</div>
 		
@@ -540,7 +740,9 @@ function fncGetTown(){
   
 </div><!-- /container -->
 </form>
-        
+</div><!-- 10 끝 -->
+</div><!-- row 끝 -->
+  
     </body>
 </html>
 

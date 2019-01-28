@@ -141,7 +141,27 @@
 	 
 	 
 	
-	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
+	 <select  id="getTotalCount2"  parameterType="com.zagle.service.domain.SearchAdmin"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT user_no , user_name , reg_date, delete_count
+						FROM users
+						WHERE black_code = '1'
+						<if test="searchCondition != null">
+						
+								<if test="searchCondition == 0 and searchKeyword !='' ">
+						 			user_name = #{searchKeyword}
+								</if>
+								<if test="searchCondition == 1 and searchKeyword !='' ">
+						 			delete_count = #{searchKeyword}
+								</if>
+						
+						</if> ) countTable						
+	 </select>
+	 
+	 
+	 
+	 
+	 <select  id="getTotalCount"  parameterType="com.zagle.service.domain.SearchAdmin"	 resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT user_no , user_name , sns_no, reg_date, delete_count
 						FROM users
@@ -151,10 +171,11 @@
 						 			user_name = #{searchKeyword}
 								</if>
 								<if test="searchCondition == 1 and searchKeyword !='' ">
-						 		delete_count = #{searchKeyword}
+						 			delete_count = #{searchKeyword}
 								</if>
 							</where>
 						</if> ) countTable						
 	 </select>
+	 
 	 
 </mapper>

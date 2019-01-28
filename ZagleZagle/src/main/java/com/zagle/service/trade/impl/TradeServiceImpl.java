@@ -39,4 +39,9 @@ public class TradeServiceImpl implements TradeService{
 		return map;
 	}
 
+	@Override
+	public Sell getSell(String sellNo) throws Exception {
+		return tradeDAO.getSell(sellNo);
+	}
+
 }
