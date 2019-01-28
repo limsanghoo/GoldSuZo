@@ -38,4 +38,17 @@
 		SELECT DISTINCT u.user_no, u.profile, u.user_nickname, s.* FROM sell s, users u WHERE u.user_no=s.user_no and sell_no=#{sellNo}
 	</select>
 	 
+	 <select id="listSell" parameterType="Map" resultMap="sellSelectMap">
+		SELECT * 
+		FROM 
+		(SELECT inner_table.*, ROWNUM as row_seq FROM
+		(SELECT * FROM sell WHERE user_no=#{userNo} ORDER BY sell_no) inner_table
+		WHERE ROWNUM &lt;=#{search.endRowNum:INTEGER})
+		WHERE row_seq BETWEEN #{search.startRowNum:INTEGER} AND #{search.endRowNum:INTEGER}
+	 </select>
+	 
+	 <select id="getTotalCount" parameterType="string" resultType="int">
+		SELECT COUNT(*)
+		FROM (SELECT * FROM sell WHERE user_no=#{userNo} ORDER BY sell_no) countTable
+	 </select>
 </mapper>
