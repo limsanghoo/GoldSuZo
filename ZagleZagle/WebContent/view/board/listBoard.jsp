@@ -827,15 +827,10 @@ $(document).ready(function() {
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-             	<select class="form-control" id="reportReason" name="reportReason">
-		      	<option value="0">신고 사유를 선택해주세요 ▼</option>
-		      	<option value="1">욕설</option>
-		      	<option value="2">광고</option>
-		      	<option value="3">음란</option>
-		      	</select>
+             	<jsp:include page="/view/board/addReport.jsp"/>
             </div>
             <div class="modal-footer">
-              <input type="button" class="btn btn-primary" value="신고" name="addReport"/>
+              
             </div>
           </div>
         </div>
