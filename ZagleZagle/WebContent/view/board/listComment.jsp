@@ -89,7 +89,7 @@ function commentInsert(boardNo,userNo, text){
               			b='<div class="col-sm-2"></div>';
               		}
                                 
-                   a += '<div class="row commentArea'+list.commentNo+'">';                           
+                   a += '<div class="row commentArea'+list.commentNo+'" style="padding-bottom: 5px;">';                           
                    a += '<div class="col-sm-1"><img src="/common/images/profile/'+list.user.profile+'" style="width: 30px; height: 30px; border-radius: 70px;"/></div>';                 
                    a += '<div class="col-sm-2" style="font-size:medium">'+list.user.userNickname+'</div>';                 
                    a += '<div class="col-sm-7" style="font-size:medium">'+list.commentDetailText+'</div>';                   
@@ -129,10 +129,11 @@ function commentDelete(commentNo, boardNo){
 </head>
 
 <body>
-		<div class="commentList" align="left"></div>
-	
-		<div class="col-sm-10"><input type="text" id="<%=boardNo%>commentDetailText" placeholder="댓글을 입력해주세요"></div>
-		<div class="col-sm-2" style="padding-left: 0;"><input type="button" id="<%=boardNo%>Comment" value="등록" style="width:80px;"></div>
-
+		<div class="commentList" align="left" style="padding-left: 10px;"></div>
+		
+		<div style="padding-bottom: 20px;margin-bottom: 30px;">
+		<div class="col-sm-10"><input type="text" id="<%=boardNo%>commentDetailText" placeholder="댓글을 입력해주세요" style="width: 400px;"></div>
+		<div class="col-sm-2" style="padding-left: 10;"><input class="btn btn-b" type="button" id="<%=boardNo%>Comment" value="등록" style="width:60px; height:30px; padding:0px;"></div>
+		</div>
 </body>
 </html>

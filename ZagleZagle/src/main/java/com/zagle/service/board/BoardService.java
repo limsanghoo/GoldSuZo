@@ -21,7 +21,7 @@ public interface BoardService {
 	
 	public void updateBoard(Board board) throws Exception;
 	
-	public void deleteBoard(Board board) throws Exception;
+	public void updateBoardStatus(Board board) throws Exception;
 	
 	public void deleteLink(Link link) throws Exception;
 	

@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.zagle.service.admin.AdminService;
 import com.zagle.service.board.BoardService;
 import com.zagle.service.chat.ChatService;
+import com.zagle.service.domain.Blind;
 import com.zagle.service.domain.Board;
 import com.zagle.service.domain.Comment;
 import com.zagle.service.domain.Local;
@@ -48,11 +49,11 @@ public class BoardController {
 	
 	/*@Autowired
 	@Qualifier("chatServiceImpl")
-	private ChatService chatService;
+	private ChatService chatService;*/
 	
 	@Autowired
 	@Qualifier("adminServiceImpl")
-	private AdminService adminService;*/
+	private AdminService adminService;
 	
 	public BoardController() {
 		System.out.println(this.getClass());
@@ -113,27 +114,12 @@ public class BoardController {
         
 		ModelAndView modelAndView=new ModelAndView();
 	
-		modelAndView.setViewName("redirect:http://192.168.0.36:8080/board/listBoard?view=all");
+		modelAndView.setViewName("redirect:http://192.168.0.49:8080/board/listBoard?view=all");
 		
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="addComment", method=RequestMethod.POST)
-	public ModelAndView addComment(@ModelAttribute("comment") Comment comment) throws Exception{
-		
-		ModelAndView modelAndView=new ModelAndView();
-		
-		return modelAndView;
-	}
-	
-	@RequestMapping(value="addLike", method=RequestMethod.GET)
-	public ModelAndView addLike() throws Exception{
-		
-		ModelAndView modelAndView=new ModelAndView();
-		
-		return modelAndView;
-	}
-	
+
 	@RequestMapping(value="addLink", method=RequestMethod.GET)
 	public ModelAndView addLink() throws Exception{
 		
@@ -143,39 +129,68 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="addReport", method=RequestMethod.GET)
-	public ModelAndView addReport(@RequestParam("reportReason") String reportReason) throws Exception{
+	public ModelAndView addReport(@RequestParam("reportReason") String reportReason, @RequestParam("reportingUserNo") String reportingUserNo, 
+			@RequestParam("reportedBoardNo") String reportedBoardNo, @RequestParam("reportedUserNo") String reportedUserNo) throws Exception{
 		
 		System.out.println("/addReport");
-		System.out.println("리즌 : "+reportReason);
+		System.out.println("reportReason : "+reportReason);
+		System.out.println("reportingUserNo : "+reportingUserNo);
+		System.out.println("reportedBoardNo : "+reportedBoardNo);
+		System.out.println("reportedUserNo : "+reportedUserNo);
+		
+		User reportingUser=new User();
+		reportingUser.setUserNo(reportingUserNo);
+		
+		User reportedUser=new User();
+		reportedUser.setUserNo(reportedUserNo);
+		
+		Board board=new Board();
+		board.setBoardNo(reportedBoardNo);
+		
+		Report report=new Report();
+		report.setReportingUserNo(reportingUser);
+		report.setReportedUserNo(reportedUser);
+		report.setReportReason(reportReason);
+		report.setReportedBoardNo(board);
+		
+		boardService.addReport(report);
+		
+		//신고 횟수 카운트
+		int reportCount=adminService.checkReportCount(report);
+		
+		System.out.println("reportCount : "+reportCount);
+		
+		if(reportCount==3) {			
+			
+			//해당 게시물 블라인드 등록 blind code 0으로
+			Blind blind=new Blind();
+			blind.setBlindBoardNo(report.getReportedBoardNo());
+			adminService.addBlind(blind);
+			
+			//해당 게시물 boardStatus 3으로
+			board.setBoardStatus("3");
+			System.out.println("+++상태 : "+board);
+			boardService.updateBoardStatus(board);
+			
+		}
 		
 		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.setViewName("forward:/view/board/close.jsp");
 		
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="addReport", method=RequestMethod.POST)
+	/*@RequestMapping(value="addReport", method=RequestMethod.POST)
 	public ModelAndView addReport(@ModelAttribute("report") Report report) throws Exception{
 		
+		System.out.println("/addReport POST");
+		System.out.println(report);
+		
 		ModelAndView modelAndView=new ModelAndView();
 		
 		return modelAndView;
-	}
+	}*/
 	
-	@RequestMapping(value="addScrap", method=RequestMethod.GET)
-	public ModelAndView addScrap() throws Exception{
-		
-		ModelAndView modelAndView=new ModelAndView();
-		
-		return modelAndView;
-	}
-	
-	@RequestMapping(value="cancelLike", method=RequestMethod.GET)
-	public ModelAndView cancelLike() throws Exception{
-		
-		ModelAndView modelAndView=new ModelAndView();
-		
-		return modelAndView;
-	}
 	
 	@RequestMapping(value="deleteBoard", method=RequestMethod.GET)
 	public ModelAndView deleteBoard(@ModelAttribute("board") Board board) throws Exception{
@@ -187,7 +202,7 @@ public class BoardController {
 		
 		System.out.println(board);
 		
-		boardService.deleteBoard(board);
+		boardService.updateBoardStatus(board);
 		
 		ModelAndView modelAndView=new ModelAndView();
 		modelAndView.setViewName("redirect:/board/listBoard?view=all");
@@ -195,13 +210,6 @@ public class BoardController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="deleteComment", method=RequestMethod.GET)
-	public ModelAndView deleteComment() throws Exception{
-		
-		ModelAndView modelAndView=new ModelAndView();
-		
-		return modelAndView;
-	}
 	
 	@RequestMapping(value="getBoard", method=RequestMethod.GET)
 	public ModelAndView getBoard(@RequestParam("boardNo") String boardNo) throws Exception{

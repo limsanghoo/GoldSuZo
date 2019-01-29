@@ -21,7 +21,7 @@ public void addBoard(Board board) throws Exception;
 	
 	public void updateBoard(Board board) throws Exception;
 	
-	public void deleteBoard(Board board) throws Exception;
+	public void updateBoardStatus(Board board) throws Exception;
 	
 	public List<Board> listBoard(SearchBoard searchBoard) throws Exception;
 

@@ -11,12 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.zagle.service.domain.Chat;
 import com.zagle.service.domain.User;
 import com.zagle.service.user.UserService;
 
@@ -54,42 +51,4 @@ public class ChatController {
 		}
         
     }
-	
-	@RequestMapping(value="testUser")
-	public String testUser(HttpServletRequest request,HttpSession session) {
-		User user = new User();
-		user.setUserNo("test1");
-		user.setProfile("juh.jpg");
-		user.setUserNickname("주현");
-		user.setUserAddr("서초동");
-		
-		session.setAttribute("user", user);
-		System.out.println("세션에 유저넣음1");
-		return "redirect:/index.jsp";
-	}
-	
-	@RequestMapping(value="testUser2")
-	public String testUser2(HttpServletRequest request,HttpSession session) {
-		User user = new User();
-		user.setUserNo("test2");
-		user.setProfile("dlsgh.jpg");
-		user.setUserNickname("백인호");
-		user.setUserAddr("서초동");
-		
-		session.setAttribute("user", user);
-		System.out.println("세션에 유저넣음2");
-		return "redirect:/index.jsp";
-	}
-	
-	@RequestMapping(value="testUser3")
-	public String testUser3(HttpServletRequest request,HttpSession session) {
-		User user = new User();
-		user.setProfile("sanghoo.jpg");
-		user.setUserNickname("상후형");
-		user.setUserAddr("서울시 관악구 봉천동");
-		
-		session.setAttribute("user", user);
-		System.out.println("세션에 유저넣음3");
-		return "redirect:/index.jsp";
-	}
 }
