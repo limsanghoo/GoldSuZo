@@ -86,10 +86,10 @@
 	FROM report 
 	<where>
 		<if test="reportedBoardNo != null">
-			reportied_board_no = #{report.reportedBoardNo.boardNo}
+			board_no = #{reportedBoardNo.boardNo}
 		</if>
 		<if test="reportedCommentNo != null">
-			reportied_comment_no = #{report.reportedCommentNo.commentNo}
+			comment_no = #{reportedCommentNo.commentNo}
 		</if>
 	
 	</where>
