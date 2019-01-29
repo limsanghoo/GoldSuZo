@@ -47,6 +47,9 @@ public class UserDaoImpl implements UserDao {
 	public void addActiveScore(User user) throws Exception {
 	sqlSession.update("UserMapper.updateAddActiveScore", user);
 	}
+	public void updateDeleteCount(User user) throws Exception {
+		sqlSession.update("UserMapper.updateDeleteCount", user);
+	}
 	
 	// �Խ��� Page ó���� ���� ��ü Row(totalCount)  return
 	public int getTotalCount(SearchAdmin search) throws Exception {

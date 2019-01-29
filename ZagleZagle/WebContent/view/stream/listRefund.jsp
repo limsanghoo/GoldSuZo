@@ -10,10 +10,16 @@
 <head>
 <title>스트리밍 목록조회</title>
 <style>
+#margintable{
+ padding :50px;
+   padding:1rem 1rem; 
+    padding-left :80px;
+    padding-right :80px;
+}
+h1{
+ padding-left :40px; 
+}
 
- .container{
-   text-align: center;   
- }
  	#margin{
  	margin :40 3rem; 
  	color : white;
@@ -76,15 +82,16 @@
 
 <script type="text/javascript">
 
-function fncGetRefundList(currentPage) {
-	var list = "${list}";
-	alert(list);  
+function fncGetList(currentPage) {
+	
+	//var list = "${list}";
+	alert(currentPage)
     $("#currentPage").val(currentPage)
    
     
     $("form").attr("method", "POST").attr("action", "/stream/listRefund").submit();
 	}
- 
+  
 $(function() {
 	$(".checkRefund").on("click", function() {
 		//   alert("클릭합니다~");
@@ -119,12 +126,12 @@ $(function() {
 
 <body>
 <jsp:include page="/view/layout/toolbar.jsp" /> 
-<div class="h1">환급리스트</div>    
-<div id="margin">
+  
 
-  <input type="hidden" id="currentPage" name="currentPage" value=""/>
-		
+  <div id="margin">
+  		<h1>환급리스트</h1></div>
    	<!-- ToolBar End /////////////////////////////////////-->
+   	<div id="margintable">
  <table class="table">  
       
         <thead>
@@ -139,7 +146,7 @@ $(function() {
           </tr>
                
         </thead>  
-        
+           
 		<tbody>	
 		  <c:set var="i" value="0" />
 		  <c:forEach var="refund" items="${list}">
@@ -158,9 +165,16 @@ $(function() {
                <td align="left" data-param="1" data-param2="${refund.streamerNo}">환급완료</td>
               </c:if> 
 		    </tr>
+		    
           </c:forEach>
+           <form>
+			  	  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
+			  </form> 
+			  </div>
         </tbody>
       </table> 
- 	  <jsp:include page="/view/stream/pageNavigator.jsp"/> </div>
+      </div>  
+ 	 <jsp:include page="/common/pageNavigation.jsp"/> 
 </body>
 </html>

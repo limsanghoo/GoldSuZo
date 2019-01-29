@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.zagle.common.Page;
 import com.zagle.service.domain.Refund;
+import com.zagle.service.domain.SearchAdmin;
 import com.zagle.service.domain.SearchStream;
 import com.zagle.service.domain.Stream;
 import com.zagle.service.domain.User;
@@ -92,15 +93,13 @@ public class StreamController {
 		System.out.println(user);
 		stream.setUser(user);  
 		stream.setStreamDate(date);
-
 		System.out.println("addStream[stream]="+stream);
 		streamService.addStream(stream);
-	
 	ModelAndView modelAndView = new ModelAndView();
 	//modelAndView.addObject("streamer",stream.getUser().getUserNo());
 	//modelAndView.addObject("userNo",stream.getUser().getUserNo());
 	System.out.println("왜 라스트로 안가니,,?");
-	modelAndView.setViewName("redirect:https://192.168.0.12:443/stream/add?streamer="+stream.getUser().getUserNo()+"&userNo="+stream.getUser().getUserNo());
+	modelAndView.setViewName("redirect:https://192.168.0.21:443/stream/add?streamer="+stream.getUser().getUserNo()+"&userNo="+stream.getUser().getUserNo());
 	return modelAndView;
 	}
 	  
@@ -108,8 +107,11 @@ public class StreamController {
 	
 	
 	@RequestMapping(value="listStream",method=RequestMethod.GET)
-	public ModelAndView listStream() throws Exception{
+	public ModelAndView listStream(HttpSession session) throws Exception{
 		
+		User user = userService.getUser2("US10023");	
+		System.out.println("리스트유저 "+user);
+		session.setAttribute("user", user);
 	 	SearchStream search = new SearchStream();
 	 	search.setCurrentPage(1);
 	 	search.setPageSize(3);
@@ -142,7 +144,7 @@ public class StreamController {
 	
 	@RequestMapping(value="addRefund",method=RequestMethod.POST)
 	public void addRefund(@ModelAttribute("refund")Refund refund) throws Exception{
-		System.out.println("addRefund=========");
+		System.out.println("addRefund========="+refund);
 		User user = userService.getUser2(refund.getStreamerNo());
 		refund.setAccount(user.getAccount());
 		refund.setBankname(user.getBankName());
@@ -150,13 +152,15 @@ public class StreamController {
 		System.out.println(refund);
 	}
 	
-	@RequestMapping(value="listRefund",method=RequestMethod.GET)
-	public ModelAndView listRefund(HttpSession session) throws Exception{
+	@RequestMapping(value="listRefund")
+	public ModelAndView listRefund(@ModelAttribute("searchStream") SearchStream searchStream) throws Exception{
 		System.out.println("listRefund==========");
 	//	User user = session.getAttribute("user");
-		SearchStream searchStream = new SearchStream();
-		searchStream.setCurrentPage(1);
-		searchStream.setPageSize(3);
+		//SearchStream searchStream = new SearchStream();
+		if(searchStream.getCurrentPage() ==0 ){
+			searchStream.setCurrentPage(1);
+		}  
+		searchStream.setPageSize(pageSize); 
 		searchStream.setSearchUserNo("US10000");
 		System.out.println("왜 안바뀌지????"+searchStream);
 		

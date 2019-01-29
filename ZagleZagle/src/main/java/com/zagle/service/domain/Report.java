@@ -8,18 +8,13 @@ public class Report {
 	
 	private String reportNo;
 	private User reportingUserNo;
+	
 	private User reportedUserNo;
-	public int getHardleNo() {
-		return hardleNo;
-	}
-
-	public void setHardleNo(int hardleNo) {
-		this.hardleNo = hardleNo;
-	}
-
+	private Board reportedBoardNo;
+	
 	private String reportReason;
 	
-	private Board reportedBoard;
+	private Comment reportedCommentNo;
 	private Comment reportedComment;
 	
 	private int hardleNo;
@@ -28,6 +23,32 @@ public class Report {
 	///Constructor
 	public Report() {
 	}
+	
+	public Board getReportedBoardNo() {
+		return reportedBoardNo;
+	}
+
+	public void setReportedBoardNo(Board reportedBoardNo) {
+		this.reportedBoardNo = reportedBoardNo;
+	}
+
+	public Comment getReportedCommentNo() {
+		return reportedCommentNo;
+	}
+
+	public void setReportedCommentNo(Comment reportedCommentNo) {
+		this.reportedCommentNo = reportedCommentNo;
+	}
+
+	public int getHardleNo() {
+		return hardleNo;
+	}
+
+	public void setHardleNo(int hardleNo) {
+		this.hardleNo = hardleNo;
+	}
+
+	
 
 	public String getReportNo() {
 		return reportNo;
@@ -61,14 +82,6 @@ public class Report {
 		this.reportReason = reportReason;
 	}
 
-	public Board getReportedBoard() {
-		return reportedBoard;
-	}
-
-	public void setReportedBoard(Board reportedBoard) {
-		this.reportedBoard = reportedBoard;
-	}
-
 	public Comment getReportedComment() {
 		return reportedComment;
 	}
@@ -84,13 +97,17 @@ public class Report {
 	public void setReportDate(Date reportDate) {
 		this.reportDate = reportDate;
 	}
+	
+	
 
 	@Override
 	public String toString() {
-		return "Report [reportNo=" + reportNo + ", reportingUserNo=" + reportingUserNo + ", reprotedUserNo="
-				+ reportedUserNo + ", reportReason=" + reportReason + ", hardleNo=" + hardleNo + ", reportDate="
-				+ reportDate + "]";
+		return "Report [reportNo=" + reportNo + ", reportingUserNo=" + reportingUserNo + ", reportedUserNo="
+				+ reportedUserNo + ", reportedBoardNo=" + reportedBoardNo + ", reportReason=" + reportReason
+				+ ", reportedCommentNo=" + reportedCommentNo + ", reportedComment=" + reportedComment + ", hardleNo="
+				+ hardleNo + ", reportDate=" + reportDate + "]";
 	}
+
 	
 	
 

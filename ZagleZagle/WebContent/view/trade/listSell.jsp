@@ -15,15 +15,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	
-	
-	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-    <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-   
-   
+
    <!-- jQuery UI toolTip 사용 CSS-->
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <!-- jQuery UI toolTip 사용 JS-->
@@ -31,9 +23,7 @@
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-	  .container {
-            padding-top : 150px;
-        }
+
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -56,7 +46,6 @@
 		});	
 		
 		 $(function() {
-
 			$(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "whitesmoke");
 		});	
 	
@@ -71,10 +60,10 @@
    	<!-- ToolBar End /////////////////////////////////////-->
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
+	<div class="container" style="margin-top:150px">
 	
 		<div class="page-header text-info">
-	       <h3>판매물품조회</h3>
+	       <h3><strong>판매물품조회</strong></h3>
 	    </div>
 		
       <!--  table Start /////////////////////////////////////-->
@@ -82,9 +71,10 @@
       
         <thead>
           <tr>
-          	<th align="center">No</th>
+          	<th align="center"></th>
             <th align="left" >상품명</th>
             <th align="left">가격</th>
+            <th align="left">거래방법</th>
             <th align="left">상태</th>
             <th align="left"></th>
           </tr>
@@ -97,9 +87,14 @@
 			<c:set var="i" value="${ i+1 }" />
 			<c:if test="${sell.sellState!=0}">
 			<tr class="list" data-sellno="${sell.sellNo}">
-				<td align="left">${ i }</td>
+				<td align="left"></td>
 			  <td align="left">${sell.sellName}</td>
 			  <td align="left">${sell.sellPrice}</td>
+			  <td align="left">
+			  
+			  <c:if test="${sell.sellStyle=='10'}">택배거래</c:if>
+			  <c:if test="${sell.sellStyle=='20'}">직거래</c:if>
+			  </td>
 			  <td align="left">
 			  
 			  	<c:if test="${sell.sellState=='10'}">판매중</c:if>
@@ -131,11 +126,10 @@
 	  
  	</div>
  	<!--  화면구성 div End /////////////////////////////////////-->
- 	
- 	
+
  	<!-- PageNavigation Start... -->
 	<jsp:include page="/common/pageNavigation.jsp"/>
 	<!-- PageNavigation End... -->
-	
+
 </body>
 </html>

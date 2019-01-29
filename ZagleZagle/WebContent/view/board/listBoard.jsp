@@ -63,10 +63,8 @@
 form{
 	  padding-top : 150px;
 	 	padding-left:150px;
-        padding-right:150px; */
-       /*  background-color:#f2f2f2; */
-        /* background-image: url(/common/css/html5up-helios/images/pic03.jpg); */
-        /* background-size: cover; */
+        padding-right:150px;
+       background-color:#f7f0e1;
 	}
 
 body {
@@ -128,16 +126,12 @@ body {
     }
 } */
 
-#goAddBoard{
+/* #goAddBoard{
     	position: static;
     	float:right;
-}
+} */
 
-#searchKeyword{
-    	position: absolute;
-    	left:40%;
-    	width:300px;
-}
+
 
 .disabled{
 		pointer-events:none;
@@ -158,6 +152,12 @@ body {
 	display: none;
 }
 
+ 
+input[name='report']{
+-webkit-appearance: button;
+    cursor: pointer;
+    margin-left: 60px;
+}
 
 
 </style>
@@ -176,7 +176,7 @@ $(function(){
 	//게시물 등록
 	$("input[value='게시물 등록']").bind("click",function(){
 		
-		self.location="http://192.168.0.36:8080/board/addBoard?userNo=${user.userNo}";
+		self.location="http://192.168.0.49:8080/board/addBoard?userNo=${user.userNo}";
 	})
 	
 	//지도로 보기
@@ -313,7 +313,14 @@ $(function(){
 		
 	});//스크랩 끝
 	
-	
+	//신고 시작
+	$("input[value='신고']").bind("click",function(){
+		var boardNo=$(this).data('report');
+		
+		var data = document.querySelector("#"+boardNo+"report").value;
+
+	    window.open("/view/board/addReport.jsp?val="+data, "addReport", "width=300, height=200, resizable=yes" );
+	})
 	
 	
 });
@@ -414,11 +421,6 @@ function fncGetTown(){
 }
 
 
-//신고 새창 띄우기
-function openWin(){  
-    window.open("/view/board/addReport.jsp", "네이버새창", "width=800, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" );  
-}  
-
 
 
 </script>
@@ -438,39 +440,48 @@ function openWin(){
 <div class="row fullScreen">
 
 
-<div class="col-sm-11">
+<div class="col-sm-12">
 
 
 
 <form name="listBoard">
 
-<div id="selectMenu">
 
 <a href="/board/testUser">
 <input type="button" value="세션">
 </a>
 
 
+<div class="row col-md-12">
 <!-- 지도로 보기 -->
+<div class="col-md-2 col-md-offset-1">
 <c:if test="${user.userNo!=null}">
-<input type="button" value="지도로 보기"/>
-</c:if>
-
-<!-- 검색 -->
-<span id="searchKeyword">
-<input type="text" name="searchKeyword" value="${! empty searchBoard.searchKeyword ? searchBoard.searchKeyword : ''}" onkeypress="enter()"; placeholder="해시태그 검색하기"/>
-</span>
-
-<!-- 게시물 등록 -->
-<c:if test="${user.userNo!=null}">
-<input class="btn btn-a" type="button" value="게시물 등록" id="goAddBoard"/>
+<input class="btn btn-b" type="button" value="지도로 보기"/>
 </c:if>
 </div>
+
+<!-- 검색 -->
+<div class="col-md-5 col-md-offset-2">
+<input type="text" name="searchKeyword" value="${! empty searchBoard.searchKeyword ? searchBoard.searchKeyword : ''}" onkeypress="enter()"; placeholder="해시태그 검색하기" 
+    style="width: 300px; "
+/>
+</div>
+
+<!-- 게시물 등록 -->
+<div class="col-md-2">
+<c:if test="${user.userNo!=null}">
+<input class="btn btn-b" type="button" value="게시물 등록" id="goAddBoard"/>
+</c:if>
+</div>
+</div>
+
+<br/><br/>
+
 
 <!-- 동네 선택 -->
 <div id="selectTown">
 <c:if test="${param.view=='town'}">
-<div class="row">
+<div class="row" style="display: inherit; text-align: center;">
 				<select name="state" class="ct_input_g" style="width: 200px; height: 40px" onchange="fncGetState(this)">
 					<option value='' style="font-size:20px;"  selected>시·도</option>
 					<c:set var="i" value="0"/>
@@ -668,7 +679,9 @@ function openWin(){
         <!-- 신고 버튼 -->
         <c:if test="${user.userNo!=board.user.userNo}">
         <div class="col-md-5 col-md-offset-1">
-        <input type="button" value="신고" onClick="javascript:openWin();"/>
+        
+        <input type="button" name="report" class="btn btn-a" value="신고" data-report="${board.boardNo}"/>
+        <input type="hidden" id="${board.boardNo}report" value="${board.boardNo}${board.user.userNo}">
         </div>
         </c:if>
         

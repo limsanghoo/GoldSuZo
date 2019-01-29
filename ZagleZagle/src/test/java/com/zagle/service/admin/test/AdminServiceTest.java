@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.zagle.service.admin.AdminService;
+import com.zagle.service.board.BoardService;
 import com.zagle.service.domain.BlackList;
 import com.zagle.service.domain.Blind;
 import com.zagle.service.domain.Board;
@@ -36,6 +37,10 @@ import junit.framework.Assert;
 	@Autowired
 	@Qualifier("adminServiceImpl")
 	private AdminService adminService;
+	
+	@Autowired
+	@Qualifier("boardServiceImpl")
+	private BoardService boardService;
 	
 	
 	//@Test
@@ -141,7 +146,7 @@ import junit.framework.Assert;
 
 	}
 
-	//@Test
+	@Test
 	public void testAddReport() throws Exception {
 		
 		System.out.println("=======================addRport========================");
@@ -157,18 +162,18 @@ import junit.framework.Assert;
 		reportedBoard.setBoardNo("BD10038");
 		
 		
-		report.setReportNo("RP10002");
+		//report.setReportNo("RP10004");
 		report.setReportingUserNo(reportingUserNo);
 		report.setReportedUserNo(reportedUserNo);
-		report.setReportedBoard(reportedBoard);
-		report.setReportReason("테스트용");
+		report.setReportedBoardNo(reportedBoard);
+		report.setReportReason("광고");
 	
 		
 
 		adminService.addReport(report);
+	
 		
-		
-		Assert.assertEquals("RP10000", report.getReportNo());;
+		//Assert.assertEquals("RP10000", report.getReportNo());;
 	}
 	//@Test
 	public void testAddBlackList() throws Exception {
@@ -278,7 +283,7 @@ import junit.framework.Assert;
 		System.out.println("==============================================");
 		}
 		
-		@Test
+		//@Test
 		public void testGetBlindList() throws Exception {
 			
 			SearchAdmin search = new SearchAdmin();
@@ -306,5 +311,11 @@ import junit.framework.Assert;
 			
 			
 		}
+
+			
+		
+			
+			
+	
 		
 }

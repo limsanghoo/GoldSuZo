@@ -9,8 +9,13 @@
 //--//-->   STYLES GENERALES
 ======================================*/
 
+@font-face{
+   font-family: 'Jeju Gothic';
+   src : url("/common/ft/JejuGothic.ttf");
+}
+
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins','Jeju Gothic',"제주고딕", sans-serif;
   color: #555555;
 }
 
@@ -1620,7 +1625,7 @@ footer .credits {
 .btn.btn-a,
 .btn.btn-b {
   border-radius: 0;
-  padding: 1rem 3rem;
+  padding: .5rem 2rem;
   letter-spacing: .05rem;
 }
 
