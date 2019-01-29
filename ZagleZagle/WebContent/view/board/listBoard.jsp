@@ -158,23 +158,6 @@ body {
 	display: none;
 }
 
-#mydiv {
-  position: absolute;
-  z-index: 9;
-  text-align: center;
-  background-color: rgba(0,0,0,0);
-  height: 700px;
-  width: 600px;
-}
-
-#mydivheader {
-margin-top:200px;
- /*  padding-top: 150px; */
-  cursor: move;
-  z-index: 10;
-  background-color: rgba(0,0,0,0.3);
-  color: #fff;
-}
 
 
 </style>
@@ -430,97 +413,6 @@ function fncGetTown(){
 	$("form").attr("method" , "POST").attr("action" , "/board/listBoard?view=${param.view}").submit();
 }
 
-//채팅
-$(function(){
-    dragElement(document.getElementById("mydiv"));
-    function dragElement(elmnt) {
-var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-if (document.getElementById(elmnt.id + "header")) {
-/* if present, the header is where you move the DIV from:*/
-document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-} else {
-/* otherwise, move the DIV from anywhere inside the DIV:*/
-elmnt.onmousedown = dragMouseDown;
-}
-
-function dragMouseDown(e) {
-e = e || window.event;
-e.preventDefault();
-// get the mouse cursor position at startup:
-pos3 = e.clientX;
-pos4 = e.clientY;
-document.onmouseup = closeDragElement;
-// call a function whenever the cursor moves:
-document.onmousemove = elementDrag;
-}
-
-function elementDrag(e) {
-e = e || window.event;
-e.preventDefault();
-// calculate the new cursor position:
-pos1 = pos3 - e.clientX;
-pos2 = pos4 - e.clientY;
-pos3 = e.clientX;
-pos4 = e.clientY;
-// set the element's new position:
-elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-}
-
-function closeDragElement() {
-/* stop moving when mouse button is released:*/
-document.onmouseup = null;
-document.onmousemove = null;
-}
-}
- })
- 
- 
- $(function(){
-         $("#btn").hide();
-         $("#btn:contains('숨기기')").on("click",function(){
-            $("#mydiv").css("display","none");
-            $(this).hide();
-            $("#btn2").show();
-         });
-         
-      });
-      $(function(){
-
-         $("#btn2:contains('보이기')").on("click",function(){
-        	if(document.getElementById("chatting")==null){
-        		$("#mydiv").append('<iframe id="chatting" src="/chat/getChat?room=${user.userAddr}" align="right" style="height:100%; width: 100%;" frameborder="0" scrolling="no"></iframe>');
-        	 }
-        	 
-            $("#mydiv").css("display","inline");
-            $(this).hide();
-            $("#btn").show();
-         });
-      });
-      
-//채팅 배너
-$(document).ready(function() {
-	 
-	// 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
-	var floatPosition = parseInt($("#floatMenu").css('top'));
-	// 250px 이런식으로 가져오므로 여기서 숫자만 가져온다. parseInt( 값 );
- 
-	$(window).scroll(function() {
-		// 현재 스크롤 위치를 가져온다.
-		var scrollTop = $(window).scrollTop();
-		var newPosition = scrollTop + floatPosition + "px";
- 
-		/*/애니메이션 없이 바로 따라감
-		 $("#floatMenu").css('top', newPosition);
-		 */
- 
-		$("#floatMenu").stop().animate({
-			"top" : newPosition
-		}, 500);
- 
-	}).scroll();
-	
-});
 
 //신고 새창 띄우기
 function openWin(){  
@@ -542,24 +434,8 @@ function openWin(){
 
 <jsp:include page="/view/layout/toolbar.jsp"/>
 
-<!-- 채팅창 시작 -->
-<div id="mydiv" style="display: none;">
-   <div id="mydivheader">-여기를 눌러 이동-</div>
-</div>
-<!-- 채팅창 끝 -->
-
 
 <div class="row fullScreen">
-
-
-<c:if test="${user.userNo!=null}">
-<div class="col-sm-1" id="floatMenu">
-<button class="btn btn-b" id="btn" style="margin-top: 200px;">채팅 숨기기</button>
-<button class="btn btn-b" id="btn2" style="margin-top: 200px;">채팅 보이기</button>
-</div>
-</c:if>
-
-
 
 
 <div class="col-sm-11">

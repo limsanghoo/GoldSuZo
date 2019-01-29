@@ -26,15 +26,14 @@
 	 	 
 	 	 
 	 <select id="listRefund"	parameterType="com.zagle.service.domain.SearchStream" resultMap="refundSelectMap">
-	 SELECT *
+	 SELECT refund_no,user_no,user_nickname,TRUNC(refund_price,1) as refund_price,refund_date,bank_name,account,check_refund 
 	 FROM ( SELECT inner_table.* , ROWNUM AS row_seq
 	 FROM (SELECT * from refund
-	 
 	 <if test= "searchUserNo != 'US10000'">	
 	 WHERE user_no = #{searchUserNo} 
 	 </if>
 	 	 ) inner_table
-						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
 	  
