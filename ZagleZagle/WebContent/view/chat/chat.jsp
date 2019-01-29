@@ -41,7 +41,7 @@ body,html{
 			height: 600px;
 			overflow-y: auto;
 			border-radius: 15px !important;
-			background-color: rgba(0,0,0,0.4) !important;
+			background-color: rgba(0,0,0,0.8) !important;
 		}
 		.contacts_body{
 			padding:  0.75rem 0 !important;
@@ -275,7 +275,7 @@ margin-top: -1px;
   z-index: 9;
   background-color: #f1f1f1;
   text-align: center;
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(0,0,0,0.6);
   height: 800px;
   width: 600px;
 }
@@ -284,9 +284,12 @@ margin-top: -1px;
   padding: 10px;
   cursor: move;
   z-index: 10;
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(0,0,0,0.7);
   color: #fff;
+  width: 70px;
+  height: 30px;
 }
+
 input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
 #mdStart {position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
 </style>
@@ -372,7 +375,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 					$("#ok_chat").val(msg.a_user)
 					mdstart2.click();
 				}else if(msg.b_user=="${user.userNickname}"&&msg.ms=="ok"){
-					window.open("/chat/getChat?room="+msg.b_user,"_blank", "width=400, height=600, scrollbars=no ,location=no,resizable=yes,toolbar=no ")
+					window.open("/chat/getChat?room="+msg.b_user,"_blank", "width=400, height=600, scrollbars=no ,location=no,resizable=yes,toolbar=no,status=no ")
 					
 				}else if(msg.b_user=="${user.userNickname}"&&msg.ms=="no"){
 					alert("상대방이 거절하셧슴다.")
@@ -381,7 +384,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 					$("#ok_chat").val(msg.a_user+"@s")
 					mdstart2.click();
 				}else if(msg.b_user.substring(0,msg.b_user.length-2)=="${user.userNickname}"&&msg.ms=="ok"){
-					window.open("https://192.168.0.12/stream/videochat?applyuserNo="+msg.a_user+"&userName=${user.userNickname}","_blank", "width=400, height=300, scrollbars=no");
+					window.open("https://192.168.0.21/stream/videochat?applyuserNo="+msg.a_user+"&userName=${user.userNickname}","_blank", "width=400, height=300, scrollbars=no,status=no");
 				}else if(msg.b_user.substring(0,msg.b_user.length-2)=="${user.userNickname}"&&msg.ms=="no"){
 					alert("상대방이 거절하셧슴다.")
 				}
@@ -391,9 +394,9 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 				var name = $(this).val();
 				socket.emit("one_msg",{a_user:"${user.userNickname}",b_user:name,ms:"ok"});
 				if (name.substring(name.length-2)=="@s") {
-					window.open("https://192.168.0.12/stream/videochat?applyuserNo=${user.userNickname}&userName=${user.userNickname}","_blank", "width=400, height=300, scrollbars=no");  
+					window.open("https://192.168.0.21/stream/videochat?applyuserNo=${user.userNickname}&userName=${user.userNickname}","_blank", "width=400,status=no, height=300, scrollbars=no");  
 				}else{
-					window.open("/chat/getChat?room="+name,"_blank", "width=400, height=600, scrollbars=no ,location=no,resizable=yes,toolbar=no")
+					window.open("/chat/getChat?room="+name,"_blank", "width=400, height=600, scrollbars=no ,location=no,resizable=yes,toolbar=no,status=no")
 				}
 			})
 			$("#no_chat").on("click",function(){
@@ -731,7 +734,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 
 <button id="btn_one" style="display: none;" value=""></button>
 
-<div style="text-align: center; color: white; font-style: oblique;"><h3><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;${user.userAddr}</h3></div>
+<div style="text-align: center; color: #2eca6a; font-style: inherit; "><h3><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;${user.userAddr}</h3></div>
 		<div class="container-fluid h-100">
 		
 			<div class="row justify-content-center h-100">
@@ -770,7 +773,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 						<div class="card-footer">
 							<div class="input-group">
 								<div class="input-group-append">
-									<span class="input-group-text attach_btn"><label for="image_name"><i class="fas fa-paperclip" for="image_name"></i></label></span>
+									<span class="input-group-text attach_btn"><label for="image_name"><i class="fas fa-paperclip"></i></label></span>
 									
 								</div>
 								<input name="" class="form-control type_msg" placeholder="Type your message..." id="msg"></input>
