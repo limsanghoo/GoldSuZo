@@ -61,7 +61,7 @@
 }
 
 form{
-	 	/* padding-top : 150px;
+	  padding-top : 150px;
 	 	padding-left:150px;
         padding-right:150px; */
        /*  background-color:#f2f2f2; */
@@ -168,7 +168,8 @@ body {
 }
 
 #mydivheader {
-  padding: 10px;
+margin-top:200px;
+ /*  padding-top: 150px; */
   cursor: move;
   z-index: 10;
   background-color: rgba(0,0,0,0.3);
@@ -553,20 +554,17 @@ function openWin(){
 
 <c:if test="${user.userNo!=null}">
 <div class="col-sm-1" id="floatMenu">
-<button id="btn" style="margin-top: 200px;">채팅 숨기기</button>
-<button id="btn2" style="margin-top: 200px;">채팅 보이기</button>
+<button class="btn btn-b" id="btn" style="margin-top: 200px;">채팅 숨기기</button>
+<button class="btn btn-b" id="btn2" style="margin-top: 200px;">채팅 보이기</button>
 </div>
 </c:if>
 
 
 
-<c:if test="${user.userNo!=null}">
-<div class="col-sm-11">
-</c:if>
 
-<c:if test="${user.userNo==null}">
-<div class="col-sm-12">
-</c:if>
+<div class="col-sm-11">
+
+
 
 <form name="listBoard">
 
@@ -589,7 +587,7 @@ function openWin(){
 
 <!-- 게시물 등록 -->
 <c:if test="${user.userNo!=null}">
-<input type="button" value="게시물 등록" id="goAddBoard"/>
+<input class="btn btn-a" type="button" value="게시물 등록" id="goAddBoard"/>
 </c:if>
 </div>
 
@@ -598,7 +596,7 @@ function openWin(){
 <c:if test="${param.view=='town'}">
 <div class="row">
 				<select name="state" class="ct_input_g" style="width: 200px; height: 40px" onchange="fncGetState(this)">
-					<option value='' style="font-size:20px;"  selected>시·도 ▼</option>
+					<option value='' style="font-size:20px;"  selected>시·도</option>
 					<c:set var="i" value="0"/>
 					<c:forEach var="local" items="${list}">
 					<c:set var="i" value="${i+1}"/>
@@ -607,11 +605,11 @@ function openWin(){
 				</select>
 				
 				<select name="city"  class="ct_input_g" style="width: 200px; height: 40px" onchange="fncGetCity(this)">
-					<option value="" style="font-size:20px;">시·군·구 ▼</option>
+					<option value="" style="font-size:20px;">시·군·구</option>
 				</select>
         
 				<select name="town"  class="ct_input_g" style="width: 200px; height: 40px" onchange="fncGetTown(this)">
-					<option value="" style="font-size:20px;">읍·면·동 ▼</option>
+					<option value="" style="font-size:20px;">읍·면·동</option>
 				</select> 
 				
 				<input type="hidden" name="local" value="${searchBoard.local}"/>
@@ -890,9 +888,11 @@ function openWin(){
         
   
 </div><!-- /container -->
+
 </form>
+
+</div>
 </div><!-- row 끝 -->
-  
     </body>
 </html>
 
