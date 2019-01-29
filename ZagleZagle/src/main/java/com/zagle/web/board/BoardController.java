@@ -113,7 +113,7 @@ public class BoardController {
         
 		ModelAndView modelAndView=new ModelAndView();
 	
-		modelAndView.setViewName("redirect:http://192.168.0.36:8080/board/listBoard?view=all");
+		modelAndView.setViewName("redirect:http://192.168.0.49:8080/board/listBoard?view=all");
 		
 		return modelAndView;
 	}
@@ -143,10 +143,31 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="addReport", method=RequestMethod.GET)
-	public ModelAndView addReport(@RequestParam("reportReason") String reportReason) throws Exception{
+	public ModelAndView addReport(@RequestParam("reportReason") String reportReason, @RequestParam("reportingUserNo") String reportingUserNo, 
+			@RequestParam("reportedBoard") String reportedBoard, @RequestParam("reportedUserNo") String reportedUserNo) throws Exception{
 		
 		System.out.println("/addReport");
-		System.out.println("리즌 : "+reportReason);
+		System.out.println("reportReason : "+reportReason);
+		System.out.println("reportingUserNo : "+reportingUserNo);
+		System.out.println("reportedBoard : "+reportedBoard);
+		System.out.println("reportedUserNo : "+reportedUserNo);
+		
+		User reportingUser=new User();
+		reportingUser.setUserNo(reportingUserNo);
+		
+		User reportedUser=new User();
+		reportedUser.setUserNo(reportedUserNo);
+		
+		Board board=new Board();
+		board.setBoardNo(reportedBoard);
+		
+		Report report=new Report();
+		report.setReportingUserNo(reportingUser);
+		report.setReportedUserNo(reportedUser);
+		report.setReportReason(reportReason);
+		report.setReportedBoard(board);
+		
+		boardService.addReport(report);
 		
 		ModelAndView modelAndView=new ModelAndView();
 		
@@ -155,6 +176,9 @@ public class BoardController {
 	
 	@RequestMapping(value="addReport", method=RequestMethod.POST)
 	public ModelAndView addReport(@ModelAttribute("report") Report report) throws Exception{
+		
+		System.out.println("/addReport POST");
+		System.out.println(report);
 		
 		ModelAndView modelAndView=new ModelAndView();
 		

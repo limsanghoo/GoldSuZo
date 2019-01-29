@@ -68,8 +68,7 @@ public class BoardDAOImpl implements BoardDAO{
 
 	@Override
 	public void addReport(Report report) throws Exception {
-		// TODO Auto-generated method stub
-		
+		sqlSession.insert("ReportMapper.addReport", report);
 	}
 
 	@Override

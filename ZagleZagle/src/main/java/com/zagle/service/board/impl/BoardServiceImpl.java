@@ -83,8 +83,7 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public void addReport(Report report) throws Exception {
-		// TODO Auto-generated method stub
-		
+		boardDAO.addReport(report);	
 	}
 
 	@Override

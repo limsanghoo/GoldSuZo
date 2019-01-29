@@ -19,12 +19,44 @@
 
 $(function(){
 	
-	$("input[value='신고']").bind("click",function(){
-		alert("신고한당");
-		$("form").attr("method" , "POST").attr("action" , "/board/addReport").submit();
+	$("input[value='신고']").on("click",function(){
+
+		var reportReason=$("select[name='reportReason']").val();
+		alert(reportReason);
+		
+		var reportingUserNo=$("input[name='reportingUserNo']").val();
+		//alert(reportingUserNo);
+		
+		var reportedBoard=$("input[name='reportedBoard']").val();
+		//alert(reportedBoard);
+		
+		var reportedUserNo=$("input[name='reportedUserNo']").val();
+		//alert(reportedUserNo);
+		
+		self.location="/board/addReport?reportReason="+reportReason+"&reportingUserNo="+reportingUserNo+"&reportedBoard="+reportedBoard+"&reportedUserNo="+reportedUserNo;	
+		
+		window.close();
 	});
 	
 });
+
+//부모창에서 값 받아오기
+window.onload = function () {
+    var search = window.location.search;
+    var getData =  decodeURI(search);
+    		
+    var reportedBoard=getData.substring(5,12);
+    
+    var reportedUserNo=getData.substring(12,20);
+    
+    var sender1 = document.querySelector('#reportedBoard');
+    sender1.value = reportedBoard;
+    
+    var sender2 = document.querySelector('#reportedUserNo');
+    sender2.value = reportedUserNo;
+    
+}
+
 
 </script>
 
@@ -34,17 +66,19 @@ $(function(){
 <form name="addReport">
 	<select class="form-control" id="reportReason" name="reportReason">
 		      	<option value="0">신고 사유를 선택해주세요</option>
-		      	<option value="1">욕설</option>
-		      	<option value="2">광고</option>
-		      	<option value="3">음란</option>		      	
+		      	<option value="욕설">욕설</option>
+		      	<option value="광고">광고</option>
+		      	<option value="음란">음란</option>		      	
 	</select>
 	
 	<input type="hidden" name="reportingUserNo" value="${user.userNo}"/>
-	
-	<input type="hidden" name="reportedBoard" value="BD10066"/>
-	<input type="hidden" name="reportedUserNo" value="US10025"/>
+	<input type="hidden" name="reportedBoard" id="reportedBoard"/>
+	<input type="hidden" name="reportedUserNo" id="reportedUserNo"/>
+
 	
 </form>
+
+<br/><br/><br/>
 
 <input type="button" value="신고"/>
 </body>
