@@ -198,21 +198,41 @@ public class AdminController {
 		
 		System.out.println("boardNo 확인"+board);
 		
+		User user = board.getUser();
+		String userNo = user.getUserNo();
+		System.out.println("userNo"+userNo);
 		
+		User user01 = userService.getUser2(userNo);
+		
+		int deleteCount = user01.getDeleteCount();
 	
+		System.out.println(deleteCount);
+		
 		
 		blind.setBlindNo(blindNo);
 		blind.setBlindCode(blindCode);
 		
 		if(blindCode.equals("1")) {
+			
 		board.setBoardStatus("2");
+		
+		user01.setDeleteCount(deleteCount+1);
+		
 		}else {
 		board.setBoardStatus("4");	
 		}
 		
 		adminService.updateBlind(blind);
 		boardService.updateBoard(board);
+		userService.updateDeleteCount(user01);
 		
+		System.out.println("딜리트 카운트"+deleteCount);
+		
+		if(deleteCount == 2) {
+			user01.setBlackCode(1);
+			userService.updateUser(user01);
+		}
+
 		
 		System.out.println("blind 확인 :"+blind);
 		
@@ -258,5 +278,37 @@ public class AdminController {
 		
 		return modelAndView;
 	}
+	@RequestMapping(value="updateBlackCheckCode", method=RequestMethod.GET)
+	public ModelAndView updateBlackCheckCode(@RequestParam("userNo") String userNo,
+																						@RequestParam("blackNo") String blackNo) throws Exception {
+		
+		
+		System.out.println("업데이트 블랙체크 코드 시작 입니다리~~~~~~~~~~~~~~~~~~~~!!!!!!!!!!!!!!!!!!!!");
+		
+		System.out.println(userNo);
+		System.out.println(blackNo);
+		
+		String blackCheckCode = "1";
+		BlackList black = new BlackList();
+		
+		black.setBlackCheckCode(blackCheckCode);
+		black.setBlackNo(blackNo);
+		
+		adminService.updateBlackCheckCode(black);
+	
+		User user = userService.getUser2(userNo);
+		user.setBlackCode(4);
+		
+		userService.updateUser(user);
+		
+		System.out.println("user 업데이트 확인"+user);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/admin/listBlackList");
+		
+		return modelAndView;
+				
+	}
+	
 }
 

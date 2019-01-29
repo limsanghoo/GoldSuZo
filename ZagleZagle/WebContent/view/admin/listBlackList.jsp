@@ -40,7 +40,10 @@
 		$("#currentPage").val(currentPage)
 		$("form").attr("method" , "POST").attr("action" , "/admin/listBlackList").submit();
 	}
+	
 
+			
+		
 	
 	
 	 $( function() {
@@ -121,7 +124,20 @@
 			
 		}); 
 		
+		//================ 블랙 리스트 삭제==================
+
+		$("#deleteBlack").on("click" , function() {
 			
+			alert("확인용")
+			var userNo =  $(this).data("param4");
+			var blackNo = $(this).data("param5");
+			alert(blackNo)
+			alert(userNo)
+			
+			self.location = "/admin/updateBlackCheckCode?userNo="+userNo+"&blackNo="+blackNo;
+		});
+	//=============================================	
+
 			
 			
 			
@@ -261,13 +277,14 @@
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
               <div class="modal-body">
-              <form>
-              <input type="text" style="width: 100%" name="banReason" placeholder="해지 하시겠습니까?" readonly>
+           
+           		<strong>해지 하시겠습니까?</strong>
               </div>
               <div class="modal-footer">
-              
-              <button class="btn btn-primary" name="addBlackList" id="addBlackList">블랙리스트 해지</button>
-              </form>
+            	<a href="#" class="btn btn-primary" id="deleteBlack" data-param4="${blackList.blackUser.userNo}" 
+            						data-param5="${blackList.blackNo}">삭제</a>
+             
+          
             </div>
           </div>
         </div>

@@ -82,5 +82,9 @@ public class UserServiceImpl implements UserService {
 	public void addActiveScore(User user) throws Exception {
 		userDao.addActiveScore(user);
 	}
+	
+	public void updateDeleteCount(User user) throws Exception {
+		userDao.updateDeleteCount(user);
+	}
 
 }

@@ -28,6 +28,14 @@
 	</insert>
 	
 	
+	<update id="updateBlackCheckCode" parameterType="com.zagle.service.domain.BlackList">
+	UPDATE blackList
+	<set>
+	black_check_code =  #{blackCheckCode:VARCHAR}
+	</set>
+	WHERE black_no = #{blackNo:VARCHAR}
+	</update>
+	
 	<!--  
 	<select id="listBlackList" parameterType="com.zagle.service.domain.SearchAdmin" resultMap="blackListSelectMap">
 	SELECT b.black_no, u.user_no, b.ban_reason, b.ban_start_day, b.ban_expire_day, u.black_code
@@ -42,9 +50,9 @@
 	FROM ( SELECT inner_table.*, ROWNUM AS row_seq
 					FROM ( SELECT *
 									FROM blackList
-								
+									WHERE black_check_code = '0'
 									<if test="searchCondition != null">
-												<where>
+											
 			
 													<if test="searchCondition == 0 and searchKeyword !='' ">
 										 				ban_reason = #{searchKeyword}
@@ -52,7 +60,7 @@
 													<if test="searchCondition == 1 and searchKeyword !='' ">
 										 			  black_check_code = #{searchKeyword}
 													</if>
-												</where>
+												
 											</if>
 											ORDER BY black_no ) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
@@ -64,16 +72,16 @@
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT *
 						FROM  blackList
-					
+						WHERE black_check_code = '0'
 						<if test="searchCondition != null">
-							<where>
+							
 								<if test="searchCondition == 0 and searchKeyword !='' ">
 						 			ban_reason = #{searchKeyword}
 								</if>
 								<if test="searchCondition == 1 and searchKeyword !='' ">
 						 		 	 black_check_code = #{searchKeyword}
 								</if>
-							</where>
+						
 						</if> ) countTable						
 	 </select>
 	 

@@ -423,7 +423,7 @@ public class UserController {
 	*/
 	
 	@RequestMapping(value = "getGGToken", method = { RequestMethod.GET, RequestMethod.POST })
-	public void doSessionAssignActionPage(HttpServletRequest request, HttpServletResponse response)throws Exception{
+	public ModelAndView doSessionAssignActionPage(HttpServletRequest request, HttpServletResponse response, HttpSession session)throws Exception{
 		   System.out.println("Google login success");
 		   
 		   String code = request.getParameter("code");
@@ -446,9 +446,23 @@ public class UserController {
 
 			  PlusOperations plusOperations = google.plusOperations();
 			  Person profile = plusOperations.getGoogleProfile();
-			  System.out.println(profile.getDisplayName());
-
-			  response.sendRedirect("/board/listBoard");
+			  
+			  System.out.println(profile);
+			  
+			  System.out.println(profile.getId());
+			  
+			  String snsNo = "G@"+profile.getId();
+			  
+			  session.setAttribute("snsNo", snsNo);
+			  
+			  System.out.println(snsNo);
+			  
+			  //System.out.println(profile.getDisplayName());
+			  ModelAndView model = new ModelAndView();
+	
+			  model.setViewName("checkDuplication");
+			  //response.sendRedirect("/board/listBoard");
+			  return model;
 			  
 	}
 	
