@@ -48,11 +48,11 @@ public class BoardController {
 	
 	/*@Autowired
 	@Qualifier("chatServiceImpl")
-	private ChatService chatService;
+	private ChatService chatService;*/
 	
 	@Autowired
 	@Qualifier("adminServiceImpl")
-	private AdminService adminService;*/
+	private AdminService adminService;
 	
 	public BoardController() {
 		System.out.println(this.getClass());
@@ -118,22 +118,7 @@ public class BoardController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="addComment", method=RequestMethod.POST)
-	public ModelAndView addComment(@ModelAttribute("comment") Comment comment) throws Exception{
-		
-		ModelAndView modelAndView=new ModelAndView();
-		
-		return modelAndView;
-	}
-	
-	@RequestMapping(value="addLike", method=RequestMethod.GET)
-	public ModelAndView addLike() throws Exception{
-		
-		ModelAndView modelAndView=new ModelAndView();
-		
-		return modelAndView;
-	}
-	
+
 	@RequestMapping(value="addLink", method=RequestMethod.GET)
 	public ModelAndView addLink() throws Exception{
 		
@@ -168,13 +153,18 @@ public class BoardController {
 		report.setReportedBoard(board);
 		
 		boardService.addReport(report);
+			
+		int reportCount=adminService.checkReportCount(report);
+		
+		System.out.println("reportCount : "+reportCount);
 		
 		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.setViewName("forward:/view/board/close.jsp");
 		
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="addReport", method=RequestMethod.POST)
+	/*@RequestMapping(value="addReport", method=RequestMethod.POST)
 	public ModelAndView addReport(@ModelAttribute("report") Report report) throws Exception{
 		
 		System.out.println("/addReport POST");
@@ -183,23 +173,8 @@ public class BoardController {
 		ModelAndView modelAndView=new ModelAndView();
 		
 		return modelAndView;
-	}
+	}*/
 	
-	@RequestMapping(value="addScrap", method=RequestMethod.GET)
-	public ModelAndView addScrap() throws Exception{
-		
-		ModelAndView modelAndView=new ModelAndView();
-		
-		return modelAndView;
-	}
-	
-	@RequestMapping(value="cancelLike", method=RequestMethod.GET)
-	public ModelAndView cancelLike() throws Exception{
-		
-		ModelAndView modelAndView=new ModelAndView();
-		
-		return modelAndView;
-	}
 	
 	@RequestMapping(value="deleteBoard", method=RequestMethod.GET)
 	public ModelAndView deleteBoard(@ModelAttribute("board") Board board) throws Exception{
@@ -219,13 +194,6 @@ public class BoardController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="deleteComment", method=RequestMethod.GET)
-	public ModelAndView deleteComment() throws Exception{
-		
-		ModelAndView modelAndView=new ModelAndView();
-		
-		return modelAndView;
-	}
 	
 	@RequestMapping(value="getBoard", method=RequestMethod.GET)
 	public ModelAndView getBoard(@RequestParam("boardNo") String boardNo) throws Exception{

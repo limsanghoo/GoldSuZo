@@ -34,10 +34,8 @@ $(function(){
 		//alert(reportedUserNo);
 		
 		self.location="/board/addReport?reportReason="+reportReason+"&reportingUserNo="+reportingUserNo+"&reportedBoard="+reportedBoard+"&reportedUserNo="+reportedUserNo;	
-		
-		window.close();
+
 	});
-	
 });
 
 //부모창에서 값 받아오기
