@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.zagle.service.admin.AdminService;
 import com.zagle.service.board.BoardService;
 import com.zagle.service.chat.ChatService;
+import com.zagle.service.domain.Blind;
 import com.zagle.service.domain.Board;
 import com.zagle.service.domain.Comment;
 import com.zagle.service.domain.Local;
@@ -129,12 +130,12 @@ public class BoardController {
 	
 	@RequestMapping(value="addReport", method=RequestMethod.GET)
 	public ModelAndView addReport(@RequestParam("reportReason") String reportReason, @RequestParam("reportingUserNo") String reportingUserNo, 
-			@RequestParam("reportedBoard") String reportedBoard, @RequestParam("reportedUserNo") String reportedUserNo) throws Exception{
+			@RequestParam("reportedBoardNo") String reportedBoardNo, @RequestParam("reportedUserNo") String reportedUserNo) throws Exception{
 		
 		System.out.println("/addReport");
 		System.out.println("reportReason : "+reportReason);
 		System.out.println("reportingUserNo : "+reportingUserNo);
-		System.out.println("reportedBoard : "+reportedBoard);
+		System.out.println("reportedBoardNo : "+reportedBoardNo);
 		System.out.println("reportedUserNo : "+reportedUserNo);
 		
 		User reportingUser=new User();
@@ -144,19 +145,32 @@ public class BoardController {
 		reportedUser.setUserNo(reportedUserNo);
 		
 		Board board=new Board();
-		board.setBoardNo(reportedBoard);
+		board.setBoardNo(reportedBoardNo);
 		
 		Report report=new Report();
 		report.setReportingUserNo(reportingUser);
 		report.setReportedUserNo(reportedUser);
 		report.setReportReason(reportReason);
-		report.setReportedBoard(board);
+		report.setReportedBoardNo(board);
+		
+		System.out.println(report);
 		
 		boardService.addReport(report);
-			
+		
+		//신고 횟수 카운트
 		int reportCount=adminService.checkReportCount(report);
 		
 		System.out.println("reportCount : "+reportCount);
+		
+		if(reportCount>3) {
+			Blind blind=new Blind();
+			
+			//해당 게시물 블라인드 등록 blind code 0으로
+			blind.setBlindBoardNo(report.getReportedBoardNo());		
+			adminService.addBlind(blind);
+			
+			//해당 게시물 boardStatus 3으로
+		}
 		
 		ModelAndView modelAndView=new ModelAndView();
 		modelAndView.setViewName("forward:/view/board/close.jsp");

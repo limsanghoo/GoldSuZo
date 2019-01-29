@@ -165,7 +165,7 @@ import junit.framework.Assert;
 		//report.setReportNo("RP10004");
 		report.setReportingUserNo(reportingUserNo);
 		report.setReportedUserNo(reportedUserNo);
-		report.setReportedBoard(reportedBoard);
+		report.setReportedBoardNo(reportedBoard);
 		report.setReportReason("광고");
 	
 		

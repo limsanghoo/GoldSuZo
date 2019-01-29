@@ -8,10 +8,21 @@ public class Report {
 	
 	private String reportNo;
 	private User reportingUserNo;
+	
 	private User reportedUserNo;
 	private Board reportedBoardNo;
-	private Comment reportedCommentNo;
 	
+	private String reportReason;
+	
+	private Comment reportedCommentNo;
+	private Comment reportedComment;
+	
+	private int hardleNo;
+	private Date reportDate;
+	
+	///Constructor
+	public Report() {
+	}
 	
 	public Board getReportedBoardNo() {
 		return reportedBoardNo;
@@ -37,17 +48,7 @@ public class Report {
 		this.hardleNo = hardleNo;
 	}
 
-	private String reportReason;
 	
-	private Board reportedBoard;
-	private Comment reportedComment;
-	
-	private int hardleNo;
-	private Date reportDate;
-	
-	///Constructor
-	public Report() {
-	}
 
 	public String getReportNo() {
 		return reportNo;
@@ -81,14 +82,6 @@ public class Report {
 		this.reportReason = reportReason;
 	}
 
-	public Board getReportedBoard() {
-		return reportedBoard;
-	}
-
-	public void setReportedBoard(Board reportedBoard) {
-		this.reportedBoard = reportedBoard;
-	}
-
 	public Comment getReportedComment() {
 		return reportedComment;
 	}
@@ -104,13 +97,17 @@ public class Report {
 	public void setReportDate(Date reportDate) {
 		this.reportDate = reportDate;
 	}
+	
+	
 
 	@Override
 	public String toString() {
-		return "Report [reportNo=" + reportNo + ", reportingUserNo=" + reportingUserNo + ", reprotedUserNo="
-				+ reportedUserNo + ", reportReason=" + reportReason + ", hardleNo=" + hardleNo + ", reportDate="
-				+ reportDate + "]";
+		return "Report [reportNo=" + reportNo + ", reportingUserNo=" + reportingUserNo + ", reportedUserNo="
+				+ reportedUserNo + ", reportedBoardNo=" + reportedBoardNo + ", reportReason=" + reportReason
+				+ ", reportedCommentNo=" + reportedCommentNo + ", reportedComment=" + reportedComment + ", hardleNo="
+				+ hardleNo + ", reportDate=" + reportDate + "]";
 	}
+
 	
 	
 

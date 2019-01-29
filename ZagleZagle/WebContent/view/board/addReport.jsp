@@ -22,18 +22,18 @@ $(function(){
 	$("input[value='신고']").on("click",function(){
 
 		var reportReason=$("select[name='reportReason']").val();
-		alert(reportReason);
+		//alert(reportReason);
 		
 		var reportingUserNo=$("input[name='reportingUserNo']").val();
 		//alert(reportingUserNo);
 		
-		var reportedBoard=$("input[name='reportedBoard']").val();
-		//alert(reportedBoard);
+		var reportedBoardNo=$("input[name='reportedBoardNo']").val();
+		alert(reportedBoardNo);
 		
 		var reportedUserNo=$("input[name='reportedUserNo']").val();
-		//alert(reportedUserNo);
+		alert(reportedUserNo);
 		
-		self.location="/board/addReport?reportReason="+reportReason+"&reportingUserNo="+reportingUserNo+"&reportedBoard="+reportedBoard+"&reportedUserNo="+reportedUserNo;	
+		self.location="/board/addReport?reportReason="+reportReason+"&reportingUserNo="+reportingUserNo+"&reportedBoardNo="+reportedBoardNo+"&reportedUserNo="+reportedUserNo;	
 
 	});
 });
@@ -43,12 +43,12 @@ window.onload = function () {
     var search = window.location.search;
     var getData =  decodeURI(search);
     		
-    var reportedBoard=getData.substring(5,12);
+    var reportedBoardNo=getData.substring(5,12);
     
     var reportedUserNo=getData.substring(12,20);
     
-    var sender1 = document.querySelector('#reportedBoard');
-    sender1.value = reportedBoard;
+    var sender1 = document.querySelector('#reportedBoardNo');
+    sender1.value = reportedBoardNo;
     
     var sender2 = document.querySelector('#reportedUserNo');
     sender2.value = reportedUserNo;
@@ -70,7 +70,7 @@ window.onload = function () {
 	</select>
 	
 	<input type="hidden" name="reportingUserNo" value="${user.userNo}"/>
-	<input type="hidden" name="reportedBoard" id="reportedBoard"/>
+	<input type="hidden" name="reportedBoardNo" id="reportedBoardNo"/>
 	<input type="hidden" name="reportedUserNo" id="reportedUserNo"/>
 
 	

@@ -89,7 +89,7 @@ $(function() {
 
 	
 	
-	$("a:contains('로그아웃')").on("click",function() {
+	$("a:contains('LOGOUT')").on("click",function() {
 		
 		alert("클릭됨")
 		
@@ -309,7 +309,7 @@ font-size: 100%;
       <a href="/index.jsp" class="navbar-brand text-brand" style="padding-top: 0; padding-bottom: 0;">Dongne<span class="color-b">Vangne</span></a>
 
       <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav" style="cursor:pointer">
           <li class="nav-item">
             <a class="nav-link">전체 게시물</a>
           </li>      
@@ -377,23 +377,21 @@ font-size: 100%;
       
       <!-- 로그인 로그아웃-->
       
-      <div style="list-style: none;">
+      <div style="list-style: none; cursor:pointer;">
 		<c:if test="${user.userNo!=null}">
-		 <li class="nav-item">
+		 	<li class="nav-item">
 					<h4 style="font-style: italic; color: black;"><a href="/user/getUser2?userNo=${user.userNo}">${user.userName}</a> 님 환영합니다.</h4>
-		</li>
+			</li>
 					
-		<li class="nav-item">					
-	                <a class="nav-link" data-param="${user.snsNo}">로그아웃</a>		                
-		  </li>
+			<li class="nav-item">					
+	                <a class="nav-link" data-param="${user.snsNo}">LOGOUT</a>		                
+		 	</li>
 		 </c:if>      
       
-      
-      
      	 <c:if test="${user.userNo==null}">  			
-		<li class="button primary" id="login" data-toggle="modal" data-target="#modal1" style="">
-			<a class="nav-link">Login</a>
-		</li>
+			<li class="button primary" id="login" data-toggle="modal" data-target="#modal1" style="">
+			<a class="nav-link">LOGIN</a>
+			</li>
 		</c:if>
 			
 		 	
