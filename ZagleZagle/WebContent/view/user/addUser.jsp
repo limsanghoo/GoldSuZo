@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,9 +9,75 @@
 
 <script>
 
-$('.message a').click(function(){
-	   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
-	});
+function fncGetState(){
+	
+	var stateCode = $("select[name=state]").val();
+	//alert(stateCode);
+	
+	$.ajax(
+		{
+			url : "/board/json/listMap/getCity/"+stateCode,
+			method : "GET",
+			header : {
+				"Accept" : "application/json",
+				"Content-Type" : "application/json"
+			},
+			success : function(data, status){
+				
+				var temp ="";
+				var display ="";
+				
+				if(data.length>0){
+					$.each(data, function(index){
+						temp = "<option value='"+data[index].cityCode+"' style='font-size:20px;'>"+data[index].cityName+"</option>";
+						display += temp;
+					});
+					
+					$("select[name=city]").children("option").not("option:nth-child(1)").remove();
+					$("select[name=city]").append(display);
+				}
+				
+			}
+			
+		});
+}
+
+function fncGetCity(){
+	
+	var stateCode = $("select[name=state]").val();
+	var cityCode = $("select[name=city]").val();
+	//alert(cityCode);
+	
+	$.ajax(
+		{
+			url : "/board/json/listMap/getTown/"+cityCode+"/"+stateCode,
+			method : "GET",
+			header : {
+				"Accept" : "application/json",
+				"Content-Type" : "application/json"
+			},
+			success : function(data, status){
+				
+				var temp ="";
+				var display ="";
+				
+				if(data.length>0){
+					$.each(data, function(index){
+						temp = "<option value='"+data[index].townCode+"' style='font-size:20px;'>"+data[index].townName+"</option>";
+						display += temp;
+					});
+					
+					$("select[name=town]").children("option").not("option:nth-child(1)").remove();
+					$("select[name=town]").append(display);
+				}
+				
+			}
+			
+		});
+}
+
+
+
 	
 </script>
 
@@ -161,6 +228,28 @@ h1 {
 
 .agileits-top {
   padding: 3em;
+}
+
+select {
+ font-size: 0.9em;
+  color: #fff;
+  font-weight: 100;
+  width: 25%;
+  display: inline;
+  border: none;
+  padding: 0.8em;
+  border: solid 1px rgba(255, 255, 255, 0.37);
+  -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+  transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #fff 4%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #fff 4%);
+  background-position: -800px 0;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  padding-right: 25px;
+
 }
 
 input[type="text"], input[type="email"], input[type="password"] {
@@ -807,28 +896,52 @@ input.checkbox:checked:after {
 				<form action="#" method="post">
 			
 					<br>
-					<input class="text" type="text" name="Username" placeholder="Username" required="">
+					<input class="text" type="text" name="Username" placeholder="이름을 입력하세요." required="">
 					<br>
 					
-					<input class="text" type="text" name="UserNickname" placeholder="Nickname" required="">
+					<input class="text" type="text" name="UserNickname" placeholder="닉네임을 입력하세요." required="">
 					
 					<br>
 				
-					<input class="text" type="text" name="password" placeholder="주민등록번호 앞자리만 입력하세요" required="">
+					<input class="text" type="text" name="Birth" placeholder="주민등록번호 앞자리만 입력하세요." required="">
 		
 								<br>
+				
+					<div class="row"style="text-align: center; display: inherit;">
+				<select name="state" class="ct_input_g" onchange="fncGetState(this)">
+					<option value='' style="font-size:20px;"  selected>시·도</option>
+					
+
+			
+				</select>
+				
+				<select name="city"  class="ct_input_g" onchange="fncGetCity(this)">
+					<option value="" style="font-size:20px;">시·군·구</option>
+				</select>
+        
+				<select name="town"  class="ct_input_g"  onchange="fncGetTown(this)">
+					<option value="" style="font-size:20px;">읍·면·동</option>
+				</select>  
+				
+				            
+			</div>
+<br/>
+					
+					
+				
+								
 					<div class="wthree-text">
 						<label class="anim">
 						
 							<input type="checkbox" class="checkbox" required="">
 				
-							<span>I Agree To The Terms & Conditions</span>
+							<span>추가정보 기입에 동의합니다.</span>
 						</label>
 						<div class="clear"> </div>
 					</div>
-					<input type="submit" value="SIGNUP">
+					<input type="submit" value="확 인" id="agreement">
 				</form>
-				<p>Don't have an Account? <a href="#"> Login Now!</a></p>
+			
 			</div>
 		</div>
 		<!-- copyright -->
