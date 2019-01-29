@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.zagle.common.Page;
 import com.zagle.service.domain.Refund;
+import com.zagle.service.domain.SearchAdmin;
 import com.zagle.service.domain.SearchStream;
 import com.zagle.service.domain.Stream;
 import com.zagle.service.domain.User;
@@ -144,7 +145,7 @@ public class StreamController {
 	
 	@RequestMapping(value="addRefund",method=RequestMethod.POST)
 	public void addRefund(@ModelAttribute("refund")Refund refund) throws Exception{
-		System.out.println("addRefund=========");
+		System.out.println("addRefund========="+refund);
 		User user = userService.getUser2(refund.getStreamerNo());
 		refund.setAccount(user.getAccount());
 		refund.setBankname(user.getBankName());
@@ -152,13 +153,15 @@ public class StreamController {
 		System.out.println(refund);
 	}
 	
-	@RequestMapping(value="listRefund",method=RequestMethod.GET)
-	public ModelAndView listRefund(HttpSession session) throws Exception{
+	@RequestMapping(value="listRefund")
+	public ModelAndView listRefund(@ModelAttribute("searchStream") SearchStream searchStream) throws Exception{
 		System.out.println("listRefund==========");
 	//	User user = session.getAttribute("user");
-		SearchStream searchStream = new SearchStream();
-		searchStream.setCurrentPage(1);
-		searchStream.setPageSize(3);
+		//SearchStream searchStream = new SearchStream();
+		if(searchStream.getCurrentPage() ==0 ){
+			searchStream.setCurrentPage(1);
+		}  
+		searchStream.setPageSize(pageSize); 
 		searchStream.setSearchUserNo("US10000");
 		System.out.println("왜 안바뀌지????"+searchStream);
 		

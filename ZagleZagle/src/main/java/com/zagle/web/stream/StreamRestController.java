@@ -35,6 +35,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import com.zagle.service.domain.Refund;
 import com.zagle.service.domain.Spon;
 import com.zagle.service.domain.Stream;
@@ -372,7 +373,33 @@ public class StreamRestController {
 	return string; 
 	}
 	
-
+	@RequestMapping(value="json/addRefund",method=RequestMethod.POST)
+	@ResponseBody
+	public String addRefund(@RequestBody Map<String,Object> map ) throws Exception{
+		System.out.println("JSON....  addRefund=========");
+		System.out.println(map);
+		String test = String.valueOf(map.get("price"));
+		System.out.println(test);
+		float test2 = Float.parseFloat(test);
+		System.out.println(test2);
+		int result2 = (int) (test2/10*10); 
+		System.out.println(test2); 
+		User user = userService.getUser2((String)map.get("streamerNo"));
+		System.out.println("getUser됏니?"+user);
+		Refund refund = new Refund();
+		refund.setStreamerNo(user.getUserNo());
+		refund.setStreamerNickname(user.getUserNickname());
+		System.out.println("refund 도메인111"+refund);
+		refund.setPrice(result2);  
+		refund.setAccount(user.getAccount());
+		refund.setBankname(user.getBankName());
+		System.out.println("refund 도메인22"+refund);
+		streamService.addRefund(refund);
+		System.out.println(refund);
+		String result = "성공";
+		return result;
+	}
+	
 }
 	
 	

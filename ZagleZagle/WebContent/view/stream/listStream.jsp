@@ -97,7 +97,7 @@ function addStream(){
  }
 		
 function addRefund(){
-		//alert('addRefund()');
+		alert('addRefund()'); 
 	    $("#addRefundForm").attr("method", "POST").attr("action", "/stream/addRefund").submit();
 } 
   
@@ -112,23 +112,65 @@ $(function() {
 	  var streamContent = $("input[name='streamContent']").val();
       
 	$("#upload").on("click", function() {
-		   alert("전송됩니다~");
+		  // alert("전송됩니다~");
 		   window.open("", "popup_window", "width=1450, height=900, scrollbars=no");
 		   addStream();
 	});
-	
 	$("#refund").on("click", function() {
 		   alert("환급합니다~");
-		   addRefund();    
-		// $("#addRefundForm").attr("method", "POST").attr("action", "/stream/addRefund").submit();
-		  var result = confirm("환급신청 완료! 환급리스트 화면으로 이동 하시겠습니까?");
+		   var streamerNo = $('input[name="streamerNo"]').val();
+		   var streamerNickname = $('input[name="streamerNickname"]').val();
+		   var price = $('input[name="price"]').val();
+		   var totalPrice = $('input[name="totalPrice"]').val();
+		   var data = {
+				   "streamerNo" : streamerNo,
+		   			"streamerNickname" : streamerNickname, 
+		   			"price" :   price,
+		    		"totalPrice" : totalPrice 
+		   };    
+		 	 $.ajax({
+	             url : '/stream/json/addRefund',  
+	             method : 'post', 
+	             data: JSON.stringify(data),
+	             headers: {
+	   	            "Accept": "application/json",
+	   	            "Content-Type": "application/json"
+	   	        },    	        
+	             success : function (JSONData,status) {
+	           alert("보내기 성공");
+	           var result = confirm("환급신청 완료! 환급리스트 화면으로 이동 하시겠습니까?");
+			     
+	 		  if(result){
+	 			  //alert("환급리스트 공사중....") 
+	 			  self.location="/stream/listRefund";
+	 		  }else{ 
+	 			  self.location="/stream/listStream";
+	 		  }  
+	             },
+	             error : function (err) { 
+	                 alert("보내기 성공");
+	  	           var result = confirm("환급신청 완료! 환급리스트 화면으로 이동 하시겠습니까?");
+	  			     
+	  	 		  if(result){
+	  	 			  //alert("환급리스트 공사중....") 
+	  	 			  self.location="/stream/listRefund";
+	  	 		  }else{ 
+	  	 			  self.location="/stream/listStream";
+	  	 		  }  
+	  	             
+	                 }  
+	         }); 
+		 /*  addRefund();    
+		   var result = confirm("환급신청 완료! 환급리스트 화면으로 이동 하시겠습니까?");
 		     
-		  if(result){
-			  //alert("환급리스트 공사중....") 
-			  self.location="/stream/listRefund";
-		  }else{ 
-			  self.location="/stream/listStream";
-		  } 
+	 		  if(result){
+	 			  //alert("환급리스트 공사중....") 
+	 			  self.location="/stream/listRefund";
+	 		  }else{ 
+	 			  self.location="/stream/listStream";
+	 		  }  */
+	 		   
+	//	 $("#addRefundForm").attr("method", "POST").attr("action", "/stream/addRefund").submit();
 	});  
 	$("#listRefund").on("click", function() {
 		   alert("환급리스트로 이동합니다~");
@@ -164,17 +206,14 @@ $(function() {
            if(JSONData==1){
         	   alert('강퇴당하셔서 입장 불가능 하십니다 ㅠ.ㅠ 다음기회에...~');
            }else{
-        		 window.open("https://192.168.0.21:443/stream/join?streamer="+streamer+"&userNo=${user.userNo}&userNickname=user02&userProfile=default.jpg", "popup_window", "width=1450, height=900, scrollbars=no");
-   
+        		 window.open("https://192.168.0.21:443/stream/join?streamer="+streamer+"&userNo=US10002&userNickname=user02&userProfile=default.jpg", "popup_window", "width=1450, height=900, scrollbars=no");
            }  	                    
              },  
              error : function (err) { 
              	alert('실패 ㅠㅠ');
                  } 
          });
-    	
-	 	 
-		}); 
+	}); 
 	   
 	   $('button[name="banname"]').on('click',function(){
 
@@ -201,9 +240,9 @@ $(function() {
 	            $('input[name="streamerNo"]').val(v.STREAMERNO);
 	            $('#streamerNickname').text(v.USERNAME);
 	            $('input[name="streamerNickname"]').val(v.USERNAME);
-	            $('#price').text(v.POSSIBLEPRICE);
-	            $('input[name="price"]').val(v.POSSIBLEPRICE);
-	            $('#totalPrice').text(v.TOTALPRICE);   
+	            $('#price').text(v.POSSIBLEPRICE);  
+	            $('input[name="price"]').val(v.POSSIBLEPRICE); 
+	            $('#totalPrice').text(v.TOTALPRICE);    
 	            $('input[name="totalPrice"]').val(v.TOTALPRICE);  
 	             
 	          });   	                    
