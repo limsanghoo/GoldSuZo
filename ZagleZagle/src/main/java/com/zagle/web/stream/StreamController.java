@@ -100,7 +100,7 @@ public class StreamController {
 	//modelAndView.addObject("streamer",stream.getUser().getUserNo());
 	//modelAndView.addObject("userNo",stream.getUser().getUserNo());
 	System.out.println("왜 라스트로 안가니,,?");
-	modelAndView.setViewName("redirect:https://192.168.0.12:443/stream/add?streamer="+stream.getUser().getUserNo()+"&userNo="+stream.getUser().getUserNo());
+	modelAndView.setViewName("redirect:https://192.168.0.21:443/stream/add?streamer="+stream.getUser().getUserNo()+"&userNo="+stream.getUser().getUserNo());
 	return modelAndView;
 	}
 	  
@@ -108,8 +108,10 @@ public class StreamController {
 	
 	
 	@RequestMapping(value="listStream",method=RequestMethod.GET)
-	public ModelAndView listStream() throws Exception{
+	public ModelAndView listStream(HttpSession session) throws Exception{
 		
+		User user = userService.getUser2("US10001");	
+		session.setAttribute("user", user);
 	 	SearchStream search = new SearchStream();
 	 	search.setCurrentPage(1);
 	 	search.setPageSize(3);
