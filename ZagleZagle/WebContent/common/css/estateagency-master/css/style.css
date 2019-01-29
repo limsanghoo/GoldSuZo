@@ -9,8 +9,13 @@
 //--//-->   STYLES GENERALES
 ======================================*/
 
+@font-face{
+   font-family: 'Jeju Gothic';
+   src : url("/common/ft/JejuGothic.ttf");
+}
+
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins','Jeju Gothic',"제주고딕", sans-serif;
   color: #555555;
 }
 
