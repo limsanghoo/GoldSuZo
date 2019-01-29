@@ -37,6 +37,9 @@ public interface AdminService {
 	
 	public void updateBlind(Blind blind) throws Exception;
 	
+	public void updateBlackCheckCode(BlackList blackList) throws Exception;
+	
+	public int checkReportCount(Report report) throws Exception;
 	
 	
 	//public void addBlind2(Comment comment) throws Exception;

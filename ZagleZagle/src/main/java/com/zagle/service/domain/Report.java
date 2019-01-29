@@ -9,6 +9,26 @@ public class Report {
 	private String reportNo;
 	private User reportingUserNo;
 	private User reportedUserNo;
+	private Board reportedBoardNo;
+	private Comment reportedCommentNo;
+	
+	
+	public Board getReportedBoardNo() {
+		return reportedBoardNo;
+	}
+
+	public void setReportedBoardNo(Board reportedBoardNo) {
+		this.reportedBoardNo = reportedBoardNo;
+	}
+
+	public Comment getReportedCommentNo() {
+		return reportedCommentNo;
+	}
+
+	public void setReportedCommentNo(Comment reportedCommentNo) {
+		this.reportedCommentNo = reportedCommentNo;
+	}
+
 	public int getHardleNo() {
 		return hardleNo;
 	}

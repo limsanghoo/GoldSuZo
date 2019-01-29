@@ -143,6 +143,10 @@ public class AdminDaoImpl implements AdminDao {
 		
 		return sqlSession.selectOne("ReportMapper.getReportList", search);
 	}
+	public void updateBlackCheckCode(BlackList blackList) throws Exception {
+		
+		sqlSession.update("BlackListMapper.updateBlackCheckCode", blackList);
+	}
 
 	@Override
 	public int getTotalCount4(SearchAdmin search) throws Exception {
@@ -156,6 +160,10 @@ public class AdminDaoImpl implements AdminDao {
 
 	}
 	
+	public int checkReportCount(Report report) throws Exception {
+		
+		return sqlSession.selectOne("ReportMapper.checkReportCount", report);
+	}
 	
 	
 }
