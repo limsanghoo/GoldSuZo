@@ -44,7 +44,7 @@
 <jsp:include page="/view/layout/toolbar.jsp" />
 
 
-<div class="row"style="text-align: center">
+<div class="row"style="text-align: center; display: inherit;">
 				<select name="state" class="ct_input_g" style="width: 200px; height: 40px" onchange="fncGetState(this)">
 					<option value='' style="font-size:20px;"  selected>시·도</option>
 					<c:set var="i" value="0"/>

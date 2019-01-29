@@ -2,13 +2,18 @@
 <%@ page pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<style>
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover{
+background-color: #2eca6a;
+border-color: #2eca6a;
+}
+</style>
  
 <div class="container text-center">
 		 
 		 <nav>
 		  <!-- 크기조절 :  pagination-lg pagination-sm-->
-		  <ul class="pagination" >
+		  <ul class="pagination" style="display: inline-flex;" >
 		    
 		    <!--  <<== 좌측 nav -->
 		  	<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">
@@ -27,7 +32,7 @@
 				
 				<c:if test="${ resultPage.currentPage == i }">
 					<!--  현재 page 가르킬경우 : active -->
-				    <li class="active">
+				    <li class="active" >
 				    	<a href="javascript:fncGetList('${ i }');">${ i }<span class="sr-only">(current)</span></a>
 				    </li>
 				</c:if>	
