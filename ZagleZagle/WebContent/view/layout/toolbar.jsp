@@ -234,8 +234,7 @@ font-size: 100%;
 }
 
 #mydivheader {
-margin-top:200px;
- /*  padding-top: 150px; */
+	margin-top:150px;
   cursor: move;
   z-index: 10;
   background-color: rgba(0,0,0,0.3);
