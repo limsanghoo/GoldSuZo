@@ -741,7 +741,7 @@ input.checkbox:checked:after {
     margin: 0 0 1em;
   }
 
-  input[type="text"], input[type="email"], input[type="password"] {
+  input[type="text"], input[type="email"], input[type="password"], input[type="file"] {
     width: 89.5%;
     font-size: 0.85em;
   }
@@ -805,6 +805,8 @@ input.checkbox:checked:after {
 		<div class="main-agileinfo">
 			<div class="agileits-top">
 				<form action="#" method="post">
+			
+					<br>
 					<input class="text" type="text" name="Username" placeholder="Username" required="">
 					<br>
 					
@@ -814,9 +816,12 @@ input.checkbox:checked:after {
 				
 					<input class="text" type="text" name="password" placeholder="주민등록번호 앞자리만 입력하세요" required="">
 		
+								<br>
 					<div class="wthree-text">
 						<label class="anim">
+						
 							<input type="checkbox" class="checkbox" required="">
+				
 							<span>I Agree To The Terms & Conditions</span>
 						</label>
 						<div class="clear"> </div>
