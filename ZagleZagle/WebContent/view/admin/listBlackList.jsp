@@ -35,12 +35,15 @@
 	
 	function fncGetList(currentPage) {
 		
-		alert("클릭")
+	
 		
 		$("#currentPage").val(currentPage)
-		$("form").attr("method" , "POST").attr("action" , "/admin/listBlackObject").submit();
+		$("form").attr("method" , "POST").attr("action" , "/admin/listBlackList").submit();
 	}
+	
 
+			
+		
 	
 	
 	 $( function() {
@@ -49,13 +52,95 @@
 
 			$("li:contains('회원목록')").on("click" , function() {
 				
-				alert("클릭")
+	
 				
 				self.location = "/admin/listUser"
 			});
 		//=============================================	
 			
 		
+		
+		//====================블랙리스트 회원 정보 보기=========================//
+			
+		$("td:nth-child(3) i").on("click", function(){
+					
+					var userNo = $(this).data("param")
+					alert(userNo)
+					
+					$.ajax( 
+							{
+								url : "/user/json/getUser2/"+userNo ,
+								method : "GET" ,
+								dataType : "json" ,
+								headers : {
+									"Accept" : "application/json",
+									"Content-Type" : "application/json"
+								},
+								success : function(JSONData , status) {
+									alert(JSONData.userName)
+									
+									var snsNo = JSONData.snsNo
+									alert(snsNo)
+									
+									if(snsNo.startsWith("K")) {
+										snsNo = "카카오"
+									}else if(snsNo.startsWith("N")) {
+										snsNo = "네이버"
+									}else {
+										snsNo = "구글"
+									}
+									
+									var grade = JSONData.grade
+									
+								 	alert(grade)
+									
+									if(grade== 0) {
+										grade = "흙수저"
+									}else if(grade == 1) {
+										grade = "동수저"
+									}else if(grade == 2) {
+										grade = "은수저" 
+									}else if(grade == 3) {
+										grade =  "금수저"
+									}
+										
+									var displayValue = "<h6>"
+																+"   이  름 :"+JSONData.userName+"<br/>"
+																+"   닉네임 : "+JSONData.userNickname+"<br/>"
+																+"   생일 : "+JSONData.userBirth+"<br/>"
+																+"   성별 : "+JSONData.userSex+"<br/>"
+																+" SNS종류 :"+snsNo+"<br/>"
+																+" 가입날짜 : "+JSONData.regDate+"<br/>"
+																+" 등 급 :"+grade+"<br/>" 
+																+"</h6>";
+									$("h6").remove();
+									$( "#"+userNo+"" ).html(displayValue);
+								}
+								
+								
+						});
+						////////////////////////////////////////////////////////////////////////////////////////////
+						
+			
+		}); 
+		
+		//================ 블랙 리스트 삭제==================
+
+		$("#deleteBlack").on("click" , function() {
+			
+			alert("확인용")
+			var userNo =  $(this).data("param4");
+			var blackNo = $(this).data("param5");
+			alert(blackNo)
+			alert(userNo)
+			
+			self.location = "/admin/updateBlackCheckCode?userNo="+userNo+"&blackNo="+blackNo;
+		});
+	//=============================================	
+
+			
+			
+			
 			
 		}); 
    
@@ -153,7 +238,7 @@
             <th align="left">제재 사유</th>
             <th align="left">시작날짜</th>
              <th align="left">만기날짜</th>
-             <th align="left">블랙리스트 코드</th>
+             <th align="left">해지</th>
           
           </tr>
         </thead>
@@ -167,14 +252,47 @@
    			<tr>
    			<td align="left">${ i }</td>
 			  <td align="left" >${blackList.blackNo}</td>
-			  <td align="left">${blackList.blackUser.userNo}</td>
+			  
+			  <td align="left">${blackList.blackUser.userNo}
+			  <div style="padding-left: 22px;"><i class="glyphicon glyphicon-chevron-down" id= "${blackList.blackUser.userNo}" data-param="${blackList.blackUser.userNo}"></i></div>
+			  <input type="hidden" value="${blackList.blackUser.userNo}">
+			  </td>
+			  
 			  <td align="left">${blackList.banReason}</td>
 			   <td align="left">${blackList.banStartDay}</td>
 			    <td align="left">${blackList.banExpireDay}</td>
-			     <td align="left">${blackList.blackCheckCode}</td>
+			     <td align="left">  <i class="glyphicon glyphicon-ok" style="padding-left: 17px;" data-param3="${blackList.blackUser.userNo}"   
+			     									data-toggle="modal" data-target="#${blackList.blackUser.userNo}modal1"></i> </td>
 		
 		
 		   </tr>
+		   
+		   
+		      
+		      <!--  신고 사유 모달창 -->
+    <div class="modal" aria-hidden="true" style="display: none; z-index: 1060;" id="${blackList.blackUser.userNo}modal1">
+	<div class="modal-dialog modal-md">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+              <div class="modal-body">
+           
+           		<strong>해지 하시겠습니까?</strong>
+              </div>
+              <div class="modal-footer">
+            	<a href="#" class="btn btn-primary" id="deleteBlack" data-param4="${blackList.blackUser.userNo}" 
+            						data-param5="${blackList.blackNo}">삭제</a>
+             
+          
+            </div>
+          </div>
+        </div>
+</div>
+
+	<!-- 모달3 끝 -->
+		   			
+		   
    			
    			  	</c:forEach>
 			  

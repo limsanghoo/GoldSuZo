@@ -7,7 +7,7 @@ public class BlackList {
 	private String blackNo;
 	private User blackUser;
 	private String banReason;
-	private int blackCheckCode;
+	private String blackCheckCode;
 	private Date banStartDay;
 	private Date banExpireDay;
 	
@@ -29,10 +29,10 @@ public class BlackList {
 	public void setBanReason(String banReason) {
 		this.banReason = banReason;
 	}
-	public int getBlackCheckCode() {
+	public String getBlackCheckCode() {
 		return blackCheckCode;
 	}
-	public void setBlackCheckCode(int blackCheckCode) {
+	public void setBlackCheckCode(String blackCheckCode) {
 		this.blackCheckCode = blackCheckCode;
 	}
 	public Date getBanStartDay() {

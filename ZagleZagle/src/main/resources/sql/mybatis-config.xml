@@ -22,6 +22,7 @@
 		<typeAlias alias="refund" type="com.zagle.service.domain.Refund" />
 		<typeAlias alias="spon" type="com.zagle.service.domain.Spon" />
 		<typeAlias alias="sell" type="com.zagle.service.domain.Sell" />
+		<typeAlias alias="buy" type="com.zagle.service.domain.Buy" />
 		<typeAlias alias="comment" type="com.zagle.service.domain.Comment" />
 		<typeAlias alias="like"	type="com.zagle.service.domain.Like"/>
 		<typeAlias alias="scrap"	type="com.zagle.service.domain.Scrap"/>
@@ -41,6 +42,7 @@
 		<mapper resource="sql/BlackListMapper.xml"/>
 		<mapper resource="sql/ReportMapper.xml"/>
 		<mapper resource="sql/BlindMapper.xml"/>
+		<mapper resource="sql/BuyMapper.xml"/>
 	</mappers>
 
 </configuration>

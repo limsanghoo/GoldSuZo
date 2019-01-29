@@ -80,4 +80,19 @@
 	
 	</select>
 	
+	
+	<select id="checkReportCount" parameterType="com.zagle.service.domain.Report" resultType="int">
+	SELECT COUNT(*)
+	FROM report 
+	<where>
+		<if test="reportedBoardNo != null">
+			board_no = #{reportedBoardNo.boardNo}
+		</if>
+		<if test="reportedCommentNo != null">
+			comment_no = #{reportedCommentNo.commentNo}
+		</if>
+	
+	</where>
+	
+	</select>
 	</mapper>
