@@ -129,7 +129,7 @@ public class AdminController {
 		System.out.println(pageUnit);
 		System.out.println(pageSize);
 		
-System.out.println(map.get("totalCount"));
+		System.out.println(map.get("totalCount"));
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 	    System.out.println(resultPage);
