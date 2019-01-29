@@ -48,11 +48,28 @@ $(function() {
 	$("a:contains('로그인')").on("click" , function() {
 		login.click();
 	}); 
-	$("a:contains('로그아웃')").on("click" , function() {
-		//$(self.location).attr("href","/user/logout");
-		//self.location = "/user/logout"
-	});
 
+	$("a:contains('로그아웃')").on("click",function() {
+		
+		alert("클릭됨")
+		
+			var snsNo = $(this).data("param");
+			
+			alert(snsNo)
+		
+		if(snsNo.startsWith("K")) {
+			
+			alert("K로시작하는거 인식")
+			$("form").attr("method" , "POST").attr("action" , "/user/logout/json").submit();
+			
+		}else if(snsNo.startsWith("N")){
+			alert("N으로시작하는거 인식")
+			$("form").attr("method" , "POST").attr("action" , "/user/Nlogout").submit();
+		}
+		
+	});
+	
+	
 	$("a:contains('전체 게시물')").on("click" , function() {
 		//$(self.location).attr("href","http://localhost:3000/");
 		self.location = "/board/listBoard?view=all"
@@ -126,43 +143,78 @@ $(function() {
 		self.location = "/mypage/updateAccount"
 		
 	});
-////////////////////////////////////////////////////회원정보보기, Logout//////////////////////////////////////////////////////////
-
-
-	$(function() {
-
-
-		
-		
-$("a:contains('로그아웃')").on("click",function() {
-	
-	alert("클릭됨")
-	
-		var snsNo = $(this).data("param");
-		
-		alert(snsNo)
-	
-	if(snsNo.startsWith("K")) {
-		
-		alert("K로시작하는거 인식")
-		$("form").attr("method" , "POST").attr("action" , "/user/logout/json").submit();
-		
-	}else if(snsNo.startsWith("N")){
-		alert("N으로시작하는거 인식")
-		$("form").attr("method" , "POST").attr("action" , "/user/Nlogout").submit();
-	}
-
-	
-
-	
-});
-
 
 });
 
 
+//채팅
+$(function(){
+    dragElement(document.getElementById("mydiv"));
+    function dragElement(elmnt) {
+var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+if (document.getElementById(elmnt.id + "header")) {
+/* if present, the header is where you move the DIV from:*/
+document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+} else {
+/* otherwise, move the DIV from anywhere inside the DIV:*/
+elmnt.onmousedown = dragMouseDown;
+}
 
-});
+function dragMouseDown(e) {
+e = e || window.event;
+e.preventDefault();
+// get the mouse cursor position at startup:
+pos3 = e.clientX;
+pos4 = e.clientY;
+document.onmouseup = closeDragElement;
+// call a function whenever the cursor moves:
+document.onmousemove = elementDrag;
+}
+
+function elementDrag(e) {
+e = e || window.event;
+e.preventDefault();
+// calculate the new cursor position:
+pos1 = pos3 - e.clientX;
+pos2 = pos4 - e.clientY;
+pos3 = e.clientX;
+pos4 = e.clientY;
+// set the element's new position:
+elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+}
+
+function closeDragElement() {
+/* stop moving when mouse button is released:*/
+document.onmouseup = null;
+document.onmousemove = null;
+}
+}
+ })
+ 
+ 
+ $(function(){
+         $("#btn").hide();
+         $("#btn:contains('숨기기')").on("click",function(){
+            $("#mydiv").css("display","none");
+            $(this).hide();
+            $("#btn2").show();
+         });
+         
+      });
+      
+$(function(){
+
+         $("#btn2:contains('보이기')").on("click",function(){
+        	if(document.getElementById("chatting")==null){
+        		$("#mydiv").append('<iframe id="chatting" src="/chat/getChat?room=${user.userAddr}" align="right" style="height:100%; width: 100%;" frameborder="0" scrolling="no"></iframe>');
+        	 }
+        	 
+            $("#mydiv").css("display","inline");
+            $(this).hide();
+            $("#btn").show();
+         });
+      });
 </script>
  
  
@@ -170,6 +222,24 @@ $("a:contains('로그아웃')").on("click",function() {
 
 html{
 font-size: 100%;
+}
+
+#mydiv {
+  position: absolute;
+  z-index: 9;
+  text-align: center;
+  background-color: rgba(0,0,0,0);
+  height: 700px;
+  width: 600px;
+}
+
+#mydivheader {
+margin-top:200px;
+ /*  padding-top: 150px; */
+  cursor: move;
+  z-index: 10;
+  background-color: rgba(0,0,0,0.3);
+  color: #fff;
 }
 
 </style> 
@@ -270,6 +340,10 @@ font-size: 100%;
   <div id="preloader"></div>
 
   <!-- JavaScript Libraries -->
+  
+  <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+  
+  
   <script src="/common/css/estateagency-master/lib/jquery/jquery.min.js"></script>
   <script src="/common/css/estateagency-master/lib/jquery/jquery-migrate.min.js"></script>
   <script src="/common/css/estateagency-master/lib/popper/popper.min.js"></script>
