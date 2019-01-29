@@ -25,7 +25,7 @@ public interface UserDao {
 	//public User addActiveScore(int totalActiveScore) throws Exception;
 	public void addActiveScore(User user) throws Exception;
 
-	
+	public void updateDeleteCount(User user) throws Exception;
 	
 	// �Խ��� Page ó���� ���� ��ü Row(totalCount) return
 	public int getTotalCount(SearchAdmin search) throws Exception;

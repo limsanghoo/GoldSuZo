@@ -73,5 +73,8 @@ public interface AdminDao {
 	
 	public void addBlackList(BlackList blackList) throws Exception;
 	
+	public void updateBlackCheckCode(BlackList blackList) throws Exception;
 	
+	///// 신고 카운팅 체크
+	public int checkReportCount(Report report) throws Exception;
 }

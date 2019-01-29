@@ -38,8 +38,7 @@
 		
 		$("#addBlackList").on("click", function() {
 			
-			alert("클릭")
-			
+		
 			fncAddBlackList();
 		});
 		
@@ -70,7 +69,7 @@
 	
 	function fncGetList(currentPage) {
 		
-		alert("클릭")
+	
 		
 		$("#currentPage").val(currentPage)
 		$("form").attr("method" , "POST").attr("action" , "/admin/listBlackObject").submit();
@@ -84,7 +83,7 @@
 
 			$("li:contains('회원목록')").on("click" , function() {
 				
-				alert("클릭")
+			
 				
 				self.location = "/admin/listUser"
 			});
@@ -93,7 +92,7 @@
 			
 				$("li:contains('예비 블랙리스트')").on("click" , function() {
 				
-				alert("클릭")
+			
 				
 				self.location = "/admin/listBlackObject"
 			});
@@ -103,7 +102,7 @@
 			
 				$("li:contains('블랙리스트 목록')").on("click" , function() {
 				
-				alert("클릭")
+				
 				
 				self.location = "/admin/listBlackList"
 			});
@@ -283,7 +282,7 @@
                         <ul class="nav navbar-nav">
                             <li><a href="#"><i class="fa fa-table"></i>회원목록</a></li>
                             <li id="listBlackObject"><a href="#"><i class="fa fa-edit"></i>예비 블랙리스트</a></li>
-                            <li><a href="editor.html"><i class="fa fa-edit"></i>블랙리스트 목록</a></li>
+                            <li><a href="/admin/listBlackList"><i class="fa fa-edit"></i>블랙리스트 목록</a></li>
                         </ul>
                     </li>
                     <li><a href="bootstrap.html"><i class="fa fa-magic"></i>신고 처리</a></li>

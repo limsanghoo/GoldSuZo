@@ -28,10 +28,10 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 
 form{
-	 	padding-top : 150px;
+		padding-top:100px;
 	 	padding-left:150px;
         padding-right:150px;
-       /*  background-color:#f2f2f2; */
+       background-color:#f2f2f2;
 /*         background-image: url(/common/css/html5up-helios/images/pic03.jpg); */
         background-size: cover;
 	}
@@ -67,25 +67,14 @@ body {
     	float:right;
 }
 
-#searchKeyword{
-    	position: absolute;
-    	left:40%;
-    	width:300px;
-}
-
 .disabled{
 		pointer-events:none;
 }
 
 #selectMenu{
-		padding-top : 100px;
-		padding-left: 300px;
-		padding-right: 300px;
-}
-
-#selectTown{
-	padding-top : 40px;
-	text-align: center;
+		padding-top:50px;
+		padding-left:150px;
+        padding-right:150px;
 }
 
 </style>
@@ -126,24 +115,26 @@ function enter() {
 <jsp:include page="/view/layout/toolbar.jsp"/>
 
 <form name="listTrade">
+
 <div id="selectMenu">
-
-<!-- 검색 -->
-<span id="searchKeyword">
-<input type="text" name="searchKeyword" value="${! empty searchBoard.searchKeyword ? searchBoard.searchKeyword : ''}" onkeypress="enter()" placeholder=""/>
-</span>
-
-<label>
-<input type="checkbox"> Remember me
-</label>
-
 <!-- 게시물 등록 -->
 <c:if test="${user.userNo!=null}">
 <input type="button" class="btn btn-b" value="판매물품 등록" id="goAddSell"/>
 </c:if>
+<br/>
+<br/>
+
+<!-- 검색 -->
+<span id="searchKeyword" style="text-align: center; display: inherit;">
+<input type="text" name="searchKeyword" value="${! empty searchBoard.searchKeyword ? searchBoard.searchKeyword : ''}" onkeypress="enter()" placeholder=""/>
+</span>
+<br/>
+<label style="text-align: center; display: inherit;">
+<input type="checkbox">판매중인 상품만 보기
+</label>
+
 </div>
 
-<br/>
  <div class="containerList">
  
  <ul class="grid effect-2" id="grid">
@@ -163,10 +154,10 @@ function enter() {
 	<span style="font-weight: bold; display: inline;">&nbsp;${sell.seller.userNickname}</span>
 	<span style="float:right">
 	<c:if test="${sell.sellStyle == 10}">
-	<img src="/common/images/trade/giveaway-filled.png" style="height: 80%; display: inline; vertical-align: middle; float:right"/>
+	<img src="/common/images/trade/transit-filled.png" style="height: 80%; display: inline; vertical-align: middle; float:right"/>
 	</c:if>
 	<c:if test="${sell.sellStyle == 20}">
-	<img src="/common/images/trade/transit-filled.png" style="height: 80%; display: inline; vertical-align:text-top; float:right;"/>
+	<img src="/common/images/trade/giveaway-filled.png" style="height: 80%; display: inline; vertical-align:text-top; float:right;"/>
 	</c:if>
 	</span>
 	</p>

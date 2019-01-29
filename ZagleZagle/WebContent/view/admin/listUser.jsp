@@ -138,7 +138,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="siteManage.jsp" title="ZagleZagle">ZagleZagle</a>
+                <a class="navbar-brand" href="/board/listBoard/" title="ZagleZagle">ZagleZagle</a>
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
@@ -148,12 +148,12 @@
                         <ul class="nav navbar-nav">
                             <li id="listUser"><a href="#"><i class="fa fa-table"></i>회원목록</a></li>
                             <li  id="listBlackObject"><a href="#"><i class="fa fa-edit"></i>예비 블랙리스트</a></li>
-                            <li><a href="editor.html"><i class="fa fa-edit"></i>블랙리스트 목록</a></li>
+                            <li><a href="/admin/listBlackList"><i class="fa fa-edit"></i>블랙리스트 목록</a></li>
                         </ul>
                     </li>
-                    <li><a href="bootstrap.html"><i class="fa fa-magic"></i> Bootstrap Elements</a></li>
+                    <li><a href="/admin/handleReport"><i class="fa fa-magic"></i> 신고 처리</a></li>
                     <li class="nav nav-list nav-list-expandable">
-                        <a><i class="fa fa-key"></i> Collapsed Menu Item <span class="caret"></span></a>
+                        <a><i class="fa fa-key"></i> 방문자 통계 보기<span class="caret"></span></a>
                         <ul class="nav navbar-nav">
                             <li><a href="#">Sub Item 1</a></li>
                             <li><a href="#">Sub Item 2</a></li>

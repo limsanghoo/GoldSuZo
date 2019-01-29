@@ -88,7 +88,13 @@ public class AdminServiceImpl implements AdminService {
 
 	public void addReport(Report report) throws Exception {
 		
+		
 		adminDao.addReport(report);
+		
+		//int reportCount = adminDao.checkReportCount(report);
+		
+		//System.out.println("ReportCount"+reportCount);
+		
 	}
 	
 	@Override
@@ -157,11 +163,18 @@ public class AdminServiceImpl implements AdminService {
 //		adminDao.deleteBlind2(comment);
 //	}
 
-	
+	public int checkReportCount(Report report) throws Exception {
+		
+		return adminDao.checkReportCount(report);
+	}
 	
 	public void addBlackList(BlackList blackList) throws Exception {
 		
 		adminDao.addBlackList(blackList);
 	}
 
+	public void updateBlackCheckCode(BlackList blackList) throws Exception {
+		
+		adminDao.updateBlackCheckCode(blackList);
+	}
 }

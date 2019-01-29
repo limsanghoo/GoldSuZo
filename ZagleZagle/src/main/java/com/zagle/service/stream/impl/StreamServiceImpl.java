@@ -78,8 +78,8 @@ public class StreamServiceImpl implements StreamService{
 		List<Refund> list = streamDAO.listRefund(search);
 		int count = streamDAO.getTotalCount(search);
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("list", list);
-		map.put("count", count);
+		map.put("list", list); 
+		map.put("count", new Integer(count));
 		return map;
 	}
 
@@ -140,6 +140,7 @@ public class StreamServiceImpl implements StreamService{
 
 	@Override
 	public void addRefund(Refund refund) throws Exception {
+		System.out.println("addRefund Service Impl===========");
 		streamDAO.updateSpon(refund.getStreamerNo());
 		streamDAO.addRefund(refund);
 	}

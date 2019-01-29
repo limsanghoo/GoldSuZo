@@ -169,8 +169,17 @@
 				var blindNo = $(this).data("param");
 			
 				
-				
+		
 				alert(blindNo)
+				
+				//////수정 필요///// commentNo 관련
+				/////      if(blindNo != null) {
+				/////		self.location="/admin/updateBlind?blindCode=1&blindNo="+blindNo;
+			
+				////}else {
+				////		self.location="/admin/updateBlind2?blindCode=1&CommentNo="+CommentNo;
+				////}
+				/////
 				
 				
 			
@@ -342,7 +351,7 @@
    		
    			  </td>
 			  <td align="left">
-			  <div style="padding-left: 7px;"><i class="glyphicon glyphicon-fire" data-param="${blind.blindNo}"></i></div>
+			  <div style="padding-left: 7px;"><i class="glyphicon glyphicon-fire" data-param="${blind.blindNo}" data-param2="${blind.blindBoardNo.boardNo}"></i></div>
 			  
 			  </td>
 			  
@@ -375,83 +384,6 @@
     </div>
     <!-- /#wrapper -->
     
-    <div class="realBox" data-toggle="modal" data-target="#${board.boardNo}modal1">
-    
-    <!-- 모달1 시작 -->
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="${board.boardNo}modal1">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-    
-	<!-- 모달1 헤더 시작 -->
-      <div class="modal-header">
-      <div class="row">
-      
-      	<div class="col-md-11 col-md-offset-1">
-        <span aria-hidden="true" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: 30px; margin-right:5px; display: inline;">&times;</span>       
-        </div>
-        
-        <h4 class="modal-title" id="gridSystemModalLabel">
-        <div class="col-md-4" style="display: inline;">
-        <img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px;" align="middle;"/>
-		${board.user.userNickname}
-		</div>
-		
-		<!-- 내 글만 수정, 삭제 -->
-		<c:if test="${user.userNo==board.user.userNo}">
-		<div class="col-md-4 col-md-offset-4">
-		<input type="button" value="수정" data-update="${board.boardNo}"/>
-        <div class="btn btn-primary" data-toggle="modal" data-target="#${board.boardNo}modal2">삭제</div>
-        </div>
-        </c:if>
-        
-        </h4>
-        </div>
-      </div>
-     <!-- 모달1 헤더 끝 -->
-      
-     <!-- 모달1 바디 시작 -->
-      <div class="modal-body" style="text-align: center">  
-
-		<div>
-			<c:if test="${board.photo1 !=null}">
-			<div><img src="${board.photo1}" style="width: 500px"/></div>
-			<br/>
-			</c:if>
-
-			<c:if test="${board.photo2 !=null}">
-			<div><img src="${board.photo2}" style="width: 500px"/></div>
-			<br/>
-			</c:if>
-	
-			<c:if test="${board.photo3 !=null}">
-			<div><img src="${board.photo3}" style="width: 500px"/></div>
-			<br/>
-			</c:if>
-		</div>
-
-		<p>
-			${board.boardDetailText}
-		</p>
-     
-       
-      </div>
-      <!-- 모달1 바디 끝 -->
-      
-      <!-- 모달1 푸터 시작 -->
-      <div class="modal-footer">
-      
-		<!-- listComment로 파라미터 보내기 -->      
-     	<jsp:include page="/view/board/listComment.jsp">
-     		<jsp:param name="boardNo" value="${board.boardNo}"/>
-     	</jsp:include>
-    	
-      </div>
-      <!-- 모달1 푸터 끝 -->
-      
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<!-- 모달1 끝 -->
 </div>
     
     

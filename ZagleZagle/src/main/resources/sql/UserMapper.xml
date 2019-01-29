@@ -90,6 +90,15 @@
 	 </update>
 	 
 	 
+	 <!--  SQL UPDATE DELETE COUNT -->
+	 <update id="updateDeleteCount" parameterType="user">
+	 UPDATE users
+	 <set>
+	 delete_count = #{deleteCount:INTEGER}
+	 </set>
+	 WHERE user_no = #{userNo}
+	 </update>
+	 
 	 <!--  LIST USER -->
 	 
 	<select  id="listUser"  parameterType="com.zagle.service.domain.SearchAdmin"	resultMap="userSelectMap">

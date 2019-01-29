@@ -24,4 +24,6 @@ public interface UserService {
 	//public User addActiveScore(int totalActiveScore) throws Exception;
 	public void addActiveScore(User user) throws Exception;
 	
+	public void updateDeleteCount(User user) throws Exception;
+	
 }
