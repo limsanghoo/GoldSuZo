@@ -7,6 +7,9 @@
 background-color: #2eca6a;
 border-color: #2eca6a;
 }
+.pagination>li>a, .pagination>li>span{
+color:#ddd;
+}
 </style>
  
 <div class="container text-center">
