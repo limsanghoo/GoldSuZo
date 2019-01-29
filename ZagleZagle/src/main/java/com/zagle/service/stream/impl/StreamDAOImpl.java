@@ -90,6 +90,19 @@ public class StreamDAOImpl  implements StreamDAO{
 		sqlSession.insert("RefundMapper.addRefund", refund);
 		sqlSession.update("SponMapper.updateSpon", refund.getStreamerNo());
 	}
-
+	@Override
+	public void updateRefund(Map<String,Object>map) throws Exception {
+		// TODO Auto-generated method stub
+		String check = (String) map.get("check");
+		if(check.equals("0")) {
+			map.put("check","1");
+		}else {
+			map.put("check","0");
+		}
+		
+		System.out.println("환불업데이트~~~~"+map);
+		sqlSession.update("RefundMapper.updateRefund",map);
+		
+	}
 	
 }

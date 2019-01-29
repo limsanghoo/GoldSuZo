@@ -39,12 +39,12 @@
 	 </select>
 	  
 
-	  <update	id="updateRefund"	parameterType="refund">
+	  <update	id="updateRefund"	parameterType="java.util.HashMap"> 
 	   	UPDATE refund
 	   	<set>
-	   	check_refund = #{checkRefund}
+	   	check_refund = #{check}
 	   	</set>
-	   	WHERE refund_no = #{refundNo}
+	   	WHERE refund_no = #{refundNo}  
 	 </update>
 	 
 	 <select  id="getTotalCount"  parameterType="com.zagle.service.domain.SearchStream"	 resultType="int">

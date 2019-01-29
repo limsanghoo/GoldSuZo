@@ -45,53 +45,45 @@
 //============= logout Event  처리 =============	
 $(function() {
 	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-	$("li:contains('로그인')").on("click" , function() {
+	$("a:contains('로그인')").on("click" , function() {
 		login.click();
 	}); 
-	$("li:contains('로그아웃')").on("click" , function() {
+	$("a:contains('로그아웃')").on("click" , function() {
 		//$(self.location).attr("href","/user/logout");
 		//self.location = "/user/logout"
 	});
-	$("li:contains('강남1')").on("click" , function() {
-		//$(self.location).attr("href","http://localhost:3000/");
-		self.location = "/chat/testUser"
-		
-	}); 
-	$("li:contains('강남2')").on("click" , function() {
-		//$(self.location).attr("href","http://localhost:3000/");
-		self.location = "/chat/testUser2"
-		
-	}); 
-	$("li:contains('서초3')").on("click" , function() {
-		//$(self.location).attr("href","http://localhost:3000/");
-		self.location = "/chat/testUser3"
-		
-	}); 
-	
-	$("li:contains('전체 게시물')").on("click" , function() {
+
+	$("a:contains('전체 게시물')").on("click" , function() {
 		//$(self.location).attr("href","http://localhost:3000/");
 		self.location = "/board/listBoard?view=all"
 		
 	});
 	
-	$("li:contains('동네 게시물')").on("click" , function() {
+	$("a:contains('동네 게시물')").on("click" , function() {
 		//$(self.location).attr("href","http://localhost:3000/");
 		self.location = "/board/listBoard?view=town"
 		
 	});
 	
-	$("li:contains('방송 목록 보기')").on("click" , function() {
+	$("a:contains('방송 목록 보기')").on("click" , function() {
 		//$(self.location).attr("href","http://localhost:3000/");
-		self.location = "http://192.168.0.12:8080/stream/listStream"
+		self.location = "http://192.168.0.21:8080/stream/listStream"
 		
 	});
-	$("li:contains('판매상품목록')").on("click" , function() {
+	
+	$("a:contains('중고장터')").on("click" , function() {
+		self.location = "/trade/listTrade"
+		
+	});
+	
+	
+	$("a:contains('판매상품목록')").on("click" , function() {
 		//$(self.location).attr("href","http://localhost:3000/");
 		self.location = "/trade/listSell"
 		
 	});
 
-	$("li:contains('구매상품목록')").on("click" , function() {
+	$("a:contains('구매상품목록')").on("click" , function() {
 		//$(self.location).attr("href","http://localhost:3000/");
 		self.location = "/trade/listBuy"
 		
@@ -99,37 +91,37 @@ $(function() {
 	
 //////////////////////////////////마이 페이지 Navigation 영역///////////////////////////////////////
 
-	$("li:contains('작성 게시물 보기')").on("click" , function() {
+	$("a:contains('작성 게시물 보기')").on("click" , function() {
 		//$(self.location).attr("href","http://localhost:3000/");
-		self.location = "/mypage/listScrap"
+		self.location = "/mypage/listMyBoard"
 		
 	});
 
-	$("li:contains('좋아요 게시물 보기')").on("click" , function() {
+	$("a:contains('좋아요 게시물 보기')").on("click" , function() {
 		//$(self.location).attr("href","http://localhost:3000/");
 		self.location = "/mypage/listLike"
 		
 	});
 	
-	$("li:contains('스크랩 게시물 보기')").on("click" , function() {
+	$("a:contains('스크랩 게시물 보기')").on("click" , function() {
 		//$(self.location).attr("href","http://localhost:3000/");
-		self.location = "/mypage/listMyBoard"
+		self.location = "/mypage/listScrap"
 		
 	});
 	
-	$("li:contains('댓글 작성한 게시물 보기')").on("click" , function() {
+	$("a:contains('댓글 작성한 게시물 보기')").on("click" , function() {
 		//$(self.location).attr("href","http://localhost:3000/");
 		self.location = "/mypage/listComment"
 		
 	});
 	
-	$("li:contains('계좌번호 등록(신규)')").on("click" , function() {
+	$("a:contains('계좌번호 등록(신규)')").on("click" , function() {
 		//$(self.location).attr("href","http://localhost:3000/");
 		self.location = "/mypage/addAccount"
 		
 	});
 	
-	$("li:contains('계좌번호 수정')").on("click" , function() {
+	$("a:contains('계좌번호 수정')").on("click" , function() {
 		//$(self.location).attr("href","http://localhost:3000/");
 		self.location = "/mypage/updateAccount"
 		
@@ -142,7 +134,7 @@ $(function() {
 
 		
 		
-$("li:contains('로그아웃')").on("click",function() {
+$("a:contains('로그아웃')").on("click",function() {
 	
 	alert("클릭됨")
 	
@@ -199,7 +191,7 @@ font-size: 100%;
         <span></span>
         <span></span>
       </button>
-      <a class="navbar-brand text-brand" href="index.html">Estate<span class="color-b">Agency</span></a>
+      <a href="/index.jsp" class="navbar-brand text-brand" style="padding-top: 0; padding-bottom: 0;">Dongne<span class="color-b">Vangne</span></a>
 
       <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
         <ul class="navbar-nav">
@@ -249,10 +241,23 @@ font-size: 100%;
               <a class="dropdown-item">계좌번호 등록(신규)</a>
               <a class="dropdown-item">계좌번호 수정</a>
             </div>
-          </li>         
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" id="btn">채팅 숨기기</a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" id="btn2">채팅 보이기</a>
+          </li>
+          
+          
+                   
           </c:if>
           
-         
+        <div id="mydiv" style="display: none;">
+   			<div id="mydivheader">-여기를 눌러 이동-</div>
+		</div>
           
           
         </ul>

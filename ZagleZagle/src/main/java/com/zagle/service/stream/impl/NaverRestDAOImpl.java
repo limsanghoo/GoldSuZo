@@ -72,4 +72,10 @@ public class NaverRestDAOImpl  implements StreamRestDAO {
 		
 	}
 
+	@Override
+	public long checkBan(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

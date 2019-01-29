@@ -16,6 +16,8 @@ public interface StreamService {
 	
 	public void addSpon(Spon spon)throws Exception;
 	
+	public long checkBan(Map<String,Object>map)throws Exception;
+	
 	public void addRefund(Refund refund)throws Exception; 
 	
 	public void joinStream(Map<String,Object> map)throws Exception;
@@ -25,6 +27,8 @@ public interface StreamService {
 	public List<String> listSpon(String userNo)throws Exception;
 	
 	public Map<String,Object> listRefund(SearchStream search)throws Exception; 
+	
+	public void updateRefund(Map<String,Object> map)throws Exception;
 	
 	public String kakaopayStream(Map<String,Object> map)throws Exception;
 	

@@ -143,6 +143,18 @@ public class StreamServiceImpl implements StreamService{
 		streamDAO.updateSpon(refund.getStreamerNo());
 		streamDAO.addRefund(refund);
 	}
+
+	@Override
+	public void updateRefund(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		streamDAO.updateRefund(map);
+	}
+
+	@Override
+	public long checkBan(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return mongoRestDAOImpl.checkBan(map);
+	}
 	
 	
 }

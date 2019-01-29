@@ -157,7 +157,7 @@ public class StreamController {
 		SearchStream searchStream = new SearchStream();
 		searchStream.setCurrentPage(1);
 		searchStream.setPageSize(3);
-		searchStream.setSearchUserNo("US10001");
+		searchStream.setSearchUserNo("US10000");
 		System.out.println("왜 안바뀌지????"+searchStream);
 		
 		System.out.println(searchStream.getEndRowNum());

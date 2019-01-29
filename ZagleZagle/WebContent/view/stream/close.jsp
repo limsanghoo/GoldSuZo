@@ -28,16 +28,16 @@
    	System.out.println("현재페이지"+currentPage);
 }
 -->
-
-
-$(function(){
-	
-	//$("#close").on("click",function(){
-		 window.close();
-		// window.location.href="http://192.168.0.12:8080/view/board/listBoard.jsp"; 
-	//}); 
-	    
-});
+//opener.setChildValue("안녕");
+		alert("결제완료되었습니다");
+		 window.opener.document.location.href = window.opener.document.URL;
+		window.close(); 
+		$(function(){
+			
+		
+			//window.opener.location.reload();  
+			//});   
+		});
 
 </script>
 

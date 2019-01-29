@@ -46,7 +46,9 @@ color:black !important;
 	background-color: rgba(0,0,0,0.4) !important; 
 	display: block;  
 }
-     
+    #buttonList{
+   text-align: center; 
+    } 
        
     button:hover{
          box-shadow:2px 8px 4px -6px hsla(0,0%,0%,.3);
@@ -123,8 +125,30 @@ $(function() {
 	$('a[name="get"]').on("click", function() {
 		var streamer = $(this).data("param");
 		alert(streamer);
-		  window.open("https://192.168.0.12:443/stream/join?streamer="+streamer+"&userNo=US10002&userNickname=user02&userProfile=default.jpg", "popup_window", "width=1450, height=900, scrollbars=no");
-	}); 
+	 	 $.ajax({
+             url : '/stream/json/checkBan?userNo=${user.userNo}&streamer=US10001',  
+             method : 'get', 
+             headers: {
+   	            "Accept": "application/json",
+   	            "Content-Type": "application/json"
+   	        }, 
+             success : function (JSONData,status) {
+           //alert("보내기 성공");
+          // alert(JSON.stringify(JSONData));
+           if(JSONData==1){
+        	   alert('강퇴당하셔서 입장 불가능 하십니다 ㅠ.ㅠ 다음기회에...~');
+           }else{
+        		 window.open("https://192.168.0.12:443/stream/join?streamer="+streamer+"&userNo=${user.userNo}&userNickname=user02&userProfile=default.jpg", "popup_window", "width=1450, height=900, scrollbars=no");
+   
+           }  	                    
+             },  
+             error : function (err) { 
+             	alert('실패 ㅠㅠ');
+                 } 
+         });
+    	
+	 	 
+		}); 
 	   
 	   $('button[name="banname"]').on('click',function(){
 
@@ -174,13 +198,13 @@ $(function() {
 <jsp:include page="/view/layout/toolbar.jsp" /> 
 
 		<!--<button type="button" data-toggle="modal" data-target="#myModal" style="margin:15px; padding:15px;">스트리밍 방 업로드 하기</button>   -->
-    
+   <div id="buttonList"> 
   <button class='lined thick' data-toggle="modal" data-target="#myModal"  style="width:200px;">스트리밍방업로드 하기</button> 
    
 		<!--<button type="button" name="refundbtn" data-toggle="modal" data-target="#myModal2" style="margin:15px; padding:15px;">환급하기</button>  -->
    <button class='lined thick'  name="refundbtn" data-toggle="modal" data-target="#myModal2">환급하기</button>
     <button class='lined thick' id="listRefund" name="listRefund">환급리스트이동</button> 
-  
+  </div>
 					
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -240,14 +264,14 @@ $(function() {
         <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
       </div> 
       </form>
-    </div>
+    </div>  
   </div></div>	
 	 
 <div class="row" id="list" "position: relative; z-index: 2;">
 <c:set var="i" value="0" />
 <c:forEach var="obj" items="${list}">
 <div class="container"> <div class="box">
-<h2><img id="profile" src="/common/images/stream/${obj.streamerProfile}" style="height:30px; width:30px;">${obj.streamNickname}</h2><img alt="50x50" data-src="holder.js/100x200" src='/common/images/stream/${obj.streamSum}' style=" width:80%;margin:auto; display: block;">
+<h2><img id="profile" src="/common/images/stream/${obj.streamerProfile}" style="height:50px; width:50px; border-radius:70px;  ">${obj.streamNickname}</h2><img alt="50x50" data-src="holder.js/100x200" src='/common/images/stream/${obj.streamSum}' style=" width:80%;margin:auto; display: block;">
 <h2>${obj.streamTitle}</h2><p>내용:${obj.streamContent}</p><p>시청자수:${obj.streamViewCount}<p><p>좋아요수:${obj.streamLikeCount}</p><a class="btn btn-default" name="get" role="button" data-param="${obj.streamer}">들어가기</a> 
     
 </div> </div> 
