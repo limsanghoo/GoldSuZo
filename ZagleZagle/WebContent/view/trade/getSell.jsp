@@ -20,7 +20,7 @@
 		//============= 회원정보수정 Event  처리 =============	
 		 $(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			 $( "button:contains('구매')" ).on("click" , function() {
+			 $( "button:contains('구매 요청')" ).on("click" , function() {
 				 self.location="/trade/addBuy?sellNo="+'${sell.sellNo}';
 				});
 			
@@ -64,7 +64,7 @@
 	</c:if>
 	<c:if test="${user != null && user.userNo != sell.seller.userNo}">
 	  		<div class="col-lg-5 text-right">
-	  			<button type="button" class="btn btn-b">구매</button>
+	  			<button type="button" class="btn btn-b">구매 요청</button>
 	  			<button type="button" class="btn btn-a">이전</button>
 	  		</div>
 		</c:if>

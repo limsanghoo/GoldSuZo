@@ -113,7 +113,7 @@ $(function() {
       
 	$("#upload").on("click", function() {
 		  // alert("전송됩니다~");
-		   window.open("", "popup_window", "width=1450, height=900, scrollbars=no");
+		   window.open("", "popup_window", "width=1450, height=900, toolbar=no, location=no, status=no, memubar=no, scrollbars=no, resizable=no");
 		   addStream();
 	});
 	$("#refund").on("click", function() {
@@ -192,9 +192,9 @@ $(function() {
 	
 	$('a[name="get"]').on("click", function() {
 		var streamer = $(this).data("param");
-		alert(streamer);
+		//alert(streamer);
 	 	 $.ajax({
-             url : '/stream/json/checkBan?userNo=${user.userNo}&streamer=US10001',  
+             url : '/stream/json/checkBan?userNo=${user.userNo}&streamer='+streamer,   
              method : 'get', 
              headers: {
    	            "Accept": "application/json",
@@ -204,9 +204,9 @@ $(function() {
            //alert("보내기 성공");
           // alert(JSON.stringify(JSONData));
            if(JSONData==1){
-        	   alert('강퇴당하셔서 입장 불가능 하십니다 ㅠ.ㅠ 다음기회에...~');
+        	   alert('강퇴당하셔서 입장 불가능 하십니다 ㅠ.ㅠ 다음기회에...~'); 
            }else{
-        		 window.open("https://192.168.0.21:443/stream/join?streamer="+streamer+"&userNo=US10002&userNickname=user02&userProfile=default.jpg", "popup_window", "width=1450, height=900, scrollbars=no");
+        		 window.open("https://192.168.0.21:443/stream/join?streamer="+streamer+"&userNo=${user.userNo}&userNickname=${user.userNickname}&userProfile=${user.profile}", "popup_window", "width=1450, height=900, scrollbars=no");
            }  	                    
              },  
              error : function (err) { 
@@ -262,8 +262,6 @@ $(function() {
   
 <body>  
    	<!-- ToolBar End /////////////////////////////////////-->
-
-  
 		<!--<button type="button" data-toggle="modal" data-target="#myModal" style="margin:15px; padding:15px;">스트리밍 방 업로드 하기</button>   -->
    <div id="buttonList"> 
   <button class='btn btn-b' data-toggle="modal" data-target="#myModal">스트리밍방업로드 하기</button>  

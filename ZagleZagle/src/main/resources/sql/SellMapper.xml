@@ -47,7 +47,7 @@
 		WHERE row_seq BETWEEN #{search.startRowNum:INTEGER} AND #{search.endRowNum:INTEGER}
 	 </select>
 	 
-	 <select id="getTotalCount" parameterType="string" resultType="int">
+	 <select id="getSellCount" parameterType="string" resultType="int">
 		SELECT COUNT(*)
 		FROM (SELECT * FROM sell WHERE user_no=#{userNo} ORDER BY sell_no) countTable
 	 </select>
@@ -67,11 +67,12 @@
 			WHERE sell_no=#{sellNo}
 	 </update>
 	 
-	 <update id="deleteSell" parameterType="string">
+	 <update id="updateSellState" parameterType="sell">
 	 	UPDATE sell
 	 	<set>
 	 		sell_state=#{sellState}
 	 	</set>
 	 	WHERE sell_no=#{sellNo}
 	 </update>
+	 
 </mapper>
