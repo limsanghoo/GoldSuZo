@@ -52,52 +52,52 @@
 	    <div class="col-12">
 	    
 	    <div class="row">
-	<div class="col-lg-8">
+	<div class="col-lg-7">
 	<H2><strong>상세정보</strong></H2>
 	</div>
 	<c:if test="${user.userNo == sell.seller.userNo}">
-	<div class="col-lg-4 text-center">
+	<div class="col-lg-5 text-right">
 		<button type="button" class="btn btn-b">수정</button>
 		<button type="button" class="btn btn-b">삭제</button>
-		<button type="button" class="btn btn-b">이전</button>
+		<button type="button" class="btn btn-a">이전</button>
 	</div>
 	</c:if>
 	<c:if test="${user != null && user.userNo != sell.seller.userNo}">
-	  		<div class="col-lg-4 text-center">
-	  			<button type="button" class="btn-inverse">구매</button>
-	  			<button type="button" class="btn-inverse">이전</button>
+	  		<div class="col-lg-5 text-right">
+	  			<button type="button" class="btn btn-b">구매</button>
+	  			<button type="button" class="btn btn-a">이전</button>
 	  		</div>
 		</c:if>
 
 </div>
 	    		<div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: #2eca6a;"></div>
-	    <br/
-	    >
+	    <br/>
+	    
 		<div class="row">
-	  		<div class="col-xs-8 col-md-1" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: #2eca6a; text-align: right;"><strong>상품명</strong></div>
+	  		<div class="col-xs-8 col-md-1" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: #777; text-align: right;"><strong>상품명</strong></div>
 			<div class="col-xs-4 col-md-5">${sell.sellName}</div>
 
-	  		<div class="col-xs-8 col-md-2" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: #2eca6a; text-align: right;"><strong>작성일</strong></div>
+	  		<div class="col-xs-8 col-md-2" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: #777; text-align: right;"><strong>작성일</strong></div>
 			<div class="col-xs-4 col-md-4">${sell.sellDate}</div>
 		</div>
 		
 		<br/>
 
 	    <div class="row">
-	  		<div class="col-xs-8 col-md-1" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: #2eca6a; text-align: right;"><strong>판매자</strong></div>
+	  		<div class="col-xs-8 col-md-1" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: #777; text-align: right;"><strong>판매자</strong></div>
 			<div class="col-xs-4 col-md-5">${sell.seller.userNickname}</div>
 			
-			<div class="col-xs-8 col-md-2" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: #2eca6a; text-align: right;"><strong>전화번호</strong></div>
+			<div class="col-xs-8 col-md-2" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: #777; text-align: right;"><strong>전화번호</strong></div>
 			<div class="col-xs-4 col-md-4">${sell.sellPhone}</div>
 		</div>
 		
 		<br/>
 
 		<div class="row">
-	  		<div class="col-xs-8 col-md-1" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: #2eca6a; text-align: right;"><strong>가격</strong></div>
+	  		<div class="col-xs-8 col-md-1" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: #777; text-align: right;"><strong>가격</strong></div>
 			<div class="col-xs-4 col-md-5">${sell.sellPrice}원</div>
 			
-			<div class="col-xs-8 col-md-2" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: #2eca6a; text-align: right;"><strong>판매방식</strong></div>
+			<div class="col-xs-8 col-md-2" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: #777; text-align: right;"><strong>판매방식</strong></div>
 			<div class="col-xs-4 col-md-4">
 				<c:if test="${sell.sellStyle=='10'}">택배거래</c:if>
 				<c:if test="${sell.sellStyle=='20'}">직거래</c:if>
