@@ -93,10 +93,8 @@ public class StreamController {
 		System.out.println(user);
 		stream.setUser(user);  
 		stream.setStreamDate(date);
-
 		System.out.println("addStream[stream]="+stream);
 		streamService.addStream(stream);
-	
 	ModelAndView modelAndView = new ModelAndView();
 	//modelAndView.addObject("streamer",stream.getUser().getUserNo());
 	//modelAndView.addObject("userNo",stream.getUser().getUserNo());
@@ -111,7 +109,8 @@ public class StreamController {
 	@RequestMapping(value="listStream",method=RequestMethod.GET)
 	public ModelAndView listStream(HttpSession session) throws Exception{
 		
-		User user = userService.getUser2("US10001");	
+		User user = userService.getUser2("US10023");	
+		System.out.println("리스트유저 "+user);
 		session.setAttribute("user", user);
 	 	SearchStream search = new SearchStream();
 	 	search.setCurrentPage(1);

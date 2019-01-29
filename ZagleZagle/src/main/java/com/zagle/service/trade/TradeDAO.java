@@ -3,6 +3,7 @@ package com.zagle.service.trade;
 import java.util.List;
 
 import com.zagle.common.Search;
+import com.zagle.service.domain.Buy;
 import com.zagle.service.domain.Sell;
 
 public interface TradeDAO {
@@ -15,11 +16,17 @@ public interface TradeDAO {
 
 	public List<Sell> listSell(Search search, String userNo) throws Exception;
 
-	public int getTotalCount(String userNo) throws Exception;
-
 	public void updateSell(Sell sell) throws Exception;
 	
 	public void updateSellState(Sell sell) throws Exception;
+
+	public List<Buy> listBuy(Search search, String userNo) throws Exception;
+
+	public void addBuy(Buy buy) throws Exception;
+
+	public int getSellCount(String userNo) throws Exception;
+
+	public int getBuyCount(String userNo) throws Exception;
 	
 //	addSell 판매상품올리기
 //	addBuy 구매요청했을때
