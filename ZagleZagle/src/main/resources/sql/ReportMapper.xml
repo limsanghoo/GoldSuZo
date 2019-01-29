@@ -14,7 +14,7 @@
 <result property="reportNo"									column="report_no"						jdbcType="VARCHAR" />
 <result property="reportingUserNo.userNo"		column="reporting_user_no"		jdbcType="VARCHAR" />
 <result property="reportedUserNo.userNo"		column="reportied_user_no"		jdbcType	="VARCHAR"/>
-<result property="reportedBoard.boardNo"		column="board_no"						jdbcType="VARCHAR"/>
+<result property="reportedBoardNo.boardNo"		column="board_no"						jdbcType="VARCHAR"/>
 <result property="reportReason"							column="report_reason"				jdbcType="VARCHAR"/>
 <result property="reportedComment.commentNo" column="comment_no"			jdbcType="VARCHAR"/>
 <result property="hardleNo"							column="hardle_no"					jdbcType="VARCHAR"/>
@@ -27,7 +27,7 @@
 	 INTO report(report_no, reporting_user_no, reportied_user_no, board_no, 
 	 						report_reason, comment_no, hardle_no, report_date)
 	 						
-	 VALUES ('RP'||seq_rp.nextval, #{reportingUserNo.userNo:VARCHAR}, #{reportedUserNo.userNo:VARCHAR}, #{reportedBoard.boardNo:VARCHAR},
+	 VALUES ('RP'||seq_rp.nextval, #{reportingUserNo.userNo:VARCHAR}, #{reportedUserNo.userNo:VARCHAR}, #{reportedBoardNo.boardNo:VARCHAR},
 	 						#{reportReason:VARCHAR}, #{reportedComment.commentNo:VARCHAR}, '0', SYSDATE )
 	</insert>
 	

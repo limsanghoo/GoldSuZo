@@ -193,13 +193,20 @@ public class MongoRestDAOImpl implements StreamRestDAO{
 		MongoClientURI uri  = new MongoClientURI("mongodb://192.168.0.21:27017/stream"); 
         MongoClient mongoClient = new MongoClient(uri);
         DB db = mongoClient.getDB(uri.getDatabase());
-		System.out.println("MONGODB SUCCESS");
-
+		System.out.println("MONGODB SUCCESS"+map);
 
 		DBCollection dbcoll = db.getCollection("streams");
-		BasicDBObject query = new BasicDBObject();
-		query.put("banList.userNo",map.get("userNo")); 
-		long dbsize = dbcoll.find(query).count();
+	/*	BasicDBObject query = new BasicDBObject();
+		query.append("streamer",map.get("streamer"));
+		query.append("banList.userNo",map.get("userNo")); 
+		long dbsize = dbcoll.find(query).count(); */
+		BasicDBObject andQuery = new BasicDBObject();
+		List<BasicDBObject> obj = new ArrayList<BasicDBObject>();
+		obj.add(new BasicDBObject("streamer", map.get("streamer")));
+		obj.add(new BasicDBObject("banList.userNo", map.get("userNo")));
+		andQuery.put("$and", obj);
+		System.out.println(andQuery.toString());
+		long dbsize = dbcoll.find(andQuery).count();
 		return dbsize;
 	
 	}

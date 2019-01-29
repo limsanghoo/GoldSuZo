@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.zagle.common.Search;
 import com.zagle.service.domain.Board;
+import com.zagle.service.domain.Buy;
 import com.zagle.service.domain.Sell;
+import com.zagle.service.domain.User;
 import com.zagle.service.trade.TradeDAO;
 import com.zagle.service.trade.TradeService;
 
@@ -47,7 +49,7 @@ public class TradeServiceImpl implements TradeService{
 	@Override
 	public Map<String, Object> listSell(Search search, String userNo) throws Exception {
 		List<Sell> list = tradeDAO.listSell(search, userNo);
-		int totalCount = tradeDAO.getTotalCount(userNo);
+		int totalCount = tradeDAO.getSellCount(userNo);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
@@ -65,6 +67,24 @@ public class TradeServiceImpl implements TradeService{
 	public void updateSellState(Sell sell) throws Exception {
 		tradeDAO.updateSellState(sell);		
 	}
+
+	@Override
+	public Map<String, Object> listBuy(Search search, String userNo) throws Exception {
+		List<Buy> list = tradeDAO.listBuy(search, userNo);
+		int totalCount = tradeDAO.getBuyCount(userNo);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("totalCount", new Integer(totalCount));
+		
+		return map;
+	}
+
+	@Override
+	public void addBuy(Buy buy) throws Exception {
+		tradeDAO.addBuy(buy);
+	}
+
 
 
 }

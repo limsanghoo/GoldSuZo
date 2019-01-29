@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.zagle.common.Search;
+import com.zagle.service.domain.Buy;
 import com.zagle.service.domain.Sell;
 import com.zagle.service.trade.TradeDAO;
 
@@ -47,7 +48,7 @@ public class TradeDAOImpl implements TradeDAO{
 		return sqlSession.selectList("SellMapper.listSell", map);
 	}
 	@Override
-	public int getTotalCount(String userNo) {
+	public int getSellCount(String userNo) {
 		return sqlSession.selectOne("SellMapper.getTotalCount",userNo);
 	}
 	@Override
@@ -58,5 +59,21 @@ public class TradeDAOImpl implements TradeDAO{
 	@Override
 	public void updateSellState(Sell sell) throws Exception {
 		sqlSession.update("SellMapper.updateSellState",sell);		
+	}
+	@Override
+	public List<Buy> listBuy(Search search, String userNo) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("search", search);
+		map.put("userNo", userNo);
+		
+		return sqlSession.selectList("BuyMapper.listBuy", map);
+	}
+	@Override
+	public void addBuy(Buy buy) throws Exception {
+		sqlSession.insert("BuyMapper.addBuy",buy);
+	}
+	@Override
+	public int getBuyCount(String userNo) throws Exception {
+		return sqlSession.selectOne("BuyMapper.getBuyCount",userNo);
 	}
 }

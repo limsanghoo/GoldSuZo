@@ -50,8 +50,8 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
-	public void deleteBoard(Board board) throws Exception {
-		sqlSession.update("BoardMapper.deleteBoard", board);
+	public void updateBoardStatus(Board board) throws Exception {
+		sqlSession.update("BoardMapper.updateBoardStatus", board);
 	}
 
 	@Override
@@ -68,8 +68,7 @@ public class BoardDAOImpl implements BoardDAO{
 
 	@Override
 	public void addReport(Report report) throws Exception {
-		// TODO Auto-generated method stub
-		
+		sqlSession.insert("ReportMapper.addReport", report);
 	}
 
 	@Override

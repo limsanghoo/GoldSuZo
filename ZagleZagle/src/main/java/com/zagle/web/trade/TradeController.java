@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.zagle.common.Page;
 import com.zagle.common.Search;
+import com.zagle.service.domain.Buy;
 import com.zagle.service.domain.Sell;
 import com.zagle.service.domain.User;
 import com.zagle.service.trade.TradeService;
@@ -108,9 +109,24 @@ public class TradeController {
 	
 	
 	@RequestMapping(value="listBuy")
-	public ModelAndView listBuy() throws Exception{
+	public ModelAndView listBuy(HttpSession session, @ModelAttribute("search") Search search) throws Exception{
+		
+		User user = (User)session.getAttribute("user");
+		
+		if (search.getCurrentPage() == 0) {
+			search.setCurrentPage(1);
+		}
+		search.setPageSize(pageSize);
+		
+		Map<String , Object> map = tradeService.listBuy(search, user.getUserNo());
+		
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize );
 		
 		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("forward:/view/trade/listBuy.jsp");
+		modelAndView.addObject("list",map.get("list"));
+		modelAndView.addObject("resultPage",resultPage);
+		modelAndView.addObject("search",search);
 		
 		return modelAndView;
 	}
@@ -153,4 +169,26 @@ public class TradeController {
 		return modelAndView;
 	}
 	
+	@RequestMapping(value="addBuy", method=RequestMethod.GET)
+	public ModelAndView addBuy(@ModelAttribute("sellNo") String sellNo, HttpSession session) throws Exception{
+		Sell sell = new Sell();
+		sell.setSellNo(sellNo);
+		int sellState = 20;
+		sell.setSellState(sellState);
+		
+		User user = (User)session.getAttribute("user");
+		
+		Buy buy = new Buy();
+		buy.setBuyer(user);
+		buy.setSellProd(sell);
+		
+		tradeService.updateSellState(sell);
+		tradeService.addBuy(buy);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("sell",sell);
+		modelAndView.setViewName("forward:/trade/listBuy");
+		
+		return modelAndView;
+	}
 }

@@ -11,8 +11,27 @@
   <meta content="" name="keywords">
   <meta content="" name="description">
 
+ 
+  <!-- 내가 추가한거임 -->
+  <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+  
+  
+  <!-- JavaScript Libraries -->
+  <script src="/common/css/estateagency-master/lib/jquery/jquery.min.js"></script>
+  <script src="/common/css/estateagency-master/lib/jquery/jquery-migrate.min.js"></script>
+  <script src="/common/css/estateagency-master/lib/popper/popper.min.js"></script>
+  <script src="/common/css/estateagency-master/lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/common/css/estateagency-master/lib/easing/easing.min.js"></script>
+  <script src="/common/css/estateagency-master/lib/owlcarousel/owl.carousel.min.js"></script>
+  <script src="/common/css/estateagency-master/lib/scrollreveal/scrollreveal.min.js"></script>
+  <!-- Contact Form JavaScript File -->
+  <script src="/common/css/estateagency-master/contactform/contactform.js"></script>
 
-
+  <!-- Template Main Javascript File -->
+  <script src="/common/css/estateagency-master/js/main.js"></script>
 
   <!-- Favicons -->
   <link href="/common/css/estateagency-master/img/favicon.png" rel="icon">
@@ -42,14 +61,35 @@
 
 
 <script type="text/javascript">
-//============= logout Event  처리 =============	
-$(function() {
-	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-	$("a:contains('로그인')").on("click" , function() {
-		login.click();
-	}); 
 
-	$("a:contains('로그아웃')").on("click",function() {
+
+$(function() {
+    
+    $("#Kakao").on("click", function() {
+       
+       alert("클릭 완료")
+       
+       
+       var  URL = "https://kauth.kakao.com/oauth/authorize?client_id=c3883a306a9faad67b127d7631568b29&redirect_uri=http://192.168.0.16:8080/user/kakaologin&response_type=code"
+       popWin
+       = window.open(URL,   "popWin",  "left=300,top=200,width=780,height=130,marginwidth=0,marginheight=0,"+
+             "scrollbars=no,scrolling=no,menubar=no,resizable=no")
+           
+              opener.window.location = url;
+       close();
+             
+             
+    });
+ 
+  }); 
+
+
+
+$(function() {
+
+	
+	
+	$("a:contains('LOGOUT')").on("click",function() {
 		
 		alert("클릭됨")
 		
@@ -195,7 +235,7 @@ document.onmousemove = null;
  
  $(function(){
          $("#btn").hide();
-         $("#btn:contains('숨기기')").on("click",function(){
+         $("#btn:contains('퇴장')").on("click",function(){
             $("#mydiv").css("display","none");
             $(this).hide();
             $("#btn2").show();
@@ -205,9 +245,13 @@ document.onmousemove = null;
       
 $(function(){
 
-         $("#btn2:contains('보이기')").on("click",function(){
+         $("#btn2:contains('입장')").on("click",function(){
+        	 
+        	 var local="${searchBoard.local}";
+        	 alert(local);
+        	 
         	if(document.getElementById("chatting")==null){
-        		$("#mydiv").append('<iframe id="chatting" src="/chat/getChat?room=${user.userAddr}" align="right" style="height:100%; width: 100%;" frameborder="0" scrolling="no"></iframe>');
+        		$("#mydiv").append('<iframe id="chatting" src="/chat/getChat?room='+local+'" align="right" style="height:100%; width: 100%;" frameborder="0" scrolling="no"></iframe>');
         	 }
         	 
             $("#mydiv").css("display","inline");
@@ -234,12 +278,17 @@ font-size: 100%;
 }
 
 #mydivheader {
-margin-top:200px;
- /*  padding-top: 150px; */
   cursor: move;
   z-index: 10;
   background-color: rgba(0,0,0,0.3);
   color: #fff;
+  margin-top: 0px;
+  border-top-width: 150px;
+
+}
+
+.container{
+	max-width: 1500px;
 }
 
 </style> 
@@ -264,11 +313,11 @@ margin-top:200px;
       <a href="/index.jsp" class="navbar-brand text-brand" style="padding-top: 0; padding-bottom: 0;">Dongne<span class="color-b">Vangne</span></a>
 
       <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav" style="cursor:pointer">
           <li class="nav-item">
             <a class="nav-link">전체 게시물</a>
-          </li>
-          
+          </li>      
+
           <c:if test="${sessionScope.user.userNo != null}">
           <li class="nav-item">
             <a class="nav-link">동네 게시물</a>
@@ -314,48 +363,93 @@ margin-top:200px;
           </li>
           
           <li class="nav-item">
-            <a class="nav-link" id="btn">채팅 숨기기</a>
+            <a class="nav-link" id="btn2">마을회관 입장</a>
           </li>
           
           <li class="nav-item">
-            <a class="nav-link" id="btn2">채팅 보이기</a>
+            <a class="nav-link" id="btn">마을회관 퇴장</a>
           </li>
-          
-          
-                   
+                          
           </c:if>
           
+        <!-- 채팅창 -->       
         <div id="mydiv" style="display: none;">
    			<div id="mydivheader">-여기를 눌러 이동-</div>
-		</div>
-          
-          
+		</div>		       
         </ul>
       </div>
+      
+      <!-- 로그인 로그아웃-->
+      
+      <div style="list-style: none; cursor:pointer;">
+		<c:if test="${user.userNo!=null}">
+		 	<li class="nav-item">
+					<h4 style="font-style: italic; color: black;"><a href="/user/getUser2?userNo=${user.userNo}">${user.userName}</a> 님 환영합니다.</h4>
+			</li>
+					
+			<li class="nav-item">					
+	                <a class="nav-link" data-param="${user.snsNo}">LOGOUT</a>		                
+		 	</li>
+		 </c:if>      
+      
+     	 <c:if test="${user.userNo==null}">  			
+			<li class="button primary" id="login" data-toggle="modal" data-target="#modal1" style="">
+			<a class="nav-link">LOGIN</a>
+			</li>
+		</c:if>
+			
+		 	
+      </div>
+      
+      
     </div>
   </nav>
-  <!--/ Nav End /-->
+<!--/ Nav End /--> 
+  
+
 
   <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
   <div id="preloader"></div>
+  
+<!-- 모달 시작 -->
+<div class="modal"  aria-hidden="true" style="display: none; z-index: 1060;" id="modal1">
+    	<div class="modal-dialog modal-md">
+    	
+          <div class="modal-content">
+          
+            <div class="modal-body">
+            	<div class="snsLoginButton" align="center">
+             	<img id="Kakao" src="/common/images/KakaoTalk.png" height="50" width="50"/>
+             	
+             	<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=ICC6WpwdQLzHUQn5KfEC&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fuser%2FnaverCallback&state=state">
+             	<img height="50" src="/common/images/NaverSmall.jpg" height="50" width="50" >
+             	</a>
+             	
+             	<img src="/common/images/smallGoogle.jpg" height="50" width="50" id="GGG"/>
+             	</div>
+             	
+             	<br/><br/><br/>
+             	
+             	<div style="text-align: center">
+             		<strong style="color: black; font-style: oblique;">SNS 로그인만 가능합니다.</strong>
+             	</div>
+            </div><!-- 모달바디 끝 -->	
+          </div>
+        </div>
+</div>
+<!-- 모달 끝 -->
+  
 
-  <!-- JavaScript Libraries -->
   
-  <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-  
-  
-  <script src="/common/css/estateagency-master/lib/jquery/jquery.min.js"></script>
-  <script src="/common/css/estateagency-master/lib/jquery/jquery-migrate.min.js"></script>
-  <script src="/common/css/estateagency-master/lib/popper/popper.min.js"></script>
-  <script src="/common/css/estateagency-master/lib/bootstrap/js/bootstrap.min.js"></script>
-  <script src="/common/css/estateagency-master/lib/easing/easing.min.js"></script>
-  <script src="/common/css/estateagency-master/lib/owlcarousel/owl.carousel.min.js"></script>
-  <script src="/common/css/estateagency-master/lib/scrollreveal/scrollreveal.min.js"></script>
-  <!-- Contact Form JavaScript File -->
-  <script src="/common/css/estateagency-master/contactform/contactform.js"></script>
 
-  <!-- Template Main Javascript File -->
-  <script src="/common/css/estateagency-master/js/main.js"></script>
+  
+  
+   
+  
+  
+  
+
+
 
 </body>
 </html>
