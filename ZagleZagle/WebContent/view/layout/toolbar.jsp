@@ -246,8 +246,12 @@ document.onmousemove = null;
 $(function(){
 
          $("#btn2:contains('입장')").on("click",function(){
+        	 
+        	 var local="${searchBoard.local}";
+        	 alert(local);
+        	 
         	if(document.getElementById("chatting")==null){
-        		$("#mydiv").append('<iframe id="chatting" src="/chat/getChat?room=${user.userAddr}" align="right" style="height:100%; width: 100%;" frameborder="0" scrolling="no"></iframe>');
+        		$("#mydiv").append('<iframe id="chatting" src="/chat/getChat?room='+local+'" align="right" style="height:100%; width: 100%;" frameborder="0" scrolling="no"></iframe>');
         	 }
         	 
             $("#mydiv").css("display","inline");
