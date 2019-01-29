@@ -139,7 +139,7 @@ function enter() {
 
 <!-- 게시물 등록 -->
 <c:if test="${user.userNo!=null}">
-<input type="button" value="판매물품 등록" id="goAddSell"/>
+<input type="button" class="btn btn-b" value="판매물품 등록" id="goAddSell"/>
 </c:if>
 </div>
 

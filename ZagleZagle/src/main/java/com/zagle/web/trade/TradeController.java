@@ -108,7 +108,7 @@ public class TradeController {
 	
 	
 	@RequestMapping(value="listBuy")
-	public ModelAndView listBuy(@RequestParam("userNo") String userNo) throws Exception{
+	public ModelAndView listBuy() throws Exception{
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
