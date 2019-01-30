@@ -84,15 +84,16 @@
 	<select id="checkReportCount" parameterType="com.zagle.service.domain.Report" resultType="int">
 	SELECT COUNT(*)
 	FROM report 
-	<where>
+	WHERE hardle_no = '0'
+	
 		<if test="reportedBoardNo != null">
-			board_no = #{reportedBoardNo.boardNo}
+			and board_no = #{reportedBoardNo.boardNo}
 		</if>
 		<if test="reportedCommentNo != null">
-			comment_no = #{reportedCommentNo.commentNo}
+			and comment_no = #{reportedCommentNo.commentNo}
 		</if>
 	
-	</where>
+	
 	
 	</select>
 	</mapper>
