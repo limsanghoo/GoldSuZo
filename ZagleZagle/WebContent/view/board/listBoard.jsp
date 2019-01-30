@@ -451,6 +451,10 @@ function fncGetTown(){
 <input type="button" value="세션">
 </a>
 
+<a href="/board/testUser2">
+<input type="button" value="어드민세션">
+</a>
+
 
 <div class="row col-md-12">
 <!-- 지도로 보기 -->
@@ -516,18 +520,23 @@ function fncGetTown(){
  <c:forEach var="board" items="${boardList}">
 	<c:set var="i" value="${ i+1 }" />
 	
-	<c:if test="${board.boardStatus=='3'}">
+	
+	
+	<c:if test="${sessionScope.user.grade!=4}">
+	<c:if test="${board.boardStatus=='3'}"><!-- 블라인드 게시물 -->
 		<li>	
-	<div class="box" style="height:250px;">
-	<p style="text-align: center;"><br/><br/><br/>신고 누적으로<br/>블라인드 된 게시물입니다</p>
-	</div>
-	</li>
+		<div class="box" style="height:250px;">
+		<p style="text-align: center;"><br/><br/><br/>신고 누적으로<br/>블라인드 된 게시물입니다</p>
+		</div>
+		</li>
 	</c:if>
-	
-	
-	
-	<c:if test="${board.boardStatus=='1'}"><!-- 정상 게시물만 보여주기 -->
-	
+	</c:if>
+
+		<c:if test="${board.boardStatus=='1' || board.boardStatus=='3'}">
+
+	<!-- 정상 게시물 -->
+
+
 <!-- 썸네일 박스 시작 -->
 
 
@@ -765,7 +774,6 @@ function fncGetTown(){
         </div>
 </div>
 <!-- 모달2 끝 -->
-
 
 </c:if>
 
