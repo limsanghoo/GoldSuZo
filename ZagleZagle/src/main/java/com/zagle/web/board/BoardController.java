@@ -153,8 +153,6 @@ public class BoardController {
 		report.setReportReason(reportReason);
 		report.setReportedBoardNo(board);
 		
-		System.out.println(report);
-		
 		boardService.addReport(report);
 		
 		//신고 횟수 카운트
@@ -162,14 +160,18 @@ public class BoardController {
 		
 		System.out.println("reportCount : "+reportCount);
 		
-		if(reportCount>3) {
-			Blind blind=new Blind();
+		if(reportCount==3) {			
 			
 			//해당 게시물 블라인드 등록 blind code 0으로
-			blind.setBlindBoardNo(report.getReportedBoardNo());		
+			Blind blind=new Blind();
+			blind.setBlindBoardNo(report.getReportedBoardNo());
 			adminService.addBlind(blind);
 			
 			//해당 게시물 boardStatus 3으로
+			board.setBoardStatus("3");
+			System.out.println("+++상태 : "+board);
+			boardService.updateBoardStatus(board);
+			
 		}
 		
 		ModelAndView modelAndView=new ModelAndView();
@@ -200,7 +202,7 @@ public class BoardController {
 		
 		System.out.println(board);
 		
-		boardService.deleteBoard(board);
+		boardService.updateBoardStatus(board);
 		
 		ModelAndView modelAndView=new ModelAndView();
 		modelAndView.setViewName("redirect:/board/listBoard?view=all");

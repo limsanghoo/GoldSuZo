@@ -28,10 +28,10 @@ $(function(){
 		//alert(reportingUserNo);
 		
 		var reportedBoardNo=$("input[name='reportedBoardNo']").val();
-		alert(reportedBoardNo);
+		//alert(reportedBoardNo);
 		
 		var reportedUserNo=$("input[name='reportedUserNo']").val();
-		alert(reportedUserNo);
+		//alert(reportedUserNo);
 		
 		self.location="/board/addReport?reportReason="+reportReason+"&reportingUserNo="+reportingUserNo+"&reportedBoardNo="+reportedBoardNo+"&reportedUserNo="+reportedUserNo;	
 
