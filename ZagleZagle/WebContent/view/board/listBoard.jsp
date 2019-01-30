@@ -520,9 +520,9 @@ function fncGetTown(){
  
  <c:forEach var="board" items="${boardList}">
 	<c:set var="i" value="${ i+1 }" />
-
+	
+	<!-- 블라인드 게시물 -->
 	<c:if test="${board.boardStatus=='3' && user.grade!='4'}">
-		<!-- 블라인드 게시물 -->
 		<li>	
 		<div class="box" style="height:250px;">
 		<p style="text-align: center;"><br/><br/><br/>신고 누적으로<br/>블라인드 된 게시물입니다</p>
@@ -530,13 +530,11 @@ function fncGetTown(){
 		</li>
 	</c:if>
 
-	
-	<c:if test="${board.boardStatus=='1' || board.boardStatus=='4' || (board.boardStatus=='3' && user.grade=='4')}"><!-- 정상 게시물, 블라인드 해지 게시물 -->
+	<!-- 정상 게시물, 블라인드 해지 게시물 -->
+	<c:if test="${board.boardStatus=='1' || board.boardStatus=='4' || (board.boardStatus=='3' && user.grade=='4')}">
 
 
 <!-- 썸네일 박스 시작 -->
-
-
 <li>	
 	<div class="box">
 		
