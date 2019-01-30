@@ -394,7 +394,7 @@ font-size: 100%;
       <div style="list-style: none; cursor:pointer;">
 		<c:if test="${user.userNo!=null}">
 		 	<li class="nav-item">
-					<h4 style="font-style: italic; color: black;"><a href="/user/getUser2?userNo=${user.userNo}">${user.userName}</a> 님 환영합니다.</h4>
+					<h5 style="font-style: italic; color: black;"><a href="/user/getUser2?userNo=${user.userNo}">${user.userName}</a>님 환영합니다</h5>
 			</li>
 					
 			<li class="nav-item">					

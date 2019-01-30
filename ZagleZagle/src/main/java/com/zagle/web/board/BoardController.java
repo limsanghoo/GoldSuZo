@@ -392,7 +392,6 @@ public class BoardController {
 		
 		User testUser = new User();
 		testUser=userService.getUser3("admin");
-		System.out.println(testUser);
 		session.setAttribute("user", testUser);
 		
 		return "redirect:/board/listBoard?view=town";
