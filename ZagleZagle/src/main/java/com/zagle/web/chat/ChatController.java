@@ -30,9 +30,11 @@ public class ChatController {
 	}
 
 	@RequestMapping(value = "getChat", method = RequestMethod.GET)
-    public String getChat(Locale locale, Model model,HttpServletRequest request,HttpSession session) {
-		User user = (User)session.getAttribute("user");
+    public String getChat(Locale locale, Model model,HttpServletRequest request) {
 		String room = request.getParameter("room");
+		System.out.println("참가방 : "+room);
+		System.out.println("참가조건 : "+room.substring(0, 2));
+		System.out.println("참가방2 : "+room.substring(2));
         Date date = new Date();
         DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
         String formattedDate = dateFormat.format(date);
@@ -41,14 +43,14 @@ public class ChatController {
 			ip=request.getRemoteAddr();
 		}
         System.out.println(locale+" "+formattedDate+" "+ip+"유저 채팅방입장");
-        model.addAttribute("room", room);
-        model.addAttribute("serverTime", formattedDate );
-
-        if (room.equals(user.getUserAddr())) {
-            return "forward:/view/chat/chat.jsp";
-		}else {
-	        return "forward:/view/chat/oneToOneChat.jsp";
-		}
         
+        model.addAttribute("serverTime", formattedDate );
+        if (room.substring(0, 2).equals("@@")) {
+        	model.addAttribute("room", room.substring(2));
+        	return "forward:/view/chat/oneToOneChat.jsp";
+		}else {
+			model.addAttribute("room", room);
+			return "forward:/view/chat/chat.jsp";
+		}
     }
 }
