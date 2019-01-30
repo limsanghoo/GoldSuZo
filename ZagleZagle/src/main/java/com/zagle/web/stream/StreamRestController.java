@@ -212,6 +212,7 @@ public class StreamRestController {
 		  	System.out.println("close.jsp로 갑니다");
 		  	User user = (User) session.getAttribute("user");
 		  	User streamer = (User) session.getAttribute("streamer");
+		  	System.out.println("user닉네임===================="+user.getUserNickname());
 		  	ModelAndView view = new ModelAndView("redirect:https://192.168.0.21/stream/sponSpeech2?streamer="+streamer.getUserNo()+"&userNo="+user.getUserNo()+"&userNickname="+user.getUserNickname()+"&userProfile=default.jpg&price="+session.getAttribute("price"));
 		//	ModelAndView view = new ModelAndView("redirect:http://192.168.0.12:8080/stream/));
 			//modelAndView.setViewName("forward:/view/stream/close.jsp");	

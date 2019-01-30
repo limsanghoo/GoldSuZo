@@ -91,7 +91,7 @@ h1{
 function fncGetList(currentPage) {
 	
 	//var list = "${list}";
-	alert(currentPage)
+	//alert(currentPage)
     $("#currentPage").val(currentPage)
    
     
@@ -103,7 +103,7 @@ $(function() {
 		//   alert("클릭합니다~");
 		   var check = $(this).data("param");
 		   var refundNo = $(this).data("param2");
-		   alert(check+refundNo); 	    
+		 //  alert(check+refundNo); 	    
 		   $.ajax({
 				
 	  		    
@@ -116,7 +116,7 @@ $(function() {
 	  	            "Content-Type": "application/json"
 	  	        },
 	  		    success: function(JSONData,status){ 		
-	  		    	alert('성공'); 
+	  		    //	alert('성공'); 
 	  		    	location.reload();
 	 				//alert(status);   
 	 				//alert(JSONData);  
@@ -165,7 +165,7 @@ $(function() {
 			  <td align="left">${refund.account}</td>
 			  <td align="left">${refund.price}</td>
 			  <c:if test="${refund.checkRefund =='0'}">
-              <td align="left" class="checkRefund" data-param="0" data-param2="${refund.refundNo}">환급진행중</td>
+              <td align="left" class="checkRefund" data-param="0" data-param2="${refund.refundNo}"><button style="height:26px; text-align:center; padding-top:0;">환급진행중</button></td> 
               </c:if>
               <c:if test="${refund.checkRefund =='1'}"> 
                <td align="left" data-param="1" data-param2="${refund.streamerNo}">환급완료</td>
