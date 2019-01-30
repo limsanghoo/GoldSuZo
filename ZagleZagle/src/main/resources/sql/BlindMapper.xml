@@ -52,6 +52,8 @@ WHERE blind_no = #{blindNo:VARCHAR}
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 </select>
 
+
+
 <select id="getTotalCountBlind" parameterType="com.zagle.service.domain.SearchAdmin" resultType="int" >
 	SELECT COUNT(*)
 				FROM(SELECT *	
