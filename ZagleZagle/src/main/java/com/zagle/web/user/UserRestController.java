@@ -248,7 +248,7 @@ public class UserRestController {
 				ModelAndView modelAndView = new ModelAndView();
 				modelAndView.addObject("result", new Boolean(result));
 				modelAndView.addObject("snsNo", snsNo);
-				modelAndView.setViewName("forward:/view/user/addUserView.jsp");
+				modelAndView.setViewName("forward:/view/user/addUser.jsp");
 				return modelAndView;
 				
 			}else {
