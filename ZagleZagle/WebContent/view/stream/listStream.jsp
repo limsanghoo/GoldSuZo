@@ -91,6 +91,12 @@ margin: 0 0 10px;
 		$('#list').load('/stream/listStream').fadeIn("slow"); 
 		},3000); // 새로고침 시간 1000은 1초를 의미합니다.
    */
+function ban()
+ {
+     alert('강퇴당하셨습니다 ㅠㅠㅠㅠㅠ');
+   }
+   
+   
 function addStream(){
 	
     $("#addStreamForm").attr("method", "POST").attr("action", "/stream/addStream").submit();
@@ -365,7 +371,7 @@ $(function() {
 <c:forEach var="obj" items="${list}"> 
 <div class="col-sm-6 col-md-4">  
 <div class="thumbnail">  
-<div class="profileusername"><img id="profile" src="/common/images/stream/${obj.streamerProfile}" style="height:50px; width:50px; border-radius:70px;">${obj.streamNickname}</div>
+<div class="profileusername"><img id="profile" src="/common/images/profile/${obj.streamerProfile}" style="height:50px; width:50px; border-radius:70px;">${obj.streamNickname}</div>
 <img class="sumnail" alt="50x50" data-src="holder.js/100x200" src='/common/images/stream/${obj.streamSum}' style=" width:80%;margin:auto; display: block;">
 <div class="caption"><h2>${obj.streamTitle}</h2><p>내용:${obj.streamContent}</p><p>시청자수:${obj.streamViewCount}</p><p>좋아요수:${obj.streamLikeCount}</p><a id="get" class="btn btn-default" name="get" role="button" data-param="${obj.streamer}">들어가기</a>
 </div>  
