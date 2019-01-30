@@ -69,6 +69,7 @@ form{
 
 body {
    	margin: 0;
+   	padding-right: 0px;
     padding: 0;
     font-family: 'Poppins', sans-serif;
 	/* background: #333; */
@@ -519,24 +520,21 @@ function fncGetTown(){
  
  <c:forEach var="board" items="${boardList}">
 	<c:set var="i" value="${ i+1 }" />
-
-	<c:if test="${sessionScope.user.grade!=4}">
-		<c:if test="${board.boardStatus=='3'}"><!-- 블라인드 게시물 -->
+	
+	<!-- 블라인드 게시물 -->
+	<c:if test="${board.boardStatus=='3' && user.grade!='4'}">
 		<li>	
 		<div class="box" style="height:250px;">
 		<p style="text-align: center;"><br/><br/><br/>신고 누적으로<br/>블라인드 된 게시물입니다</p>
 		</div>
 		</li>
-		</c:if>
 	</c:if>
 
-	
-	<c:if test="${board.boardStatus=='1' || board.boardStatus=='3' || board.boardStatus=='4'}"><!-- 정상 게시물 -->
+	<!-- 정상 게시물, 블라인드 해지 게시물 -->
+	<c:if test="${board.boardStatus=='1' || board.boardStatus=='4' || (board.boardStatus=='3' && user.grade=='4')}">
 
 
 <!-- 썸네일 박스 시작 -->
-
-
 <li>	
 	<div class="box">
 		
