@@ -203,7 +203,7 @@ $(function(){
 		var boardNo=$(this).data('boardno');
 		var checkLike=$(this).data('checklike');
 		
-		//alert(checkLike);
+		alert(checkLike);
 		
 		if(checkLike=='0'){
 			$.ajax({
@@ -213,7 +213,7 @@ $(function(){
 				success: function(data){
 					
 					if(data==1){
-						//alert('등록 성공');
+						alert('등록 성공');
 						
 						$("#"+boardNo+"like").data("checklike","1");
 						$("img[name='"+boardNo+"emptyLike']").attr("src","/common/images/board/fullLike.png");
@@ -232,13 +232,13 @@ $(function(){
 				success: function(data){
 					
 					if(data==2){
-						//alert('취소 성공');
+						alert('취소 성공');
 						
 						$("#"+boardNo+"like").data("checklike","2");
 						$("img[name='"+boardNo+"fullLike']").attr("src","/common/images/board/emptyLike.png");
 						$("img[name='"+boardNo+"fullLike']").attr("name",boardNo+"emptyLike");
 					}else if(data==1){
-						//alert('재등록 성공');
+						alert('재등록 성공');
 
 						$("#"+boardNo+"like").data("checklike","1");
 						$("img[name='"+boardNo+"emptyLike']").attr("src","/common/images/board/fullLike.png");
@@ -260,7 +260,7 @@ $(function(){
 		var boardNo=$(this).data('boardno');
 		var checkScrap=$(this).data('checkscrap');
 		
-		//alert(checkScrap);
+		alert(checkScrap);
 		
 		if(checkScrap=='0'){
 			
@@ -271,7 +271,7 @@ $(function(){
 				success: function(data){
 					
 					if(data==1){
-						//alert('등록 성공');
+						alert('등록 성공');
 						
 						$("#"+boardNo+"scrap").data("checkscrap","1");
 						$("img[name='"+boardNo+"emptyScrap']").attr("src","/common/images/board/fullScrap.png");
@@ -283,7 +283,7 @@ $(function(){
 		
 		if(checkScrap=='1' || checkScrap=='2'){
 			
-			//alert("수정"+checkScrap);
+			alert("수정"+checkScrap);
 			
 			$.ajax({
 				
@@ -292,14 +292,14 @@ $(function(){
 				success: function(data){
 					
 					if(data==2){
-						//alert('취소 성공');
+						alert('취소 성공');
 						
 						$("#"+boardNo+"scrap").data("checkscrap","2");
 						$("img[name='"+boardNo+"fullScrap']").attr("src","/common/images/board/emptyScrap.png");
 						$("img[name='"+boardNo+"fullScrap']").attr("name",boardNo+"emptyScrap");
 						
 					}else if(data==1){
-						//alert('재등록 성공');
+						alert('재등록 성공');
 												
 						$("#"+boardNo+"scrap").data("checkscrap","1");
 						$("img[name='"+boardNo+"emptyScrap']").attr("src","/common/images/board/fullScrap.png");
@@ -451,6 +451,10 @@ function fncGetTown(){
 <input type="button" value="세션">
 </a>
 
+<a href="/board/testUser2">
+<input type="button" value="어드민세션">
+</a>
+
 
 <div class="row col-md-12">
 <!-- 지도로 보기 -->
@@ -515,19 +519,21 @@ function fncGetTown(){
  
  <c:forEach var="board" items="${boardList}">
 	<c:set var="i" value="${ i+1 }" />
-	
-	<c:if test="${board.boardStatus=='3'}">
+
+	<c:if test="${sessionScope.user.grade!=4}">
+	<c:if test="${board.boardStatus=='3'}"><!-- 블라인드 게시물 -->
 		<li>	
-	<div class="box" style="height:250px;">
-	<p style="text-align: center;"><br/><br/><br/>신고 누적으로<br/>블라인드 된 게시물입니다</p>
-	</div>
-	</li>
+		<div class="box" style="height:250px;">
+		<p style="text-align: center;"><br/><br/><br/>신고 누적으로<br/>블라인드 된 게시물입니다</p>
+		</div>
+		</li>
 	</c:if>
-	
-	
-	
-	<c:if test="${board.boardStatus=='1'}"><!-- 정상 게시물만 보여주기 -->
-	
+	</c:if>
+
+		<c:if test="${board.boardStatus=='1' || board.boardStatus=='3'}">
+
+	<!-- 정상 게시물 -->
+
 <!-- 썸네일 박스 시작 -->
 
 
@@ -765,7 +771,6 @@ function fncGetTown(){
         </div>
 </div>
 <!-- 모달2 끝 -->
-
 
 </c:if>
 
