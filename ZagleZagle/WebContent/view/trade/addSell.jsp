@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>addSell</title>
+<title>상품등록</title>
 <style>
         div.editable{
         	border: 1px solid #777;
