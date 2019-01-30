@@ -36,7 +36,7 @@
 	<set>
 	hardle_no	= #{hardleNo:VARCHAR}
 	</set>
-	where report_no = #{reportNo:VARCHAR}
+	where board_no = #{reportedBoardNo.boardNo:VARCHAR}
 	</update>
 	
 	<!--  SQL : GET REPORT (신고 이유 추출) -->

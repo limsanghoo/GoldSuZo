@@ -168,8 +168,9 @@
 				
 				var blindNo = $(this).data("param");
 			
-				
+				var boardNo = $(this).data("param2");
 		
+				alert(boardNo)
 				alert(blindNo)
 				
 				//////수정 필요///// commentNo 관련
@@ -183,7 +184,7 @@
 				
 				
 			
-			self.location="/admin/updateBlind?blindCode=1&blindNo="+blindNo;
+			self.location="/admin/updateBlind?blindCode=1&blindNo="+blindNo+"&boardNo="+boardNo;
 			
 		
 		});
