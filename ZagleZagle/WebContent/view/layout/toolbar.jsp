@@ -105,6 +105,8 @@ $(function() {
 		}else if(snsNo.startsWith("N")){
 			alert("N으로시작하는거 인식")
 			$("form").attr("method" , "POST").attr("action" , "/user/Nlogout").submit();
+		}else{
+			$("form").attr("method" , "POST").attr("action" , "/user/logout").submit();
 		}
 		
 	});
