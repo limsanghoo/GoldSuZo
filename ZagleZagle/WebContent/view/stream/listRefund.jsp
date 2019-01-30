@@ -9,7 +9,13 @@
 <html>
 <head>
 <title>스트리밍 목록조회</title>
+  
 <style>
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+KR"); 
+body {
+  font-family:"Noto Sans KR", sans-serif;
+  color: #555555; 
+}
 #margintable{
  padding :50px;
    padding:1rem 1rem; 
