@@ -260,7 +260,7 @@ public class BoardController {
 		ModelAndView modelAndView=new ModelAndView();
 		modelAndView.addObject("boardList", map.get("boardList"));//게시물 리스트
 		modelAndView.addObject("searchBoard", searchBoard);
-		modelAndView.addObject("list",list);//동네  리스트
+		modelAndView.addObject("list",list);//동네  리스트		
 		modelAndView.setViewName("forward:/view/board/listBoard.jsp");
 		
 		return modelAndView;
@@ -380,6 +380,8 @@ public class BoardController {
 		
 		//주현
 		testUser=userService.getUser2("US10027");	
+		
+		
 		
 		session.setAttribute("user", testUser);
 		
