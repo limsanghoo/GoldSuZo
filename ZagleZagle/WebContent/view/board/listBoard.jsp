@@ -195,7 +195,7 @@ $(function(){
 	//게시물 등록
 	$("input[value='게시물 등록']").bind("click",function(){
 		
-		self.location="http://192.168.0.35:8080/board/addBoard?userNo=${user.userNo}";
+		self.location="http://192.168.0.49:8080/board/addBoard?userNo=${user.userNo}";
 	})
 	
 	//지도로 보기

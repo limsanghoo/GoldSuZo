@@ -99,7 +99,7 @@ $(function(){
 	        
 	        $.ajax(	
 	        		{
-	        			url : "http://192.168.0.35:8080/board/json/addBoardVisionTag",
+	        			url : "http://192.168.0.49:8080/board/json/addBoardVisionTag",
 	        			method : "GET",
 	        			data : {
 	        				link : result.data.link
