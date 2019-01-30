@@ -521,18 +521,18 @@ function fncGetTown(){
 	<c:set var="i" value="${ i+1 }" />
 
 	<c:if test="${sessionScope.user.grade!=4}">
-	<c:if test="${board.boardStatus=='3'}"><!-- 블라인드 게시물 -->
+		<c:if test="${board.boardStatus=='3'}"><!-- 블라인드 게시물 -->
 		<li>	
 		<div class="box" style="height:250px;">
 		<p style="text-align: center;"><br/><br/><br/>신고 누적으로<br/>블라인드 된 게시물입니다</p>
 		</div>
 		</li>
-	</c:if>
+		</c:if>
 	</c:if>
 
-		<c:if test="${board.boardStatus=='1' || board.boardStatus=='3'}">
+	
+	<c:if test="${board.boardStatus=='1' || board.boardStatus=='3' || board.boardStatus=='4'}"><!-- 정상 게시물 -->
 
-	<!-- 정상 게시물 -->
 
 <!-- 썸네일 박스 시작 -->
 
@@ -669,45 +669,38 @@ function fncGetTown(){
       <div class="row">
       
       	<div class="col-md-11 col-md-offset-1">
-        <span aria-hidden="true" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: 30px; margin-right:5px; display: inline;">&times;</span>       
+        <span aria-hidden="true" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: 15px; margin-right:5px; margin-bottom:15px; display: inline;">&times;</span>       
         </div>
       </div> 
-       
-      <div class="row">  
-       <div class="col-md-12">
-        <h4 class="modal-title" id="gridSystemModalLabel">
+      
+        <h4 class="row modal-title" id="gridSystemModalLabel">
          
-        <div class="col-md-2" style="display: inline;">
-        <img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px;" align="middle;"/>
+        <div class="col-sm-2">
+        <img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px; vertical-align: middle; margin-left: 15px;"/>
         </div>
-        <div class="col-md-4" style="display: inline;">
+        
+        <div class="col-sm-3">
 		${board.user.userNickname}
 		</div>
 		
 		<!-- 내 글만 수정, 삭제 -->
 		<c:if test="${user.userNo==board.user.userNo}">
-		<div class="col-md-3 col-md-offset-4 ">
-		<input type="button" value="수정" data-update="${board.boardNo}"/>
-        <div class="btn btn-primary" data-toggle="modal" data-target="#${board.boardNo}modal2">삭제</div>
+		<div class="col-sm-7" style="padding-left: 60px;">
+		<input class="btn btn-a" type="button" value="수정" data-update="${board.boardNo}"/>
+        <span class="btn btn-b" data-toggle="modal" data-target="#${board.boardNo}modal2">삭제</span>
         </div>
         </c:if>
         
         <!-- 신고 버튼 -->
         <c:if test="${user.userNo!=board.user.userNo}">
-        <div class="col-md-5 col-md-offset-1">
-        
+        <div class="col-sm-5 col-md-offset-2">    
         <input type="button" name="report" class="btn btn-a" value="신고" data-report="${board.boardNo}"/>
         <input type="hidden" id="${board.boardNo}report" value="${board.boardNo}${board.user.userNo}">
         </div>
-        </c:if>
-        
+        </c:if>     
          
         </h4>
-        
-       </div>
-        
-        </div>
-     
+          
      <!-- 모달1 헤더 끝 -->
       
      <!-- 모달1 바디 시작 -->
