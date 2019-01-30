@@ -43,8 +43,9 @@
 					self.location ="/trade/getSell?sellNo="+$(this).data("sellno");
 			});
 			
-			 $(".ct_list_pop td:nth-child(9):contains('(승인하기)')").on("click",function(){
-					self.location = "/trade/update?tranCode=2&prodNo="+$(this).data("prodno");
+			 $("td:nth-child(6):contains('승인하기')").on("click",function(){
+// 					self.location = "/trade/update?tranCode=2&prodNo="+$(this).data("prodno");
+alert(" 클릭완료 "+$(this).data("sellno")+$(this).data("sellstate"));
 				})
 			
 		});	
@@ -114,9 +115,9 @@
 			  	<c:if test="${sell.sellState=='70'}">완료</c:if>
 			  </td>
 			  
-			  <td align="center">
-			  	<c:if test="${sell.sellState=='20'}">승인하기</c:if>
-			  	<c:if test="${sell.sellState=='50'}">배송하기</c:if>			  	
+			  <td align="center" data-sellno="${sell.sellNo}">
+				  <c:if test="${sell.sellState=='20'}">승인하기</c:if>
+				  <c:if test="${sell.sellState=='50'}">배송하기</c:if>		  	
 			  </td>
 			  
 			</tr>
