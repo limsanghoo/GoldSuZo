@@ -84,9 +84,9 @@ function commentInsert(boardNo,userNo, text){
                   var boardNo="'"+list.board.boardNo+"'";
                   
                		if("${user.userNo}"==list.user.userNo){
-              			b='<div class="col-sm-2" onclick="commentDelete('+commentNo+','+boardNo+')">[삭제]</div>';
+              			b='<div class="col-sm-2" style="margin-top: 5px;" onclick="commentDelete('+commentNo+','+boardNo+')"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></div>';
               		}else{
-              			b='<div class="col-sm-2"></div>';
+              			b='<div class="col-sm-2" style="margin-top: 5px;" onclick="reportComment('+commentNo+','+"${user.userNo}"+')"><span class="glyphicon glyphicon-hdd" aria-hidden="true"></span></div>';
               		}
                                 
                    a += '<div class="row commentArea'+list.commentNo+'" style="padding-bottom: 5px;">';                           
@@ -114,6 +114,12 @@ function commentDelete(commentNo, boardNo){
          });
 }
 
+//댓글 신고
+function reportComment(commentNo, userNo){
+	
+	alert(commentNo);
+	alert(userNo);
+}
 
 </script>
 
