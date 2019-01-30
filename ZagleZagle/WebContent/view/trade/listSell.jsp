@@ -39,14 +39,17 @@
 		 $(function() {
 		
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			
+			$("td:nth-child(6):contains('승인하기')").on("click",function(){
+// 				 alert("왜안돼");
+//  					self.location = "/trade/updateSellState?sellNo="+$(this).data("sellno")+"&sellState=40";
+				});
+			
 			$( ".list" ).on("click" , function() {
 					self.location ="/trade/getSell?sellNo="+$(this).data("sellno");
 			});
 			
-			 $("td:nth-child(6):contains('승인하기')").on("click",function(){
-// 					self.location = "/trade/update?tranCode=2&prodNo="+$(this).data("prodno");
-alert(" 클릭완료 "+$(this).data("sellno")+$(this).data("sellstate"));
-				})
+			 
 			
 		});	
 		

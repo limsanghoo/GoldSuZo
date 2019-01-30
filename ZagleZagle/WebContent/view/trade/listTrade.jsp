@@ -167,9 +167,9 @@ function enter() {
 
 	<div><img src="${sell.sellPhoto1}" style="width:100%;" align="middle"/></div>
 
-	<p align="left">상품명 : ${sell.sellName}</p>
-	<p align="left">상품금액 : ${sell.sellPrice} 원</p>
-	<p align="left"> 상품정보 </p>
+	<p align="left"><strong>상&nbsp;품&nbsp;명</strong>&nbsp;:&nbsp;${sell.sellName}</p>
+	<p align="left"><strong>가&emsp;&nbsp;격</strong>&nbsp;:&nbsp;${sell.sellPrice} 원</p>
+	<p align="left"><strong>상세정보</strong></p>
 	<p align="left">${sell.sellText}</p>
 	
 </div>

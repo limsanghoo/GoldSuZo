@@ -43,6 +43,11 @@
 					self.location ="/product/getProduct?prodNo="+$(this).data("prodno");
 			});
 			
+			 $("td:nth-child(6):contains('승인하기')").on("click",function(){
+//					self.location = "/trade/update?tranCode=2&prodNo="+$(this).data("prodno");
+alert(" 클릭완료 "+$(this).data("sellno")+$(this).data("sellstate"));
+				})
+			
 		});	
 		
 		 $(function() {
@@ -111,7 +116,7 @@
 						<c:if test="${buy.sellProd.sellState=='70'}">완료</c:if>
 				</td>
 				
-				<td align="center">
+				<td align="left">
 					<c:if test="${buy.sellProd.sellState=='20'}">구매요청취소</c:if>
 					
 					<c:if test="${buy.sellProd.sellStyle=='10'}">

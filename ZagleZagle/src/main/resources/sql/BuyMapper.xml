@@ -40,7 +40,7 @@
 		FROM (SELECT inner_table.*, ROWNUM as row_seq 
 					FROM (SELECT b.*, s.sell_name, s.sell_price, s.sell_state, s.sell_style
 								FROM buy b, sell s 
-								WHERE b.user_no=#{userNo} and b.sell_no=s.sell_no ORDER BY buy_no) inner_table 
+								WHERE b.user_no=#{userNo} and b.sell_no=s.sell_no ORDER BY buy_no desc) inner_table 
 					WHERE ROWNUM &lt;=#{search.endRowNum:INTEGER})
 		WHERE row_seq BETWEEN #{search.startRowNum:INTEGER}  AND #{search.endRowNum:INTEGER}
 	 </select>
