@@ -375,7 +375,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 					$("#ok_chat").val(msg.a_user)
 					mdstart2.click();
 				}else if(msg.b_user=="${user.userNickname}"&&msg.ms=="ok"){
-					window.open("/chat/getChat?room="+msg.b_user,"_blank", "width=400, height=600, scrollbars=no ,location=no,resizable=yes,toolbar=no,status=no ")
+					window.open("/chat/getChat?room=@@"+msg.b_user,"_blank", "width=400, height=600, scrollbars=no ,location=no,resizable=yes,toolbar=no,status=no ")
 					
 				}else if(msg.b_user=="${user.userNickname}"&&msg.ms=="no"){
 					alert("상대방이 거절하셧슴다.")
@@ -396,7 +396,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 				if (name.substring(name.length-2)=="@s") {
 					window.open("https://192.168.0.21/stream/videochat?applyuserNo=${user.userNickname}&userName=${user.userNickname}","_blank", "width=400,status=no, height=300, scrollbars=no");  
 				}else{
-					window.open("/chat/getChat?room="+name,"_blank", "width=400, height=600, scrollbars=no ,location=no,resizable=yes,toolbar=no,status=no")
+					window.open("/chat/getChat?room=@@"+name,"_blank", "width=400, height=600, scrollbars=no ,location=no,resizable=yes,toolbar=no,status=no")
 				}
 			})
 			$("#no_chat").on("click",function(){
@@ -734,7 +734,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 
 <button id="btn_one" style="display: none;" value=""></button>
 
-<div style="text-align: center; color: #2eca6a; font-style: inherit; "><h3><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;${user.userAddr}</h3></div>
+<div style="text-align: center; color: #2eca6a; font-style: inherit; "><h3><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;${room}</h3></div>
 		<div class="container-fluid h-100">
 		
 			<div class="row justify-content-center h-100">
