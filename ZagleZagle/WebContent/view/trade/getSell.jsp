@@ -5,8 +5,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>getsell</title>
+<title>상세보기</title>
 <style>
+.btn {
+  transition: .5s ease;
+}
+
+.btn.btn-c {
+  border-radius: 0;
+  padding: .5rem 2rem;
+  letter-spacing: .05rem;
+}
+
+.btn.btn-c {
+  background-color: #dc3545;
+  color: #000000;
+}
+
+.btn.btn-c:hover {
+  background-color: #000000;
+  color: #ffffff;
+}
 </style>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
@@ -57,14 +76,24 @@
 	</div>
 	<c:if test="${user.userNo == sell.seller.userNo}">
 	<div class="col-lg-5 text-right">
+	<c:if test="${sell.sellState==10}">
 		<button type="button" class="btn btn-b">수정</button>
 		<button type="button" class="btn btn-b">삭제</button>
+	</c:if>
+	<c:if test="${sell.sellState!=10}">
+	  		<button type="button" class="btn btn-c">판매완료</button>
+	</c:if>
 		<button type="button" class="btn btn-a">이전</button>
 	</div>
 	</c:if>
 	<c:if test="${user != null && user.userNo != sell.seller.userNo}">
 	  		<div class="col-lg-5 text-right">
+	  		<c:if test="${sell.sellState==10}">
 	  			<button type="button" class="btn btn-b">구매 요청</button>
+	  		</c:if>
+	  		<c:if test="${sell.sellState!=10}">
+	  			<button type="button" class="btn btn-c">판매완료</button>
+	  		</c:if>
 	  			<button type="button" class="btn btn-a">이전</button>
 	  		</div>
 		</c:if>

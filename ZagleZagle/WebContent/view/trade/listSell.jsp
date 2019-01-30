@@ -3,7 +3,7 @@
 
 <!DOCTYPE html>
 <html>
-<title>Insert title here</title>
+<title>DongneVangne</title>
 <head>
 <meta charset="UTF-8">
 	
@@ -40,8 +40,12 @@
 		
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$( ".list" ).on("click" , function() {
-					self.location ="/product/getProduct?prodNo="+$(this).data("prodno");
+					self.location ="/trade/getSell?sellNo="+$(this).data("sellno");
 			});
+			
+			 $(".ct_list_pop td:nth-child(9):contains('(승인하기)')").on("click",function(){
+					self.location = "/trade/update?tranCode=2&prodNo="+$(this).data("prodno");
+				})
 			
 		});	
 		
@@ -63,7 +67,7 @@
 	<div class="container" style="margin-top:150px">
 	
 		<div class="page-header text-info">
-	       <h3><strong>판매물품조회</strong></h3>
+	       <h3><strong>판매상품목록</strong></h3>
 	    </div>
 		
       <!--  table Start /////////////////////////////////////-->
@@ -110,7 +114,7 @@
 			  	<c:if test="${sell.sellState=='70'}">완료</c:if>
 			  </td>
 			  
-			  <td align="left">
+			  <td align="center">
 			  	<c:if test="${sell.sellState=='20'}">승인하기</c:if>
 			  	<c:if test="${sell.sellState=='50'}">배송하기</c:if>			  	
 			  </td>

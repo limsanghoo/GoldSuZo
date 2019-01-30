@@ -63,7 +63,7 @@
 	<div class="container" style="margin-top:150px">
 	
 		<div class="page-header text-info">
-	       <h3><strong>판매물품조회</strong></h3>
+	       <h3><strong>구매물품조회</strong></h3>
 	    </div>
 		
       <!--  table Start /////////////////////////////////////-->
