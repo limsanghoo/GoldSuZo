@@ -302,7 +302,7 @@ font-size: 100%;
   
 </head>
 
-<body>
+<body style="padding-right: 0px;">
 
   <div class="click-closed"></div>
 
@@ -383,7 +383,7 @@ font-size: 100%;
           </c:if>
           
         <!-- 채팅창 -->       
-        <div id="mydiv" style="display: none;">
+        <div class="col-md-4" id="mydiv" style="display: none;">
    			<div id="mydivheader">-여기를 눌러 이동-</div>
 		</div>		       
         </ul>

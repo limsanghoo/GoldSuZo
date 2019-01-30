@@ -33,6 +33,12 @@ $(function(){
 		var reportedUserNo=$("input[name='reportedUserNo']").val();
 		//alert(reportedUserNo);
 		
+		
+		if(reportReason=='0'){
+			alert("신고 사유를 선택해주세요");
+			return;
+		}
+		
 		self.location="/board/addReport?reportReason="+reportReason+"&reportingUserNo="+reportingUserNo+"&reportedBoardNo="+reportedBoardNo+"&reportedUserNo="+reportedUserNo;	
 
 	});

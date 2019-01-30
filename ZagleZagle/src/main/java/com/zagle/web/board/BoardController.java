@@ -114,7 +114,7 @@ public class BoardController {
         
 		ModelAndView modelAndView=new ModelAndView();
 	
-		modelAndView.setViewName("redirect:http://192.168.0.49:8080/board/listBoard?view=all");
+		modelAndView.setViewName("redirect:http://192.168.0.35:8080/board/listBoard?view=all");
 		
 		return modelAndView;
 	}
@@ -169,7 +169,6 @@ public class BoardController {
 			
 			//해당 게시물 boardStatus 3으로
 			board.setBoardStatus("3");
-			System.out.println("+++상태 : "+board);
 			boardService.updateBoardStatus(board);
 			
 		}
