@@ -49,7 +49,7 @@ public class TradeDAOImpl implements TradeDAO{
 	}
 	@Override
 	public int getSellCount(String userNo) {
-		return sqlSession.selectOne("SellMapper.getTotalCount",userNo);
+		return sqlSession.selectOne("SellMapper.getSellCount",userNo);
 	}
 	@Override
 	public void updateSell(Sell sell) throws Exception {

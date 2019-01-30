@@ -302,7 +302,7 @@ font-size: 100%;
   
 </head>
 
-<body>
+<body style="padding-right: 0px;">
 
   <div class="click-closed"></div>
 
@@ -383,7 +383,7 @@ font-size: 100%;
           </c:if>
           
         <!-- 채팅창 -->       
-        <div id="mydiv" style="display: none;">
+        <div class="col-md-4" id="mydiv" style="display: none;">
    			<div id="mydivheader">-여기를 눌러 이동-</div>
 		</div>		       
         </ul>
@@ -394,7 +394,7 @@ font-size: 100%;
       <div style="list-style: none; cursor:pointer;">
 		<c:if test="${user.userNo!=null}">
 		 	<li class="nav-item">
-					<h4 style="font-style: italic; color: black;"><a href="/user/getUser2?userNo=${user.userNo}">${user.userName}</a> 님 환영합니다.</h4>
+					<h5 style="font-style: italic; color: black;"><a href="/user/getUser2?userNo=${user.userNo}">${user.userName}</a>님 환영합니다</h5>
 			</li>
 					
 			<li class="nav-item">					

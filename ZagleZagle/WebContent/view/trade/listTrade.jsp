@@ -12,7 +12,7 @@
 <meta name="keywords" content="css animation, loading effect, google plus, grid items, masonry" />
 <meta name="author" content="Codrops" />
 		
-<title>listTrade</title>
+<title>중고장터</title>
 
 <link rel="shortcut icon" href="../favicon.ico"> 
 <link rel="stylesheet" type="text/css" href="/common/css/GridLoadingEffects/css/default.css" />
@@ -31,9 +31,9 @@ form{
 		padding-top:100px;
 	 	padding-left:150px;
         padding-right:150px;
-       background-color:#f2f2f2;
-/*         background-image: url(/common/css/html5up-helios/images/pic03.jpg); */
+       	background-color:#f2f2f2;
         background-size: cover;
+        height: 100%;
 	}
 
 body {
@@ -145,30 +145,33 @@ function enter() {
 <!-- 썸네일 박스 시작 -->
 	
 <li>
-<!-- 	<div class="box" data-toggle="modal" data-target="#${sell.sellNo}modal1"> -->
 <div class="box" data-sellno="${sell.sellNo}">
 		
-	
 	<p>
 	<img src="/common/images/profile/${sell.seller.profile}" style="height: 60px; width:60px; border-radius: 70px; display: inline; vertical-align: middle"/>
 	<span style="font-weight: bold; display: inline;">&nbsp;${sell.seller.userNickname}</span>
 	<span style="float:right">
+	<c:if test="${sell.sellState == 10}">
 	<c:if test="${sell.sellStyle == 10}">
 	<img src="/common/images/trade/transit-filled.png" style="height: 80%; display: inline; vertical-align: middle; float:right"/>
 	</c:if>
 	<c:if test="${sell.sellStyle == 20}">
 	<img src="/common/images/trade/giveaway-filled.png" style="height: 80%; display: inline; vertical-align:text-top; float:right;"/>
 	</c:if>
+	</c:if>
+	<c:if test="${sell.sellState != 10}">
+	<img src="/common/images/trade/soldout.png" style="height: 80%; display: inline; vertical-align: middle; float:right"/>
+	</c:if>
 	</span>
 	</p>
 
 	<div><img src="${sell.sellPhoto1}" style="width:100%;" align="middle"/></div>
 
-	<p align="center" style="font-size: small">${sell.sellName}</p>
-	<p align="center">${sell.sellText}</p>
-	<p align="center" style="text-align: left; font-size: small">${sell.sellPrice}</p>
+	<p align="left"><strong>상&nbsp;품&nbsp;명</strong>&nbsp;:&nbsp;${sell.sellName}</p>
+	<p align="left"><strong>가&emsp;&nbsp;격</strong>&nbsp;:&nbsp;${sell.sellPrice} 원</p>
+	<p align="left"><strong>상세정보</strong></p>
+	<p align="left">${sell.sellText}</p>
 	
-
 </div>
 </li>
 

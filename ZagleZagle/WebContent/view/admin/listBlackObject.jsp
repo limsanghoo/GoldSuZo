@@ -158,13 +158,13 @@
 			$("td:nth-child(3) i").on("click", function() {
 				alert("click 확인")
 				
-				var userName = $(this).data("param1")
+				var userNo = $(this).data("param1")
 				
-				alert(userName)
+				alert(userNo)
 				
 				$.ajax(
 					{
-						url : "/admin/json/getReportList/"+userNo,
+						url : "/admin/json/userBlindList/"+userNo,
 						method : "GET",
 						dataType : "json",
 						headers : {

@@ -75,6 +75,8 @@ function commentInsert(boardNo,userNo, text){
             	var a='';
             	var b='';
             	
+            	var userNo="${user.userNo}";
+            	
                 
                 $.each(JSONData, function(i){
                 	
@@ -84,15 +86,15 @@ function commentInsert(boardNo,userNo, text){
                   var boardNo="'"+list.board.boardNo+"'";
                   
                		if("${user.userNo}"==list.user.userNo){
-              			b='<div class="col-sm-2" onclick="commentDelete('+commentNo+','+boardNo+')">[삭제]</div>';
+              			b='<div class="col-sm-2" style="margin-top: 5px;" onclick="commentDelete('+commentNo+','+boardNo+')"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></div>';
               		}else{
-              			b='<div class="col-sm-2"></div>';
+              			b='<div class="col-sm-2" style="margin-top: 5px;" onclick="reportComment('+commentNo+','+userNo+')"><span class="glyphicon glyphicon-hdd" aria-hidden="true"></span></div>';
               		}
                                 
                    a += '<div class="row commentArea'+list.commentNo+'" style="padding-bottom: 5px;">';                           
                    a += '<div class="col-sm-1"><img src="/common/images/profile/'+list.user.profile+'" style="width: 30px; height: 30px; border-radius: 70px;"/></div>';                 
-                   a += '<div class="col-sm-2" style="font-size:medium">'+list.user.userNickname+'</div>';                 
-                   a += '<div class="col-sm-7" style="font-size:medium">'+list.commentDetailText+'</div>';                   
+                   a += '<div class="col-sm-3" style="font-size:medium">'+list.user.userNickname+'</div>';                 
+                   a += '<div class="col-sm-6" style="font-size:medium">'+list.commentDetailText+'</div>';                   
                    a += b+'<div class="w-100"></div>';                                
                    a += '</div>';
                });
@@ -114,6 +116,12 @@ function commentDelete(commentNo, boardNo){
          });
 }
 
+//댓글 신고
+function reportComment(commentNo, userNo){
+	
+	alert(commentNo);
+	alert(userNo);
+}
 
 </script>
 

@@ -168,8 +168,9 @@
 				
 				var blindNo = $(this).data("param");
 			
-				
+				var boardNo = $(this).data("param2");
 		
+				alert(boardNo)
 				alert(blindNo)
 				
 				//////수정 필요///// commentNo 관련
@@ -183,7 +184,7 @@
 				
 				
 			
-			self.location="/admin/updateBlind?blindCode=1&blindNo="+blindNo;
+			self.location="/admin/updateBlind?blindCode=1&blindNo="+blindNo+"&boardNo="+boardNo;
 			
 		
 		});
@@ -194,14 +195,14 @@
 					
 				
 				var blindNo = $(this).data("param1");
-			
+			    var boardNo = $(this).data("param3");
 				
 				
 				alert(blindNo)
 				
 				
 			
-			self.location="/admin/updateBlind?blindCode=2&blindNo="+blindNo;
+			self.location="/admin/updateBlind?blindCode=2&blindNo="+blindNo+"&boardNo="+boardNo;
 			
 		
 		});
@@ -239,14 +240,14 @@
                     <li class="nav nav-list nav-list-expandable nav-list-expanded">
                         <a><i class="fa fa-user"></i> 회원목록 상세보기 <span class="caret"></span></a>
                         <ul class="nav navbar-nav">
-                            <li><a href="#"><i class="fa fa-table"></i>회원목록</a></li>
+                            <li><a href="/admin/listUser"><i class="fa fa-table"></i>회원목록</a></li>
                             <li id="listBlackObject"><a href="#"><i class="fa fa-edit"></i>예비 블랙리스트</a></li>
-                            <li><a href="editor.html"><i class="fa fa-edit"></i>블랙리스트 목록</a></li>
+                            <li><a href="/admin/listBlackList"><i class="fa fa-edit"></i>블랙리스트 목록</a></li>
                         </ul>
                     </li>
-                    <li><a href="bootstrap.html"><i class="fa fa-magic"></i>신고 처리</a></li>
+                    <li><a href="/admin/handleReport"><i class="fa fa-magic"></i>신고 처리</a></li>
                     <li class="nav nav-list nav-list-expandable">
-                        <a><i class="fa fa-key"></i> Collapsed Menu Item <span class="caret"></span></a>
+                        <a><i class="fa fa-key"></i> 방문자 통계 <span class="caret"></span></a>
                         <ul class="nav navbar-nav">
                             <li><a href="#">Sub Item 1</a></li>
                             <li><a href="#">Sub Item 2</a></li>
@@ -276,7 +277,7 @@
                         </ul>
                     </li>
                     <li class="dropdown user-dropdown">
-                       <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Steve Miller<b class="caret"></b></a>
+                       <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>${user.userName}<b class="caret"></b></a>
                        <ul class="dropdown-menu">
                            <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
                            <li><a href="#"><i class="fa fa-gear"></i> Settings</a></li>
@@ -356,7 +357,7 @@
 			  </td>
 			  
 			  <td align="left">
-			  <div style="padding-left: 7px;"><i class="glyphicon glyphicon-leaf" data-param1="${blind.blindNo}"></i></div>
+			  <div style="padding-left: 7px;"><i class="glyphicon glyphicon-leaf" data-param1="${blind.blindNo}" data-param3="${blind.blindBoardNo.boardNo}"></i></div>
 			  
 			  </td>
 			 

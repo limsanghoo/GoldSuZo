@@ -9,6 +9,10 @@
 	<resultMap id="buySelectMap" type="buy">
 		<result property="buyNo" 							column="buy_no" 					jdbcType="VARCHAR"/>
 		<result property="sellProd.sellNo" 				column="sell_no" 					jdbcType="VARCHAR" />
+		<result property="sellProd.sellName" 			column="sell_name"					jdbcType="VARCHAR" />
+		<result property="sellProd.sellState" 			column="sell_state" 				jdbcType="VARCHAR" />
+		<result property="sellProd.sellPrice" 			column="sell_price" 					jdbcType="VARCHAR" />
+		<result property="sellProd.sellStyle" 			column="sell_style"	 				jdbcType="VARCHAR" />
 		<result property="buyer.userNo"					column="user_no" 					jdbcType="VARCHAR" />
 		<result property="buyer.profile"					column="profile" 						jdbcType="VARCHAR" />
 		<result property="buyer.userNickname"		column="user_nickname" 			jdbcType="VARCHAR" />
@@ -33,11 +37,12 @@
 	 
 	 <select id="listBuy" parameterType="Map" resultMap="buySelectMap">
 		SELECT * 
-		FROM 
-		(SELECT inner_table.*, ROWNUM as row_seq FROM
-		(SELECT * FROM buy WHERE user_no=#{userNo} ORDER BY buy_no) inner_table
-		WHERE ROWNUM &lt;=#{search.endRowNum:INTEGER})
-		WHERE row_seq BETWEEN #{search.startRowNum:INTEGER} AND #{search.endRowNum:INTEGER}
+		FROM (SELECT inner_table.*, ROWNUM as row_seq 
+					FROM (SELECT b.*, s.sell_name, s.sell_price, s.sell_state, s.sell_style
+								FROM buy b, sell s 
+								WHERE b.user_no=#{userNo} and b.sell_no=s.sell_no ORDER BY buy_no desc) inner_table 
+					WHERE ROWNUM &lt;=#{search.endRowNum:INTEGER})
+		WHERE row_seq BETWEEN #{search.startRowNum:INTEGER}  AND #{search.endRowNum:INTEGER}
 	 </select>
 	 
 </mapper>

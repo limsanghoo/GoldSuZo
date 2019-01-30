@@ -20,6 +20,7 @@ import com.zagle.service.domain.Buy;
 import com.zagle.service.domain.Sell;
 import com.zagle.service.domain.User;
 import com.zagle.service.trade.TradeService;
+import com.zagle.service.user.UserService;
 
 @Controller
 @RequestMapping("/trade/*")
@@ -28,6 +29,10 @@ public class TradeController {
 	@Autowired
 	@Qualifier("tradeServiceImpl")
 	private TradeService tradeService;
+	
+	@Autowired
+	@Qualifier("userServiceImpl")
+	private UserService userService;
 	
 	public TradeController() {
 	}
@@ -190,5 +195,24 @@ public class TradeController {
 		modelAndView.setViewName("forward:/trade/listBuy");
 		
 		return modelAndView;
+	}
+	
+	@RequestMapping(value="testUser")
+	public String testUser(HttpSession session) throws Exception{
+		
+		User testUser = new User();
+	
+		//상아
+		testUser=userService.getUser2("US10003");
+		
+		//인호
+		//testUser=userService.getUser2("US10023");
+		
+		//주현
+		//testUser=userService.getUser2("US10027");	
+		
+		session.setAttribute("user", testUser);
+		
+		return "redirect:/trade/listTrade";
 	}
 }

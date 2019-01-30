@@ -130,9 +130,9 @@ public class UserController {
 		if( user.getSnsNo().equals(admin.getSnsNo())) {
 			
 		
-			session.setAttribute("admin", admin);
+			session.setAttribute("user", admin);
 			
-			modelAndView.setViewName("redirect:/view/admin/siteManage.jsp");
+			modelAndView.setViewName("/view/admin/siteManage.jsp");
 			
 		}else {
 			
