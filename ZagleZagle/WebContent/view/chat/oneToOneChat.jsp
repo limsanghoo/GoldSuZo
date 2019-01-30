@@ -194,15 +194,6 @@ body,html{
 	.msg_head{
 		position: relative;
 	}
-	#action_menu_btn{
-		position: absolute;
-		right: 10px;
-		top: 10px;
-		color: white;
-		cursor: pointer;
-		font-size: 20px;
-	}
-	
 	.action_menu{
 		z-index: 1;
 		position: absolute;
@@ -214,21 +205,35 @@ body,html{
 		right: 15px;
 		display: none;
 	}
-	.action_menu ul{
+	.action_menu a{
 		list-style: none;
-		padding: 0;
+		padding-left: 10px;
 	margin: 0;
+	color: white;
 	}
-	.action_menu ul li{
+	.action_menu a ul{
 		width: 100%;
 		padding: 10px 15px;
 		margin-bottom: 5px;
 	}
-	.action_menu ul li i{
+	.action_menu a ul li{
 		padding-right: 10px;
 	
 	}
-	.action_menu ul li:hover{
+	.action_menu a ul:hover{
+		cursor: pointer;
+		background-color: rgba(0,0,0,0.2);
+	}
+	.action2_menu a ul{
+		width: 100%;
+		padding: 10px 15px;
+		margin-bottom: 5px;
+	}
+	.action2_menu a ul li i{
+		padding-right: 10px;
+	
+	}
+	.action2_menu a ul li:hover{
 		cursor: pointer;
 		background-color: rgba(0,0,0,0.2);
 	}
@@ -261,11 +266,11 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 #mdStart {position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
 
 </style>
-	<script src="http://192.168.0.25:82/socket.io/socket.io.js"></script>
+	<script src="http://192.168.0.38:82/socket.io/socket.io.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script>
 		$(document).ready(function() {
-			var socket = io("http://192.168.0.25:82");
+			var socket = io("http://192.168.0.38:82");
 			socket.emit("send_user",{id :"${user.userNickname}", addr : "${room}",pro : "${user.profile}"});
 			
 			//msg에서 키를 누를떄
@@ -469,7 +474,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 		            	if (msg.substring(msg.length-3)=='mp4') {
 		            		setTimeout(function() {
 			            		while(true){
-				            		var path = 'http://192.168.0.25:8080/common/images/chat/'+msg;
+				            		var path = 'http://192.168.0.38:8080/common/images/chat/'+msg;
 				            		var re = doesFileExist(path);
 				            		if (re) {
 				            			socket.emit("send_msg",msg);
@@ -480,7 +485,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 						}else{
 							setTimeout(function() {
 			            		while(true){
-				            		var path = 'http://192.168.0.25:8080/common/images/chat/'+msg;
+				            		var path = 'http://192.168.0.38:8080/common/images/chat/'+msg;
 				            		var re = doesFileExist(path);
 				            		if (re) {
 				            			socket.emit("send_msg",msg);
@@ -531,7 +536,47 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 			});
 			
 		});
-		
+		$(function(){
+		    $("#msg_trans li a").on("click",function(){
+		        	var inputData = $('#msg').val();
+		        	var target = $(this).data("val");
+		        	alert(target)
+			        $.ajax({
+			                 type : 'post',
+			                 url : '/chat/json/translate2/',
+			                 data : { 
+			                	 "text" : inputData,
+			                	"target" : 	target	 
+			                 },
+			                 success : function(data) {	         		                	 
+			                //	 $("#msg").val(data);
+			                	$.ajax({
+					                 type : 'post',
+					                 url : '/chat/json/translate/',
+					                 data : { 
+					                	 "text" : data.text,
+					                	"target" : data.target,
+					                	"tranCode" : data.tranCode
+					                 },
+					                 success : function(data) {
+					                	alert("번역성공!!")
+					                	alert(data)
+					                	 $('#msg').val(data).focus();
+					                 },
+					                 error : function(error) {
+					                     alert("번역실패.");
+					                 }	
+				        
+				        		});
+			                 },
+			                 error : function(error) {
+			                     alert("번역실패.");
+			                 }	
+		        
+		        });
+		        
+			});
+		});
 		$(document).ready(function(){
 			$('#action_menu_btn').click(function(){
 				$('.action_menu').toggle();
@@ -575,12 +620,12 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 							</div>
 							<span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
 							<div class="action_menu">
-								<ul>
-									<li><i class="fas fa-exchange-alt" id="msg_trans">&nbsp;&nbsp;번역</i></li>
-									<li><i class="fas fa-users"></i> 메뉴2</li>
-									<li><i class="fas fa-plus"></i> 메뉴3</li>
-									<li><i class="fas fa-ban"></i> 메뉴4</li>
-								</ul>
+								<a href="#" class="dropdown-toggle fas fa-retweet" data-toggle="dropdown">&emsp;번역<b class="caret"></b></a>
+                   					 <ul class="dropdown-menu" style="background-color: rgba(0,0,0,0); text-align: right; border: 0em; color: fuchsia;" id="msg_trans">
+				                        <li><a href="#" data-val="en">영어</a>&emsp;</li>
+				                        <li><a href="#" data-val="ja">일어</a>&emsp;</li>
+				                        <li><a href="#" data-val="ko">한국어</a>&emsp;</li>
+				                     </ul>
 							</div>
 						</div>
 						<div class="card-body msg_card_body" id="chat_box">

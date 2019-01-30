@@ -124,7 +124,7 @@ $(function() {
 	
 	$("a:contains('방송 목록 보기')").on("click" , function() {
 		//$(self.location).attr("href","http://localhost:3000/");
-		self.location = "http://192.168.0.21:8080/stream/listStream"
+		self.location = "/stream/listStream"
 		
 	});
 	
@@ -248,7 +248,10 @@ $(function(){
          $("#btn2:contains('입장')").on("click",function(){
         	 
         	 var local="${searchBoard.local}";
-        	 alert(local);
+        	 
+        	 if(local==""){
+        		 local="${user.userAddr}";
+        	 }
         	 
         	if(document.getElementById("chatting")==null){
         		$("#mydiv").append('<iframe id="chatting" src="/chat/getChat?room='+local+'" align="right" style="height:100%; width: 100%;" frameborder="0" scrolling="no"></iframe>');
@@ -313,12 +316,15 @@ font-size: 100%;
       <a href="/index.jsp" class="navbar-brand text-brand" style="padding-top: 0; padding-bottom: 0;">Dongne<span class="color-b">Vangne</span></a>
 
       <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
-        <ul class="navbar-nav" style="cursor:pointer">
-          <li class="nav-item">
-            <a class="nav-link">전체 게시물</a>
-          </li>      
+        <ul class="navbar-nav" style="cursor:pointer">   
 
           <c:if test="${sessionScope.user.userNo != null}">
+          
+          <li class="nav-item">
+            <a class="nav-link">전체 게시물</a>
+          </li>
+          
+          
           <li class="nav-item">
             <a class="nav-link">동네 게시물</a>
           </li>
@@ -362,6 +368,7 @@ font-size: 100%;
             </div>
           </li>
           
+          <c:if test="${param.view=='town'}"> 
           <li class="nav-item">
             <a class="nav-link" id="btn2">마을회관 입장</a>
           </li>
@@ -369,7 +376,8 @@ font-size: 100%;
           <li class="nav-item">
             <a class="nav-link" id="btn">마을회관 퇴장</a>
           </li>
-                          
+          </c:if>
+                      
           </c:if>
           
         <!-- 채팅창 -->       

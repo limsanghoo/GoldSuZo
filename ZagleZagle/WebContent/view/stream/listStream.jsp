@@ -117,7 +117,7 @@ $(function() {
 		   addStream();
 	});
 	$("#refund").on("click", function() {
-		   alert("환급합니다~");
+		  // alert("환급합니다~");
 		   var streamerNo = $('input[name="streamerNo"]').val();
 		   var streamerNickname = $('input[name="streamerNickname"]').val();
 		   var price = $('input[name="price"]').val();
@@ -137,7 +137,7 @@ $(function() {
 	   	            "Content-Type": "application/json"
 	   	        },    	        
 	             success : function (JSONData,status) {
-	           alert("보내기 성공");
+	           //alert("보내기 성공");
 	           var result = confirm("환급신청 완료! 환급리스트 화면으로 이동 하시겠습니까?");
 			     
 	 		  if(result){
@@ -148,7 +148,7 @@ $(function() {
 	 		  }  
 	             },
 	             error : function (err) { 
-	                 alert("보내기 성공");
+	              //   alert("보내기 성공");
 	  	           var result = confirm("환급신청 완료! 환급리스트 화면으로 이동 하시겠습니까?");
 	  			     
 	  	 		  if(result){
@@ -173,7 +173,7 @@ $(function() {
 	//	 $("#addRefundForm").attr("method", "POST").attr("action", "/stream/addRefund").submit();
 	});  
 	$("#listRefund").on("click", function() {
-		   alert("환급리스트로 이동합니다~");
+		//   alert("환급리스트로 이동합니다~"); 
 		self.location="/stream/listRefund";  
 	}); 
 	 
@@ -219,6 +219,21 @@ $(function() {
 
 	    	alert('ddd');	
 	    });
+	   
+	   
+	   $('button[id="session"]').on('click',function(){
+
+	    	//alert('ddd');	
+	    	self.location ="/stream/listStream2?userNo=US10023";
+	    });
+	    
+	   $('button[id="session2"]').on('click',function(){
+
+	    	//alert('ddd');	
+	    	self.location ="/stream/listStream2?userNo=US10003";
+	    });
+	   
+	   
 	   
 	   $('button[name="refundbtn"]').on('click',function(){ 
 	    	 $.ajax({
@@ -268,6 +283,9 @@ $(function() {
 		<!--<button type="button" name="refundbtn" data-toggle="modal" data-target="#myModal2" style="margin:15px; padding:15px;">환급하기</button>  -->
    <button class="btn btn-b"  name="refundbtn" data-toggle="modal" data-target="#myModal2">환급하기</button>
     <button class='btn btn-b' id="listRefund" name="listRefund">환급리스트이동</button> 
+        <button class='btn btn-b' id="session" name="session">세션</button> 
+         <button class='btn btn-b' id="session2" name="session">세션2</button>  
+        
   </div>
 					 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
