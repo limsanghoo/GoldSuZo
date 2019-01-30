@@ -20,6 +20,7 @@ import com.zagle.service.board.BoardService;
 import com.zagle.service.domain.BlackList;
 import com.zagle.service.domain.Blind;
 import com.zagle.service.domain.Board;
+import com.zagle.service.domain.Report;
 import com.zagle.service.domain.SearchAdmin;
 import com.zagle.service.domain.User;
 import com.zagle.service.user.UserService;
@@ -39,6 +40,9 @@ public class AdminController {
 	@Autowired
 	@Qualifier("userServiceImpl")
 	private UserService userService;
+
+	
+	
 	
 	public AdminController() {
 		
@@ -180,6 +184,7 @@ public class AdminController {
 	@RequestMapping(value="updateBlind" , method=RequestMethod.GET)
 	public ModelAndView updateBlind(@RequestParam("blindNo") String blindNo,
 																	@RequestParam("blindCode") String blindCode,
+																		@RequestParam("boardNo") String boardNo,
 																	 HttpServletRequest request) throws Exception {
 		
 		System.out.println("===============updateBlind(blindCode)=======================");
@@ -189,12 +194,15 @@ public class AdminController {
 		
 		System.out.println("blindNo"+blindNo);
 		System.out.println("blindCode"+blindCode);
+		System.out.println("boardNo"+boardNo);
+		
+	
 		
 		Blind blind = adminService.getBlind(blindNo);
 		
-		String boardNo = blind.getBlindBoardNo().getBoardNo();
+		String boardNo1 = blind.getBlindBoardNo().getBoardNo();
 		
-		Board board = boardService.getBoard(boardNo);
+		Board board = boardService.getBoard(boardNo1);
 		
 		System.out.println("boardNo 확인"+board);
 		
@@ -223,8 +231,26 @@ public class AdminController {
 		}
 		
 		adminService.updateBlind(blind);
+		
+		//Report report = new Report();
+		
+		//report.setHardleNo(1);
+		
 		boardService.updateBoard(board);
 		userService.updateDeleteCount(user01);
+		
+		Board ReBoard = boardService.getBoard(boardNo);
+		Report report = new Report();
+		report.setReportedBoardNo(ReBoard);
+		report.setHardleNo(1);
+		
+		adminService.updateReport(report);
+		
+		
+
+	
+
+		
 		
 		System.out.println("딜리트 카운트"+deleteCount);
 		
