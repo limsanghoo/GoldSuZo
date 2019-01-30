@@ -519,10 +519,7 @@ function fncGetTown(){
  
  <c:forEach var="board" items="${boardList}">
 	<c:set var="i" value="${ i+1 }" />
-<<<<<<< HEAD
-	
-	
-	
+
 	<c:if test="${sessionScope.user.grade!=4}">
 	<c:if test="${board.boardStatus=='3'}"><!-- 블라인드 게시물 -->
 		<li>	
@@ -537,12 +534,6 @@ function fncGetTown(){
 
 	<!-- 정상 게시물 -->
 
-
-=======
-		
-	<c:if test="${board.boardStatus=='1'}"><!-- 정상 게시물만 보여주기 -->
-	
->>>>>>> refs/remotes/origin/master
 <!-- 썸네일 박스 시작 -->
 
 
