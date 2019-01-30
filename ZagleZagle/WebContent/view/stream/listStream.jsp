@@ -220,6 +220,21 @@ $(function() {
 	    	alert('ddd');	
 	    });
 	   
+	   
+	   $('button[id="session"]').on('click',function(){
+
+	    	//alert('ddd');	
+	    	self.location ="/stream/listStream2?userNo=US10023";
+	    });
+	    
+	   $('button[id="session2"]').on('click',function(){
+
+	    	//alert('ddd');	
+	    	self.location ="/stream/listStream2?userNo=US10003";
+	    });
+	   
+	   
+	   
 	   $('button[name="refundbtn"]').on('click',function(){ 
 	    	 $.ajax({
 	             url : '/stream/json/listSpon', 
@@ -268,6 +283,9 @@ $(function() {
 		<!--<button type="button" name="refundbtn" data-toggle="modal" data-target="#myModal2" style="margin:15px; padding:15px;">환급하기</button>  -->
    <button class="btn btn-b"  name="refundbtn" data-toggle="modal" data-target="#myModal2">환급하기</button>
     <button class='btn btn-b' id="listRefund" name="listRefund">환급리스트이동</button> 
+        <button class='btn btn-b' id="session" name="session">세션</button> 
+         <button class='btn btn-b' id="session2" name="session">세션2</button>  
+        
   </div>
 					 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

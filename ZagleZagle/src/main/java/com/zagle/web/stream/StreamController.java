@@ -103,15 +103,37 @@ public class StreamController {
 	return modelAndView;
 	}
 	  
-	
+	@RequestMapping(value="listStream2",method=RequestMethod.GET)
+	public ModelAndView listStream2(@RequestParam("userNo")String userNo,HttpSession session) throws Exception{
+		
+		User user = userService.getUser2(userNo);	
+		//System.out.println("리스트유저 "+user);
+		session.setAttribute("user", user);
+	 	SearchStream search = new SearchStream();
+	 	search.setCurrentPage(1);
+	 	search.setPageSize(3);
+	 	Map<String,Object> map = streamService.listStream(search);	 	
+	 	List<Object> list = (List<Object>)map.get("list");
+
+     	System.out.println(list.toString());
+     	
+     	for(int i=0; i<list.size(); i++) {
+     		System.out.println(list.get(i));
+     	}
+     	ModelAndView modelandview = new ModelAndView();
+     	modelandview.addObject("list", map.get("list"));
+     	modelandview.setViewName("/view/stream/listStream.jsp");
+     	
+	return modelandview;
+	}
 	
 	
 	@RequestMapping(value="listStream",method=RequestMethod.GET)
 	public ModelAndView listStream(HttpSession session) throws Exception{
 		
-		User user = userService.getUser2("US10023");	
-		System.out.println("리스트유저 "+user);
-		session.setAttribute("user", user);
+		//User user = userService.getUser2("US10023");	
+		//System.out.println("리스트유저 "+user);
+		//session.setAttribute("user", user);
 	 	SearchStream search = new SearchStream();
 	 	search.setCurrentPage(1);
 	 	search.setPageSize(3);
