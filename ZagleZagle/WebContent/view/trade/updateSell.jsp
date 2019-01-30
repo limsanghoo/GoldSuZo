@@ -5,16 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>addSell</title>
+<title>상품수정</title>
 <style>
-	  .container {
-            padding-top : 150px;
-        }
-
         div.editable{
-        	border: 1px solid gray;
+        	border: 1px solid #777;
         }
-        
 </style>
 
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
@@ -81,35 +76,27 @@ $(function() {
 	<form class="form-horizontal" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="sellNo" value="${sell.sellNo}"/>
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
-	
+	<div class="container" style="margin-top:150px">
+
+	    <div class="col-12">
+
 	<div class="row">
 	<div class="col-lg-9">
-	<H2>상품수정</H2>
+	<H2><strong>상품수정</strong></H2>
 	</div>
-	<div class="col-lg-3 text-center">
-		<button type="button" class="btn-inverse">수정</button>
-		<button type="button" class="btn-inverse">이전</button>
+	<div class="col-lg-3 text-right">
+		<button type="button" class="btn btn-b">수정</button>
+		<button type="button" class="btn btn-a">이전</button>
 	</div>
 </div>
-	    <div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: Gray;"></div>
+	    <div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: #2eca6a;"></div>
 	    <br/>
 		
-	    <div class="col-12">
-	    
 		<div class="row">
-	  		<div class="col-xs-8 col-md-1 text-center" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: darkgray;"><strong>상품명</strong></div>
-			<div class="col-xs-4 col-md-5"><input type="text" class="form-control" id="sellName" name="sellName" value="${sell.sellName}"></div>
+	  		<div class="col-xs-8 col-md-1 text-right" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: #777; padding-top: .5em; padding-bottom: .5em;"><strong>상품명</strong></div>
+			<div class="col-xs-4 col-md-4"><input type="text" class="form-control" id="sellName" name="sellName" placeholder="상품명"></div>
 			
-			<div class="col-xs-8 col-md-1 text-center" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: darkgray;"><strong>가격</strong></div>
-			<div class="col-xs-3 col-md-4"><input type="text" class="form-control" id="sellPrice" name="sellPrice" value="${sell.sellPrice}"></div>
-			<div class="col-xs-1 col-md-1">원</div>
-		</div>
-		
-		<br/>
-
-	    <div class="row">
-			<div class="col-xs-8 col-md-1 text-center" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: darkgray;"><strong>전화번호</strong></div>
+			<div class="col-xs-8 col-md-2 text-right" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: #777; padding-top: .5em; padding-bottom: .5em;"><strong>전화번호</strong></div>
 			<div class="col-xs-4 col-md-5">
 			     <div class="col-sm-3">
 			      <input type="text" class="form-control" id="phone1" name="phone1">
@@ -124,25 +111,27 @@ $(function() {
 			    </div>
 		    	<input type="hidden" name="sellPhone"/>
 		    </div>
-		    
-		    <div class="col-xs-8 col-md-1 text-center" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: darkgray;"><strong>판매방식</strong></div>
+		</div>
+		
+		<br/>
+
+	    <div class="row">
+	    <div class="col-xs-8 col-md-1 text-right" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: #777; padding-top: .5em; padding-bottom: .5em;"><strong>가격</strong></div>
+			<div class="col-xs-3 col-md-3"><input type="text" class="form-control" id="sellPrice" name="sellPrice"></div>
+			<div class="col-xs-1 col-md-1">원</div>
+
+		    <div class="col-xs-8 col-md-2 text-right" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: #777; padding-top: .5em; padding-bottom: .5em;"><strong>판매방식</strong></div>
 			<div class="col-xs-4 col-md-5">
 				<select class="form-control" name="sellStyle">
-				<c:if test="${sell.sellStyle=='10'}">
-				<option value="10" selected>택배거래</option>
-				<option value="20">직거래</option>
-				</c:if>
-				<c:if test="${sell.sellStyle=='20'}">
-				<option value="10">택배거래</option>
-				<option value="20" selected>직거래</option>
-				</c:if>
+				<option value="10" >택배거래</option>
+				<option value="20" >직거래</option>
 			</select>
 			</div>
 		</div>
 		
 		<br/>
 
-		<div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: darkgray;"></div>
+		<div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: #2eca6a;"></div>
 		
 		<br/>
 	
@@ -152,14 +141,14 @@ $(function() {
 		
 		<br/>
 		
-		<div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: darkgray;"></div>
+		<div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: #2eca6a;"></div>
 		
 		<br/>
 		
 		<div class="row">
-		<div class="col-xs-8 col-md-1"><strong>상세정보</strong></div>
+		<div class="col-xs-8 col-md-2" style="padding-top: .5em; padding-bottom: .5em;"><strong>상세정보</strong></div>
 	
-			<div class="col-xs-4 col-md-11" style="border-left-width: 0.1em; border-left-style: solid; border-left-color: darkgray;">
+			<div class="col-xs-4 col-md-10" style="border-left-width: 0.1em; border-left-style: solid; border-left-color: #777; padding-top: .5em; padding-bottom: .5em;">
 			<textarea class="editable" id="sellText" name="sellText">
 			${sell.sellText}
 			</textarea>
@@ -183,7 +172,7 @@ $(function() {
     
     </script>
     
-		<div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: Gray;"></div>
+		<div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: #2eca6a;"></div>
 		
 </div>
 </div>
