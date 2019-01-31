@@ -24,13 +24,57 @@
 	
 	<script type="text/javascript">
 	
+	
+//  아이디와 비밀번호가 맞지 않을 경우 가입버튼 비활성화를 위한 변수설정
+    var nicCheck = 0;
+    var pwdCheck = 0;
+    //아이디 체크하여 가입버튼 비활성화, 중복확인.
+    function checkNickname() {
+        var inputed = $("#userNickname").val();
+        $.ajax({
+            data : {
+                 userNickname : inputed
+            },
+            url : "/user/checkNickname/{userNickname}",
+            success : function(data) {
+            	
+           
+            	
+                if(inputed=="" && data=='0') {
+                    $("button.btn.btn-primary").prop("disabled", true);
+                  
+                    $("#userNickname").css("background-color", "white");
+                    nicCheck = 0;
+             
+                }else if(data =='0') {
+                		  $("button.btn.btn-primary").prop("disabled", false);
+                          
+                          $("#userNickname").css("background-color", "#2eca6a");
+                	
+              
+                }else if (data == '1') {
+                    $("button.btn.btn-primary").prop("disabled", true);
+                    $("button.btn.btn-primary").css("background-color", "#aaaaaa");
+                    $("#userNickname").css("background-color", "#FFCECE");
+                    nicCheck = 0;
+                } 
+            }
+        });
+    }
+
+	
+	
+	
+	
+	
+	/*
 	$(function() {
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		$( "button.btn.btn-primary" ).on("click" , function() {
 			fncAddUser();
 		});
 	});	
-	
+	*/
 	
 	//============= "취소"  Event 처리 및  연결 =============
 	$(function() {
@@ -110,7 +154,8 @@
 	 <div class="form-group">
 	   <label for="userNickname" class="col-sm-offset-1 col-sm-3 control-label">닉네임</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userNickname" name="userNickname" placeholder="중복확인하세요">
+		      <input type="text" class="form-control" id="userNickname" name="userNickname" placeholder="중복확인하세요"
+		      																																				oninput="checkNickname()">
 		  		 <span id="helpBlock" class="help-block">
 		      	<strong class="text-danger">입력전 중복확인 부터..(구현해야함!)</strong>
 		      </span>

@@ -2,13 +2,14 @@ package com.zagle.web.user;
 
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
-
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -42,11 +43,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.zagle.service.board.BoardService;
+import com.zagle.service.domain.Local;
 import com.zagle.service.domain.User;
 import com.zagle.service.user.UserService;
 
@@ -61,6 +67,11 @@ public class UserRestController {
 	@Autowired
 	@Qualifier("userServiceImpl")
 	private UserService userService;
+	
+
+	@Autowired
+	@Qualifier("boardServiceImpl")
+	private BoardService boardService;
 	
     private RestTemplate restTemplate = new RestTemplate(); 
 	
@@ -245,9 +256,18 @@ public class UserRestController {
 			//model.addAttribute("snsNo", snsNo);
 			
 			if(result==false) {
+				
+				System.out.println("////////////////=============getState Start=========/////////////");
+				
+				List<Local> list = boardService.getState();
+			
+				
+				
+				
 				ModelAndView modelAndView = new ModelAndView();
 				modelAndView.addObject("result", new Boolean(result));
 				modelAndView.addObject("snsNo", snsNo);
+				modelAndView.addObject("list", list);
 				modelAndView.setViewName("forward:/view/user/addUser.jsp");
 				return modelAndView;
 				
@@ -410,39 +430,49 @@ public class UserRestController {
 		    	
 		    	return null;
 		}
-	
-		/*
 		
-			@RequestMapping(value="kakaoLogin" ,method=RequestMethod.GET)
-			public ModelAndView kakaoLogin() throws Exception {
+		@RequestMapping(value = "checkNickname/{userNickname}", method = { RequestMethod.GET, RequestMethod.POST})
+				public @ResponseBody int checkNickname(User user)  throws Exception {
+			
+				System.out.println("==============checkNickname Start=================");
 				
-				System.out.println("Kakao : GET으로 쏘기");
-				
-				String apiURL="https://kauth.kakao.com/oauth/authorize?client_id=c3883a306a9faad67b127d7631568b29&redirect_uri=http://192.168.0.16:8080/user/kakaologin&response_type=code";
-				
-				
-				HttpClient httpClient = new DefaultHttpClient();
-				HttpGet get = new HttpGet(apiURL);
-				
-				
-				 get.setHeader("Accept", "applicaion/json");
-				    get.setHeader("Content-Type", "application/json");
-				
-				    HttpResponse httpResponse = httpClient.execute(get);  
-				    
-				    System.out.println(httpResponse);
-				    
-				    
-				ModelAndView modelAndView = new ModelAndView();
-				modelAndView.setViewName(apiURL);
-				
-				return modelAndView;
-				
-				
-			}
+				return userService.checkNickname(user);
+		}
+		@RequestMapping(value="json/uploadFile/",method=RequestMethod.POST)
+		public String uploadFile(MultipartHttpServletRequest multipartFile) throws Exception{
+			String path = "C:\\Users\\Bit\\git\\GoldSuZo\\ZagleZagle\\WebContent\\common\\images\\profile\\";
+			System.out.println("파일업로드하는곳");
+//			Chat chat = new Chat();
+//			File file = new File(temDir, multipartFile.getOriginalFilename());
+//			multipartFile.transferTo(file);
+//			chat.setImageFile(multipartFile.getOriginalFilename());
+			
+			String fileName = "";
+			
+	        File dir = new File(path);
+	        if(!dir.isDirectory()){
+	            dir.mkdir();
+	        }
+	        Iterator<String> files = multipartFile.getFileNames();
+	        System.out.println(files.hasNext());
+	        while(files.hasNext()){
+	            String uploadFile = files.next();
+	            MultipartFile mFile = multipartFile.getFile(uploadFile);
+	            fileName = mFile.getOriginalFilename();
+	            System.out.println("실제 파일 이름 : " +fileName);
+	           
+	            try {
+	                mFile.transferTo(new File(path,fileName));
+	               
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        return fileName;
+		}
 		
-	*/
-
+		
+			
 }
 	
 
