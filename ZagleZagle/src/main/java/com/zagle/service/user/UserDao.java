@@ -30,4 +30,6 @@ public interface UserDao {
 	// �Խ��� Page ó���� ���� ��ü Row(totalCount) return
 	public int getTotalCount(SearchAdmin search) throws Exception;
 	
+	public int checkNickname(User user) throws Exception;
+	
 }

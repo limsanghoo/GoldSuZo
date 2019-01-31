@@ -1,24 +1,100 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 
 <script>
 
-$(function() {
+
+function fncAddUser() {
 	
-	alert("추가 정보를 기입하셔야 모든 기능 이용이 가능합니다.")
-});
+	
+	alert("확인용")
+	
+	history.replaceState({}, null, location.pathname);
+	
+	var name=$("input[name='userName']").val();
+	var nickName=$("input[name='userNickname']").val();
+	var birth=$("input[name='userBirth']").val();
+	var userAddr=$("input[name='userAddr']").val();
+	
+	
+	alert(name)
+	alert(nickName)
+	alert(birth)
+	alert(userAddr)
+	
+	if(birth.length >7 || birth.length<5) {
+		alert("주민등록번호 앞자리를 입력해주세요")
+	}
+	
+	
+	$("form").attr("method" , "POST").attr("action" , "/user/addUser").submit();
+}
+
+
+
+
+//아이디와 비밀번호가 맞지 않을 경우 가입버튼 비활성화를 위한 변수설정
+var nicCheck = 0;
+var pwdCheck = 0;
+//아이디 체크하여 가입버튼 비활성화, 중복확인.
+function checkNickname() {
+    var inputed = $("#userNickname").val();
+    $.ajax({
+        data : {
+             userNickname : inputed
+        },
+        url : "/user/checkNickname/{userNickname}",
+        success : function(data) {
+        	
+       
+        	
+            if(inputed=="" && data=='0') {
+                $("#agreement").prop("disabled", true);
+                $("#agreement").css("background-color", "#aaaaaa");
+                $("#userNickname").css("background-color",  "rgba(255, 255, 255, 0)");
+                nicCheck = 0;
+         
+            }else if(data =='0') {
+            		  $("#agreement").prop("disabled", false);
+            		    $("#agreement").css("background-color", "#2eca6a");
+                      $("#userNickname").css("background-color", "#2eca6a");
+            	
+          
+            }else if (data == '1') {
+                $("#agreement").prop("disabled", true);
+                $("#agreement").css("background-color", "#aaaaaa");
+                $("#userNickname").css("background-color", "#FFCECE");
+                nicCheck = 0;
+            } 
+        }
+    });
+}
+
+
+
 
 
 function fncGetState(){
 	
 	var stateCode = $("select[name=state]").val();
-	//alert(stateCode);
+	
 	
 	$.ajax(
 		{
@@ -35,7 +111,7 @@ function fncGetState(){
 				
 				if(data.length>0){
 					$.each(data, function(index){
-						temp = "<option value='"+data[index].cityCode+"' style='font-size:20px;'>"+data[index].cityName+"</option>";
+						temp = "<option value='"+data[index].cityCode+"' style='font-size:20px; color: black;'>"+data[index].cityName+"</option>";
 						display += temp;
 					});
 					
@@ -47,6 +123,84 @@ function fncGetState(){
 			
 		});
 }
+
+
+function fncGetTown(){
+	var stateName = $("select[name=state] option:checked").text();
+	var cityName = $("select[name=city] option:checked").text();
+	var townName = $("select[name=town] option:checked").text();
+	
+	var local = stateName+" "+cityName+" "+townName;
+	
+	$("input:hidden[name='userAddr']").val( local );
+}
+
+$(function() {
+	
+	$('#profile').on('change',function(){
+	     var formData = new FormData($('form')[0]);
+	     
+	        var ajaxReq = $.ajax({
+	             type : 'post',
+	             url : '/user/json/uploadFile/',
+	             data : formData,
+	             processData : false,
+	             contentType : false,
+	           
+	             success : function(data, statusText, xhr) {	         		                	 
+	            //	 $("#msg").val(data);
+	            	
+	               alert("프로필 사진 등록 성공") 
+	               alert(data)
+	   
+	             },
+	             error : function(error) {
+	                 alert("파일 업로드에 실패하였습니다.");
+	                 console.log(error);
+	                 console.log(error.status);
+	             }
+	         });
+	        
+	        
+	        ajaxReq.done(function(data){
+	       		
+	        	alert(data)
+	        	
+	        	setTimeout(function() {
+	            		while(true){
+		            		var path = 'http://192.168.0.35:8080/common/images/profile/'+data;
+		            		var re = doesFileExist(path);
+		            		if (re) {
+		            			
+		            			$("#uploadPro").html("<img src='/common/images/profile/"+data+"'/>")
+		            			
+								break;
+							}
+		            	}
+	            	},2000);
+				
+	        	
+	        	
+	        });
+	        
+	        function doesFileExist(urlToFile) {
+			    var xhr = new XMLHttpRequest();
+			    xhr.open('HEAD', urlToFile, false);
+			    xhr.send();
+			     
+			    if (xhr.status == "404") {
+			        return false;
+			    } else {
+			        return true;
+			    }
+			}
+
+
+
+ 	});	
+});
+
+
 
 function fncGetCity(){
 	
@@ -69,7 +223,7 @@ function fncGetCity(){
 				
 				if(data.length>0){
 					$.each(data, function(index){
-						temp = "<option value='"+data[index].townCode+"' style='font-size:20px;'>"+data[index].townName+"</option>";
+						temp = "<option value='"+data[index].townCode+"' style='font-size:20px; color: black;'>"+data[index].townName+"</option>";
 						display += temp;
 					});
 					
@@ -95,7 +249,7 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 --*/
 /*-- reset --*/
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, dl, dt, dd, ol, nav ul, nav li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, dl, dt, dd, ol, nav ul, nav li, fieldset, form,  legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
@@ -241,7 +395,7 @@ select {
   color: #fff;
   font-weight: 100;
   width: 25%;
-  display: inline;
+  display: inline-flex;
   border: none;
   padding: 0.8em;
   border: solid 1px rgba(255, 255, 255, 0.37);
@@ -254,7 +408,9 @@ select {
   background-repeat: no-repeat;
   color: #fff;
   font-family: 'Roboto', sans-serif;
-  padding-right: 25px;
+
+ 
+ 
 
 }
 
@@ -872,15 +1028,37 @@ input.checkbox:checked:after {
   .main-w3layouts {
     padding: 1em 0 0;
   }
+  
+ 
+
 }
+
+
+	#uploadPro{
+			height: 70px;
+			width: 70px;
+			border:1.5px solid #f5f6fa;
+			border-radius: 50%;
+			margin : auto;
+		}
+		
+	#camera{
+	
+	margin : auto;
+		
+	}	
+
+	
+input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1px; height: 1px; 
+padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
 
 
 </style>
 
 </head>
-<body>
-<!DOCTYPE html>
-<html>
+
+
+
 <head>
 <title>Creative Colorlib SignUp Form</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -893,29 +1071,49 @@ input.checkbox:checked:after {
 <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
 <!-- //web font -->
 </head>
+
 <body>
 	<!-- main -->
 	<div class="main-w3layouts wrapper">
 		<h1>추가정보 입력</h1>
 		<div class="main-agileinfo">
 			<div class="agileits-top">
-				<form action="#" method="post">
-			
-					<br>
-					<input class="text" type="text" name="Username" placeholder="이름을 입력하세요." required="">
+				<form enctype="multipart/form-data" method="post">
+					
+					<input type="file" name="profile" id="profile"/>
+					<div id="uploadPro">
+					
+				
+					
+					</div> <label for="profile" style="margin: auto;" id="aaa"><br>프로필 등록&nbsp;<i class="glyphicon glyphicon-camera" style="width: 10px; height: 10px;" ></i></label>
+					
+					
+					<br><br>
+					
+					<input class="text" type="text" name="userName" placeholder="이름을 입력하세요." required="">
 					<br>
 					
-					<input class="text" type="text" name="UserNickname" placeholder="닉네임을 입력하세요." required="">
+					<input class="text" type="text" name="userNickname" placeholder="닉네임을 입력하세요."  id="userNickname" name="userNickname" placeholder="중복확인하세요"
+		      																																				oninput="checkNickname()" required="">
 					
 					<br>
 				
-					<input class="text" type="text" name="Birth" placeholder="주민등록번호 앞자리만 입력하세요." required="">
+					<input class="text" type="text" name="userBirth" placeholder="주민등록번호 앞자리만 입력하세요." required="">
 		
-								<br>
+					<br>
 				
-					<div class="row"style="text-align: center; display: inherit;">
+				
+
+				
+					<div class="row"style="text-align: center; display: inherit;" >
 				<select name="state" class="ct_input_g" onchange="fncGetState(this)">
 					<option value='' style="font-size:20px;"  selected>시·도</option>
+					
+					<c:set var="i" value="0"/>
+					<c:forEach var="local" items="${list}">
+					<c:set var="i" value="${i+1}"/>
+					<option value='${local.stateCode}' style="font-size:20px; color: black;">${local.stateName}</option>
+					</c:forEach>
 					
 
 			
@@ -928,14 +1126,14 @@ input.checkbox:checked:after {
 				<select name="town"  class="ct_input_g"  onchange="fncGetTown(this)">
 					<option value="" style="font-size:20px;">읍·면·동</option>
 				</select>  
-				
+				<input type="hidden" name="userAddr" />
+				<input type="hidden" name="snsNo" value="${snsNo}"/>
 				            
 			</div>
 <br/>
-					
-					
 				
-								
+	
+							
 					<div class="wthree-text">
 						<label class="anim">
 						
@@ -945,8 +1143,13 @@ input.checkbox:checked:after {
 						</label>
 						<div class="clear"> </div>
 					</div>
-					<input type="submit" value="확 인" id="agreement">
+					
+					
 				</form>
+					
+					<input type="submit" value="확 인" id="agreement" onclick="javascript : fncAddUser()">
+					
+			
 			
 			</div>
 		</div>
@@ -969,7 +1172,5 @@ input.checkbox:checked:after {
 		</ul>
 	</div>
 	<!-- //main -->
-</body>
-</html>
 </body>
 </html>
