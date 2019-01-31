@@ -55,4 +55,7 @@ public class UserDaoImpl implements UserDao {
 	public int getTotalCount(SearchAdmin search) throws Exception {
 	return sqlSession.selectOne("UserMapper.getTotalCount", search);
 	}
+	public int checkNickname(User user) throws Exception {
+		return sqlSession.selectOne("UserMapper.checkNickname", user);
+	}
 }

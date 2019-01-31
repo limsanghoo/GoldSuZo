@@ -63,12 +63,7 @@ $(function() {
 			<hr/>
 			
 				
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>휴대전화번호</strong></div>
-			<div class="col-xs-8 col-md-4">${user.phone}</div>
-		</div>
-		
-			<hr/>
+	
 			
 			<div class="row">
 	  		<div class="col-xs-4 col-md-2"><strong>생년월일</strong></div>
@@ -77,12 +72,6 @@ $(function() {
 		
 			<hr/>
 			
-				<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>성별</strong></div>
-			<div class="col-xs-8 col-md-4">${user.userSex}</div>
-		</div>
-		
-			<hr/>
 			
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2"><strong>활동점수</strong></div>
