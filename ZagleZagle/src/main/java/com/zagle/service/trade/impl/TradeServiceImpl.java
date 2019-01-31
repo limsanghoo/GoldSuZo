@@ -85,6 +85,11 @@ public class TradeServiceImpl implements TradeService{
 		tradeDAO.addBuy(buy);
 	}
 
+	@Override
+	public Buy getBuy(String buyNo) throws Exception {
+		return tradeDAO.getBuy(buyNo);
+	}
+
 
 
 }

@@ -130,13 +130,14 @@ public class BoardController {
 	
 	@RequestMapping(value="addReport", method=RequestMethod.GET)
 	public ModelAndView addReport(@RequestParam("reportReason") String reportReason, @RequestParam("reportingUserNo") String reportingUserNo, 
-			@RequestParam("reportedBoardNo") String reportedBoardNo, @RequestParam("reportedUserNo") String reportedUserNo) throws Exception{
+			@RequestParam("reportedBoardNo") String reportedBoardNo, @RequestParam("reportedUserNo") String reportedUserNo, @RequestParam("reportedCommentNo") String reportedCommentNo) throws Exception{
 		
 		System.out.println("/addReport");
 		System.out.println("reportReason : "+reportReason);
 		System.out.println("reportingUserNo : "+reportingUserNo);
-		System.out.println("reportedBoardNo : "+reportedBoardNo);
 		System.out.println("reportedUserNo : "+reportedUserNo);
+		System.out.println("reportedBoardNo : "+reportedBoardNo);		
+		System.out.println("reportedCommentNo : "+reportedCommentNo);
 		
 		User reportingUser=new User();
 		reportingUser.setUserNo(reportingUserNo);
@@ -147,11 +148,15 @@ public class BoardController {
 		Board board=new Board();
 		board.setBoardNo(reportedBoardNo);
 		
+		Comment comment=new Comment();
+		comment.setCommentNo(reportedCommentNo);
+		
 		Report report=new Report();
 		report.setReportingUserNo(reportingUser);
 		report.setReportedUserNo(reportedUser);
 		report.setReportReason(reportReason);
 		report.setReportedBoardNo(board);
+		report.setReportedCommentNo(comment);
 		
 		boardService.addReport(report);
 		
@@ -160,18 +165,32 @@ public class BoardController {
 		
 		System.out.println("reportCount : "+reportCount);
 		
-		if(reportCount==3) {			
+		if(reportCount==3) {
 			
-			//해당 게시물 블라인드 등록 blind code 0으로
-			Blind blind=new Blind();
-			blind.setBlindBoardNo(report.getReportedBoardNo());
-			adminService.addBlind(blind);
+			if(report.getReportedCommentNo().getCommentNo().equals("")) {
 			
-			//해당 게시물 boardStatus 3으로
-			board.setBoardStatus("3");
-			boardService.updateBoardStatus(board);
-			
-		}
+				//해당 게시물 블라인드 등록 blind code 0으로
+				Blind blind=new Blind();
+				blind.setBlindBoardNo(report.getReportedBoardNo());
+				adminService.addBlind(blind);
+				
+				//해당 게시물 boardStatus 3으로
+				board.setBoardStatus("3");
+				boardService.updateBoardStatus(board);		
+							
+			}else if(report.getReportedBoardNo().getBoardNo().equals("")) {
+								
+				//해당 댓글 블라인드 등록 blind code 0으로
+				Blind blind=new Blind();
+				blind.setBlindCommentNo(report.getReportedCommentNo());
+				adminService.addBlind(blind);
+				
+				//해당 게시물 commentStatus 2로
+				comment.setCommentStatus("2");
+				boardService.updateCommentStatus(comment);							
+			}
+						
+		}//신고 횟수 카운트 끝
 		
 		ModelAndView modelAndView=new ModelAndView();
 		modelAndView.setViewName("forward:/view/board/close.jsp");
@@ -269,10 +288,6 @@ public class BoardController {
 	public ModelAndView listBoard(@ModelAttribute("searchBoard") SearchBoard searchBoard, HttpSession session) throws Exception{
 		
 		System.out.println("/listBoard POST");
-		
-		System.out.println("**********searchBoard : "+searchBoard);
-		
-		System.out.println("=====local : "+searchBoard.getLocal());
 		
 		if(searchBoard.getLocal()=="") {
 			searchBoard.setLocal(null);

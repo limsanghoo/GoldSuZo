@@ -87,6 +87,12 @@ public class BoardDAOImpl implements BoardDAO{
 		return sqlSession.selectList("BoardMapper.listComment", boardNo);
 	}
 
+	
+	@Override
+	public void updateCommentStatus(Comment comment) throws Exception {
+		sqlSession.update("BoardMapper.updateCommentStatus", comment);
+	}
+
 	@Override
 	public void deleteComment(String commentNo) throws Exception {
 		sqlSession.delete("BoardMapper.deleteComment", commentNo);

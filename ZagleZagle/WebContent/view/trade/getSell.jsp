@@ -52,7 +52,7 @@
 				});
 			
 			 $("button:contains('삭제')").on("click", function() {
-				 self.location="/trade/deleteSell?sellNo="+'${sell.sellNo}&sellState=00';
+				 self.location="/trade/updateSellState?sellNo=${sell.sellNo}&sellState=00";
 				});
 		});
 		
@@ -88,10 +88,10 @@
 	</c:if>
 	<c:if test="${user != null && user.userNo != sell.seller.userNo}">
 	  		<div class="col-lg-5 text-right">
-	  		<c:if test="${sell.sellState==10}">
+	  		<c:if test="${sell.sellState==10 || sell.sellState ==30}">
 	  			<button type="button" class="btn btn-b">구매 요청</button>
 	  		</c:if>
-	  		<c:if test="${sell.sellState!=10}">
+	  		<c:if test="${sell.sellState!=10 && sell.sellState!=30}">
 	  			<button type="button" class="btn btn-c">판매완료</button>
 	  		</c:if>
 	  			<button type="button" class="btn btn-a">이전</button>

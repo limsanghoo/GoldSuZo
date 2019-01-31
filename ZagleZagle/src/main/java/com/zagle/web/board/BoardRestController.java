@@ -146,6 +146,7 @@ public class BoardRestController {
 	      comment.setUser(userService.getUser2(userNo));
 	      comment.setBoard(boardService.getBoard(boardNo));
 	      comment.setCommentDetailText(commentDetailText);
+	      comment.setCommentStatus("1"); //정상 댓글
 	      
 	      boardService.addComment(comment);
 	      

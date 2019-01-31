@@ -159,6 +159,8 @@ $(function(){
 
 <body>
 
+<jsp:include page="/view/layout/toolbar.jsp"/>
+
 <form name="fileForm" class="form-horizontal" enctype="multipart/form-data" style="text-align: center;">
 
 <input type="hidden" name="userNo" value="${param.userNo}"/><!-- value 수정해야함 -->

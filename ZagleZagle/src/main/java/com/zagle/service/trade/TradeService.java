@@ -25,4 +25,6 @@ public interface TradeService {
 
 	public void addBuy(Buy buy) throws Exception;
 
+	public Buy getBuy(String buyNo) throws Exception;
+
 }
