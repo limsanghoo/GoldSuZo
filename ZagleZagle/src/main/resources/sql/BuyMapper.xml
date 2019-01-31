@@ -8,11 +8,6 @@
  	
 	<resultMap id="buySelectMap" type="buy">
 		<result property="buyNo" 							column="buy_no" 					jdbcType="VARCHAR"/>
-		<result property="sellProd.sellNo" 				column="sell_no" 					jdbcType="VARCHAR" />
-		<result property="sellProd.sellName" 			column="sell_name"					jdbcType="VARCHAR" />
-		<result property="sellProd.sellState" 			column="sell_state" 				jdbcType="VARCHAR" />
-		<result property="sellProd.sellPrice" 			column="sell_price" 					jdbcType="VARCHAR" />
-		<result property="sellProd.sellStyle" 			column="sell_style"	 				jdbcType="VARCHAR" />
 		<result property="buyer.userNo"					column="user_no" 					jdbcType="VARCHAR" />
 		<result property="buyer.profile"					column="profile" 						jdbcType="VARCHAR" />
 		<result property="buyer.userNickname"		column="user_nickname" 			jdbcType="VARCHAR" />
@@ -22,6 +17,24 @@
 		<result property="trackingNo" 						column="tracking_no" 				jdbcType="NUMERIC" />
 		<result property="companyCode"					column="company_code"			jdbcType="NUMERIC" />
 		<result property="buyDate" 							column="buy_date"	 				jdbcType="DATE" />
+		
+		<association property="sellProd"  javaType="sell">
+			<id property="sellNo" 									column="sell_no" 					jdbcType="VARCHAR"/>
+			<result property="seller.userNo"					column="user_no" 					jdbcType="VARCHAR" />
+			<result property="seller.profile"					column="profile" 						jdbcType="VARCHAR" />
+			<result property="seller.userNickname"		column="user_nickname" 			jdbcType="VARCHAR" />
+			<result property="sellName" 						column="sell_name" 				jdbcType="VARCHAR" />
+			<result property="sellPrice" 							column="sell_price" 					jdbcType="NUMERIC" />
+			<result property="sellText" 							column="sell_text" 					jdbcType="VARCHAR" />
+			<result property="sellPhoto1" 						column="sell_Photo1" 				jdbcType="VARCHAR" />
+			<result property="sellPhoto2" 						column="sell_Photo2" 				jdbcType="VARCHAR" />
+			<result property="sellPhoto3" 						column="sell_Photo3" 				jdbcType="VARCHAR" />
+			<result property="sellPhone" 						column="sell_phone" 				jdbcType="VARCHAR" />
+			<result property="sellStyle" 							column="sell_style" 					jdbcType="NUMERIC"  />
+			<result property="sellState" 							column="sell_state" 				jdbcType="NUMERIC" />
+			<result property="sellDate" 							column="sell_date" 					jdbcType="DATE" />
+		</association>
+		
 	</resultMap>
 	
 	<insert 	id="addBuy"	parameterType="buy" >
@@ -43,6 +56,12 @@
 								WHERE b.user_no=#{userNo} and b.sell_no=s.sell_no ORDER BY buy_no desc) inner_table 
 					WHERE ROWNUM &lt;=#{search.endRowNum:INTEGER})
 		WHERE row_seq BETWEEN #{search.startRowNum:INTEGER}  AND #{search.endRowNum:INTEGER}
+	 </select>
+	 
+	 <select id="getBuy" parameterType="string" resultMap="buySelectMap">
+	 	SELECT DISTINCT u.user_no, u.profile, u.user_nickname, s.*, b.* 
+	 	FROM sell s, users u, (select * from buy where buy_no=#{buyNo}) b 
+	 	WHERE u.user_no=s.user_no and s.sell_no=b.sell_no
 	 </select>
 	 
 </mapper>
