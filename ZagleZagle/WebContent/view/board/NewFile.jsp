@@ -161,7 +161,22 @@ $(function(){
 
 <jsp:include page="/view/layout/toolbar.jsp"/>
 
-<form name="fileForm" class="form-horizontal" enctype="multipart/form-data" style="text-align: center;">
+<form class="form-horizontal" name="fileForm" class="form-horizontal" enctype="multipart/form-data">
+
+<div class="container" style="margin-top:150px">
+	<div class="col-12">
+
+<div class="row">
+	<div class="col-lg-9">
+	<H2><strong>게시물 등록</strong></H2>
+	</div>
+	
+	<div class="col-lg-3 text-right">
+		<button type="button" class="btn btn-b">등록</button>
+		<button type="button" class="btn btn-a">이전</button>
+	</div>
+	
+</div><!-- row 끝 -->
 
 <input type="hidden" name="userNo" value="${param.userNo}"/><!-- value 수정해야함 -->
 
@@ -282,6 +297,9 @@ $(function(){
 
 <input type="hidden" id="link" value="" name="photo1"/><!-- 이미지 링크 append 되는 부분 -->
 
+
+</div><!-- col-12 끝 -->
+</div><!-- 컨테이너 끝 -->
 
 </form>
 

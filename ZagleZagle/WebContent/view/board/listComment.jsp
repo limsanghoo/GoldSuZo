@@ -23,6 +23,11 @@ $(function(){
 		var userNo="${user.userNo}";
 		
 		var text=$("#<%=boardNo%>commentDetailText").val();
+		
+		if(userNo==""){
+			alert("로그인 후 이용 가능합니다");
+			return;
+		}
 			
 		commentInsert(boardNo, userNo, text);
 	
@@ -75,8 +80,6 @@ function commentInsert(boardNo,userNo, text){
             	var a='';
             	var b='';
             	
-            	var userNo="${user.userNo}";
-            	
                 
                 $.each(JSONData, function(i){
                 	
@@ -84,6 +87,9 @@ function commentInsert(boardNo,userNo, text){
                   
                   var commentNo="'"+list.commentNo+"'";
                   var boardNo="'"+list.board.boardNo+"'";
+                  var userNo="'"+list.user.userNo+"'";
+                  
+                  if(list.commentStatus=='1'){
                   
                		if("${user.userNo}"==list.user.userNo){
               			b='<div class="col-sm-2" style="margin-top: 5px;" onclick="commentDelete('+commentNo+','+boardNo+')"><img src="/common/images/board/trash.png" style="width:20px;"></div>';
@@ -91,13 +97,21 @@ function commentInsert(boardNo,userNo, text){
               			b='<div class="col-sm-2" style="margin-top: 5px;" onclick="reportComment('+commentNo+','+userNo+')"><img src="/common/images/board/siren.png" style="width:20px;"></div>';
               		}
                                 
-                   a += '<div class="row commentArea'+list.commentNo+'" style="padding-bottom: 5px;">';                           
+                   a += '<div class="row commentArea'+list.commentNo+'" style="padding-bottom: 5px; height:30px;">';                           
                    a += '<div class="col-sm-1"><img src="/common/images/profile/'+list.user.profile+'" style="width: 30px; height: 30px; border-radius: 70px;"/></div>';                 
                    a += '<div class="col-sm-3" style="font-size:medium">'+list.user.userNickname+'</div>';                 
                    a += '<div class="col-sm-6" style="font-size:medium">'+list.commentDetailText+'</div>';                   
                    a += b+'<div class="w-100"></div>';                                
                    a += '</div>';
+                  }else if(list.commentStatus=='2'){
+                   a += '<div class="row commentArea'+list.commentNo+'" style="padding-bottom: 5px;">';
+                   a += '<div class="col-sm-4" style="font-size:medium"></div>';
+                   a += '<div class="col-sm-6" style="font-size:medium">'+'블라인드 처리된 댓글입니다'+'</div>';
+                   a += '<div class="w-100"></div></div>';
+                  }
+                  
                });
+                
                a += '<br/>'; 
                $(".commentList").html(a); 
            }
@@ -119,8 +133,10 @@ function commentDelete(commentNo, boardNo){
 //댓글 신고
 function reportComment(commentNo, userNo){
 	
-	alert(commentNo);
-	alert(userNo);
+	//alert(commentNo);
+	//alert(userNo);
+	
+	window.open("/view/board/addReport.jsp?val="+commentNo+userNo, "addReport", "width=300, height=200, resizable=yes" );
 }
 
 </script>

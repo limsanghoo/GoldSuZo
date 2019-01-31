@@ -104,6 +104,12 @@ public class BoardServiceImpl implements BoardService{
 		return list;
 	}
 
+	
+	@Override
+	public void updateCommentStatus(Comment comment) throws Exception {
+		boardDAO.updateCommentStatus(comment);
+	}
+
 	@Override
 	public void deleteComment(String commentNo) throws Exception {
 		boardDAO.deleteComment(commentNo);

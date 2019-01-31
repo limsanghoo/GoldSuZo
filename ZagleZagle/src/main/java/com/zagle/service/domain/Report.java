@@ -7,15 +7,12 @@ public class Report {
 	///Field
 	
 	private String reportNo;
-	private User reportingUserNo;
-	
+	private User reportingUserNo;	
 	private User reportedUserNo;
-	private Board reportedBoardNo;
-	
 	private String reportReason;
 	
+	private Board reportedBoardNo;	
 	private Comment reportedCommentNo;
-	private Comment reportedComment;
 	
 	private int hardleNo;
 	private Date reportDate;
@@ -82,14 +79,6 @@ public class Report {
 		this.reportReason = reportReason;
 	}
 
-	public Comment getReportedComment() {
-		return reportedComment;
-	}
-
-	public void setReportedComment(Comment reportedComment) {
-		this.reportedComment = reportedComment;
-	}
-
 	public Date getReportDate() {
 		return reportDate;
 	}
@@ -104,7 +93,7 @@ public class Report {
 	public String toString() {
 		return "Report [reportNo=" + reportNo + ", reportingUserNo=" + reportingUserNo + ", reportedUserNo="
 				+ reportedUserNo + ", reportedBoardNo=" + reportedBoardNo + ", reportReason=" + reportReason
-				+ ", reportedCommentNo=" + reportedCommentNo + ", reportedComment=" + reportedComment + ", hardleNo="
+				+ ", reportedCommentNo=" + reportedCommentNo + ", hardleNo="
 				+ hardleNo + ", reportDate=" + reportDate + "]";
 	}
 
