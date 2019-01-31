@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -58,8 +58,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
-
+import com.zagle.service.board.BoardService;
+import com.zagle.service.domain.Local;
 import com.zagle.service.domain.User;
 import com.zagle.service.user.UserService;
 
@@ -73,6 +73,7 @@ public class UserController {
 	@Autowired
 	@Qualifier("userServiceImpl")
 	private UserService userService;
+	
 	
 	 @Autowired
      private GoogleConnectionFactory googleConnectionFactory;
@@ -161,7 +162,7 @@ public class UserController {
 		
 	}
 	@RequestMapping(value="addUser", method=RequestMethod.POST)
-	public ModelAndView addUser(@RequestParam("snsNo") String snsNo,@ModelAttribute("user") User user)throws Exception {
+	public ModelAndView addUser(@ModelAttribute("user") User user)throws Exception {
 		
 		System.out.println("/user/addUser : POST");
 		
@@ -551,7 +552,7 @@ public class UserController {
 	
 		
 	}
-	
+
 	
 	
 }

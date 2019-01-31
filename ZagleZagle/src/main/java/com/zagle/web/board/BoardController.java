@@ -114,7 +114,7 @@ public class BoardController {
         
 		ModelAndView modelAndView=new ModelAndView();
 	
-		modelAndView.setViewName("redirect:http://192.168.0.35:8080/board/listBoard?view=all");
+		modelAndView.setViewName("redirect:http://192.168.0.49:8080/board/listBoard?view=all");
 		
 		return modelAndView;
 	}

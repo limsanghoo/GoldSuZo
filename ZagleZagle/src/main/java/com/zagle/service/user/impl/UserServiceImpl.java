@@ -73,6 +73,13 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	
+	public int checkNickname(User user) throws Exception {
+		
+		int nicCount = userDao.checkNickname(user);
+		
+		return nicCount;
+	}
+	
 	/*
 	public User addActiveScore(int totalActiveScore) throws Exception {
 		userDao.addActiveScore(totalActiveSocre);
@@ -86,5 +93,6 @@ public class UserServiceImpl implements UserService {
 	public void updateDeleteCount(User user) throws Exception {
 		userDao.updateDeleteCount(user);
 	}
+	
 
 }

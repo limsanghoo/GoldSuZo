@@ -86,9 +86,9 @@ function commentInsert(boardNo,userNo, text){
                   var boardNo="'"+list.board.boardNo+"'";
                   
                		if("${user.userNo}"==list.user.userNo){
-              			b='<div class="col-sm-2" style="margin-top: 5px;" onclick="commentDelete('+commentNo+','+boardNo+')"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></div>';
+              			b='<div class="col-sm-2" style="margin-top: 5px;" onclick="commentDelete('+commentNo+','+boardNo+')"><img src="/common/images/board/trash.png" style="width:20px;"></div>';
               		}else{
-              			b='<div class="col-sm-2" style="margin-top: 5px;" onclick="reportComment('+commentNo+','+userNo+')"><span class="glyphicon glyphicon-hdd" aria-hidden="true"></span></div>';
+              			b='<div class="col-sm-2" style="margin-top: 5px;" onclick="reportComment('+commentNo+','+userNo+')"><img src="/common/images/board/siren.png" style="width:20px;"></div>';
               		}
                                 
                    a += '<div class="row commentArea'+list.commentNo+'" style="padding-bottom: 5px;">';                           
