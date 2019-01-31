@@ -52,7 +52,7 @@
 				});
 			
 			 $("button:contains('삭제')").on("click", function() {
-				 self.location="/trade/deleteSell?sellNo="+'${sell.sellNo}&sellState=00';
+				 self.location="/trade/updateSellState?sellNo=${sell.sellNo}&sellState=00";
 				});
 		});
 		

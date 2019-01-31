@@ -34,23 +34,11 @@
 			$("#currentPage").val(currentPage)
 			$("form").attr("method" , "POST").attr("action" , "/product/listProduct").submit();
 		}
-		
-		//============= userId 에 회원정보보기  Event  처리(Click) =============	
+
 		 $(function() {
-		
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			
-			$("td:nth-child(6):contains('승인하기')").on("click",function(){
-// 				 alert("왜안돼");
-//  					self.location = "/trade/updateSellState?sellNo="+$(this).data("sellno")+"&sellState=40";
-				});
-			
 			$( ".list" ).on("click" , function() {
 					self.location ="/trade/getSell?sellNo="+$(this).data("sellno");
 			});
-			
-			 
-			
 		});	
 		
 		 $(function() {
@@ -119,7 +107,7 @@
 			  </td>
 			  
 			  <td align="center" data-sellno="${sell.sellNo}">
-				  <c:if test="${sell.sellState=='20'}">승인하기</c:if>
+				  <c:if test="${sell.sellState=='20'}"><a href="/trade/updateSellState?sellNo=${sell.sellNo}&sellState=40">승인하기</a></c:if>
 				  <c:if test="${sell.sellState=='50'}">배송하기</c:if>		  	
 			  </td>
 			  
