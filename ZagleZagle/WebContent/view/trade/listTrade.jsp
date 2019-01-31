@@ -151,7 +151,7 @@ function enter() {
 	<img src="/common/images/profile/${sell.seller.profile}" style="height: 60px; width:60px; border-radius: 70px; display: inline; vertical-align: middle"/>
 	<span style="font-weight: bold; display: inline;">&nbsp;${sell.seller.userNickname}</span>
 	<span style="float:right">
-	<c:if test="${sell.sellState == 10}">
+	<c:if test="${sell.sellState == 10 || sell.sellState == 30 }">
 	<c:if test="${sell.sellStyle == 10}">
 	<img src="/common/images/trade/transit-filled.png" style="height: 80%; display: inline; vertical-align: middle; float:right"/>
 	</c:if>
@@ -159,7 +159,7 @@ function enter() {
 	<img src="/common/images/trade/giveaway-filled.png" style="height: 80%; display: inline; vertical-align:text-top; float:right;"/>
 	</c:if>
 	</c:if>
-	<c:if test="${sell.sellState != 10}">
+	<c:if test="${sell.sellState != 10 && sell.sellState != 30}">
 	<img src="/common/images/trade/soldout.png" style="height: 80%; display: inline; vertical-align: middle; float:right"/>
 	</c:if>
 	</span>
