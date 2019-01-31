@@ -159,7 +159,25 @@ input[name='report']{
     cursor: pointer;
     margin-left: 60px;
 }
+.btn {
+  transition: .5s ease;
+}
 
+.btn.btn-c {
+  border-radius: 0;
+  padding: .5rem 2rem;
+  letter-spacing: .05rem;
+}
+
+.btn.btn-c {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.btn.btn-c:hover {
+  background-color: #dc3545;
+  color: #000000;
+}
 
 </style>
 <script type="text/javascript">
@@ -177,7 +195,7 @@ $(function(){
 	//게시물 등록
 	$("input[value='게시물 등록']").bind("click",function(){
 		
-		self.location="http://192.168.0.35:8080/board/addBoard?userNo=${user.userNo}";
+		self.location="http://192.168.0.49:8080/board/addBoard?userNo=${user.userNo}";
 	})
 	
 	//지도로 보기
@@ -658,7 +676,7 @@ function fncGetTown(){
 
 
 <!-- 모달1 시작 -->
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="${board.boardNo}modal1">
+<div class="modal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="${board.boardNo}modal1">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     
@@ -692,7 +710,7 @@ function fncGetTown(){
         <!-- 신고 버튼 -->
         <c:if test="${user.userNo!=board.user.userNo}">
         <div class="col-sm-5 col-md-offset-2">    
-        <input type="button" name="report" class="btn btn-a" value="신고" data-report="${board.boardNo}"/>
+        <input type="button" name="report" class="btn btn-c" value="신고" data-report="${board.boardNo}"/>
         <input type="hidden" id="${board.boardNo}report" value="${board.boardNo}${board.user.userNo}">
         </div>
         </c:if>     

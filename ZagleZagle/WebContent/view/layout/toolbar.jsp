@@ -278,8 +278,9 @@ font-size: 100%;
   z-index: 9;
   text-align: center;
   background-color: rgba(0,0,0,0);
-  height: 700px;
+  height: 800px;
   width: 600px;
+
 }
 
 #mydivheader {
@@ -383,7 +384,7 @@ font-size: 100%;
           </c:if>
           
         <!-- 채팅창 -->       
-        <div class="col-md-4" id="mydiv" style="display: none;">
+        <div class="col-lg-8 col-centered" id="mydiv" style="display: none;">
    			<div id="mydivheader">-여기를 눌러 이동-</div>
 		</div>		       
         </ul>
