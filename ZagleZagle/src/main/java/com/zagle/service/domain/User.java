@@ -9,12 +9,12 @@ public class User {
 	private String snsNo;
 	private String userName;
 	private String userNickname;
-	private String phone;
-	private String userSex;
+
+
 	private String userAddr;
 	private String profile;
 	private String grade;
-	private String snsName;
+
 	private String bankName;
 	private String account;
 	
@@ -26,9 +26,7 @@ public class User {
 	private int totalActiveScore;
 	
 	///////////////////EL ���� ���� �߰��� Field////////////////////////
-	private String phone1;
-	private String phone2;
-	private String phone3;
+
 	
 	
 	
@@ -69,21 +67,7 @@ public class User {
 		this.userNickname = userNickname;
 	}
 
-	public String getPhone() {
-		return phone;
-	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getUserSex() {
-		return userSex;
-	}
-
-	public void setUserSex(String userSex) {
-		this.userSex = userSex;
-	}
 
 	public String getUserAddr() {
 		return userAddr;
@@ -117,14 +101,7 @@ public class User {
 		this.blackCode = blackCode;
 	}
 
-	public String getSnsName() {
-		return snsName;
-	}
-
-	public void setSnsName(String snsName) {
-		this.snsName = snsName;
-	}
-
+	
 	public String getBankName() {
 		return bankName;
 	}
@@ -176,32 +153,12 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [userNo=" + userNo + ", snsNo=" + snsNo + ", userName=" + userName + ", userNickname="
-				+ userNickname + ", phone=" + phone + ", userSex=" + userSex + ", userAddr=" + userAddr + ", profile="
-				+ profile + ", grade=" + grade + ", blackCode=" + blackCode + ", snsName=" + snsName + ", bankName="
+				+ userNickname + ",userAddr=" + userAddr + ", profile="	+ profile + ", grade=" + grade + ", blackCode=" + blackCode + ", bankName="
 				+ bankName + ", regDate=" + regDate + ", account=" + account + ", userBirth=" + userBirth
 				+ ", deleteCount=" + deleteCount + ", totalActiveScore=" + totalActiveScore + "]";
 	}
 
 	
-	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////
-	// JSON == > Domain Obejct Binding ���� �߰��� �κ�
-	
-	
 
-	public void setPhone1(String phone1) {
-		this.phone1 = phone1;
-	}
-
-	public void setPhone2(String phone2) {
-		this.phone2 = phone2;
-	}
-
-	public void setPhone3(String phone3) {
-		this.phone3 = phone3;
-	}
-	
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
 	
 }

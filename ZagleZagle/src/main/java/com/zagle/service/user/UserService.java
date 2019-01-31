@@ -22,6 +22,10 @@ public interface UserService {
 	
 	public boolean checkBlack(String userNo) throws Exception;
 	//public User addActiveScore(int totalActiveScore) throws Exception;
+	
+	public int checkNickname(User user) throws Exception;
+	
+	
 	public void addActiveScore(User user) throws Exception;
 	
 	public void updateDeleteCount(User user) throws Exception;
