@@ -310,8 +310,7 @@ $(function() {
  				   <input type="text" class="form-control" id="streamContent" value="" placeholder="내용을 입력하세요" name="streamContent"> <br/>	
  				
  				 <label for="txt-user-text" class="col-form-label">썸네일이미지</label> <br/>   
- 	<input type="file" multiple class="form-control" id="file" name="file">
-		   
+ 	<input type="file" multiple class="form-control" id="file" name="file">		   
       </div> 
       <div class="modal-footer">
       	<button type="button" class="btn btn-default" data-dismiss="modal" id="upload">업로드하기</button>

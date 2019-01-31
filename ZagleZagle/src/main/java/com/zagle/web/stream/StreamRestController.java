@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -177,8 +178,8 @@ public class StreamRestController {
 	return view;	
 	}
 	
-	
-@RequestMapping(value="json/kakaoOkStream")
+	 
+@RequestMapping(value="json/kakaoOkStream",produces = "application/text; charset=utf-8; pageEncoding=UTF-8; ")
 	public ModelAndView kakaoOkStream(@RequestParam("pg_token") String pg_token,HttpSession session) throws Exception{
 		System.out.println("add/kakao=================");
 			Spon spon = (Spon) session.getAttribute("spon");
@@ -213,7 +214,13 @@ public class StreamRestController {
 		  	User user = (User) session.getAttribute("user");
 		  	User streamer = (User) session.getAttribute("streamer");
 		  	System.out.println("user닉네임===================="+user.getUserNickname());
-		  	ModelAndView view = new ModelAndView("redirect:https://192.168.0.21/stream/sponSpeech2?streamer="+streamer.getUserNo()+"&userNo="+user.getUserNo()+"&userNickname="+user.getUserNickname()+"&userProfile=default.jpg&price="+session.getAttribute("price"));
+		  //	String url  = "https://192.168.0.21/stream/sponSpeech2?streamer="+streamer.getUserNo()+"&userNo="+user.getUserNo()+"&userNickname="+user.getUserNickname()+"&userProfile=default.jpg&price="+session.getAttribute("price");
+		  //	String encodeResult = URLEncoder.encode(url, "UTF-8");
+//System.out.println(encodeResult);
+		String encode =  	URLEncoder.encode(user.getUserNickname(),"UTF-8");
+		System.out.println("인코딩 한 후 닉네임================"+encode);
+		 	//ModelAndView view = new ModelAndView("redirect:"+url); 
+		 	ModelAndView view = new ModelAndView("redirect:https://192.168.0.21/stream/sponSpeech2?streamer="+streamer.getUserNo()+"&userNo="+user.getUserNo()+"&userNickname="+encode+"&userProfile=default.jpg&price="+session.getAttribute("price"));
 		//	ModelAndView view = new ModelAndView("redirect:http://192.168.0.12:8080/stream/));
 			//modelAndView.setViewName("forward:/view/stream/close.jsp");	
 		  	return view; 
