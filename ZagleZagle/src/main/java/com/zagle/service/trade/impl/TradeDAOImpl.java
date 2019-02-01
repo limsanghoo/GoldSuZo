@@ -76,4 +76,8 @@ public class TradeDAOImpl implements TradeDAO{
 	public int getBuyCount(String userNo) throws Exception {
 		return sqlSession.selectOne("BuyMapper.getBuyCount",userNo);
 	}
+	@Override
+	public Buy getBuy(String buyNo) throws Exception {
+		return sqlSession.selectOne("BuyMapper.getBuy",buyNo);
+	}
 }

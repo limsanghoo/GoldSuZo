@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.zagle.common.Page;
 import com.zagle.service.admin.AdminService;
 import com.zagle.service.board.BoardService;
 import com.zagle.service.chat.ChatService;
@@ -62,8 +63,10 @@ public class BoardController {
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
 	
-	@Value("#{commonProperties['pageSize']}")
-	int pageSize;
+	@Value("#{commonProperties['boardPageSize']}")
+	int boardPageSize;
+	
+	
 	
 	
 	
@@ -130,13 +133,14 @@ public class BoardController {
 	
 	@RequestMapping(value="addReport", method=RequestMethod.GET)
 	public ModelAndView addReport(@RequestParam("reportReason") String reportReason, @RequestParam("reportingUserNo") String reportingUserNo, 
-			@RequestParam("reportedBoardNo") String reportedBoardNo, @RequestParam("reportedUserNo") String reportedUserNo) throws Exception{
+			@RequestParam("reportedBoardNo") String reportedBoardNo, @RequestParam("reportedUserNo") String reportedUserNo, @RequestParam("reportedCommentNo") String reportedCommentNo) throws Exception{
 		
 		System.out.println("/addReport");
 		System.out.println("reportReason : "+reportReason);
 		System.out.println("reportingUserNo : "+reportingUserNo);
-		System.out.println("reportedBoardNo : "+reportedBoardNo);
 		System.out.println("reportedUserNo : "+reportedUserNo);
+		System.out.println("reportedBoardNo : "+reportedBoardNo);		
+		System.out.println("reportedCommentNo : "+reportedCommentNo);
 		
 		User reportingUser=new User();
 		reportingUser.setUserNo(reportingUserNo);
@@ -147,11 +151,15 @@ public class BoardController {
 		Board board=new Board();
 		board.setBoardNo(reportedBoardNo);
 		
+		Comment comment=new Comment();
+		comment.setCommentNo(reportedCommentNo);
+		
 		Report report=new Report();
 		report.setReportingUserNo(reportingUser);
 		report.setReportedUserNo(reportedUser);
 		report.setReportReason(reportReason);
 		report.setReportedBoardNo(board);
+		report.setReportedCommentNo(comment);
 		
 		boardService.addReport(report);
 		
@@ -160,18 +168,32 @@ public class BoardController {
 		
 		System.out.println("reportCount : "+reportCount);
 		
-		if(reportCount==3) {			
+		if(reportCount==3) {
 			
-			//해당 게시물 블라인드 등록 blind code 0으로
-			Blind blind=new Blind();
-			blind.setBlindBoardNo(report.getReportedBoardNo());
-			adminService.addBlind(blind);
+			if(report.getReportedCommentNo().getCommentNo().equals("")) {
 			
-			//해당 게시물 boardStatus 3으로
-			board.setBoardStatus("3");
-			boardService.updateBoardStatus(board);
-			
-		}
+				//해당 게시물 블라인드 등록 blind code 0으로
+				Blind blind=new Blind();
+				blind.setBlindBoardNo(report.getReportedBoardNo());
+				adminService.addBlind(blind);
+				
+				//해당 게시물 boardStatus 3으로
+				board.setBoardStatus("3");
+				boardService.updateBoardStatus(board);		
+							
+			}else if(report.getReportedBoardNo().getBoardNo().equals("")) {
+								
+				//해당 댓글 블라인드 등록 blind code 0으로
+				Blind blind=new Blind();
+				blind.setBlindCommentNo(report.getReportedCommentNo());
+				adminService.addBlind(blind);
+				
+				//해당 게시물 commentStatus 2로
+				comment.setCommentStatus("2");
+				boardService.updateCommentStatus(comment);							
+			}
+						
+		}//신고 횟수 카운트 끝
 		
 		ModelAndView modelAndView=new ModelAndView();
 		modelAndView.setViewName("forward:/view/board/close.jsp");
@@ -243,6 +265,12 @@ public class BoardController {
 		
 		SearchBoard searchBoard=new SearchBoard();
 		
+		if(searchBoard.getCurrentPage() ==0 ){
+			searchBoard.setCurrentPage(1);
+		}
+		
+		searchBoard.setPageSize(boardPageSize);		
+		
 		if(session.getAttribute("user")!=null) {
 		
 			User user=(User)session.getAttribute("user");
@@ -252,13 +280,17 @@ public class BoardController {
 			searchBoard.setLoginUserNo(loginUserNo);
 		}
 		
-		Map<String , Object> map=boardService.listBoard(searchBoard);		
+		
+		Map<String , Object> map=boardService.listBoard(searchBoard);
+		
+		Page resultPage=new Page(searchBoard.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, boardPageSize);
 		
 		List<Local> list = boardService.getState();//추가
 		
 		ModelAndView modelAndView=new ModelAndView();
 		modelAndView.addObject("boardList", map.get("boardList"));//게시물 리스트
-		modelAndView.addObject("searchBoard", searchBoard);
+		modelAndView.addObject("searchBoard", searchBoard);//검색 조건
+		modelAndView.addObject("resultPage", resultPage);//페이지
 		modelAndView.addObject("list",list);//동네  리스트		
 		modelAndView.setViewName("forward:/view/board/listBoard.jsp");
 		
@@ -270,12 +302,12 @@ public class BoardController {
 		
 		System.out.println("/listBoard POST");
 		
-		System.out.println("**********searchBoard : "+searchBoard);
-		
-		System.out.println("=====local : "+searchBoard.getLocal());
-		
 		if(searchBoard.getLocal()=="") {
 			searchBoard.setLocal(null);
+		}
+		
+		if(searchBoard.getSearchKeyword()=="") {
+			searchBoard.setSearchKeyword(null);
 		}
 		
 		if(searchBoard.getCurrentPage()==0) {
@@ -289,19 +321,22 @@ public class BoardController {
 			String loginUserNo=user.getUserNo();
 		
 			searchBoard.setLoginUserNo(loginUserNo);
+		}else if(session.getAttribute("user")==null) {
+			searchBoard.setLoginUserNo(null);
 		}
 		
-		searchBoard.setPageSize(pageSize);
+		searchBoard.setPageSize(boardPageSize);
 		
 		Map<String , Object> map=boardService.listBoard(searchBoard);
-		
-		//System.out.println("컨트롤러 map : "+map);
+
+		Page resultPage=new Page(searchBoard.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, boardPageSize);
 		
 		List<Local> list = boardService.getState();//추가
 		
 		ModelAndView modelAndView=new ModelAndView();
 		modelAndView.addObject("boardList", map.get("boardList"));//게시물 리스트
 		modelAndView.addObject("searchBoard", searchBoard);
+		modelAndView.addObject("resultPage", resultPage);//페이지
 		modelAndView.addObject("list",list);//동네  리스트
 		modelAndView.setViewName("forward:/view/board/listBoard.jsp");
 		

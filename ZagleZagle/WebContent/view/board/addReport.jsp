@@ -27,37 +27,60 @@ $(function(){
 		var reportingUserNo=$("input[name='reportingUserNo']").val();
 		//alert(reportingUserNo);
 		
+		var reportedUserNo=$("input[name='reportedUserNo']").val();
+		//alert(reportedUserNo);
+		
 		var reportedBoardNo=$("input[name='reportedBoardNo']").val();
 		//alert(reportedBoardNo);
 		
-		var reportedUserNo=$("input[name='reportedUserNo']").val();
-		//alert(reportedUserNo);
+		var reportedCommentNo=$("input[name='reportedCommentNo']").val();
+		//alert(reportedCommentNo);
 		
 		
 		if(reportReason=='0'){
 			alert("신고 사유를 선택해주세요");
 			return;
 		}
-		
-		self.location="/board/addReport?reportReason="+reportReason+"&reportingUserNo="+reportingUserNo+"&reportedBoardNo="+reportedBoardNo+"&reportedUserNo="+reportedUserNo;	
 
+		self.location="/board/addReport?reportReason="+reportReason+"&reportingUserNo="+reportingUserNo+"&reportedUserNo="+reportedUserNo+"&reportedBoardNo="+reportedBoardNo+"&reportedCommentNo="+reportedCommentNo;	
+	
 	});
 });
 
 //부모창에서 값 받아오기
 window.onload = function () {
+	
     var search = window.location.search;
     var getData =  decodeURI(search);
+    
+    //게시물인지 댓글인지 구분
+    var vali=getData.substring(5,7);
     		
-    var reportedBoardNo=getData.substring(5,12);
+    if(vali=='BD'){
+    	
+    	var reportedBoardNo=getData.substring(5,12);
+        
+        var reportedUserNo=getData.substring(12,20);
+        
+        var sender1 = document.querySelector('#reportedBoardNo');
+        sender1.value = reportedBoardNo;
+        
+        var sender2 = document.querySelector('#reportedUserNo');
+        sender2.value = reportedUserNo;
+    	
+    }else if(vali=='CM'){
+    	
+		var reportedCommentNo=getData.substring(5,12);
+        
+        var reportedUserNo=getData.substring(12,20);
+        
+        var sender1 = document.querySelector('#reportedCommentNo');
+        sender1.value = reportedCommentNo;
+        
+        var sender2 = document.querySelector('#reportedUserNo');
+        sender2.value = reportedUserNo;
+    }
     
-    var reportedUserNo=getData.substring(12,20);
-    
-    var sender1 = document.querySelector('#reportedBoardNo');
-    sender1.value = reportedBoardNo;
-    
-    var sender2 = document.querySelector('#reportedUserNo');
-    sender2.value = reportedUserNo;
     
 }
 
@@ -68,16 +91,20 @@ window.onload = function () {
 </head>
 <body>
 <form name="addReport">
+
 	<select class="form-control" id="reportReason" name="reportReason">
 		      	<option value="0">신고 사유를 선택해주세요</option>
-		      	<option value="욕설">욕설</option>
-		      	<option value="광고">광고</option>
-		      	<option value="음란">음란</option>		      	
+		      	<option value="욕설/비방">욕설/비방</option>
+		      	<option value="광고/허위">광고/허위</option>
+		      	<option value="음란/유해">음란/유해</option>		      	
 	</select>
 	
 	<input type="hidden" name="reportingUserNo" value="${user.userNo}"/>
-	<input type="hidden" name="reportedBoardNo" id="reportedBoardNo"/>
 	<input type="hidden" name="reportedUserNo" id="reportedUserNo"/>
+	
+	<input type="hidden" name="reportedBoardNo" id="reportedBoardNo"/>
+	
+	<input type="hidden" name="reportedCommentNo" id="reportedCommentNo"/>
 
 	
 </form>

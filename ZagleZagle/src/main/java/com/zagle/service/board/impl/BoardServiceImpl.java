@@ -69,9 +69,12 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public Map<String, Object> listBoard(SearchBoard searchBoard) throws Exception {
 		List<Board> list=boardDAO.listBoard(searchBoard);
+
+		int totalCount=boardDAO.getTotalCount(searchBoard);
 		
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("boardList", list);
+		map.put("totalCount", new Integer(totalCount));
 		
 		return map;
 	}
@@ -102,6 +105,12 @@ public class BoardServiceImpl implements BoardService{
 		List<Comment> list=boardDAO.listComment(boardNo);
 		
 		return list;
+	}
+
+	
+	@Override
+	public void updateCommentStatus(Comment comment) throws Exception {
+		boardDAO.updateCommentStatus(comment);
 	}
 
 	@Override

@@ -25,6 +25,7 @@
 		<result	property="checkLike"	column="check_like"	jdbcType="VARCHAR"/>
 		<result	property="scrapUserNo"	column="scrap_user_no"	jdbcType="VARCHAR"/>
 		<result	property="checkScrap"	column="check_scrap"	jdbcType="VARCHAR"/>
+		<result	property="likeCount"	column="likeCount"	jdbcType="VARCHAR"/>
 	</resultMap>
 	
 	<resultMap type="comment" id="commentSelectMap">
@@ -35,6 +36,7 @@
 		<result property="user.userNickname" column="user_nickname"	jdbcType="VARCHAR"/>
 		<result property="commentDetailText"	column="comment_detail_text"	jdbcType="VARCHAR"/>
 		<result property="commentRegDate"	column="comment_reg_date"	jdbcType="DATE"/>
+		<result property="commentStatus"	column="comment_status"	jdbcType="DATE"/>
 	</resultMap>
 	
 	<resultMap type="like" id="likeSelectMap">
@@ -61,8 +63,8 @@
 	 
 	<insert id="addComment" parameterType="comment">
 	 	INSERT
-	 	INTO comments(comment_no, board_no, user_no, comment_detail_text, comment_reg_date)
-	 	VALUES('CM'||seq_cm.nextval,#{board.boardNo},#{user.userNo},#{commentDetailText},sysdate)
+	 	INTO comments(comment_no, board_no, user_no, comment_detail_text, comment_reg_date, comment_status)
+	 	VALUES('CM'||seq_cm.nextval,#{board.boardNo},#{user.userNo},#{commentDetailText},sysdate,#{commentStatus})
 	 </insert>
 	 
 	 
@@ -80,7 +82,9 @@
 	 
 	 
 	<select id="listBoard" parameterType="com.zagle.service.domain.SearchBoard" resultMap="boardSelectMap">
-		SELECT DISTINCT u.user_no, u.profile, u.user_nickname, b.board_no, b.photo1, b.photo2, b.photo3, b.board_detail_text, b.hash_tag, b.user_theme, b.coord, b.board_reg_date, b.board_status, b.address		
+		SELECT DISTINCT u.user_no, u.profile, u.user_nickname, b.board_no, b.photo1, b.photo2, b.photo3, b.board_detail_text, b.hash_tag, b.user_theme, b.coord, b.board_reg_date, b.board_status, b.address 	
+		,(SELECT count(*) FROM likes WHERE board_no=b.board_no AND check_like='1')likeCount
+		
 		
 		<if test="loginUserNo!=null">
 		, l.user_no AS like_user_no, NVL(l.check_like,'0') check_like, s.user_no AS scrap_user_no, NVL(s.check_scrap,'0') check_scrap
@@ -88,6 +92,7 @@
 		
 		FROM users u, board b, likes l, scrap s
 		WHERE (u.user_no=b.user_no AND b.board_no=l.board_no(+)) AND (u.user_no=b.user_no AND b.board_no=s.board_no(+))
+		AND b.board_status !='2' 
 		
 		<if test="local!=null">
 		AND b.address LIKE '%'||#{local}||'%'
@@ -106,7 +111,7 @@
 	 
 	 
 	 <select id="listComment" parameterType="string" resultMap="commentSelectMap">
-	 	SELECT DISTINCT u.user_no, u.profile, u.user_nickname, c.board_no, c.comment_no, c.comment_detail_text, c.comment_reg_date 
+	 	SELECT DISTINCT u.user_no, u.profile, u.user_nickname, c.board_no, c.comment_no, c.comment_detail_text, c.comment_reg_date, c.comment_status  
 		FROM users u, comments c 
 		WHERE c.user_no=u.user_no AND c.board_no=#{value} 
 	 	ORDER BY c.comment_reg_date
@@ -117,6 +122,38 @@
 	 	SELECT *
 	 	FROM board
 	 	WHERE board_no=#{value}
+	</select>
+	
+	<select id="getTotalCount" parameterType="com.zagle.service.domain.SearchBoard" resultType="int">
+	SELECT COUNT(*)
+	FROM(
+		SELECT DISTINCT u.user_no, u.profile, u.user_nickname, b.board_no, b.photo1, b.photo2, b.photo3, b.board_detail_text, b.hash_tag, b.user_theme, b.coord, b.board_reg_date, b.board_status, b.address 	
+		,(select count(*) from likes where board_no=b.board_no and check_like='1')likeCount
+		
+		
+		<if test="loginUserNo!=null">
+		, l.user_no AS like_user_no, NVL(l.check_like,'0') check_like, s.user_no AS scrap_user_no, NVL(s.check_scrap,'0') check_scrap
+		</if>	
+		
+		FROM users u, board b, likes l, scrap s
+		WHERE (u.user_no=b.user_no AND b.board_no=l.board_no(+)) AND (u.user_no=b.user_no AND b.board_no=s.board_no(+))
+		AND b.board_status !='2' 
+		
+		<if test="local!=null">
+		AND b.address LIKE '%'||#{local}||'%'
+		</if>
+		
+		<if test="searchKeyword!=null">
+		AND b.hash_tag LIKE '%'||#{searchKeyword}||'%'
+		</if>
+		
+		<if test="loginUserNo!=null">
+		AND l.user_no(+)=#{loginUserNo} AND s.user_no(+)=#{loginUserNo}
+		</if>
+		
+		ORDER BY b.board_reg_date DESC
+		)countTable
+		
 	</select>
 
 
@@ -143,6 +180,14 @@
 			board_status=#{boardStatus}
 		</set>
 		WHERE board_no=#{boardNo}
+	</update>
+	
+	<update id="updateCommentStatus" parameterType="Comment">
+		UPDATE comments
+		<set>
+			comment_status=#{commentStatus}
+		</set>
+		WHERE comment_no=#{commentNo}
 	</update>
 	
 	
@@ -185,74 +230,7 @@
 		select * from board where address like '${searchKeyword}%' and board_status=1
 	</select>
 	
-<!-- ////////////////////////////////////// -->	
-	
-	
-	 <!-- SQL : INSERT -->
-   <!-- <insert id="addReComment" parameterType="com.destiny.service.domain.Comment">
-       INSERT
-      INTO comments ( comment_no, community_no, comment_writer_id, comment_detail, comment_write_date, comment_target_no, comment_view_condition ) 
-      VALUES ( seq_comment_no.nextval, #{commentComuNo}, #{commentWriterId}, #{commentDetail}, SYSDATE, #{targetNo}, #{viewCondition})
-    </insert> -->
-   
-   <!-- SQL : INSERT -->
-   <!-- <insert id="addComment" parameterType="comment">
-       INSERT
-      INTO comments( comment_no, community_no, comment_writer_id, comment_detail, comment_write_date, comment_target_no, comment_view_condition ) 
-      VALUES( seq_comment_no.nextval, #{commentComuNo}, #{commentWriterId}, #{commentDetail}, SYSDATE, seq_comment_no.currval, #{viewCondition} )
-   </insert> -->
-    
-    <!-- SQL : SELECT ONE -->
-    <!-- <select id="getComment" parameterType="int" resultMap="commentSelectMap">
-      SELECT
-      comment_no, community_no, comment_writer_id, comment_detail, comment_write_date, comment_target_no, comment_view_condition
-      FROM comments
-      WHERE comment_no = #{value}
-    </select> -->
-    
-    <!-- SQL : UPDATE -->
-   <!--  <update id="updateComment"   parameterType="com.destiny.service.domain.Comment" >
-         UPDATE comments
-         <set>
-            comment_detail = #{commentDetail}
-         </set>
-         WHERE comment_no = #{commentNo}
-    </update> -->
-    
-    <!-- SQL : VIEW_CONDITION UPDATE -->
-    <!-- <update id="updateViewCondition"   parameterType="com.destiny.service.domain.Comment" >
-         UPDATE comments
-         <set>
-            comment_view_condition = 'DEL'
-         </set>
-         WHERE comment_no = #{commentNo}
-    </update> -->
-   
-   <!-- SQL : SELECT LIST -->
-   <!-- <select  id="getCommentList"  parameterType="map"   resultMap="commentSelectMap">
-        SELECT comment_no , community_no , comment_writer_id , comment_detail , comment_write_date, comment_target_no, comment_view_condition
-      FROM comments
-      WHERE community_no = #{commentComuNo} and comment_view_condition = 'DEF' and parent_reply_no is NULL
-      ORDER BY comment_target_no, comment_no 
-        SELECT *
-        FROM (   SELECT inner_table.* , ROWNUM AS row_seq
-                    FROM      (   SELECT comment_no , community_no , comment_writer_id , comment_detail , comment_write_date, comment_target_no, comment_view_condition
-                                 FROM comments
-                                 WHERE community_no = #{commentComuNo} and parent_reply_no is NULL
-                                 ORDER BY comment_target_no, comment_no
-                               ) inner_table
-                  WHERE ROWNUM &lt;= #{search.endRowNum} )
-      WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
-    </select> -->
-    
-    <!-- SQL : SELECT ROW Count -->    
-    <!-- <select  id="getTotalCount"  parameterType="String"    resultType="int">
-        SELECT COUNT(*)
-        FROM(   SELECT comment_no , community_no , comment_writer_id , comment_detail , comment_write_date, comment_target_no, comment_view_condition
-                  FROM comments
-                  WHERE community_no = #{value} 
-                ) countTable                  
-    </select> -->
+
 	
 	 
 </mapper>

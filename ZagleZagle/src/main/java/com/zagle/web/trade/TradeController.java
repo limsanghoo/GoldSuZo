@@ -192,7 +192,7 @@ public class TradeController {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("sell",sell);
-		modelAndView.setViewName("forward:/trade/listBuy");
+		modelAndView.setViewName("redirect:/trade/listBuy");
 		
 		return modelAndView;
 	}
@@ -214,5 +214,30 @@ public class TradeController {
 		session.setAttribute("user", testUser);
 		
 		return "redirect:/trade/listTrade";
+	}
+	
+	@RequestMapping(value="payBuy", method=RequestMethod.GET)
+	public ModelAndView payBuy(@ModelAttribute("buyNo") String buyNo) throws Exception{
+		
+		Buy buy = new Buy();
+		
+		buy = tradeService.getBuy(buyNo);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("buy",buy);
+		modelAndView.setViewName("forward:/view/trade/payBuy.jsp");
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="payBuy", method=RequestMethod.POST)
+	public ModelAndView payBuy(@ModelAttribute("buy") Buy buy ) throws Exception{
+		
+		System.out.println(buy);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("redirect:/trade/listBuy");
+		 
+		return modelAndView;
 	}
 }

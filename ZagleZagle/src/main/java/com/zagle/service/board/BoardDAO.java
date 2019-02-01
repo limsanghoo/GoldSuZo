@@ -25,6 +25,8 @@ public void addBoard(Board board) throws Exception;
 	
 	public List<Board> listBoard(SearchBoard searchBoard) throws Exception;
 
+	public int getTotalCount(SearchBoard searchBoard) throws Exception;
+	
 	public Board getBoard(String boardNo) throws Exception;
 	
 	public void addReport(Report report) throws Exception;
@@ -34,6 +36,8 @@ public void addBoard(Board board) throws Exception;
 	public void addComment(Comment comment) throws Exception;
 	
 	public List<Comment> listComment(String boardNo) throws Exception;
+	
+	public void updateCommentStatus(Comment comment) throws Exception;
 	
 	public void deleteComment(String commentNo) throws Exception;
 	

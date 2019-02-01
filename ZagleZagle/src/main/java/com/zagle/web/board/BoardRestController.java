@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.zagle.common.Page;
 import com.zagle.common.Search;
 import com.zagle.service.board.BoardService;
 import com.zagle.service.domain.Board;
@@ -34,6 +35,8 @@ import com.zagle.service.domain.Comment;
 import com.zagle.service.domain.Like;
 import com.zagle.service.domain.Local;
 import com.zagle.service.domain.Scrap;
+import com.zagle.service.domain.SearchBoard;
+import com.zagle.service.domain.User;
 import com.zagle.service.user.UserService;
 
 @RestController
@@ -55,8 +58,8 @@ public class BoardRestController {
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
 	
-	@Value("#{commonProperties['pageSize']}")
-	int pageSize;
+	@Value("#{commonProperties['boardPageSize']}")
+	int boardPageSize;
 	
 	@RequestMapping(value="json/shareBoard", method=RequestMethod.GET)
 	public ModelAndView shareBoard() throws Exception{
@@ -146,6 +149,7 @@ public class BoardRestController {
 	      comment.setUser(userService.getUser2(userNo));
 	      comment.setBoard(boardService.getBoard(boardNo));
 	      comment.setCommentDetailText(commentDetailText);
+	      comment.setCommentStatus("1"); //정상 댓글
 	      
 	      boardService.addComment(comment);
 	      
@@ -294,5 +298,106 @@ public class BoardRestController {
 		 return boardService.getBoard(boardNo);
 		 
 	 }
+	 
+	 @RequestMapping( value="json/listBoard", method=RequestMethod.POST)
+	 public Map<String,Object> listBoard(@RequestBody SearchBoard searchBoard, HttpSession session) throws Exception{
+		
+		 	if(searchBoard.getLocal()=="") {
+				searchBoard.setLocal(null);
+			}
+			
+			if(searchBoard.getSearchKeyword()=="") {
+				searchBoard.setSearchKeyword(null);
+			}
+			
+			if(searchBoard.getCurrentPage()==0) {
+				searchBoard.setCurrentPage(1);
+			}
+			
+			if(session.getAttribute("user")!=null) {
+				
+				User user=(User)session.getAttribute("user");
+					
+				String loginUserNo=user.getUserNo();
+			
+				searchBoard.setLoginUserNo(loginUserNo);
+			}else if(session.getAttribute("user")==null) {
+				searchBoard.setLoginUserNo(null);
+			}
+			
+			searchBoard.setPageSize(boardPageSize);
+			
+			Map<String , Object> map=boardService.listBoard(searchBoard);
+
+			Page resultPage=new Page(searchBoard.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, boardPageSize);
+			
+			List<Local> list = boardService.getState();//추가
+			
+			map.put("searchBoard", searchBoard);
+			map.put("resultPage", resultPage);
+			map.put("list",list);
+			
+			System.out.println(map);
+		 
+		 return map;
+		 
+	 }
+	 
+	 
+//	 @RequestMapping( value="json/listProduct/", method=RequestMethod.POST)
+//	   public Map<String,Object>listProduct(@RequestBody Map<String,String> maps  ) throws Exception {
+//
+//	         
+//	         Search search = new Search();
+//
+//	   /*   search.setSortCondition(sortCondition);
+//
+//	      search.setSearchCondition(searchCondition);
+//
+//	      
+//	      if(search.getCurrentPage() ==0 ){
+//	         System.out.println("pageset===="+currentPage);
+//	         search.setCurrentPage(currentPage);
+//	   }
+//	      */
+//	         
+//	      /*if(search.getSortCondition()==null) {
+//	         search.setSearchCondition("0");
+//	         search.setSortCondition("1");
+//	         search.setSearchKeyword("");
+//	      }
+//	      if(search.getPrice1()==null) {
+//	         search.setPrice1("");
+//	         search.setPrice2("");
+//	      }
+//	      if(search.getInquiryCondition()==null) {
+//	         search.setInquiryCondition("");
+//	      }*/
+//	         //System.out.println("page===="+maps.get("page"));
+//	         //search.setCurrentPage(Integer.parseInt(maps.get("page")));
+//	         search.setInquiryCondition((String) maps.get("inquiryCondition"));
+//	         search.setPrice1((String)maps.get("searchprice1"));
+//	         search.setPrice2((String)maps.get("searchprice2"));
+//	         search.setSortCondition((String) maps.get("sortCondition"));
+//	         search.setSearchKeyword((String) maps.get("searchKeyword"));
+//	         search.setSearchCondition((String) maps.get("searchCondition"));
+//	         search.setPageSize(pageSize);
+//	         search.setCurrentPage(Integer.parseInt(maps.get("CurrentPage")));
+//	         System.out.println("map占쏙옙占쌍는곤옙 占쏙옙占쏙옙占쏙옙==="+search);
+//	      // Business logic 占쏙옙占쏙옙
+//	      System.out.println("search占쏙옙 占쏙옙 占쏙옙載� 占쌍댐옙"+search);
+//	      Map<String , Object> map=productService.getProductList(search);
+//	      //List list = (List) map.get("list");
+//	      System.out.println("map占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙載� 占쌍댐옙"+map);
+//
+//	      //System.out.println("map占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙載� 占쌍댐옙"+"mapprice1="+map.get("searchprice1"));
+//	      Page resultPage = new Page((Integer.parseInt(maps.get("CurrentPage"))), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+//	      System.out.println(resultPage);
+//	      map.put("resultPage",resultPage);
+//	      System.out.println("占쏙옙占쏙옙================="+map);
+//	      
+//	      return map;
+//	   }
+	 
 
 }
