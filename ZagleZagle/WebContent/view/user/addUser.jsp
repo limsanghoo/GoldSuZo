@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<!-- 합쳐지고 최소화된 최신 CSS -->
+   <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
 <!-- 부가적인 테마 -->
@@ -22,29 +22,33 @@
 
 
 function fncAddUser() {
-	
-	
-	alert("확인용")
-	
-	history.replaceState({}, null, location.pathname);
-	
-	var name=$("input[name='userName']").val();
-	var nickName=$("input[name='userNickname']").val();
-	var birth=$("input[name='userBirth']").val();
-	var userAddr=$("input[name='userAddr']").val();
-	
-	
-	alert(name)
-	alert(nickName)
-	alert(birth)
-	alert(userAddr)
-	
-	if(birth.length >7 || birth.length<5) {
-		alert("주민등록번호 앞자리를 입력해주세요")
-	}
-	
-	
-	$("form").attr("method" , "POST").attr("action" , "/user/addUser").submit();
+   
+   
+   alert("확인용")
+   
+   history.replaceState({}, null, location.pathname);
+   
+   var name=$("input[name='userName']").val();
+   var nickName=$("input[name='userNickname']").val();
+   var birth=$("input[name='userBirth']").val();
+   var userAddr=$("input[name='userAddr']").val();
+   var profile=$("input[name='profile']").val();
+   
+   
+   alert(name)
+   alert(nickName)
+   
+   alert(profile)
+   
+  
+   
+   if(birth.length != 6) {
+      alert("주민등록번호 앞자리를 입력해주세요")
+      return;
+   }
+   
+   
+   $("#goCon").attr("method" , "POST").attr("action" , "/user/addUser").submit();
 }
 
 
@@ -62,26 +66,28 @@ function checkNickname() {
         },
         url : "/user/checkNickname/{userNickname}",
         success : function(data) {
-        	
+           
        
-        	
+           
             if(inputed=="" && data=='0') {
                 $("#agreement").prop("disabled", true);
                 $("#agreement").css("background-color", "#aaaaaa");
                 $("#userNickname").css("background-color",  "rgba(255, 255, 255, 0)");
-                nicCheck = 0;
+             
          
             }else if(data =='0') {
-            		  $("#agreement").prop("disabled", false);
-            		    $("#agreement").css("background-color", "#2eca6a");
+                    $("#agreement").prop("disabled", false);
+                      $("#agreement").css("background-color", "#2eca6a");
                       $("#userNickname").css("background-color", "#2eca6a");
-            	
+               
           
             }else if (data == '1') {
                 $("#agreement").prop("disabled", true);
                 $("#agreement").css("background-color", "#aaaaaa");
                 $("#userNickname").css("background-color", "#FFCECE");
-                nicCheck = 0;
+                
+                                
+               
             } 
         }
     });
@@ -92,153 +98,170 @@ function checkNickname() {
 
 
 function fncGetState(){
-	
-	var stateCode = $("select[name=state]").val();
-	
-	
-	$.ajax(
-		{
-			url : "/board/json/listMap/getCity/"+stateCode,
-			method : "GET",
-			header : {
-				"Accept" : "application/json",
-				"Content-Type" : "application/json"
-			},
-			success : function(data, status){
-				
-				var temp ="";
-				var display ="";
-				
-				if(data.length>0){
-					$.each(data, function(index){
-						temp = "<option value='"+data[index].cityCode+"' style='font-size:20px; color: black;'>"+data[index].cityName+"</option>";
-						display += temp;
-					});
-					
-					$("select[name=city]").children("option").not("option:nth-child(1)").remove();
-					$("select[name=city]").append(display);
-				}
-				
-			}
-			
-		});
+   
+   var stateCode = $("select[name=state]").val();
+   
+   
+   $.ajax(
+      {
+         url : "/board/json/listMap/getCity/"+stateCode,
+         method : "GET",
+         header : {
+            "Accept" : "application/json",
+            "Content-Type" : "application/json"
+         },
+         success : function(data, status){
+            
+            var temp ="";
+            var display ="";
+            
+            if(data.length>0){
+               $.each(data, function(index){
+                  temp = "<option value='"+data[index].cityCode+"' style='font-size:20px; color: black;'>"+data[index].cityName+"</option>";
+                  display += temp;
+               });
+               
+               $("select[name=city]").children("option").not("option:nth-child(1)").remove();
+               $("select[name=city]").append(display);
+            }
+            
+         }
+         
+      });
 }
 
 
 function fncGetTown(){
-	var stateName = $("select[name=state] option:checked").text();
-	var cityName = $("select[name=city] option:checked").text();
-	var townName = $("select[name=town] option:checked").text();
-	
-	var local = stateName+" "+cityName+" "+townName;
-	
-	$("input:hidden[name='userAddr']").val( local );
+   var stateName = $("select[name=state] option:checked").text();
+   var cityName = $("select[name=city] option:checked").text();
+   var townName = $("select[name=town] option:checked").text();
+   
+   var local = stateName+" "+cityName+" "+townName;
+   
+   $("input:hidden[name='userAddr']").val( local );
 }
 
 $(function() {
-	
-	$('#profile').on('change',function(){
-	     var formData = new FormData($('form')[0]);
-	     
-	        var ajaxReq = $.ajax({
-	             type : 'post',
-	             url : '/user/json/uploadFile/',
-	             data : formData,
-	             processData : false,
-	             contentType : false,
-	           
-	             success : function(data, statusText, xhr) {	         		                	 
-	            //	 $("#msg").val(data);
-	            	
-	               alert("프로필 사진 등록 성공") 
-	               alert(data)
+   
+   $('#broll').on('change',function(){
 	   
-	             },
-	             error : function(error) {
-	                 alert("파일 업로드에 실패하였습니다.");
-	                 console.log(error);
-	                 console.log(error.status);
-	             }
-	         });
-	        
-	        
-	        ajaxReq.done(function(data){
-	       		
-	        	alert(data)
-	        	
-	        	setTimeout(function() {
-	            		while(true){
-		            		var path = 'http://192.168.0.35:8080/common/images/profile/'+data;
-		            		var re = doesFileExist(path);
-		            		if (re) {
-		            			
-		            			$("#uploadPro").html("<img src='/common/images/profile/"+data+"'/>")
-		            			
-								break;
-							}
-		            	}
-	            	},2000);
-				
-	        	
-	        	
-	        });
-	        
-	        function doesFileExist(urlToFile) {
-			    var xhr = new XMLHttpRequest();
-			    xhr.open('HEAD', urlToFile, false);
-			    xhr.send();
-			     
-			    if (xhr.status == "404") {
-			        return false;
-			    } else {
-			        return true;
-			    }
-			}
+	   var form = $("#perioe")[0];
+        var formData = new FormData(form);
+        
+  
+			
+        
+           var ajaxReq = $.ajax({
+                type : 'post',
+                url : '/user/json/uploadFile/',
+                data : formData,
+                processData : false,
+                contentType : false,
+              
+                success : function(data, statusText, xhr) {                                      
+               //    $("#msg").val(data);
+                  alert(data)
+                  
+                  alert("프로필 사진 등록 성공") 
+                 
+      
+                },
+                error : function(error) {
+                    alert("파일 업로드에 실패하였습니다.");
+                    console.log(error);
+                    console.log(error.status);
+                }
+            });
+           
+           
+        
+           ajaxReq.done(function(data){
+        	   
+        	   	alert(data)
+        	  
+       		 $("#coffee").val(data);
+    
+      	
+              
+              if(data == "") {
+            	  
+            	  alert("데이터 없음")
+            	  
+              } else  {
+              
+              setTimeout(function() {
+                     while(true){
+                        var path = 'http://192.168.0.35:8080/common/images/profile/'+data;
+                        var re = doesFileExist(path);
+                        if (re) {
+                           
+                           $("#uploadPro").html("<img src='/common/images/profile/"+data+"'/>")
+                           
+                        break;
+                     }
+                     }
+                  },2000);
+            
+              }
+              
+           });
+           
+           function doesFileExist(urlToFile) {
+             var xhr = new XMLHttpRequest();
+             xhr.open('HEAD', urlToFile, false);
+             xhr.send();
+              
+             if (xhr.status == "404") {
+                 return false;
+             } else {
+                 return true;
+             }
+         }
 
 
 
- 	});	
+    });   
 });
 
 
 
 function fncGetCity(){
-	
-	var stateCode = $("select[name=state]").val();
-	var cityCode = $("select[name=city]").val();
-	//alert(cityCode);
-	
-	$.ajax(
-		{
-			url : "/board/json/listMap/getTown/"+cityCode+"/"+stateCode,
-			method : "GET",
-			header : {
-				"Accept" : "application/json",
-				"Content-Type" : "application/json"
-			},
-			success : function(data, status){
-				
-				var temp ="";
-				var display ="";
-				
-				if(data.length>0){
-					$.each(data, function(index){
-						temp = "<option value='"+data[index].townCode+"' style='font-size:20px; color: black;'>"+data[index].townName+"</option>";
-						display += temp;
-					});
-					
-					$("select[name=town]").children("option").not("option:nth-child(1)").remove();
-					$("select[name=town]").append(display);
-				}
-				
-			}
-			
-		});
+   
+   var stateCode = $("select[name=state]").val();
+   var cityCode = $("select[name=city]").val();
+   //alert(cityCode);
+   
+   $.ajax(
+      {
+         url : "/board/json/listMap/getTown/"+cityCode+"/"+stateCode,
+         method : "GET",
+         header : {
+            "Accept" : "application/json",
+            "Content-Type" : "application/json"
+         },
+         success : function(data, status){
+            
+            var temp ="";
+            var display ="";
+            
+            if(data.length>0){
+               $.each(data, function(index){
+                  temp = "<option value='"+data[index].townCode+"' style='font-size:20px; color: black;'>"+data[index].townName+"</option>";
+                  display += temp;
+               });
+               
+               $("select[name=town]").children("option").not("option:nth-child(1)").remove();
+               $("select[name=town]").append(display);
+            }
+            
+         }
+         
+      });
 }
 
 
 
-	
+   
 </script>
 
 <style>
@@ -1034,21 +1057,21 @@ input.checkbox:checked:after {
 }
 
 
-	#uploadPro{
-			height: 70px;
-			width: 70px;
-			border:1.5px solid #f5f6fa;
-			border-radius: 50%;
-			margin : auto;
-		}
-		
-	#camera{
-	
-	margin : auto;
-		
-	}	
+   #uploadPro, img{
+         height: 70px;
+         width: 70px;
+         border:1.5px solid #f5f6fa;
+         border-radius: 50%;
+         margin : auto;
+      }
+      
+   #camera{
+   
+   margin : auto;
+      
+   }   
 
-	
+   
 input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1px; height: 1px; 
 padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
 
@@ -1059,7 +1082,7 @@ padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
 
 
 
-<head>
+
 <title>Creative Colorlib SignUp Form</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -1070,107 +1093,111 @@ padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
 <!-- web font -->
 <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
 <!-- //web font -->
-</head>
+
 
 <body>
-	<!-- main -->
-	<div class="main-w3layouts wrapper">
-		<h1>추가정보 입력</h1>
-		<div class="main-agileinfo">
-			<div class="agileits-top">
-				<form enctype="multipart/form-data" method="post">
-					
-					<input type="file" name="profile" id="profile"/>
-					<div id="uploadPro">
-					
-				
-					
-					</div> <label for="profile" style="margin: auto;" id="aaa"><br>프로필 등록&nbsp;<i class="glyphicon glyphicon-camera" style="width: 10px; height: 10px;" ></i></label>
-					
-					
-					<br><br>
-					
-					<input class="text" type="text" name="userName" placeholder="이름을 입력하세요." required="">
-					<br>
-					
-					<input class="text" type="text" name="userNickname" placeholder="닉네임을 입력하세요."  id="userNickname" name="userNickname" placeholder="중복확인하세요"
-		      																																				oninput="checkNickname()" required="">
-					
-					<br>
-				
-					<input class="text" type="text" name="userBirth" placeholder="주민등록번호 앞자리만 입력하세요." required="">
-		
-					<br>
-				
-				
+   <!-- main -->
+   <div class="main-w3layouts wrapper">
+      <h1>추가정보 입력</h1>
+      <div class="main-agileinfo">
+         <div class="agileits-top">
+         
+            <form enctype="multipart/form-data" method="post" id="perioe">
+               <input type="file" id="broll" name="proimg"/>
+            </form>
+            
+            
+               
+               <div id="uploadPro">
+               
+              
+                          
+              </div> <label for="broll" style="margin: auto;" id="aaa"><br>프로필 등록&nbsp;<i class="glyphicon glyphicon-camera" style="width: 10px; height: 10px;" ></i></label>
+               <form method="post" id="goCon">
+                <input type="hidden" id="coffee" name="profile" value="default.png"/>
+               <br><br>
+               
+               <input class="text" type="text" name="userName" placeholder="이름을 입력하세요." required="">
+               <br>
+               
+               <input class="text" type="text" name="userNickname" placeholder="닉네임을 입력하세요."  id="userNickname" name="userNickname" placeholder="중복확인하세요"
+                                                                                                                        oninput="checkNickname()" required="">
+               
+               <br>
+            
+               <input class="text" type="text" name="userBirth" placeholder="주민등록번호 앞자리만 입력하세요." required="">
+      
+               <br>
+            
+            
 
-				
-					<div class="row"style="text-align: center; display: inherit;" >
-				<select name="state" class="ct_input_g" onchange="fncGetState(this)">
-					<option value='' style="font-size:20px;"  selected>시·도</option>
-					
-					<c:set var="i" value="0"/>
-					<c:forEach var="local" items="${list}">
-					<c:set var="i" value="${i+1}"/>
-					<option value='${local.stateCode}' style="font-size:20px; color: black;">${local.stateName}</option>
-					</c:forEach>
-					
+            
+               <div class="row"style="text-align: center; display: inherit;" >
+            <select name="state" class="ct_input_g" onchange="fncGetState(this)">
+               <option value='' style="font-size:20px;"  selected>시·도</option>
+               
+               <c:set var="i" value="0"/>
+               <c:forEach var="local" items="${list}">
+               <c:set var="i" value="${i+1}"/>
+               <option value='${local.stateCode}' style="font-size:20px; color: black;">${local.stateName}</option>
+               </c:forEach>
+               
 
-			
-				</select>
-				
-				<select name="city"  class="ct_input_g" onchange="fncGetCity(this)">
-					<option value="" style="font-size:20px;">시·군·구</option>
-				</select>
+         
+            </select>
+            
+            <select name="city"  class="ct_input_g" onchange="fncGetCity(this)">
+               <option value="" style="font-size:20px;">시·군·구</option>
+            </select>
         
-				<select name="town"  class="ct_input_g"  onchange="fncGetTown(this)">
-					<option value="" style="font-size:20px;">읍·면·동</option>
-				</select>  
-				<input type="hidden" name="userAddr" />
-				<input type="hidden" name="snsNo" value="${snsNo}"/>
-				            
-			</div>
+            <select name="town"  class="ct_input_g"  onchange="fncGetTown(this)">
+               <option value="" style="font-size:20px;">읍·면·동</option>
+            </select>  
+            <input type="hidden" name="userAddr" />
+            <input type="hidden" name="snsNo" value="${snsNo}"/>
+                        
+         </div>
 <br/>
-				
-	
-							
-					<div class="wthree-text">
-						<label class="anim">
-						
-							<input type="checkbox" class="checkbox" required="">
-				
-							<span>추가정보 기입에 동의합니다.</span>
-						</label>
-						<div class="clear"> </div>
-					</div>
-					
-					
-				</form>
-					
-					<input type="submit" value="확 인" id="agreement" onclick="javascript : fncAddUser()">
-					
-			
-			
-			</div>
-		</div>
-		<!-- copyright -->
-		<div class="colorlibcopy-agile">
-			<p>© 2019 DongneVangne Signup Form. All rights reserved | Design by <a href="https://colorlib.com/" target="_blank">DongneVangne</a></p>
-		</div>
-		<!-- //copyright -->
-		<ul class="colorlib-bubbles">
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-		</ul>
-	</div>
-	<!-- //main -->
+            
+   
+                     
+               <div class="wthree-text">
+                  <label class="anim">
+                  
+                     <input type="checkbox" class="checkbox" required="">
+            
+                     <span>추가정보 기입에 동의합니다.</span>
+                  </label>
+                  <div class="clear"> </div>
+               </div>
+               
+               
+            </form>
+               
+               <input type="submit" value="확 인" id="agreement" onclick="javascript : fncAddUser()">
+               
+         
+         
+         </div>
+      </div>
+      <!-- copyright -->
+      <div class="colorlibcopy-agile">
+         <p>© 2019 DongneVangne Signup Form. All rights reserved | Design by <a href="https://colorlib.com/" target="_blank">DongneVangne</a></p>
+      </div>
+      <!-- //copyright -->
+      <ul class="colorlib-bubbles">
+         <li></li>
+         <li></li>
+         <li></li>
+         <li></li>
+         <li></li>
+         <li></li>
+         <li></li>
+         <li></li>
+         <li></li>
+         <li></li>
+      </ul>
+   </div>
+   <!-- //main -->
 </body>
 </html>

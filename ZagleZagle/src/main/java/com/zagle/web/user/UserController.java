@@ -55,6 +55,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -162,7 +163,7 @@ public class UserController {
 		
 	}
 	@RequestMapping(value="addUser", method=RequestMethod.POST)
-	public ModelAndView addUser(@ModelAttribute("user") User user)throws Exception {
+	public ModelAndView addUser(@ModelAttribute("user") User user, HttpSession session)throws Exception {
 		
 		System.out.println("/user/addUser : POST");
 		
@@ -171,6 +172,8 @@ public class UserController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject(user);
 		modelAndView.setViewName("/view/user/model.jsp");
+		
+		session.setAttribute("user", user);
 		
 		return modelAndView;
 		

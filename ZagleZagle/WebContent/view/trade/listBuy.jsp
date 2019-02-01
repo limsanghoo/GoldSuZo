@@ -40,20 +40,11 @@
 		
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$( ".list" ).on("click" , function() {
-					self.location ="/product/getProduct?prodNo="+$(this).data("prodno");
+					self.location ="/trade/getBuy?buyNo="+$(this).data("buyno");
 			});
-			
-			 $("td:nth-child(6):contains('승인하기')").on("click",function(){
-//					self.location = "/trade/update?tranCode=2&prodNo="+$(this).data("prodno");
-alert(" 클릭완료 "+$(this).data("sellno")+$(this).data("sellstate"));
-				})
-			
+
 		});	
-		
-		 $(function() {
-			$(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "whitesmoke");
-		});	
-	
+
 	</script>
 	
 </head>
@@ -82,7 +73,6 @@ alert(" 클릭완료 "+$(this).data("sellno")+$(this).data("sellstate"));
             <th align="left">거래방법</th>
             <th align="left">상태</th>
             <th align="left"></th>
-            <th align="right">배송위치조회</th>
           </tr>
         </thead>
        
@@ -91,7 +81,7 @@ alert(" 클릭완료 "+$(this).data("sellno")+$(this).data("sellstate"));
 		  <c:set var="i" value="0" />
 		  <c:forEach var="buy" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
-			<tr class="list" data-sellno="${buy.buyNo}">
+			<tr class="list" data-buyno="${buy.buyNo}">
 				<td align="left">${i}</td>
 									
 				<td align="left">${buy.sellProd.sellName}</td>
@@ -117,10 +107,10 @@ alert(" 클릭완료 "+$(this).data("sellno")+$(this).data("sellstate"));
 				</td>
 				
 				<td align="left">
-					<c:if test="${buy.sellProd.sellState=='20'}">구매요청취소</c:if>
+					<c:if test="${buy.sellProd.sellState=='20'}"><a href="/trade/updateSellState?sellNo=${buy.sellProd.sellNo}&sellState=30">구매요청취소</a></c:if>
 					
 					<c:if test="${buy.sellProd.sellStyle=='10'}">
-						<c:if test="${buy.sellProd.sellState=='40'}">결제하기</c:if>	
+						<c:if test="${buy.sellProd.sellState=='40'}"><a href="/trade/payBuy?buyNo=${buy.buyNo}">결제하기</a></c:if>	
 						<c:if test="${buy.sellProd.sellState=='60'}">거래종료</c:if>
 					</c:if>
 					
@@ -129,9 +119,6 @@ alert(" 클릭완료 "+$(this).data("sellno")+$(this).data("sellstate"));
 					</c:if>
 				</td>
 					
-				<td align="right">
-				</td>
-				
 			</tr>
           </c:forEach>
         

@@ -8,6 +8,7 @@ public class Comment {
 	private Board board;
 	private User user;
 	private String commentDetailText;
+	private String commentStatus;
 	private Date commentRegDate;
 	
 	public Comment() {
@@ -54,10 +55,18 @@ public class Comment {
 		this.commentRegDate = commentRegDate;
 	}
 
+	public String getCommentStatus() {
+		return commentStatus;
+	}
+
+	public void setCommentStatus(String commentStatus) {
+		this.commentStatus = commentStatus;
+	}
+
 	@Override
 	public String toString() {
 		return "Comment [commentNo=" + commentNo + ", board=" + board + ", user=" + user + ", commentDetailText="
-				+ commentDetailText + ", commentRegDate=" + commentRegDate + "]";
+				+ commentDetailText + ", commentStatus="+commentStatus+", commentRegDate=" + commentRegDate + "]";
 	}
 	
 	

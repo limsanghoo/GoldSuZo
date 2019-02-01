@@ -31,7 +31,7 @@
 								bank_name, reg_date, black_code, account, user_birth, delete_count, total_active_score) 
 															
 		VALUES	 (	'US'||seq_us.nextval, #{snsNo:VARCHAR} , #{userName:VARCHAR} , #{userNickname:VARCHAR} ,
-							 #{userAddr:VARCHAR} ,#{profile:VARCHAR}, #{grade:VARCHAR}, 	, #{bankName:VARCHAR}, SYSDATE , 0 , #{account:VARCHAR} , #{userBirth:INTEGER}, 0, 0)
+							 #{userAddr:VARCHAR} ,#{profile:VARCHAR}, 0, #{bankName:VARCHAR}, SYSDATE , 0 , #{account:VARCHAR} , #{userBirth:INTEGER}, 0, 0)
 	 </insert>
 	 
 	 <!-- SQL : SELECT ONE -->

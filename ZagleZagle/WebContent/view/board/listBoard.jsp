@@ -237,8 +237,14 @@ $(function(){
 						$("#"+boardNo+"like").data("checklike","1");
 						$("img[name='"+boardNo+"emptyLike']").attr("src","/common/images/board/fullLike.png");
 						$("img[name='"+boardNo+"emptyLike']").attr("name",boardNo+"fullLike");
+						
+						
+						var before=$("span[name='"+boardNo+"likeCount']").html();
+						var after=Number(before)+1;
+						$("span[name='"+boardNo+"likeCount']").html(after);
+							
 					}
-				}
+				}//success 끝
 			})			
 		}//0일때 끝
 		
@@ -256,12 +262,22 @@ $(function(){
 						$("#"+boardNo+"like").data("checklike","2");
 						$("img[name='"+boardNo+"fullLike']").attr("src","/common/images/board/emptyLike.png");
 						$("img[name='"+boardNo+"fullLike']").attr("name",boardNo+"emptyLike");
+						
+						var before=$("span[name='"+boardNo+"likeCount']").html();
+						var after=Number(before)-1;
+						$("span[name='"+boardNo+"likeCount']").html(after);
+						
+						
 					}else if(data==1){
 						//alert('재등록 성공');
 
 						$("#"+boardNo+"like").data("checklike","1");
 						$("img[name='"+boardNo+"emptyLike']").attr("src","/common/images/board/fullLike.png");
 						$("img[name='"+boardNo+"emptyLike']").attr("name",boardNo+"fullLike");
+						
+						var before=$("span[name='"+boardNo+"likeCount']").html();
+						var after=Number(before)+1;
+						$("span[name='"+boardNo+"likeCount']").html(after);					
 					}
 				}
 				
@@ -334,6 +350,12 @@ $(function(){
 	
 	//신고 시작
 	$("input[value='신고']").bind("click",function(){
+		
+		if("${user.userNo}"==""){
+			alert("로그인 후 이용 가능합니다");
+			return;
+		}
+		
 		var boardNo=$(this).data('report');
 		
 		var data = document.querySelector("#"+boardNo+"report").value;
@@ -558,8 +580,9 @@ function fncGetTown(){
 		
 	<p>
 	<img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px; display: inline; vertical-align: middle"/>
-	<span style="font-weight: bold; display: inline;">&nbsp;${board.user.userNickname}</span>
-	
+	<span style="height:100%; font-weight: bold; display: inline; vertical-align: middle;">&nbsp;${board.user.userNickname}</span>
+		
+	<span name="${board.boardNo}likeCount" style="display: inline; margin-left:3px; margin-top: 7px; float: right;">${board.likeCount}</span>
 	
 	<span name="like" id="${board.boardNo}like" data-boardNo="${board.boardNo}" data-checkLike="${board.checkLike}">	
 	<c:choose>
@@ -570,17 +593,17 @@ function fncGetTown(){
 			</c:if>
 			
 			<c:if test="${user.userNo==board.likeUserNo && board.checkLike=='1'}">
-				<img src="/common/images/board/fullLike.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}fullLike"/>
+				<img src="/common/images/board/fullLike.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}fullLike"/>			
 			</c:if>
 			
 			<c:if test="${user.userNo==board.likeUserNo && board.checkLike=='2'}">
-				<img src="/common/images/board/emptyLike.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}emptyLike"/>
+				<img src="/common/images/board/emptyLike.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}emptyLike"/>			
 			</c:if>
+			
 		</c:when>
 	</c:choose>
 	</span>
-	
-	
+		
 	<span name="scrap" id="${board.boardNo}scrap" data-boardNo="${board.boardNo}" data-checkScrap="${board.checkScrap}">
 	<c:choose>
 		<c:when test="${user.userNo !=null}">
@@ -599,7 +622,6 @@ function fncGetTown(){
 		</c:when>
 	</c:choose>
 	</span>
-	
 	
 	</p>
 

@@ -27,7 +27,6 @@
       
         div.editable{
         	border: 1px solid #D6CDB7;
-            margin-top: 10px;
         }
         
         div{
@@ -161,16 +160,69 @@ $(function(){
 
 <jsp:include page="/view/layout/toolbar.jsp"/>
 
-<form name="fileForm" class="form-horizontal" enctype="multipart/form-data" style="text-align: center;">
+<form class="form-horizontal" name="fileForm" class="form-horizontal" enctype="multipart/form-data">
 
-<input type="hidden" name="userNo" value="${param.userNo}"/><!-- value 수정해야함 -->
+<div class="container" style="margin-top:150px">
+	<div class="col-12">
 
-<div>
-<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"/>
-<input type="button" onclick="sample4_execDaumPostCode()" value="지명 검색"/>
-<input type="text" name="address" id="sample5_address" placeholder="검색버튼을 눌러주세요" readOnly/><br/>
+<div class="row">
+	<div class="col-lg-9">
+	<H2><strong>게시물 등록</strong></H2>
+	</div>
+	
+	<div class="col-lg-3 text-right">
+		<button id="submit" type="button" class="btn btn-b">등록</button>
+		<button type="button" class="btn btn-a">이전</button>
+	</div>	
+</div>
+
+<br/>
+<div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: #2eca6a;">
+</div>
+<br/>
+
+<!-- 텍스트 -->
+<div class="row">
+		<div class="col-xs-8 col-md-2 text-right" style="padding-top: .5em; padding-bottom: .5em;"><strong>내용</strong></div>
+	
+			<div class="col-xs-4 col-md-10" style="border-left-width: 0.1em; border-left-style: solid; border-left-color: #777; padding-top: .5em; padding-bottom: .5em;">
+			<textarea class="editable" id="boardDetailText" name="boardDetailText">
+			</textarea>
+			</div>	
+</div>
+
+<script src="/common/js/medium-editor/dist/js/medium-editor.js"></script>
+<script>
+  
+    var editor = new MediumEditor('.editable', {
+    	extensions: {
+            'imageDragging': {}
+        },
+        placeholder: {
+            text: '내용은 필수 입력사항입니다',
+            hideOnClick: true
+        }
+        
+    
+    });
+    
+</script>
+
+<br/>
+<div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: #2eca6a;"></div>
+<br/>
+
+<!-- 지도 -->
+<div class="row">
+<div class="col-xs-8 col-md-2 text-right" style="padding-top: .5em; padding-bottom: .5em;"><strong>위치정보</strong></div>
+<div class="col-xs-4 col-md-10" style="border-left-width: 0.1em; border-left-style: solid; border-left-color: #777; padding-top: .5em; padding-bottom: .5em;">
+
+<!-- 주소 시작 -->
+<input class="btn" type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"/>
+<input class="btn" type="button" onclick="sample4_execDaumPostCode()" value="지명 검색"/>
+<input class="form-control" type="text" name="address" id="sample5_address" placeholder="검색버튼을 눌러주세요" readOnly style="width:35%; margin-top: 5px;"/><br/>
 <input type="hidden" name="coord" value=""/><!-- 좌표 -->
-<div id="map" style="width:500px;height:500px;margin-top:10px;display:none;"></div>
+<div id="map" style="width:500px;height:500px;margin-top:10px;display:none;margin-left: 0px;"></div>
    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc9c3216a02c263f1acc2c4187e96443&libraries=services"></script>
    <script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
@@ -227,53 +279,72 @@ $(function(){
         }).open();
     }
 </script>
+<!-- 주소 끝 -->
 </div>
+
+</div>
+
+<br/>
+<div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: #2eca6a;"></div>
 <br/>
 
-테마선택
-<div class="userTheme">
-   <input type="radio" name="userTheme" value="H_spoon" checked="checked"> 흙수저
-   <input type="radio" name="userTheme" value="D_spoon"> 동수저
-   <input type="radio" name="userTheme" value="S_spoon"> 은수저
-   <input type="radio" name="userTheme" value="G_spoon"> 금수저
+<!-- 테마 시작 -->
+<div class="row">
+<div class="col-xs-8 col-md-2 text-right" style="padding-top: .5em; padding-bottom: .5em;"><strong>테마</strong></div>
+<div class="col-xs-4 col-md-10" style="border-left-width: 0.1em; border-left-style: solid; border-left-color: #777; padding-top: .5em; padding-bottom: .5em;">
+
+	<input type="radio" name="userTheme" value="H_spoon" checked="checked"> 흙수저
+    <input type="radio" name="userTheme" value="D_spoon"> 동수저
+    <input type="radio" name="userTheme" value="S_spoon"> 은수저
+    <input type="radio" name="userTheme" value="G_spoon"> 금수저
+
 </div>
+</div>
+<!-- 테마 끝 -->
+
+<br/>
+<div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: #2eca6a;"></div>
 <br/>
 
-내용
-<!-- <div>
-   <input type="text" name="boardDetailText" value=""/>
-   <textarea cols="50px" rows="10px" name="boardDetailText" value=""></textarea>
+<!-- 해시태그 시작 -->
+<div class="row">
+<div class="col-xs-8 col-md-2 text-right" style="padding-top: .5em; padding-bottom: .5em;"><strong>해시태그</strong></div>
+<div class="col-xs-4 col-md-10" style="border-left-width: 0.1em; border-left-style: solid; border-left-color: #777; padding-top: .5em; padding-bottom: .5em;">
+
+	 <input class="form-control" type="text" name="hashTag" id="hashTag" value=""/>
+	
 </div>
-<br/> -->
-
-
-			<div class="container">
-				<textarea class="editable" id="boardDetailText" name="boardDetailText"></textarea>
-			</div>
-
-    <script src="/common/js/medium-editor/dist/js/medium-editor.js"></script>
-    <script>
-  
-    var editor = new MediumEditor('.editable', {
-    	extensions: {
-            'imageDragging': {}
-        },
-        placeholder: {
-            text: '여기에 글을 작성 해 주세요',
-            hideOnClick: true
-        }
-    
-    });
-
-    </script>
-
-
-
-해시태그
-<div>
-   <input type="text" name="hashTag" id="hashTag" value=""/>
 </div>
+<!-- 해시태그 끝 -->
+
 <br/>
+<div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: #2eca6a;"></div>
+<br/>
+
+<!-- 사진 시작 -->
+<div class="row">
+<div class="col-xs-8 col-md-2 text-right" style="padding-top: .5em; padding-bottom: .5em;"><strong>사진</strong></div>
+<div class="col-xs-4 col-md-10" style="border-left-width: 0.1em; border-left-style: solid; border-left-color: #777; padding-top: .5em; padding-bottom: .5em;">
+
+	 <input class="form-control" type="text" name="hashTag" id="hashTag" value=""/>
+	
+</div>
+</div>
+<!-- 사진 끝 -->
+
+
+
+
+
+
+
+
+
+<br/>
+
+
+
+
 
 <div>
 	<input id=file type=file multiple="multiple" style="display: inline;">* 사진은 하나씩 등록해주세요!<br/>
@@ -281,7 +352,10 @@ $(function(){
 </div>
 
 <input type="hidden" id="link" value="" name="photo1"/><!-- 이미지 링크 append 되는 부분 -->
+<input type="hidden" name="userNo" value="${param.userNo}"/><!-- value 수정해야함 -->
 
+</div><!-- col-12 끝 -->
+</div><!-- 컨테이너 끝 -->
 
 </form>
 
@@ -291,10 +365,7 @@ $(function(){
 </div>    
 
 
-<div style="text-align: center">
-   <input type="button" id="submit" value="등록"/>
-   <input type="button" id="cancel" value="취소"/>
-</div>
+
 
 
 </body>
