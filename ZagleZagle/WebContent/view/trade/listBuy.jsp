@@ -110,7 +110,7 @@
 					<c:if test="${buy.sellProd.sellState=='20'}"><a href="/trade/updateSellState?sellNo=${buy.sellProd.sellNo}&sellState=30">구매요청취소</a></c:if>
 					
 					<c:if test="${buy.sellProd.sellStyle=='10'}">
-						<c:if test="${buy.sellProd.sellState=='40'}"><a href="/trade/updateBuy?buyNo=${buy.buyNo}">결제하기</a></c:if>	
+						<c:if test="${buy.sellProd.sellState=='40'}"><a href="/trade/payBuy?buyNo=${buy.buyNo}">결제하기</a></c:if>	
 						<c:if test="${buy.sellProd.sellState=='60'}">거래종료</c:if>
 					</c:if>
 					
