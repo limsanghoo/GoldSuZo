@@ -237,7 +237,7 @@ public class TradeController {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("redirect:/trade/listBuy");
-		
+		 
 		return modelAndView;
 	}
 }
