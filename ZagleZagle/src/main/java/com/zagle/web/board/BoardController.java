@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.zagle.common.Page;
 import com.zagle.service.admin.AdminService;
 import com.zagle.service.board.BoardService;
 import com.zagle.service.chat.ChatService;
@@ -62,8 +63,10 @@ public class BoardController {
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
 	
-	@Value("#{commonProperties['pageSize']}")
-	int pageSize;
+	@Value("#{commonProperties['boardPageSize']}")
+	int boardPageSize;
+	
+	
 	
 	
 	
@@ -262,6 +265,12 @@ public class BoardController {
 		
 		SearchBoard searchBoard=new SearchBoard();
 		
+		if(searchBoard.getCurrentPage() ==0 ){
+			searchBoard.setCurrentPage(1);
+		}
+		
+		searchBoard.setPageSize(boardPageSize);		
+		
 		if(session.getAttribute("user")!=null) {
 		
 			User user=(User)session.getAttribute("user");
@@ -271,13 +280,17 @@ public class BoardController {
 			searchBoard.setLoginUserNo(loginUserNo);
 		}
 		
-		Map<String , Object> map=boardService.listBoard(searchBoard);		
+		
+		Map<String , Object> map=boardService.listBoard(searchBoard);
+		
+		Page resultPage=new Page(searchBoard.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, boardPageSize);
 		
 		List<Local> list = boardService.getState();//추가
 		
 		ModelAndView modelAndView=new ModelAndView();
 		modelAndView.addObject("boardList", map.get("boardList"));//게시물 리스트
-		modelAndView.addObject("searchBoard", searchBoard);
+		modelAndView.addObject("searchBoard", searchBoard);//검색 조건
+		modelAndView.addObject("resultPage", resultPage);//페이지
 		modelAndView.addObject("list",list);//동네  리스트		
 		modelAndView.setViewName("forward:/view/board/listBoard.jsp");
 		
@@ -293,6 +306,10 @@ public class BoardController {
 			searchBoard.setLocal(null);
 		}
 		
+		if(searchBoard.getSearchKeyword()=="") {
+			searchBoard.setSearchKeyword(null);
+		}
+		
 		if(searchBoard.getCurrentPage()==0) {
 			searchBoard.setCurrentPage(1);
 		}
@@ -304,19 +321,22 @@ public class BoardController {
 			String loginUserNo=user.getUserNo();
 		
 			searchBoard.setLoginUserNo(loginUserNo);
+		}else if(session.getAttribute("user")==null) {
+			searchBoard.setLoginUserNo(null);
 		}
 		
-		searchBoard.setPageSize(pageSize);
+		searchBoard.setPageSize(boardPageSize);
 		
 		Map<String , Object> map=boardService.listBoard(searchBoard);
-		
-		//System.out.println("컨트롤러 map : "+map);
+
+		Page resultPage=new Page(searchBoard.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, boardPageSize);
 		
 		List<Local> list = boardService.getState();//추가
 		
 		ModelAndView modelAndView=new ModelAndView();
 		modelAndView.addObject("boardList", map.get("boardList"));//게시물 리스트
 		modelAndView.addObject("searchBoard", searchBoard);
+		modelAndView.addObject("resultPage", resultPage);//페이지
 		modelAndView.addObject("list",list);//동네  리스트
 		modelAndView.setViewName("forward:/view/board/listBoard.jsp");
 		

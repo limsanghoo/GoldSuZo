@@ -94,6 +94,7 @@ body {
     overflow: hidden;
     break-inside: avoid;
     border-radius: 15px;
+    
 }
 
 .containerList .box img {
@@ -361,10 +362,11 @@ $(function(){
 		var data = document.querySelector("#"+boardNo+"report").value;
 
 	    window.open("/view/board/addReport.jsp?val="+data, "addReport", "width=300, height=200, resizable=yes" );
-	})
+	});
 	
 	
-});
+	
+});//function 끝
 
 
 //검색 엔터
@@ -374,6 +376,7 @@ function enter() {
         	$("form").attr("method" , "POST").attr("action" , "/board/listBoard?view=${param.view}").submit();
         }
 }
+
 
 //시도 선택
 function fncGetState(){
@@ -575,18 +578,25 @@ function fncGetTown(){
 
 
 <!-- 썸네일 박스 시작 -->
-<li>	
+<li>
+
+	<c:if test="${board.userTheme=='H_spoon'}">	
+	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #eac999;">
+	</c:if>
+	
 	<div class="box">
 		
 	<p>
 	<img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px; display: inline; vertical-align: middle"/>
 	<span style="height:100%; font-weight: bold; display: inline; vertical-align: middle;">&nbsp;${board.user.userNickname}</span>
 		
-	<span name="${board.boardNo}likeCount" style="display: inline; margin-left:3px; margin-top: 7px; float: right;">${board.likeCount}</span>
+	
 	
 	<span name="like" id="${board.boardNo}like" data-boardNo="${board.boardNo}" data-checkLike="${board.checkLike}">	
 	<c:choose>
 		<c:when test="${user.userNo !=null}">
+		
+		<span name="${board.boardNo}likeCount" style="display: inline; margin-left:3px; margin-top: 7px; float: right;">${board.likeCount}</span>
 		
 			<c:if test="${board.likeUserNo==null && board.checkLike=='0'}">
 				<img src="/common/images/board/emptyLike.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}emptyLike"/>
@@ -691,7 +701,7 @@ function fncGetTown(){
 	<p style="text-align: center;">${board.boardDetailText}</p>
 	<p style="text-align: left; font-size: small">${board.hashTag}</p>
 	
-</div><!-- 본문 내용 끝 -->	
+</div><!-- 본문 내용 끝 -->
 </div><!-- box 끝 -->
 </li>
 <!-- 썸네일 박스 끝 -->

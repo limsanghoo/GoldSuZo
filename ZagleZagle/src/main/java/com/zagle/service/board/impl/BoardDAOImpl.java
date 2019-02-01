@@ -59,6 +59,13 @@ public class BoardDAOImpl implements BoardDAO{
 	
 		return sqlSession.selectList("BoardMapper.listBoard", searchBoard);
 	}
+	
+
+	@Override
+	public int getTotalCount(SearchBoard searchBoard) throws Exception {
+	
+		return sqlSession.selectOne("BoardMapper.getTotalCount", searchBoard);
+	}
 
 	@Override
 	public Board getBoard(String boardNo) throws Exception {
