@@ -56,6 +56,7 @@ public class MypageController {
 	int pageUnit;
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
+
 	
 	@RequestMapping( value="addAccount", method=RequestMethod.GET)
 	public ModelAndView addAccount( HttpSession session) throws Exception {
@@ -281,7 +282,7 @@ public class MypageController {
 		return modelAndView;
 	}
 	@RequestMapping(value="checkAccount", method=RequestMethod.POST)
-	public ModelAndView checkAccount(HttpServletRequest req) throws Exception {
+	public ModelAndView checkAccount(HttpServletRequest req, HttpSession session) throws Exception {
 		
 		System.out.println("=============계좌 실명 인증 마지막 단계===================");
 		
@@ -291,7 +292,15 @@ public class MypageController {
 		System.out.println("리얼 이름 :"+userName);
 		System.out.println("계좌 넘어 온거 확인"+account);
 		
-		boolean result = mypageService.checkAccount(userName);
+		User user = (User) session.getAttribute("user");
+		
+		///DB에 이름 중복된거 있으면 문제나는거 해결 해야함.
+		
+		String userNo = user.getUserNo();
+		
+		System.out.println("user 확인 :"+user);
+		
+		boolean result = mypageService.checkAccount(userName, userNo);
 		
 		System.out.println("result 콜백 확인"+result);
 		
@@ -302,7 +311,22 @@ public class MypageController {
 		if(nameBank==97) {
 			
 			testBank ="신한은행";
+			
+		}else if(nameBank == 3) {
+			
+			testBank ="기업은행";
+		}else if(nameBank == 4) {
+			
+			testBank ="국민은행";
+		}else if(nameBank == 20) {
+			
+			testBank ="우리은행";
+		}else if(nameBank == 7) {
+			
+			testBank ="수협";
 		}
+		
+		System.out.println(testBank);
 		
 		
 		ModelAndView modelAndView = new ModelAndView();

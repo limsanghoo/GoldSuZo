@@ -32,7 +32,13 @@ function fncAddUser() {
    var nickName=$("input[name='userNickname']").val();
    var birth=$("input[name='userBirth']").val();
    var userAddr=$("input[name='userAddr']").val();
+   var profile=$("input[name='profile']").val();
    
+   
+   alert(name)
+   alert(nickName)
+   
+   alert(profile)
    
   
    
@@ -137,8 +143,13 @@ function fncGetTown(){
 
 $(function() {
    
-   $('#profile1').on('change',function(){
-        var formData = new FormData(document.getElementById('profile1'))
+   $('#broll').on('change',function(){
+	   
+	   var form = $("#perioe")[0];
+        var formData = new FormData(form);
+        
+  
+			
         
            var ajaxReq = $.ajax({
                 type : 'post',
@@ -149,9 +160,10 @@ $(function() {
               
                 success : function(data, statusText, xhr) {                                      
                //    $("#msg").val(data);
+                  alert(data)
                   
                   alert("프로필 사진 등록 성공") 
-                  $("profile").val(data);
+                 
       
                 },
                 error : function(error) {
@@ -164,8 +176,12 @@ $(function() {
            
         
            ajaxReq.done(function(data){
-                
-              alert(data)
+        	   
+        	   	alert(data)
+        	  
+       		 $("#coffee").val(data);
+    
+      	
               
               if(data == "") {
             	  
@@ -1041,7 +1057,7 @@ input.checkbox:checked:after {
 }
 
 
-   #uploadPro{
+   #uploadPro, img{
          height: 70px;
          width: 70px;
          border:1.5px solid #f5f6fa;
@@ -1085,18 +1101,20 @@ padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
       <h1>추가정보 입력</h1>
       <div class="main-agileinfo">
          <div class="agileits-top">
-            <form enctype="multipart/form-data" method="post" id="uplode">
-               <input type="file" id="profile1" name="pro"/>
+         
+            <form enctype="multipart/form-data" method="post" id="perioe">
+               <input type="file" id="broll" name="proimg"/>
             </form>
-            <form method="post" id="goCon">
+            
+            
                
                <div id="uploadPro">
                
-               <input type="text" name="profile" style="display:none;" value="default.png"/>
-               
-               </div> <label for="profile1" style="margin: auto;" id="aaa"><br>프로필 등록&nbsp;<i class="glyphicon glyphicon-camera" style="width: 10px; height: 10px;" ></i></label>
-               
-               
+              
+                          
+              </div> <label for="broll" style="margin: auto;" id="aaa"><br>프로필 등록&nbsp;<i class="glyphicon glyphicon-camera" style="width: 10px; height: 10px;" ></i></label>
+               <form method="post" id="goCon">
+                <input type="hidden" id="coffee" name="profile" value="default.png"/>
                <br><br>
                
                <input class="text" type="text" name="userName" placeholder="이름을 입력하세요." required="">

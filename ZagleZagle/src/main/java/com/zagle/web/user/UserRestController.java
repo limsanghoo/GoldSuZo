@@ -460,6 +460,14 @@ public class UserRestController {
 	            MultipartFile mFile = multipartFile.getFile(uploadFile);
 	            fileName = mFile.getOriginalFilename();
 	            System.out.println("실제 파일 이름 : " +fileName);
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
 	           
 	            try {
 	                mFile.transferTo(new File(path,fileName));
