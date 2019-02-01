@@ -104,13 +104,8 @@
 		    </div>
 		  </div>
 		 
-		
-		    <div class="form-group">
-		    <label for="phone" class="col-sm-offset-1 col-sm-3 control-label">휴대전화번호</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="phone" name="phone" value="${user.phone}" placeholder="변경번호">
-		    </div>
-		  </div>
+	
+		  
 		 
 		 
 		 
@@ -122,13 +117,7 @@
 		      <input type="text" class="form-control" id="userBirth" name="userBirth" value="${user.userBirth}" placeholder="생년월일">
 		    </div>
 		  </div>
-		  
-		  <div class="form-group">
-		    <label for="userSex" class="col-sm-offset-1 col-sm-3 control-label">성별</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userSex" name="userSex" value="${user.userSex}" placeholder="성별">
-		    </div>
-		  </div>
+		
 		  
 		    <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">

@@ -216,8 +216,8 @@ public class TradeController {
 		return "redirect:/trade/listTrade";
 	}
 	
-	@RequestMapping(value="updateBuy", method=RequestMethod.GET)
-	public ModelAndView updateBuy(@ModelAttribute("buyNo") String buyNo) throws Exception{
+	@RequestMapping(value="payBuy", method=RequestMethod.GET)
+	public ModelAndView payBuy(@ModelAttribute("buyNo") String buyNo) throws Exception{
 		
 		Buy buy = new Buy();
 		
@@ -225,9 +225,19 @@ public class TradeController {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("buy",buy);
-		modelAndView.setViewName("forward:/view/trade/updateBuy.jsp");
+		modelAndView.setViewName("forward:/view/trade/payBuy.jsp");
 		
 		return modelAndView;
 	}
 	
+	@RequestMapping(value="payBuy", method=RequestMethod.POST)
+	public ModelAndView payBuy(@ModelAttribute("buy") Buy buy ) throws Exception{
+		
+		System.out.println(buy);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("redirect:/trade/listBuy");
+		 
+		return modelAndView;
+	}
 }

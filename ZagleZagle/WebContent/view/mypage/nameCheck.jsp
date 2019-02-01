@@ -100,11 +100,20 @@
 		 <div class="form-group">
 		    <label for="bankName">은행이름</label>
 		      <select class="form-control" name="bankName" id="bankName"  placeholder="은행이름">
+		      
 		      		<option value="097" >신한은행</option>
-					<option value="011" >국민은행</option>
-					<option value="016" >하나은행</option>
-					<option value="018" >비트은행</option>
-					<option value="019" >코인은행</option>
+					<option value="003" >기업은행</option>
+					<option value="004" >국민은행</option>
+					<option value="020" >우리은행</option>
+					<option value="007" >수협</option>
+					<option value="011" >농협</option>
+					<option value="012" >지역농축협</option>
+					<option value="023" >SC제일은행</option>
+					<option value="027" >한국씨티은행</option>
+					<option value="081" >KEB하나은행</option>
+					<option value="045" >새마을금고</option>
+					<option value="071" >우체국</option>
+					<option value="090" >카카오뱅크</option>
 		    	</select>
 		    																		
 		      </div>
