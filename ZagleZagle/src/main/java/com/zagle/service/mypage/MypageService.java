@@ -20,7 +20,7 @@ public interface MypageService {
 	
 	public Map<String, Object> listMyBoard(SearchMypage search) throws Exception;
 	
-	public Boolean checkAccount(String realName) throws Exception;
+	public Boolean checkAccount(String realName, String userNo) throws Exception;
 	
 	
 

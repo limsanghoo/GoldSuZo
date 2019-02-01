@@ -69,22 +69,94 @@ $(function() {
 </script>
 
 
+
 <style>
-	div.page-header {
-		padding-top : 50px:
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+
+
+ #detail {
+
+  display:block;
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  white-space: nowrap; 
+  width: 100px;
+	
+
+
+
+
+
+
+
+
+form{
+		padding-top:100px;
+	 	padding-left:150px;
+        padding-right:150px;
+       	background-color:#f7f0e1;
+        background-size: cover;
+        height: 100%;
 	}
-	
-	
 
 
-	
-	
-	
-	
-	
-	
-	
+body {
+   	margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+	background: #333;
+}
+
+.grid{
+   margin-bottom: 0px;
+}
+
+.containerList .box {
+    width: 100%;
+    margin: 0 0 20px;
+    padding: 10px;
+    background: #ffffff;
+    overflow: hidden;
+    break-inside: avoid;
+    border-radius: 15px;
+}
+.containerList .box img {
+    max-width: 100%;
+    background-size: cover;
+}
+
+
+#goAddSell{
+    	position: static;
+    	float:right;
+}
+
+.disabled{
+		pointer-events:none;
+}
+
+#selectMenu{
+		padding-top:50px;
+		padding-left:150px;
+        padding-right:150px;
+}
+
 </style>
+	
+	
+	
+	
+
+
+	
+	
+	
+	
+	
+	
+	
+
 
 
 </head>
@@ -95,7 +167,7 @@ $(function() {
 
 
 
-<jsp:include page="/view/layout/mypageToolbar.jsp" />
+
 
 
 <div class="container" >
@@ -128,7 +200,7 @@ $(function() {
 			<tr>
 			  <td align="left" style="font-size: medium;">${ i }</td>
 			 	 
-			  <td class="abcd" align="left"  style="font-size: medium;" title="Click : 게시물 상세정보" data-toggle="modal" data-target="#${board.boardNo}aaa">${board.boardDetailText}</td>
+			  <td class="abcd" id="detail" align="left"  style="font-size: medium;" title="Click : 게시물 상세정보" data-toggle="modal" data-target="#${board.boardNo}aaa">${board.boardDetailText}</td>
 			  	
 			  <td align="left" style="font-size: medium;" >${board.boardRegDate}</td>
 			  

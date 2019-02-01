@@ -95,16 +95,20 @@ public class MypageServiceImpl implements MypageService {
 		return map;
 	}
 
-	public Boolean checkAccount(String userName) throws Exception {
+	public Boolean checkAccount(String userName, String userNo) throws Exception {
 		
 		System.out.println("checkAccount Service 실행 확인하고");
 		System.out.println("리얼 네임 값 확인"+userName);
+		System.out.println("유저 넘 확인"+userNo);
 		
-		////////////////////////////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////////////////////////
 		
 		
-		User user = userDao.getUser3(userName);
-
+		
+		//User user = userDao.getUser3(userName);
+		User user = userDao.getUser2(userNo);
+		
+		
 		System.out.println("user 누구냐 :"+user);
 		
 		boolean result = false;
