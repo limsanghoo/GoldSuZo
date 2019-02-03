@@ -98,9 +98,9 @@ public class StreamRestController {
 		    params.add("quantity","1");
 		    params.add("total_amount",price);
 		    params.add("tax_free_amount","0");
-		    params.add("approval_url","http://192.168.0.21:8080/stream/json/kakaoOkStream");
-		    params.add("cancel_url","http://192.168.0.21:8080");
-		    params.add("fail_url","http://192.168.0.21:8080");
+		    params.add("approval_url","http://192.168.0.14:8080/stream/json/kakaoOkStream");
+		    params.add("cancel_url","http://192.168.0.14:8080");
+		    params.add("fail_url","http://192.168.0.14:8080");
 
 		    // 서버로 요청할 Header 
 		    HttpHeaders headers = new HttpHeaders();
@@ -139,9 +139,9 @@ public class StreamRestController {
 		    params.add("quantity","1");
 		    params.add("total_amount",spon.getPrice()+"");
 		    params.add("tax_free_amount","0");
-		    params.add("approval_url","http://192.168.0.21:8080/stream/json/kakaoOkStream?");
-		    params.add("cancel_url","http://192.168.0.21:8080");
-		    params.add("fail_url","http://192.168.0.21:8080");
+		    params.add("approval_url","http://192.168.0.14:8080/stream/json/kakaoOkStream?");
+		    params.add("cancel_url","http://192.168.0.14:8080");
+		    params.add("fail_url","http://192.168.0.14:8080");
 
 		    // 서버로 요청할 Header 
 		    HttpHeaders headers = new HttpHeaders();
@@ -174,7 +174,7 @@ public class StreamRestController {
 	System.out.println("addStream[stream]="+stream);
 	streamService.addStream(stream);
 	
-	ModelAndView view = new ModelAndView("redirect:https://192.168.0.21:443/streamer="+user.getUserNo()+"&userName="+user.getUserNickname());
+	ModelAndView view = new ModelAndView("redirect:https://192.168.0.14:443/streamer="+user.getUserNo()+"&userName="+user.getUserNickname());
 	return view;	
 	}
 	
@@ -214,13 +214,13 @@ public class StreamRestController {
 		  	User user = (User) session.getAttribute("user");
 		  	User streamer = (User) session.getAttribute("streamer");
 		  	System.out.println("user닉네임===================="+user.getUserNickname());
-		  //	String url  = "https://192.168.0.21/stream/sponSpeech2?streamer="+streamer.getUserNo()+"&userNo="+user.getUserNo()+"&userNickname="+user.getUserNickname()+"&userProfile=default.jpg&price="+session.getAttribute("price");
+		  //	String url  = "https://192.168.0.14/stream/sponSpeech2?streamer="+streamer.getUserNo()+"&userNo="+user.getUserNo()+"&userNickname="+user.getUserNickname()+"&userProfile=default.jpg&price="+session.getAttribute("price");
 		  //	String encodeResult = URLEncoder.encode(url, "UTF-8");
 //System.out.println(encodeResult);
 		String encode =  	URLEncoder.encode(user.getUserNickname(),"UTF-8");
 		System.out.println("인코딩 한 후 닉네임================"+encode);
 		 	//ModelAndView view = new ModelAndView("redirect:"+url); 
-		 	ModelAndView view = new ModelAndView("redirect:https://192.168.0.21/stream/sponSpeech2?streamer="+streamer.getUserNo()+"&userNo="+user.getUserNo()+"&userNickname="+encode+"&userProfile=default.jpg&price="+session.getAttribute("price"));
+		 	ModelAndView view = new ModelAndView("redirect:https://192.168.0.14/stream/sponSpeech2?streamer="+streamer.getUserNo()+"&userNo="+user.getUserNo()+"&userNickname="+encode+"&userProfile=default.jpg&price="+session.getAttribute("price"));
 		//	ModelAndView view = new ModelAndView("redirect:http://192.168.0.12:8080/stream/));
 			//modelAndView.setViewName("forward:/view/stream/close.jsp");	
 		  	return view; 
