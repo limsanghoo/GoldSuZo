@@ -4,9 +4,6 @@
 eclipse.preferences.version=1
 encoding//WebContent/view/admin/siteManage.jsp=UTF-8
 encoding//WebContent/view/board/listBoard.jsp=UTF-8
-<<<<<<< HEAD
 encoding//WebContent/view/board/scroll.jsp=UTF-8
-=======
-encoding//WebContent/view/mypage/listMyBoard1.jsp=UTF-8
->>>>>>> refs/remotes/origin/master
+encoding//WebContent/view/mypage/listMyBoard.jsp=UTF-8
 encoding//WebContent/view/trade/addSell.jsp=UTF-8
