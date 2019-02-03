@@ -24,11 +24,19 @@
 <script type="text/javascript">
 
 
+$(function() {
+
+	
+	$(function () {
+		  $('[data-toggle="tooltip"]').tooltip()
+		})
 
 
-$(function () {
-	  $('[data-toggle="tooltip1"]').tooltip()
-	});
+
+});
+
+	
+
 
 
 
@@ -80,10 +88,10 @@ background-color: whitesmoke;
 	<div class="container1">
 	
 	
-<div class="row" style="padding: 300px">	
+<div class="row" style="padding: 300px;">	
 	
-  <div style="padding-right: 20px;" id="listMyboard">
-      <img src="../common/images/mypage/contract.png" style="width:100px; height:100px;" data-toggle="tooltip1" data-placement="top" title="작성 게시물로 이동">
+  <div style="padding-right: 20px;">
+      <img src="/common/images/mypage/contract.png" style="width:100px; height:100px;" data-toggle="tooltip" data-placement="top" title="작성 게시물로 이동">
    
   		
   
@@ -97,7 +105,7 @@ background-color: whitesmoke;
   
     	<div style="padding-right: 20px;">
   
-      <img src="../common/images/mypage/signature.png" style="width:100px; height:100px;" data-toggle="tooltip1" data-placement="top" title="댓글 작성한 게시물로 이동">
+      <img src="/common/images/mypage/signature.png" style="width:100px; height:100px;" data-toggle="tooltip" data-placement="top" title="댓글 작성한 게시물로 이동">
    
   
       
@@ -109,7 +117,7 @@ background-color: whitesmoke;
 
 <div style="padding-right: 20px;">
    
-      <img src="../common/images/mypage/scrap.png" style="width:100px; height:100px;" data-toggle="tooltip1" data-placement="top" title="스크랩 게시물로 이동">
+      <img src="/common/images/mypage/scrap.png" style="width:100px; height:100px;" data-toggle="tooltip" data-placement="top" title="스크랩 게시물로 이동">
       
  </div>
  
@@ -121,14 +129,14 @@ background-color: whitesmoke;
 
  <div style="padding-right: 20px;">
 
-      <img src="../common/images/mypage/likelike.png" style="width:100px; height:100px;" data-toggle="tooltip1" data-placement="top" title="좋아요한 게시물로 이동">
+      <img src="/common/images/mypage/likelike.png" style="width:100px; height:100px;" data-toggle="tooltip" data-placement="top" title="좋아요한 게시물로 이동">
      
  </div> <br/>
    
     
      <div style="padding-right: 20px;">
   
-      <img src="../common/images/mypage/addAccount.png" style="width:100px; height:100px;" data-toggle="tooltip1" data-placement="top" title="계좌번호 등록">
+      <img src="/common/images/mypage/addAccount.png" style="width:100px; height:100px;" data-toggle="tooltip" data-placement="top" title="계좌번호 등록">
       
   
  </div>
@@ -136,7 +144,7 @@ background-color: whitesmoke;
  
    
    <div>
-      <img src="../common/images/mypage/updateAccount.png" style="width:100px; height:100px;" data-toggle="tooltip1" data-placement="top" title="계좌번호 수정">
+      <img src="/common/images/mypage/updateAccount.png" style="width:100px; height:100px;" data-toggle="tooltip" data-placement="top" title="계좌번호 수정">
     
   
  </div>
