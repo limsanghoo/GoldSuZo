@@ -7,28 +7,93 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>updateBoard</title>
 
-<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<link rel="stylesheet" href="/common/js/medium-editor/dist/css/medium-editor.min.css">
+<link rel="stylesheet" href="/common/js/medium-editor/dist/css/themes/beagle.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="/common/js/medium-editor/dist/js/medium-editor.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+
+<style>
+div.editable{
+        	border: 1px solid #D6CDB7;
+        }
+        
+div{
+        	margin:auto;
+        }
+
+
+.wrap-loading{ /*화면 전체를 어둡게 합니다.*/
+
+    position: fixed;
+
+    left:0;
+
+    right:0;
+
+    top:0;
+
+    bottom:0;
+
+    background: rgba(0,0,0,0.2); /*not in ie */
+
+    filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000', endColorstr='#20000000');    /* ie */
+
+    
+
+}
+
+     .wrap-loading div{ /*로딩 이미지*/
+
+        text-align: center;
+
+    }
+
+    .display-none{ /*감추기*/
+
+        display:none;
+
+    }        
+
+</style>
+
 <script type="text/javascript">
 
 $(function(){
 	
 	$('#submit').bind("click",function(){
 		
-		var userTheme=$("input[name='userTheme']").val();
-		var boardDetailText=$("input[name='boardDetailText']").val();
+		var imgLength=$("img[name='img']").length;
+	      
+		  if(imgLength>3){
+			alert("사진은 세 장까지 등록 가능합니다.");
+			return;
+		  }
+		
+		
+		var boardDetailText=$("textarea[name='boardDetailText']").val();
 		
 		if(boardDetailText==""){
-			alert("내용을 입력해라");
+			alert("내용을 입력해주세요.");
 		}
 			
 			$("form").attr("method" , "POST").attr("action" , "/board/updateBoard").submit();
 		
-	})
+	});
+	
+	
+	$("button:contains('이전')").on("click", function() {
+		 self.location="/board/listBoard?view=town";
+	});
+	
 	
 	$('#edit').bind("click",function(){
 		$("#img_box").empty();//원래 이미지 비우기
-		$("#newPhoto").append('<input id="file" type="file" multiple="multiple">* 사진은 하나씩 등록해주세요!<br/>');	//파일 첨부 버튼 생성
+		$("#newPhoto").append('<input id="file" type="file" multiple="multiple"><br/>* 사진은 한 장씩 등록해주세요 * 세 장까지 등록 가능합니다<br/><br/>');	//파일 첨부 버튼 생성
 		$("#hashTag").val("");//원래 해시태그 비우기
 		$("#link").val("");//원래 링크 비우기		
 		
@@ -36,6 +101,9 @@ $(function(){
 		var image = document.getElementById('image');
 
 		file.onchange = function (event) {
+			
+			$('.wrap-loading').removeClass('display-none'); //로딩중 이미지 보여주기
+			
 		  var target = event.currentTarget;
 		  var xmlHttpRequest = new XMLHttpRequest();
 		  xmlHttpRequest.open('POST', 'https://api.imgur.com/3/image/', true);
@@ -54,7 +122,7 @@ $(function(){
 		        
 		        $.ajax(	
 		        		{
-		        			url : "http://192.168.0.36:8080/board/json/addBoardVisionTag",
+		        			url : "http://192.168.0.49:8080/board/json/addBoardVisionTag",
 		        			method : "GET",
 		        			data : {
 		        				link : result.data.link
@@ -63,12 +131,16 @@ $(function(){
 		        			dataType : "text",
 		        			success : function (data,status){
 		        				var decode=decodeURIComponent(data);//특수문자 포함 디코딩
-		        				alert("decode : "+decode);
+		        				//alert("decode : "+decode);
 		        				
-		        				var tagArea=$("#hashTag");
-		        				tagArea.val(tagArea.val()+decode);//해시태그 append
-		        				
+		        				if(decode.charAt(0)=="#"){
+		        					var tagArea=$("#hashTag");
+		        					tagArea.val(tagArea.val()+decode);//해시태그 append
+		        				}
 		        			}
+		        			,complete:function(){
+		        		        $('.wrap-loading').addClass('display-none'); //로딩중 이미지 감추기
+		        		    }
 		        		});
 		      
 		      }
@@ -90,47 +162,73 @@ $(function(){
 </head>
 <body>
 
-<form name="fileForm" class="form-horizontal" enctype="multipart/form-data">
+<jsp:include page="/view/layout/toolbar.jsp"/>
+
+<div class="container" style="margin-top:150px">
+	<div class="col-12">
+	
+	
+<div class="row">
+	<div class="col-lg-9">
+	<H2><strong>게시물 수정</strong></H2>
+	</div>
+	
+	<div class="col-lg-3 text-right">
+		<button id="submit" type="button" class="btn btn-b">수정</button>
+		<button type="button" class="btn btn-a">이전</button>
+	</div>	
+</div>		
+
+<form class="form-horizontal" name="fileForm" enctype="multipart/form-data">
 
 <input type="hidden" name="userNo" value="${board.user.userNo}"/>
 <input type="hidden" name="boardNo" value="${board.boardNo}"/>
 
-<div id="newPhoto">
-	
-	<input type="hidden" name="photo1" value="${board.photo1}" id="link"/>
-	
-	<div id="img_box">
-	
-	<input type="button" value="사진 수정하기" id="edit"/>
-	
-	<!-- 원래 이미지 보여주는 부분 시작-->
-	<c:if test="${board.photo1 !=null}">
-	<img src="${board.photo1}"/>
-	</c:if>
-
-	<c:if test="${board.photo2 !=null}">
-	<img src="${board.photo2}" name="photo2" value="${board.photo2}"/>
-	<input type="hidden" name="photo2" value="${board.photo2}"/>
-	</c:if>
-	
-	<c:if test="${board.photo3 !=null}">
-	<img src="${board.photo3}" name="photo3" value="${board.photo3}"/>
-	<input type="hidden" name="photo3" value="${board.photo3}"/>
-	</c:if>
-	<!-- 원래 이미지 보여주는 부분 끝-->
-	
-	
-	</div><!-- /img_box -->
+<br/>
+<div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: #2eca6a;">
 </div>
-
 <br/>
 
-<div>
-<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"/>
-<input type="button" onclick="sample4_execDaumPostCode()" value="지명 검색"/><hr/>
-<input type="text" name="address" id="sample5_address" placeholder="${board.address}" readOnly value="${board.address}"/><br/>
+
+<!-- 텍스트 -->
+<div class="row">
+		<div class="col-xs-8 col-md-2 text-right" style="padding-top: .5em; padding-bottom: .5em;"><strong>내용</strong></div>
+	
+			<div class="col-xs-4 col-md-10" style="border-left-width: 0.1em; border-left-style: solid; border-left-color: #777; padding-top: .5em; padding-bottom: .5em;">
+			<textarea class="editable" id="boardDetailText" name="boardDetailText">${board.boardDetailText}</textarea>
+			</div>	
+</div>
+
+<script src="/common/js/medium-editor/dist/js/medium-editor.js"></script>
+<script>
+  
+    var editor = new MediumEditor('.editable', {
+    	extensions: {
+            'imageDragging': {}
+        },
+        placeholder: {
+            text: '내용은 필수 입력사항입니다',
+            hideOnClick: false
+        }
+        
+    
+    });
+    
+</script>
+
+<br/>
+<div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: #2eca6a;"></div>
+<br/>
+<!-- 지도 -->
+<div class="row">
+<div class="col-xs-8 col-md-2 text-right" style="padding-top: .5em; padding-bottom: .5em;"><strong>위치정보</strong></div>
+<div class="col-xs-4 col-md-10" style="border-left-width: 0.1em; border-left-style: solid; border-left-color: #777; padding-top: .5em; padding-bottom: .5em;">
+
+<input class="btn" type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"/>
+<input class="btn" type="button" onclick="sample4_execDaumPostCode()" value="지명 검색"/>
+<input class="form-control" type="text" name="address" id="sample5_address" placeholder="${board.address}" readOnly value="${board.address}" style="width:35%; margin-top: 5px;"/><br/>
 <input type="hidden" name="coord" value="${board.coord}"/><!-- 좌표 -->
-<div id="map" style="width:500px;height:500px;margin-top:10px;display:none"></div>
+<div id="map" style="width:500px; height:500px; margin-top:10px; display:none; z-index: -1;"></div>
    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc9c3216a02c263f1acc2c4187e96443&libraries=services"></script>
    <script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
@@ -187,37 +285,126 @@ $(function(){
         }).open();
     }
 </script>
+
 </div>
+</div><!-- 지도 끝 -->
+
+<br/>
+<div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: #2eca6a;"></div>
 <br/>
 
-테마선택
+<!-- 테마 시작 -->
+<div class="row">
+<div class="col-xs-8 col-md-2 text-right" style="padding-top: .5em; padding-bottom: .5em;"><strong>테마</strong></div>
+<div class="col-xs-4 col-md-10" style="border-left-width: 0.1em; border-left-style: solid; border-left-color: #777; padding-top: .5em; padding-bottom: .5em;">
 
-<div class="userTheme">
+
+	<c:if test="${user.grade=='0'}">
+	<input type="radio" name="userTheme" value="H_spoon" checked="checked"> 흙수저
+    <input type="radio" name="userTheme" value="D_spoon" disabled="disabled"> 동수저
+    <input type="radio" name="userTheme" value="S_spoon1" disabled="disabled"> 은수저
+    <input type="radio" name="userTheme" value="S_spoon2" disabled="disabled"> 은수저
+    <input type="radio" name="userTheme" value="G_spoon1" disabled="disabled"> 금수저
+    <input type="radio" name="userTheme" value="G_spoon2" disabled="disabled"> 금수저
+	</c:if> 
+	
+	<c:if test="${user.grade=='1'}">
 	<input type="radio" name="userTheme" value="H_spoon" ${! empty board.userTheme && board.userTheme=="H_spoon" ? "checked":""}> 흙수저
-	<input type="radio" name="userTheme" value="D_spoon" ${! empty board.userTheme && board.userTheme=="D_spoon" ? "checked":""}> 동수저
-	<input type="radio" name="userTheme" value="S_spoon" ${! empty board.userTheme && board.userTheme=="S_spoon" ? "checked":""}> 은수저
-	<input type="radio" name="userTheme" value="G_spoon" ${! empty board.userTheme && board.userTheme=="G_spoon" ? "checked":""}> 금수저
+    <input type="radio" name="userTheme" value="D_spoon" ${! empty board.userTheme && board.userTheme=="D_spoon" ? "checked":""}> 동수저
+    <input type="radio" name="userTheme" value="S_spoon1" disabled="disabled"> 은수저
+    <input type="radio" name="userTheme" value="S_spoon2" disabled="disabled"> 은수저
+    <input type="radio" name="userTheme" value="G_spoon1" disabled="disabled"> 금수저
+    <input type="radio" name="userTheme" value="G_spoon2" disabled="disabled"> 금수저
+	</c:if> 
+	
+	<c:if test="${user.grade=='2'}">
+	<input type="radio" name="userTheme" value="H_spoon" ${! empty board.userTheme && board.userTheme=="H_spoon" ? "checked":""}> 흙수저
+    <input type="radio" name="userTheme" value="D_spoon" ${! empty board.userTheme && board.userTheme=="D_spoon" ? "checked":""}> 동수저
+    <input type="radio" name="userTheme" value="S_spoon1" ${! empty board.userTheme && board.userTheme=="S_spoon1" ? "checked":""}> 은수저
+    <input type="radio" name="userTheme" value="S_spoon2" ${! empty board.userTheme && board.userTheme=="S_spoon2" ? "checked":""}> 은수저
+    <input type="radio" name="userTheme" value="G_spoon1" disabled="disabled"> 금수저
+    <input type="radio" name="userTheme" value="G_spoon2" disabled="disabled"> 금수저
+	</c:if> 
+	
+	<c:if test="${user.grade=='3' || user.grade=='4'}">
+	<input type="radio" name="userTheme" value="H_spoon" ${! empty board.userTheme && board.userTheme=="H_spoon" ? "checked":""}> 흙수저
+  	<input type="radio" name="userTheme" value="D_spoon" ${! empty board.userTheme && board.userTheme=="D_spoon" ? "checked":""}> 동수저
+    <input type="radio" name="userTheme" value="S_spoon1" ${! empty board.userTheme && board.userTheme=="S_spoon1" ? "checked":""}> 은수저
+    <input type="radio" name="userTheme" value="S_spoon2" ${! empty board.userTheme && board.userTheme=="S_spoon2" ? "checked":""}> 은수저
+    <input type="radio" name="userTheme" value="G_spoon1" ${! empty board.userTheme && board.userTheme=="G_spoon1" ? "checked":""}> 금수저
+    <input type="radio" name="userTheme" value="G_spoon2" ${! empty board.userTheme && board.userTheme=="G_spoon2" ? "checked":""}> 금수저
+	</c:if>
 </div>
+</div>
+<!-- 테마 끝 -->
+
+<br/>
+<div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: #2eca6a;"></div>
 <br/>
 
-내용
-<div>
-	<input type="text" name="boardDetailText" value="${board.boardDetailText}"/>
+<!-- 해시태그 시작 -->
+<div class="row">
+<div class="col-xs-8 col-md-2 text-right" style="padding-top: .5em; padding-bottom: .5em;"><strong>해시태그</strong></div>
+<div class="col-xs-4 col-md-10" style="border-left-width: 0.1em; border-left-style: solid; border-left-color: #777; padding-top: .5em; padding-bottom: .5em;">
+
+	 <input class="form-control" type="text" name="hashTag" id="hashTag" value="${board.hashTag}"/>
+	
 </div>
+</div>
+<!-- 해시태그 끝 -->
+
+<br/>
+<div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: #2eca6a;"></div>
 <br/>
 
-해시태그
-<div>
-	<input type="text" name="hashTag" id="hashTag" value="${board.hashTag}"/>
-</div>
-<br/>
 
-</form>
+<div class="row">
+<div class="col-xs-8 col-md-2 text-right" style="padding-top: .5em; padding-bottom: .5em;"><strong>사진</strong></div>
+<div class="col-xs-4 col-md-10" style="border-left-width: 0.1em; border-left-style: solid; border-left-color: #777; padding-top: .5em; padding-bottom: .5em;">
 
-<div>
-	<input type="button" id="submit" value="수정"/>
-	<input type="button" id="cancel" value="취소"/>
+<div id="newPhoto">
+	
+	<input type="hidden" name="photo1" value="${board.photo1}" id="link"/>
+	
+	<div id="img_box">
+	
+	<input class="btn" type="button" value="사진 수정하기" id="edit"/>
+	<br/>
+	<br/>
+	<!-- 원래 이미지 보여주는 부분 시작-->
+	<c:if test="${board.photo1 !=null}">
+	<img src="${board.photo1}" style="width: 500px;"/>
+	</c:if>
+
+	<c:if test="${board.photo2 !=null}">
+	<img src="${board.photo2}" name="photo2" value="${board.photo2}" style="width: 500px;"/>
+	<input type="hidden" name="photo2" value="${board.photo2}"/>
+	</c:if>
+	
+	<c:if test="${board.photo3 !=null}">
+	<img src="${board.photo3}" name="photo3" value="${board.photo3}" style="width: 500px;"/>
+	<input type="hidden" name="photo3" value="${board.photo3}"/>
+	</c:if>
+	<!-- 원래 이미지 보여주는 부분 끝-->
+	
+	
+	</div><!-- /img_box -->
+</div><!-- newPhoto -->
+
+
 </div>
+</div>
+
+
+</form>	
+</div><!-- col 12 끝 -->
+</div><!-- 컨테이너 끝 -->
+
+
+<!-- 로딩중 이미지 -->
+<div class="wrap-loading display-none">
+    <div><img src="/common/images/board/equalizes.gif" style="z-index: 6;"/></div>
+</div>   
 
 </body>
 </html>
