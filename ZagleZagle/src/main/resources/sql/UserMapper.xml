@@ -14,7 +14,7 @@
 		<result property="userNickname" 				column="user_nickname" 		jdbcType="VARCHAR" />
 		<result property="userAddr" 						column="user_addr" 					jdbcType="VARCHAR" />
 		<result property="profile" 								column="profile" 						jdbcType="VARCHAR"  />
-		<result property="grade" 								column="grade_name" 			jdbcType="VARCHAR" />
+		<result property="grade" 								column="grade" 						jdbcType="VARCHAR" />
 		<result property="bankName"						column="bank_name"				jdbcType="VARCHAR"/>
 		<result property="regDate"							column="reg_date"					jdbcType="DATE"/>
 		<result property="blackCode"						column="black_code"				jdbcType="VARCHAR" />
@@ -80,6 +80,16 @@
 	 </set>
 	 WHERE sns_no = #{snsNo}
 	 </update>
+	 
+		 <!--  SQL : UPDATE GRADE -->
+	 <update id="updateGrade" parameterType="user">
+	 UPDATE users
+	 <set>
+	 grade = #{grade}
+	 </set>
+	 WHERE user_no = #{userNo}
+	 </update>
+	 
 	 
 	 
 	 <!--  SQL UPDATE DELETE COUNT -->
@@ -185,6 +195,8 @@
 	  FROM users
 	  WHERE user_nickname = #{userNickname}
 	 </select>
+	
+	
 	 
 	 
 </mapper>
