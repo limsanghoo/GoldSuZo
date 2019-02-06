@@ -109,8 +109,10 @@ $(function(){
 	        				var decode=decodeURIComponent(data);//특수문자 포함 디코딩
 	        				//alert("decode : "+decode);
 	        				
-	        				var tagArea=$("#hashTag");
-	        				tagArea.val(tagArea.val()+decode);//해시태그 append
+	        				if(decode.charAt(0)=="#"){	        				
+	        					var tagArea=$("#hashTag");
+	        					tagArea.val(tagArea.val()+decode);//해시태그 append
+	        				}
 	        			}
 	        			
 	        			,complete:function(){
@@ -182,7 +184,7 @@ $(function(){
 	</div>	
 </div>
 
-<form class="form-horizontal" name="fileForm" class="form-horizontal" enctype="multipart/form-data">
+<form class="form-horizontal" name="fileForm" enctype="multipart/form-data">
 
 <br/>
 <div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: #2eca6a;">
@@ -229,7 +231,7 @@ $(function(){
 <input class="btn" type="button" onclick="sample4_execDaumPostCode()" value="지명 검색"/>
 <input class="form-control" type="text" name="address" id="sample5_address" placeholder="검색버튼을 눌러주세요" readOnly style="width:35%; margin-top: 5px;"/><br/>
 <input type="hidden" name="coord" value=""/><!-- 좌표 -->
-<div id="map" style="width:500px;height:500px;margin-top:10px;display:none;margin-left: 0px;"></div>
+<div id="map" style="width:500px; height:500px; margin-top:10px; display:none; margin-left: 0px; z-index: -1;"></div>
    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc9c3216a02c263f1acc2c4187e96443&libraries=services"></script>
    <script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
@@ -328,14 +330,14 @@ $(function(){
     <input type="radio" name="userTheme" value="G_spoon2" disabled="disabled"> 금수저
 	</c:if> 
 	
-	<c:if test="${user.grade=='3'}">
+	<c:if test="${user.grade=='3' || user.grade=='4'}">
 	<input type="radio" name="userTheme" value="H_spoon" checked="checked"> 흙수저
     <input type="radio" name="userTheme" value="D_spoon"> 동수저
     <input type="radio" name="userTheme" value="S_spoon1"> 은수저
     <input type="radio" name="userTheme" value="S_spoon2"> 은수저
     <input type="radio" name="userTheme" value="G_spoon1"> 금수저
     <input type="radio" name="userTheme" value="G_spoon2"> 금수저
-	</c:if> 
+	</c:if>
 	
 	
 
@@ -367,7 +369,7 @@ $(function(){
 <div class="col-xs-8 col-md-2 text-right" style="padding-top: .5em; padding-bottom: .5em;"><strong>사진</strong></div>
 <div class="col-xs-4 col-md-10" style="border-left-width: 0.1em; border-left-style: solid; border-left-color: #777; padding-top: .5em; padding-bottom: .5em;">
 
-	<input id=file type=file multiple="multiple" style="display: inline; width: 250px;">
+	<input id=file type=file multiple="multiple">
 	<br/>* 사진은 한 장씩 등록해주세요 * 세 장까지 등록 가능합니다<br/><br/>
 	<div id="img_box"></div>
 	
@@ -379,15 +381,16 @@ $(function(){
 
 <br/>
 
+</form>
 
 </div><!-- col-12 끝 -->
 </div><!-- 컨테이너 끝 -->
 
-</form>
+
 
 <!-- 로딩중 이미지 -->
 <div class="wrap-loading display-none">
-    <div><img src="/common/images/board/equalizes.gif"/></div>
+    <div><img src="/common/images/board/equalizes.gif" style="z-index: 6;"/></div>
 </div>    
 
 

@@ -413,7 +413,9 @@ public class BoardController {
 		//testUser=userService.getUser2("US10023");
 		
 		//주현
-		testUser=userService.getUser3("김주현");	
+		//testUser=userService.getUser3("김주현");	
+		
+		testUser=userService.getUser3("페리오");
 		
 		
 		session.setAttribute("user", testUser);
