@@ -371,6 +371,103 @@ $(function(){
 	});
 	
 	
+	//카카오 링크1 주소 있는 경우
+	$("span[name='kakao1']").bind("click",function(){
+		
+		var address=$(this).data('address');
+		
+		var boardDetailText=$(this).data('boarddetailtext');
+		
+		var hashTag=$(this).data('hashtag');
+		
+		var photo1=$(this).data('photo1');
+		
+		var likeCount=$(this).data('likecount');
+		
+		var boardNo=$(this).data('boardno');
+		
+		
+		//<![CDATA[
+		// // 사용할 앱의 JavaScript 키를 설정해 주세요.
+		Kakao.init('83df98960f21b7281d6cdfddf483b6a5');
+		// // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+				
+		  Kakao.Link.sendDefault({
+		    objectType: 'location',
+		    address: address,
+		    content: {
+		      title: boardDetailText,
+		      description: hashTag,
+		      imageUrl: photo1,
+		      link: {
+		        mobileWebUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo,
+		        webUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo
+		      }
+		    },
+		    social: {
+		      likeCount: likeCount,
+		    },
+		    buttons: [
+		      {
+		        title: '웹으로 보기',
+		        link: {
+		          mobileWebUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo,
+		          webUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo
+		        }
+		      }
+		    ]
+		  });
+		
+		//]]>
+				
+	});//카카오 링크1 끝
+	
+	
+	//카카오 링크2 주소 없는 경우
+	$("span[name='kakao2']").bind("click",function(){
+		
+		var boardDetailText=$(this).data('boarddetailtext');
+		
+		var hashTag=$(this).data('hashtag');
+		
+		var photo1=$(this).data('photo1');
+		
+		var likeCount=$(this).data('likecount');
+		
+		var boardNo=$(this).data('boardno');
+		
+		
+	//<![CDATA[
+    // // 사용할 앱의 JavaScript 키를 설정해 주세요.
+    Kakao.init('83df98960f21b7281d6cdfddf483b6a5');
+    // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+    
+      Kakao.Link.sendDefault({
+        objectType: 'feed',
+        content: {
+          title: boardDetailText,
+          description: hashTag,
+          imageUrl: photo1,
+          link: {
+            mobileWebUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo,
+            webUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo
+          }
+        },
+        social: {
+          likeCount: likeCount,
+        },
+        buttons: [
+          {
+            title: '웹으로 보기',
+            link: {
+              mobileWebUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo,
+              webUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo
+            }
+          }
+        ]
+      });
+     //]]>
+	});//카카오 링크2 끝
 	
 });//function 끝
 
@@ -470,48 +567,6 @@ function fncGetTown(){
 	$("form").attr("method" , "POST").attr("action" , "/board/listBoard?view=${param.view}").submit();
 }
 
-//카톡 공유
-
-//<![CDATA[
-// // 사용할 앱의 JavaScript 키를 설정해 주세요.
-Kakao.init('83df98960f21b7281d6cdfddf483b6a5');
-// // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
-function sendLink() {
-	
-	var address=$(this).data('address');
-	
-	alert(address);
-		
-  Kakao.Link.sendDefault({
-    objectType: 'location',
-    address: '경기 성남시 분당구 판교역로 235 에이치스퀘어 N동 8층',
-    addressTitle: '카카오 판교오피스 카페톡',
-    content: {
-      title: '신메뉴 출시♥︎ 체리블라썸라떼',
-      description: '이번 주는 체리블라썸라떼 1+1',
-      imageUrl: 'http://mud-kage.kakao.co.kr/dn/bSbH9w/btqgegaEDfW/vD9KKV0hEintg6bZT4v4WK/kakaolink40_original.png',
-      link: {
-        mobileWebUrl: 'https://developers.kakao.com',
-        webUrl: 'https://developers.kakao.com'
-      }
-    },
-    social: {
-      likeCount: 286,
-      commentCount: 45,
-      sharedCount: 845
-    },
-    buttons: [
-      {
-        title: '웹으로 보기',
-        link: {
-          mobileWebUrl: 'https://developers.kakao.com',
-          webUrl: 'https://developers.kakao.com'
-        }
-      }
-    ]
-  });
-}
-//]]>
 
 </script>
 
@@ -653,10 +708,7 @@ function sendLink() {
 	<p>
 	<img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px; display: inline; vertical-align: middle"/>
 	<span style="height:100%; font-weight: bold; display: inline; vertical-align: middle;">&nbsp;${board.user.userNickname}</span>
-		
-	<a id="kakao-link-btn" href="javascript:sendLink()" data-address="${board.address}">
-	<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
-	</a>
+	
 	
 	<span name="like" id="${board.boardNo}like" data-boardNo="${board.boardNo}" data-checkLike="${board.checkLike}">	
 	<c:choose>
@@ -679,6 +731,7 @@ function sendLink() {
 		</c:when>
 	</c:choose>
 	</span>
+	
 		
 	<span name="scrap" id="${board.boardNo}scrap" data-boardNo="${board.boardNo}" data-checkScrap="${board.checkScrap}">
 	<c:choose>
@@ -698,6 +751,22 @@ function sendLink() {
 		</c:when>
 	</c:choose>
 	</span>
+		
+	<c:if test="${board.address!=null}">	
+	<span id="${board.boardNo}kakao-link-btn" name="kakao1"
+	 data-address="${board.address}" data-boardDetailText="${board.boardDetailText}" data-hashTag="${board.hashTag}" data-photo1="${board.photo1}" data-likeCount="${board.likeCount}" data-boardNo="${board.boardNo}"
+	 style="display: inline; float: right; width: 40px; height: 40px;">
+	<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
+	</span>
+	</c:if>
+	
+	<c:if test="${board.address==null}">
+	<span id="${board.boardNo}kakao-link-btn" name="kakao2"
+	 data-boardDetailText="${board.boardDetailText}" data-hashTag="${board.hashTag}" data-photo1="${board.photo1}" data-likeCount="${board.likeCount}" data-boardNo="${board.boardNo}"
+	 style="display: inline; float: right; width: 40px; height: 40px;">
+	<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
+	</span>
+	</c:if>
 	
 	</p>
 

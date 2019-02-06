@@ -7,12 +7,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<link rel="stylesheet" href="css/demo.css">
-<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
-
 <title>addBoard</title>
 
-
+<link rel="stylesheet" href="css/demo.css">
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
 <link rel="stylesheet" href="/common/js/medium-editor/dist/css/medium-editor.min.css">
 <link rel="stylesheet" href="/common/js/medium-editor/dist/css/themes/beagle.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
@@ -113,8 +111,7 @@ $(function(){
 	        					var tagArea=$("#hashTag");
 	        					tagArea.val(tagArea.val()+decode);//해시태그 append
 	        				}
-	        			}
-	        			
+	        			}	        			
 	        			,complete:function(){
 	        		        $('.wrap-loading').addClass('display-none'); //로딩중 이미지 감추기
 	        		    }
