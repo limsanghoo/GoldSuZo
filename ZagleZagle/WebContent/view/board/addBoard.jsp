@@ -141,8 +141,6 @@ $(function(){
 	   
       var boardDetailText=$("textarea[name='boardDetailText']").val();
       
-      alert(boardDetailText);
-      
       if(boardDetailText==""){
          alert("내용을 입력해주세요.");
          return;
@@ -302,6 +300,7 @@ $(function(){
 
 	<c:if test="${user.grade=='0'}">
 	<input type="radio" name="userTheme" value="H_spoon" checked="checked"> 흙수저
+	<img src="/common/images/board/hspoon.png">
     <input type="radio" name="userTheme" value="D_spoon" disabled="disabled"> 동수저
     <input type="radio" name="userTheme" value="S_spoon1" disabled="disabled"> 은수저
     <input type="radio" name="userTheme" value="S_spoon2" disabled="disabled"> 은수저
@@ -311,29 +310,47 @@ $(function(){
 	
 	<c:if test="${user.grade=='1'}">
 	<input type="radio" name="userTheme" value="H_spoon" checked="checked"> 흙수저
+	<img src="/common/images/board/hspoon.png">
     <input type="radio" name="userTheme" value="D_spoon"> 동수저
+    <img src="/common/images/board/dspoon.png">
     <input type="radio" name="userTheme" value="S_spoon1" disabled="disabled"> 은수저
+    <img src="/common/images/board/sspoon1.png">
     <input type="radio" name="userTheme" value="S_spoon2" disabled="disabled"> 은수저
+    <img src="/common/images/board/sspoon2.png">
     <input type="radio" name="userTheme" value="G_spoon1" disabled="disabled"> 금수저
+    <img src="/common/images/board/gspoon1.png">
     <input type="radio" name="userTheme" value="G_spoon2" disabled="disabled"> 금수저
+    <img src="/common/images/board/gspoon2.png">
 	</c:if> 
 	
 	<c:if test="${user.grade=='2'}">
 	<input type="radio" name="userTheme" value="H_spoon" checked="checked"> 흙수저
+	<img src="/common/images/board/hspoon.png">
     <input type="radio" name="userTheme" value="D_spoon"> 동수저
+    <img src="/common/images/board/dspoon.png">
     <input type="radio" name="userTheme" value="S_spoon1"> 은수저
+    <img src="/common/images/board/sspoon1.png">
     <input type="radio" name="userTheme" value="S_spoon2"> 은수저
+    <img src="/common/images/board/sspoon2.png">
     <input type="radio" name="userTheme" value="G_spoon1" disabled="disabled"> 금수저
+    <img src="/common/images/board/gspoon1.png">
     <input type="radio" name="userTheme" value="G_spoon2" disabled="disabled"> 금수저
+    <img src="/common/images/board/gspoon2.png">
 	</c:if> 
 	
 	<c:if test="${user.grade=='3' || user.grade=='4'}">
 	<input type="radio" name="userTheme" value="H_spoon" checked="checked"> 흙수저
+	<img src="/common/images/board/hspoon.png">
     <input type="radio" name="userTheme" value="D_spoon"> 동수저
+    <img src="/common/images/board/dspoon.png">
     <input type="radio" name="userTheme" value="S_spoon1"> 은수저
+    <img src="/common/images/board/sspoon1.png">
     <input type="radio" name="userTheme" value="S_spoon2"> 은수저
+    <img src="/common/images/board/sspoon2.png">
     <input type="radio" name="userTheme" value="G_spoon1"> 금수저
+    <img src="/common/images/board/gspoon1.png">
     <input type="radio" name="userTheme" value="G_spoon2"> 금수저
+    <img src="/common/images/board/gspoon2.png">
 	</c:if>
 	
 	
