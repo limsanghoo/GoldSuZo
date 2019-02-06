@@ -60,6 +60,20 @@ public class TradeController {
 		
 		User user =(User)session.getAttribute("user");
 		sell.setSeller(user);
+		
+		String[] photo=sell.getSellPhoto1().split(",");//이미지 링크 파싱
+		
+		if(photo.length==1) {
+			sell.setSellPhoto1(photo[0]);
+	    }else if(photo.length==2) {
+	    	sell.setSellPhoto1(photo[0]);
+	    	sell.setSellPhoto2(photo[1]);
+	    }else if(photo.length==3) {
+	        sell.setSellPhoto1(photo[0]);
+	        sell.setSellPhoto2(photo[1]);
+	        sell.setSellPhoto3(photo[2]);
+	    }
+		
 		tradeService.addSell(sell);
 	
 		ModelAndView modelAndView = new ModelAndView();
@@ -231,9 +245,15 @@ public class TradeController {
 	}
 	
 	@RequestMapping(value="payBuy", method=RequestMethod.POST)
-	public ModelAndView payBuy(@ModelAttribute("buy") Buy buy ) throws Exception{
+	public ModelAndView payBuy(@ModelAttribute("buy") Buy buy, @ModelAttribute("sellNo") String sellNo ) throws Exception{
 		
-		System.out.println(buy);
+		Sell sell = new Sell();
+		sell.setSellNo(sellNo);
+		int sellState = 50;
+		sell.setSellState(sellState);
+		
+		tradeService.payBuy(buy);
+		tradeService.updateSellState(sell);
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("redirect:/trade/listBuy");

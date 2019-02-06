@@ -139,16 +139,14 @@
 		
 		<br/>
 	
-	  	<div class="row">
-	  		<div class="col-xs-4 col-md-4">
-	    	<img src="${board.photo1}"/>사진1
-			</div>
-			<div class="col-xs-4 col-md-4">
-	    	<img src="${board.photo2}" />사진2
-			</div>
-			<div class="col-xs-4 col-md-4">
-	    	<img src="${board.photo3}"/>사진3
-			</div>
+	  	<div class="row" style="margin: auto;">
+	    	<a href="${sell.sellPhoto1}" target="_blank"><img src="${sell.sellPhoto1}" style="height: 150px"/></a>
+			&emsp;
+	    	<a href="${sell.sellPhoto2}" target="_blank"><img src="${sell.sellPhoto2}" style="height: 150px"/></a>
+			&emsp;
+	    	<a href="${sell.sellPhoto3}" target="_blank"><img src="${sell.sellPhoto3}" style="height: 150px"/></a>
+	    	<br/><br/><br/><br/><br/>
+	    	&emsp; * 사진 클릭시 원본 사이즈로 보실 수 있습니다. 
 		</div>
 		
 		<br/>
