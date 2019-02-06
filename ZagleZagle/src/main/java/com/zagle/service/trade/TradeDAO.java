@@ -29,6 +29,8 @@ public interface TradeDAO {
 	public int getBuyCount(String userNo) throws Exception;
 
 	public Buy getBuy(String buyNo) throws Exception;
+
+	public void payBuy(Buy buy) throws Exception;
 	
 //	addSell 판매상품올리기
 //	addBuy 구매요청했을때

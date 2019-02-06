@@ -35,8 +35,6 @@ $(function() {
 
 	file.onchange = function (event) {
 		
-	  $('.wrap-loading').removeClass('display-none'); //로딩중 이미지 보여주기
-		
 	  var target = event.currentTarget;
 	  var xmlHttpRequest = new XMLHttpRequest();
 	  xmlHttpRequest.open('POST', 'https://api.imgur.com/3/image/', true); //원래 true
@@ -46,35 +44,13 @@ $(function() {
 	    if (xmlHttpRequest.readyState == 4) {
 	      if (xmlHttpRequest.status == 200) {
 	        var result = JSON.parse(xmlHttpRequest.responseText);
-	        $("#img_box").append("<img src='"+result.data.link+"' name='img' style='width: 500px;'>");//이미지 미리보기
+	        $("#img_box").append("<img src='"+result.data.link+"' name='img' style=' height: 150px;'>&nbsp;");//이미지 미리보기
 	        
 	        var linkArea=$("#link");
 			linkArea.val(linkArea.val()+result.data.link+",");//이미지 링크 append
 			
 	        console.log(result);        
-	        
-	        $.ajax(	
-	        		{
-	        			url : "http://192.168.0.49:8080/board/json/addBoardVisionTag",
-	        			method : "GET",
-	        			data : {
-	        				link : result.data.link
-	        			},
-	        			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-	        			dataType : "text",
-	        			success : function (data,status){
-	        				var decode=decodeURIComponent(data);//특수문자 포함 디코딩
-	        				//alert("decode : "+decode);
-	        				
-	        				var tagArea=$("#hashTag");
-	        				tagArea.val(tagArea.val()+decode);//해시태그 append
-	        			}
-	        			
-	        			,complete:function(){
-	        		        $('.wrap-loading').addClass('display-none'); //로딩중 이미지 감추기
-	        		    }
-	        		});
-	      
+    
 	      }
 	      else {
 	      	alert("업로드 실패");
@@ -192,14 +168,13 @@ $(function() {
 		<br/>
 	
 	  	<div class="row">
-	  		<div class="col-xs-4 col-md-4">
-	    	<img src="${board.photo1}"/>사진1
-			</div>
-			<div class="col-xs-4 col-md-4">
-	    	<img src="${board.photo2}" />사진2
-			</div>
-			<div class="col-xs-4 col-md-4">
-	    	<img src="${board.photo3}"/>사진3
+	  	<div class="col-xs-8 col-md-1" style="padding-top: .5em; padding-bottom: .5em;"><strong>사진</strong></div>
+	  	<div class="col-xs-4 col-md-11" style="border-left-width: 0.1em; border-left-style: solid; border-left-color: #777; padding-top: .5em; padding-bottom: .5em;">
+			<input id=file type=file multiple="multiple"><br/>	
+			<div id="img_box"></div>
+			<br/>* 사진은 한 장씩 등록해주세요 * 세 장까지 등록 가능합니다<br/><br/>
+
+			<input type="hidden" id="link" value="" name="sellPhoto1"/><!-- 이미지 링크 append 되는 부분 -->
 			</div>
 		</div>
 		
@@ -210,9 +185,9 @@ $(function() {
 		<br/>
 		
 		<div class="row">
-		<div class="col-xs-8 col-md-2" style="padding-top: .5em; padding-bottom: .5em;"><strong>상세정보</strong></div>
+		<div class="col-xs-8 col-md-1" style="padding-top: .5em; padding-bottom: .5em;"><strong>상세정보</strong></div>
 	
-			<div class="col-xs-4 col-md-10" style="border-left-width: 0.1em; border-left-style: solid; border-left-color: #777; padding-top: .5em; padding-bottom: .5em;">
+			<div class="col-xs-4 col-md-11" style="border-left-width: 0.1em; border-left-style: solid; border-left-color: #777; padding-top: .5em; padding-bottom: .5em;">
 			<textarea class="editable" id="sellText" name="sellText">
 			</textarea>
 			</div>

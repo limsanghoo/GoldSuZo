@@ -64,4 +64,14 @@
 	 	WHERE u.user_no=s.user_no and s.sell_no=b.sell_no
 	 </select>
 	 
+	 <update id="payBuy" parameterType="buy">
+	 	UPDATE buy
+	 	<set>
+	 		payment=#{payment},
+	 		buy_phone=#{buyPhone}, 
+	 		buy_addr=#{buyAddress},
+	 	</set>
+	 	WHERE buy_no=#{buyNo}
+	 </update>
+	 
 </mapper>
