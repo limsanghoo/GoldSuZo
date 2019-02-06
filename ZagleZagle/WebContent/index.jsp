@@ -47,6 +47,34 @@
 				self.location = "/user/googleLogin"
 			});
 		}); 
+    	
+    	
+    //////////==============Naver Login View popup================/////////
+    
+    
+    	$(function() {
+    		
+    		
+    		
+    		$("#naverLogin").on("click", function() {
+    			
+    			alert("네이버 로긴 클릭")
+        		
+    			
+    			
+    			var URL ="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=ICC6WpwdQLzHUQn5KfEC&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fuser%2FnaverCallback&state=state"
+    					
+    			popWin
+    			= window.open(URL, "popWin", "left=300, top=200, width=780, height=500, marginwidth=0, marginheight=0,"+"scrollbars=no,scrolling=no,menubar=no,resizable=no")
+    			
+    			opener.window.location = url;
+    			
+    			close();
+    			
+    		});
+    	});
+    
+    
     
     	   /////=========Kakao Login View popup ==========////////////
 
@@ -57,9 +85,9 @@
 	    		  alert("클릭 완료")
 	    		  
 	    		  
-	    		  var  URL = "https://kauth.kakao.com/oauth/authorize?client_id=c3883a306a9faad67b127d7631568b29&redirect_uri=http://192.168.0.35:8080/user/kakaologin&response_type=code"
+	    		  var  URL = "https://kauth.kakao.com/oauth/authorize?client_id=c3883a306a9faad67b127d7631568b29&redirect_uri=http://192.168.0.18:8080/user/kakaologin&response_type=code"
 	    		  popWin
-	    		  = window.open(URL,   "popWin",  "left=300,top=200,width=780,height=130,marginwidth=0,marginheight=0,"+
+	    		  = window.open(URL,   "popWin",  "left=300,top=200,width=780,height=500,marginwidth=0,marginheight=0,"+
 							"scrollbars=no,scrolling=no,menubar=no,resizable=no")
 	    				
 							 opener.window.location = url;
@@ -172,11 +200,14 @@ background-color: rgba(0,0,0,0.1);
 	   <img src="/common/images/KakaoTalk.png" height="50" width="50"/>
 		</a>
 		
+		
+		<a href=# id="naverLogin">
+		<img src="/common/images/NaverSmall.jpg" height="50" width="50">
+		</a>
+		
 	
-		<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=ICC6WpwdQLzHUQn5KfEC&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fuser%2FnaverCallback&state=state">
-		<img height="50" src="/common/images/NaverSmall.jpg" height="50" width="50" ></a>
 	
-		<a herf="#">
+		<a href="#">
 		<img src="/common/images/smallGoogle.jpg" height="50" width="50" id="GGG"/>
 		</a>
 		
