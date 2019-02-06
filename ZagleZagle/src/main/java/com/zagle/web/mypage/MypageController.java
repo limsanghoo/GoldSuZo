@@ -125,10 +125,8 @@ public class MypageController {
 		
 		System.out.println("/mypage/listComment : GET/POST");
 		
-//		if(search.getCurrentPage()==0) {
-//			search.setCurrentPage(1);
-//		}
-//		search.setPageSize(pageSize);
+		
+		
 		
 		User user = (User) session.getAttribute("user");
 		user.getUserNo();
@@ -142,7 +140,12 @@ public class MypageController {
 		
 		Map<String, Object> map = mypageService.listComment(searchMypage);
 		
+		System.out.println(pageUnit);
+		System.out.println(pageSize);
 		System.out.println(map);
+		
+		System.out.println(map.get("totalCount"));
+		
 		
 		ArrayList list = (ArrayList) map.get("list");
 		System.out.println(list);
@@ -158,12 +161,11 @@ public class MypageController {
 		}
 		System.out.println(bdList);
 		
-		
-//		Page resultPage = new Page(search.getCurrentPage(),((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-//		System.out.println(resultPage);
+	
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("list", map.get("list"));
+
 		modelAndView.addObject("Cboard", bdList);
 		modelAndView.addObject(" searchMypage",  searchMypage);
 		modelAndView.setViewName("forward:/view/mypage/listComment.jsp");
@@ -176,7 +178,7 @@ public class MypageController {
 	public ModelAndView listMyBoard(@ModelAttribute("SearchMypage") SearchMypage searchMypage, HttpServletRequest request, HttpSession session)throws Exception {
 		
 		System.out.println("/mypage/listMyboard : GET/POST");
-		
+	
 		
 		
 		User user = (User) session.getAttribute("user");
@@ -206,6 +208,7 @@ public class MypageController {
 		
 			Mypage mp = (Mypage)list.get(i);
 			String bdNo = mp.getBoard().getBoardNo();
+			
 			Board bd = boardService.getBoard(bdNo);
 			bdList.add(bd);
 		}
@@ -214,6 +217,7 @@ public class MypageController {
 		modelAndView.addObject("listBoard", bdList);
 //		modelAndView.addObject("resultPage", resultPage);
 		modelAndView.addObject("searchMypage", searchMypage);
+		modelAndView.addObject("user", user);
 		modelAndView.setViewName("forward:/view/mypage/listMyBoard.jsp");
 	
 	
@@ -251,6 +255,21 @@ public class MypageController {
 		
 		return modelAndView;
 	}
+	
+	@RequestMapping(value="mypageMainView")
+	public ModelAndView mypageMainView() throws Exception {
+		
+		System.out.println("/mypage/mypageMainView");
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/view/mypage/mypageMain.jsp");
+		
+		return modelAndView;
+		
+	}
+	
+	
+	
 	@RequestMapping(value="listLike")
 	public ModelAndView listLike(@ModelAttribute("SearchMypage") SearchMypage search, HttpSession session) throws Exception {
 		

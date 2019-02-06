@@ -1,234 +1,202 @@
-<html lang="ko" xml:lang="ko" xmlns="http://www.w3.org/1999/xhtml"><!--[if lt IE 7]>
-<html  lang="ko" xml:lang="ko" xmlns="http://www.w3.org/1999/xhtml" class="no-js oldie lt-ie9 lt-ie8 lt-ie7"> <![endif]--><!--[if IE 7]>
-<html  lang="ko" xml:lang="ko" xmlns="http://www.w3.org/1999/xhtml" class="no-js oldie lt-ie9 lt-ie8"> <![endif]--><!--[if IE 8]>
-<html lang="ko" xml:lang="ko" xmlns="http://www.w3.org/1999/xhtml" class="no-js oldie lt-ie9 lt-ie10"> <![endif]--><!--[if IE 9]>
-<html lang="ko" xml:lang="ko" xmlns="http://www.w3.org/1999/xhtml" class="no-js ie9"> <![endif]--><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-<meta name="generator" content="MUSINSA">
-<meta name="author" content="패션웹진 무신사">
-<meta name="subject" content="무신사 매거진">
-<meta name="description" content="거리패션, 패션 중고장터, 패션잡지, 비바스튜디오, 모디파이드, 에스피오나지, 패션화보">
-<meta name="copyright" content="Copyrights © 2019 www.musinsa.com All Rights Reserved">
-<meta property="og:title" content="무신사 매거진">
-<meta property="og:type" content="product">
-<meta property="og:url" content="https://www.musinsa.com/?">
-<meta property="og:image" content="https://image.musinsa.com/mfile_outsrc/img/logo-simbol-musinsache.png?v=1"> 
-<meta property="og:site_name" content="무신사 매거진">
-<meta property="og:description" content="거리패션, 패션 중고장터, 패션잡지, 비바스튜디오, 모디파이드, 에스피오나지, 패션화보">
-<meta property="fb:app_id" content="256225934421849"> 
-<meta name="google-site-verification" content="NqB0BDAEWJTvAPCCxzrckJYnS7-xJILFU40FvSmh5S8"><title>무신사 매거진</title>
-			<link rel="shortcut icon" href="/favicon.ico?ver=1" type="image/x-icon">
-		<link type="text/css" rel="stylesheet" charset="utf-8" href="/outsrc/css/common/normalizer.css?v=9.20850">
-		<link type="text/css" rel="stylesheet" href="//static.musinsa.com/mfile_outsrc/css/common/base.css?v=9.20850">
-		<link type="text/css" rel="stylesheet" charset="utf-8" href="//static.musinsa.com/mfile_outsrc/css/common/common-magazine.css?v=9.20850">
-		<link type="text/css" rel="stylesheet" charset="utf-8" href="//static.musinsa.com/mfile_outsrc/css/common/common.css?v=9.20850">
-		<link type="text/css" rel="stylesheet" charset="utf-8" href="//static.musinsa.com/mfile_outsrc/css/common/common-pc.css?v=9.20850">
-		<link type="text/css" rel="stylesheet" charset="utf-8" href="//static.musinsa.com/mfile_outsrc/css/common/footer.css?v=9.20850">
-		<link type="text/css" rel="stylesheet" charset="utf-8" href="//static.musinsa.com/mfile_outsrc/css/common/header.css?v=9.20850">
-		<link type="text/css" rel="stylesheet" href="/outsrc/css/font-awesome/font-awesome.css?v=9.20850">
-						<link type="text/css" rel="stylesheet" charset="utf-8" href="//static.musinsa.com/mfile_scr/modules/comment/musinsa.comment.css?v=9.20850">
-		<link type="text/css" rel="stylesheet" href="//static.musinsa.com/mfile_outsrc/css/module/member.css?v=9.20850">
-	<link type="text/css" rel="stylesheet" href="//static.musinsa.com/mfile_outsrc/css/module/member.main.css?v=9.20850">
-<link type="text/css" rel="stylesheet" charset="utf-8" href="//static.musinsa.com/mfile_scr/layouts/community/css/jquery.lightbox-0.5.css?v=9.20850"><script async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript" src="//static.musinsa.com/mfile_outsrc/js/vendor/jquery-1.11.1.min.js"></script>
-<script type="text/javascript">
-//<![CDATA[
-var mbrclick= false;
-var rooturl = 'https://www.musinsa.com';
-var raccount= 'home';
-var moduleid= 'member';
-var memberid= 'sh91joey';
-var is_admin= '0';
-var needlog = '로그인후에 이용하실 수 있습니다. ';
-var neednum = '숫자만 입력해 주세요.';
-var myagent	= navigator.appName.indexOf('Explorer') != -1 ? 'ie' : 'ns';
-if (myagent == 'ns' && navigator.userAgent.indexOf('Trident/7.0') != -1)
-{
-    myagent = 'ie11';
-}
-//]]>
-</script>
-<script type="text/javascript" charset="utf-8" src="/_core/js/sys.js?version=6.4320"></script>
-<script type="text/javascript" src="/modules/editor/theme/default/main.js?version=6.4320"></script>
-<script type="text/javascript" charset="utf-8" src="/layouts/community/_main.js?version=6.4320"></script><script type="text/javascript" src="//static.musinsa.com/mfile_scr/layouts/community/js/common.js"></script><script type="text/javascript" src="//static.musinsa.com/mfile_scr/layouts/community/js/jquery.lightbox-0.5.musinsa.1.2.js"></script><script type="text/javascript" src="//static.musinsa.com/mfile_scr/layouts/community/js/rich_calendar.js"></script><script type="text/javascript" src="/layouts/community/js/poll.js?v=1.52"></script>
-<script type="text/javascript" charset="utf-8" src="/modules/comment/musinsa.comment.js?version=6.4320"></script>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-  ga('create', 'UA-41566681-1',{cookieDomain: 'musinsa.com', sampleRate: 5});
-  ga('send', 'pageview');
-</script>
-</head><body class="MYPAGE_BODY" data-dico="noTrans">
-<script type="text/javascript">
-var hsGetMobileStat = function() {
-	return false;
-}
-</script>
-<link type="text/css" rel="stylesheet" charset="utf-8" href="//static.musinsa.com/mfile_scr/layouts/community/css/musinsa_timeline.css?version=9.20850">
-<script type="text/javascript" src="/layouts/community/js/musinsa_timeline.new.js?version=6.4320"></script>
 
-<script type="text/javascript" src="/layouts/community/js/store.suggestions.js?version=6.4320"></script>
-<script type="text/javascript" src="/layouts/community/js/ex.script.js?version=6.4320"></script>
-<script type="text/javascript" src="//static.musinsa.com/skin/musinsa/js/jquery.cycle.all.js?version=6.4320"></script>
-
-<script type="text/javascript">
-$(document).ready(function(){
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	
-	// 인기검색어 레이어 슬라이드
-	$("#pop_search_word").cycle({
-		fx : "scrollHorz", 
-		speed : 500, 
-		timeout: 0,
-		next : "#pop_search_word_next",
-		prev : "#pop_search_word_prev"
-	});
+	<link href="/css/animate.min.css" rel="stylesheet">
+   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
 	
-	// 추천검색어 레이어 슬라이드
-	$("#recommend_search_word").cycle({
-		fx : "scrollHorz", 
-		speed : 500, 
-		timeout: 0,
-		next : "#recommend_search_word_next",
-		prev : "#recommend_search_word_prev"
-	});
+	 <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+   
+	 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-	// 판매랭킹 레이어 슬라이드
-	$("#box_sale_rank").cycle({
-		fx : "scrollHorz", 
-		speed : 500, 
-		timeout: 0,
-		next : "#box_sale_rank_next",
-		prev : "#box_sale_rank_prev"
-	});
 
-});
-</script>
+		<script>
+		
+		
+	
+		 $(function() {
+			
+		
+				//댓글 리스트 불러오기
+				$("td:nth-child(2)").bind("click",function(){
+					var preBoardNo=$(this).data('target');
+					
+					//#${board.boardNo}modal1 자르기
+					var boardNo=preBoardNo.substring(1,8);
+					
+					commentList(boardNo);
+				})
+
+ });
+
+	
+
+		
+		</script>
+
+
+
+</head>
+
+
 
 <body>
 
-<jsp:include page="/view/layout/toolbar.jsp"/>
+<jsp:include page="/view/layout/toolbar.jsp" />
+<jsp:include page="/view/layout/mypageToolbar.jsp" />
 
-<div class="column-wrapper" id="wrapper">
-<div class="top-column column">
+<div class="container">
 
-<div class="bottom-column column clearfix">		
-		<div class="main-content-wrapper">
-			<div class="header">
-				<div class="breadCrumb-wrapper">
-					<span class="breadCrumb"></span><span class="breadCrumb"></span>				</div>
-				<div class="pageHeading">
-					<span class="eng"></span>				</div>
-			</div>
-			<div class="main-content" style="height: 1602px;">
-				<div class="section">
-					<div class="content-wrapper wrapper">
-						<div class="userInfo-wrapper">
-							<div class="userStatus-box box">
-																<div class="userPhoto" onclick="window.open('?r=home&amp;mod=member_info&amp;page=simbol','','statusbar=no,scrollbars=yes,toolbar=no');" title="사진 등록">
-									<img src="//image.musinsa.com/mfile_s01/_simbols/0.gif" alt="">								</div>
-																<div class="userStatus">
-									<div class="statusBox">
-										<p>
-											<span class="level"></span>
-											<span class="name"></span><span>님</span>
-											<a href="javascript:void(0)" onclick="window.open('?r=home&amp;mod=member_info&amp;page=info','','statusbar=no,scrollbars=yes,toolbar=no');"><span class="brackets">회원정보 변경</span></a>
-										</p>
-										<p class="row-2">
-											<span></span>
-											<span class="levelPoint parentheses"> <span class="point"></span></span>
-											<a href="//store.musinsa.com/app/content/s/cs/benefit_01" class="underline"><span></span></a>
-										</p>
-									</div>
-									<p class="notification">
-										  <span class="blue"></span> <a class="underline" href="javascript:void(0)" onclick="window.open('?r=home&amp;mod=member_info&amp;page=mclass','','statusbar=no,scrollbars=yes,toolbar=no');"><span>계산방법</span></a>
-									</p>
-								</div>
-							</div>
-							<div class="point-box box">
-								<div class="header">
-									<span class="title"></span>
-									<a href="javascript:void(0)" onclick="window.open('?r=home&amp;mod=member_info&amp;page=point','','statusbar=no,scrollbars=yes,toolbar=no');"><img src="//image.musinsa.com/mfile_scr/layouts/community/image/img/btn_mymore.gif" alt=""></a>
-								</div>
-								<span class="number"></span>
-								<span class="unit"></span>
-							</div>
-							<div class="savings-box box">
-								<div class="header">
-									<span class="title"></span>
-									<a href="//store.musinsa.com/app/mypage/point"><img src="//image.musinsa.com/mfile_scr/layouts/community/image/img/btn_mymore.gif" alt=""></a>
-								</div>
-								<span class="number"></span>
-								<span class="unit"></span>
-							</div>
-							<div class="coupon-box box">
-								<div class="header">
-									<span class="title"></span>
-									<a href="//store.musinsa.com/app/mypage/coupon_available/"><img src="//image.musinsa.com/mfile_scr/layouts/community/image/img/btn_mymore.gif" alt=""></a>
-								</div>
-								<span class="number"></span>
-								<span class="unit"></span>
-							</div>
-							<div class="pm-box box">
-								<div class="header">
-									<span class="title"></span>
-									<a href="javascript:void(0)" onclick="window.open('?r=home&amp;mod=member_info&amp;page=paper','','statusbar=no,scrollbars=yes,toolbar=no');"><img src="//image.musinsa.com/mfile_scr/layouts/community/image/img/btn_mymore.gif" alt=""></a>
-								</div>
-								<span class="number"></span>
-								<span class="unit"></span>
-							</div>
-						</div>
+<div class="page-header text-info">
+	       <h5>작성 게시물</h5>
+	    </div>
+	    
+	         <table class="table table-hover table-striped" >
+	    
+	         <thead>
+          <tr>
+            <th align="center">No</th>
+            <th align="left" >게시물 내용</th>
+            <th align="left">작성 날짜</th>
+    
+  
+          </tr>
+        </thead>
+	    
+	    
+      <c:set var="i" value="0" />
+		   <c:forEach var="board" items="${listBoard}">
+		   	
+		   	<tr>
+		   <c:set var="i" value="${ i+1 }" />
+		 
+		     <td align="left">${ i }</td>
+		   	
+		      <td align="left"  title="click 시 상세보기" data-toggle="modal" data-target="#${board.boardNo}bbb">${board.boardDetailText}</td>
+		      
+		      <td align="left">${board.boardRegDate} 				</td>
+		    
+		      
+		    </tr>
+		    
 
-						<div class="linkBtn-wrapper clearfix">
-							<a href="./?mod=mypage" class="plain-btn btn active"></a>
-							<a href="//store.musinsa.com/app/mypage" class="plain-btn btn"></a>
-						</div>
+		    
+		
+<!-- 모달1 시작 -->
+<div class="modal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="${board.boardNo}bbb">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    
+	<!-- 모달1 헤더 시작 -->
+    
+      <div class="row">
+      
+      	<div class="col-md-11 col-md-offset-1">
+        <span aria-hidden="true" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: 15px; margin-right:5px; margin-bottom:15px; display: inline;">&times;</span>       
+        </div>
+      </div> 
+      
+        <h4 class="row modal-title" id="gridSystemModalLabel">
+         
+        <div class="col-sm-2">
+        <img src="/common/images/profile/${user.profile}" style="height: 60px; width:60px; border-radius: 70px; vertical-align: middle; margin-left: 15px;"/>
+        </div>
+        
+        <div class="col-sm-3">
+		${user.userNickname}
+		</div>
+		
+		<!-- 내 글만 수정, 삭제 -->
+		<c:if test="${user.userNo==board.user.userNo}">
+		<div class="col-sm-7" style="padding-left: 60px;">
+		<input class="btn btn-a" type="button" value="수정" data-update="${board.boardNo}"/>
+        <span class="btn btn-b" data-toggle="modal" data-target="#${board.boardNo}modal2">삭제</span>
+        </div>
+        </c:if>
+        
+        <!-- 신고 버튼 -->
+        <c:if test="${user.userNo!=board.user.userNo}">
+        <div class="col-sm-5 col-md-offset-2">    
+        <input type="button" name="report" class="btn btn-c" value="신고" data-report="${board.boardNo}"/>
+        <input type="hidden" id="${board.boardNo}report" value="${board.boardNo}${board.user.userNo}">
+        </div>
+        </c:if>     
+         
+        </h4>
+          
+     <!-- 모달1 헤더 끝 -->
+      
+     <!-- 모달1 바디 시작 -->
+      <div class="modal-body" style="text-align: center">  
 
-						<div class="userArticle-wrapper clearfix">
-							<div class="articleList-box box">
-								<div class="header">
-									<span class="title"></span>
-									<a class="showAll" href="/?mod=mypage&amp;page=post"><span></span></a>
-								</div>
-								<ul class="list">
-																																		<li class="nodata"></li>
-																	</ul>
-							</div>
-							<div class="myReplyList-box box">
-								<div class="header">
-									<span class="title"></span>
-									<a class="showAll" href="/?mod=mypage&amp;page=comment"><span></span></a>
-								</div>
-								<ul class="list">
-																																				<li class="nodata"></li>
-																	</ul>
-							</div>
-							<div class="articleReplyList-box box">
-								<div class="header">
-									<span class="title"></span>
-								</div>
-								<ul class="list">
-																																				<li class="nodata"></li>
-																	</ul>
-							</div>
-							<div class="opinionList-box box">
-								<div class="header">
-									<span class="title"></span>
-								</div>
-								<ul class="list">
-																																				<li class="nodata"></li>
-																	</ul>
-							</div>
-							<div class="infoLayerPopup" id="qTilePopDiv" style="left: 836px; top: 267px;">
-								<p>
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-</div>
+		<div>
+			<c:if test="${board.photo1 !=null}">
+			<div><img src="${board.photo1}" style="width: 100%"/></div>
+			<br/>
+			</c:if>
+
+			<c:if test="${board.photo2 !=null}">
+			<div><img src="${board.photo2}" style="width: 100%"/></div>
+			<br/>
+			</c:if>
+	
+			<c:if test="${board.photo3 !=null}">
+			<div><img src="${board.photo3}" style="width: 100%"/></div>
+			<br/>
+			</c:if>
+		</div>
+
+		<p>
+			${board.boardDetailText}
+		</p>
+     
+       
+      </div>
+      <!-- 모달1 바디 끝 -->
+      
+      <!-- 모달1 푸터 시작 -->
+      <div>
+      
+		<!-- listComment로 파라미터 보내기 -->      
+     	<jsp:include page="/view/board/listComment.jsp">
+     		<jsp:param name="boardNo" value="${board.boardNo}"/>
+     	</jsp:include>
+    	
+      </div>
+      <!-- 모달1 푸터 끝 -->
+      
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- 모달1 끝 -->
+		
+		    
+		    
+		    
+	    </c:forEach>
+	
+
+		    
+	
+	    
+	    </table>
+	    
+		     <!-- PageNavigation Start... -->
+	<jsp:include page="/common/pageNavigation.jsp"/>
+	<!-- PageNavigation End... -->
+	
+	
+	</div>
 </body>
+</html>
