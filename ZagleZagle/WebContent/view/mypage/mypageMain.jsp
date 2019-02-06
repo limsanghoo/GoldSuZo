@@ -32,7 +32,39 @@ $(function() {
 		})
 
 
+		
+		$("#myboard").on("click", function() {
+			
+			self.location = "/mypage/listMyBoard"
+		});
+	
+		$("#commentBoard").on("click", function() {
+		
+		self.location = "/mypage/listComment"
+		});
+	
+		$("#scrapBoard").on("click", function() {
+		
+		self.location = "/mypage/listScrap"
+		});
+		
+		$("#likeBoard").on("click", function() {
+			
+		self.location = "/mypage/listLike"
+		});
+			
 
+		$("#addAccount").on("click", function() {
+			
+		self.location = "/mypage/addAccount"
+		});
+			
+		$("#updateAccount").on("click", function() {
+			
+		self.location = "/mypage/updateAccount"
+		});
+					
+		
 });
 
 	
@@ -91,10 +123,7 @@ background-color: whitesmoke;
 <div class="row" style="padding: 300px;">	
 	
   <div style="padding-right: 20px;">
-      <img src="/common/images/mypage/contract.png" style="width:100px; height:100px;" data-toggle="tooltip" data-placement="top" title="작성 게시물로 이동">
-   
-  		
-  
+      <img src="/common/images/mypage/contract.png" style="width:100px; height:100px;" data-toggle="tooltip" data-placement="top" title="작성 게시물로 이동" id="myboard">
   
       </div>
       
@@ -105,7 +134,8 @@ background-color: whitesmoke;
   
     	<div style="padding-right: 20px;">
   
-      <img src="/common/images/mypage/signature.png" style="width:100px; height:100px;" data-toggle="tooltip" data-placement="top" title="댓글 작성한 게시물로 이동">
+      <img src="/common/images/mypage/signature.png" style="width:100px; height:100px;" data-toggle="tooltip" data-placement="top" 
+      title="댓글 작성한 게시물로 이동" id="commentBoard">
    
   
       
@@ -117,7 +147,7 @@ background-color: whitesmoke;
 
 <div style="padding-right: 20px;">
    
-      <img src="/common/images/mypage/scrap.png" style="width:100px; height:100px;" data-toggle="tooltip" data-placement="top" title="스크랩 게시물로 이동">
+      <img src="/common/images/mypage/scrap.png" style="width:100px; height:100px;" data-toggle="tooltip" data-placement="top" title="스크랩 게시물로 이동" id="scrapBoard">
       
  </div>
  
@@ -129,14 +159,14 @@ background-color: whitesmoke;
 
  <div style="padding-right: 20px;">
 
-      <img src="/common/images/mypage/likelike.png" style="width:100px; height:100px;" data-toggle="tooltip" data-placement="top" title="좋아요한 게시물로 이동">
+      <img src="/common/images/mypage/likelike.png" style="width:100px; height:100px;" data-toggle="tooltip" data-placement="top" title="좋아요한 게시물로 이동" id="likeBoard">
      
  </div> <br/>
    
     
      <div style="padding-right: 20px;">
   
-      <img src="/common/images/mypage/addAccount.png" style="width:100px; height:100px;" data-toggle="tooltip" data-placement="top" title="계좌번호 등록">
+      <img src="/common/images/mypage/addAccount.png" style="width:100px; height:100px;" data-toggle="tooltip" data-placement="top" title="계좌번호 등록" id="addAccount">
       
   
  </div>
@@ -144,7 +174,7 @@ background-color: whitesmoke;
  
    
    <div>
-      <img src="/common/images/mypage/updateAccount.png" style="width:100px; height:100px;" data-toggle="tooltip" data-placement="top" title="계좌번호 수정">
+      <img src="/common/images/mypage/updateAccount.png" style="width:100px; height:100px;" data-toggle="tooltip" data-placement="top" title="계좌번호 수정" id="updateAccount">
     
   
  </div>

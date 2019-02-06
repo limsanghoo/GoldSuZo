@@ -94,5 +94,8 @@ public class UserServiceImpl implements UserService {
 		userDao.updateDeleteCount(user);
 	}
 	
+	public void updateGrade(User user) throws Exception {
+		userDao.updateGrade(user);
+	}
 
 }

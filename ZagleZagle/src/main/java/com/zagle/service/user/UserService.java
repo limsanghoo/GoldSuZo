@@ -30,4 +30,6 @@ public interface UserService {
 	
 	public void updateDeleteCount(User user) throws Exception;
 	
+	public void updateGrade(User user) throws Exception;
+	
 }

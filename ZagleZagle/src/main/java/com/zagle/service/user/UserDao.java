@@ -27,9 +27,13 @@ public interface UserDao {
 
 	public void updateDeleteCount(User user) throws Exception;
 	
+	public void updateGrade(User user) throws Exception;
+	
 	// �Խ��� Page ó���� ���� ��ü Row(totalCount) return
 	public int getTotalCount(SearchAdmin search) throws Exception;
 	
 	public int checkNickname(User user) throws Exception;
+	
+
 	
 }

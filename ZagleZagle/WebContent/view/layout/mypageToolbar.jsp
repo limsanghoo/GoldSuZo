@@ -12,17 +12,26 @@
 <script>
 
 $(function() {
+	
+	
+	$("a:contains('Mypage')").on("click" , function() {
+	
+		
+		$(self.location).attr("href","/mypage/mypageMainView");
+		
+	});	
+	
+	
 
 $("a:contains('작성 게시물 모아보기')").on("click" , function() {
-	alert("클릭됨")
-	
+
 	$(self.location).attr("href","/mypage/listMyBoard");
 	
 });
 
 
 $("a:contains('댓글 작성한 게시물 보기')").on("click" , function() {
-	alert("클릭됨")
+
 	
 	$(self.location).attr("href","/mypage/listComment");
 	
@@ -31,7 +40,7 @@ $("a:contains('댓글 작성한 게시물 보기')").on("click" , function() {
 
 
 $("a:contains('스크랩 게시물 모아보기')").on("click" , function() {
-	alert("클릭됨")
+
 	
 	$(self.location).attr("href","/mypage/listScrap");
 	
@@ -39,7 +48,7 @@ $("a:contains('스크랩 게시물 모아보기')").on("click" , function() {
 
 
 $("a:contains('좋아요한 게시물 모아보기')").on("click" , function() {
-	alert("클릭됨")
+
 	
 	$(self.location).attr("href","/mypage/listLike");
 	
@@ -49,7 +58,7 @@ $("a:contains('좋아요한 게시물 모아보기')").on("click" , function() {
 
 
 $("a:contains('계좌번호 등록')").on("click" , function() {
-	alert("클릭됨")
+
 	
 	$(self.location).attr("href","/mypage/addAccount");
 	
@@ -57,7 +66,7 @@ $("a:contains('계좌번호 등록')").on("click" , function() {
 
 
 $("a:contains('계좌번호 수정')").on("click" , function() {
-	alert("클릭됨")
+
 	
 	$(self.location).attr("href","/mypage/updateAccount");
 	
@@ -85,7 +94,7 @@ $("a:contains('계좌번호 수정')").on("click" , function() {
     width: 250px;
     height: 100%;
     margin-left: -250px;
-    background: lightblue;;
+    background: lightblue;
     overflow-x: hidden;
     overflow-y: auto;
   }

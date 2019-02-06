@@ -206,6 +206,7 @@ public class MypageController {
 		
 			Mypage mp = (Mypage)list.get(i);
 			String bdNo = mp.getBoard().getBoardNo();
+			
 			Board bd = boardService.getBoard(bdNo);
 			bdList.add(bd);
 		}
@@ -214,6 +215,7 @@ public class MypageController {
 		modelAndView.addObject("listBoard", bdList);
 //		modelAndView.addObject("resultPage", resultPage);
 		modelAndView.addObject("searchMypage", searchMypage);
+		modelAndView.addObject("user", user);
 		modelAndView.setViewName("forward:/view/mypage/listMyBoard.jsp");
 	
 	
@@ -251,6 +253,21 @@ public class MypageController {
 		
 		return modelAndView;
 	}
+	
+	@RequestMapping(value="mypageMainView")
+	public ModelAndView mypageMainView() throws Exception {
+		
+		System.out.println("/mypage/mypageMainView");
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/view/mypage/mypageMain.jsp");
+		
+		return modelAndView;
+		
+	}
+	
+	
+	
 	@RequestMapping(value="listLike")
 	public ModelAndView listLike(@ModelAttribute("SearchMypage") SearchMypage search, HttpSession session) throws Exception {
 		

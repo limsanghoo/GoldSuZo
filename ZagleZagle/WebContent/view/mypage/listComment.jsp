@@ -83,38 +83,49 @@
 				
 	
 	
+		
 <!-- 모달1 시작 -->
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="${board.boardNo}modal">
+<div class="modal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="${board.boardNo}modal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     
 	<!-- 모달1 헤더 시작 -->
-      <div class="modal-header">
+    
       <div class="row">
       
       	<div class="col-md-11 col-md-offset-1">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span aria-hidden="true" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: 15px; margin-right:5px; margin-bottom:15px; display: inline;">&times;</span>       
+        </div>
+      </div> 
+      
+        <h4 class="row modal-title" id="gridSystemModalLabel">
+         
+        <div class="col-sm-2">
+        <img src="/common/images/profile/${user.profile}" style="height: 60px; width:60px; border-radius: 70px; vertical-align: middle; margin-left: 15px;"/>
         </div>
         
-        <h4 class="modal-title" id="gridSystemModalLabel">
-        <div class="col-md-4">
-        <img src="/common/images/profile/${user.profile}" style="height: 60px; width:60px;" align="middle"/>
+        <div class="col-sm-3">
 		${user.userNickname}
 		</div>
 		
-		
-		
 		<!-- 내 글만 수정, 삭제 -->
 		<c:if test="${user.userNo==board.user.userNo}">
-		<div class="col-md-4 col-md-offset-4">
-		<input type="button" value="수정" data-update="${board.boardNo}"/>
-        <div class="btn btn-primary" data-toggle="modal" data-target="#${board.boardNo}modal2">삭제</div>
+		<div class="col-sm-7" style="padding-left: 60px;">
+		<input class="btn btn-a" type="button" value="수정" data-update="${board.boardNo}"/>
+        <span class="btn btn-b" data-toggle="modal" data-target="#${board.boardNo}modal2">삭제</span>
         </div>
         </c:if>
         
-        </h4>
+        <!-- 신고 버튼 -->
+        <c:if test="${user.userNo!=board.user.userNo}">
+        <div class="col-sm-5 col-md-offset-2">    
+        <input type="button" name="report" class="btn btn-c" value="신고" data-report="${board.boardNo}"/>
+        <input type="hidden" id="${board.boardNo}report" value="${board.boardNo}${board.user.userNo}">
         </div>
-      </div>
+        </c:if>     
+         
+        </h4>
+          
      <!-- 모달1 헤더 끝 -->
       
      <!-- 모달1 바디 시작 -->
@@ -122,17 +133,17 @@
 
 		<div>
 			<c:if test="${board.photo1 !=null}">
-			<div><img src="${board.photo1}" style="width: 450px"/></div>
+			<div><img src="${board.photo1}" style="width: 100%"/></div>
 			<br/>
 			</c:if>
 
 			<c:if test="${board.photo2 !=null}">
-			<div><img src="${board.board.photo2}" style="width: 450px"/></div>
+			<div><img src="${board.photo2}" style="width: 100%"/></div>
 			<br/>
 			</c:if>
 	
 			<c:if test="${board.photo3 !=null}">
-			<div><img src="${board.board.photo3}" style="width: 450px"/></div>
+			<div><img src="${board.photo3}" style="width: 100%"/></div>
 			<br/>
 			</c:if>
 		</div>
@@ -144,19 +155,36 @@
        
       </div>
       <!-- 모달1 바디 끝 -->
+      
+      <!-- 모달1 푸터 시작 -->
+      <div>
+      
+		<!-- listComment로 파라미터 보내기 -->      
+     	<jsp:include page="/view/board/listComment.jsp">
+     		<jsp:param name="boardNo" value="${board.boardNo}"/>
+     	</jsp:include>
+    	
+      </div>
+      <!-- 모달1 푸터 끝 -->
+      
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <!-- 모달1 끝 -->
-			  
+		
 			  
 			  
 			  
 			  
 			  	</c:forEach>
-			  
+	
+		    
 			  
 			</table>
+			
+			<!-- PageNavigation Start... -->
+	<jsp:include page="/common/pageNavigation.jsp"/>
+	<!-- PageNavigation End... -->
 			
 	</div>
 		
