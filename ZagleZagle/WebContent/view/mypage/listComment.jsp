@@ -28,6 +28,18 @@
 	 $("span.glyphicon.glyphicon-ok").on("click", function() {
 	 
 	 alert("확인용")
+	 
+	   $.ajax({
+		   
+		   alert("ajax 실행 확인")
+		   
+           url : '/board/json/deleteComment/'+commentNo,
+           type : 'get',
+           success : function(data){
+               if(data == 1) commentList(boardNo); 
+           }
+       });
+	 
  });
 
  });
@@ -77,7 +89,7 @@
 			  <td align="left">${ i }</td>
 			  <td align="left"  title="Click : 댓글 작성한 게시물로 이동" data-toggle="modal" data-target="#${board.boardNo}modal">${board.boardDetailText}</td>
 			  <td align="left">${board.boardRegDate}</td>
-			  <td align="left"><span class="glyphicon glyphicon-ok">Click</span> </td>
+			  <td align="left"><span class="glyphicon glyphicon-ok" >Click</span> </td>
 		
 				</tr>
 				
