@@ -183,25 +183,6 @@ public class BoardRestController {
 	      return 1;
 	   }
 
-	   /*대댓글 등록
-	   @RequestMapping(value="/rest/addReComment/{targetNo}", method=RequestMethod.POST)
-	   public int addReComment(@PathVariable("targetNo") int targetNo, @RequestBody Comment comment ) throws Exception{
-	      System.out.println("/rest/addReComment : POST");
-	      
-	      System.out.println("comment : "+comment);
-	      
-	      comment.setViewCondition("DEF");
-	      comment.setCommentComuNo(comment.getCommentComuNo());
-	      comment.setCommentWriterId(comment.getCommentWriterId());
-	      comment.setCommentDetail(comment.getCommentDetail());
-	      comment.setTargetNo(targetNo);
-	      
-	      System.out.println("comment : "+comment);
-	      commentService.addReComment(comment);
-	      System.out.println("comment11 : " + comment);
-
-	      return 1;
-	   }*/
 
 	   @RequestMapping(value="json/addLike/{userNo}/{boardNo}", method=RequestMethod.GET)
 	   public int addLike(@PathVariable String userNo, @PathVariable String boardNo) throws Exception{

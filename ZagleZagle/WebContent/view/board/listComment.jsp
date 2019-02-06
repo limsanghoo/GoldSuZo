@@ -75,6 +75,8 @@ function commentInsert(boardNo,userNo, text){
 
 //댓글 리스트
    function commentList(boardNo){
+	
+	alert("왜?");
 
        	$.ajax({
            url : '/board/json/listComment/'+boardNo,

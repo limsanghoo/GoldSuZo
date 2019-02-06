@@ -63,8 +63,6 @@
 
 form{
 	  padding-top : 150px;
-	 	padding-left:150px;
-        padding-right:150px;
        background-color:#f7f0e1;
 	}
 
@@ -400,8 +398,8 @@ $(function(){
 		      description: hashTag,
 		      imageUrl: photo1,
 		      link: {
-		        mobileWebUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo,
-		        webUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo
+		        mobileWebUrl: 'http://192.168.0.49:8080/board/getBoard?view=mobile&boardNo='+boardNo,
+		        webUrl: 'http://192.168.0.49:8080/board/getBoard?view=mobile&boardNo='+boardNo
 		      }
 		    },
 		    social: {
@@ -460,8 +458,8 @@ $(function(){
           {
             title: '웹으로 보기',
             link: {
-              mobileWebUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo,
-              webUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo
+              mobileWebUrl: 'http://192.168.0.49:8080/board/getBoard?view=mobile&boardNo='+boardNo,
+              webUrl: 'http://192.168.0.49:8080/board/getBoard?view=mobile&boardNo='+boardNo
             }
           }
         ]
@@ -658,7 +656,7 @@ function fncGetTown(){
 <br/>
 
 
- <div class="containerList">
+ <div class="containerList" style="width: 100%;">
 
  <ul class="grid effect-2" id="grid">
  

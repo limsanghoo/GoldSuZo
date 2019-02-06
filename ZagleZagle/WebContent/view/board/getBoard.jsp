@@ -29,7 +29,7 @@
 
 <br/>
 
-<div class="container" style="margin-top:150px">
+<div class="container" style="margin-top:130px">
 
 <div>
 <img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px; display: inline; vertical-align: middle"/>

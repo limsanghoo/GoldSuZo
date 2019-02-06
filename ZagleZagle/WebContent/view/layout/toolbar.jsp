@@ -278,17 +278,21 @@ font-size: 100%;
 
 <body style="padding-right: 0px;">
 
-  <div class="click-closed"></div>
+  <!-- <div class="click-closed"></div> -->
 
   <!--/ Nav Star /-->
   <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
     <div class="container">
+    
+    <c:if test="${user.userNo!=null}">
       <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault"
         aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span></span>
         <span></span>
         <span></span>
       </button>
+     </c:if>
+     
       <a href="/index.jsp" class="navbar-brand text-brand" style="padding-top: 0; padding-bottom: 0;">Dongne<span class="color-b">Vangne</span></a>
 
       <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
