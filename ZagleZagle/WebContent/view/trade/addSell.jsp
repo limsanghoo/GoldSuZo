@@ -30,8 +30,71 @@
 <script type="text/javascript">
 		
 $(function() {
+	var file = document.getElementById('file');
+	var image = document.getElementById('image');
+
+	file.onchange = function (event) {
+		
+	  $('.wrap-loading').removeClass('display-none'); //로딩중 이미지 보여주기
+		
+	  var target = event.currentTarget;
+	  var xmlHttpRequest = new XMLHttpRequest();
+	  xmlHttpRequest.open('POST', 'https://api.imgur.com/3/image/', true); //원래 true
+	  xmlHttpRequest.setRequestHeader("Authorization", "Client-ID c764d6730f6f9a6");
+	  xmlHttpRequest.onreadystatechange = function () {
+
+	    if (xmlHttpRequest.readyState == 4) {
+	      if (xmlHttpRequest.status == 200) {
+	        var result = JSON.parse(xmlHttpRequest.responseText);
+	        $("#img_box").append("<img src='"+result.data.link+"' name='img' style='width: 500px;'>");//이미지 미리보기
+	        
+	        var linkArea=$("#link");
+			linkArea.val(linkArea.val()+result.data.link+",");//이미지 링크 append
+			
+	        console.log(result);        
+	        
+	        $.ajax(	
+	        		{
+	        			url : "http://192.168.0.49:8080/board/json/addBoardVisionTag",
+	        			method : "GET",
+	        			data : {
+	        				link : result.data.link
+	        			},
+	        			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+	        			dataType : "text",
+	        			success : function (data,status){
+	        				var decode=decodeURIComponent(data);//특수문자 포함 디코딩
+	        				//alert("decode : "+decode);
+	        				
+	        				var tagArea=$("#hashTag");
+	        				tagArea.val(tagArea.val()+decode);//해시태그 append
+	        			}
+	        			
+	        			,complete:function(){
+	        		        $('.wrap-loading').addClass('display-none'); //로딩중 이미지 감추기
+	        		    }
+	        		});
+	      
+	      }
+	      else {
+	      	alert("업로드 실패");
+	      }
+	    }
+	  };//()function 끝
+	  xmlHttpRequest.send(target.files[0]);
+	};//(event)function 끝
+	
+	
 	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 	$( "button:contains('등록')"  ).on("click" , function() {
+		
+		var imgLength=$("img[name='img']").length;
+	      
+		  if(imgLength>3){
+			alert("사진은 세 장까지 등록 가능합니다.");
+			return;
+		  }
+		  
 		addSell();
 	});
 	$("button:contains('이전')").on("click", function() {
@@ -65,6 +128,7 @@ $(function() {
 	<jsp:include page="/view/layout/toolbar.jsp"/>
    	<!-- ToolBar End /////////////////////////////////////-->
 	<form class="form-horizontal" method="post" enctype="multipart/form-data">
+	
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container" style="margin-top:150px">
 	<div class="col-12">
