@@ -28,6 +28,11 @@ $(function(){
 			alert("로그인 후 이용 가능합니다");
 			return;
 		}
+		
+		if("${user.blackCode}"=='2'){
+			alert("블랙리스트 회원은 이용할 수 없습니다.");
+			return;
+		}
 			
 		commentInsert(boardNo, userNo, text);
 	

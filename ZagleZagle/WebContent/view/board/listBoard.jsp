@@ -25,8 +25,9 @@
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="/common/css/GridLoadingEffects/js/modernizr.custom.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>       
-        
-        
+ 
+<!-- 카톡 공유 -->       
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>        
         
  <!--  --> 
  <!-- Favicons -->
@@ -189,12 +190,17 @@ $(function(){
 	//게시물 수정
 	$("input[value='수정']").bind("click",function(){
 		var boardNo=$(this).data('update');
-		alert(boardNo);
+	
 		self.location="/board/updateBoard?boardNo="+boardNo;
 	})
 	
 	//게시물 등록
 	$("input[value='게시물 등록']").bind("click",function(){
+		
+		if("${user.blackCode}"=='2'){
+			alert("블랙리스트 회원은 이용할 수 없습니다.");
+			return;
+		}
 		
 		self.location="http://192.168.0.49:8080/board/addBoard?userNo=${user.userNo}";
 	})
@@ -464,8 +470,48 @@ function fncGetTown(){
 	$("form").attr("method" , "POST").attr("action" , "/board/listBoard?view=${param.view}").submit();
 }
 
+//카톡 공유
 
-
+//<![CDATA[
+// // 사용할 앱의 JavaScript 키를 설정해 주세요.
+Kakao.init('83df98960f21b7281d6cdfddf483b6a5');
+// // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+function sendLink() {
+	
+	var address=$(this).data('address');
+	
+	alert(address);
+		
+  Kakao.Link.sendDefault({
+    objectType: 'location',
+    address: '경기 성남시 분당구 판교역로 235 에이치스퀘어 N동 8층',
+    addressTitle: '카카오 판교오피스 카페톡',
+    content: {
+      title: '신메뉴 출시♥︎ 체리블라썸라떼',
+      description: '이번 주는 체리블라썸라떼 1+1',
+      imageUrl: 'http://mud-kage.kakao.co.kr/dn/bSbH9w/btqgegaEDfW/vD9KKV0hEintg6bZT4v4WK/kakaolink40_original.png',
+      link: {
+        mobileWebUrl: 'https://developers.kakao.com',
+        webUrl: 'https://developers.kakao.com'
+      }
+    },
+    social: {
+      likeCount: 286,
+      commentCount: 45,
+      sharedCount: 845
+    },
+    buttons: [
+      {
+        title: '웹으로 보기',
+        link: {
+          mobileWebUrl: 'https://developers.kakao.com',
+          webUrl: 'https://developers.kakao.com'
+        }
+      }
+    ]
+  });
+}
+//]]>
 
 </script>
 
@@ -581,16 +627,36 @@ function fncGetTown(){
 <li>
 
 	<c:if test="${board.userTheme=='H_spoon'}">	
+	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #afafaf;">
+	</c:if>
+	
+	<c:if test="${board.userTheme=='D_spoon'}">	
 	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #eac999;">
 	</c:if>
 	
-	<div class="box">
+	<c:if test="${board.userTheme=='S_spoon1'}">	
+	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #ff9a9a;">
+	</c:if>
+	
+	<c:if test="${board.userTheme=='S_spoon2'}">	
+	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #bdf199;">
+	</c:if>
+	
+	<c:if test="${board.userTheme=='G_spoon1'}">	
+	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #a5cff5;">
+	</c:if>
+	
+	<c:if test="${board.userTheme=='G_spoon2'}">	
+	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #d2c0fb;">
+	</c:if>
 		
 	<p>
 	<img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px; display: inline; vertical-align: middle"/>
 	<span style="height:100%; font-weight: bold; display: inline; vertical-align: middle;">&nbsp;${board.user.userNickname}</span>
 		
-	
+	<a id="kakao-link-btn" href="javascript:sendLink()" data-address="${board.address}">
+	<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
+	</a>
 	
 	<span name="like" id="${board.boardNo}like" data-boardNo="${board.boardNo}" data-checkLike="${board.checkLike}">	
 	<c:choose>
