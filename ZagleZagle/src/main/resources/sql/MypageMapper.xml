@@ -45,11 +45,11 @@
 	</update>
 	 
 	 <select id="commentList"	parameterType="com.zagle.service.domain.SearchMypage" resultMap="mypageSelectMap">
-	 SELECT u.user_no, c.comment_no, c.comment_detail_text, c.comment_reg_date, c.board_no
-	 FROM users u, comments c
+	SELECT	 u.user_no, c.comment_no, c.comment_detail_text, c.comment_reg_date, c.board_no
+	FROM users u, comments c
 	 WHERE u.user_no = c.user_no and u.user_no = #{myUser.userNo:VARCHAR}
 	 ORDER BY c.comment_reg_date DESC 
-	 </select>
+	</select>
 	 
 	 <select id="listLike"	parameterType="com.zagle.service.domain.SearchMypage" resultMap="mypageSelectMap">
 	 SELECT*
@@ -72,6 +72,17 @@
 		ORDER BY b.board_reg_date DESC
 	 </select>
 	 
+	 
+	 <!-- 
+	 <select id="getTotalCount" parameterType="com.zagle.service.domain.SearchMypage" resultMap="mypageSelectMap">
+	 SELECT COUNT(*)
+	 FROM ( SELECT u.user_no, c.comment_no, c.comment_detail_text, c.comment_reg_date, c.board_no
+	 FROM users u, comments c
+	  WHERE u.user_no = c.user_no and u.user_no = #{myUser.userNo:VARCHAR} 
+	    ) countTable
+	    </select>
+	 - -->
+	
 	
 	 
 	 

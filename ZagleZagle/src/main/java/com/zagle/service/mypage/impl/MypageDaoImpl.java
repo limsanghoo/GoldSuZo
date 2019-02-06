@@ -64,12 +64,15 @@ public class MypageDaoImpl implements MypageDao {
 		return sqlSession.selectList("MypageMapper.listMyBoard", search);
 	}
 	
+	
 	/*
-	public int getTotalCount(Search search) throws Exception {
+	public int getTotalCount(SearchMypage search) throws Exception {
 		
 		return sqlSession.selectOne("MypageMapper.getTotalCount", search);
 	}
 	*/
+	
+	
 	
 	
 

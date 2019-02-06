@@ -31,5 +31,5 @@ public interface MypageDao {
 	
 	public User checkAccount(User user) throws Exception;
 	
-	//public int getTotalCount(Search search) throws Exception ;
+	//public int getTotalCount(SearchMypage search) throws Exception ;
 }

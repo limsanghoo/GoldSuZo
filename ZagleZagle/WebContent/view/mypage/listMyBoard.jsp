@@ -28,11 +28,15 @@
 		 $(function() {
 			
 		
-
-				$(function () {
-					  $('[data-toggle="tooltip"]').tooltip()
-					})
- 
+				//댓글 리스트 불러오기
+				$("td:nth-child(2)").bind("click",function(){
+					var preBoardNo=$(this).data('target');
+					
+					//#${board.boardNo}modal1 자르기
+					var boardNo=preBoardNo.substring(1,8);
+					
+					commentList(boardNo);
+				})
 
  });
 

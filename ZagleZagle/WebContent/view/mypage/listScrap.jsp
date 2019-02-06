@@ -35,9 +35,33 @@
 	 $("span.glyphicon.glyphicon-ok").on("click", function() {
 	 
 	 alert("확인용")
+	 
+	 
+	 
+	 	//댓글 리스트 불러오기
+	 	
+				$("td:nth-child(2)").bind("click",function(){
+					var preBoardNo=$(this).data('target');
+					
+					//#${board.boardNo}modal1 자르기
+					var boardNo=preBoardNo.substring(1,8);
+					
+					commentList(boardNo);
+				})
+	 
  });
 
  });
+		
+		
+
+				
+			
+		
+			
+
+
+		
 		//==>스크랩 취소 끝
 	
 
