@@ -210,11 +210,19 @@ document.onmousemove = null;
  
  $(function(){
          $("#btn").hide();
+         
          $("#btn:contains('퇴장')").on("click",function(){
             $("#mydiv").css("display","none");
             $(this).hide();
             $("#btn2").show();
          });
+
+         
+         $("#close").on("click",function(){
+             $("#mydiv").css("display","none");
+             $("#btn:contains('퇴장')").hide();
+             $("#btn2").show();
+          });
          
       });
       
@@ -352,7 +360,8 @@ font-size: 100%;
           
         <!-- 채팅창 -->       
         <div class="col-lg-8 col-centered" id="mydiv" style="display: none;">
-   			<div id="mydivheader">-여기를 눌러 이동-</div>
+        	<div id="close" style="float: left; color: white;">&nbsp;닫기</div>
+   			<div id="mydivheader">- 여기를 눌러 이동 -</div>
 		</div>		       
         </ul>
       </div>

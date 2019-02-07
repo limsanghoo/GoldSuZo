@@ -301,39 +301,89 @@ $(function(){
 
 	<c:if test="${user.grade=='0'}">
 	<input type="radio" name="userTheme" value="H_spoon" checked="checked"> 흙수저
-    <input type="radio" name="userTheme" value="D_spoon" disabled="disabled"> 동수저
-    <input type="radio" name="userTheme" value="S_spoon1" disabled="disabled"> 은수저
-    <input type="radio" name="userTheme" value="S_spoon2" disabled="disabled"> 은수저
-    <input type="radio" name="userTheme" value="G_spoon1" disabled="disabled"> 금수저
-    <input type="radio" name="userTheme" value="G_spoon2" disabled="disabled"> 금수저
+	<img src="/common/images/board/hspoon.png" style="border-radius: 70px; width: 20px;">
+	
+    <input type="radio" name="userTheme" value="D_spoon" disabled="disabled" style="margin-left: 15px;"> 동수저
+    <img src="/common/images/board/dspoon.png" style="border-radius: 70px; width: 20px;">
+    
+    <input type="radio" name="userTheme" value="S_spoon1" disabled="disabled" style="margin-left: 15px;"> 은수저
+    <img src="/common/images/board/sspoon1.png" style="border-radius: 70px; width: 20px;">
+    
+    <input type="radio" name="userTheme" value="S_spoon2" disabled="disabled" style="margin-left: 15px;"> 은수저
+    <img src="/common/images/board/sspoon2.png" style="border-radius: 70px; width: 20px;">
+    
+    <input type="radio" name="userTheme" value="G_spoon1" disabled="disabled" style="margin-left: 15px;"> 금수저
+    <img src="/common/images/board/gspoon1.png" style="border-radius: 70px; width: 20px;">
+    
+    <input type="radio" name="userTheme" value="G_spoon2" disabled="disabled" style="margin-left: 15px;"> 금수저
+    <img src="/common/images/board/gspoon2.png" style="border-radius: 70px; width: 20px;">    
 	</c:if> 
+	
 	
 	<c:if test="${user.grade=='1'}">
-	<input type="radio" name="userTheme" value="H_spoon" ${! empty board.userTheme && board.userTheme=="H_spoon" ? "checked":""}> 흙수저
-    <input type="radio" name="userTheme" value="D_spoon" ${! empty board.userTheme && board.userTheme=="D_spoon" ? "checked":""}> 동수저
-    <input type="radio" name="userTheme" value="S_spoon1" disabled="disabled"> 은수저
-    <input type="radio" name="userTheme" value="S_spoon2" disabled="disabled"> 은수저
-    <input type="radio" name="userTheme" value="G_spoon1" disabled="disabled"> 금수저
-    <input type="radio" name="userTheme" value="G_spoon2" disabled="disabled"> 금수저
+	<input type="radio" name="userTheme" value="H_spoon"  ${! empty board.userTheme && board.userTheme=="H_spoon" ? "checked":""} style="margin-left: 15px;"> 흙수저
+	<img src="/common/images/board/hspoon.png" style="border-radius: 70px; width: 20px;">
+	
+    <input type="radio" name="userTheme" value="D_spoon"  ${! empty board.userTheme && board.userTheme=="D_spoon" ? "checked":""} style="margin-left: 15px;"> 동수저
+    <img src="/common/images/board/dspoon.png" style="border-radius: 70px; width: 20px;">
+    
+    <input type="radio" name="userTheme" value="S_spoon1" disabled="disabled" style="margin-left: 15px;"> 은수저
+    <img src="/common/images/board/sspoon1.png" style="border-radius: 70px; width: 20px;">
+    
+    <input type="radio" name="userTheme" value="S_spoon2" disabled="disabled" style="margin-left: 15px;"> 은수저
+    <img src="/common/images/board/sspoon2.png" style="border-radius: 70px; width: 20px;">
+    
+    <input type="radio" name="userTheme" value="G_spoon1" disabled="disabled" style="margin-left: 15px;"> 금수저
+    <img src="/common/images/board/gspoon1.png" style="border-radius: 70px; width: 20px;">
+    
+    <input type="radio" name="userTheme" value="G_spoon2" disabled="disabled" style="margin-left: 15px;"> 금수저
+    <img src="/common/images/board/gspoon2.png" style="border-radius: 70px; width: 20px;">   
 	</c:if> 
+	
 	
 	<c:if test="${user.grade=='2'}">
-	<input type="radio" name="userTheme" value="H_spoon" ${! empty board.userTheme && board.userTheme=="H_spoon" ? "checked":""}> 흙수저
-    <input type="radio" name="userTheme" value="D_spoon" ${! empty board.userTheme && board.userTheme=="D_spoon" ? "checked":""}> 동수저
-    <input type="radio" name="userTheme" value="S_spoon1" ${! empty board.userTheme && board.userTheme=="S_spoon1" ? "checked":""}> 은수저
-    <input type="radio" name="userTheme" value="S_spoon2" ${! empty board.userTheme && board.userTheme=="S_spoon2" ? "checked":""}> 은수저
-    <input type="radio" name="userTheme" value="G_spoon1" disabled="disabled"> 금수저
-    <input type="radio" name="userTheme" value="G_spoon2" disabled="disabled"> 금수저
+	<input type="radio" name="userTheme" value="H_spoon" ${! empty board.userTheme && board.userTheme=="H_spoon" ? "checked":""} style="margin-left: 15px;"> 흙수저
+	<img src="/common/images/board/hspoon.png" style="border-radius: 70px; width: 20px;">
+	
+    <input type="radio" name="userTheme" value="D_spoon" ${! empty board.userTheme && board.userTheme=="D_spoon" ? "checked":""} style="margin-left: 15px;"> 동수저
+    <img src="/common/images/board/dspoon.png" style="border-radius: 70px; width: 20px;">
+    
+    <input type="radio" name="userTheme" value="S_spoon1" ${! empty board.userTheme && board.userTheme=="S_spoon1" ? "checked":""} style="margin-left: 15px;"> 은수저
+    <img src="/common/images/board/sspoon1.png" style="border-radius: 70px; width: 20px;">
+    
+    <input type="radio" name="userTheme" value="S_spoon2" ${! empty board.userTheme && board.userTheme=="S_spoon2" ? "checked":""} style="margin-left: 15px;"> 은수저
+    <img src="/common/images/board/sspoon2.png" style="border-radius: 70px; width: 20px;">
+    
+    <input type="radio" name="userTheme" value="G_spoon1" disabled="disabled" style="margin-left: 15px;"> 금수저
+    <img src="/common/images/board/gspoon1.png" style="border-radius: 70px; width: 20px;">
+    
+    <input type="radio" name="userTheme" value="G_spoon2" disabled="disabled" style="margin-left: 15px;"> 금수저
+    <img src="/common/images/board/gspoon2.png" style="border-radius: 70px; width: 20px;">
 	</c:if> 
 	
+	
 	<c:if test="${user.grade=='3' || user.grade=='4'}">
-	<input type="radio" name="userTheme" value="H_spoon" ${! empty board.userTheme && board.userTheme=="H_spoon" ? "checked":""}> 흙수저
-  	<input type="radio" name="userTheme" value="D_spoon" ${! empty board.userTheme && board.userTheme=="D_spoon" ? "checked":""}> 동수저
-    <input type="radio" name="userTheme" value="S_spoon1" ${! empty board.userTheme && board.userTheme=="S_spoon1" ? "checked":""}> 은수저
-    <input type="radio" name="userTheme" value="S_spoon2" ${! empty board.userTheme && board.userTheme=="S_spoon2" ? "checked":""}> 은수저
-    <input type="radio" name="userTheme" value="G_spoon1" ${! empty board.userTheme && board.userTheme=="G_spoon1" ? "checked":""}> 금수저
-    <input type="radio" name="userTheme" value="G_spoon2" ${! empty board.userTheme && board.userTheme=="G_spoon2" ? "checked":""}> 금수저
+	<input type="radio" name="userTheme" value="H_spoon" ${! empty board.userTheme && board.userTheme=="H_spoon" ? "checked":""} style="margin-left: 15px;"> 흙수저
+	<img src="/common/images/board/hspoon.png" style="border-radius: 70px; width: 20px;">
+	
+  	<input type="radio" name="userTheme" value="D_spoon" ${! empty board.userTheme && board.userTheme=="D_spoon" ? "checked":""} style="margin-left: 15px;"> 동수저
+    <img src="/common/images/board/dspoon.png" style="border-radius: 70px; width: 20px;">
+    
+    <input type="radio" name="userTheme" value="S_spoon1" ${! empty board.userTheme && board.userTheme=="S_spoon1" ? "checked":""} style="margin-left: 15px;"> 은수저
+    <img src="/common/images/board/sspoon1.png" style="border-radius: 70px; width: 20px;">
+    
+    <input type="radio" name="userTheme" value="S_spoon2" ${! empty board.userTheme && board.userTheme=="S_spoon2" ? "checked":""} style="margin-left: 15px;"> 은수저
+    <img src="/common/images/board/sspoon2.png" style="border-radius: 70px; width: 20px;">
+    
+    <input type="radio" name="userTheme" value="G_spoon1" ${! empty board.userTheme && board.userTheme=="G_spoon1" ? "checked":""} style="margin-left: 15px;"> 금수저
+    <img src="/common/images/board/gspoon1.png" style="border-radius: 70px; width: 20px;">
+    
+    <input type="radio" name="userTheme" value="G_spoon2" ${! empty board.userTheme && board.userTheme=="G_spoon2" ? "checked":""} style="margin-left: 15px;"> 금수저
+	<img src="/common/images/board/gspoon2.png" style="border-radius: 70px; width: 20px;">
 	</c:if>
+	
+	
+	
 </div>
 </div>
 <!-- 테마 끝 -->
@@ -403,7 +453,7 @@ $(function(){
 
 <!-- 로딩중 이미지 -->
 <div class="wrap-loading display-none">
-    <div><img src="/common/images/board/equalizes.gif" style="z-index: 6;"/></div>
+    <div id="preloader" style="background:none; "></div>
 </div>   
 
 </body>
