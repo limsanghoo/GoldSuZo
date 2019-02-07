@@ -32,6 +32,7 @@ public interface TradeService {
 
 	public Buy getBuyNo(String sellNo) throws Exception;
 
-	public List<CompanyList> getCompany()  throws Exception;
+	public List<CompanyList> getCompany() throws Exception;
 
+	public void addTracking(Buy buy) throws Exception;
 }

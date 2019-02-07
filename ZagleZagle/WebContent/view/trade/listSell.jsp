@@ -110,7 +110,7 @@
 			  
 			  <td align="center" data-sellno="${sell.sellNo}">
 				  <c:if test="${sell.sellState=='20'}"><a href="/trade/updateSellState?sellNo=${sell.sellNo}&sellState=40">승인하기</a></c:if>
-				  <c:if test="${sell.sellState=='50'}"><a href="/trade/addTracking?sellNo=${sell.sellNo}&sellState=60">배송하기</a></c:if>		  	
+				  <c:if test="${sell.sellState=='50'}"><a href="/trade/addTracking?sellNo=${sell.sellNo}">배송하기</a></c:if>		  	
 			  </td>
 			  
 			</tr>

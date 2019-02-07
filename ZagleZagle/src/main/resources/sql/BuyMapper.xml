@@ -91,4 +91,13 @@
 	 	SELECT * FROM company_list ORDER BY company_code
 	 </select>
 	 
+	 <update id="addTracking" parameterType="buy">
+	 	UPDATE buy
+	 	<set>
+	 		tracking_no=#{TrackingNo},
+	 		company_code=#{companyCode}
+	 	</set>
+	 	WHERE buy_no=#{buyNo}
+	 </update>
+	 
 </mapper>

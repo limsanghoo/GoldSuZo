@@ -284,9 +284,17 @@ public class TradeController {
 	}
 	
 	@RequestMapping(value="addTracking", method=RequestMethod.POST)
-	public ModelAndView addTracking(@ModelAttribute("buy") Buy buy) throws Exception{
+	public ModelAndView addTracking(@ModelAttribute("buy") Buy buy, @ModelAttribute("sellNo") String sellNo) throws Exception{
 
 		System.out.println(buy);
+		
+		tradeService.addTracking(buy);
+		
+		Sell sell = new Sell();
+		sell.setSellNo(sellNo);
+		sell.setSellState(60);
+		
+		tradeService.updateSellState(sell);
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("redirect:/trade/listSell");

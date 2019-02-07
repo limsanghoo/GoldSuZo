@@ -93,4 +93,8 @@ public class TradeDAOImpl implements TradeDAO{
 	public List<CompanyList> getCompany() throws Exception {
 		return sqlSession.selectList("BuyMapper.getCompany");
 	}
+	@Override
+	public void addTracking(Buy buy) throws Exception {
+		sqlSession.update("BuyMapper.addTracking",buy);
+	}
 }

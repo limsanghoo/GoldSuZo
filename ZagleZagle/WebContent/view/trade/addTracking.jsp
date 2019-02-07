@@ -179,6 +179,7 @@ $(function() {
 				</div>
 				</div>
 				<input type="hidden" id="buyNo" value="${buy.buyNo}" name="buyNo"/>
+				<input type="hidden" id="sellNo" value="${buy.sellProd.sellNo}" name="sellNo"/>
 	       </form>
 	      </div>
 	      <div class="modal-footer">

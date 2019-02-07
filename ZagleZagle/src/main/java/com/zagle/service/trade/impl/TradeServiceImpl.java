@@ -106,6 +106,11 @@ public class TradeServiceImpl implements TradeService{
 		return tradeDAO.getCompany();
 	}
 
+	@Override
+	public void addTracking(Buy buy) throws Exception {
+		tradeDAO.addTracking(buy);
+	}
+
 
 
 }
