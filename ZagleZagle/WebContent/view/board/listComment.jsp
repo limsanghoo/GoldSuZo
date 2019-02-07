@@ -25,12 +25,12 @@ $(function(){
 		var text=$("#<%=boardNo%>commentDetailText").val();
 		
 		if(userNo==""){
-			alert("로그인 후 이용 가능합니다");
+			swal("","로그인 후 이용 가능합니다.", "error");
 			return;
 		}
 		
 		if("${user.blackCode}"=='2'){
-			alert("블랙리스트 회원은 이용할 수 없습니다.");
+			swal("","블랙리스트 회원은 이용할 수 없습니다.", "error");
 			return;
 		}
 			
@@ -141,7 +141,7 @@ function reportComment(commentNo, userNo){
 	//alert(commentNo);
 	//alert(userNo);
 	
-	window.open("/view/board/addReport.jsp?val="+commentNo+userNo, "addReport", "width=300, height=200, resizable=yes" );
+	window.open("/view/board/addReport.jsp?val="+commentNo+userNo, "addReport", "width=500, height=400, resizable=yes" );
 }
 
 </script>

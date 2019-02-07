@@ -8,12 +8,40 @@
 
 <meta charset="UTF-8" />
 
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" > -->
-
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>  -->
 
+  <!-- JavaScript Libraries -->
+  <script src="/common/css/estateagency-master/lib/jquery/jquery.min.js"></script>
+  <script src="/common/css/estateagency-master/lib/jquery/jquery-migrate.min.js"></script>
+  <script src="/common/css/estateagency-master/lib/popper/popper.min.js"></script>
+  <script src="/common/css/estateagency-master/lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/common/css/estateagency-master/lib/easing/easing.min.js"></script>
+  <script src="/common/css/estateagency-master/lib/owlcarousel/owl.carousel.min.js"></script>
+  <script src="/common/css/estateagency-master/lib/scrollreveal/scrollreveal.min.js"></script>
+  <!-- Contact Form JavaScript File -->
+  <script src="/common/css/estateagency-master/contactform/contactform.js"></script>
+
+  <!-- Template Main Javascript File -->
+  <script src="/common/css/estateagency-master/js/main.js"></script>
+
+  <!-- Favicons -->
+  <link href="/common/css/estateagency-master/img/favicon.png" rel="icon">
+  <link href="/common/css/estateagency-master/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="/common/css/estateagency-master/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="/common/css/estateagency-master/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/common/css/estateagency-master/lib/animate/animate.min.css" rel="stylesheet">
+  <link href="/common/css/estateagency-master/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="/common/css/estateagency-master/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="/common/css/estateagency-master/css/style.css" rel="stylesheet">
 
 <script type="text/javascript">
 
@@ -89,10 +117,10 @@ window.onload = function () {
 
 <title>addReport</title>
 </head>
-<body>
+<body style="text-align: center; margin-top: 100px;">
 <form name="addReport">
-
-	<select class="form-control" id="reportReason" name="reportReason">
+	
+	<select class="ct_input_g" id="reportReason" name="reportReason">
 		      	<option value="0">신고 사유를 선택해주세요</option>
 		      	<option value="욕설/비방">욕설/비방</option>
 		      	<option value="광고/허위">광고/허위</option>
@@ -109,8 +137,8 @@ window.onload = function () {
 	
 </form>
 
-<br/><br/><br/>
+<br/><br/><br/><br/>
 
-<input type="button" value="신고"/>
+<input class="btn btn-b" type="button" value="신고"/>
 </body>
 </html>

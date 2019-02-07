@@ -432,7 +432,7 @@ $(function(){
 
 <!-- 로딩중 이미지 -->
 <div class="wrap-loading display-none">
-    <div><img src="/common/images/board/equalizes.gif" style="z-index: 6;"/></div>
+	<div id="preloader" style="background:none; "></div>
 </div>    
 
 
