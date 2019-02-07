@@ -26,6 +26,7 @@
         div.row{
         	padding-top : 150px;
         }
+     
 
 
 </style>
@@ -39,13 +40,13 @@
 
 
 
-<body>
+<body style="background-color: #e2e2e2">
 
 <jsp:include page="/view/layout/toolbar.jsp" />
 
 
 <div class="row"style="text-align: center; display: inherit;">
-				<select name="state" class="ct_input_g" style="width: 200px; height: 40px" onchange="fncGetState(this)">
+				<select name="state" class="ct_input_g" style="width: 200px; height: 40px; background-color: white;" onchange="fncGetState(this)">
 					<option value='' style="font-size:20px;"  selected>시·도</option>
 					<c:set var="i" value="0"/>
 					<c:forEach var="local" items="${list}">
@@ -54,11 +55,11 @@
 					</c:forEach>
 				</select>
 				
-				<select name="city"  class="ct_input_g" style="width: 200px; height: 40px" onchange="fncGetCity(this)">
+				<select name="city"  class="ct_input_g" style="width: 200px; height: 40px; background-color: white;" onchange="fncGetCity(this)">
 					<option value="" style="font-size:20px;">시·군·구</option>
 				</select>
         
-				<select name="town"  class="ct_input_g" style="width: 200px; height: 40px" onchange="fncGetTown(this)">
+				<select name="town"  class="ct_input_g" style="width: 200px; height: 40px; background-color: white;" onchange="fncGetTown(this)">
 					<option value="" style="font-size:20px;">읍·면·동</option>
 				</select>  
 				
