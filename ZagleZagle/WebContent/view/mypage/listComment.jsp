@@ -23,27 +23,24 @@
 <script type="text/javascript">
 
 
+
  $(function() {
-	
-	 $("span.glyphicon.glyphicon-ok").on("click", function() {
-	 
-	 alert("확인용")
-	 
-	   $.ajax({
-		   
-		   alert("ajax 실행 확인")
-		   
-           url : '/board/json/deleteComment/'+commentNo,
-           type : 'get',
-           success : function(data){
-               if(data == 1) commentList(boardNo); 
-           }
-       });
-	 
- });
+		
+		
+		//댓글 리스트 불러오기
+		$("td:nth-child(2)").bind("click",function(){
+			
+			alert("확인용")
+			
+			var preBoardNo=$(this).data('target');
+			
+			//#${board.boardNo}modal1 자르기
+			var boardNo=preBoardNo.substring(1,8);
+			
+			commentList(boardNo);
+		})
 
- });
-
+});
 
  
  
@@ -72,7 +69,7 @@
             <th align="center">No</th>
             <th align="left" >게시물 내용</th>
             <th align="left">작성 날짜</th>
-            <th align="left">삭제 여부</th>
+
             
           </tr>
         </thead>
@@ -89,7 +86,6 @@
 			  <td align="left">${ i }</td>
 			  <td align="left"  title="Click : 댓글 작성한 게시물로 이동" data-toggle="modal" data-target="#${board.boardNo}modal">${board.boardDetailText}</td>
 			  <td align="left">${board.boardRegDate}</td>
-			  <td align="left"><span class="glyphicon glyphicon-ok" >Click</span> </td>
 		
 				</tr>
 				

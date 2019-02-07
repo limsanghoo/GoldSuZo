@@ -66,6 +66,12 @@ public class AdminDaoImpl implements AdminDao {
 	public Blind getBlind(String blindNo) throws Exception {
 		return sqlSession.selectOne("BlindMapper.getBlind", blindNo);
 	}
+	public Comment getComment(String commentNo) throws Exception {
+		
+		System.out.println("DAO에서 코멘트 넘 확인"+commentNo);
+		
+		return sqlSession.selectOne("AdminMapper.getComment", commentNo);
+	}
 	
 	public List<Blind> getBlindList(SearchAdmin search) throws Exception {
 		
@@ -97,30 +103,11 @@ public class AdminDaoImpl implements AdminDao {
 		sqlSession.update("BlindMapper.updateBlind", blind);
 	}
 	
-//	@Override
-//	public void cancelBlind(Blind blind) throws Exception {
-//		// TODO Auto-generated method stub
-//		sqlSession.update("AdminMapper.cancelBlind", blind);
-//	}
-
-//	@Override
-//	public void cancelBlind2(Comment comment) throws Exception {
-//		// TODO Auto-generated method stub
-//		
-//	}
-
-//	@Override
-//	public void deleteBlind(Blind blind) throws Exception {
-//		
-//		sqlSession.update("AdminMapper.deleteBlind", blind);
-//	}
-
-//	@Override
-//	public void deleteBlind2(Comment commnet) throws Exception {
-//		// TODO Auto-generated method stub
-//		
-//	}
-
+	public void updateComment(Comment comment) throws Exception {
+		
+		sqlSession.update("AdminMapper.updateComment", comment);
+	}
+	
 
 	public int getTotalCount(SearchAdmin search) throws Exception {
 		
@@ -164,6 +151,6 @@ public class AdminDaoImpl implements AdminDao {
 		
 		return sqlSession.selectOne("ReportMapper.checkReportCount", report);
 	}
-	
+
 	
 }

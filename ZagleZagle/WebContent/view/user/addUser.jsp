@@ -1113,7 +1113,7 @@ padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
               
                           
               </div> <label for="broll" style="margin: auto;" id="aaa"><br>프로필 등록&nbsp;<i class="glyphicon glyphicon-camera" style="width: 10px; height: 10px;" ></i></label>
-               <form method="post" id="goCon">
+           
                 <input type="hidden" id="coffee" name="profile" value="default.png"/>
                <br><br>
                
