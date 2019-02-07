@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="ko" >
+<html lang="ko">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -21,236 +21,138 @@
 	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
-	
-
-<script type="text/javascript">
-function fncGetList(currentPage) {
-	//document.getElementById("currentPage").value = currentPage;
-   	//document.detailForm.submit();		
-   	$("#currentPage").val(currentPage)
-   	$("form").attr("method" , "POST").attr("action" , "/purchase/listPurchase").submit();
-}
-
-$(function() {
-	 
-	//==> 검색 Event 연결처리부분
-	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-	//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함. 
-	 //$( "td.ct_btn01:contains('검색')" ).on("click" , function() {
-		//Debug..
-		//alert(  $( "td.ct_btn01:contains('검색')" ).html() );
-		//fncGetList(1);
-	});
+		<script>
+		
 		
 	
-		
-		$( "td:nth-child(2)" ).on("click" , function() {
+		 $(function() {
 			
-			
-			var boardNo = $(this).data("param");
-			console.log(boardNo);
-			//Debug..
-			alert(  $( this ).text().trim() );
-			
-			
-			self.location ="/board/getBoard?boradNo="+boardNo;
-	});
 		
+				//댓글 리스트 불러오기
+				$("td:nth-child(2)").bind("click",function(){
+					var preBoardNo=$(this).data('target');
+					
+					//#${board.boardNo}modal1 자르기
+					var boardNo=preBoardNo.substring(1,8);
+					
+					commentList(boardNo);
+				})
+
+ });
+
+	
+
 		
-		$(document).ready(function(){
-		    $("#myModal").click(function(){
-		        $("#myModal").modal();
-		    });
-		});
-		
-
-	
-
-</script>
-
-
-
-<style>
-@import url('https://fonts.googleapis.com/css?family=Poppins');
-
-
-
- #detail {
-
-  display:block;
-  overflow: hidden; 
-  text-overflow: ellipsis;
-  white-space: nowrap; 
-  width: 100px;
-	
-
-
-
-
-
-
-
-
-form{
-		padding-top:100px;
-	 	padding-left:150px;
-        padding-right:150px;
-       	background-color:#f7f0e1;
-        background-size: cover;
-        height: 100%;
-	}
-
-
-body {
-   	margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-	background: #333;
-}
-
-.grid{
-   margin-bottom: 0px;
-}
-
-.containerList .box {
-    width: 100%;
-    margin: 0 0 20px;
-    padding: 10px;
-    background: #ffffff;
-    overflow: hidden;
-    break-inside: avoid;
-    border-radius: 15px;
-}
-.containerList .box img {
-    max-width: 100%;
-    background-size: cover;
-}
-
-
-#goAddSell{
-    	position: static;
-    	float:right;
-}
-
-.disabled{
-		pointer-events:none;
-}
-
-#selectMenu{
-		padding-top:50px;
-		padding-left:150px;
-        padding-right:150px;
-}
-
-</style>
-	
-	
-	
-	
-
-
-	
-	
-	
-	
-	
-	
-	
+		</script>
 
 
 
 </head>
+
+
+
 <body>
 
-
 <jsp:include page="/view/layout/toolbar.jsp" />
+<jsp:include page="/view/layout/mypageToolbar.jsp" />
 
+<div class="container">
 
-
-
-
-
-<div class="container" >
-	
-	<div class="page-header text-info" style="font-style: italic;">
-	       <h5 style="font-size: x-large;">작성 게시물 보기</h5>
+<div class="page-header text-info">
+	       <h5>작성 게시물</h5>
 	    </div>
-	
-	<table class="table table-hover table-striped" >
 	    
-		<thead>
-		
-		 <tr>
-            <th align="center" style="font-size: large;">No</th>
-            <th align="left" style="font-size: large;">글 내용</th>
-            <th align="left"style="font-size: large;">작성 날짜</th>
+	         <table class="table table-hover table-striped" >
+	    
+	         <thead>
+          <tr>
+            <th align="center">No</th>
+            <th align="left" >게시물 내용</th>
+            <th align="left">작성 날짜</th>
+    
+  
           </tr>
         </thead>
-
-
-		  <tbody class="tt">
-      
+	    
+	    
       <c:set var="i" value="0" />
-		  
-		    <c:forEach var="board" items="${listBoard}">
-		  
-		  
-		  
-			<c:set var="i" value="${ i+1 }" />
-			<tr>
-			  <td align="left" style="font-size: medium;">${ i }</td>
-			 	 
-			  <td class="abcd" id="detail" align="left"  style="font-size: medium;" title="Click : 게시물 상세정보" data-toggle="modal" data-target="#${board.boardNo}aaa">${board.boardDetailText}</td>
-			  	
-			  <td align="left" style="font-size: medium;" >${board.boardRegDate}</td>
-			  
-			 
-			  
-			  
-			  </tr>
-			  
-			  <!-- Modal -->
-<div class="modal fade" id="${board.boardNo}aaa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog"  role="document">
+		   <c:forEach var="board" items="${listBoard}">
+		   	
+		   	<tr>
+		   <c:set var="i" value="${ i+1 }" />
+		 
+		     <td align="left">${ i }</td>
+		   	
+		      <td align="left"  title="click 시 상세보기" data-toggle="modal" data-target="#${board.boardNo}bbb">${board.boardDetailText}</td>
+		      
+		      <td align="left">${board.boardRegDate} 				</td>
+		    
+		      
+		    </tr>
+		    
+
+		    
+		
+<!-- 모달1 시작 -->
+<div class="modal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="${board.boardNo}bbb">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+    
+	<!-- 모달1 헤더 시작 -->
+    
       <div class="row">
       
-   
-     
-     <h4 class="modal-title" id="gridSystemModalLabel">
-       <div class="col-md-4">
-      <img src="/common/images/profile/${user.profile}" style="height: 60px; width:60px;" align="left"/>
+      	<div class="col-md-11 col-md-offset-1">
+        <span aria-hidden="true" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: 15px; margin-right:5px; margin-bottom:15px; display: inline;">&times;</span>       
+        </div>
+      </div> 
+      
+        <h4 class="row modal-title" id="gridSystemModalLabel">
+         
+        <div class="col-sm-2">
+        <img src="/common/images/profile/${user.profile}" style="height: 60px; width:60px; border-radius: 70px; vertical-align: middle; margin-left: 15px;"/>
+        </div>
+        
+        <div class="col-sm-3">
 		${user.userNickname}
 		</div>
 		
+		<!-- 내 글만 수정, 삭제 -->
 		<c:if test="${user.userNo==board.user.userNo}">
-		<div class="col-md-4 col-md-offset-4">
-		<input type="button" value="수정" data-update="${board.boardNo}"/>
-        <div class="btn btn-primary" data-toggle="modal" data-target="#${board.boardNo}modal2">삭제</div>
+		<div class="col-sm-7" style="padding-left: 60px;">
+		<input class="btn btn-a" type="button" value="수정" data-update="${board.boardNo}"/>
+        <span class="btn btn-b" data-toggle="modal" data-target="#${board.boardNo}modal2">삭제</span>
         </div>
         </c:if>
         
-           </h4>
+        <!-- 신고 버튼 -->
+        <c:if test="${user.userNo!=board.user.userNo}">
+        <div class="col-sm-5 col-md-offset-2">    
+        <input type="button" name="report" class="btn btn-c" value="신고" data-report="${board.boardNo}"/>
+        <input type="hidden" id="${board.boardNo}report" value="${board.boardNo}${board.user.userNo}">
         </div>
-      </div>
+        </c:if>     
+         
+        </h4>
+          
      <!-- 모달1 헤더 끝 -->
       
-		<div class="modal-body" style="text-align: center">  
+     <!-- 모달1 바디 시작 -->
+      <div class="modal-body" style="text-align: center">  
 
 		<div>
 			<c:if test="${board.photo1 !=null}">
-			<div><img src="${board.photo1}" style="width: 450px"/></div>
+			<div><img src="${board.photo1}" style="width: 100%"/></div>
 			<br/>
 			</c:if>
 
 			<c:if test="${board.photo2 !=null}">
-			<div><img src="${board.photo2}" style="width: 450px"/></div>
+			<div><img src="${board.photo2}" style="width: 100%"/></div>
 			<br/>
 			</c:if>
 	
 			<c:if test="${board.photo3 !=null}">
-			<div><img src="${board.photo3}" style="width: 450px"/></div>
+			<div><img src="${board.photo3}" style="width: 100%"/></div>
 			<br/>
 			</c:if>
 		</div>
@@ -262,28 +164,39 @@ body {
        
       </div>
       <!-- 모달1 바디 끝 -->
- 
-			   <div class="modal-footer">
-      <input type="text" value>
+      
+      <!-- 모달1 푸터 시작 -->
+      <div>
+      
+		<!-- listComment로 파라미터 보내기 -->      
+     	<jsp:include page="/view/board/listComment.jsp">
+     		<jsp:param name="boardNo" value="${board.boardNo}"/>
+     	</jsp:include>
+    	
       </div>
       <!-- 모달1 푸터 끝 -->
+      
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <!-- 모달1 끝 -->
-			  
-			  
 		
-			  	</c:forEach>
-			  
-			</table>
-			
-			
-			
-	</div>
+		    
+		    
+		    
+	    </c:forEach>
+	
 
+		    
 	
-	<jsp:include page="/common/pageNavigation.jsp" />
+	    
+	    </table>
+	    
+		     <!-- PageNavigation Start... -->
+	<jsp:include page="/common/pageNavigation.jsp"/>
+	<!-- PageNavigation End... -->
 	
+	
+	</div>
 </body>
 </html>

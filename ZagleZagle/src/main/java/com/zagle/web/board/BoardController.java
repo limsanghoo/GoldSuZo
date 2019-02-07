@@ -87,7 +87,8 @@ public class BoardController {
 		
 		System.out.println("/addBoard POST");
 		
-		String[] photo=board.getPhoto1().split(",");//이미지 링크 파싱
+		//이미지 링크 파싱
+		String[] photo=board.getPhoto1().split(",");
 	
 		if(photo.length==1) {
 			board.setPhoto1(photo[0]);
@@ -110,14 +111,33 @@ public class BoardController {
 		
 		boardService.addBoard(board);
 		
+		//게시물 등록 10점
 		int value = user.getTotalActiveScore();
-		user.setTotalActiveScore(value+10);//게시물 등록 10점	
+		user.setTotalActiveScore(value+10);	
 		
 		userService.addActiveScore(user);
-        
+		
+		//등업	
+		int value1 = user.getTotalActiveScore();
+		
+		System.out.println("활동점수 확인"+value1);		
+		
+		if(100<=value1 && value1<=199) {
+			user.setGrade("1");
+			userService.updateGrade(user);
+
+		}else if(200<=value1 && value1<=299) {
+			user.setGrade("2");
+			userService.updateGrade(user);
+
+		}else if(300<=value1 && value1<=99999) {
+			user.setGrade("3");
+			userService.updateGrade(user);
+		}
+		       
+		
 		ModelAndView modelAndView=new ModelAndView();
-	
-		modelAndView.setViewName("redirect:http://192.168.0.49:8080/board/listBoard?view=all");
+		modelAndView.setViewName("redirect:http://192.168.0.49:8080/board/listBoard?view=town");
 		
 		return modelAndView;
 	}
@@ -226,7 +246,7 @@ public class BoardController {
 		boardService.updateBoardStatus(board);
 		
 		ModelAndView modelAndView=new ModelAndView();
-		modelAndView.setViewName("redirect:/board/listBoard?view=all");
+		modelAndView.setViewName("redirect:/board/listBoard?view=town");
 		
 		return modelAndView;
 	}
@@ -384,7 +404,7 @@ public class BoardController {
 		boardService.updateBoard(board);
 		
 		ModelAndView modelAndView=new ModelAndView();
-		modelAndView.setViewName("redirect:/board/listBoard?view=all");
+		modelAndView.setViewName("redirect:/board/listBoard?view=town");
 		
 		return modelAndView;
 	}
@@ -410,10 +430,12 @@ public class BoardController {
 		//testUser=userService.getUser2("US10003");
 		
 		//인호
-		//testUser=userService.getUser2("US10023");
+		testUser=userService.getUser2("US10023");
 		
 		//주현
-		testUser=userService.getUser3("김주현");	
+		//testUser=userService.getUser3("김주현");	
+		
+		//testUser=userService.getUser3("페리오");
 		
 		
 		session.setAttribute("user", testUser);

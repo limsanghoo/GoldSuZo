@@ -91,7 +91,7 @@ $(function() {
 	
 	$("a:contains('LOGOUT')").on("click",function() {
 		
-		alert("클릭됨")
+	
 		
 			var snsNo = $(this).data("param");
 			
@@ -99,11 +99,11 @@ $(function() {
 		
 		if(snsNo.startsWith("K")) {
 			
-			alert("K로시작하는거 인식")
+			
 			$("form").attr("method" , "POST").attr("action" , "/user/logout/json").submit();
 			
 		}else if(snsNo.startsWith("N")){
-			alert("N으로시작하는거 인식")
+			
 			$("form").attr("method" , "POST").attr("action" , "/user/Nlogout").submit();
 		}else{
 			$("form").attr("method" , "POST").attr("action" , "/user/logout").submit();
@@ -150,42 +150,15 @@ $(function() {
 	
 //////////////////////////////////마이 페이지 Navigation 영역///////////////////////////////////////
 
-	$("a:contains('작성 게시물 보기')").on("click" , function() {
+
+	
+	$("a:contains('마이페이지')").on("click" , function() {
 		//$(self.location).attr("href","http://localhost:3000/");
-		self.location = "/mypage/listMyBoard"
+		self.location = "/mypage/mypageMainView"
 		
 	});
 
-	$("a:contains('좋아요 게시물 보기')").on("click" , function() {
-		//$(self.location).attr("href","http://localhost:3000/");
-		self.location = "/mypage/listLike"
-		
-	});
 	
-	$("a:contains('스크랩 게시물 보기')").on("click" , function() {
-		//$(self.location).attr("href","http://localhost:3000/");
-		self.location = "/mypage/listScrap"
-		
-	});
-	
-	$("a:contains('댓글 작성한 게시물 보기')").on("click" , function() {
-		//$(self.location).attr("href","http://localhost:3000/");
-		self.location = "/mypage/listComment"
-		
-	});
-	
-	$("a:contains('계좌번호 등록(신규)')").on("click" , function() {
-		//$(self.location).attr("href","http://localhost:3000/");
-		self.location = "/mypage/addAccount"
-		
-	});
-	
-	$("a:contains('계좌번호 수정')").on("click" , function() {
-		//$(self.location).attr("href","http://localhost:3000/");
-		self.location = "/mypage/updateAccount"
-		
-	});
-
 });
 
 
@@ -305,17 +278,21 @@ font-size: 100%;
 
 <body style="padding-right: 0px;">
 
-  <div class="click-closed"></div>
+  <!-- <div class="click-closed"></div> -->
 
   <!--/ Nav Star /-->
   <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
     <div class="container">
+    
+    <c:if test="${user.userNo!=null}">
       <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault"
         aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span></span>
         <span></span>
         <span></span>
       </button>
+     </c:if>
+     
       <a href="/index.jsp" class="navbar-brand text-brand" style="padding-top: 0; padding-bottom: 0;">Dongne<span class="color-b">Vangne</span></a>
 
       <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
@@ -356,20 +333,10 @@ font-size: 100%;
           </li>
           
           
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              	My Page
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item">작성 게시물 보기</a>
-              <a class="dropdown-item">댓글 작성한 게시물 보기</a>
-              <a class="dropdown-item">스크랩 게시물 보기</a>
-              <a class="dropdown-item">좋아요 게시물 보기</a>
-              <a class="dropdown-item">계좌번호 등록(신규)</a>
-              <a class="dropdown-item">계좌번호 수정</a>
-            </div>
-          </li>
+          <li class="nav-item">
+          	<a class="nav-link">마이페이지</a>
+          	</li>
+          
           
           <c:if test="${param.view=='town'}"> 
           <li class="nav-item">

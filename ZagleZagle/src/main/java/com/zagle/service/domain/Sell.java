@@ -9,9 +9,9 @@ public class Sell {
 	private String sellName;
 	private int sellPrice;
 	private String sellText;
-	private String SellPhoto1;
-	private String SellPhoto2;
-	private String SellPhoto3;
+	private String sellPhoto1;
+	private String sellPhoto2;
+	private String sellPhoto3;
 	private String sellPhone;
 	private int sellStyle;
 	private int sellState;
@@ -21,20 +21,20 @@ public class Sell {
 		super();
 	}
 
-	public User getSeller() {
-		return seller;
-	}
-
-	public void setSeller(User seller) {
-		this.seller = seller;
-	}
-	
 	public String getSellNo() {
 		return sellNo;
 	}
 
 	public void setSellNo(String sellNo) {
 		this.sellNo = sellNo;
+	}
+
+	public User getSeller() {
+		return seller;
+	}
+
+	public void setSeller(User seller) {
+		this.seller = seller;
 	}
 
 	public String getSellName() {
@@ -62,27 +62,27 @@ public class Sell {
 	}
 
 	public String getSellPhoto1() {
-		return SellPhoto1;
+		return sellPhoto1;
 	}
 
 	public void setSellPhoto1(String sellPhoto1) {
-		SellPhoto1 = sellPhoto1;
+		this.sellPhoto1 = sellPhoto1;
 	}
 
 	public String getSellPhoto2() {
-		return SellPhoto2;
+		return sellPhoto2;
 	}
 
 	public void setSellPhoto2(String sellPhoto2) {
-		SellPhoto2 = sellPhoto2;
+		this.sellPhoto2 = sellPhoto2;
 	}
 
 	public String getSellPhoto3() {
-		return SellPhoto3;
+		return sellPhoto3;
 	}
 
 	public void setSellPhoto3(String sellPhoto3) {
-		SellPhoto3 = sellPhoto3;
+		this.sellPhoto3 = sellPhoto3;
 	}
 
 	public String getSellPhone() {
@@ -120,8 +120,8 @@ public class Sell {
 	@Override
 	public String toString() {
 		return "Sell [sellNo=" + sellNo + ", seller=" + seller + ", sellName=" + sellName + ", sellPrice=" + sellPrice
-				+ ", sellText=" + sellText + ", SellPhoto1=" + SellPhoto1 + ", SellPhoto2=" + SellPhoto2
-				+ ", SellPhoto3=" + SellPhoto3 + ", sellPhone=" + sellPhone + ", sellStyle=" + sellStyle
+				+ ", sellText=" + sellText + ", sellPhoto1=" + sellPhoto1 + ", sellPhoto2=" + sellPhoto2
+				+ ", sellPhoto3=" + sellPhoto3 + ", sellPhone=" + sellPhone + ", sellStyle=" + sellStyle
 				+ ", sellState=" + sellState + ", sellDate=" + sellDate + "]";
 	}
 

@@ -5,57 +5,66 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <title>getBoard</title>
 
-<style>
-	#goListBoard{
-		position: static;
-    	float:right;
-	}
-</style>
+<link rel="stylesheet" href="css/demo.css">
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="/common/js/medium-editor/dist/css/medium-editor.min.css">
+<link rel="stylesheet" href="/common/js/medium-editor/dist/css/themes/beagle.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="/common/js/medium-editor/dist/js/medium-editor.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 
 </head>
 
 <body>
 
-  
-<a href="/board/listBoard">
-<input type="button" value="전체 게시물" id="goListBoard">
-</a>
+<jsp:include page="/view/layout/toolbar.jsp"/>
 
 <br/>
 
-<div id="content">
+<div class="container" style="margin-top:130px">
+
+<div>
+<img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px; display: inline; vertical-align: middle"/>
+	<span style="height:100%; font-weight: bold; display: inline; vertical-align: middle;">&nbsp;${board.user.userNickname}</span>
+</div>
 
 <div>
 	<c:if test="${board.photo1 !=null}">
-	<img src="${board.photo1}" style="width: 500px"/>
+	<img src="${board.photo1}" style="width: 100%; padding-top: 10px;"/>
 	<br/>
 	</c:if>
 
 	<c:if test="${board.photo2 !=null}">
-	<img src="${board.photo2}" style="width: 500px"/>
+	<img src="${board.photo2}" style="width: 100%; padding-top: 10px;"/>
 	<br/>
 	</c:if>
 	
 	<c:if test="${board.photo3 !=null}">
-	<img src="${board.photo3}" style="width: 500px"/>
+	<img src="${board.photo3}" style="width: 100%; padding-top: 10px;"/>
 	<br/>
 	</c:if>
 </div>
 
-<div>
-${board.address}
+
+<div style="padding-top: 10px;">
+${board.boardDetailText}
 </div>
+
 <br/>
 
 <div>
-${board.boardDetailText}
+${board.hashTag}
 </div>
+
+<br/>
 
 </div>
 

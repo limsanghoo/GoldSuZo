@@ -179,7 +179,7 @@ public class UserRestController {
 				        MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 				        params.add("grant_type", "authorization_code");
 				        params.add("client_id", "c3883a306a9faad67b127d7631568b29");
-				        params.add("redirect_uri", "http://192.168.0.35:8080/user/kakaologin");
+				        params.add("redirect_uri", "http://192.168.0.18:8080/user/kakaologin");
 				        params.add("code", code);
 				   
 				        
@@ -304,16 +304,29 @@ public class UserRestController {
 			userService.addActiveScore(user);
 			
 			
+	/////////////////USER GRADE UPDATE //////////////////////////////
+			int value1 = user.getTotalActiveScore();
 			
+			System.out.println("활동점수 확인"+value1);
+			
+			if(100<=value1 && value1<=199) {
+				user.setGrade("1");
+				userService.updateGrade(user);
+			}else if(200<=value1 && value1<=299) {
+				user.setGrade("2");
+				userService.updateGrade(user);
+			}else if(300<=value1 && value1<=99999) {
+				user.setGrade("3");
+				userService.updateGrade(user);
+			}
+	////////////////////////////////////////////////////////////////////////////////////////////////
+			
+			
+	/////////////////////UESR SESSION////////////////////////////////////		
 			session.setAttribute("user", user);
+///////////////////////////////////////////////////////////////////////////////////////////				
 			
 			
-			
-			//userService.addActiveScore(user);
-			
-			
-			//modelAndView.addObject("result", new Boolean(result));
-			//modelAndView.addObject("user", user);
 			modelAndView.setViewName("redirect:/view/user/model.jsp");
 			
 			return modelAndView;

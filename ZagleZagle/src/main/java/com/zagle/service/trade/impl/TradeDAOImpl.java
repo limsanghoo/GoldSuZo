@@ -80,4 +80,8 @@ public class TradeDAOImpl implements TradeDAO{
 	public Buy getBuy(String buyNo) throws Exception {
 		return sqlSession.selectOne("BuyMapper.getBuy",buyNo);
 	}
+	@Override
+	public void payBuy(Buy buy) throws Exception {
+		sqlSession.update("BuyMapper.payBuy",buy);
+	}
 }

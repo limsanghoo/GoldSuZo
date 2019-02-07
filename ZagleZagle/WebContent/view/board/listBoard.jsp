@@ -25,8 +25,9 @@
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="/common/css/GridLoadingEffects/js/modernizr.custom.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>       
-        
-        
+ 
+<!-- 카톡 공유 -->       
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>        
         
  <!--  --> 
  <!-- Favicons -->
@@ -62,8 +63,6 @@
 
 form{
 	  padding-top : 150px;
-	 	padding-left:150px;
-        padding-right:150px;
        background-color:#f7f0e1;
 	}
 
@@ -189,12 +188,17 @@ $(function(){
 	//게시물 수정
 	$("input[value='수정']").bind("click",function(){
 		var boardNo=$(this).data('update');
-		alert(boardNo);
+	
 		self.location="/board/updateBoard?boardNo="+boardNo;
 	})
 	
 	//게시물 등록
 	$("input[value='게시물 등록']").bind("click",function(){
+		
+		if("${user.blackCode}"=='2'){
+			alert("블랙리스트 회원은 이용할 수 없습니다.");
+			return;
+		}
 		
 		self.location="http://192.168.0.49:8080/board/addBoard?userNo=${user.userNo}";
 	})
@@ -365,6 +369,103 @@ $(function(){
 	});
 	
 	
+	//카카오 링크1 주소 있는 경우
+	$("span[name='kakao1']").bind("click",function(){
+		
+		var address=$(this).data('address');
+		
+		var boardDetailText=$(this).data('boarddetailtext');
+		
+		var hashTag=$(this).data('hashtag');
+		
+		var photo1=$(this).data('photo1');
+		
+		var likeCount=$(this).data('likecount');
+		
+		var boardNo=$(this).data('boardno');
+		
+		
+		//<![CDATA[
+		// // 사용할 앱의 JavaScript 키를 설정해 주세요.
+		Kakao.init('83df98960f21b7281d6cdfddf483b6a5');
+		// // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+				
+		  Kakao.Link.sendDefault({
+		    objectType: 'location',
+		    address: address,
+		    content: {
+		      title: boardDetailText,
+		      description: hashTag,
+		      imageUrl: photo1,
+		      link: {
+		        mobileWebUrl: 'http://192.168.0.49:8080/board/getBoard?view=mobile&boardNo='+boardNo,
+		        webUrl: 'http://192.168.0.49:8080/board/getBoard?view=mobile&boardNo='+boardNo
+		      }
+		    },
+		    social: {
+		      likeCount: likeCount,
+		    },
+		    buttons: [
+		      {
+		        title: '웹으로 보기',
+		        link: {
+		          mobileWebUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo,
+		          webUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo
+		        }
+		      }
+		    ]
+		  });
+		
+		//]]>
+				
+	});//카카오 링크1 끝
+	
+	
+	//카카오 링크2 주소 없는 경우
+	$("span[name='kakao2']").bind("click",function(){
+		
+		var boardDetailText=$(this).data('boarddetailtext');
+		
+		var hashTag=$(this).data('hashtag');
+		
+		var photo1=$(this).data('photo1');
+		
+		var likeCount=$(this).data('likecount');
+		
+		var boardNo=$(this).data('boardno');
+		
+		
+	//<![CDATA[
+    // // 사용할 앱의 JavaScript 키를 설정해 주세요.
+    Kakao.init('83df98960f21b7281d6cdfddf483b6a5');
+    // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+    
+      Kakao.Link.sendDefault({
+        objectType: 'feed',
+        content: {
+          title: boardDetailText,
+          description: hashTag,
+          imageUrl: photo1,
+          link: {
+            mobileWebUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo,
+            webUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo
+          }
+        },
+        social: {
+          likeCount: likeCount,
+        },
+        buttons: [
+          {
+            title: '웹으로 보기',
+            link: {
+              mobileWebUrl: 'http://192.168.0.49:8080/board/getBoard?view=mobile&boardNo='+boardNo,
+              webUrl: 'http://192.168.0.49:8080/board/getBoard?view=mobile&boardNo='+boardNo
+            }
+          }
+        ]
+      });
+     //]]>
+	});//카카오 링크2 끝
 	
 });//function 끝
 
@@ -465,8 +566,6 @@ function fncGetTown(){
 }
 
 
-
-
 </script>
 
 
@@ -557,7 +656,7 @@ function fncGetTown(){
 <br/>
 
 
- <div class="containerList">
+ <div class="containerList" style="width: 100%;">
 
  <ul class="grid effect-2" id="grid">
  
@@ -581,15 +680,32 @@ function fncGetTown(){
 <li>
 
 	<c:if test="${board.userTheme=='H_spoon'}">	
+	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #afafaf;">
+	</c:if>
+	
+	<c:if test="${board.userTheme=='D_spoon'}">	
 	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #eac999;">
 	</c:if>
 	
-	<div class="box">
+	<c:if test="${board.userTheme=='S_spoon1'}">	
+	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #ff9a9a;">
+	</c:if>
+	
+	<c:if test="${board.userTheme=='S_spoon2'}">	
+	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #bdf199;">
+	</c:if>
+	
+	<c:if test="${board.userTheme=='G_spoon1'}">	
+	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #a5cff5;">
+	</c:if>
+	
+	<c:if test="${board.userTheme=='G_spoon2'}">	
+	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #d2c0fb;">
+	</c:if>
 		
 	<p>
 	<img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px; display: inline; vertical-align: middle"/>
 	<span style="height:100%; font-weight: bold; display: inline; vertical-align: middle;">&nbsp;${board.user.userNickname}</span>
-		
 	
 	
 	<span name="like" id="${board.boardNo}like" data-boardNo="${board.boardNo}" data-checkLike="${board.checkLike}">	
@@ -613,6 +729,7 @@ function fncGetTown(){
 		</c:when>
 	</c:choose>
 	</span>
+	
 		
 	<span name="scrap" id="${board.boardNo}scrap" data-boardNo="${board.boardNo}" data-checkScrap="${board.checkScrap}">
 	<c:choose>
@@ -632,6 +749,22 @@ function fncGetTown(){
 		</c:when>
 	</c:choose>
 	</span>
+		
+	<c:if test="${board.address!=null}">	
+	<span id="${board.boardNo}kakao-link-btn" name="kakao1"
+	 data-address="${board.address}" data-boardDetailText="${board.boardDetailText}" data-hashTag="${board.hashTag}" data-photo1="${board.photo1}" data-likeCount="${board.likeCount}" data-boardNo="${board.boardNo}"
+	 style="display: inline; float: right; width: 40px; height: 40px;">
+	<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
+	</span>
+	</c:if>
+	
+	<c:if test="${board.address==null}">
+	<span id="${board.boardNo}kakao-link-btn" name="kakao2"
+	 data-boardDetailText="${board.boardDetailText}" data-hashTag="${board.hashTag}" data-photo1="${board.photo1}" data-likeCount="${board.likeCount}" data-boardNo="${board.boardNo}"
+	 style="display: inline; float: right; width: 40px; height: 40px;">
+	<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
+	</span>
+	</c:if>
 	
 	</p>
 

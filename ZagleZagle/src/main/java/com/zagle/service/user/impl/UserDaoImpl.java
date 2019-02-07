@@ -50,6 +50,9 @@ public class UserDaoImpl implements UserDao {
 	public void updateDeleteCount(User user) throws Exception {
 		sqlSession.update("UserMapper.updateDeleteCount", user);
 	}
+	public void updateGrade(User user) throws Exception {
+		sqlSession.update("UserMapper.updateGrade", user);
+	}
 	
 	// �Խ��� Page ó���� ���� ��ü Row(totalCount)  return
 	public int getTotalCount(SearchAdmin search) throws Exception {
