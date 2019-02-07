@@ -90,6 +90,27 @@ public class UserRestController {
 		return userService.getUser2(userNo);
 	}
 	
+	@RequestMapping(value="json/getUser/{snsNo}", method=RequestMethod.GET)
+	public User getUser(@PathVariable String snsNo,HttpSession session) throws Exception {
+		
+		System.out.println("==============RestController getUser01==============");
+		User user = userService.getUser(snsNo);
+		session.setAttribute("user",user);
+		System.out.println("user==="+user);
+		System.out.println("세션저장"+session.getAttribute("user"));
+		return userService.getUser(snsNo);
+	}
+	
+	
+	@RequestMapping(value="json/getUserSession", method=RequestMethod.GET)
+	public User getUser(HttpSession session) throws Exception {
+		
+		System.out.println("==============RestController getUserSession==============");
+		System.out.println("세션값 왜 안나오징;;"+session.getAttribute("user"));
+		return (User)session.getAttribute("user");
+	}
+	
+	
 	
 	/*
 	@RequestMapping(value="KakaoLogin", produces="application/json")
