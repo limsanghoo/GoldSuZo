@@ -14,27 +14,22 @@
 
 <html>
 	<head>
-		<title>Zagle Zagle</title>
+		<title>Dongne Vangne</title>
+		
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="/common/css/assets/css/main.css" />
 		<link rel="stylesheet" href="/common/css/assets/css/noscript.css" />
-
-		
+		<link href="/css/animate.min.css" rel="stylesheet">
+   		<link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">	
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-			<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	
-	 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		
-		<link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">	
-		
-	 <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-	
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script src="/javascript/bootstrap-dropdownhover.min.js"></script>
 	
 	<script>
 	
@@ -103,31 +98,31 @@
 	
 	
 	</head>
+	
+	
 	<style>
-	body,html { background: url("https://images.wallpaperscraft.com/image/window_sunset_trees_132266_3840x2160.jpg") no-repeat center center fixed; -webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;}
-	
-	
-	div.modal-body,.modal-content{
 
-background-color: rgba(0,0,0,0.1);
-}
-	
+	div.modal-body,.modal-content{
+		background-color: rgba(0,0,0,0.1);
+	}
+
+	body{
+		overflow-x:hidden; 
+	}
 	
 	</style>
 	
-	
-	
-	
+
 	<body class="is-preload">
 
 		<!-- Wrapper -->
 			<div id="wrapper">
-
+				
 				<!-- Main -->
 					<section id="main">
 						<header>
-							<span class="avatar"><img src="https://us.123rf.com/450wm/uasumy/uasumy1507/uasumy150700013/42874535-%ED%8E%B8%EC%A7%80-z-%EB%A1%9C%EA%B3%A0-%EB%AA%A8%ED%98%95-%EB%AA%A8%ED%98%95-%EB%AA%A8%EB%85%B8%EA%B7%B8%EB%9E%A8-%EA%B2%B9%EC%B9%98%EB%8A%94-%EC%8A%A4%ED%83%80%EC%9D%BC-%EB%AA%85%ED%95%A8-.jpg?ver=6" alt="" style="width : 200px; height : 200px;"/></span>
-							<h1>ZAGLE ZAGLE</h1>
+							<span class="avatar"><img src="/common/images/logo2.png" alt="" style="width : 200px; height : 200px;"/></span>
+							
 							<p>by  GoldSuZo</p>
 						</header>
 						<!--
@@ -244,6 +239,7 @@ background-color: rgba(0,0,0,0.1);
 			}
 				
 			</script>
+
 
 	</body>
 </html>

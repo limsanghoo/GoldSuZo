@@ -72,6 +72,7 @@ body {
     padding: 0;
     font-family: 'Poppins', sans-serif;
 	/* background: #333; */
+	overflow-x: hidden;
 }
 
 .fullScreen{
