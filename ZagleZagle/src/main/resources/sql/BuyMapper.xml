@@ -11,12 +11,13 @@
 		<result property="buyer.userNo"					column="user_no" 					jdbcType="VARCHAR" />
 		<result property="buyer.profile"					column="profile" 						jdbcType="VARCHAR" />
 		<result property="buyer.userNickname"		column="user_nickname" 			jdbcType="VARCHAR" />
+		<result property="buyer.userName"				column="user_Name"	 			jdbcType="VARCHAR" />
 		<result property="buyPhone" 						column="buy_phone" 				jdbcType="VARCHAR" />
 		<result property="buyAddress" 					column="buy_addr" 					jdbcType="VARCHAR" />
 		<result property="payment" 							column="payment"	 				jdbcType="VARCHAR" />
 		<result property="trackingNo" 						column="tracking_no" 				jdbcType="NUMERIC" />
-		<result property="companyCode"					column="company_code"			jdbcType="NUMERIC" />
 		<result property="buyDate" 							column="buy_date"	 				jdbcType="DATE" />
+		<result property="companyCode"					column="company_code"			jdbcType="DATE" />
 		
 		<association property="sellProd"  javaType="sell">
 			<id property="sellNo" 									column="sell_no" 					jdbcType="VARCHAR"/>
@@ -34,8 +35,14 @@
 			<result property="sellState" 							column="sell_state" 				jdbcType="NUMERIC" />
 			<result property="sellDate" 							column="sell_date" 					jdbcType="DATE" />
 		</association>
-		
 	</resultMap>
+	
+	<resultMap id="companySelectMap" type="companylist">
+		<result property="companyCode" 					column="company_code" 					jdbcType="NUMERIC"/>
+		<result property="companyName" 				column="company_name"					jdbcType="VARCHAR"  />
+	</resultMap>
+		
+	
 	
 	<insert 	id="addBuy"	parameterType="buy" >
 	 	INSERT
@@ -59,9 +66,9 @@
 	 </select>
 	 
 	 <select id="getBuy" parameterType="string" resultMap="buySelectMap">
-	 	SELECT DISTINCT u.user_no, u.profile, u.user_nickname, s.*, b.* 
-	 	FROM sell s, users u, (select * from buy where buy_no=#{buyNo}) b 
-	 	WHERE u.user_no=s.user_no and s.sell_no=b.sell_no
+	 	SELECT DISTINCT u.user_no, u.user_nickname, u.user_name, b.* 
+       FROM users u, (select * from buy where buy_no=#{buyNo}) b 
+       WHERE u.user_no=b.user_no
 	 </select>
 	 
 	 <update id="payBuy" parameterType="buy">
@@ -73,5 +80,15 @@
 	 	</set>
 	 	WHERE buy_no=#{buyNo}
 	 </update>
+	 
+	 <select id="getBuyNo" parameterType="string" resultMap="buySelectMap">
+	 	select *
+	 	from buy
+	 	where sell_no=#{sellNo}
+	 </select>
+	 
+	 <select id="getCompany" resultMap="companySelectMap">
+	 	SELECT * FROM company_list ORDER BY company_code
+	 </select>
 	 
 </mapper>

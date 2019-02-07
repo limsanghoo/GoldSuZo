@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.zagle.common.Search;
 import com.zagle.service.domain.Board;
 import com.zagle.service.domain.Buy;
+import com.zagle.service.domain.CompanyList;
 import com.zagle.service.domain.Sell;
 import com.zagle.service.domain.User;
 import com.zagle.service.trade.TradeDAO;
@@ -93,6 +94,16 @@ public class TradeServiceImpl implements TradeService{
 	@Override
 	public void payBuy(Buy buy) throws Exception {
 		tradeDAO.payBuy(buy);		
+	}
+
+	@Override
+	public Buy getBuyNo(String sellNo) throws Exception {
+		return tradeDAO.getBuyNo(sellNo);
+	}
+
+	@Override
+	public List<CompanyList> getCompany() throws Exception {
+		return tradeDAO.getCompany();
 	}
 
 

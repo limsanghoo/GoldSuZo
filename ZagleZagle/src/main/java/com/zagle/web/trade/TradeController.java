@@ -1,5 +1,6 @@
 package com.zagle.web.trade;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.zagle.common.Page;
 import com.zagle.common.Search;
 import com.zagle.service.domain.Buy;
+import com.zagle.service.domain.CompanyList;
 import com.zagle.service.domain.Sell;
 import com.zagle.service.domain.User;
 import com.zagle.service.trade.TradeService;
@@ -236,6 +238,7 @@ public class TradeController {
 		Buy buy = new Buy();
 		
 		buy = tradeService.getBuy(buyNo);
+		buy.setSellProd(tradeService.getSell(buy.getSellProd().getSellNo()));
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("buy",buy);
@@ -258,6 +261,36 @@ public class TradeController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("redirect:/trade/listBuy");
 		 
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="addTracking", method=RequestMethod.GET)
+	public ModelAndView addTracking(@ModelAttribute("sellNo") String sellNo) throws Exception{
+		
+		Buy buy = new Buy();
+		buy = tradeService.getBuyNo(sellNo);
+		 
+		buy = tradeService.getBuy(buy.getBuyNo());
+		buy.setSellProd(tradeService.getSell(buy.getSellProd().getSellNo()));
+		
+		List<CompanyList> company = tradeService.getCompany();
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("buy",buy);
+		modelAndView.addObject("company",company);
+		modelAndView.setViewName("forward:/view/trade/addTracking.jsp");
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="addTracking", method=RequestMethod.POST)
+	public ModelAndView addTracking(@ModelAttribute("buy") Buy buy) throws Exception{
+
+		System.out.println(buy);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("redirect:/trade/listSell");
+		
 		return modelAndView;
 	}
 }

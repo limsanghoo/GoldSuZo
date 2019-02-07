@@ -20,6 +20,8 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <!-- jQuery UI toolTip 사용 JS-->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
+  
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
@@ -108,7 +110,7 @@
 			  
 			  <td align="center" data-sellno="${sell.sellNo}">
 				  <c:if test="${sell.sellState=='20'}"><a href="/trade/updateSellState?sellNo=${sell.sellNo}&sellState=40">승인하기</a></c:if>
-				  <c:if test="${sell.sellState=='50'}">배송하기</c:if>		  	
+				  <c:if test="${sell.sellState=='50'}"><a href="/trade/addTracking?sellNo=${sell.sellNo}&sellState=60">배송하기</a></c:if>		  	
 			  </td>
 			  
 			</tr>
@@ -119,7 +121,7 @@
       
       </table>
 	  <!--  table End /////////////////////////////////////-->
-	  
+
  	</div>
  	<!--  화면구성 div End /////////////////////////////////////-->
 
