@@ -40,6 +40,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -472,6 +473,35 @@ public class UserRestController {
 				
 				return userService.checkNickname(user);
 		}
+		
+		@RequestMapping(value = "checkNickname2/{userNickname}", method = { RequestMethod.GET, RequestMethod.POST})
+		public @ResponseBody String checkNickname2(@PathVariable String userNickname)  throws Exception {
+	User user = new User();
+	user.setUserNickname(userNickname);
+		System.out.println("==============checkNickname Start2=================");
+		
+		return String.valueOf(userService.checkNickname(user));
+}
+
+		
+		@RequestMapping(value = "json/userUpdate", method = { RequestMethod.GET, RequestMethod.POST})
+		public @ResponseBody User userUpdate(@RequestBody Map<String,String> maps)  throws Exception {
+			System.out.println("==============userUpdate Start=================");
+			System.out.println(maps);
+			System.out.println(maps.get("userNickname"));
+			User user = userService.getUser3(maps.get("userName"));
+			System.out.println("이름으로찾는 user정보"+user);
+			user.setUserNickname(maps.get("userNickname"));
+			user.setUserBirth(Integer.parseInt(maps.get("userBirth")));
+			System.out.println("다시 입력값 넣은 user 정보"+user);
+			userService.updateUser(user);
+			
+		return userService.getUser2(user.getUserNo());
+}
+		
+		
+		
+		
 		@RequestMapping(value="json/uploadFile/",method=RequestMethod.POST)
 		public String uploadFile(MultipartHttpServletRequest multipartFile) throws Exception{
 			String path = "C:\\Users\\Bit\\git\\GoldSuZo\\ZagleZagle\\WebContent\\common\\images\\profile\\";
