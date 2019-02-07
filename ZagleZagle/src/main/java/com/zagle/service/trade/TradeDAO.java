@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.zagle.common.Search;
 import com.zagle.service.domain.Buy;
+import com.zagle.service.domain.CompanyList;
 import com.zagle.service.domain.Sell;
 
 public interface TradeDAO {
@@ -31,6 +32,12 @@ public interface TradeDAO {
 	public Buy getBuy(String buyNo) throws Exception;
 
 	public void payBuy(Buy buy) throws Exception;
+
+	public Buy getBuyNo(String sellNo) throws Exception;
+	
+	public List<CompanyList> getCompany() throws Exception;
+
+	public void addTracking(Buy buy) throws Exception;
 	
 //	addSell 판매상품올리기
 //	addBuy 구매요청했을때

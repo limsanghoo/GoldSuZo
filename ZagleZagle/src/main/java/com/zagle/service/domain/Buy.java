@@ -1,6 +1,6 @@
 package com.zagle.service.domain;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Buy {
 	
@@ -12,7 +12,7 @@ public class Buy {
 	private String payment;
 	private Date buyDate;
 	private String TrackingNo;
-	private int companyCode;
+	private String companyCode;
 	
 	public Buy() {
 		super();
@@ -82,11 +82,11 @@ public class Buy {
 		TrackingNo = trackingNo;
 	}
 
-	public int getCompanyCode() {
+	public String getCompanyCode() {
 		return companyCode;
 	}
 
-	public void setCompanyCode(int companyCode) {
+	public void setCompanyCode(String companyCode) {
 		this.companyCode = companyCode;
 	}
 
@@ -96,5 +96,6 @@ public class Buy {
 				+ ", buyAddress=" + buyAddress + ", payment=" + payment + ", buyDate=" + buyDate + ", TrackingNo="
 				+ TrackingNo + ", companyCode=" + companyCode + "]";
 	}
-	
+
+
 }

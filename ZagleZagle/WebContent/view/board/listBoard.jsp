@@ -27,9 +27,11 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>       
  
 <!-- 카톡 공유 -->       
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>        
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+  <!--  sweetAlert -->     
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>       
         
- <!--  --> 
  <!-- Favicons -->
   <link href="/common/css/estateagency-master/img/favicon.png" rel="icon">
   <link href="/common/css/estateagency-master/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -47,7 +49,10 @@
   <link href="/common/css/estateagency-master/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
   <!-- Main Stylesheet File -->
-  <link href="/common/css/estateagency-master/css/style.css" rel="stylesheet">      
+  <link href="/common/css/estateagency-master/css/style.css" rel="stylesheet"> 
+  
+
+       
 <style>
 
 @import url('https://fonts.googleapis.com/css?family=Poppins');
@@ -63,7 +68,8 @@
 
 form{
 	  padding-top : 150px;
-       background-color:#f7f0e1;
+/*        background-color:#f7f0e1; */
+background-color:#e2e2e2;
 	}
 
 body {
@@ -72,6 +78,7 @@ body {
     padding: 0;
     font-family: 'Poppins', sans-serif;
 	/* background: #333; */
+	overflow-x: hidden;
 }
 
 .fullScreen{
@@ -196,7 +203,7 @@ $(function(){
 	$("input[value='게시물 등록']").bind("click",function(){
 		
 		if("${user.blackCode}"=='2'){
-			alert("블랙리스트 회원은 이용할 수 없습니다.");
+			swal("","블랙리스트 회원은 이용할 수 없습니다.", "error");
 			return;
 		}
 		
@@ -357,7 +364,7 @@ $(function(){
 	$("input[value='신고']").bind("click",function(){
 		
 		if("${user.userNo}"==""){
-			alert("로그인 후 이용 가능합니다");
+			swal("","로그인 후 이용 가능합니다.", "error");
 			return;
 		}
 		
@@ -365,7 +372,7 @@ $(function(){
 		
 		var data = document.querySelector("#"+boardNo+"report").value;
 
-	    window.open("/view/board/addReport.jsp?val="+data, "addReport", "width=300, height=200, resizable=yes" );
+	    window.open("/view/board/addReport.jsp?val="+data, "addReport", "width=500, height=400, resizable=yes" );
 	});
 	
 	
@@ -629,7 +636,7 @@ function fncGetTown(){
 <div id="selectTown">
 <c:if test="${param.view=='town'}">
 <div class="row" style="display: inherit; text-align: center;">
-				<select name="state" class="ct_input_g" style="width: 200px; height: 40px" onchange="fncGetState(this)">
+				<select name="state" class="ct_input_g" style="width: 200px; height: 40px; background-color: white;" onchange="fncGetState(this)">
 					<option value='' style="font-size:20px;"  selected>시·도</option>
 					<c:set var="i" value="0"/>
 					<c:forEach var="local" items="${list}">
@@ -638,11 +645,11 @@ function fncGetTown(){
 					</c:forEach>
 				</select>
 				
-				<select name="city"  class="ct_input_g" style="width: 200px; height: 40px" onchange="fncGetCity(this)">
+				<select name="city"  class="ct_input_g" style="width: 200px; height: 40px; background-color: white;" onchange="fncGetCity(this)">
 					<option value="" style="font-size:20px;">시·군·구</option>
 				</select>
         
-				<select name="town"  class="ct_input_g" style="width: 200px; height: 40px" onchange="fncGetTown(this)">
+				<select name="town"  class="ct_input_g" style="width: 200px; height: 40px; background-color: white;" onchange="fncGetTown(this)">
 					<option value="" style="font-size:20px;">읍·면·동</option>
 				</select> 
 				
@@ -652,6 +659,14 @@ function fncGetTown(){
 </c:if>
 </div>
 <!-- 동네 선택  끝-->
+
+<c:if test="${searchBoard.local !=null}">
+<br/>
+
+<div style="text-align: center;">
+<img src="/common/images/board/local.png" style="width: 20px;">${searchBoard.local}
+</div>
+</c:if>
 
 <br/>
 
@@ -692,7 +707,7 @@ function fncGetTown(){
 	</c:if>
 	
 	<c:if test="${board.userTheme=='S_spoon2'}">	
-	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #bdf199;">
+	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #8fef4c;">
 	</c:if>
 	
 	<c:if test="${board.userTheme=='G_spoon1'}">	
@@ -715,15 +730,15 @@ function fncGetTown(){
 		<span name="${board.boardNo}likeCount" style="display: inline; margin-left:3px; margin-top: 7px; float: right;">${board.likeCount}</span>
 		
 			<c:if test="${board.likeUserNo==null && board.checkLike=='0'}">
-				<img src="/common/images/board/emptyLike.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}emptyLike"/>
+				<img src="/common/images/board/emptyLike.png" style="display: inline; vertical-align: middle; float:right; width: 30px;" name="${board.boardNo}emptyLike"/>
 			</c:if>
 			
 			<c:if test="${user.userNo==board.likeUserNo && board.checkLike=='1'}">
-				<img src="/common/images/board/fullLike.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}fullLike"/>			
+				<img src="/common/images/board/fullLike.png" style="display: inline; vertical-align: middle; float:right; width: 30px;" name="${board.boardNo}fullLike"/>			
 			</c:if>
 			
 			<c:if test="${user.userNo==board.likeUserNo && board.checkLike=='2'}">
-				<img src="/common/images/board/emptyLike.png" style="display: inline; vertical-align: middle; float:right; width: 40px;" name="${board.boardNo}emptyLike"/>			
+				<img src="/common/images/board/emptyLike.png" style="display: inline; vertical-align: middle; float:right; width: 30px;" name="${board.boardNo}emptyLike"/>			
 			</c:if>
 			
 		</c:when>
@@ -735,15 +750,15 @@ function fncGetTown(){
 	<c:choose>
 		<c:when test="${user.userNo !=null}">
 			<c:if test="${board.scrapUserNo==null && board.checkScrap=='0'}">
-				<img src="/common/images/board/emptyScrap.png" style="display: inline; vertical-align: middle; float:right; width: 50px; height: 40px;" name="${board.boardNo}emptyScrap"/>
+				<img src="/common/images/board/emptyScrap.png" style="display: inline; vertical-align: middle; float:right; width: 40px; height: 30px;" name="${board.boardNo}emptyScrap"/>
 			</c:if>
 			
 			<c:if test="${user.userNo==board.scrapUserNo && board.checkScrap=='1'}">
-				<img src="/common/images/board/fullScrap.png" style="display: inline; vertical-align: middle; float:right; width: 50px; height: 40px;" name="${board.boardNo}fullScrap"/>
+				<img src="/common/images/board/fullScrap.png" style="display: inline; vertical-align: middle; float:right; width: 40px; height: 30px;" name="${board.boardNo}fullScrap"/>
 			</c:if>
 			
 			<c:if test="${user.userNo==board.scrapUserNo && board.checkScrap=='2'}">
-				<img src="/common/images/board/emptyScrap.png" style="display: inline; vertical-align: middle; float:right; width: 50px; height: 40px;" name="${board.boardNo}emptyScrap"/>
+				<img src="/common/images/board/emptyScrap.png" style="display: inline; vertical-align: middle; float:right; width: 40px; height: 30px;" name="${board.boardNo}emptyScrap"/>
 			</c:if>
 		
 		</c:when>
@@ -753,16 +768,16 @@ function fncGetTown(){
 	<c:if test="${board.address!=null}">	
 	<span id="${board.boardNo}kakao-link-btn" name="kakao1"
 	 data-address="${board.address}" data-boardDetailText="${board.boardDetailText}" data-hashTag="${board.hashTag}" data-photo1="${board.photo1}" data-likeCount="${board.likeCount}" data-boardNo="${board.boardNo}"
-	 style="display: inline; float: right; width: 40px; height: 40px;">
-	<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
+	 style="display: inline; float: right; width: 30px; height: 40px;">
+	<img src="/common/images/board/kakao.JPG"/>
 	</span>
 	</c:if>
 	
 	<c:if test="${board.address==null}">
 	<span id="${board.boardNo}kakao-link-btn" name="kakao2"
 	 data-boardDetailText="${board.boardDetailText}" data-hashTag="${board.hashTag}" data-photo1="${board.photo1}" data-likeCount="${board.likeCount}" data-boardNo="${board.boardNo}"
-	 style="display: inline; float: right; width: 40px; height: 40px;">
-	<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
+	 style="display: inline; float: right; width: 30px; height: 40px;">
+	<img src="/common/images/board/kakao.JPG"/>
 	</span>
 	</c:if>
 	
@@ -933,13 +948,14 @@ function fncGetTown(){
     	<div class="modal-dialog modal-md">
           <div class="modal-content">
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<br/>
             </div>
             <div class="modal-body">
              	삭제하시겠습니까?
             </div>
             <div class="modal-footer">
-              <a href="/board/deleteBoard?boardNo=${board.boardNo}" class="btn btn-primary">삭제</a>
+              <a href="/board/deleteBoard?boardNo=${board.boardNo}" class="btn btn-b">삭제</a>
+              <button type="button" class="btn btn-a" data-dismiss="modal">닫기</button>
             </div>
           </div>
         </div>

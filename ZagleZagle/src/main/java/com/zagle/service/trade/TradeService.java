@@ -1,11 +1,12 @@
 package com.zagle.service.trade;
 
+import java.util.List;
 import java.util.Map;
 
 import com.zagle.common.Search;
 import com.zagle.service.domain.Buy;
+import com.zagle.service.domain.CompanyList;
 import com.zagle.service.domain.Sell;
-import com.zagle.service.domain.User;
 
 public interface TradeService {
 
@@ -29,4 +30,9 @@ public interface TradeService {
 
 	public void payBuy(Buy buy) throws Exception;
 
+	public Buy getBuyNo(String sellNo) throws Exception;
+
+	public List<CompanyList> getCompany() throws Exception;
+
+	public void addTracking(Buy buy) throws Exception;
 }
