@@ -101,13 +101,12 @@
 	
 	
 	<style>
+	
+	body,html { background: url("https://i.imgur.com/E5lL08V.jpg") no-repeat center center fixed; -webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;}
+	
 
 	div.modal-body,.modal-content{
 		background-color: rgba(0,0,0,0.1);
-	}
-
-	body{
-		overflow-x:hidden; 
 	}
 	
 	</style>
@@ -164,7 +163,7 @@
 						-->
 						<br/><br/>
 						<footer>
-								<button class="button primary" id="login" data-toggle="modal" data-target="#modal1" >-login-</button>
+								<button class="button primary" id="login" data-toggle="modal" data-target="#modal1" >-LOGIN-</button>
 								<br/><br/><a href="/board/listBoard?view=all">온 동네 소식보기</a>
 							</ul>
 						</footer>
