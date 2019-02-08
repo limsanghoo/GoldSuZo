@@ -49,10 +49,31 @@
 
 .my container {
 
-
-max-width: 1200px;
-margin-left: 300px;
+padding-left: 30%;
+margin: auto;
 }
+
+.row {
+
+max-width: 100px;
+
+}
+
+
+.page-header text-info {
+
+padding-top: 30%;
+padding-left: 30%;
+
+}
+.mypage_header {
+
+padding-left: 40%;
+padding-top: 20%;
+
+
+}
+
 
 </style>
 
@@ -65,10 +86,30 @@ margin-left: 300px;
 <body>
 
 <jsp:include page="/view/layout/toolbar.jsp" />
-<jsp:include page="/view/layout/mypageToolbar2.jsp" />
+<jsp:include page="/view/layout/mypageToolbar.jsp" />
 
-<div class="my container" style="max-width: 1200px;margin-left: 300px;">
+<div id="mypage_header">
+	<div class="mypage_header">
+	<h1>
+	<a herf=#>
+	동네방네</a>
+	</h1>
+	
+	<div class="header_sch">
+	<p class="grade">
+		<span clss="txt_grade">
+		<strong>{user.userName}</strong> 님의 등급은
+		<span class="grade"> {user.grade}</span> 입니다.
+		</span>
+	</p>
+		
+		
 
+	
+	</div>
+	
+</div>
+<div class="my container">
 <div class="page-header text-info">
 	       <h5>작성 게시물</h5>
 	    </div>
@@ -206,8 +247,9 @@ margin-left: 300px;
 		     <!-- PageNavigation Start... -->
 	<jsp:include page="/common/pageNavigation.jsp"/>
 	<!-- PageNavigation End... -->
-	
-	
 	</div>
+	
+	
+	
 </body>
 </html>
