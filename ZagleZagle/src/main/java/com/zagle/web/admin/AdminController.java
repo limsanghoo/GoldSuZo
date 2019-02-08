@@ -522,9 +522,13 @@ public class AdminController {
 			
 		}
 		
-
+		boolean result = true;
 		
-		return null;
+		ModelAndView model = new ModelAndView();
+		model.setViewName("/index.jsp");
+		model.addObject("result", result);
+		
+		return model;
 				
 	}
 	
