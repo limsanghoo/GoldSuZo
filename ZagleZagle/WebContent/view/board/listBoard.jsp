@@ -67,9 +67,8 @@
 }
 
 form{
-	  padding-top : 150px;
-/*        background-color:#f7f0e1; */
-background-color:#e2e2e2;
+	padding-top : 150px;
+	background-color:#e2e2e2;
 	}
 
 body {
@@ -207,7 +206,7 @@ $(function(){
 			return;
 		}
 		
-		self.location="http://192.168.0.49:8080/board/addBoard?userNo=${user.userNo}";
+		self.location="http://192.168.0.18:8080/board/addBoard?userNo=${user.userNo}";
 	})
 	
 	//지도로 보기
@@ -405,8 +404,8 @@ $(function(){
 		      description: hashTag,
 		      imageUrl: photo1,
 		      link: {
-		        mobileWebUrl: 'http://192.168.0.49:8080/board/getBoard?view=mobile&boardNo='+boardNo,
-		        webUrl: 'http://192.168.0.49:8080/board/getBoard?view=mobile&boardNo='+boardNo
+		        mobileWebUrl: 'http://192.168.0.18:8080/board/getBoard?view=mobile&boardNo='+boardNo,
+		        webUrl: 'http://192.168.0.18:8080/board/getBoard?view=mobile&boardNo='+boardNo
 		      }
 		    },
 		    social: {
@@ -416,8 +415,8 @@ $(function(){
 		      {
 		        title: '웹으로 보기',
 		        link: {
-		          mobileWebUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo,
-		          webUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo
+		          mobileWebUrl: 'http://192.168.0.18:8080/board/getBoard?boardNo='+boardNo,
+		          webUrl: 'http://192.168.0.18:8080/board/getBoard?boardNo='+boardNo
 		        }
 		      }
 		    ]
@@ -454,8 +453,8 @@ $(function(){
           description: hashTag,
           imageUrl: photo1,
           link: {
-            mobileWebUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo,
-            webUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo
+            mobileWebUrl: 'http://192.168.0.18:8080/board/getBoard?boardNo='+boardNo,
+            webUrl: 'http://192.168.0.18:8080/board/getBoard?boardNo='+boardNo
           }
         },
         social: {
@@ -465,8 +464,8 @@ $(function(){
           {
             title: '웹으로 보기',
             link: {
-              mobileWebUrl: 'http://192.168.0.49:8080/board/getBoard?view=mobile&boardNo='+boardNo,
-              webUrl: 'http://192.168.0.49:8080/board/getBoard?view=mobile&boardNo='+boardNo
+              mobileWebUrl: 'http://192.168.0.18:8080/board/getBoard?view=mobile&boardNo='+boardNo,
+              webUrl: 'http://192.168.0.18:8080/board/getBoard?view=mobile&boardNo='+boardNo
             }
           }
         ]
@@ -589,21 +588,37 @@ function fncGetTown(){
 
 <div class="row fullScreen">
 
+<!-- 날씨 -->
+<div class="col-sm-2" style="background-color:#e2e2e2;">
+<c:if test="${searchBoard.local != null}">
+<div id="floatMenu" style="padding-top: 150px; padding-left: 50%; position: absolute; text-align: center; left:50px;">
+	<jsp:include page="/view/board/weather.jsp">
+		<jsp:param name="weatherLocal" value="${searchBoard.local}"/>
+	</jsp:include>
+</div>
+</c:if>
 
-<div class="col-sm-12" style="padding-right: 0px;">
+<c:if test="${searchBoard.local == null && user.userAddr != null}">
+<div id="floatMenu" style="padding-top: 150px; padding-left: 50%; position: absolute; text-align: center;">
+	<jsp:include page="/view/board/weather.jsp">
+		<jsp:param name="weatherLocal" value="${user.userAddr}"/>
+	</jsp:include>
+</div>
+</c:if>
+</div>
 
 
-
+<div class="col-sm-10" style="padding-right: 0px; padding-left: 0px;">
 <form name="listBoard">
 
 
-<a href="/board/testUser">
-<input type="button" value="세션">
-</a>
+<!-- <a href="/board/testUser"> -->
+<!-- <input type="button" value="세션"> -->
+<!-- </a> -->
 
-<a href="/board/testUser2">
-<input type="button" value="어드민세션">
-</a>
+<!-- <a href="/board/testUser2"> -->
+<!-- <input type="button" value="어드민세션"> -->
+<!-- </a> -->
 
 
 <div class="row col-md-12">
