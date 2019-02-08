@@ -60,6 +60,7 @@ button{
 text-align:center; 
 }
 body{
+background-color: #f7f0e1 !important; 
 padding-top : 135px;
 }
 @import url('https://fonts.googleapis.com/css?family=Poppins');

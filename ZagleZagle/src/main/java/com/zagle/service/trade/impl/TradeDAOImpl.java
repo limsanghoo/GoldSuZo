@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.zagle.common.Search;
 import com.zagle.service.domain.Buy;
+import com.zagle.service.domain.CompanyList;
 import com.zagle.service.domain.Sell;
 import com.zagle.service.trade.TradeDAO;
 
@@ -83,5 +84,17 @@ public class TradeDAOImpl implements TradeDAO{
 	@Override
 	public void payBuy(Buy buy) throws Exception {
 		sqlSession.update("BuyMapper.payBuy",buy);
+	}
+	@Override
+	public Buy getBuyNo(String sellNo) throws Exception {
+		return sqlSession.selectOne("BuyMapper.getBuyNo",sellNo);
+	}
+	@Override
+	public List<CompanyList> getCompany() throws Exception {
+		return sqlSession.selectList("BuyMapper.getCompany");
+	}
+	@Override
+	public void addTracking(Buy buy) throws Exception {
+		sqlSession.update("BuyMapper.addTracking",buy);
 	}
 }
