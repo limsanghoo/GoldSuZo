@@ -56,9 +56,9 @@ $(function() {
 			swal({
 				  title: "회원정보를 수정하시겠습니까??",
 				  text: "수정을 원하시면 OK 버튼을 눌러주세요.",
-				
+					
 				  buttons: true,
-				  dangerMode: true,
+				  buttons: true,
 				})
 				.then((willDelete) => {
 				  if (willDelete) {

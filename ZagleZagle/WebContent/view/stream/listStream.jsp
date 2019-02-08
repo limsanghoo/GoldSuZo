@@ -101,10 +101,10 @@ $(function() {
 	  var streamTitle = $("input[name='streamTitle']").val();
 	  
 	  var streamContent = $("input[name='streamContent']").val();
-      
+       
 	$("#upload").on("click", function() {
 		  // alert("전송됩니다~");
-		   window.open("", "popup_window", "width=1450, height=900, toolbar=no, location=no, status=no, memubar=no, scrollbars=no, resizable=no");
+		   window.open("", "popup_window", "width=1450, height=900, toolbar=no, location=no, status=no, memubar=no, scrollbars=no, resizable=no,fullscreen=no");
 		   addStream();
 	});
 	$("#refund").on("click", function() {

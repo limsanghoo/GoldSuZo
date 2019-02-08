@@ -220,7 +220,7 @@ public class StreamRestController {
 		String encode =  	URLEncoder.encode(user.getUserNickname(),"UTF-8");
 		System.out.println("인코딩 한 후 닉네임================"+encode);
 		 	//ModelAndView view = new ModelAndView("redirect:"+url); 
-		 	ModelAndView view = new ModelAndView("redirect:https://192.168.0.14/stream/sponSpeech2?streamer="+streamer.getUserNo()+"&userNo="+user.getUserNo()+"&userNickname="+encode+"&userProfile=default.jpg&price="+session.getAttribute("price"));
+		 	ModelAndView view = new ModelAndView("redirect:https://192.168.0.14:443/stream/sponSpeech2?streamer="+streamer.getUserNo()+"&userNo="+user.getUserNo()+"&userNickname="+encode+"&userProfile=default.jpg&price="+session.getAttribute("price"));
 		//	ModelAndView view = new ModelAndView("redirect:http://192.168.0.12:8080/stream/));
 			//modelAndView.setViewName("forward:/view/stream/close.jsp");	
 		  	return view; 
