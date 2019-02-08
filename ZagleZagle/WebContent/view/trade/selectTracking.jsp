@@ -20,33 +20,36 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <!-- jQuery UI toolTip 사용 JS-->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
 	<script>
 	window.onload = function(){
+
 	$.ajax(
 			{
-				url : "https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key=KmLTDQE5pCDwajoI5Z87PQ&t_code=04&t_invoice=347130622236",
+				url : "https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key=KmLTDQE5pCDwajoI5Z87PQ&t_code=${buy.companyCode}&t_invoice=${buy.trackingNo}",
 				method : "GET",
 				header : {
 					"accept" : "application/json;charset=UTF-8"
 				},
 				success : function(data, status){
+					console.log(data);
+					$("#receiver").append(data.receiverName+" / "+data.receiverAddr);
+					$("#sender").append(data.senderName);
+					
 					var a='';
 					
 					var trackingDetails = data.trackingDetails;
 					
 					$.each(trackingDetails, function(i){
-						console.log("시간 : "+trackingDetails[i].timeString);
-						console.log("위치 : "+trackingDetails[i].where);
-						console.log("상태 : "+trackingDetails[i].kind);
-						console.log("================");
 						
+						a +='<div class="row">'
 						a +='<div class="col-xs-8 col-md-4" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: #777; text-align: center;" id="time">'+trackingDetails[i].timeString+'</div>';
 						a +='<div class="col-xs-8 col-md-4" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: #777; text-align: center;" id="where">'+trackingDetails[i].where+'</div>';
 				  		a +='<div class="col-xs-8 col-md-4" style="text-align: center;" id="kind">'+trackingDetails[i].kind+'</div>';
-				  		a +='<br/>';
+				  		a +='</div><br/>';
 					});
 					
-					$("#whyno").append(a);
+					$(".col-12").append(a);
 				}
 				
 			});
@@ -64,25 +67,18 @@
 	    <div class="col-12">
 	    
 	    <div class="row">
-	<div class="col-lg-7">
-	<H2><strong>배송조회</strong></H2>
-	</div>
-
-	<div class="col-lg-5 text-right">
-	
-	</div>
-
-	
-</div>
-	    		<div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: #2eca6a;"></div>
+			<H2><strong>배송조회</strong></H2>
+		</div>
+		
+	    <div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: #2eca6a;"></div>
 	    <br/>
 	    
 		<div class="row">
-	  		<div class="col-xs-8 col-md-1" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: #777; text-align: right;"><strong>받는분</strong></div>
-			<div class="col-xs-4 col-md-5">어쩌고 저쩌고</div>
+	  		<div class="col-xs-8 col-md-1"  style="border-right-width: 0.1em; border-right-style: solid; border-right-color: #777; text-align: right;"><strong>받는분</strong></div>
+			<div class="col-xs-4 col-md-5" id="receiver"></div>
 
 	  		<div class="col-xs-8 col-md-2" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: #777; text-align: right;"><strong>보내는분</strong></div>
-			<div class="col-xs-4 col-md-4">블라블라</div>
+			<div class="col-xs-4 col-md-4" id="sender"></div>
 		</div>
 
 		<br/>
@@ -93,15 +89,13 @@
 		<div class="row">
 	  		<div class="col-xs-8 col-md-4" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: #777; text-align: center;"><strong>시간</strong></div>
 			<div class="col-xs-8 col-md-4" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: #777; text-align: center;"><strong>위치</strong></div>
-	  		<div class="col-xs-8 col-md-4" style="text-align: center;"><strong>상태</strong></div>
+	  		<div class="col-xs-8 col-md-4" style="text-align: center;"><strong>배송상태</strong></div>
 		</div>
 
 		<br/>
 		
 		<div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: #2eca6a;"></div>
 		<br/>
-		
-		<div class="row" id="whyno"></div>
 		
 </div>
 </div>

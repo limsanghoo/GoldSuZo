@@ -11,7 +11,7 @@ public class Buy {
 	private String buyAddress;
 	private String payment;
 	private Date buyDate;
-	private String TrackingNo;
+	private String trackingNo;
 	private String companyCode;
 	
 	public Buy() {
@@ -74,14 +74,6 @@ public class Buy {
 		this.buyDate = buyDate;
 	}
 
-	public String getTrackingNo() {
-		return TrackingNo;
-	}
-
-	public void setTrackingNo(String trackingNo) {
-		TrackingNo = trackingNo;
-	}
-
 	public String getCompanyCode() {
 		return companyCode;
 	}
@@ -90,11 +82,19 @@ public class Buy {
 		this.companyCode = companyCode;
 	}
 
+	public String getTrackingNo() {
+		return trackingNo;
+	}
+
+	public void setTrackingNo(String trackingNo) {
+		this.trackingNo = trackingNo;
+	}
+
 	@Override
 	public String toString() {
 		return "Buy [buyNo=" + buyNo + ", sellProd=" + sellProd + ", buyer=" + buyer + ", buyPhone=" + buyPhone
-				+ ", buyAddress=" + buyAddress + ", payment=" + payment + ", buyDate=" + buyDate + ", TrackingNo="
-				+ TrackingNo + ", companyCode=" + companyCode + "]";
+				+ ", buyAddress=" + buyAddress + ", payment=" + payment + ", buyDate=" + buyDate + ", trackingNo="
+				+ trackingNo + ", companyCode=" + companyCode + "]";
 	}
 
 

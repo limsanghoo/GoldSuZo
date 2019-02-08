@@ -31,7 +31,7 @@ form{
 		padding-top:100px;
 	 	padding-left:150px;
         padding-right:150px;
-       	background-color:#f2f2f2;
+       	background-color:#e2e2e2;
         background-size: cover;
         height: 100%;
 	}
