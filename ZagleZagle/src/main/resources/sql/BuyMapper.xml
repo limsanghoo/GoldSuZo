@@ -94,7 +94,7 @@
 	 <update id="addTracking" parameterType="buy">
 	 	UPDATE buy
 	 	<set>
-	 		tracking_no=#{TrackingNo},
+	 		tracking_no=#{trackingNo},
 	 		company_code=#{companyCode}
 	 	</set>
 	 	WHERE buy_no=#{buyNo}
