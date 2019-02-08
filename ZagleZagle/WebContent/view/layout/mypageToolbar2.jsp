@@ -8,8 +8,7 @@
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
-	<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
 
 <!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
@@ -70,8 +69,45 @@ $(function() {
 </head>
 <body>
 
+<div class="toolbar container">
+
+<div class="row">
+
+  <img src="/common/images/mypage/contract.png" style="width:100px; height:100px;" data-toggle="tooltip" data-placement="top" title="작성 게시물로 이동" id="myboard">
+  
+
+</div>
+
+<div class="row">
 
 
+   <img src="/common/images/mypage/signature.png" style="width:100px; height:100px;" data-toggle="tooltip" data-placement="top" 
+      title="댓글 작성한 게시물로 이동" id="commentBoard">
 
+</div>
+
+<br>
+
+<div class="row">
+<img src="/common/images/mypage/scrap.png" style="width:100px; height:100px;" data-toggle="tooltip" data-placement="top" title="스크랩 게시물로 이동" id="scrapBoard">
+
+</div>
+<br>
+<div class="row">
+      <img src="/common/images/mypage/likelike.png" style="width:100px; height:100px;" data-toggle="tooltip" data-placement="top" title="좋아요한 게시물로 이동" id="likeBoard">
+     
+</div>
+<br>
+<div class="row">
+          <img src="/common/images/mypage/addAccount.png" style="width:100px; height:100px;" data-toggle="tooltip" data-placement="top" title="계좌번호 등록" id="addAccount">
+      
+</div>
+<br>
+<div class="row">
+         <img src="/common/images/mypage/updateAccount.png" style="width:100px; height:100px;" data-toggle="tooltip" data-placement="top" title="계좌번호 수정" id="updateAccount">
+     
+</div>
+<br>
+</div>
 </body>
 </html>

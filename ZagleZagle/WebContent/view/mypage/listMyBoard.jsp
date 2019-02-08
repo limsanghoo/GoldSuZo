@@ -65,7 +65,7 @@ margin-left: 300px;
 <body>
 
 <jsp:include page="/view/layout/toolbar.jsp" />
-<jsp:include page="/view/layout/mypageToolbar.jsp" />
+<jsp:include page="/view/layout/mypageToolbar2.jsp" />
 
 <div class="my container" style="max-width: 1200px;margin-left: 300px;">
 
