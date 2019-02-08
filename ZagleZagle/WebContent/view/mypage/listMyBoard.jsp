@@ -45,6 +45,17 @@
 		
 		</script>
 
+<style>
+
+.my container {
+
+
+max-width: 1200px;
+margin-left: 300px;
+}
+
+</style>
+
 
 
 </head>
@@ -56,7 +67,7 @@
 <jsp:include page="/view/layout/toolbar.jsp" />
 <jsp:include page="/view/layout/mypageToolbar.jsp" />
 
-<div class="container">
+<div class="my container" style="max-width: 1200px;margin-left: 300px;">
 
 <div class="page-header text-info">
 	       <h5>작성 게시물</h5>

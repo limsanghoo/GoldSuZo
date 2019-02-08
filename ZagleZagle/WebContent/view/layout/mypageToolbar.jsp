@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+
+	
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 
@@ -94,7 +95,7 @@ $("a:contains('계좌번호 수정')").on("click" , function() {
     width: 250px;
     height: 100%;
     margin-left: -250px;
-    background: lightblue;
+    background: #2868ad;
     overflow-x: hidden;
     overflow-y: auto;
   }
