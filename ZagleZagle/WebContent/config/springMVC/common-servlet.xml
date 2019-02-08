@@ -58,8 +58,8 @@
    	  <bean id="googleConnectionFactory"
   class="org.springframework.social.google.connect.GoogleConnectionFactory">
   <constructor-arg
-    value="770357560919-aul509lnf1546sjm4dpb8jdf48jk1ook.apps.googleusercontent.com" />
-  <constructor-arg value="kpsY-DIe7NHeZI1ELrZ2Or-f" />
+    value="931353283466-98qls95q0i5m0q3vpoq24rg287g36tn0.apps.googleusercontent.com" />
+  <constructor-arg value="SBEmbKbEzK4PBF6-ZrPguN3x" />
 </bean>
 <!-- 승인된 자바스크립트 원본과 승인된 리디렉션 URI -->
 <bean id="googleOAuth2Parameters"
