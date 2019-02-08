@@ -24,22 +24,11 @@
 
 		<script>
 		
-		
-	
-		//==> Board 정보 요청 Ajax 부분
-		
-		
-		//==> 스크랩 취소 기능
+
 		 $(function() {
-	
-	 $("span.glyphicon.glyphicon-ok").on("click", function() {
-	 
-	 alert("확인용")
-	 
-	 
-	 
-	 	//댓글 리스트 불러오기
-	 	
+			
+		
+				//댓글 리스트 불러오기
 				$("td:nth-child(2)").bind("click",function(){
 					var preBoardNo=$(this).data('target');
 					
@@ -48,12 +37,49 @@
 					
 					commentList(boardNo);
 				})
+
+});
+	
+		//==> Board 정보 요청 Ajax 부분
+		
+		
+		//==> 스크랩 취소 기능
+		 $(function() {
+	
+	 $("#updateScrap").on("click", function() {
 	 
+	 alert("확인용")
+
+	 /*
+		$.ajax({
+			
+			
+			var userNo = $(this).data("param2")
+			var boardNo = $(this).data("param")
+			
+			alert(userNo)
+			alert(boardNo)
+			
+			url: '/board/json/addScrap/'+userNo+'/'+boardNo,
+			type: 'get',
+			success: function(data){
+				
+				if(data==1){
+					//alert('등록 성공');
+					
+					$("#"+boardNo+"scrap").data("checkscrap","1");
+					$("img[name='"+boardNo+"emptyScrap']").attr("src","/common/images/board/fullScrap.png");
+					$("img[name='"+boardNo+"emptyScrap']").attr("name",boardNo+"fullScrap");
+				}
+			}
+		})			
+	 */
  });
+	 	
 
  });
 		
-		
+
 
 				
 			
@@ -108,7 +134,7 @@
 		   	
 		      <td align="left" title="Click : 게시물 상세정보" data-toggle="modal" data-target="#${board.boardNo}bbb">${board.boardDetailText}</td>
 		      <td align="left">${board.boardRegDate} 				</td>
-		      <td align="left"> <span class="glyphicon glyphicon-ok" aria-hidden="true">Click</span>
+		      <td align="left"> <span class="glyphicon glyphicon-ok" id="updateScrap" aria-hidden="true" data-param=${board.boardNo} data-param2="${user.userNo}">Click</span>
 				 </td>
 		      
 		    </tr>
@@ -146,6 +172,11 @@
         </div>
         </c:if>
         
+        
+        
+        
+        
+        
         <!-- 신고 버튼 -->
         <c:if test="${user.userNo!=board.user.userNo}">
         <div class="col-sm-5 col-md-offset-2">    
@@ -153,6 +184,27 @@
         <input type="hidden" id="${board.boardNo}report" value="${board.boardNo}${board.user.userNo}">
         </div>
         </c:if>     
+        
+        <span name="scrap" id="${board.boardNo}scrap" data-boardNo="${board.boardNo}" data-checkScrap="${board.checkScrap}">
+	<c:choose>
+		<c:when test="${user.userNo !=null}">
+			<c:if test="${board.scrapUserNo==null && board.checkScrap=='0'}">
+				<img src="/common/images/board/emptyScrap.png" style="display: inline; vertical-align: middle; float:right; width: 50px; height: 40px;" name="${board.boardNo}emptyScrap"/>
+			</c:if>
+			
+			<c:if test="${user.userNo==board.scrapUserNo && board.checkScrap=='1'}">
+				<img src="/common/images/board/fullScrap.png" style="display: inline; vertical-align: middle; float:right; width: 50px; height: 40px;" name="${board.boardNo}fullScrap"/>
+			</c:if>
+			
+			<c:if test="${user.userNo==board.scrapUserNo && board.checkScrap=='2'}">
+				<img src="/common/images/board/emptyScrap.png" style="display: inline; vertical-align: middle; float:right; width: 50px; height: 40px;" name="${board.boardNo}emptyScrap"/>
+			</c:if>
+		
+		</c:when>
+	</c:choose>
+	</span>
+        
+        
          
         </h4>
           

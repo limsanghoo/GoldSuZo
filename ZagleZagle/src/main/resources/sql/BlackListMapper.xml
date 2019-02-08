@@ -36,6 +36,7 @@
 	WHERE black_no = #{blackNo:VARCHAR}
 	</update>
 	
+	
 	<!--  
 	<select id="listBlackList" parameterType="com.zagle.service.domain.SearchAdmin" resultMap="blackListSelectMap">
 	SELECT b.black_no, u.user_no, b.ban_reason, b.ban_start_day, b.ban_expire_day, u.black_code
@@ -66,6 +67,8 @@
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	</select>
+	
+
 
 	
 	 <select  id="getTotalCount3"  parameterType="com.zagle.service.domain.SearchAdmin"	 resultType="int">

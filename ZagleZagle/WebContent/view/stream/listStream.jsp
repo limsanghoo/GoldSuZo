@@ -49,36 +49,20 @@
   <link href="/common/css/estateagency-master/css/style.css" rel="stylesheet">   
 <style>  
 
-.thumbnail{
-padding: 15px;  
+body{
+background-color: #e2e2e2 !important; 
+padding-top : 150px;
 }
 
-.sumnail{
-padding: 10px; 
-}
-button{
-text-align:center; 
-}
-body{
-background-color: #f7f0e1 !important; 
-padding-top : 135px;
-}
-@import url('https://fonts.googleapis.com/css?family=Poppins');
-  
 .row{
 
- padding-left: 140px;
-  padding-right: 140px; 
+ padding-left: 200px;
+  padding-right: 200px; 
 }
-#get{ 
-margin-left: 70%;  
-}  
-   
- 
+
 #buttonList{
- padding: 10px; 
-margin: 0 0 10px; 
- 
+padding: 10px; 
+margin: 0 0 20px; 
 }  
 
 </style>  
@@ -197,7 +181,7 @@ $(function() {
 	
 	});
 	
-	$('a[name="get"]').on("click", function() {
+	$('button[name="get"]').on("click", function() {
 		var streamer = $(this).data("param");
 		//alert(streamer);
 	 	 $.ajax({
@@ -354,51 +338,50 @@ $(function() {
       </form>
     </div>  
   </div></div>	
-	 
-<!--<div class="row" id="list" "position: relative; z-index: 2;">
-<c:set var="i" value="0" />
-<c:forEach var="obj" items="${list}">
-<div class="container"> <div class="box">
-<h2><img id="profile" src="/common/images/stream/${obj.streamerProfile}" style="height:50px; width:50px; border-radius:70px;  ">${obj.streamNickname}</h2><img alt="50x50" data-src="holder.js/100x200" src='/common/images/stream/${obj.streamSum}' style=" width:80%;margin:auto; display: block;">
-<h2>${obj.streamTitle}</h2><p>내용:${obj.streamContent}</p><p>시청자수:${obj.streamViewCount}<p><p>좋아요수:${obj.streamLikeCount}</p><a class="btn btn-default" name="get" role="button" data-param="${obj.streamer}">들어가기</a> 
-    
-</div> </div> 
-</c:forEach>  
-</div>    -->
- 
+
 <div class="row" id="list">
 <c:set var="i" value="0" /> 
 <c:forEach var="obj" items="${list}"> 
 <div class="col-sm-6 col-md-4">  
-<div class="thumbnail">  
-<div class="profileusername"><img id="profile" src="/common/images/profile/${obj.streamerProfile}" style="height:50px; width:50px; border-radius:70px;">${obj.streamNickname}</div>
-<img class="sumnail" alt="50x50" data-src="holder.js/100x200" src='/common/images/stream/${obj.streamSum}' style=" width:80%;margin:auto; display: block;">
-<div class="caption"><h2>${obj.streamTitle}</h2><p>내용:${obj.streamContent}</p><p>시청자수:${obj.streamViewCount}</p><p>좋아요수:${obj.streamLikeCount}</p><a id="get" class="btn btn-default" name="get" role="button" data-param="${obj.streamer}">들어가기</a>
-</div>  
-</div> </div>
+	<div class="thumbnail">  
+		<div style="margin: 10px;">
+		
+			<div class="profileusername">
+			<img id="profile" src="/common/images/profile/${obj.streamerProfile}" style="height:50px; width:50px; border-radius:70px;">&emsp;<strong>${obj.streamNickname}</strong>
+			</div>
+			
+			<br/>
+			
+			<div style="border-top-width: 0.1em; border-top-style: dashed; border-top-color: #7b7b7b;"></div><br/>
+			
+			<c:if test="${obj.streamSum != ''}">
+			<img class="sumnail" alt="50x50" data-src="holder.js/100x200" src='/common/images/stream/${obj.streamSum}' style=" width:85%;margin:auto; display: block;" >
+			</c:if>
+			<c:if test="${obj.streamSum == ''}">
+			<img class="sumnail" alt="50x50" data-src="holder.js/100x200" src='/common/images/stream/defaultSum.jpg' style=" width:85%;margin:auto; display: block;">
+			</c:if>
+			
+			<br/>
+			
+			<div style="border-top-width: 0.1em; border-top-style: dashed; border-top-color: #7b7b7b;"></div><br/>
+			
+			<div class="caption">
+			<h2>${obj.streamTitle}</h2><br/>
+			<p>내용 : ${obj.streamContent}</p>
+			<p>시청자수 : ${obj.streamViewCount}</p>
+			<p>좋아요수 : ${obj.streamLikeCount}</p>
+			</div>
+			
+			<div style="text-align: right;">
+			<button type="button" class="btn btn-b" name="get" data-param="${obj.streamer}">들어가기</button>
+			</div>
+			
+		</div>  
+		
+	</div>
+</div>
 </c:forEach>
 </div> 
-
-<%-- <div class="containerList">
- <ul class="grid effect-2" id="grid">
- <c:forEach var="obj" items="${list}">
-	<c:set var="i" value="0" />	
-<li>	
-<div class="box">		
-<p>
-<img id="profile" src="/common/images/stream/${obj.streamerProfile}" style="height:50px; width:50px; border-radius:70px;  "><img alt="50x50" data-src="holder.js/100x200" src='/common/images/stream/${obj.streamSum}' style=" width:80%;margin:auto; display: block;">
-<span style="font-weight: bold; display: inline;">&nbsp;${obj.streamNickname}</span>		</p>
-<!-- 본문 시작 -->
-<div class="realBox" data-toggle="modal">  
-<!-- 지도 끝 -->
-<div><img src="/common/images/stream/${obj.streamSum}" style="width:100%;" align="middle"/></div>	
-</div><!-- 본문 내용 끝 -->	
-</div><!-- box 끝 -->
-</li>
-</c:forEach> 
-</ul>  
-</div>  --%>
-
 
 </body>
 </html>

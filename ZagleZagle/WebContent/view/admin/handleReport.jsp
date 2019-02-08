@@ -82,11 +82,11 @@
 	
 			
 			$("td:nth-child(2) i").on("click", function() {
-				alert("click 확인")
+	
 				
 				var boardNo = $(this).data("param")
 				
-				alert(boardNo)
+		
 				
 				$.ajax(
 					{
@@ -98,7 +98,7 @@
 							"Content-Type" : "application/json"
 						},
 						success : function(JSONData, status) {
-						alert(JSONData.photo1)
+					
 						
 						var photo = JSONData.photo1
 						
@@ -119,7 +119,7 @@
 			});
 			
 			
-		
+		///////////////////////getComment Ajax/////////////////////////////
 		
 			$("td:nth-child(3) i").on("click", function() {
 				alert("click 확인")
@@ -130,7 +130,7 @@
 				
 				$.ajax(
 					{
-						url : "/admin/json/getReportList/"+userNo,
+						url : "/admin/json/getComment/"+commentNo,
 						method : "GET",
 						dataType : "json",
 						headers : {
@@ -139,20 +139,14 @@
 						},
 						success : function(JSONData, status) {
 							alert(JSONData)
-							var displayValue ="";
-							var temp ="";
+						
 							
-							$.each(JSONData,function(index) {
-							
-							temp = "<h6>"
-														+"   신고 사유 : "+JSONData[index].reportReason+"<br/>"
-														+"</h6>";
-							displayValue += temp;
-							
-							});
-							
-							$("h6")
-							$( "#"+userNo+"" ).html(displayValue);
+							var displayValue ="<h6>"
+								+"작성자 :"+JSONData.user.userNo+"<br/>"
+								+"작성 내용 :"+JSONData.commentDetailText+"<br/>"
+								+"작성 날짜 :"+JSONData.commentRegDate+"<br/>"
+								+"</h6>"
+							$( "#"+commentNo+"" ).html(displayValue);
 							
 						
 						}
@@ -170,21 +164,26 @@
 			
 				var boardNo = $(this).data("param2");
 		
+				var commentNo =$(this).data("param4");
+				
 				alert(boardNo)
+				alert(commentNo)
 				alert(blindNo)
 				
-				//////수정 필요///// commentNo 관련
-				/////      if(blindNo != null) {
-				/////		self.location="/admin/updateBlind?blindCode=1&blindNo="+blindNo;
+
 			
-				////}else {
-				////		self.location="/admin/updateBlind2?blindCode=1&CommentNo="+CommentNo;
-				////}
-				/////
+			 if(boardNo == "") {
+				 self.location="/admin/updateBlind2?blindCode=1&blindNo="+blindNo+"&commentNo="+commentNo;
+			
+			}else{
+					
+					self.location="/admin/updateBlind?blindCode=1&blindNo="+blindNo+"&boardNo="+boardNo;
+			}
 				
 				
+				
 			
-			self.location="/admin/updateBlind?blindCode=1&blindNo="+blindNo+"&boardNo="+boardNo;
+			//self.location="/admin/updateBlind?blindCode=1&blindNo="+blindNo+"&boardNo="+boardNo;
 			
 		
 		});
@@ -196,14 +195,20 @@
 				
 				var blindNo = $(this).data("param1");
 			    var boardNo = $(this).data("param3");
+			    var commentNo = $(this).data("param5");
 				
 				
 				alert(blindNo)
 				
+		
+			if(boardNo != null) { 
 				
-			
 			self.location="/admin/updateBlind?blindCode=2&blindNo="+blindNo+"&boardNo="+boardNo;
 			
+			}else if(boardNo == null) {
+				
+			self.location="/admin/updateBlind2?blindCode=2&blindNo="+blindNo+"&CommentNo="+CommentNo;
+			}
 		
 		});
 		
@@ -321,12 +326,12 @@
    		
    			  </td>
 			  <td align="left">
-			  <div style="padding-left: 7px;"><i class="glyphicon glyphicon-fire" data-param="${blind.blindNo}" data-param2="${blind.blindBoardNo.boardNo}"></i></div>
+			  <div style="padding-left: 7px;"><i class="glyphicon glyphicon-fire" data-param="${blind.blindNo}" data-param2="${blind.blindBoardNo.boardNo}" data-param4="${blind.blindCommentNo.commentNo}"></i></div>
 			  
 			  </td>
 			  
 			  <td align="left">
-			  <div style="padding-left: 7px;"><i class="glyphicon glyphicon-leaf" data-param1="${blind.blindNo}" data-param3="${blind.blindBoardNo.boardNo}"></i></div>
+			  <div style="padding-left: 7px;"><i class="glyphicon glyphicon-leaf" data-param1="${blind.blindNo}" data-param3="${blind.blindBoardNo.boardNo}" data-param5="${blind.blindCommentNo.commentNo}"></i></div>
 			  
 			  </td>
 			 

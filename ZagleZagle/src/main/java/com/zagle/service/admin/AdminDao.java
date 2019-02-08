@@ -40,22 +40,10 @@ public interface AdminDao {
 	///블라인드 코드 업데이트
 	public void updateBlind(Blind blind) throws Exception;
 	
-	///코맨트 블라인드 처리
-	//public void addBlind2(Comment comment) throws Exception;
+	public Comment getComment(String commentNo) throws Exception;
 	
-	///보드 블라인드 해지
-	//public void cancelBlind(Blind blind) throws Exception;
 	
-	///코맨트 블라인드 해지
-	//public void cancelBlind2(Comment comment) throws Exception;
 	
-	///블라인드 보드 삭제
-	//public void deleteBlind(Blind blind) throws Exception;
-	
-	///블라인드 코맨트 삭제
-	///public void deleteBlind2(Comment commnet) throws Exception;
-	
-
 	
 	///////
 	public int getTotalCount(SearchAdmin search) throws Exception ;
@@ -74,6 +62,8 @@ public interface AdminDao {
 	public void addBlackList(BlackList blackList) throws Exception;
 	
 	public void updateBlackCheckCode(BlackList blackList) throws Exception;
+	
+	public void updateComment(Comment comment) throws Exception;
 	
 	///// 신고 카운팅 체크
 	public int checkReportCount(Report report) throws Exception;

@@ -1,5 +1,10 @@
 package com.zagle.web.admin;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +25,7 @@ import com.zagle.service.board.BoardService;
 import com.zagle.service.domain.BlackList;
 import com.zagle.service.domain.Blind;
 import com.zagle.service.domain.Board;
+import com.zagle.service.domain.Comment;
 import com.zagle.service.domain.Report;
 import com.zagle.service.domain.SearchAdmin;
 import com.zagle.service.domain.User;
@@ -270,6 +276,109 @@ public class AdminController {
 		
 		
 	}
+	
+	
+	@RequestMapping(value="updateBlind2" , method=RequestMethod.POST)
+	public ModelAndView updateBlind2(@RequestParam("blindNo") String blindNo,
+																	@RequestParam("blindCode") String blindCode,
+																		@RequestParam("commentNo") String commentNo,
+																	 HttpServletRequest request) throws Exception {
+		
+		System.out.println("===============updateBlind2(blindCode)=======================");
+		
+		
+		
+		
+		System.out.println("blindNo"+blindNo);
+		System.out.println("blindCode"+blindCode);
+		System.out.println("commentNo"+commentNo);
+		
+		Comment comment = adminService.getComment(commentNo);
+		User user = comment.getUser();
+		String userNo = user.getUserNo();
+		
+		Blind blind = adminService.getBlind(blindNo);
+		
+		
+		System.out.println("userNo"+userNo);
+		
+		User user01 = userService.getUser2(userNo);
+		
+		int deleteCount = user01.getDeleteCount();
+	
+		System.out.println(deleteCount);
+		
+		
+		blind.setBlindNo(blindNo);
+		blind.setBlindCode(blindCode);
+		
+		if(blindCode.equals("1")) {
+			
+		comment.setCommentStatus("2");	
+		
+		user01.setDeleteCount(deleteCount+1);
+		
+		}else {
+			
+		comment.setCommentStatus("3");
+		}
+		
+		adminService.updateBlind(blind);
+		
+		//Report report = new Report();
+		
+		//report.setHardleNo(1);
+		
+		adminService.updateComment(comment);
+		userService.updateDeleteCount(user01);
+		
+		Comment reComment = adminService.getComment(commentNo);
+		Report report = new Report();
+		report.setReportedCommentNo(reComment);
+		report.setHardleNo(1);
+		
+		adminService.updateReport(report);
+		
+		
+
+	
+
+		
+		
+		System.out.println("딜리트 카운트"+deleteCount);
+		
+		if(deleteCount == 2) {
+			user01.setBlackCode(1);
+			userService.updateUser(user01);
+		}
+
+		
+		System.out.println("blind 확인 :"+blind);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
+		modelAndView.setViewName("redirect:/admin/handleReport");
+		
+		return modelAndView;
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping(value="updateUser2", method=RequestMethod.POST)
 	public ModelAndView updateUser(@RequestParam("userNo") String userNo, @RequestParam("blackCode") int blackCode,
 																@ModelAttribute("blackList") BlackList blackList) throws Exception {
@@ -290,6 +399,9 @@ public class AdminController {
 
 		userService.updateUser(user);
 		
+		user.setDeleteCount(0);
+		userService.updateDeleteCount(user);
+		
 		blackList.setBlackUser(user);
 		
 		
@@ -309,7 +421,7 @@ public class AdminController {
 																						@RequestParam("blackNo") String blackNo) throws Exception {
 		
 		
-		System.out.println("업데이트 블랙체크 코드 시작 입니다리~~~~~~~~~~~~~~~~~~~~!!!!!!!!!!!!!!!!!!!!");
+		System.out.println("업데이트 블랙체크 코드 시작!!!!!!!!!!!!!!!!!!");
 		
 		System.out.println(userNo);
 		System.out.println(blackNo);
@@ -333,6 +445,90 @@ public class AdminController {
 		modelAndView.setViewName("/admin/listBlackList");
 		
 		return modelAndView;
+				
+	}
+	@RequestMapping(value="expireBanDate", method=RequestMethod.GET)
+	public ModelAndView expireBanDate(@ModelAttribute("SearchAdmin") SearchAdmin search) throws Exception {
+		
+		
+		System.out.println("expireBanDate 시작!!!!!!!!!!!!!!!!!!");
+		if(search.getCurrentPage() ==0 ){
+			search.setCurrentPage(1);
+		}
+		search.setPageSize(pageSize);
+		
+		Map<String, Object> map = adminService.listBlackList(search);
+		
+		System.out.println(search.getCurrentPage());
+		System.out.println(pageUnit);
+		System.out.println(pageSize);
+		
+		System.out.println(map.get("totalCount"));
+		
+		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+	    System.out.println(resultPage);
+	
+		
+		String blackCheckCode = "1";
+		
+
+		ArrayList list = (ArrayList) map.get("list");
+		
+		System.out.println("리스트리스트"+list);
+		
+		List<BlackList> bkList = new ArrayList<BlackList> ();
+		
+		for(int i=0; i< list.size(); i++) {
+			
+			BlackList bk = (BlackList) list.get(i);
+			String blackNo = bk.getBlackNo();
+			
+			System.out.println("블랙넘 확인"+blackNo);
+			
+			Date banDate = bk.getBanExpireDay();
+			
+			System.out.println("banDate 만료 확인 :"+banDate);
+			
+			Date currentDate;
+			String oTime ="";
+			String compareVal = "N";
+				
+			SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
+			Date currentTime = new Date();
+			oTime = mSimpleDateFormat.format(currentTime);
+			currentDate = mSimpleDateFormat.parse(oTime);
+			
+			System.out.println("현재 날짜 확인 :"+currentDate);
+			
+			int compare = currentDate.compareTo(banDate);
+			
+			System.out.println("비교 확인"+compare);
+			if(compare > 0) {
+				
+				bk.setBlackCheckCode(blackCheckCode);
+				bk.setBlackNo(blackNo);
+				
+				adminService.updateBlackCheckCode(bk);
+			
+				compareVal = "N";
+			}else if (compare <= 0) {
+				
+			
+				
+				
+				
+				compareVal = "Y";
+			}
+			
+		}
+		
+		boolean result = true;
+		
+		ModelAndView model = new ModelAndView();
+		model.setViewName("/index.jsp");
+		model.addObject("result", result);
+		
+		return model;
 				
 	}
 	

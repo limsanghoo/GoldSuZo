@@ -74,6 +74,9 @@ public class UserController {
 	@Autowired
 	@Qualifier("userServiceImpl")
 	private UserService userService;
+	@Autowired
+	@Qualifier("boardServiceImpl")
+	private BoardService boardService;
 	
 	
 	 @Autowired
@@ -219,9 +222,11 @@ public class UserController {
 		System.out.println(":==>/updateUserView.start");
 		
 		User user = userService.getUser2(userNo);
+		List<Local> list = boardService.getState();
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject(user);
+		modelAndView.addObject("list", list);
 		modelAndView.setViewName("/view/user/updateUserView.jsp");
 		
 		return modelAndView;
@@ -238,6 +243,7 @@ public class UserController {
 		
 		//Business Logic 
 		userService.updateUser(user);
+		
 		/*
 		String sessionId=((User)session.getAttribute("user")).getUserNo();
 		if(sessionId.equals(user.getUserNo())) {
@@ -249,6 +255,7 @@ public class UserController {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject(user);
+	
 		modelAndView.setViewName("redirect:/user/getUser2?userNo="+user.getUserNo());
 		
 		return modelAndView;
