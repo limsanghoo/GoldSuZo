@@ -35,12 +35,18 @@
 	
 	////////////////////////////////////////블랙리스트 만료기간 확인////////////////////////////////////////////////////
 	
-		 $(function() {
-		 
+$(document).ready(function(){
+
+	var result = $("#goExpire").val();
 	
-		 
-		 self.location="/admin/expireBanDate"
-	 });
+	alert(result)
+	if(result =="") {
+	self.location="/admin/expireBanDate"
+	}
+	
+});
+
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	
@@ -124,7 +130,8 @@
 	
 
 	<body class="is-preload">
-
+	
+	<input type="hidden" id="goExpire" value="${result}"/>
 		<!-- Wrapper -->
 			<div id="wrapper">
 				
