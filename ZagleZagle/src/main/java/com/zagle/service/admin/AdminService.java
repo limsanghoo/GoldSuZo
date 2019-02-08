@@ -33,24 +33,19 @@ public interface AdminService {
 	
 	public Blind getBlind(String BlindNo) throws Exception;
 	
+	public Comment getComment(String commentNo) throws Exception;
+	
 	public void addBlind(Blind blind) throws Exception;
 	
 	public void updateBlind(Blind blind) throws Exception;
+	
+	public void updateComment(Comment comment) throws Exception;
 	
 	public void updateBlackCheckCode(BlackList blackList) throws Exception;
 	
 	public int checkReportCount(Report report) throws Exception;
 	
 	
-	//public void addBlind2(Comment comment) throws Exception;
-	
-	//public void cancelBlind(Blind blind) throws Exception;
-	
-	//public void cancelComment(Comment comment) throws Exception;
-	
-	//public void deleteBlind(Blind blind) throws Exception;
-	
-	//public void delteBlind2(Comment comment) throws Exception;
 	
 
 

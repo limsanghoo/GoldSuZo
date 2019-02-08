@@ -15,6 +15,7 @@ import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 import com.zagle.service.admin.AdminService;
 import com.zagle.service.board.BoardService;
 import com.zagle.service.domain.Board;
+import com.zagle.service.domain.Comment;
 import com.zagle.service.domain.Mypage;
 import com.zagle.service.domain.Report;
 import com.zagle.service.domain.SearchAdmin;
@@ -129,5 +130,14 @@ public class AdminRestController {
 	 
 		return null;
 }
+	@RequestMapping(value="json/getComment/{commentNo}", method=RequestMethod.GET )
+	public Comment getComment(@PathVariable String commentNo) throws Exception {
+		
+		System.out.println("/admin/json/getComment : GET");
+		
+		System.out.println("코멘트 넘버 확인 "+commentNo);
+		
+		return adminService.getComment(commentNo);
+	}
 
 }

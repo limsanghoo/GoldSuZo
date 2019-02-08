@@ -14,7 +14,7 @@ import com.zagle.service.admin.AdminService;
 
 import com.zagle.service.domain.BlackList;
 import com.zagle.service.domain.Blind;
-
+import com.zagle.service.domain.Comment;
 import com.zagle.service.domain.Report;
 import com.zagle.service.domain.SearchAdmin;
 import com.zagle.service.domain.User;
@@ -52,6 +52,7 @@ public class AdminServiceImpl implements AdminService {
 		
 		List<BlackList> list = adminDao.listBlackList(search);
 		int totalCount = adminDao.getTotalCount3(search);
+	
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
@@ -121,6 +122,11 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.getBlind(blindNo);
 	}
 	
+	public Comment getComment(String commentNo) throws Exception {
+		return adminDao.getComment(commentNo);
+		
+	}
+	
 	public void addBlind(Blind blind) throws Exception {
 		
 		adminDao.addBlind(blind);
@@ -130,38 +136,10 @@ public class AdminServiceImpl implements AdminService {
 		
 		adminDao.updateBlind(blind);
 	}
-	
-	
-	
-//	@Override
-//	public void addBlind2(Comment comment) throws Exception {
-//		// TODO Auto-generated method stub
-//		
-//	}
-
-//	@Override
-//	public void cancelBlind(Blind blind) throws Exception {
-//		
-//		adminDao.cancelBlind(blind);
-//	}
-
-//	@Override
-//	public void cancelComment(Comment comment) throws Exception {
-//		// TODO Auto-generated method stub
-//		
-//	}
-
-//	@Override
-//	public void deleteBlind(Blind blind) throws Exception {
-//		
-//		adminDao.deleteBlind(blind);
-//	}
-
-//	@Override
-//	public void delteBlind2(Comment comment) throws Exception {
-//
-//		adminDao.deleteBlind2(comment);
-//	}
+	public void updateComment(Comment comment) throws Exception {
+		
+		adminDao.updateComment(comment);
+	}
 
 	public int checkReportCount(Report report) throws Exception {
 		

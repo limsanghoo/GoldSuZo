@@ -33,6 +33,18 @@
 	
 	<script>
 	
+	////////////////////////////////////////블랙리스트 만료기간 확인////////////////////////////////////////////////////
+	
+		 $(function() {
+		 
+	
+		 
+		 self.location="/admin/expireBanDate"
+	 });
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	
 
     	$( function() {
 		
@@ -53,8 +65,7 @@
     		
     		$("#naverLogin").on("click", function() {
     			
-    			alert("네이버 로긴 클릭")
-        		
+    	
     			
     			
     			var URL ="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=ICC6WpwdQLzHUQn5KfEC&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fuser%2FnaverCallback&state=state"
@@ -77,7 +88,7 @@
 	      	
 	    	  $("#Kakao").on("click", function() {
 	    		  
-	    		  alert("클릭 완료")
+	    	
 	    		  
 	    		  
 	    		  var  URL = "https://kauth.kakao.com/oauth/authorize?client_id=c3883a306a9faad67b127d7631568b29&redirect_uri=http://192.168.0.18:8080/user/kakaologin&response_type=code"

@@ -217,8 +217,8 @@
 				
 			
 			});
+			===> 모달로 처리해서 주석임 */
 			
-			*/
 			
 			$("td:nth-child(6) i").on("click" , function() {
 				

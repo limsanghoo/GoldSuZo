@@ -9,8 +9,17 @@ public class SearchAdmin {
 	private int endRowNum;
 	private int startRowNum;
 	private Report checkReport;
+	private BlackList checkBlackCode;
 	
 	
+	public BlackList getCheckBlackCode() {
+		return checkBlackCode;
+	}
+
+	public void setCheckBlackCode(BlackList checkBlackCode) {
+		this.checkBlackCode = checkBlackCode;
+	}
+
 	public Report getCheckReport() {
 		return checkReport;
 	}
