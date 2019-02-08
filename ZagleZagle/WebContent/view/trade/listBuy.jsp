@@ -40,7 +40,7 @@
 		
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$( ".list" ).on("click" , function() {
-					self.location ="/trade/getBuy?buyNo="+$(this).data("buyno");
+					self.location ="/trade/getSell?sellNo="+$(this).data("sellno");
 			});
 
 		});	
@@ -81,7 +81,7 @@
 		  <c:set var="i" value="0" />
 		  <c:forEach var="buy" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
-			<tr class="list" data-buyno="${buy.buyNo}">
+			<tr class="list" data-sellno="${buy.sellProd.sellNo}">
 				<td align="left">${i}</td>
 									
 				<td align="left">${buy.sellProd.sellName}</td>
@@ -111,7 +111,7 @@
 					
 					<c:if test="${buy.sellProd.sellStyle=='10'}">
 						<c:if test="${buy.sellProd.sellState=='40'}"><a href="/trade/payBuy?buyNo=${buy.buyNo}">결제하기</a></c:if>	
-						<c:if test="${buy.sellProd.sellState=='60'}"><a href="/view/trade/selectTracking.jsp" target="_blank">배송조회</a></c:if>
+						<c:if test="${buy.sellProd.sellState=='60'}"><a href="/trade/selectTracking?buyNo=${buy.buyNo}" target="_blank">배송조회</a></c:if>
 					</c:if>
 					
 					<c:if test="${buy.sellProd.sellStyle=='20'}">

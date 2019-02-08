@@ -301,4 +301,17 @@ public class TradeController {
 		
 		return modelAndView;
 	}
+	
+	@RequestMapping(value="selectTracking", method=RequestMethod.GET)
+	public ModelAndView selectTracking(@ModelAttribute("buyNo") String buyNo) throws Exception{
+		
+		Buy buy = new Buy();
+		buy = tradeService.getBuy(buyNo);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("buy",buy);
+		modelAndView.setViewName("forward:/view/trade/selectTracking.jsp");
+		
+		return modelAndView;
+	}
 }
