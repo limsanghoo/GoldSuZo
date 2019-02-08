@@ -694,7 +694,7 @@ function fncGetTown(){
 <!-- 썸네일 박스 시작 -->
 <li>
 
-	<c:if test="${board.userTheme=='H_spoon'}">	
+	<c:if test="${board.userTheme=='H_spoon'}">
 	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #afafaf;">
 	</c:if>
 	
