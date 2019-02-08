@@ -7,9 +7,21 @@
 <meta charset="UTF-8">
 <title>상품등록</title>
 <style>
-        div.editable{
+      div.editable{
         	border: 1px solid #777;
         }
+        
+      .wrap-loading div{ /*로딩 이미지*/
+
+        text-align: center;
+
+    }
+
+    .display-none{ /*감추기*/
+
+        display:none;
+
+    }
 </style>
 
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
@@ -35,6 +47,8 @@ $(function() {
 
 	file.onchange = function (event) {
 		
+		$('.wrap-loading').removeClass('display-none'); //로딩중 이미지 보여주기
+		
 	  var target = event.currentTarget;
 	  var xmlHttpRequest = new XMLHttpRequest();
 	  xmlHttpRequest.open('POST', 'https://api.imgur.com/3/image/', true); //원래 true
@@ -50,11 +64,12 @@ $(function() {
 			linkArea.val(linkArea.val()+result.data.link+",");//이미지 링크 append
 			
 	        console.log(result);        
-    
+    		
 	      }
 	      else {
 	      	alert("업로드 실패");
 	      }
+	      $('.wrap-loading').addClass('display-none'); //로딩중 이미지 감추기
 	    }
 	  };//()function 끝
 	  xmlHttpRequest.send(target.files[0]);
@@ -215,6 +230,11 @@ $(function() {
 </div>
 </div>
 </form>
+
+<!-- 로딩중 이미지 -->
+<div class="wrap-loading display-none">
+	<div id="preloader" style="background:none; "></div>
+</div>    
 
 </body>
 
