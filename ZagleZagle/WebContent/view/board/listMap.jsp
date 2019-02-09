@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>주소로 장소 표시하기</title>
+    <title>Dongne Vangne</title>
     <style>
     .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
     .wrap * {padding: 0;margin: 0;}
@@ -35,7 +35,7 @@
 
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>  
-    
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 
@@ -175,7 +175,19 @@ function fncGetTown(){
 					hideMarkers();
 					if (data=='') {
 					moveMap(local);
-					alert("등록된정보가없습니다.게시물을 등록해주세요")
+					
+					swal({
+						  title: "등록된 게시물이 없습니다.",
+						  icon:"error",
+						  buttons: ["취소", "게시물 등록"]
+						})
+						.then((willDelete) => {
+						  if (willDelete) {
+						  	self.location="http://192.168.0.18:8080/board/addBoard?userNo=${user.userNo}";
+						  }
+						});
+					
+					
 					}else{
 					markerMake(data);
 					}

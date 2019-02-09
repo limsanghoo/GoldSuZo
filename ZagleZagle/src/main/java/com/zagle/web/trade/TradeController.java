@@ -46,7 +46,9 @@ public class TradeController {
 	int pageSize;
 	
 	@RequestMapping(value="listTrade", method=RequestMethod.GET)
-	public ModelAndView listTrade(@ModelAttribute("search") Search search) throws Exception{
+	public ModelAndView listTrade() throws Exception{
+		
+		Search search = new Search();
 		
 		Map<String , Object> map=tradeService.listTrade(search);
 
@@ -56,6 +58,29 @@ public class TradeController {
 		
 		return modelAndView;
 	}
+	
+	@RequestMapping(value="listTrade", method=RequestMethod.POST)
+	public ModelAndView listTrade(@ModelAttribute("search") Search search) throws Exception{
+		
+		if(search.getSearchKeyword()=="") {
+			search.setSearchKeyword(null);
+		}
+		
+		if(search.getSearchCondition()=="") {
+			search.setSearchCondition(null);
+		}
+		
+		Map<String , Object> map=tradeService.listTrade(search);
+
+		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.addObject("tradeList", map.get("tradeList"));//게시물 리스트
+		modelAndView.addObject("search",search);
+		modelAndView.setViewName("forward:/view/trade/listTrade.jsp");
+		
+		return modelAndView;
+	}
+	
+	
 	
 	@RequestMapping(value="addSell", method=RequestMethod.POST)
 	public ModelAndView addSell(@ModelAttribute("sell") Sell sell, HttpSession session) throws Exception{
