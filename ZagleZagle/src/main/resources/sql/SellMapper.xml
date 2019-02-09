@@ -5,8 +5,7 @@
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="SellMapper">
- 	
- 	
+
 	<resultMap id="sellSelectMap" type="sell">
 		<result property="sellNo" 							column="sell_no" 					jdbcType="VARCHAR"/>
 		<result property="seller.userNo"					column="user_no" 					jdbcType="VARCHAR" />
@@ -31,7 +30,21 @@
 	 </insert>
 
 	<select id="listTrade" parameterType="Search" resultMap="sellSelectMap">
-		SELECT DISTINCT u.user_no, u.profile, u.user_nickname, s.* FROM sell s, users u WHERE u.user_no=s.user_no ORDER BY s.sell_no desc
+		SELECT DISTINCT u.user_no, u.profile, u.user_nickname, s.* 
+		FROM sell s, users u 
+		WHERE u.user_no=s.user_no 
+		<if test="searchCondition==1">
+			and (s.sell_state=10 or s.sell_state=30)
+				<if test="searchKeyword!=null">
+				and s.sell_text like '%'||#{searchKeyword}||'%'
+				</if>
+		</if>
+		<if test="searchCondition==null">
+			<if test="searchKeyword!=null">
+			and s.sell_name like '%'||#{searchKeyword}||'%'
+			</if>
+		</if>
+		ORDER BY s.sell_no desc
 	</select>
 	
 	<select id="getSell" parameterType="string" resultMap="sellSelectMap">

@@ -71,11 +71,11 @@ body {
 		pointer-events:none;
 }
 
-#selectMenu{
-		padding-top:50px;
-		padding-left:150px;
-        padding-right:150px;
-}
+ #selectMenu{ 
+ 		padding-top:50px; 
+ 		padding-left:150px; 
+         padding-right:150px; 
+ }
 
 </style>
 <script type="text/javascript">
@@ -95,17 +95,33 @@ $(function(){
 		self.location="/trade/getSell?sellNo="+sellNo;
 	})
 	
+	$(".box").bind("click",function(){
+		var sellNo=$(this).data('sellno');
+		self.location="/trade/getSell?sellNo="+sellNo;
+	})
+	
+	$("#search").bind("click",function(){
+		search();
+	})
+	
+	$("#searchCondition").change(function(){
+        search();
+    });
+	
 });
-
 
 //검색 엔터
 function enter() {
         if (window.event.keyCode == 13) {
-             // 엔터키가 눌렸을 때 실행할 내용
-        	$("form").attr("method" , "POST").attr("action" , "/board/listBoard?view=${param.view}").submit();
+			search();
         }
 }
 //검색 엔터 끝 
+
+function search(){
+	$("form").attr("method" , "POST").attr("action" , "/trade/listTrade").submit();
+}
+
 </script>
 
 </head>
@@ -126,11 +142,16 @@ function enter() {
 
 <!-- 검색 -->
 <span id="searchKeyword" style="text-align: center; display: inherit;">
-<input type="text" name="searchKeyword" value="${! empty searchBoard.searchKeyword ? searchBoard.searchKeyword : ''}" onkeypress="enter()" placeholder=""/>
+<input type="text" name="searchKeyword" value="${! empty search.searchKeyword ? search.searchKeyword : ''}" onkeypress="enter()" placeholder="상품명으로 검색하기" style="height: 40px"/>
+<img src="/common/images/trade/search.png" id="search">
 </span>
-<br/>
 <label style="text-align: center; display: inherit;">
-<input type="checkbox">판매중인 상품만 보기
+<c:if test="${search.searchCondition == null }">
+<input type="checkbox" id="searchCondition" name="searchCondition" value="1">&nbsp;판매중인 상품만 보기
+</c:if>
+<c:if test="${search.searchCondition != null }">
+<input type="checkbox" id="searchCondition" name="searchCondition" value="1" checked>&nbsp;판매중인 상품만 보기
+</c:if>
 </label>
 
 </div>
@@ -143,8 +164,9 @@ function enter() {
 	<c:set var="i" value="${ i+1 }" />
 		<c:if test="${sell.sellState !=0}">
 <!-- 썸네일 박스 시작 -->
-	
-<li>
+
+<li id="startbox">
+
 <div class="box" data-sellno="${sell.sellNo}">
 		
 	<p>
@@ -174,7 +196,6 @@ function enter() {
 	
 </div>
 </li>
-
 </c:if>
 </c:forEach>     
 </ul> 
@@ -192,8 +213,7 @@ function enter() {
 			} );
 		</script>
 </div><!-- /container -->
+
 </form>
 </body>
 </html>
-
-

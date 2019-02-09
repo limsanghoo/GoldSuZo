@@ -88,7 +88,7 @@
 	</c:if>
 	<c:if test="${user != null && user.userNo != sell.seller.userNo}">
 	  		<div class="col-lg-5 text-right">
-	  		<c:if test="${sell.sellState==10 || sell.sellState ==30}">
+	  		<c:if test="${sell.sellState==10 || sell.sellState==30}">
 	  			<button type="button" class="btn btn-b">구매 요청</button>
 	  		</c:if>
 	  		<c:if test="${sell.sellState!=10 && sell.sellState!=30}">
