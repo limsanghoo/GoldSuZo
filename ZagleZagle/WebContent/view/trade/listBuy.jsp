@@ -111,7 +111,7 @@
 					
 					<c:if test="${buy.sellProd.sellStyle=='10'}">
 						<c:if test="${buy.sellProd.sellState=='40'}"><a href="/trade/payBuy?buyNo=${buy.buyNo}">결제하기</a></c:if>	
-						<c:if test="${buy.sellProd.sellState=='60'}"><a href="/trade/selectTracking?buyNo=${buy.buyNo}" target="_blank">배송조회</a></c:if>
+						<c:if test="${buy.sellProd.sellState=='60'}"><a href="/trade/selectTracking?buyNo=${buy.buyNo}" onclick="window.open(this.href,'','width=1230, height=700, scrollbars=yes'); return false;" href="/trade/selectTracking?buyNo=${buy.buyNo}">배송조회</a></c:if>
 					</c:if>
 					
 					<c:if test="${buy.sellProd.sellStyle=='20'}">

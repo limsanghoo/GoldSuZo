@@ -39,7 +39,6 @@ $(document).ready(function(){
 
 	var result = $("#goExpire").val();
 	
-	alert(result)
 	if(result =="") {
 	self.location="/admin/expireBanDate"
 	}
