@@ -102,7 +102,7 @@ $(function(){
   
   <tr>
     <td class="tg-s268" colspan="3" rowspan="6" style="text-align: center;">   
-    <img id="code" src=""/>
+    <img id="code" src="" style="text-align: center;"/>
     </td>
   </tr>
   

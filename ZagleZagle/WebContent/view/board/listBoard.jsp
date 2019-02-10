@@ -29,8 +29,8 @@
 <!-- 카톡 공유 -->       
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
-  <!--  sweetAlert -->     
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>       
+<!--  sweetAlert -->     
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>       
         
  <!-- Favicons -->
   <link href="/common/css/estateagency-master/img/favicon.png" rel="icon">
@@ -114,41 +114,11 @@ body {
     margin: 0;
     padding: 0 0 10px;
 }
-/* @media (max-width: 1200px) {
-    .containerList {
-        columns: 3;
-        width: calc(100% - 40px);
-        box-sizing: border-box;
-        padding: 20px 20px 20px 0;
-    }
-}
-@media (max-width: 768px) {
-    .containerList {
-        columns: 2;
-    }
-}
-@media (max-width: 480px) {
-    .containerList {
-        columns: 1;
-    }
-} */
-
-/* #goAddBoard{
-    	position: static;
-    	float:right;
-} */
-
-
 
 .disabled{
 		pointer-events:none;
 }
 
-/* #selectMenu{
-		padding-top : 100px;
-		padding-left: 300px;
-		padding-right: 300px;
-} */
 
 #selectTown{
 	padding-top : 40px;
@@ -165,6 +135,7 @@ input[name='report']{
     cursor: pointer;
     margin-left: 60px;
 }
+
 .btn {
   transition: .5s ease;
 }
@@ -355,9 +326,9 @@ $(function(){
 				
 			})
 		}//1, 2일때 끝
-		
-		
+				
 	});//스크랩 끝
+	
 	
 	//신고 시작
 	$("input[value='신고']").bind("click",function(){
@@ -588,25 +559,6 @@ function fncGetTown(){
 
 <div class="row fullScreen">
 
-<!-- 날씨 -->
-<%-- <div class="col-sm-2" style="background-color:#e2e2e2;">
-<c:if test="${searchBoard.local != null}">
-<div id="floatMenu" style="padding-top: 150px; padding-left: 50%; position: absolute; text-align: center; left:50px;">
-	<jsp:include page="/view/board/weather.jsp">
-		<jsp:param name="weatherLocal" value="${searchBoard.local}"/>
-	</jsp:include>
-</div>
-</c:if>
-
-<c:if test="${searchBoard.local == null && user.userAddr != null}">
-<div id="floatMenu" style="padding-top: 150px; padding-left: 50%; position: absolute; text-align: center;">
-	<jsp:include page="/view/board/weather.jsp">
-		<jsp:param name="weatherLocal" value="${user.userAddr}"/>
-	</jsp:include>
-</div>
-</c:if>
-</div> --%>
-
 
 <div class="col-sm-12" style="padding-right: 0px;">
 <form name="listBoard">
@@ -691,26 +643,26 @@ function fncGetTown(){
  <ul class="grid effect-2" id="grid">
  
  	<!-- 날씨 -->
-	
-	<c:if test="${searchBoard.local != null}">
-	<li>
-<div class="box" id="floatMenu" style="padding-top: 150px; padding-left: 50%; position: absolute; text-align: center; left:50px;">
-	<jsp:include page="/view/board/weather.jsp">
-		<jsp:param name="weatherLocal" value="${searchBoard.local}"/>
-	</jsp:include>
-</div>
-</li>
-</c:if>
+ 	<c:if test="${user.userNo!=null}">
+ 	<li>
+ 	<div class="box" style="height:250px; text-align: center;">
+ 		<!-- 동네 검색 정보 있는 경우 -->
+ 		<c:if test="${searchBoard.local != null}">
+ 		<jsp:include page="/view/board/weather.jsp">
+			<jsp:param name="weatherLocal" value="${searchBoard.local}"/>
+		</jsp:include>
+ 		</c:if>
+ 		
+ 		<!-- 동네 검색 정보 없는 경우 -->
+ 		<c:if test="${searchBoard.local == null && user.userAddr != null}">
+ 		<jsp:include page="/view/board/weather.jsp">
+			<jsp:param name="weatherLocal" value="${user.userAddr}"/>
+		</jsp:include>
+ 		</c:if>
+ 	</div>
+ 	</li>
+ 	</c:if>
 
-<c:if test="${searchBoard.local == null && user.userAddr != null}">
-<li>
-<div class="box" id="floatMenu" style="padding-top: 150px; padding-left: 50%; position: absolute; text-align: center;">
-	<jsp:include page="/view/board/weather.jsp">
-		<jsp:param name="weatherLocal" value="${user.userAddr}"/>
-	</jsp:include>
-</div>
-</li>
-</c:if>
 
  
  <c:forEach var="board" items="${boardList}">
@@ -732,6 +684,7 @@ function fncGetTown(){
 <!-- 썸네일 박스 시작 -->
 <li>
 
+	<!-- 유저 테마 -->
 	<c:if test="${board.userTheme=='H_spoon'}">
 	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #afafaf;">
 	</c:if>
@@ -755,12 +708,13 @@ function fncGetTown(){
 	<c:if test="${board.userTheme=='G_spoon2'}">	
 	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #d2c0fb;">
 	</c:if>
-		
+	
+	<!-- 프로필 사진, 닉네임 -->	
 	<p>
 	<img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px; display: inline; vertical-align: middle"/>
 	<span style="height:100%; font-weight: bold; display: inline; vertical-align: middle;">&nbsp;${board.user.userNickname}</span>
 	
-	
+	<!-- 좋아요 -->
 	<span name="like" id="${board.boardNo}like" data-boardNo="${board.boardNo}" data-checkLike="${board.checkLike}">	
 	<c:choose>
 		<c:when test="${user.userNo !=null}">
@@ -783,7 +737,7 @@ function fncGetTown(){
 	</c:choose>
 	</span>
 	
-		
+	<!-- 스크랩 -->	
 	<span name="scrap" id="${board.boardNo}scrap" data-boardNo="${board.boardNo}" data-checkScrap="${board.checkScrap}">
 	<c:choose>
 		<c:when test="${user.userNo !=null}">
@@ -802,7 +756,8 @@ function fncGetTown(){
 		</c:when>
 	</c:choose>
 	</span>
-		
+	
+	<!-- 카카오링크 -->
 	<c:if test="${board.address!=null}">	
 	<span id="${board.boardNo}kakao-link-btn" name="kakao1"
 	 data-address="${board.address}" data-boardDetailText="${board.boardDetailText}" data-hashTag="${board.hashTag}" data-photo1="${board.photo1}" data-likeCount="${board.likeCount}" data-boardNo="${board.boardNo}"
@@ -887,7 +842,7 @@ function fncGetTown(){
 	<p style="text-align: center;">${board.boardDetailText}</p>
 	<p style="text-align: left; font-size: small">${board.hashTag}</p>
 	
-</div><!-- 본문 내용 끝 -->
+</div><!-- 본문 내용 realBox 끝 -->
 </div><!-- box 끝 -->
 </li>
 <!-- 썸네일 박스 끝 -->
