@@ -37,17 +37,23 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.zagle.service.board.BoardService;
+import com.zagle.service.domain.Board;
+import com.zagle.service.domain.Mypage;
+import com.zagle.service.domain.SearchMypage;
 import com.zagle.service.domain.User;
 import com.zagle.service.mypage.MypageService;
 import com.zagle.service.user.UserService;
 
-@Controller
+@RestController
 @RequestMapping("/mypage/*")
 public class MypageRestController {
 	
@@ -55,8 +61,14 @@ public class MypageRestController {
 	@Autowired
 	@Qualifier("mypageServiceImpl")
 	private MypageService mypageService;
+	
+	@Autowired
 	@Qualifier("userServiceImpl")
 	private UserService userService;
+	
+	@Autowired
+	@Qualifier("boardServiceImpl")
+	private BoardService boardService;
 	
 	private RestTemplate restTemplate = new RestTemplate();
 	
@@ -238,7 +250,189 @@ public class MypageRestController {
        return modelAndView;
  	}
 	
+	
+	@RequestMapping(value="json/listMyBoard",method=RequestMethod.POST)
+	public Map<String,Object> listMyBoard(@RequestBody SearchMypage search,  HttpSession session) throws Exception {
+		
+		
+		if(session.getAttribute("user") != null) {
+			
+			User user = (User) session.getAttribute("user");
+			
+			String mUser = user.getUserNo();
+			search.setMyUserNo(mUser);
+			
+			
+		}else if(session.getAttribute("user")==null) {
+			search.setMyUserNo(null);
+		}
+		
+		Map<String, Object> map = mypageService.listMyBoard(search);
+		
+			
+		
+		System.out.println(map);
+		
+		
+		ArrayList list = (ArrayList) map.get("list");
+		System.out.println(list);
+		List<Board> bdList = new ArrayList<Board>();
+		for (int i = 0; i < list.size(); i++) {
+		
+			Mypage mp = (Mypage)list.get(i);
+			String bdNo = mp.getBoard().getBoardNo();
+			
+			Board bd = boardService.getBoard(bdNo);
+			bdList.add(bd);
+		}
+		
+		map.put("bdList", bdList);
+		
+		System.out.println(map);
+		return map;
+	}
+	@RequestMapping(value="json/listComment", method=RequestMethod.POST)
+	public Map<String, Object> listComment (@RequestBody SearchMypage search,  HttpSession session) throws Exception {
+	
+		if(session.getAttribute("user") != null) {
+			
+			User user = (User) session.getAttribute("user");
+			
+			String mUser = user.getUserNo();
+			search.setMyUserNo(mUser);
+			
+			
+		}else if(session.getAttribute("user")==null) {
+			search.setMyUserNo(null);
+		}
+		
+		Map<String, Object> map = mypageService.listComment(search);
+		
+			
+		
+		System.out.println(map);
+		
+		
+		ArrayList list = (ArrayList) map.get("list");
+		System.out.println(list);
+		List<Board> bdList = new ArrayList<Board>();
+		for (int i = 0; i < list.size(); i++) {
+		
+			Mypage mp = (Mypage)list.get(i);
+			String bdNo = mp.getBoard().getBoardNo();
+			
+			Board bd = boardService.getBoard(bdNo);
+			bdList.add(bd);
+		}
+		
+		map.put("bdList", bdList);
+		
+		System.out.println(map);
+		return map;
+	}
+	@RequestMapping(value="json/listLike")
+	public Map<String, Object> listLike(@RequestBody SearchMypage search,  HttpSession session) throws Exception {
+	
+	
+	if(session.getAttribute("user") != null) {
+			
+			User user = (User) session.getAttribute("user");
+			
+			String mUser = user.getUserNo();
+			search.setMyUserNo(mUser);
+			
+			
+		}else if(session.getAttribute("user")==null) {
+			search.setMyUserNo(null);
+		}
+		
+		Map<String, Object> map = mypageService.listLike(search);
+		
+			
+		
+		System.out.println(map);
+		
+		
+		ArrayList list = (ArrayList) map.get("list");
+		System.out.println(list);
+		List<Board> bdList = new ArrayList<Board>();
+		for (int i = 0; i < list.size(); i++) {
+		
+			Mypage mp = (Mypage)list.get(i);
+			String bdNo = mp.getBoard().getBoardNo();
+			
+			Board bd = boardService.getBoard(bdNo);
+			bdList.add(bd);
+		}
+		
+		map.put("bdList", bdList);
+		
+		System.out.println(map);
+		return map;
+	
+	
+	
+	}
+	
+	
+	
+	
+	@RequestMapping(value="json/listScrap")
+	public Map<String, Object> listScrap(@RequestBody SearchMypage search,  HttpSession session) throws Exception {
+	
+	
+	if(session.getAttribute("user") != null) {
+			
+			User user = (User) session.getAttribute("user");
+			
+			String mUser = user.getUserNo();
+			search.setMyUserNo(mUser);
+			
+			
+		}else if(session.getAttribute("user")==null) {
+			search.setMyUserNo(null);
+		}
+		
+		Map<String, Object> map = mypageService.listScrap(search);
+		
+			
+		
+		System.out.println(map);
+		
+		
+		ArrayList list = (ArrayList) map.get("list");
+		System.out.println(list);
+		List<Board> bdList = new ArrayList<Board>();
+		for (int i = 0; i < list.size(); i++) {
+		
+			Mypage mp = (Mypage)list.get(i);
+			String bdNo = mp.getBoard().getBoardNo();
+			
+			Board bd = boardService.getBoard(bdNo);
+			bdList.add(bd);
+		}
+		
+		map.put("bdList", bdList);
+		
+		System.out.println(map);
+		return map;
+	
+	
+	
+	}
+	
+	/////////////////////////////수정 필요///////////////////////////////////
+	@RequestMapping(value="json/addAccount", method=RequestMethod.POST)
+	public User addAccount(@RequestBody User user, HttpSession session) throws Exception  {
+		
+	 mypageService.addAccount(user);
+	 
+	 return null;
+	
+	}
+	////////////////////////////////////////////////////////////////////////////
 
+	
 	
 	/*
 	@RequestMapping(value="getBankToken",  produces="application/json", method= {RequestMethod.GET, RequestMethod.POST})
@@ -247,7 +441,7 @@ public class MypageRestController {
 		final String RequestURL = "https://testapi.open-platform.or.kr/oauth/2.0/token";
 			
 	*/
-	}
+	
 	
 	
 	
@@ -295,4 +489,4 @@ public class MypageRestController {
 		return null;
 	}
 	*/
-
+}
