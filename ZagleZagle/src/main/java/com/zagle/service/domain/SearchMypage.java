@@ -8,6 +8,23 @@ public class SearchMypage {
 	
 	Board myBoard;
 	User myUser;
+	private String myUserNo;
+	public String getMyUserNo() {
+		return myUserNo;
+	}
+
+	public void setMyUserNo(String myUserNo) {
+		this.myUserNo = myUserNo;
+	}
+
+	public void setEndRowNum(int endRowNum) {
+		this.endRowNum = endRowNum;
+	}
+
+	public void setStartRowNum(int startRowNum) {
+		this.startRowNum = startRowNum;
+	}
+
 	private int pageSize;
 	private int endRowNum;
 	private int startRowNum;
