@@ -47,18 +47,14 @@
 
 <style>
 
-.my_container {
+ .my_container {
 
     padding-top: 1%;
     padding-left: 15%;
     margin: auto;
 }
 
-.row {
 
-max-width: 100px;
-
-}
 
 
 .page-header text-info {
@@ -74,6 +70,20 @@ padding-top: 20%;
 
 
 }
+
+.detail{
+
+ width: 700px;
+    text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    word-wrap: normal !important;
+    display: block;
+    height: 1.2cm;
+
+}
+ 
 
 
 </style>
@@ -97,13 +107,13 @@ padding-top: 20%;
 	       <h5>작성 게시물</h5>
 	    </div>
 	    
-	         <table class="table table-hover table-striped" >
+	         <table class="table table-hover table-striped table-condensed">
 	    
 	         <thead>
           <tr>
-            <th align="center">No</th>
-            <th align="left" >게시물 내용</th>
-            <th align="left">작성 날짜</th>
+            <th align="center" style="width: 30px;">No</th>
+            <th align="left" style="width: 300px;">게시물 내용</th>
+            <th align="left" style="width: 30px">작성 날짜</th>
     
   
           </tr>
@@ -113,21 +123,19 @@ padding-top: 20%;
       <c:set var="i" value="0" />
 		   <c:forEach var="board" items="${listBoard}">
 		   	
-		   	<tr>
+		   	<tr id="table_id">
 		   <c:set var="i" value="${ i+1 }" />
 		 
 		     <td align="left">${ i }</td>
 		   	
-		      <td align="left"  title="click 시 상세보기" data-toggle="modal" data-target="#${board.boardNo}bbb">${board.boardDetailText}</td>
+		      <td class="detail" align="left"  title="click 시 상세보기" data-toggle="modal" data-target="#${board.boardNo}bbb">${board.boardDetailText}</td>
 		      
 		      <td align="left">${board.boardRegDate} 				</td>
 		    
 		      
 		    </tr>
 		    
-
-		    
-		
+		    	
 <!-- 모달1 시작 -->
 <div class="modal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="${board.boardNo}bbb">
   <div class="modal-dialog" role="document">
@@ -216,7 +224,8 @@ padding-top: 20%;
 </div><!-- /.modal -->
 <!-- 모달1 끝 -->
 		
-		    
+			  
+			  
 		    
 		    
 	    </c:forEach>
@@ -227,11 +236,7 @@ padding-top: 20%;
 	    
 	    </table>
 	    
-		     <!-- PageNavigation Start... -->
-	<jsp:include page="/common/pageNavigation.jsp"/>
-	<!-- PageNavigation End... -->
-	</div>
-	
+
 	
 	
 </body>
