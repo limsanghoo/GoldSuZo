@@ -71,9 +71,9 @@
 
 	 $(function() {
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		 $("button.btn.btn-info").on("click" , function() {
+		 $("#checkName").on("click" , function() {
 			 
-			 alert("클릭 됐음")
+		
 			popWin 
 			= window.open("/view/mypage/nameCheck.jsp",
 										"popWin", 
@@ -87,8 +87,19 @@
 	</script>
 	
 	<style>
+	.my_container {
 	
+	    padding-top: 5%;
+    max-width: 1600px;
+    padding-left: 150px;
+	    margin: auto;
+	}
 	
+	.bg {
+	
+	padding: auto;
+
+	}
 	
 	</style>
 
@@ -105,14 +116,18 @@
 	<jsp:include page="/view/layout/mypageToolbar.jsp" />
 
 
-	<div class="container">
+	<div class="my_container">
 	
 	
 	
 	
-	<h1 class="bg-primary text-center">계 좌 등 록</h1>
+	<h2 class="bg text-center">
+	
+	 <img src="/common/images/mypage/addaccount2.png" style="width:50px; height:50px;">
+	계 좌 등 록</h2>
 
 		<form class="form-horizontal" enctype="multipart/form-data">
+		<br>
 		
 		
 	  <div class="form-group">
@@ -124,7 +139,7 @@
 		      </span>
 		    </div>
 		    <div class="col-sm-3">
-		      <button type="button" class="btn btn-info">실명확인</button>
+		      <button type="button" class="btn btn-b" id="checkName">실명확인</button>
 		    </div>
 		  </div>
 		
@@ -143,8 +158,8 @@
 		
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" id="addAccount">등 &nbsp;록</button>
-			  <a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
+		      <button type="button" class="btn btn-b" id="addAccount">등 &nbsp;록</button>
+			  <a class="btn btn-b" href="#" role="button">취&nbsp;소</a>
 		    </div>
 		  </div>
 		</form>

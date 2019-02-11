@@ -46,7 +46,7 @@ public class MongoRestDAOImpl implements StreamRestDAO{
 		List<JSONObject> list2 = new ArrayList<JSONObject>();
 			try {
 			 
-			MongoClientURI uri  = new MongoClientURI("mongodb://192.168.0.14:27017/stream"); 
+			MongoClientURI uri  = new MongoClientURI("mongodb://192.168.0.47:27017/stream"); 
 	        MongoClient mongoClient = new MongoClient(uri);
 	        DB db = mongoClient.getDB(uri.getDatabase());
 			System.out.println("MONGODB SUCCESS");
@@ -83,7 +83,7 @@ public class MongoRestDAOImpl implements StreamRestDAO{
 	public void addMongo(Stream stream) throws Exception {
 	
 		System.out.println("StreamRestDao입니다");
-		MongoClientURI uri = new MongoClientURI("mongodb://192.168.0.14:27017/stream");
+		MongoClientURI uri = new MongoClientURI("mongodb://192.168.0.47:27017/stream");
 		MongoClient mongoClient = new MongoClient(uri);
 		DB db = mongoClient.getDB(uri.getDatabase());
 		
@@ -113,7 +113,7 @@ public class MongoRestDAOImpl implements StreamRestDAO{
 	public void joinMongo(Map<String,Object> map) throws Exception {
 	
 		System.out.println("StreamRestDao입니다");
-		MongoClientURI uri = new MongoClientURI("mongodb://192.168.0.14:27017/stream");
+		MongoClientURI uri = new MongoClientURI("mongodb://192.168.0.47:27017/stream");
 		MongoClient mongoClient = new MongoClient(uri);
 		DB db = mongoClient.getDB(uri.getDatabase());
 		
@@ -178,7 +178,7 @@ public class MongoRestDAOImpl implements StreamRestDAO{
 	@Override
 	public long getTotalCount(SearchStream search) throws Exception {
 		// TODO Auto-generated method stub
-		MongoClientURI uri  = new MongoClientURI("mongodb://192.168.0.14:27017/stream"); 
+		MongoClientURI uri  = new MongoClientURI("mongodb://192.168.0.47:27017/stream"); 
         MongoClient mongoClient = new MongoClient(uri);
         DB db = mongoClient.getDB(uri.getDatabase());
 		System.out.println("MONGODB SUCCESS");
@@ -190,7 +190,7 @@ public class MongoRestDAOImpl implements StreamRestDAO{
 	@Override
 	public long checkBan(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		MongoClientURI uri  = new MongoClientURI("mongodb://192.168.0.14:27017/stream"); 
+		MongoClientURI uri  = new MongoClientURI("mongodb://192.168.0.47:27017/stream"); 
         MongoClient mongoClient = new MongoClient(uri);
         DB db = mongoClient.getDB(uri.getDatabase());
 		System.out.println("MONGODB SUCCESS"+map);

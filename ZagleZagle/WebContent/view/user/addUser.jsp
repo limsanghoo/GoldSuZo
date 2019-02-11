@@ -27,12 +27,11 @@ $(function() {
 	
 	
 swal({
-	  title: "원활한 사이트 이용을 위해 추가정보를 기입해야 합니다.",
-	  text: "OK 버튼을 눌러주세요.",
-	  
+	  title: "추가정보를 입력해 주세요.",
+	
 
 	  buttons: true,
-	  dangerMode: true,
+	  buttons: true,
 	 
 	})
 	.then((willDelete) => {
@@ -45,9 +44,13 @@ swal({
 		  
 					
 			 swal("기입을 취소하셨습니다. 메인화면으로 돌아갑니다.");
-			 self.location = "/board/listBoard";
+			 
+		 		opener.location.replace("/board/listBoard/");
 	 	
 	  }
+		 
+		window.close();
+		
 	});
 
 });
@@ -56,7 +59,7 @@ swal({
 function fncAddUser() {
    
    
-   alert("확인용")
+
    
    history.replaceState({}, null, location.pathname);
    
@@ -66,19 +69,33 @@ function fncAddUser() {
    var userAddr=$("input[name='userAddr']").val();
    var profile=$("input[name='profile']").val();
    
+
    
-   alert(name)
-   alert(nickName)
+   if(name.length < 1) {
+	      swal("이름을 입력하세요")
+	      return;
+	   }
    
-   alert(profile)
+   if(nickName.length < 1) {
+	      swal("닉네임을 입력하세요")
+	      return;
+	   }
+
+
    
-  
+   
    
    if(birth.length != 6) {
-      alert("주민등록번호 앞자리를 입력해주세요")
+      swal("주민등록번호 앞자리를 입력해주세요")
       return;
    }
    
+  
+   if(userAddr.length < 1) {
+	   
+	swal("주소를 입력해주세요.");
+	return
+   }
    
    $("#goCon").attr("method" , "POST").attr("action" , "/user/addUser").submit();
 }

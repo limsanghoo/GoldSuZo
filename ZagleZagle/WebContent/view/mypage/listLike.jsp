@@ -29,10 +29,48 @@
 				
 			 $("span.glyphicon.glyphicon-ok").on("click", function() {
 			 
-			 alert("확인용")
+			var checkLike = '1';	 
+			var boardNo = $(this).data("param")
+			var userNo = $(this).data("param2")
+				 
+			 alert(boardNo)
+			 alert(userNo)
+			 
+			 $.ajax({
+				
+				url: '/board/json/updateLike/'+userNo+'/'+boardNo+'/'+checkLike,
+				type: 'get',
+				success: function(data){
+					
+				self.location="/mypage/listLike"
+					
+				}
+			 
+			 })
+			 
 		 });
 
 		 });
+		
+		///댓글 리스트 불러오기
+		
+		
+			 $(function() {
+			
+		
+	
+				$("td:nth-child(2)").bind("click",function(){
+					var preBoardNo=$(this).data('target');
+					
+					//#${board.boardNo}modal1 자르기
+					var boardNo=preBoardNo.substring(1,8);
+					
+					commentList(boardNo);
+				})
+
+});
+		
+		
 
 
 	//////////좋아요 취소 끝////////////
@@ -44,16 +82,44 @@
 </head>
 
 
+<style>
+
+.my_container {
+
+   padding-top: 2%;
+    padding-left: 15%;
+    margin: auto;
+    max-width: 1600px;
+}
+
+.detail{
+
+ width: 700px;
+    text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    word-wrap: normal !important;
+    display: block;
+    height: 1.2cm;
+
+}
+ 
+
+</style>
+
 
 <body>
 
 <jsp:include page="/view/layout/toolbar.jsp" />
 <jsp:include page="/view/layout/mypageToolbar.jsp" />
 
-<div class="container">
+<div class="my_container">
 
 <div class="page-header text-info">
-	       <h5>좋아요한 게시물 보기</h5>
+	       <h5>
+	         <img src="/common/images/mypage/love.png" style="width:50px; height:50px;">
+	       좋아요한 게시물 보기</h5>
 	    </div>
 	    
 	         <table class="table table-hover table-striped" >
@@ -83,9 +149,9 @@
 		 
 		     <td align="left">${ i }</td>
 		   	
-		      <td align="left"  title="Click : 게시물 상세정보"data-toggle="modal" data-target="#${board.boardNo}scrap">${board.boardDetailText}</td>
+		      <td align="left"  class="detail" title="Click : 게시물 상세정보"data-toggle="modal" data-target="#${board.boardNo}scrap">${board.boardDetailText}</td>
 		      <td align="left" >${board.boardRegDate}</td>
-		      <td align="left"> 		<span class="glyphicon glyphicon-ok" aria-hidden="true">Click</span></td>
+		      <td align="left"> 		<span class="glyphicon glyphicon-ok" aria-hidden="true" data-param="${board.boardNo}" data-param2="${user.userNo}">Click</span></td>
 		      
 		    </tr>
 		

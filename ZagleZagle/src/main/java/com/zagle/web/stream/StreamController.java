@@ -99,7 +99,7 @@ public class StreamController {
 	//modelAndView.addObject("streamer",stream.getUser().getUserNo());
 	//modelAndView.addObject("userNo",stream.getUser().getUserNo());
 	System.out.println("왜 라스트로 안가니,,?");
-	modelAndView.setViewName("redirect:https://192.168.0.14:443/stream/add?streamer="+stream.getUser().getUserNo()+"&userNo="+stream.getUser().getUserNo());
+	modelAndView.setViewName("redirect:https://192.168.0.47:443/stream/add?streamer="+stream.getUser().getUserNo()+"&userNo="+stream.getUser().getUserNo());
 	return modelAndView;
 	}
 	  
@@ -175,7 +175,7 @@ public class StreamController {
 	}
 	
 	@RequestMapping(value="listRefund")
-	public ModelAndView listRefund(@ModelAttribute("searchStream") SearchStream searchStream) throws Exception{
+	public ModelAndView listRefund(@ModelAttribute("searchStream") SearchStream searchStream,HttpSession session) throws Exception{
 		System.out.println("listRefund==========");
 	//	User user = session.getAttribute("user");
 		//SearchStream searchStream = new SearchStream();
@@ -195,8 +195,18 @@ public class StreamController {
 		modelAndView.addObject("list",map.get("list"));
 		modelAndView.addObject("count",map.get("count"));
 		modelAndView.addObject("resultPage",resultPage); 
+		User user = (User)session.getAttribute("user");
 		
+		System.out.println("grade "+user);
+		
+		if(user.getGrade().equals("4")) {
+			modelAndView.setViewName("forward:/view/admin/siteManage2.jsp");	
+			
+			System.out.println("이거되나 확인");
+			
+		}else {
 		modelAndView.setViewName("forward:/view/stream/listRefund.jsp");	
+		}
 	return modelAndView;
 	}
 	
