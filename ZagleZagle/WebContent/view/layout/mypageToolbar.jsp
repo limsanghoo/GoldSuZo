@@ -95,7 +95,7 @@ $("a:contains('계좌번호 수정')").on("click" , function() {
     width: 250px;
     height: 100%;
     margin-left: -250px;
-    background: #2868ad;
+    background: #28ad58;
     overflow-x: hidden;
     overflow-y: auto;
   }

@@ -49,9 +49,10 @@
 
  .my_container {
 
-    padding-top: 1%;
+    padding-top: 2%;
     padding-left: 15%;
     margin: auto;
+    max-width: 1600px;
 }
 
 
@@ -104,7 +105,12 @@ padding-top: 20%;
 
 <div class="my_container">
 <div class="page-header text-info">
-	       <h5>작성 게시물</h5>
+
+	       <h5>
+	       
+		  <img src="/common/images/mypage/board.png" style="width:50px; height:50px;" >
+	       &nbsp;작성 게시물</h5>
+	       
 	    </div>
 	    
 	         <table class="table table-hover table-striped table-condensed">
@@ -236,7 +242,10 @@ padding-top: 20%;
 	    
 	    </table>
 	    
-
+		
+			<!-- PageNavigation Start... -->
+	<jsp:include page="/common/pageNavigation.jsp"/>
+	<!-- PageNavigation End... -->
 	
 	
 </body>

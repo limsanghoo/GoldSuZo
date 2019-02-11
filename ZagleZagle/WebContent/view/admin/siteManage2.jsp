@@ -48,15 +48,6 @@
 				$(self.location).attr("href","/admin/listBlackObject");
 			});
 			
-			
-			$("#sponUser").on("click" , function() {
-				
-				
-				
-				$(self.location).attr("href","/stream/listRefund");
-			});
-			
-			
 			$("#listBlackList").on("click" , function() {
 				
 				
@@ -92,107 +83,11 @@
 </head>
 <body>
     <div id="wrapper">
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">            
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/board/listBoard" title="ZagleZagle">ZagleZagle</a>
-            </div>
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                    <li class="active"><a href="siteManage.jsp"><i class="glyphicon glyphicon-th"></i> Dashboard</a></li>
-                    <li class="nav nav-list nav-list-expandable nav-list-expanded">
-                        <a><i class="fa fa-user"></i> 회원목록 보기<span class="caret"></span></a>
-                        <ul class="nav navbar-nav">
-                            <li id="listUser"><a href="#"><i class="fa fa-table"></i>회원목록</a></li>
-                            <li id="listBlackObject"><a href="#"><i class="fa fa-edit"></i>예비 블랙리스트</a></li>
-                            <li id="listBlackList"><a href="#"><i class="fa fa-edit"></i>블랙리스트 목록</a></li>
-                        </ul>
-                    </li>
-                    <li id="handleReport"><a href="#"><i class="fa fa-magic"></i>신고 처리</a></li>
-                    
-                       <li id="sponUser"><a href="#"><i class="fa fa-magic"></i>환급한 회원 목록</a></li>
-                    
-             
-                </ul>
-             
-               
-                
-            </div>
-        </nav>
-
-        <div id="page-wrapper">
-         
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="fa fa-calendar"></i> Calendar</h3>
-                                </div>
-                                <div class="panel-body text-center">
-                                    <div id="calendar1"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="fa fa-gear"></i> Settings</h3>
-                                </div>
-                                <div class="panel-body">
-									<ul class="list-group">
-										<li class="list-group-item">
-											<span class="label label-default">Label Default</span>
-											<div class="pull-right">
-												<input id="switch1" name="switch1" type="checkbox" />
-											</div>
-										</li>
-										<li class="list-group-item">
-											<span class="label label-success">Label Success</span>
-											<div class="pull-right">
-												<input id="switch2" name="switch2" type="checkbox" />
-											</div>
-										</li>
-										<li class="list-group-item">
-											<span class="label label-primary">Label Primary</span>
-											<div class="pull-right">
-												<input id="switch3" name="switch3" type="checkbox" checked="checked" />
-											</div>
-										</li>
-										<li class="list-group-item">
-											<span class="label label-info">Label Info</span>
-											<div class="pull-right">
-												<input id="switch4" name="switch4" type="checkbox" checked="checked" />
-											</div>
-										</li>
-										<li class="list-group-item">
-											<span class="label label-warning">Label Warning</span>
-											<div class="pull-right">
-												<input id="switch5" name="switch4" type="checkbox" />
-											</div>
-										</li>
-										<li class="list-group-item">
-											<span class="label label-danger">Label Danger</span>
-											<div class="pull-right">
-												<input id="switch6" name="switch4" type="checkbox" checked="checked" />
-											</div>
-										</li>
-									</ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-               
-            </div>
+     
             <!-- /.row -->
        
         <!-- /#page-wrapper -->
-
+</div>
     <!-- /#wrapper -->
 
     <script type="text/javascript" src="/common/css/PBDashboard/js/jquery-1.10.2.min.js"></script>

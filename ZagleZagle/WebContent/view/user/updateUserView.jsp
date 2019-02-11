@@ -38,10 +38,10 @@
 				
 				swal({
 					  title: "회원정보를 수정하시겠습니까??",
-					  text: "수정을 원하시면 OK 버튼을 눌러주세요.",
+					 
 					
 					  buttons: true,
-					  dangerMode: true,
+					  buttons: true,
 					})
 					.then((willDelete) => {
 					  if (willDelete) {
@@ -76,9 +76,7 @@
 				var birth=$("input[name='userBirth']").val();
 				var userAddr=$("input[name='userAddr']").val();
 				
-				
-				alert(birth)
-				alert(userAddr)
+			
 				
 				  if(birth.length != 6) {
 					  swal("주민등록번호 앞자리만 입력해주세요.");
@@ -144,7 +142,7 @@
 				              
 				              setTimeout(function() {
 				                     while(true){
-				                        var path = 'http://192.168.0.18:8080/common/images/profile/'+data;
+				                        var path = 'http://192.168.0.50:8080/common/images/profile/'+data;
 				                        var re = doesFileExist(path);
 				                        if (re) {
 				                           
