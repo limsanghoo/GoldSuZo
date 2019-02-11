@@ -300,14 +300,11 @@ public class BoardController {
 		
 		Map<String , Object> map=boardService.listBoard(searchBoard);
 		
-		Page resultPage=new Page(searchBoard.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, boardPageSize);
-		
 		List<Local> list = boardService.getState();//추가
 		
 		ModelAndView modelAndView=new ModelAndView();
 		modelAndView.addObject("boardList", map.get("boardList"));//게시물 리스트
 		modelAndView.addObject("searchBoard", searchBoard);//검색 조건
-		modelAndView.addObject("resultPage", resultPage);//페이지
 		modelAndView.addObject("list",list);//동네  리스트		
 		modelAndView.setViewName("forward:/view/board/listBoard.jsp");
 		
@@ -345,15 +342,12 @@ public class BoardController {
 		searchBoard.setPageSize(boardPageSize);
 		
 		Map<String , Object> map=boardService.listBoard(searchBoard);
-
-		Page resultPage=new Page(searchBoard.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, boardPageSize);
-		
+	
 		List<Local> list = boardService.getState();//추가
 		
 		ModelAndView modelAndView=new ModelAndView();
 		modelAndView.addObject("boardList", map.get("boardList"));//게시물 리스트
 		modelAndView.addObject("searchBoard", searchBoard);
-		modelAndView.addObject("resultPage", resultPage);//페이지
 		modelAndView.addObject("list",list);//동네  리스트
 		modelAndView.setViewName("forward:/view/board/listBoard.jsp");
 		
