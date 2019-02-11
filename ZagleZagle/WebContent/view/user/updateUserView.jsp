@@ -35,7 +35,27 @@
 		 $(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$( "button.btn.btn-b" ).on("click" , function() {
-				fncUpdateUser();
+				
+				swal({
+					  title: "회원정보를 수정하시겠습니까??",
+					  text: "수정을 원하시면 OK 버튼을 눌러주세요.",
+					
+					  buttons: true,
+					  dangerMode: true,
+					})
+					.then((willDelete) => {
+					  if (willDelete) {
+					  
+							
+							fncUpdateUser();
+							  
+					  } else {
+					    swal("수정을 취소하셨습니다.");
+					   
+					  }
+						
+					});
+		
 			});
 		});	
 		
@@ -44,6 +64,7 @@
 		$(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$("a[href='#' ]").on("click" , function() {
+				  swal("수정을 취소했습니다.");
 				$("form")[0].reset();
 			});
 		});	
@@ -54,6 +75,10 @@
 			
 				var birth=$("input[name='userBirth']").val();
 				var userAddr=$("input[name='userAddr']").val();
+				
+				
+				alert(birth)
+				alert(userAddr)
 				
 				  if(birth.length != 6) {
 					  swal("주민등록번호 앞자리만 입력해주세요.");
@@ -119,7 +144,7 @@
 				              
 				              setTimeout(function() {
 				                     while(true){
-				                        var path = 'http://192.168.0.35:8080/common/images/profile/'+data;
+				                        var path = 'http://192.168.0.18:8080/common/images/profile/'+data;
 				                        var re = doesFileExist(path);
 				                        if (re) {
 				                           
@@ -192,7 +217,16 @@
 			}
 
 
-			
+			function fncGetTown(){
+				   var stateName = $("select[name=state] option:checked").text();
+				   var cityName = $("select[name=city] option:checked").text();
+				   var townName = $("select[name=town] option:checked").text();
+				   
+				   var local = stateName+" "+cityName+" "+townName;
+				   
+				   $("input:hidden[name='userAddr']").val( local );
+				}
+
 			
 			
 
@@ -264,7 +298,7 @@
 			         
 			      });
 			}
-
+			
 		
 		
 		
@@ -272,6 +306,9 @@
 
 <style>
 
+body {
+ background-color:  #e2e2e2;
+}
 
 .page-header{
 
@@ -286,7 +323,7 @@ padding-top :120px;
          border:1.5px solid #f5f6fa;
          border-radius: 50%;
          margin : auto;
-         background-color: #2eca6a;
+         background-color: #ffd0c5;
       }
       
    #camera{
@@ -294,6 +331,18 @@ padding-top :120px;
    margin : auto;
       
    }   
+
+
+	select {
+	font-size:0.9em;
+	  border: solid 1.1px;
+	  -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #fff 4%);
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #fff 4%);  	
+  }
+
+input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1px; height: 1px; 
+padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
 
 </style>
 
@@ -310,22 +359,25 @@ padding-top :120px;
 	
 		<div class="page-header text-center">
 	       <h3 class=" text-info">${user.userName}님 &nbsp;정보수정</h3>
-	       
 	    </div>
+	    
 	     <form enctype="multipart/form-data" method="post" id="perioe">
                <input type="file" id="broll" name="proimg"/>
-            </form>
+          </form>
             
 	    
 	    
 	    
 	    	    <div id="uploadPro">
                
-              
+              <img src="/common/images/profile/${user.profile}"/>
                           
-              </div> 
-	    		<label for="broll" style="margin: auto;" id="aaa"><br>프로필 등록&nbsp;<i class="glyphicon glyphicon-camera" style="width: 10px; height: 10px;" ></i></label>
-	    
+              </div>
+              
+              <br>
+              <div style="text-align: center;">
+              <label for="broll" style="text-align: center;" id="aaa">프로필 등록&nbsp;<i class="glyphicon glyphicon-camera" style="width: 10px; height: 10px;" ></i></label>
+	    		</div>
 	      <!-- form Start /////////////////////////////////////-->
 	      
 	      
@@ -337,13 +389,11 @@ padding-top :120px;
 		
 	      		
 		
-			 <div class="form-group">
+
 		    
 		       <input type="hidden" id="coffee" name="profile" value="default.png"/>
                <br><br>
-		    
-		  </div>
-		  
+
 		      <div class="form-group">
 		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">이 름</label>
 		    <div class="col-sm-4">
@@ -377,13 +427,13 @@ padding-top :120px;
          
             </select>
             
-   			&emsp;&emsp;&emsp;&emsp;&nbsp;
+   		
             
             <select name="city"  class="ct_input_g" onchange="fncGetCity(this)">
                <option value="" style="font-size:20px;">시·군·구</option>
             </select>
         	
-  			&emsp;&emsp;&emsp;&emsp;&nbsp;
+
         	
             <select name="town"  class="ct_input_g"  onchange="fncGetTown(this)">
                <option value="" style="font-size:20px;">읍·면·동</option>
@@ -394,7 +444,7 @@ padding-top :120px;
          </div>
          
         </div>
-<br/>
+
 	
 		  
 		 

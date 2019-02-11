@@ -86,7 +86,6 @@ $(function() {
 	    }, function(rsp) {
 	        if ( rsp.success ) {
 
-	        	alert(rsp.imp_uid);
 	        	$("input:hidden[name='payment']").val(rsp.imp_uid);		
 	        	payBuy();
 

@@ -17,8 +17,40 @@
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-
+ <!--  sweetAlert -->     
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      
 <script>
+
+$(function() {
+
+	
+	
+swal({
+	  title: "원활한 사이트 이용을 위해 추가정보를 기입해야 합니다.",
+	  text: "OK 버튼을 눌러주세요.",
+	  
+
+	  buttons: true,
+	  dangerMode: true,
+	 
+	})
+	.then((willDelete) => {
+	  if (willDelete) {
+	  
+			return;
+			  
+	  } else {
+		  	
+		  
+					
+			 swal("기입을 취소하셨습니다. 메인화면으로 돌아갑니다.");
+			 self.location = "/board/listBoard";
+	 	
+	  }
+	});
+
+});
 
 
 function fncAddUser() {
@@ -73,20 +105,21 @@ function checkNickname() {
                 $("#agreement").prop("disabled", true);
                 $("#agreement").css("background-color", "#aaaaaa");
                 $("#userNickname").css("background-color",  "rgba(255, 255, 255, 0)");
-             
+               	$("#footText").text("닉네임을 입력하세요.")   
+ 			
          
             }else if(data =='0') {
                     $("#agreement").prop("disabled", false);
                       $("#agreement").css("background-color", "#2eca6a");
                       $("#userNickname").css("background-color", "#2eca6a");
-               
-          
+                  	$("#footText").text("사용가능한 닉네임입니다.")
+          		
             }else if (data == '1') {
                 $("#agreement").prop("disabled", true);
                 $("#agreement").css("background-color", "#aaaaaa");
                 $("#userNickname").css("background-color", "#FFCECE");
                 
-                                
+            	$("#footText").text("중복된 닉네임입니다. 다른 닉네임을 사용하세요.")   
                
             } 
         }
@@ -191,7 +224,7 @@ $(function() {
               
               setTimeout(function() {
                      while(true){
-                        var path = 'http://192.168.0.35:8080/common/images/profile/'+data;
+                        var path = 'http://192.168.0.18:8080/common/images/profile/'+data;
                         var re = doesFileExist(path);
                         if (re) {
                            
@@ -1070,7 +1103,14 @@ input.checkbox:checked:after {
    margin : auto;
       
    }   
+   
+   #footText {
+     color: #020000;
+     font-size: .85em;
+   }
+	
 
+	
    
 input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1px; height: 1px; 
 padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
@@ -1112,19 +1152,24 @@ padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
                
               
                           
-              </div> <label for="broll" style="margin: auto;" id="aaa"><br>프로필 등록&nbsp;<i class="glyphicon glyphicon-camera" style="width: 10px; height: 10px;" ></i></label>
-           
+              </div> <br>
+              
+              <div style="text-align: center;">
+              <label for="broll" style="margin: auto;" id="aaa"><br>프로필 등록&nbsp;<i class="glyphicon glyphicon-camera" style="width: 10px; height: 10px;" ></i></label>
+           	</div>
+           	   <form method="post" id="goCon">
+           	
                 <input type="hidden" id="coffee" name="profile" value="default.png"/>
-               <br><br>
+               <br>
                
                <input class="text" type="text" name="userName" placeholder="이름을 입력하세요." required="">
                <br>
-               
                <input class="text" type="text" name="userNickname" placeholder="닉네임을 입력하세요."  id="userNickname" name="userNickname" placeholder="중복확인하세요"
                                                                                                                         oninput="checkNickname()" required="">
+                                                                                                                        <div id="footText"></div>
+                                                                                                               
                
                <br>
-            
                <input class="text" type="text" name="userBirth" placeholder="주민등록번호 앞자리만 입력하세요." required="">
       
                <br>
@@ -1171,6 +1216,7 @@ padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
                   <div class="clear"> </div>
                </div>
                
+              <br>    <br>    <br> 
                
             </form>
                
