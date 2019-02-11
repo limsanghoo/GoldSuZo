@@ -15,7 +15,7 @@ function action_coords(event) {
 
     var y2 = event.offsetY;
 
-    $("#addLink").append(
+    $("#image_panel").append(
     		 '<div class="tags_form" style="top: '+x2+'px; left: '+y2+'px; z-index: 100; position: relative;">'
     		 +'<div class="tag_icon gray"></div>'
     		 +'<div class="tag_information" style="display: block;">'
@@ -48,14 +48,12 @@ function action_coords(event) {
 <form name="addLink" id="addLink">
 
 
-    <div id="image_panel">
+    <div id="image_panel" style="position: absolute;">
+    </div>
       <img name="photo1" src="${board.photo1}" alt="None" onclick="action_coords(event)" style="height: 500px; vertical-align: middle;">
 
-         
 
 
-
-</div><!-- /image_panel -->
 
 </form>
 </body>

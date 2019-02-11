@@ -137,7 +137,7 @@ public class BoardController {
 		       
 		
 		ModelAndView modelAndView=new ModelAndView();
-		modelAndView.setViewName("redirect:http://192.168.0.49:8080/board/listBoard?view=town");
+		modelAndView.setViewName("redirect:http://192.168.0.19:8080/board/listBoard?view=town");
 		
 		return modelAndView;
 	}
@@ -422,11 +422,20 @@ public class BoardController {
 		
 		//인호
 		testUser=userService.getUser2("US10023");
+
+		//testUser=userService.getUser3("김주현");
+
+		//testUser=userService.getUser3("박현서");
+
+		//testUser=userService.getUser3("상후");
 		
-		//주현
-		//testUser=userService.getUser3("김주현");	
+		//testUser=userService.getUser3("김보미");
+		
+		//testUser=userService.getUser3("김춘배");
 		
 		//testUser=userService.getUser3("페리오");
+		
+		//testUser=userService.getUser3("김주영");
 		
 		
 		session.setAttribute("user", testUser);

@@ -915,17 +915,17 @@ function fncGetTown(){
       
         <h4 class="row modal-title" id="gridSystemModalLabel">
          
-        <div class="col-sm-2">
+        <div class="col-sm-2 col-3">
         <img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px; vertical-align: middle; margin-left: 15px;"/>
         </div>
         
-        <div class="col-sm-3">
+        <div class="col-sm-3 col-4">
 		${board.user.userNickname}
 		</div>
 		
 		<!-- 내 글만 수정, 삭제 -->
 		<c:if test="${user.userNo==board.user.userNo}">
-		<div class="col-sm-7" style="padding-left: 60px;">
+		<div class="col-sm-7 col-4" style="padding-left: 50px;">
 		<input class="btn btn-a" type="button" value="수정" data-update="${board.boardNo}"/>
         <span class="btn btn-b" data-toggle="modal" data-target="#${board.boardNo}modal2">삭제</span>
         </div>
@@ -933,8 +933,8 @@ function fncGetTown(){
         
         <!-- 신고 버튼 -->
         <c:if test="${user.userNo!=board.user.userNo}">
-        <div class="col-sm-5 col-md-offset-2">    
-        <input type="button" name="report" class="btn btn-c" value="신고" data-report="${board.boardNo}"/>
+        <div class="col-sm-4 col-md-offset-3 col-4">    
+        <input type="button" name="report" class="btn btn-c" value="신고" data-report="${board.boardNo}" style="margin-left: 0px;"/>
         <input type="hidden" id="${board.boardNo}report" value="${board.boardNo}${board.user.userNo}">
         </div>
         </c:if>     
