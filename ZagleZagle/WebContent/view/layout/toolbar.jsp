@@ -279,6 +279,10 @@ background-size: cover;
 	max-width: 1500px;
 }
 
+.navbar-default.navbar-trans, .navbar-default.navbar-reduce {
+    border-bottom: 2px solid #2eca6a;
+}
+
 </style> 
   
   
