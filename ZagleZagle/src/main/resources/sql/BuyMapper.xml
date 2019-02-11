@@ -38,7 +38,7 @@
 	</resultMap>
 	
 	<resultMap id="companySelectMap" type="companylist">
-		<result property="companyCode" 					column="company_code" 					jdbcType="NUMERIC"/>
+		<result property="companyCode" 					column="company_code" 					jdbcType="VARCHAR"/>
 		<result property="companyName" 				column="company_name"					jdbcType="VARCHAR"  />
 	</resultMap>
 		

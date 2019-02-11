@@ -3,7 +3,7 @@ package com.zagle.service.domain;
 public class CompanyList {
 	
 	private String companyName;
-	private int companyCode;
+	private String companyCode;
 
 	public CompanyList() {
 		
@@ -16,11 +16,11 @@ public class CompanyList {
 		this.companyName = companyName;
 	}
 
-	public int getCompanyCode() {
+	public String getCompanyCode() {
 		return companyCode;
 	}
 
-	public void setCompanyCode(int companyCode) {
+	public void setCompanyCode(String companyCode) {
 		this.companyCode = companyCode;
 	}
 
@@ -28,6 +28,5 @@ public class CompanyList {
 	public String toString() {
 		return "CompanyList [companyName=" + companyName + ", companyCode=" + companyCode + "]";
 	}
-	
 
 }
