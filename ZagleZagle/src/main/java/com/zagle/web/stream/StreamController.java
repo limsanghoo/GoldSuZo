@@ -175,7 +175,7 @@ public class StreamController {
 	}
 	
 	@RequestMapping(value="listRefund")
-	public ModelAndView listRefund(@ModelAttribute("searchStream") SearchStream searchStream) throws Exception{
+	public ModelAndView listRefund(@ModelAttribute("searchStream") SearchStream searchStream,HttpSession session) throws Exception{
 		System.out.println("listRefund==========");
 	//	User user = session.getAttribute("user");
 		//SearchStream searchStream = new SearchStream();
@@ -195,8 +195,12 @@ public class StreamController {
 		modelAndView.addObject("list",map.get("list"));
 		modelAndView.addObject("count",map.get("count"));
 		modelAndView.addObject("resultPage",resultPage); 
-		
+		User user = (User)session.getAttribute("user");
+		if(user.getGrade().equals("4")) {
+			modelAndView.setViewName("forward:/view/admin/siteManage2.jsp");	
+		}else {
 		modelAndView.setViewName("forward:/view/stream/listRefund.jsp");	
+		}
 	return modelAndView;
 	}
 	
