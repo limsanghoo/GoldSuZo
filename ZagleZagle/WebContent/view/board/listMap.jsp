@@ -40,7 +40,7 @@
 
 
 
-<body style="background-color: #e2e2e2">
+<body style="background-color: #eaf2ec">
 
 <jsp:include page="/view/layout/toolbar.jsp" />
 

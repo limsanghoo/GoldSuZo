@@ -80,7 +80,13 @@ public class UserRestController {
 		System.out.println(this.getClass());
 	}
 	
-	
+	@RequestMapping(value="json/getUser3/{userName}", method=RequestMethod.GET)
+	public User getUser3(@PathVariable String userName) throws Exception {
+		
+		System.out.println("==============RestController getUser3==============");
+		
+		return userService.getUser3(userName);
+	}
 	
 	
 	@RequestMapping(value="json/getUser2/{userNo}", method=RequestMethod.GET)

@@ -46,34 +46,31 @@
 		//==> 스크랩 취소 기능
 		 $(function() {
 	
-	 $("#updateScrap").on("click", function() {
+	 $("td:nth-child(4) span").on("click", function() {
 	 
-	 alert("확인용")
+	var checkScrap = '1';
+	
+	
+	
+	var boardNo = $(this).data("param")
+	var userNo = $(this).data("param2")
 
-	 /*
+	alert(checkScrap)
+	alert(boardNo)
+	alert(userNo)
+	
 		$.ajax({
-			
-			
-			var userNo = $(this).data("param2")
-			var boardNo = $(this).data("param")
-			
-			alert(userNo)
-			alert(boardNo)
-			
-			url: '/board/json/addScrap/'+userNo+'/'+boardNo,
-			type: 'get',
-			success: function(data){
 				
-				if(data==1){
-					//alert('등록 성공');
+				url: '/board/json/updateScrap/'+userNo+'/'+boardNo+'/'+checkScrap,
+				type: 'get',
+				success: function(data){
 					
-					$("#"+boardNo+"scrap").data("checkscrap","1");
-					$("img[name='"+boardNo+"emptyScrap']").attr("src","/common/images/board/fullScrap.png");
-					$("img[name='"+boardNo+"emptyScrap']").attr("name",boardNo+"fullScrap");
+					self.location="/mypage/listScrap"
+				
 				}
-			}
-		})			
-	 */
+	})
+
+	
  });
 	 	
 
@@ -94,7 +91,32 @@
 		
 		</script>
 
+<style>
 
+
+.my_container {
+
+   padding-top: 2%;
+    padding-left: 15%;
+    margin: auto;
+    max-width: 1600px;
+}
+
+.detail{
+
+ width: 700px;
+    text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    word-wrap: normal !important;
+    display: block;
+    height: 1.2cm;
+
+}
+ 
+
+</style>
 
 </head>
 
@@ -105,10 +127,12 @@
 <jsp:include page="/view/layout/toolbar.jsp" />
 <jsp:include page="/view/layout/mypageToolbar.jsp" />
 
-<div class="container">
+<div class="my_container">
 
 <div class="page-header text-info">
-	       <h5>스크랩 게시물</h5>
+	       <h5>
+	        <img src="/common/images/mypage/scrapscarp.png" style="width:50px; height:50px;" > &nbsp;
+	       스크랩 게시물</h5>
 	    </div>
 	    
 	         <table class="table table-hover table-striped" >
@@ -132,9 +156,9 @@
 		 
 		     <td align="left">${ i }</td>
 		   	
-		      <td align="left" title="Click : 게시물 상세정보" data-toggle="modal" data-target="#${board.boardNo}bbb">${board.boardDetailText}</td>
+		      <td align="left" class="detail" title="Click : 게시물 상세정보" data-toggle="modal" data-target="#${board.boardNo}bbb">${board.boardDetailText}</td>
 		      <td align="left">${board.boardRegDate} 				</td>
-		      <td align="left"> <span class="glyphicon glyphicon-ok" id="updateScrap" aria-hidden="true" data-param=${board.boardNo} data-param2="${user.userNo}">Click</span>
+		      <td align="left"> <span class="glyphicon glyphicon-ok" aria-hidden="true" data-param="${board.boardNo}" data-param2="${user.userNo}">Click</span>
 				 </td>
 		      
 		    </tr>

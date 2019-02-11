@@ -227,7 +227,7 @@
 	</delete>
 	
 	<select id="getMapList" parameterType="string" resultMap="boardSelectMap">
-		select * from board where address like '${searchKeyword}%' and board_status=1
+		select * from board where address like '${searchKeyword}%' and (board_status=1 or board_status=4)
 	</select>
 	
 

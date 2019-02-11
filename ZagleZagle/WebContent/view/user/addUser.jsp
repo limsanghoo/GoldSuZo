@@ -27,12 +27,11 @@ $(function() {
 	
 	
 swal({
-	  title: "원활한 사이트 이용을 위해 추가정보를 기입해야 합니다.",
-	  text: "OK 버튼을 눌러주세요.",
-	  
+	  title: "추가정보를 입력해 주세요.",
+	
 
 	  buttons: true,
-	  dangerMode: true,
+	  buttons: true,
 	 
 	})
 	.then((willDelete) => {
@@ -45,9 +44,13 @@ swal({
 		  
 					
 			 swal("기입을 취소하셨습니다. 메인화면으로 돌아갑니다.");
-			 self.location = "/board/listBoard";
+			 
+		 		opener.location.replace("/board/listBoard/");
 	 	
 	  }
+		 
+		window.close();
+		
 	});
 
 });

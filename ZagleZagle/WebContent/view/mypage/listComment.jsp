@@ -30,7 +30,7 @@
 		//댓글 리스트 불러오기
 		$("td:nth-child(2)").bind("click",function(){
 			
-			alert("확인용")
+
 			
 			var preBoardNo=$(this).data('target');
 			
@@ -43,10 +43,37 @@
 });
 
  
+
+ 
  
  
 </script>
 
+
+<style type="text/css">
+
+.my_container {
+   padding-top: 2%;
+    padding-left: 15%;
+    margin: auto;
+    max-width: 1600px;
+    }
+
+.detail{
+
+ width: 700px;
+    text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    word-wrap: normal !important;
+    display: block;
+    height: 1.2cm;
+
+}
+ 
+
+</style>
 
 </head>
 <body>
@@ -55,10 +82,15 @@
 <jsp:include page="/view/layout/mypageToolbar.jsp" />
 
 
-<div class="container">
+<div class="my_container">
 	
 	<div class="page-header text-info">
-	       <h5>댓글 작성한 게시물</h5>
+	       <h5>
+	            <img src="/common/images/mypage/cocococo.png" style="width:50px; height:50px;">
+	       &nbsp; 댓글 작성한 게시물
+	     
+	       
+	       </h5>
 	    </div>
 	    
 	    
@@ -84,7 +116,7 @@
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
 			  <td align="left">${ i }</td>
-			  <td align="left"  title="Click : 댓글 작성한 게시물로 이동" data-toggle="modal" data-target="#${board.boardNo}modal">${board.boardDetailText}</td>
+			  <td align="left" class="" title="Click : 댓글 작성한 게시물로 이동" data-toggle="modal" data-target="#${board.boardNo}modal">${board.boardDetailText}</td>
 			  <td align="left">${board.boardRegDate}</td>
 		
 				</tr>
