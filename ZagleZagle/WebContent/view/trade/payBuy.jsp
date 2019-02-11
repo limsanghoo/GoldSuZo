@@ -313,7 +313,7 @@ $(function() {
 	  		<div class="col-xs-8 col-md-2 text-right" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: #777; padding-top: .5em; padding-bottom: .5em;"><strong>주소</strong></div>
 			<div class="col-xs-4 col-md-5">
 				<div class="col-xs-4 col-md-8">
-					<input type="text" class="form-control" id="address" name="address" class="ct_input_g" value="${buy.buyAddress}" />
+					<input type="text" class="form-control" id="address" name="address" class="ct_input_g" value="${buy.buyAddress}"  readOnly/>
 				</div>
 				<div class="col-xs-8 col-md-4">
 			    	<input type="button" class="btn" onclick="execDaumPostcode()" value="우편번호 찾기" readonly="readonly" ><br/>
