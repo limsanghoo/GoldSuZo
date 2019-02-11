@@ -93,7 +93,7 @@ $(function(){
 
 <table class="tg">
   <tr>
-    <th class="tg-s268" id="weatherLocal" colspan="3" style="text-align: center;"></th>
+    <td class="tg-s268" id="weatherLocal" colspan="3" style="text-align: center; color: white;"></td>
   </tr>
   
   <tr>

@@ -137,7 +137,7 @@ $(document).ready(function(){
 				<!-- Main -->
 					<section id="main">
 						<header>
-							<span class="avatar"><img src="/common/images/logo2.png" alt="" style="width : 200px; height : 200px;"/></span>
+							<span class="avatar"><img src="/common/images/logo.png" alt="" style="width : 200px; height : 200px;"/></span>
 							
 							<p>by  GoldSuZo</p>
 						</header>
@@ -180,7 +180,7 @@ $(document).ready(function(){
 						-->
 						<br/><br/>
 						<footer>
-								<button class="button primary" id="login" data-toggle="modal" data-target="#modal1" >-LOGIN-</button>
+								<button class="button primary" id="login" data-toggle="modal" data-target="#modal1" >LOGIN</button>
 								<br/><br/><a href="/board/listBoard?view=all">온 동네 소식보기</a>
 							</ul>
 						</footer>
