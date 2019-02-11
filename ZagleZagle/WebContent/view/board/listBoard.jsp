@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.net.URLEncoder" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -29,8 +30,8 @@
 <!-- 카톡 공유 -->       
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
-  <!--  sweetAlert -->     
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>       
+<!--  sweetAlert -->     
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>       
         
  <!-- Favicons -->
   <link href="/common/css/estateagency-master/img/favicon.png" rel="icon">
@@ -68,7 +69,8 @@
 
 form{
 	padding-top : 150px;
-	background-color:#e2e2e2;
+/* 	background-color:#e2e2e2; */
+	background-color: #ffffff;
 	}
 
 body {
@@ -114,41 +116,11 @@ body {
     margin: 0;
     padding: 0 0 10px;
 }
-/* @media (max-width: 1200px) {
-    .containerList {
-        columns: 3;
-        width: calc(100% - 40px);
-        box-sizing: border-box;
-        padding: 20px 20px 20px 0;
-    }
-}
-@media (max-width: 768px) {
-    .containerList {
-        columns: 2;
-    }
-}
-@media (max-width: 480px) {
-    .containerList {
-        columns: 1;
-    }
-} */
-
-/* #goAddBoard{
-    	position: static;
-    	float:right;
-} */
-
-
 
 .disabled{
 		pointer-events:none;
 }
 
-/* #selectMenu{
-		padding-top : 100px;
-		padding-left: 300px;
-		padding-right: 300px;
-} */
 
 #selectTown{
 	padding-top : 40px;
@@ -165,6 +137,7 @@ input[name='report']{
     cursor: pointer;
     margin-left: 60px;
 }
+
 .btn {
   transition: .5s ease;
 }
@@ -206,7 +179,7 @@ $(function(){
 			return;
 		}
 		
-		self.location="http://192.168.0.18:8080/board/addBoard?userNo=${user.userNo}";
+		self.location="http://192.168.0.49:8080/board/addBoard?userNo=${user.userNo}";
 	})
 	
 	//지도로 보기
@@ -355,9 +328,9 @@ $(function(){
 				
 			})
 		}//1, 2일때 끝
-		
-		
+				
 	});//스크랩 끝
+	
 	
 	//신고 시작
 	$("input[value='신고']").bind("click",function(){
@@ -404,8 +377,8 @@ $(function(){
 		      description: hashTag,
 		      imageUrl: photo1,
 		      link: {
-		        mobileWebUrl: 'http://192.168.0.18:8080/board/getBoard?view=mobile&boardNo='+boardNo,
-		        webUrl: 'http://192.168.0.18:8080/board/getBoard?view=mobile&boardNo='+boardNo
+		        mobileWebUrl: 'http://192.168.0.49:8080/board/getBoard?view=mobile&boardNo='+boardNo,
+		        webUrl: 'http://192.168.0.49:8080/board/getBoard?view=mobile&boardNo='+boardNo
 		      }
 		    },
 		    social: {
@@ -415,8 +388,8 @@ $(function(){
 		      {
 		        title: '웹으로 보기',
 		        link: {
-		          mobileWebUrl: 'http://192.168.0.18:8080/board/getBoard?boardNo='+boardNo,
-		          webUrl: 'http://192.168.0.18:8080/board/getBoard?boardNo='+boardNo
+		          mobileWebUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo,
+		          webUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo
 		        }
 		      }
 		    ]
@@ -453,8 +426,8 @@ $(function(){
           description: hashTag,
           imageUrl: photo1,
           link: {
-            mobileWebUrl: 'http://192.168.0.18:8080/board/getBoard?boardNo='+boardNo,
-            webUrl: 'http://192.168.0.18:8080/board/getBoard?boardNo='+boardNo
+            mobileWebUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo,
+            webUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo
           }
         },
         social: {
@@ -464,8 +437,8 @@ $(function(){
           {
             title: '웹으로 보기',
             link: {
-              mobileWebUrl: 'http://192.168.0.18:8080/board/getBoard?view=mobile&boardNo='+boardNo,
-              webUrl: 'http://192.168.0.18:8080/board/getBoard?view=mobile&boardNo='+boardNo
+              mobileWebUrl: 'http://192.168.0.49:8080/board/getBoard?view=mobile&boardNo='+boardNo,
+              webUrl: 'http://192.168.0.49:8080/board/getBoard?view=mobile&boardNo='+boardNo
             }
           }
         ]
@@ -588,37 +561,18 @@ function fncGetTown(){
 
 <div class="row fullScreen">
 
-<!-- 날씨 -->
-<div class="col-sm-2" style="background-color:#e2e2e2;">
-<c:if test="${searchBoard.local != null}">
-<div id="floatMenu" style="padding-top: 150px; padding-left: 50%; position: absolute; text-align: center; left:50px;">
-	<jsp:include page="/view/board/weather.jsp">
-		<jsp:param name="weatherLocal" value="${searchBoard.local}"/>
-	</jsp:include>
-</div>
-</c:if>
 
-<c:if test="${searchBoard.local == null && user.userAddr != null}">
-<div id="floatMenu" style="padding-top: 150px; padding-left: 50%; position: absolute; text-align: center;">
-	<jsp:include page="/view/board/weather.jsp">
-		<jsp:param name="weatherLocal" value="${user.userAddr}"/>
-	</jsp:include>
-</div>
-</c:if>
-</div>
-
-
-<div class="col-sm-10" style="padding-right: 0px; padding-left: 0px;">
+<div class="col-sm-12" style="padding-right: 0px;">
 <form name="listBoard">
 
 
-<!-- <a href="/board/testUser"> -->
-<!-- <input type="button" value="세션"> -->
-<!-- </a> -->
+<a href="/board/testUser">
+<input type="button" value="세션">
+</a>
 
-<!-- <a href="/board/testUser2"> -->
-<!-- <input type="button" value="어드민세션"> -->
-<!-- </a> -->
+<a href="/board/testUser2">
+<input type="button" value="어드민세션">
+</a>
 
 
 <div class="row col-md-12">
@@ -631,8 +585,8 @@ function fncGetTown(){
 
 <!-- 검색 -->
 <div class="col-md-5 col-md-offset-2">
-<input type="text" name="searchKeyword" value="${! empty searchBoard.searchKeyword ? searchBoard.searchKeyword : ''}" onkeypress="enter()"; placeholder="해시태그 검색하기" 
-    style="width: 300px; "
+<input type="text" name="searchKeyword" value="${! empty searchBoard.searchKeyword ? searchBoard.searchKeyword : ''}" onkeypress="enter()"; placeholder=" 해시태그 검색하기" 
+    style="width: 300px; height: 40px; border-radius: 5px;"
 />
 </div>
 
@@ -651,7 +605,7 @@ function fncGetTown(){
 <div id="selectTown">
 <c:if test="${param.view=='town'}">
 <div class="row" style="display: inherit; text-align: center;">
-				<select name="state" class="ct_input_g" style="width: 200px; height: 40px; background-color: white;" onchange="fncGetState(this)">
+				<select name="state" class="ct_input_g" style="width: 200px; height: 40px; background-color: white; border-radius: 5px;" onchange="fncGetState(this)">
 					<option value='' style="font-size:20px;"  selected>시·도</option>
 					<c:set var="i" value="0"/>
 					<c:forEach var="local" items="${list}">
@@ -660,11 +614,11 @@ function fncGetTown(){
 					</c:forEach>
 				</select>
 				
-				<select name="city"  class="ct_input_g" style="width: 200px; height: 40px; background-color: white;" onchange="fncGetCity(this)">
+				<select name="city"  class="ct_input_g" style="width: 200px; height: 40px; background-color: white; border-radius: 5px;" onchange="fncGetCity(this)">
 					<option value="" style="font-size:20px;">시·군·구</option>
 				</select>
         
-				<select name="town"  class="ct_input_g" style="width: 200px; height: 40px; background-color: white;" onchange="fncGetTown(this)">
+				<select name="town"  class="ct_input_g" style="width: 200px; height: 40px; background-color: white; border-radius: 5px;" onchange="fncGetTown(this)">
 					<option value="" style="font-size:20px;">읍·면·동</option>
 				</select> 
 				
@@ -675,9 +629,9 @@ function fncGetTown(){
 </div>
 <!-- 동네 선택  끝-->
 
+<!-- 선택한 동네 보여주는 부분 -->
 <c:if test="${searchBoard.local !=null}">
 <br/>
-
 <div style="text-align: center;">
 <img src="/common/images/board/local.png" style="width: 20px;">${searchBoard.local}
 </div>
@@ -690,13 +644,54 @@ function fncGetTown(){
 
  <ul class="grid effect-2" id="grid">
  
+ 	<!-- 날씨 -->
+ 	<c:if test="${user.userNo!=null}">
+ 	<li>
+ 	<div class="box" style="height:250px;border-style: solid; border-width: .2rem; border-color: #afafaf;">
+ 
+ 		<!-- searchBoard.local 있는 경우 -->
+ 		<div style="padding-left: 30%;">
+ 		<c:if test="${searchBoard.local != null}">
+ 		<jsp:include page="/view/board/weather.jsp">
+			<jsp:param name="weatherLocal" value="${searchBoard.local}"/>
+		</jsp:include>
+ 		</c:if>
+ 		
+ 		<!-- searchBoard.local 없는 경우 -->
+ 		<c:if test="${searchBoard.local == null && user.userAddr != null}">
+ 		<jsp:include page="/view/board/weather.jsp">
+			<jsp:param name="weatherLocal" value="${user.userAddr}"/>
+		</jsp:include>
+ 		</c:if>
+ 		</div>
+ 	</div>
+ 	</li>
+ 	</c:if>
+ 	
+ 	
+	<!-- 게시물 리스트 없는 경우 -->
+	<c:if test="${fn:length(boardList)==0}">
+	<li>
+	<div class="box" style="height:520px; width: 600px; text-align: center; ">
+	<br/><br/><br/>
+	<img src="/common/images/board/goal.png" style="display: block; margin: 0px auto;">
+	<br/>
+	아직 등록된 게시물이 없습니다.
+	<br/>
+	이 동네의 개척자가 되어보세요!
+	</div>
+	</li>
+	</c:if>
+ 
+ 
  <c:forEach var="board" items="${boardList}">
 	<c:set var="i" value="${ i+1 }" />
+
 	
 	<!-- 블라인드 게시물 -->
 	<c:if test="${board.boardStatus=='3' && user.grade!='4'}">
 		<li>	
-		<div class="box" style="height:250px;">
+		<div class="box" style="height:250px; border-style: solid; border-width: .2rem; border-color: #afafaf;">
 		<p style="text-align: center;"><br/><br/><br/>신고 누적으로<br/>블라인드 된 게시물입니다</p>
 		</div>
 		</li>
@@ -709,8 +704,9 @@ function fncGetTown(){
 <!-- 썸네일 박스 시작 -->
 <li>
 
+	<!-- 유저 테마 -->
 	<c:if test="${board.userTheme=='H_spoon'}">
-	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #afafaf;">
+	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #f4ff9a;">
 	</c:if>
 	
 	<c:if test="${board.userTheme=='D_spoon'}">	
@@ -732,58 +728,60 @@ function fncGetTown(){
 	<c:if test="${board.userTheme=='G_spoon2'}">	
 	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #d2c0fb;">
 	</c:if>
-		
+	
+	<!-- 프로필 사진, 닉네임 -->	
 	<p>
 	<img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px; display: inline; vertical-align: middle"/>
 	<span style="height:100%; font-weight: bold; display: inline; vertical-align: middle;">&nbsp;${board.user.userNickname}</span>
 	
-	
+	<!-- 좋아요 -->
 	<span name="like" id="${board.boardNo}like" data-boardNo="${board.boardNo}" data-checkLike="${board.checkLike}">	
 	<c:choose>
 		<c:when test="${user.userNo !=null}">
 		
-		<span name="${board.boardNo}likeCount" style="display: inline; margin-left:3px; margin-top: 7px; float: right;">${board.likeCount}</span>
+		<span name="${board.boardNo}likeCount" style="display: inline; margin-left:3px; margin-top: 19px; float: right;">${board.likeCount}</span>
 		
 			<c:if test="${board.likeUserNo==null && board.checkLike=='0'}">
-				<img src="/common/images/board/emptyLike.png" style="display: inline; vertical-align: middle; float:right; width: 30px;" name="${board.boardNo}emptyLike"/>
+				<img src="/common/images/board/emptyLike.png" style="display: inline; vertical-align: middle; float:right; width: 30px; margin-top: 12px;" name="${board.boardNo}emptyLike"/>
 			</c:if>
 			
 			<c:if test="${user.userNo==board.likeUserNo && board.checkLike=='1'}">
-				<img src="/common/images/board/fullLike.png" style="display: inline; vertical-align: middle; float:right; width: 30px;" name="${board.boardNo}fullLike"/>			
+				<img src="/common/images/board/fullLike.png" style="display: inline; vertical-align: middle; float:right; width: 30px; margin-top: 12px;" name="${board.boardNo}fullLike"/>			
 			</c:if>
 			
 			<c:if test="${user.userNo==board.likeUserNo && board.checkLike=='2'}">
-				<img src="/common/images/board/emptyLike.png" style="display: inline; vertical-align: middle; float:right; width: 30px;" name="${board.boardNo}emptyLike"/>			
+				<img src="/common/images/board/emptyLike.png" style="display: inline; vertical-align: middle; float:right; width: 30px; margin-top: 12px;" name="${board.boardNo}emptyLike"/>			
 			</c:if>
 			
 		</c:when>
 	</c:choose>
 	</span>
 	
-		
+	<!-- 스크랩 -->	
 	<span name="scrap" id="${board.boardNo}scrap" data-boardNo="${board.boardNo}" data-checkScrap="${board.checkScrap}">
 	<c:choose>
 		<c:when test="${user.userNo !=null}">
 			<c:if test="${board.scrapUserNo==null && board.checkScrap=='0'}">
-				<img src="/common/images/board/emptyScrap.png" style="display: inline; vertical-align: middle; float:right; width: 40px; height: 30px;" name="${board.boardNo}emptyScrap"/>
+				<img src="/common/images/board/emptyScrap.png" style="display: inline; vertical-align: middle; float:right; width: 40px; height: 30px; margin-top: 12px;" name="${board.boardNo}emptyScrap"/>
 			</c:if>
 			
 			<c:if test="${user.userNo==board.scrapUserNo && board.checkScrap=='1'}">
-				<img src="/common/images/board/fullScrap.png" style="display: inline; vertical-align: middle; float:right; width: 40px; height: 30px;" name="${board.boardNo}fullScrap"/>
+				<img src="/common/images/board/fullScrap.png" style="display: inline; vertical-align: middle; float:right; width: 40px; height: 30px; margin-top: 12px;" name="${board.boardNo}fullScrap"/>
 			</c:if>
 			
 			<c:if test="${user.userNo==board.scrapUserNo && board.checkScrap=='2'}">
-				<img src="/common/images/board/emptyScrap.png" style="display: inline; vertical-align: middle; float:right; width: 40px; height: 30px;" name="${board.boardNo}emptyScrap"/>
+				<img src="/common/images/board/emptyScrap.png" style="display: inline; vertical-align: middle; float:right; width: 40px; height: 30px; margin-top: 12px;" name="${board.boardNo}emptyScrap"/>
 			</c:if>
 		
 		</c:when>
 	</c:choose>
 	</span>
-		
+	
+	<!-- 카카오링크 -->
 	<c:if test="${board.address!=null}">	
 	<span id="${board.boardNo}kakao-link-btn" name="kakao1"
 	 data-address="${board.address}" data-boardDetailText="${board.boardDetailText}" data-hashTag="${board.hashTag}" data-photo1="${board.photo1}" data-likeCount="${board.likeCount}" data-boardNo="${board.boardNo}"
-	 style="display: inline; float: right; width: 30px; height: 40px;">
+	 style="display: inline; float: right; width: 30px; height: 40px; margin-top: 13px;">
 	<img src="/common/images/board/kakao.JPG"/>
 	</span>
 	</c:if>
@@ -791,7 +789,7 @@ function fncGetTown(){
 	<c:if test="${board.address==null}">
 	<span id="${board.boardNo}kakao-link-btn" name="kakao2"
 	 data-boardDetailText="${board.boardDetailText}" data-hashTag="${board.hashTag}" data-photo1="${board.photo1}" data-likeCount="${board.likeCount}" data-boardNo="${board.boardNo}"
-	 style="display: inline; float: right; width: 30px; height: 40px;">
+	 style="display: inline; float: right; width: 30px; height: 40px; margin-top: 13px;">
 	<img src="/common/images/board/kakao.JPG"/>
 	</span>
 	</c:if>
@@ -864,7 +862,7 @@ function fncGetTown(){
 	<p style="text-align: center;">${board.boardDetailText}</p>
 	<p style="text-align: left; font-size: small">${board.hashTag}</p>
 	
-</div><!-- 본문 내용 끝 -->
+</div><!-- 본문 내용 realBox 끝 -->
 </div><!-- box 끝 -->
 </li>
 <!-- 썸네일 박스 끝 -->

@@ -73,8 +73,7 @@ $(function(){
 			realCode.attr("src","/common/images/board/icons8-sleet-96.png");
 			
 			if(code2=="SKY_O11")
-			realCode.attr("src","/common/images/board/icons8-storm-96.png");
-					
+			realCode.attr("src","/common/images/board/icons8-storm-96.png");					
 			
 			var weatherLocal=$("#weatherLocal");
 			weatherLocal.html(city+" "+county+" "+village);
@@ -103,7 +102,7 @@ $(function(){
   
   <tr>
     <td class="tg-s268" colspan="3" rowspan="6" style="text-align: center;">   
-    <img id="code" src=""/>
+    <img id="code" src="" style="display: block; margin: 0px auto;"/>
     </td>
   </tr>
   
