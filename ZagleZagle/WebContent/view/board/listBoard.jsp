@@ -185,7 +185,7 @@ $(function(){
 			return;
 		}
 		
-		self.location="http://192.168.0.49:8080/board/addBoard?userNo=${user.userNo}";
+		self.location="http://192.168.0.19:8080/board/addBoard?userNo=${user.userNo}";
 	})
 	
 	//지도로 보기
@@ -354,6 +354,16 @@ $(function(){
 	});
 	
 	
+	//사진 링크
+	$("#${board.photo1}link").bind("click",function(){
+		var photo1=$(this).data('photo1');
+		var boardNo=$(this).data('boardno');
+		
+		alert(photo1);
+		alert(boardNo);
+	});
+	
+	
 	//카카오 링크1 주소 있는 경우
 	$("span[name='kakao1']").bind("click",function(){
 		
@@ -383,8 +393,8 @@ $(function(){
 		      description: hashTag,
 		      imageUrl: photo1,
 		      link: {
-		        mobileWebUrl: 'http://192.168.0.49:8080/board/getBoard?view=mobile&boardNo='+boardNo,
-		        webUrl: 'http://192.168.0.49:8080/board/getBoard?view=mobile&boardNo='+boardNo
+		        mobileWebUrl: 'http://192.168.0.19:8080/board/getBoard?view=mobile&boardNo='+boardNo,
+		        webUrl: 'http://192.168.0.19:8080/board/getBoard?view=mobile&boardNo='+boardNo
 		      }
 		    },
 		    social: {
@@ -394,8 +404,8 @@ $(function(){
 		      {
 		        title: '웹으로 보기',
 		        link: {
-		          mobileWebUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo,
-		          webUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo
+		          mobileWebUrl: 'http://192.168.0.19:8080/board/getBoard?boardNo='+boardNo,
+		          webUrl: 'http://192.168.0.19:8080/board/getBoard?boardNo='+boardNo
 		        }
 		      }
 		    ]
@@ -432,8 +442,8 @@ $(function(){
           description: hashTag,
           imageUrl: photo1,
           link: {
-            mobileWebUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo,
-            webUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo
+            mobileWebUrl: 'http://192.168.0.19:8080/board/getBoard?boardNo='+boardNo,
+            webUrl: 'http://192.168.0.19:8080/board/getBoard?boardNo='+boardNo
           }
         },
         social: {
@@ -443,8 +453,8 @@ $(function(){
           {
             title: '웹으로 보기',
             link: {
-              mobileWebUrl: 'http://192.168.0.49:8080/board/getBoard?view=mobile&boardNo='+boardNo,
-              webUrl: 'http://192.168.0.49:8080/board/getBoard?view=mobile&boardNo='+boardNo
+              mobileWebUrl: 'http://192.168.0.19:8080/board/getBoard?view=mobile&boardNo='+boardNo,
+              webUrl: 'http://192.168.0.19:8080/board/getBoard?view=mobile&boardNo='+boardNo
             }
           }
         ]
@@ -656,7 +666,7 @@ function fncGetTown(){
  	<div class="box" id="weather" style="height:250px;">
  
  		<!-- searchBoard.local 있는 경우 -->
- 		<div style="padding-left: 30%;">
+ 		<div style="padding-left: 4.5em;">
  		<c:if test="${searchBoard.local != null}">
  		<jsp:include page="/view/board/weather.jsp">
 			<jsp:param name="weatherLocal" value="${searchBoard.local}"/>
@@ -923,7 +933,9 @@ function fncGetTown(){
 
 		<div>
 			<c:if test="${board.photo1 !=null}">
-			<div><img src="${board.photo1}" style="width: 100%" onclick=""/></div>
+			<div><img src="${board.photo1}" style="width: 100%"/>
+				<input type="button" value="링크 추가" id="${board.photo1}link" data-photo1="${board.photo1}" data-boardNo="${board.boardNo}">
+			</div>
 			<br/>
 			</c:if>
 
