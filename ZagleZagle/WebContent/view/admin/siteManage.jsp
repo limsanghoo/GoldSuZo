@@ -29,6 +29,14 @@
 	
 	<script type="text/javascript">
 	
+	
+	$(function() {
+		
+		$("#page-wrapper1").append('<iframe src="/board/listBoard" style="height:100%; width: 100%;" frameborder="0" scrolling="no"></iframe>');
+	});
+	
+	
+	
 	 $( function() {
 			//==> 추가된부분 : "addUser"  Event 연결
 			
@@ -86,7 +94,16 @@
 	
 	</script>
 	
+	<style>
 	
+#page-wrapper1 {
+
+	width: 100%;
+	height :1200px;
+    padding: 15px;
+	
+}
+	</style>
 	
 	
 </head>
@@ -115,7 +132,7 @@
                     </li>
                     <li id="handleReport"><a href="#"><i class="fa fa-magic"></i>신고 처리</a></li>
                     
-                       <li id="sponUser"><a href="#"><i class="fa fa-magic"></i>환급한 회원 목록</a></li>
+                       <li id="sponUser"><a href="#"><i class="glyphicon glyphicon-usd"></i>환급한 회원 목록</a></li>
                     
              
                 </ul>
@@ -125,74 +142,15 @@
             </div>
         </nav>
 
-        <div id="page-wrapper">
+        <div id="page-wrapper1">
          
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="fa fa-calendar"></i> Calendar</h3>
-                                </div>
-                                <div class="panel-body text-center">
-                                    <div id="calendar1"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="fa fa-gear"></i> Settings</h3>
-                                </div>
-                                <div class="panel-body">
-									<ul class="list-group">
-										<li class="list-group-item">
-											<span class="label label-default">Label Default</span>
-											<div class="pull-right">
-												<input id="switch1" name="switch1" type="checkbox" />
-											</div>
-										</li>
-										<li class="list-group-item">
-											<span class="label label-success">Label Success</span>
-											<div class="pull-right">
-												<input id="switch2" name="switch2" type="checkbox" />
-											</div>
-										</li>
-										<li class="list-group-item">
-											<span class="label label-primary">Label Primary</span>
-											<div class="pull-right">
-												<input id="switch3" name="switch3" type="checkbox" checked="checked" />
-											</div>
-										</li>
-										<li class="list-group-item">
-											<span class="label label-info">Label Info</span>
-											<div class="pull-right">
-												<input id="switch4" name="switch4" type="checkbox" checked="checked" />
-											</div>
-										</li>
-										<li class="list-group-item">
-											<span class="label label-warning">Label Warning</span>
-											<div class="pull-right">
-												<input id="switch5" name="switch4" type="checkbox" />
-											</div>
-										</li>
-										<li class="list-group-item">
-											<span class="label label-danger">Label Danger</span>
-											<div class="pull-right">
-												<input id="switch6" name="switch4" type="checkbox" checked="checked" />
-											</div>
-										</li>
-									</ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-               
-            </div>
+          
             <!-- /.row -->
-       
+            
+            
+       </div>
         <!-- /#page-wrapper -->
-
+	</div>
     <!-- /#wrapper -->
 
     <script type="text/javascript" src="/common/css/PBDashboard/js/jquery-1.10.2.min.js"></script>

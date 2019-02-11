@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -26,6 +28,10 @@
 	<![endif]-->
 	
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	
+	
+	<!--  sweetAlert -->  	
+   	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	
 	<script type="text/javascript">
 	
@@ -71,21 +77,204 @@
 		
 		}); 
    
-	
+	 function fncGetList(currentPage) {
+		   
+		   //var list = "${list}";
+		   //alert(currentPage)
+		    $("#currentPage").val(currentPage)
+		   
+		    
+		    $("form").attr("method", "POST").attr("action", "/stream/listRefund").submit();
+		   }
+		  
+		$(function() {
+		   $(".checkRefund").on("click", function() {
+		  			
+			   
+			   	
+			   swal({
+					  title: "환급 하시겠습니까?",
+					  
+						
+					  buttons: true,
+					  buttons: true,
+					})
+					.then((willDelete) => {
+					  if (willDelete) {
+					  
+						   var check = $(this).data("param");
+					         var refundNo = $(this).data("param2");
+					 
+					         $.ajax({
+						            
+					               
+
+					             url: "/stream/json/updateRefund?check="+check+"&refundNo="+refundNo,          
+					             method: "get", 
+					             dataType : 'json',
+					               headers: {
+					                    "Accept": "application/json", 
+					                    "Content-Type": "application/json"
+					                },
+					               success: function(JSONData,status){       
+					               //   alert('성공'); 
+					                  location.reload();
+					                //alert(status);   
+					                //alert(JSONData);  
+					              }
+					         });    
+					         
+					         
+					         
+					  } else {
+					    swal("환급을 취소하셨습니다.");
+					  }
+					});
+				
+			   
+			   
+			   
+			   
+			   
+		       
+		       //  alert(check+refundNo);        
+		  
+		          
+		         });
+		   });
 	
 	
 	
 	</script>
 	
+	<style>
 	
+	button{
+      align-self:center;
+      background:transparent;
+      padding:1rem 1rem;
+      
+      transition:all .5s ease;
+      color:#ea062f;     
+      
+      letter-spacing:1px;
+      outline:none;
+      box-shadow: 20px 38px 34px -26px hsla(0,0%,0%,.2);
+      border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+   } 
+       button:hover{
+         box-shadow:2px 8px 4px -6px hsla(0,0%,0%,.3);
+      } 
+      button.lined.thick{
+         border:solid 6px #41403E;        
+      }  
+	
+	</style>
 	
 	
 </head>
 <body>
     <div id="wrapper">
      
+       <nav class="navbar navbar-default navbar-fixed-top" role="navigation">            
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="siteManage.jsp" title="ZagleZagle">ZagleZagle</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li class="active"><a href="view/siteManage.jsp"><i class="glyphicon glyphicon-th"></i> Dashboard</a></li>
+                    <li class="nav nav-list nav-list-expandable nav-list-expanded">
+                        <a><i class="fa fa-user"></i> 회원목록 상세보기 <span class="caret"></span></a>
+                        <ul class="nav navbar-nav">
+                            <li><a href="#"><i class="fa fa-table"></i>회원목록</a></li>
+                            <li><a href="/admin/listBlackObject"><i class="fa fa-edit"></i>예비 블랙리스트</a></li>
+                            <li><a href="/admin/listBlackList"><i class="fa fa-edit"></i>블랙리스트 목록</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/admin/handleReport"><i class="fa fa-magic"></i> 신고 처리</a></li>
+                    <li class="nav nav-list nav-list-expandable">
+                        <a><i class="fa fa-key"></i> 방문자 통계 <span class="caret"></span></a>
+                        <ul class="nav navbar-nav">
+                            <li><a href="#">Sub Item 1</a></li>
+                            <li><a href="#">Sub Item 2</a></li>
+                        </ul>
+                    <li>
+                </ul>
+              
+                   </li>
+                </ul>
+            </div>
+        </nav>
+     
+     
+     
+     
+       <div id="page-wrapper">
+     
+     
+     <div id="margin">
+        <h1>환급리스트</h1></div>
+      <!-- ToolBar End /////////////////////////////////////-->
+      <div id="margintable">
+ <table class="table">  
+      
+        <thead>
+          <tr>
+            <th align="center">No</th>
+            <th align="left" >스트리머넘버</th>
+            <th align="left">스트리머닉네임</th>
+            <th align="left">은행이름</th>
+            <th align="left">계좌번호</th>
+            <th align="left">환급신청 금액</th>
+            <th align="left">상태</th>
+          </tr>
+               
+        </thead>  
+           
+      <tbody>   
+        <c:set var="i" value="0" />
+        <c:forEach var="refund" items="${list}">
+         <c:set var="i" value="${ i+1 }" />
+         <tr>
+           <td align="center">${ i }</td>  
+           <td align="left">${refund.streamerNo}</td> 
+           <td align="left">${refund.streamerNickname}</td>
+           <td align="left">${refund.bankname}</td>
+           <td align="left">${refund.account}</td>
+           <td align="left">${refund.price}</td>
+           <c:if test="${refund.checkRefund =='0'}">
+              <td align="left" class="checkRefund" data-param="0" data-param2="${refund.refundNo}"><button style="height:26px; text-align:center; padding-top:0;">
+              
+             <strong>환급진행중</strong> 
+              
+              </button></td> 
+              </c:if>
+              <c:if test="${refund.checkRefund =='1'}"> 
+               <td align="left" data-param="1" data-param2="${refund.streamerNo}">환급완료</td>
+              </c:if> 
+          </tr>
+          
+          </c:forEach>
+           <form>
+                <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+              <input type="hidden" id="currentPage" name="currentPage" value=""/>
+           </form> 
+           </div>
+        </tbody>
+      </table> 
+      </div>  
+     <jsp:include page="/common/pageNavigation.jsp"/> 
+     
+     
+     	
             <!-- /.row -->
-       
+       </div>
         <!-- /#page-wrapper -->
 </div>
     <!-- /#wrapper -->

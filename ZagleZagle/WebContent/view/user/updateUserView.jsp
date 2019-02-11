@@ -73,16 +73,40 @@
 			function fncUpdateUser() {
 		
 			
-				var birth=$("input[name='userBirth']").val();
-				var userAddr=$("input[name='userAddr']").val();
+				var name=$("input[name='userName']").val();
+				   var nickName=$("input[name='userNickname']").val();
+				   var birth=$("input[name='userBirth']").val();
+				   var userAddr=$("input[name='userAddr']").val();
+				   var profile=$("input[name='profile']").val();
+				   
 				
 			
 				
-				  if(birth.length != 6) {
-					  swal("주민등록번호 앞자리만 입력해주세요.");
+				   if(name.length < 1) {
+					      swal("이름을 입력하세요")
+					      return;
+					   }
+				   
+				   if(nickName.length < 1) {
+					      swal("닉네임을 입력하세요")
+					      return;
+					   }
+
+
+				   
+				   
+				   
+				   if(birth.length != 6) {
+				      swal("주민등록번호 앞자리를 입력해주세요")
 				      return;
 				   }
 				   
+				  
+				   if(userAddr.length < 1) {
+					   
+					swal("주소를 입력해주세요.");
+					return
+				   }
 			
 			$("form").attr("method" , "POST").attr("action" , "/user/updateUser?userNo=${user.userNo}&snsNo=${user.snsNo}").submit();
 			}
