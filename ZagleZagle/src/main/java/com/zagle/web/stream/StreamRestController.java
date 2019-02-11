@@ -98,13 +98,13 @@ public class StreamRestController {
 		    params.add("quantity","1");
 		    params.add("total_amount",price);
 		    params.add("tax_free_amount","0");
-		    params.add("approval_url","http://192.168.0.14:8080/stream/json/kakaoOkStream");
-		    params.add("cancel_url","http://192.168.0.14:8080");
-		    params.add("fail_url","http://192.168.0.14:8080");
+		    params.add("approval_url","http://192.168.0.47:8080/stream/json/kakaoOkStream");
+		    params.add("cancel_url","http://192.168.0.47:8080");
+		    params.add("fail_url","http://192.168.0.47:8080");
 
 		    // 서버로 요청할 Header 
 		    HttpHeaders headers = new HttpHeaders();
-		    headers.add("Authorization","KakaoAK "+"afd426e1a2275871414bee8f57f4f304");
+		    headers.add("Authorization","KakaoAK "+"afd426e1a2275874747bee8f57f4f304");
 		    headers.add("Content-Type",MediaType.APPLICATION_FORM_URLENCODED_VALUE +";charset=UTF-8");
 
 		    HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(params, headers);
@@ -139,13 +139,13 @@ public class StreamRestController {
 		    params.add("quantity","1");
 		    params.add("total_amount",spon.getPrice()+"");
 		    params.add("tax_free_amount","0");
-		    params.add("approval_url","http://192.168.0.14:8080/stream/json/kakaoOkStream?");
-		    params.add("cancel_url","http://192.168.0.14:8080");
-		    params.add("fail_url","http://192.168.0.14:8080");
+		    params.add("approval_url","http://192.168.0.47:8080/stream/json/kakaoOkStream?");
+		    params.add("cancel_url","http://192.168.0.47:8080");
+		    params.add("fail_url","http://192.168.0.47:8080");
 
 		    // 서버로 요청할 Header 
 		    HttpHeaders headers = new HttpHeaders();
-		    headers.add("Authorization","KakaoAK "+"afd426e1a2275871414bee8f57f4f304");
+		    headers.add("Authorization","KakaoAK "+"afd426e1a2275874747bee8f57f4f304");
 		    headers.add("Content-Type",MediaType.APPLICATION_FORM_URLENCODED_VALUE +";charset=UTF-8");
 
 		    HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(params, headers);
@@ -174,7 +174,7 @@ public class StreamRestController {
 	System.out.println("addStream[stream]="+stream);
 	streamService.addStream(stream);
 	
-	ModelAndView view = new ModelAndView("redirect:https://192.168.0.14:443/streamer="+user.getUserNo()+"&userName="+user.getUserNickname());
+	ModelAndView view = new ModelAndView("redirect:https://192.168.0.47:443/streamer="+user.getUserNo()+"&userName="+user.getUserNickname());
 	return view;	
 	}
 	
@@ -201,7 +201,7 @@ public class StreamRestController {
 			
 	    // 서버로 요청할 Header
 		    HttpHeaders headers = new HttpHeaders();
-		    headers.add("Authorization","KakaoAK "+"afd426e1a2275871414bee8f57f4f304");
+		    headers.add("Authorization","KakaoAK "+"afd426e1a2275874747bee8f57f4f304");
 		    headers.add("Content-Type",MediaType.APPLICATION_FORM_URLENCODED +";charset=UTF-8");
 
 		    HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(params, headers);
@@ -214,13 +214,13 @@ public class StreamRestController {
 		  	User user = (User) session.getAttribute("user");
 		  	User streamer = (User) session.getAttribute("streamer");
 		  	System.out.println("user닉네임===================="+user.getUserNickname());
-		  //	String url  = "https://192.168.0.14/stream/sponSpeech2?streamer="+streamer.getUserNo()+"&userNo="+user.getUserNo()+"&userNickname="+user.getUserNickname()+"&userProfile=default.jpg&price="+session.getAttribute("price");
+		  //	String url  = "https://192.168.0.47/stream/sponSpeech2?streamer="+streamer.getUserNo()+"&userNo="+user.getUserNo()+"&userNickname="+user.getUserNickname()+"&userProfile=default.jpg&price="+session.getAttribute("price");
 		  //	String encodeResult = URLEncoder.encode(url, "UTF-8");
 //System.out.println(encodeResult);
 		String encode =  	URLEncoder.encode(user.getUserNickname(),"UTF-8");
 		System.out.println("인코딩 한 후 닉네임================"+encode);
 		 	//ModelAndView view = new ModelAndView("redirect:"+url); 
-		 	ModelAndView view = new ModelAndView("redirect:https://192.168.0.14:443/stream/sponSpeech2?streamer="+streamer.getUserNo()+"&userNo="+user.getUserNo()+"&userNickname="+encode+"&userProfile=default.jpg&price="+session.getAttribute("price"));
+		 	ModelAndView view = new ModelAndView("redirect:https://192.168.0.47:443/stream/sponSpeech2?streamer="+streamer.getUserNo()+"&userNo="+user.getUserNo()+"&userNickname="+encode+"&userProfile=default.jpg&price="+session.getAttribute("price"));
 		//	ModelAndView view = new ModelAndView("redirect:http://192.168.0.12:8080/stream/));
 			//modelAndView.setViewName("forward:/view/stream/close.jsp");	
 		  	return view; 
@@ -252,7 +252,7 @@ public class StreamRestController {
 			
 	    // 서버로 요청할 Header
 		    HttpHeaders headers = new HttpHeaders();
-		    headers.add("Authorization","KakaoAK "+"afd426e1a2275871414bee8f57f4f304");
+		    headers.add("Authorization","KakaoAK "+"afd426e1a2275874747bee8f57f4f304");
 		    headers.add("Content-Type",MediaType.APPLICATION_FORM_URLENCODED +";charset=UTF-8");
 
 		    HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(params, headers);
