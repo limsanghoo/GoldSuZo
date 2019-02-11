@@ -107,7 +107,7 @@ text-indent: -999em;
     width: 100%;
     height: 130px;
     background-color: #d8e0f0;
-    border-bottom: 2px solid #ffaaf6;
+    border-bottom: 2px solid #2eca6a;
 }
 
 #myg_header div.myg_header {
@@ -224,7 +224,7 @@ script {
     padding-top: 10px;
     height: 70px;
     width: 70px;
-    border: 1.5px solid #f5f6fa;
+    
     border-radius: 50%;
       }
 
