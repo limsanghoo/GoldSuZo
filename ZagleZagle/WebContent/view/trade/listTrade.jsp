@@ -29,11 +29,14 @@
 
 form{
 		padding-top:100px;
-	 	padding-left:150px;
-        padding-right:150px;
-       	background-color:#e2e2e2;
         background-size: cover;
         height: 100%;
+
+     background: #DEEFE2; 
+     background: -moz-linear-gradient(top, #eaf2ec 0%, #d1bafc 68%, #220b4f 100%, #220b4f 100%); 
+     background: -webkit-linear-gradient(top, #DEEFE2 0%,#d1bafc 68%,#220b4f 100%,#220b4f 100%);
+     background: linear-gradient(to bottom, #DEEFE2 0%,#d1bafc 68%,#220b4f 100%,#220b4f 100%);
+     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaf2ec', endColorstr='#220b4f',GradientType=0 );
 	}
 
 body {
