@@ -69,8 +69,13 @@
 
 form{
 	padding-top : 150px;
-	background-color:#e2e2e2;
-
+	min-height: 100vh;
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#eaf2ec+0,dceadf+26,d1bafc+69,947dc0+85,220b4f+100 */
+	background: #eaf2ec; /* Old browsers */
+	background: -moz-linear-gradient(top, #eaf2ec 0%, #dceadf 26%, #d1bafc 69%, #947dc0 85%, #220b4f 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #eaf2ec 0%,#dceadf 26%,#d1bafc 69%,#947dc0 85%,#220b4f 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #eaf2ec 0%,#dceadf 26%,#d1bafc 69%,#947dc0 85%,#220b4f 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaf2ec', endColorstr='#220b4f',GradientType=0 ); /* IE6-9 */
 	}
 
 body {
@@ -160,7 +165,9 @@ input[name='report']{
 
 #weather{
 	background-image: url("https://i.imgur.com/wEnaF2K.png");
-
+/* 	background-image: url("https://i.imgur.com/rkzHSG4.jpg"); */
+	background-size: cover;
+	
 }
 
 
@@ -355,12 +362,17 @@ $(function(){
 	
 	
 	//사진 링크
-	$("#${board.photo1}link").bind("click",function(){
+	$("input[value='링크 추가']").bind("click",function(){
 		var photo1=$(this).data('photo1');
 		var boardNo=$(this).data('boardno');
 		
-		alert(photo1);
-		alert(boardNo);
+		self.location="/board/addLink?boardNo="+boardNo;
+	});
+	
+	
+	//검색 버튼 클릭
+	$("#search").bind("click",function(){
+		$("form").attr("method" , "POST").attr("action" , "/board/listBoard?view=${param.view}").submit();
 	});
 	
 	
@@ -472,6 +484,7 @@ function enter() {
         	$("form").attr("method" , "POST").attr("action" , "/board/listBoard?view=${param.view}").submit();
         }
 }
+
 
 
 //시도 선택
@@ -601,9 +614,11 @@ function fncGetTown(){
 
 <!-- 검색 -->
 <div class="col-md-5 col-md-offset-2">
+<span>
 <input class="form-control" type="text" name="searchKeyword" value="${! empty searchBoard.searchKeyword ? searchBoard.searchKeyword : ''}" onkeypress="enter()"; placeholder=" 해시태그 검색하기" 
-    style="width: 300px; height: 40px; border-radius: 5px;"
-/>
+    style="width: 300px; height: 40px; border-radius: 5px; display: inherit;"/>
+<img src="/common/images/trade/search.png" id="search">
+</span>
 </div>
 
 <!-- 게시물 등록 -->
@@ -666,7 +681,7 @@ function fncGetTown(){
  	<div class="box" id="weather" style="height:250px;">
  
  		<!-- searchBoard.local 있는 경우 -->
- 		<div style="padding-left: 4.5em;">
+ 		<div style="margin-left: 4.5em; margin-top: 1em;">
  		<c:if test="${searchBoard.local != null}">
  		<jsp:include page="/view/board/weather.jsp">
 			<jsp:param name="weatherLocal" value="${searchBoard.local}"/>
@@ -688,13 +703,13 @@ function fncGetTown(){
 	<!-- 게시물 리스트 없는 경우 -->
 	<c:if test="${fn:length(boardList)==0}">
 	<li>
-	<div class="box" style="height:520px; width: 600px; text-align: center; ">
+	<div class="box" style="height:500px; width: 600px; text-align: center; ">
 	<br/><br/><br/>
 	<img src="/common/images/board/goal.png" style="display: block; margin: 0px auto;">
 	<br/>
 	아직 등록된 게시물이 없습니다.
 	<br/>
-	이 동네의 개척자가 되어보세요!
+	개척자가 되어보세요!
 	</div>
 	</li>
 	</c:if>
@@ -742,7 +757,7 @@ function fncGetTown(){
 	</c:if>
 	
 	<c:if test="${board.userTheme=='G_spoon2'}">	
-	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #d2c0fb;">
+	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #b79fef;">
 	</c:if>
 	
 	<!-- 프로필 사진, 닉네임 -->	
@@ -934,7 +949,7 @@ function fncGetTown(){
 		<div>
 			<c:if test="${board.photo1 !=null}">
 			<div><img src="${board.photo1}" style="width: 100%"/>
-				<input type="button" value="링크 추가" id="${board.photo1}link" data-photo1="${board.photo1}" data-boardNo="${board.boardNo}">
+				<input type="button" value="링크 추가" data-photo1="${board.photo1}" data-boardNo="${board.boardNo}">
 			</div>
 			<br/>
 			</c:if>

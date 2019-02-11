@@ -97,7 +97,7 @@ $(function(){
   </tr>
   
   <tr>
-    <td class="tg-0lax" colspan="3"><br/></td>
+    <td class="tg-0lax" colspan="3"></td>
   </tr>
   
   <tr>
@@ -118,7 +118,7 @@ $(function(){
   </tr>
   
   <tr>
-    <td class="tg-0lax" colspan="3"><br/></td>
+    <td class="tg-0lax" colspan="3"></td>
   </tr>
   
   <tr>

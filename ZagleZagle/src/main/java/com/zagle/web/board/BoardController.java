@@ -144,9 +144,16 @@ public class BoardController {
 	
 
 	@RequestMapping(value="addLink", method=RequestMethod.GET)
-	public ModelAndView addLink() throws Exception{
+	public ModelAndView addLink(@RequestParam("boardNo")String boardNo) throws Exception{
+		
+		System.out.println("/addLink GET");
+		
+		System.out.println("boardNo : "+boardNo);
+		
 		
 		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.addObject("board", boardService.getBoard(boardNo));
+		modelAndView.setViewName("forward:/view/board/addLink.jsp");
 		
 		return modelAndView;
 	}
@@ -221,16 +228,6 @@ public class BoardController {
 		return modelAndView;
 	}
 	
-	/*@RequestMapping(value="addReport", method=RequestMethod.POST)
-	public ModelAndView addReport(@ModelAttribute("report") Report report) throws Exception{
-		
-		System.out.println("/addReport POST");
-		System.out.println(report);
-		
-		ModelAndView modelAndView=new ModelAndView();
-		
-		return modelAndView;
-	}*/
 	
 	
 	@RequestMapping(value="deleteBoard", method=RequestMethod.GET)
