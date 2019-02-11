@@ -69,8 +69,8 @@
 
 form{
 	padding-top : 150px;
-/* 	background-color:#e2e2e2; */
-	background-color: #ffffff;
+	background-color:#e2e2e2;
+
 	}
 
 body {
@@ -158,6 +158,12 @@ input[name='report']{
   color: #000000;
 }
 
+#weather{
+	background-image: url("https://i.imgur.com/wEnaF2K.png");
+
+}
+
+
 </style>
 <script type="text/javascript">
 
@@ -179,7 +185,7 @@ $(function(){
 			return;
 		}
 		
-		self.location="http://192.168.0.49:8080/board/addBoard?userNo=${user.userNo}";
+		self.location="http://192.168.0.19:8080/board/addBoard?userNo=${user.userNo}";
 	})
 	
 	//지도로 보기
@@ -348,6 +354,16 @@ $(function(){
 	});
 	
 	
+	//사진 링크
+	$("#${board.photo1}link").bind("click",function(){
+		var photo1=$(this).data('photo1');
+		var boardNo=$(this).data('boardno');
+		
+		alert(photo1);
+		alert(boardNo);
+	});
+	
+	
 	//카카오 링크1 주소 있는 경우
 	$("span[name='kakao1']").bind("click",function(){
 		
@@ -377,8 +393,8 @@ $(function(){
 		      description: hashTag,
 		      imageUrl: photo1,
 		      link: {
-		        mobileWebUrl: 'http://192.168.0.49:8080/board/getBoard?view=mobile&boardNo='+boardNo,
-		        webUrl: 'http://192.168.0.49:8080/board/getBoard?view=mobile&boardNo='+boardNo
+		        mobileWebUrl: 'http://192.168.0.19:8080/board/getBoard?view=mobile&boardNo='+boardNo,
+		        webUrl: 'http://192.168.0.19:8080/board/getBoard?view=mobile&boardNo='+boardNo
 		      }
 		    },
 		    social: {
@@ -388,8 +404,8 @@ $(function(){
 		      {
 		        title: '웹으로 보기',
 		        link: {
-		          mobileWebUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo,
-		          webUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo
+		          mobileWebUrl: 'http://192.168.0.19:8080/board/getBoard?boardNo='+boardNo,
+		          webUrl: 'http://192.168.0.19:8080/board/getBoard?boardNo='+boardNo
 		        }
 		      }
 		    ]
@@ -426,8 +442,8 @@ $(function(){
           description: hashTag,
           imageUrl: photo1,
           link: {
-            mobileWebUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo,
-            webUrl: 'http://192.168.0.49:8080/board/getBoard?boardNo='+boardNo
+            mobileWebUrl: 'http://192.168.0.19:8080/board/getBoard?boardNo='+boardNo,
+            webUrl: 'http://192.168.0.19:8080/board/getBoard?boardNo='+boardNo
           }
         },
         social: {
@@ -437,8 +453,8 @@ $(function(){
           {
             title: '웹으로 보기',
             link: {
-              mobileWebUrl: 'http://192.168.0.49:8080/board/getBoard?view=mobile&boardNo='+boardNo,
-              webUrl: 'http://192.168.0.49:8080/board/getBoard?view=mobile&boardNo='+boardNo
+              mobileWebUrl: 'http://192.168.0.19:8080/board/getBoard?view=mobile&boardNo='+boardNo,
+              webUrl: 'http://192.168.0.19:8080/board/getBoard?view=mobile&boardNo='+boardNo
             }
           }
         ]
@@ -585,7 +601,7 @@ function fncGetTown(){
 
 <!-- 검색 -->
 <div class="col-md-5 col-md-offset-2">
-<input type="text" name="searchKeyword" value="${! empty searchBoard.searchKeyword ? searchBoard.searchKeyword : ''}" onkeypress="enter()"; placeholder=" 해시태그 검색하기" 
+<input class="form-control" type="text" name="searchKeyword" value="${! empty searchBoard.searchKeyword ? searchBoard.searchKeyword : ''}" onkeypress="enter()"; placeholder=" 해시태그 검색하기" 
     style="width: 300px; height: 40px; border-radius: 5px;"
 />
 </div>
@@ -647,10 +663,10 @@ function fncGetTown(){
  	<!-- 날씨 -->
  	<c:if test="${user.userNo!=null}">
  	<li>
- 	<div class="box" style="height:250px;border-style: solid; border-width: .2rem; border-color: #afafaf;">
+ 	<div class="box" id="weather" style="height:250px;">
  
  		<!-- searchBoard.local 있는 경우 -->
- 		<div style="padding-left: 30%;">
+ 		<div style="padding-left: 4.5em;">
  		<c:if test="${searchBoard.local != null}">
  		<jsp:include page="/view/board/weather.jsp">
 			<jsp:param name="weatherLocal" value="${searchBoard.local}"/>
@@ -691,7 +707,7 @@ function fncGetTown(){
 	<!-- 블라인드 게시물 -->
 	<c:if test="${board.boardStatus=='3' && user.grade!='4'}">
 		<li>	
-		<div class="box" style="height:250px; border-style: solid; border-width: .2rem; border-color: #afafaf;">
+		<div class="box" style="height:250px;">
 		<p style="text-align: center;"><br/><br/><br/>신고 누적으로<br/>블라인드 된 게시물입니다</p>
 		</div>
 		</li>
@@ -706,11 +722,11 @@ function fncGetTown(){
 
 	<!-- 유저 테마 -->
 	<c:if test="${board.userTheme=='H_spoon'}">
-	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #f4ff9a;">
+	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #9ebdcc;">
 	</c:if>
 	
 	<c:if test="${board.userTheme=='D_spoon'}">	
-	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #eac999;">
+	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #ffdf7f;">
 	</c:if>
 	
 	<c:if test="${board.userTheme=='S_spoon1'}">	
@@ -718,11 +734,11 @@ function fncGetTown(){
 	</c:if>
 	
 	<c:if test="${board.userTheme=='S_spoon2'}">	
-	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #8fef4c;">
+	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #8cdc94;">
 	</c:if>
 	
 	<c:if test="${board.userTheme=='G_spoon1'}">	
-	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #a5cff5;">
+	<div class="box" style="border-style: solid; border-width: .2rem; border-color: #8fd5f5;">
 	</c:if>
 	
 	<c:if test="${board.userTheme=='G_spoon2'}">	
@@ -917,7 +933,9 @@ function fncGetTown(){
 
 		<div>
 			<c:if test="${board.photo1 !=null}">
-			<div><img src="${board.photo1}" style="width: 100%"/></div>
+			<div><img src="${board.photo1}" style="width: 100%"/>
+				<input type="button" value="링크 추가" id="${board.photo1}link" data-photo1="${board.photo1}" data-boardNo="${board.boardNo}">
+			</div>
 			<br/>
 			</c:if>
 

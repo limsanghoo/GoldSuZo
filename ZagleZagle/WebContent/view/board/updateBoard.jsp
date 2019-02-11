@@ -122,7 +122,7 @@ $(function(){
 		        
 		        $.ajax(	
 		        		{
-		        			url : "http://192.168.0.49:8080/board/json/addBoardVisionTag",
+		        			url : "http://192.168.0.19:8080/board/json/addBoardVisionTag",
 		        			method : "GET",
 		        			data : {
 		        				link : result.data.link
@@ -133,7 +133,7 @@ $(function(){
 		        				var decode=decodeURIComponent(data);//특수문자 포함 디코딩
 		        				//alert("decode : "+decode);
 		        				
-		        				if(decode.charAt(0)=="#"){
+		        				if(decode.charAt(0)=="#" && decode.length!=1){
 		        					var tagArea=$("#hashTag");
 		        					tagArea.val(tagArea.val()+decode);//해시태그 append
 		        				}
