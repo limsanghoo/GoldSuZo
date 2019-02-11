@@ -91,8 +91,9 @@ background-color: whitesmoke;
 	
 overflow: hidden;
 display: block;
-height: 100px;
-background: url(//192.168.0.18:8080/common/images/mypage/mypageLogo.jpg) no-repeat;
+height: 80px;
+width: 80px;
+
 text-indent: -999em;
 
 
@@ -101,10 +102,12 @@ text-indent: -999em;
 
 
 #myg_header {
-	padding-top : 13%;
+	
+    margin-top: 110px;
     width: 100%;
-    height: 121px;
- 	background-color: #d8e0f0;
+    height: 130px;
+    background-color: #d8e0f0;
+    border-bottom: 2px solid #ffaaf6;
 }
 
 #myg_header div.myg_header {
@@ -122,8 +125,7 @@ text-indent: -999em;
 
 #myg_header div.myg_header .header_sch {
     width: 385px;
-    padding-top: 20px;
-    float: left;
+
 }
 
 
@@ -217,6 +219,57 @@ script {
     border-top-style: none;
 }
 
+.myg_header img{
+       margin-top: 5px;
+    padding-top: 10px;
+    height: 70px;
+    width: 70px;
+    border: 1.5px solid #f5f6fa;
+    border-radius: 50%;
+      }
+
+#myg_row {
+
+      background-color: lavender;
+    height: 700px;
+    padding-left: 32%;
+    padding-right: 10%;
+    padding-top: 16%;
+}
+
+#myg_row .myg_row1  {
+
+padding-left: 50px;
+}
+
+
+.myg_row1 {
+
+  width:100px;
+  height:100px;
+  margin:10px auto;
+  overflow:hidden;
+
+}
+
+.myg_row1 img{
+	width:100px;
+	height: 100px;
+
+}
+
+.myg_row1 img:hover{
+cursor: pointer;
+-webkit-transform:scale(1.7);
+transform:sclae(1.7);
+transition: transform .35s;
+            -o-transition: transform .35s;
+            -moz-transition: transform .35s;
+            -webkit-transition: transform .35s;
+            
+}
+
+
 </style>
 	
 	
@@ -243,19 +296,19 @@ script {
 
 	
 
-<div id=wrap" class=mygwrap">
 	<a name="top"></a>
 
 	<!-- 마이페이지 헤더 -->
 	<div id="myg_header">
 	
 		<div class="myg_header">
-			<h1>나의 활동정보 myD</h1>
+			<img src="/common/images/profile/${user.profile}" >
+			
 			<div class="header_sch">
 				<p class="grade">
 					<span class="text_grade">
-						<strong>${user.userName}</strong>
-						님의 등급은
+						<strong>${user.userNickname}</strong>
+						님의 등급은<br>
 						<span class="icon_grade">
 						<span class="grade"></span>
 						
@@ -291,124 +344,85 @@ script {
 				</span>
 			</div>
 			
-			<div class="myg_mymenu">
-				<ul>
-					<li class="totalActiveSocre">
-					 <span class="blindtext">활동 점수</span>
-					 <a>
-					<img src="/common/images/mypage/push-pin.png" width="50px;" height="50px;]">
-					<span>${user.totalActiveScore}</span>
-					점
-					</a>
-				   </li>
-				   
-				   <li class="restScore">
-				   <span class="blindtext">등업까지</span>
-				   
-				   <a>
-				   <span>   
-				   
-				   
-			 <c:if test="${user.grade=='3'}">
-	       
-			0
-	       
-			</c:if>
-			
-			<c:if test="${user.grade=='2'}">
-	       
-	 
-	       
-	       	 ${299-user.totalActiveScore} 점 남았습니다.
-	       
-			</c:if>
-	       	
-	       	<c:if test="${user.grade=='1'}">
-	       
-	 
-	  		${199-user.totalActiveScore} 점 남았습니다.
-	       
-	       
-			</c:if>
-	       	
-	       	<c:if test="${user.grade=='0'}">
-	       
-	    
-	   
-	       	${99-user.totalActiveScore} 점 남았습니다.
-	       
-			</c:if>
-				   
-				   
-				   
-				    </span>
-				   
-				   </a>
-				   </li>
-				   
-				   
-				   
-				</ul>
-			
-			</div>  <!-- mypage menu div 끝 -->
 			
 			
-		</div> <!--  myapge header div 끝 -->
+			
+			
+			
 		
 	</div> <!-- #mypage header div 끝 -->
+</div>
+
+<div id="myg_row">	
 	
 	
-	<div id="contentswrap">
-		<div id="contents">
-		 	<div id="main_menu">
-		 		<span class="bg_menu_else"></span>
-		 		<ul class="menu_list">
-		 			<li id="menu1">
-		 				<a href="#" class="mn1"> <span>작성한 게시물 보기</span>
-		 			</a>
-		 			</li>
-		 			
-		 			<li id="menu6">
-		 				<a href="#" class="mn6">
-		 					<span>댓글 작성한 게시물</span>
-		 				
-		 				</a>
-		 			</li>
-		 			
-		 			<li id="menu3">
-		 				<a href="#" class="mn3">
-		 					<span> 스크랩 게시물</span>
-		 				
-		 				</a>
-		 			</li>
-		 			
-		 				<li id="menu4">
-		 				<a href="#" class="mn4">
-		 					<span> 좋아요 게시물</span>
-		 				
-		 				</a>
-		 			</li>
-		 			
-		 					<li id="menu5">
-		 				<a href="#" class="mn4">
-		 					<span>계좌번호 등록</span>
-		 				
-		 				</a>
-		 			</li>
-		 			
-		 			</ul>
-		
-		 			
-		 			
-		 			
-		 		
+  <span class="myg_row1">
+  
+  		
+      <img src="/common/images/mypage/board.png" style="width:50px; height:50px;" data-toggle="tooltip" data-placement="top" title="작성 게시물로 이동" id="myboard">
+  
+     </span>
+   
+
+  
+
+
+  	
+  <span class="myg_row1">
+
+
+      <img src="/common/images/mypage/cocococo.png" style="width:50px; height:50px;" data-toggle="tooltip" data-placement="top" 
+      title="댓글 작성한 게시물로 이동" id="commentBoard">
+ 
+  </span>
+      
+  
+
 	
-	
-	
-</div> <!-- wrap 끝 -->	
 
 
 	
+  <span class="myg_row1">
+
+
+      <img src="/common/images/mypage/scrapscarp.png" style="width:50px; height:50px;" data-toggle="tooltip" data-placement="top" title="스크랩 게시물로 이동" id="scrapBoard">
+
+</span>
+ 
+
+
+
+
+
+	
+  <span class="myg_row1">
+
+      <img src="/common/images/mypage/love.png" style="width:50px; height:50px;" data-toggle="tooltip" data-placement="top" title="좋아요한 게시물로 이동" id="likeBoard">
+  
+
+   </span>
+    
+    	
+  <span class="myg_row1">
+
+      <img src="/common/images/mypage/addaccount2.png" style="width:50px; height:50px;" data-toggle="tooltip" data-placement="top" title="계좌번호 등록" id="addAccount">
+      
+	</span>
+	
+	
+  <span class="myg_row1">
+      <img src="/common/images/mypage/chageacc.png" style="width:50px; height:50px;" data-toggle="tooltip" data-placement="top" title="계좌번호 수정" id="updateAccount">
+    
+
+</span>
+  
+
+    
+  
+    </div> <!--  div id row 끝 -->
+ 
+
+
 
 
 
