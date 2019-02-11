@@ -2,6 +2,7 @@ package com.zagle.web.board;
 
 import java.net.URI;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -163,7 +164,8 @@ public class BoardRestController {
 	      System.out.println("/listComment GET");
 	      System.out.println("boardNo : "+boardNo);
 	      
-	      List<Comment> list = boardService.listComment(boardNo);
+	      List<Comment> list = new ArrayList<Comment>();
+	      list = boardService.listComment(boardNo);
 
 	      System.out.println("list : "+list);
 	      

@@ -196,8 +196,14 @@ public class StreamController {
 		modelAndView.addObject("count",map.get("count"));
 		modelAndView.addObject("resultPage",resultPage); 
 		User user = (User)session.getAttribute("user");
+		
+		System.out.println("grade "+user);
+		
 		if(user.getGrade().equals("4")) {
 			modelAndView.setViewName("forward:/view/admin/siteManage2.jsp");	
+			
+			System.out.println("이거되나 확인");
+			
 		}else {
 		modelAndView.setViewName("forward:/view/stream/listRefund.jsp");	
 		}
