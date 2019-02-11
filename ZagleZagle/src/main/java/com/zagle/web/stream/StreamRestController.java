@@ -298,7 +298,8 @@ public class StreamRestController {
 	
 	
 	@RequestMapping(value="json/inicisStream", method = RequestMethod.POST)   
-	public ModelAndView inicisStream(@RequestBody Spon spon,HttpSession session) throws Exception{
+	@ResponseBody 
+	public Map<String,Object> inicisStream(@RequestBody Spon spon,HttpSession session) throws Exception{
 		System.out.println("inicisStream==== ");
 		System.out.println("inicisStream==== spon =>"+spon);
 		String userNo = spon.getUserNo();
@@ -311,9 +312,10 @@ public class StreamRestController {
 		refund.setPrice(spon.getPrice()); 
 		refund.setStreamerNickname(user.getUserNickname());
 		
-	 	ModelAndView modelAndView = new ModelAndView(); 
-		
-		return modelAndView;
+	 	//ModelAndView modelAndView = new ModelAndView(); 
+		Map<String,Object> map = new HashMap<>();
+		map.put("userNo",user.getUserNo());
+		return map; 
  
 	}
 	
