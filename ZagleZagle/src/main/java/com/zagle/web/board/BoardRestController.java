@@ -34,6 +34,7 @@ import com.zagle.service.board.BoardService;
 import com.zagle.service.domain.Board;
 import com.zagle.service.domain.Comment;
 import com.zagle.service.domain.Like;
+import com.zagle.service.domain.Link;
 import com.zagle.service.domain.Local;
 import com.zagle.service.domain.Scrap;
 import com.zagle.service.domain.SearchBoard;
@@ -61,22 +62,7 @@ public class BoardRestController {
 	
 	@Value("#{commonProperties['boardPageSize']}")
 	int boardPageSize;
-	
-	@RequestMapping(value="json/shareBoard", method=RequestMethod.GET)
-	public ModelAndView shareBoard() throws Exception{
-		
-		ModelAndView modelAndView=new ModelAndView();
-		
-		return modelAndView;
-	}
-	
-	@RequestMapping(value="json/addBoardDaumMap", method=RequestMethod.GET)
-	public ModelAndView addBoardDaumMap() throws Exception{
-		
-		ModelAndView modelAndView=new ModelAndView();
-		
-		return modelAndView;
-	}
+
 	
 	@RequestMapping(value="json/addBoardVisionTag", method=RequestMethod.GET)
 	@ResponseBody
@@ -89,13 +75,6 @@ public class BoardRestController {
 		return resultTag;
 	}
 
-	@RequestMapping(value="json/listMap", method=RequestMethod.GET)
-	public ModelAndView listMap() throws Exception{
-		
-		ModelAndView modelAndView=new ModelAndView();
-		
-		return modelAndView;
-	}
 	
 	@RequestMapping(value="json/listMap/getCity/{stateCode}",method=RequestMethod.GET)
 	public List<Local> getCity(@PathVariable int stateCode) throws Exception{
@@ -135,7 +114,7 @@ public class BoardRestController {
 	@RequestMapping(value="json/addComment", method=RequestMethod.POST)
 	public int addComment(@RequestBody Map<String, String> map) throws Exception{
 		  
-	      System.out.println("addComment POST");
+	      System.out.println("/json/addComment POST");
 	      
 	      System.out.println(map);
 	      
@@ -161,7 +140,7 @@ public class BoardRestController {
 
 	   @RequestMapping(value="json/listComment/{boardNo}", method=RequestMethod.GET)
 	   public List<Comment> getCommentList(@PathVariable String boardNo) throws Exception{
-	      System.out.println("/listComment GET");
+	      System.out.println("/json/listComment GET");
 	      System.out.println("boardNo : "+boardNo);
 	      
 	      List<Comment> list = new ArrayList<Comment>();
@@ -176,7 +155,7 @@ public class BoardRestController {
 	   @RequestMapping(value="json/deleteComment/{commentNo}", method=RequestMethod.GET)
 	   public int deleteComment(@PathVariable String commentNo) throws Exception{
 		   
-	      System.out.println("deleteComment GET");
+	      System.out.println("/json/deleteComment GET");
 	      
 	      System.out.println("commentNo : "+commentNo);
 	      
@@ -189,7 +168,7 @@ public class BoardRestController {
 	   @RequestMapping(value="json/addLike/{userNo}/{boardNo}", method=RequestMethod.GET)
 	   public int addLike(@PathVariable String userNo, @PathVariable String boardNo) throws Exception{
 		   
-		   System.out.println("/addLike");
+		   System.out.println("/json/addLike");
 		   System.out.println("userNo : "+userNo);
 		   System.out.println("boardNo : "+boardNo);
 		   
@@ -206,7 +185,7 @@ public class BoardRestController {
 	   @RequestMapping(value="json/updateLike/{userNo}/{boardNo}/{checkLike}", method=RequestMethod.GET)
 	   public int updateLike(@PathVariable String userNo, @PathVariable String boardNo, @PathVariable String checkLike) throws Exception{
 		   
-		   System.out.println("/updateLike");
+		   System.out.println("/json/updateLike");
 		   System.out.println("userNo : "+userNo);
 		   System.out.println("boardNo : "+boardNo);
 		   System.out.println("checkLike : "+checkLike);
@@ -233,7 +212,7 @@ public class BoardRestController {
 	   @RequestMapping(value="json/addScrap/{userNo}/{boardNo}", method=RequestMethod.GET)
 	   public int addScrap(@PathVariable String userNo, @PathVariable String boardNo) throws Exception{
 		   
-		   System.out.println("/addScrap");
+		   System.out.println("/json/addScrap");
 		   System.out.println("userNo : "+userNo);
 		   System.out.println("boardNo : "+boardNo);
 		   
@@ -250,7 +229,7 @@ public class BoardRestController {
 	   @RequestMapping(value="json/updateScrap/{userNo}/{boardNo}/{checkScrap}", method=RequestMethod.GET)
 	   public int updateScrap(@PathVariable String userNo, @PathVariable String boardNo, @PathVariable String checkScrap) throws Exception{
 		   
-		   System.out.println("/updateScrap");
+		   System.out.println("/json/updateScrap");
 		   System.out.println("userNo : "+userNo);
 		   System.out.println("boardNo : "+boardNo);
 		   System.out.println("checkScrap : "+checkScrap);
@@ -324,6 +303,18 @@ public class BoardRestController {
 		 
 		 return map;
 		 
+	 }
+	 
+	 
+	 @RequestMapping( value="json/addLink", method=RequestMethod.POST)
+	 public int addLink(@RequestBody Link link) throws Exception{
+		 
+		 System.out.println("/json/addLink");
+		 System.out.println(link);
+		 
+		 boardService.addLink(link);
+		 
+		return 1;	 
 	 }
 	 
 	 

@@ -70,6 +70,8 @@
 form{
 	padding-top : 150px;
 	min-height: 100vh;
+	min-width:100%;
+	
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#eaf2ec+0,dceadf+26,d1bafc+69,947dc0+85,220b4f+100 */
 	background: #eaf2ec; /* Old browsers */
 	background: -moz-linear-gradient(top, #eaf2ec 0%, #dceadf 26%, #d1bafc 69%, #947dc0 85%, #220b4f 100%); /* FF3.6-15 */
@@ -604,7 +606,7 @@ function fncGetTown(){
 </a>
 
 
-<div class="row col-md-12">
+<div class="row">
 <!-- 지도로 보기 -->
 <div class="col-md-2 col-md-offset-1">
 <c:if test="${user.userNo!=null}">
@@ -635,7 +637,7 @@ function fncGetTown(){
 <!-- 동네 선택 -->
 <div id="selectTown">
 <c:if test="${param.view=='town'}">
-<div class="row" style="display: inherit; text-align: center;">
+<div class="row" style="display: inherit; text-align: center; margin: 0px;">
 				<select name="state" class="ct_input_g" style="width: 200px; height: 40px; background-color: white; border-radius: 5px;" onchange="fncGetState(this)">
 					<option value='' style="font-size:20px;"  selected>시·도</option>
 					<c:set var="i" value="0"/>
@@ -876,6 +878,7 @@ function fncGetTown(){
 
          marker.setMap(map);
          map.setBounds(bounds);
+         map.setLevel(3);
 
       map.setDraggable(false);
       map.setZoomable(false);
