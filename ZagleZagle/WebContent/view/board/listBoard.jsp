@@ -212,7 +212,30 @@ $(function(){
 		
 		commentList(boardNo);
 	})
+	//이거 네비게이션 입니다====================================================================================================주현 영역========================
+	$("span[name='navi']").on("click", function(){
+		
+		var address = $(this).data('address');
+		var coord = $(this).data('coord');
+		var arr = coord.split(',');
+		var x1 = arr[0];
+		var y1 = arr[1];
+		//alert(address);
+		//alert(coord);
+	var coordy = Number(x1);
+	var coordx = Number(y1);
+		alert(coordy);
+		alert(coordx);
+		  Kakao.init('bfb1e69b68a2d4c4b41ffd0d19fc47ff'); 
+		//self.location="/stream/goNavi?address="+address+"&coord="+coord		
+		Kakao.Navi.start({
+            name: "현대백화점 판교점",
+            x:coordx,
+            y:coordy,
+            coordType: 'wgs84'
+        });
 	
+	});//======================================================================================주현 영역 끝===============================================
 	
 	//좋아요 시작
 	$("span[name='like']").on("click", function(){
@@ -817,6 +840,13 @@ function fncGetTown(){
 	 style="display: inline; float: right; width: 30px; height: 40px; margin-top: 13px;">
 	<img src="/common/images/board/kakao.JPG"/>
 	</span>
+	
+	<span id="${board.boardNo}kakaonavi-link-btn" name="navi"
+	 data-address="${board.address}" data-coord="${board.coord}"
+	 style="display: inline; float: right; width: 30px; height: 40px; margin-top: 13px;">
+	<img src="/common/images/board/navi.PNG"/>
+	</span>
+	
 	</c:if>
 	
 	<c:if test="${board.address==null}">

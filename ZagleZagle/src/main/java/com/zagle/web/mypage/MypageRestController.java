@@ -37,6 +37,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -251,11 +252,11 @@ public class MypageRestController {
  	}
 	
 	
-	@RequestMapping(value="json/listMyBoard",method=RequestMethod.POST)
-	public Map<String,Object> listMyBoard(@RequestBody SearchMypage search,  HttpSession session) throws Exception {
+	@RequestMapping(value="json/listMyBoard/{userNo}",method=RequestMethod.GET)
+	public Map<String,Object> listMyBoard(@PathVariable String userNo,HttpSession session) throws Exception {
+		System.out.println("listMyBoard 도착===="+userNo);
 		
-		
-		if(session.getAttribute("user") != null) {
+	/*	if(session.getAttribute("user") != null) {
 			
 			User user = (User) session.getAttribute("user");
 			
@@ -266,7 +267,11 @@ public class MypageRestController {
 		}else if(session.getAttribute("user")==null) {
 			search.setMyUserNo(null);
 		}
+		SearchMypage search = new SearchMypage();
+		User user = userService.getUser2(userNo);
 		
+		search.setMyUserNo(user.getUserNo()); 
+		search.setCurrentPage(1);
 		Map<String, Object> map = mypageService.listMyBoard(search);
 		
 			
@@ -289,6 +294,41 @@ public class MypageRestController {
 		map.put("bdList", bdList);
 		
 		System.out.println(map);
+		return map;*/
+	//User user = (User) session.getAttribute("user");
+User user = userService.getUser2(userNo);
+	
+	SearchMypage search = new SearchMypage();
+	search.setMyUser(user);
+		
+		
+		System.out.println();
+		
+//		if(search.getCurrentPage()==0) {
+//			search.setCurrentPage(1);
+//		}
+//		search.setPageSize(pageSize);
+		
+		
+		Map<String, Object> map = mypageService.listMyBoard(search);
+//		Page resultPage = new Page(search.getCurrentPage(),((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+//		System.out.println(resultPage);
+//		
+		
+		System.out.println(map);
+		
+		ArrayList list = (ArrayList) map.get("list");
+		System.out.println(list);
+		List<Board> bdList = new ArrayList<Board>();
+		for (int i = 0; i < list.size(); i++) {
+		
+			Mypage mp = (Mypage)list.get(i);
+			String bdNo = mp.getBoard().getBoardNo();
+			
+			Board bd = boardService.getBoard(bdNo);
+			bdList.add(bd);
+		}
+		map.put("bdList", bdList);
 		return map;
 	}
 	@RequestMapping(value="json/listComment", method=RequestMethod.POST)
