@@ -58,16 +58,22 @@ function addLink(photo1, url, coordX, coordY){
 	    success : function(data){
 	                	
 	        if(data == 1) {
-	          $("#image_panel").empty();
+	        	$("#image_panel").empty();
+				$("#plus").append(
+					'<div class="tags_form" style="left: '+coordX+'px; top: '+coordY+'px; position: relative;">'
+			    	+'<img src="/common/images/board/plus.png">'
+			    	+'</div>'
+				);
 	        }
 	    }           
 		
 	});//ajax 끝
 	
+	
 }//링크 등록 끝
 
-
 function action_coords(event) {
+
 	var x = event.offsetX;
 
     var y = event.offsetY;
@@ -80,7 +86,7 @@ function action_coords(event) {
     		+'<input type="hidden" name="coordX" value="'+x+'">'
     		+'<input type="hidden" name="coordY" value="'+y+'">'
     		+'<button id="addLink">등록</button>'
-    		+'</div>'   		
+    		+'</div>'
     );
 
 }
@@ -88,13 +94,13 @@ function action_coords(event) {
 </script>
 
 </head>
-<body>
-
-
+<body id="body">
 	
 	<div style="margin-left: 300px;">
     	<span id="image_panel" style="position:absolute;">
     	</span>
+    	
+    	<span id="plus"></span>
     	<img src="${board.photo1}" alt="None" onclick="action_coords(event)" style="height: 500px;"> 
     	<input type="hidden" name="photo1" value="${board.photo1}">
     </div>
