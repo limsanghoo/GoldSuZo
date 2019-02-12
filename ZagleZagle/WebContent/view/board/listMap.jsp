@@ -46,7 +46,7 @@
 
 
 <div class="row"style="text-align: center; display: inherit;">
-				<select name="state" class="ct_input_g" style="width: 200px; height: 40px; background-color: white;" onchange="fncGetState(this)">
+				<select name="state" class="ct_input_g" style="width: 200px; height: 40px; background-color: white; border-radius: 5px;" onchange="fncGetState(this)">
 					<option value='' style="font-size:20px;"  selected>시·도</option>
 					<c:set var="i" value="0"/>
 					<c:forEach var="local" items="${list}">
@@ -55,11 +55,11 @@
 					</c:forEach>
 				</select>
 				
-				<select name="city"  class="ct_input_g" style="width: 200px; height: 40px; background-color: white;" onchange="fncGetCity(this)">
+				<select name="city"  class="ct_input_g" style="width: 200px; height: 40px; background-color: white; border-radius: 5px;" onchange="fncGetCity(this)">
 					<option value="" style="font-size:20px;">시·군·구</option>
 				</select>
         
-				<select name="town"  class="ct_input_g" style="width: 200px; height: 40px; background-color: white;" onchange="fncGetTown(this)">
+				<select name="town"  class="ct_input_g" style="width: 200px; height: 40px; background-color: white; border-radius: 5px;" onchange="fncGetTown(this)">
 					<option value="" style="font-size:20px;">읍·면·동</option>
 				</select>  
 				

@@ -327,5 +327,9 @@ public class BoardRestController {
 	 }
 	 
 	 
+//	 @RequestMapping( value="json/addLink", method=RequestMethod.POST)
+//	 public
+	 
+	 
 
 }
