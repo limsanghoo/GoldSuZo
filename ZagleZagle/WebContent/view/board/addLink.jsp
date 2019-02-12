@@ -58,19 +58,65 @@ function addLink(photo1, url, coordX, coordY){
 	    success : function(data){
 	                	
 	        if(data == 1) {
+	        	
 	        	$("#image_panel").empty();
-				$("#plus").append(
-					'<div class="tags_form" style="left: '+coordX+'px; top: '+coordY+'px; position: relative;">'
-			    	+'<img src="/common/images/board/plus.png">'
-			    	+'</div>'
-				);
+	        	
+// 				$("#plus").append(
+// 					'<span style="left: '+coordX+'px; top: '+coordY+'px; position: relative;">'
+// 					+'<img src="/common/images/board/plus.png">'
+// 					+'</span>'
+// 				);
+
+				listLink(photo1);
 	        }
 	    }           
 		
 	});//ajax 끝
-	
-	
+		
 }//링크 등록 끝
+
+
+//링크 리스트
+function listLink(photo1){
+	
+	alert("리스트");
+	
+	var data={"photo1" : photo1};
+	
+	$.ajax({
+		url : '/board/json/listLink',
+		type: 'POST',
+		data : JSON.stringify(data),
+		headers:{
+            "Accept":"application/json",
+            "Content-Type": "application/json"
+         },
+		success:function(JSONData){
+			
+			var a='';
+			
+			 $.each(JSONData, function(i){
+             	
+                 var list = JSONData[i];
+                 
+                 var linkNo="'"+list.linkNo+"'"; 
+                 var url="'"+list.url+"'";            
+                 var coordX="'"+list.coordX+"'";                 
+                 var coordY="'"+list.coordY+"'";
+                 
+                 a+='<span style="left: '+x+'px; top: '+y+'px; position: relative;">'
+			 });
+			 
+			 $(".listLink").html(a); 
+		}//success 끝
+		
+	});//ajax 끝
+	
+}//링크 리스트 끝
+
+
+
+
 
 function action_coords(event) {
 
@@ -81,12 +127,14 @@ function action_coords(event) {
     alert(x+","+y);
 
     $("#image_panel").append(
-    		'<div class="tags_form" style="left: '+x+'px; top: '+y+'px; position: relative;">'
+    		'<span class="tags_form" style="left: '+x+'px; top: '+y+'px; position: relative;">'
+    		+'<span id="#inputArea">'
     		+'<textarea name="url"></textarea>'
     		+'<input type="hidden" name="coordX" value="'+x+'">'
     		+'<input type="hidden" name="coordY" value="'+y+'">'
     		+'<button id="addLink">등록</button>'
-    		+'</div>'
+    		+'</span>'
+    		+'</span>'
     );
 
 }
@@ -96,14 +144,14 @@ function action_coords(event) {
 </head>
 <body id="body">
 	
-	<div style="margin-left: 300px;">
+	<span style="margin-left: 300px;">
     	<span id="image_panel" style="position:absolute;">
     	</span>
-    	
-    	<span id="plus"></span>
+		<!-- <span id="plus" style="position:absolute;"></span> -->
+		<span class="listLink"></span>
     	<img src="${board.photo1}" alt="None" onclick="action_coords(event)" style="height: 500px;"> 
     	<input type="hidden" name="photo1" value="${board.photo1}">
-    </div>
+    </span>
 
 <input type="button" value="등록">
 
