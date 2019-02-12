@@ -32,6 +32,7 @@ $(function(){
 		addLink(photo1, url, coordX, coordY);
 		
 	});
+
 });
 
 
@@ -46,7 +47,20 @@ function addLink(photo1, url, coordX, coordY){
 	};
 	
 	$.ajax({
-		url : '/board/json/addLink'
+		url : '/board/json/addLink',
+		type : 'POST',
+		data : JSON.stringify(data),
+		dataType:"json",
+	    headers:{
+	                   "Accept":"application/json",
+	                   "Content-Type": "application/json"
+	                },
+	    success : function(data){
+	                	
+	        if(data == 1) {
+	          $("#image_panel").empty();
+	        }
+	    }           
 		
 	});//ajax 끝
 	
@@ -66,8 +80,7 @@ function action_coords(event) {
     		+'<input type="hidden" name="coordX" value="'+x+'">'
     		+'<input type="hidden" name="coordY" value="'+y+'">'
     		+'<button id="addLink">등록</button>'
-    		+'</div>'
-    		
+    		+'</div>'   		
     );
 
 }
@@ -80,13 +93,13 @@ function action_coords(event) {
 
 	
 	<div style="margin-left: 300px;">
-    	<div id="image_panel" style="position:absolute;">
-    	</div>
+    	<span id="image_panel" style="position:absolute;">
+    	</span>
     	<img src="${board.photo1}" alt="None" onclick="action_coords(event)" style="height: 500px;"> 
     	<input type="hidden" name="photo1" value="${board.photo1}">
     </div>
 
-
+<input type="button" value="등록">
 
 
 </body>

@@ -52,8 +52,7 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public void addLink(Link link) throws Exception {
-		// TODO Auto-generated method stub
-		
+		boardDAO.addLink(link);
 	}
 
 	@Override

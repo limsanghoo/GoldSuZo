@@ -40,8 +40,7 @@ public class BoardDAOImpl implements BoardDAO{
 
 	@Override
 	public void addLink(Link link) throws Exception {
-		// TODO Auto-generated method stub
-		
+		sqlSession.insert("BoardMapper.addLink", link);
 	}
 
 	@Override
