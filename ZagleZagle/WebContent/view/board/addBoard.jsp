@@ -302,8 +302,9 @@ $(function(){
     var infowindow = new daum.maps.InfoWindow({zIndex:1});
 
     function ummm(){
-
     	
+    	
+
     	a='<div class="option">'+
             	'<div>'+
         			'키워드 : <input type="text" value="" id="keyword" size="15">'+
@@ -314,6 +315,7 @@ $(function(){
 			'<ul id="placesList"></ul>'+
 			'<div id="pagination"></div>';
 			
+		$("#menu_wrap").empty();
 		$('#menu_wrap').append(a);
     	
     }
@@ -385,7 +387,12 @@ $(function(){
             // 마커와 검색결과 항목에 mouseover 했을때
             // 해당 장소에 인포윈도우에 장소명을 표시합니다
             // mouseout 했을 때는 인포윈도우를 닫습니다
-            (function(marker, title) {
+            (function(marker, places) {
+            	var title = places.place_name;
+            	var coordy = places.y;
+            	var coordx = places.x;
+            	var address = places.address_name;
+            	
                 daum.maps.event.addListener(marker, 'mouseover', function() {
                     displayInfowindow(marker, title);
                 });
@@ -401,7 +408,13 @@ $(function(){
                 itemEl.onmouseout =  function () {
                     infowindow.close();
                 };
-            })(marker, places[i].place_name);
+                
+                itemEl.onclick =  function () {
+                	document.getElementById("sample5_address").value = address;
+                    $("input[name='coord']").val(coordy+","+coordx);
+                };
+                
+            })(marker, places[i]);
 
             fragment.appendChild(itemEl);
         }
