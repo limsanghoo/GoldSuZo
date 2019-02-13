@@ -149,7 +149,7 @@ function search(){
 
 <!-- 검색 -->
 <span id="searchKeyword" style="text-align: center; display: inherit;">
-<input type="text" name="searchKeyword" value="${! empty search.searchKeyword ? search.searchKeyword : ''}" onkeypress="enter()" placeholder="상품명으로 검색하기" style="height: 40px"/>
+<input type="text" name="searchKeyword" value="${! empty search.searchKeyword ? search.searchKeyword : ''}" onkeypress="enter()" placeholder=" 상품명으로 검색하기" style="height: 40px"/>
 <img src="/common/images/trade/search.png" id="search">
 </span>
 <label style="text-align: center; display: inherit;">
