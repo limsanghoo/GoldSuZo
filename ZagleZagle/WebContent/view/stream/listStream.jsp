@@ -25,7 +25,7 @@
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="/common/css/GridLoadingEffects/js/modernizr.custom.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>       
-        
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>        
         
         
  <!--  --> 
@@ -197,7 +197,7 @@ $(function() {
            if(JSONData==1){
         	   alert('강퇴당하셔서 입장 불가능 하십니다 ㅠ.ㅠ 다음기회에...~'); 
            }else{
-        		 window.open("https://192.168.0.47:443/stream/join?streamer="+streamer+"&userNo=${user.userNo}&userNickname=${user.userNickname}&userProfile=${user.profile}", "popup_window", "width=1450, height=900, scrollbars=no");
+        		 window.open("https://192.168.0.16:443/stream/join?streamer="+streamer+"&userNo=${user.userNo}&userNickname=${user.userNickname}&userProfile=${user.profile}", "popup_window", "width=1450, height=900, scrollbars=no");
            }  	                    
              },  
              error : function (err) { 
@@ -276,6 +276,18 @@ $(function() {
     <button class='btn btn-b' id="listRefund" name="listRefund">환급리스트이동</button> 
         <button class='btn btn-b' id="session" name="session">세션</button> 
          <button class='btn btn-b' id="session2" name="session">세션2</button>  
+         <div id="plusfriend-addfriend-button"></div>
+<script type='text/javascript'>
+  //<![CDATA[
+    // 사용할 앱의 JavaScript 키를 설정해 주세요.
+    Kakao.init('9eb4dc20c357b025d43287c96a92137d'); 
+    // 플러스친구 친구추가 버튼을 생성합니다.
+    Kakao.PlusFriend.createAddFriendButton({
+      container: '#plusfriend-addfriend-button',
+      plusFriendId: '_unxdxej' // 플러스친구 홈 URL에 명시된 id로 설정합니다.
+    });
+  //]]>
+</script>
         
   </div>
 					 
