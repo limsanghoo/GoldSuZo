@@ -104,7 +104,12 @@ function listLink(photo1){
                  var coordX="'"+list.coordX+"'";                 
                  var coordY="'"+list.coordY+"'";
                  
-                 a+='<span style="left: '+x+'px; top: '+y+'px; position: relative;">'
+                 a+='<span style="left: '+list.coordX+'px; top: '+list.coordY+'px; position: absolute; width:100px; background-color:white;">'
+                 a+=list.url
+                 a+='<input type="hidden" value='+list.linkNo+'>'
+                 a+='<input type="button" value="삭제" onclick="deleteLink('+linkNo+')">'
+                 a+='</span>'
+                 
 			 });
 			 
 			 $(".listLink").html(a); 
@@ -113,6 +118,12 @@ function listLink(photo1){
 	});//ajax 끝
 	
 }//링크 리스트 끝
+
+
+//링크 삭제
+function deleteLink(linkNo){
+	alert(linkNo);
+}
 
 
 
@@ -124,7 +135,6 @@ function action_coords(event) {
 
     var y = event.offsetY;
     
-    alert(x+","+y);
 
     $("#image_panel").append(
     		'<span class="tags_form" style="left: '+x+'px; top: '+y+'px; position: relative;">'
@@ -143,12 +153,17 @@ function action_coords(event) {
 
 </head>
 <body id="body">
+
+
+
+	
+	
 	
 	<span style="margin-left: 300px;">
     	<span id="image_panel" style="position:absolute;">
     	</span>
 		<!-- <span id="plus" style="position:absolute;"></span> -->
-		<span class="listLink"></span>
+		<span class="listLink" style="position: absolute;"></span>
     	<img src="${board.photo1}" alt="None" onclick="action_coords(event)" style="height: 500px;"> 
     	<input type="hidden" name="photo1" value="${board.photo1}">
     </span>
