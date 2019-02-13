@@ -70,6 +70,8 @@
 form{
 	padding-top : 150px;
 	min-height: 100vh;
+	min-width:100%;
+	
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#eaf2ec+0,dceadf+26,d1bafc+69,947dc0+85,220b4f+100 */
 	background: #eaf2ec; /* Old browsers */
 	background: -moz-linear-gradient(top, #eaf2ec 0%, #dceadf 26%, #d1bafc 69%, #947dc0 85%, #220b4f 100%); /* FF3.6-15 */
@@ -211,6 +213,31 @@ $(function(){
 		commentList(boardNo);
 	})
 	
+	
+	//이거 네비게이션 입니다====================================================================================================주현 영역========================
+	$("span[name='navi']").on("click", function(){
+		
+		var address = $(this).data('address');
+		var coord = $(this).data('coord');
+		var arr = coord.split(',');
+		var x1 = arr[0];
+		var y1 = arr[1];
+		//alert(address);
+		//alert(coord);
+	var coordy = Number(x1);
+	var coordx = Number(y1);
+		alert(coordy);
+		alert(coordx);
+		  Kakao.init('bfb1e69b68a2d4c4b41ffd0d19fc47ff'); 
+		//self.location="/stream/goNavi?address="+address+"&coord="+coord		
+		Kakao.Navi.start({
+            name: "현대백화점 판교점",
+            x:coordx,
+            y:coordy,
+            coordType: 'wgs84'
+        });
+	
+	});//======================================================================================주현 영역 끝===============================================
 	
 	//좋아요 시작
 	$("span[name='like']").on("click", function(){
@@ -604,7 +631,7 @@ function fncGetTown(){
 </a>
 
 
-<div class="row col-md-12">
+<div class="row">
 <!-- 지도로 보기 -->
 <div class="col-md-2 col-md-offset-1">
 <c:if test="${user.userNo!=null}">
@@ -635,7 +662,7 @@ function fncGetTown(){
 <!-- 동네 선택 -->
 <div id="selectTown">
 <c:if test="${param.view=='town'}">
-<div class="row" style="display: inherit; text-align: center;">
+<div class="row" style="display: inherit; text-align: center; margin: 0px;">
 				<select name="state" class="ct_input_g" style="width: 200px; height: 40px; background-color: white; border-radius: 5px;" onchange="fncGetState(this)">
 					<option value='' style="font-size:20px;"  selected>시·도</option>
 					<c:set var="i" value="0"/>
@@ -815,6 +842,13 @@ function fncGetTown(){
 	 style="display: inline; float: right; width: 30px; height: 40px; margin-top: 13px;">
 	<img src="/common/images/board/kakao.JPG"/>
 	</span>
+	
+	<span id="${board.boardNo}kakaonavi-link-btn" name="navi"
+	 data-address="${board.address}" data-coord="${board.coord}"
+	 style="display: inline; float: right; width: 30px; height: 40px; margin-top: 13px;">
+	<img src="/common/images/board/navi.PNG"/>
+	</span>
+	
 	</c:if>
 	
 	<c:if test="${board.address==null}">
@@ -876,6 +910,7 @@ function fncGetTown(){
 
          marker.setMap(map);
          map.setBounds(bounds);
+         map.setLevel(3);
 
       map.setDraggable(false);
       map.setZoomable(false);

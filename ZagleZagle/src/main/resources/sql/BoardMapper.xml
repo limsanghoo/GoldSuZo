@@ -53,7 +53,17 @@
 		<result property="checkScrap"	column="check_scrap"	jdbcType="VARCHAR"/>
 	</resultMap>
 	
+	<resultMap type="link" id="linkSelectMap">
+		<result property="linkNo"	column="link_no"	jdbcType="VARCHAR"/>
+		<result property="coordX"	column="coordX"	jdbcType="VARCHAR"/>
+		<result property="coordY"	column="coordY"	jdbcType="VARCHAR"/>
+		<result property="url"	column="url"	jdbcType="VARCHAR"/>
+		<result property="photo1"	column="photo1"	jdbcType="VARCHAR"/>
+	</resultMap>
+	
 	 
+	 
+<!-- ///////////게시물//////////// -->	 
 	 <insert id="addBoard"	parameterType="board" >
 	 	INSERT
 		INTO board(board_no, user_no, board_detail_text, hash_tag, user_theme, board_reg_date, board_status, photo1, photo2, photo3, coord, address)
@@ -61,27 +71,7 @@
 	 </insert>
 	 
 	 
-	<insert id="addComment" parameterType="comment">
-	 	INSERT
-	 	INTO comments(comment_no, board_no, user_no, comment_detail_text, comment_reg_date, comment_status)
-	 	VALUES('CM'||seq_cm.nextval,#{board.boardNo},#{user.userNo},#{commentDetailText},sysdate,#{commentStatus})
-	 </insert>
-	 
-	 
-	 <insert id="addLike" parameterType="like">
-	 	INSERT 
-	 	INTO likes(like_no, board_no, user_no, check_like) 
-	 	VALUES('LK'||seq_lk.nextval,#{board.boardNo},#{user.userNo},#{checkLike})
-	 </insert>
-	 
-	 <insert id="addScrap" parameterType="scrap">
-	 	INSERT 
-	 	INTO scrap(scrap_no, board_no, user_no, check_scrap) 
-	 	VALUES('SC'||seq_sc.nextval,#{board.boardNo},#{user.userNo},#{checkScrap})
-	 </insert>
-	 
-	 
-	<select id="listBoard" parameterType="com.zagle.service.domain.SearchBoard" resultMap="boardSelectMap">
+	 <select id="listBoard" parameterType="com.zagle.service.domain.SearchBoard" resultMap="boardSelectMap">
 		SELECT DISTINCT u.user_no, u.profile, u.user_nickname, b.board_no, b.photo1, b.photo2, b.photo3, b.board_detail_text, b.hash_tag, b.user_theme, b.coord, b.board_reg_date, b.board_status, b.address 	
 		,(SELECT count(*) FROM likes WHERE board_no=b.board_no AND check_like='1')likeCount
 		
@@ -109,52 +99,12 @@
 		ORDER BY b.board_reg_date DESC
 	 </select>
 	 
-	 
-	 <select id="listComment" parameterType="string" resultMap="commentSelectMap">
-	 	SELECT DISTINCT u.user_no, u.profile, u.user_nickname, c.board_no, c.comment_no, c.comment_detail_text, c.comment_reg_date, c.comment_status  
-		FROM users u, comments c 
-		WHERE c.user_no=u.user_no AND c.board_no=#{value} 
-	 	ORDER BY c.comment_reg_date
-	 </select>
-	 
-	 
+
 	<select id="getBoard" parameterType="int"	resultMap="boardSelectMap">
 	 	SELECT *
 	 	FROM board
 	 	WHERE board_no=#{value}
 	</select>
-	
-<!-- 	<select id="getTotalCount" parameterType="com.zagle.service.domain.SearchBoard" resultType="int"> -->
-<!-- 	SELECT COUNT(*) -->
-<!-- 	FROM( -->
-<!-- 		SELECT DISTINCT u.user_no, u.profile, u.user_nickname, b.board_no, b.photo1, b.photo2, b.photo3, b.board_detail_text, b.hash_tag, b.user_theme, b.coord, b.board_reg_date, b.board_status, b.address 	 -->
-<!-- 		,(select count(*) from likes where board_no=b.board_no and check_like='1')likeCount -->
-		
-		
-<!-- 		<if test="loginUserNo!=null"> -->
-<!-- 		, l.user_no AS like_user_no, NVL(l.check_like,'0') check_like, s.user_no AS scrap_user_no, NVL(s.check_scrap,'0') check_scrap -->
-<!-- 		</if>	 -->
-		
-<!-- 		FROM users u, board b, likes l, scrap s -->
-<!-- 		WHERE (u.user_no=b.user_no AND b.board_no=l.board_no(+)) AND (u.user_no=b.user_no AND b.board_no=s.board_no(+)) -->
-<!-- 		AND b.board_status !='2'  -->
-		
-<!-- 		<if test="local!=null"> -->
-<!-- 		AND b.address LIKE '%'||#{local}||'%' -->
-<!-- 		</if> -->
-		
-<!-- 		<if test="searchKeyword!=null"> -->
-<!-- 		AND b.hash_tag LIKE '%'||#{searchKeyword}||'%' -->
-<!-- 		</if> -->
-		
-<!-- 		<if test="loginUserNo!=null"> -->
-<!-- 		AND l.user_no(+)=#{loginUserNo} AND s.user_no(+)=#{loginUserNo} -->
-<!-- 		</if> -->
-		
-<!-- 		ORDER BY b.board_reg_date DESC -->
-<!-- 		)countTable -->
-		
-<!-- 	</select> -->
 
 
 	<update id="updateBoard" parameterType="board">
@@ -181,8 +131,25 @@
 		</set>
 		WHERE board_no=#{boardNo}
 	</update>
-	
-	<update id="updateCommentStatus" parameterType="Comment">
+
+
+<!-- ///////////////댓글/////////////// --> 
+	<insert id="addComment" parameterType="comment">
+	 	INSERT
+	 	INTO comments(comment_no, board_no, user_no, comment_detail_text, comment_reg_date, comment_status)
+	 	VALUES('CM'||seq_cm.nextval,#{board.boardNo},#{user.userNo},#{commentDetailText},sysdate,#{commentStatus})
+	 </insert>
+	 
+	 
+	 <select id="listComment" parameterType="string" resultMap="commentSelectMap">
+	 	SELECT DISTINCT u.user_no, u.profile, u.user_nickname, c.board_no, c.comment_no, c.comment_detail_text, c.comment_reg_date, c.comment_status  
+		FROM users u, comments c 
+		WHERE c.user_no=u.user_no AND c.board_no=#{value} 
+	 	ORDER BY c.comment_reg_date
+	 </select>
+	 
+	 
+	 <update id="updateCommentStatus" parameterType="Comment">
 		UPDATE comments
 		<set>
 			comment_status=#{commentStatus}
@@ -191,6 +158,21 @@
 	</update>
 	
 	
+	<delete id="deleteComment" parameterType="string">
+		DELETE FROM comments
+		WHERE comment_no=#{value}
+	</delete>
+	 
+	 
+	 
+<!-- ///////////////좋아요////////////// --> 
+	 <insert id="addLike" parameterType="like">
+	 	INSERT 
+	 	INTO likes(like_no, board_no, user_no, check_like) 
+	 	VALUES('LK'||seq_lk.nextval,#{board.boardNo},#{user.userNo},#{checkLike})
+	 </insert>
+
+
 	<update id="updateLike" parameterType="like">
 		UPDATE likes
 		<set>
@@ -205,8 +187,15 @@
 		AND user_no=#{user.userNo}
 	</update>
 	
-	
-	<update id="updateScrap" parameterType="scrap">
+
+<!-- ////////////////스크랩/////////////////// -->	 
+	 <insert id="addScrap" parameterType="scrap">
+	 	INSERT 
+	 	INTO scrap(scrap_no, board_no, user_no, check_scrap) 
+	 	VALUES('SC'||seq_sc.nextval,#{board.boardNo},#{user.userNo},#{checkScrap})
+	 </insert>
+	 	 
+	 <update id="updateScrap" parameterType="scrap">
 		UPDATE scrap
 		<set>
 			<if test='checkScrap=="1"'>
@@ -219,18 +208,30 @@
 		WHERE board_no=#{board.boardNo} 
 		AND user_no=#{user.userNo}
 	</update>
+	 
+	 
+<!-- ///////////////////링크////////////// -->	 
+	 <insert id="addLink" parameterType="link">
+	 	INSERT
+	 	INTO link(link_no, coordX, coordY, url, photo1)
+	 	VALUES('LN'||seq_ln.nextval, #{coordX}, #{coordY}, #{url}, #{photo1})	 
+	 </insert>
+	 
+	 
+	 <select id="listLink" parameterType="string" resultMap="linkSelectMap">
+	 	SELECT * FROM link
+	 	WHERE photo1=#{value}
+	 </select>
+	 
+
 	
 	
-	<delete id="deleteComment" parameterType="string">
-		DELETE FROM comments
-		WHERE comment_no=#{value}
-	</delete>
+	
+	
 	
 	<select id="getMapList" parameterType="string" resultMap="boardSelectMap">
 		select * from board where address like '${searchKeyword}%' and (board_status=1 or board_status=4)
 	</select>
 	
-
-	
-	 
+ 
 </mapper>

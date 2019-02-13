@@ -79,8 +79,7 @@ function commentInsert(boardNo,userNo, text){
        	$.ajax({
            url : '/board/json/listComment/'+boardNo,
            type : 'get',
-          // data : {'postNo':postNo},
-            success : function(JSONData){
+           success : function(JSONData){
             	
             	var a='';
             	var b='';
@@ -97,15 +96,15 @@ function commentInsert(boardNo,userNo, text){
                   if(list.commentStatus=='1'){
                   
                		if("${user.userNo}"==list.user.userNo){
-              			b='<div class="col-sm-2" style="margin-top: 5px;" onclick="commentDelete('+commentNo+','+boardNo+')"><img src="/common/images/board/trash.png" style="width:20px;"></div>';
+              			b='<div class="col-sm-2 col-2" style="margin-top: 5px;" onclick="commentDelete('+commentNo+','+boardNo+')"><img src="/common/images/board/trash.png" style="width:20px;"></div>';
               		}else{
-              			b='<div class="col-sm-2" style="margin-top: 5px;" onclick="reportComment('+commentNo+','+userNo+')"><img src="/common/images/board/siren.png" style="width:20px;"></div>';
+              			b='<div class="col-sm-2 col-2" style="margin-top: 5px;" onclick="reportComment('+commentNo+','+userNo+')"><img src="/common/images/board/siren.png" style="width:20px;"></div>';
               		}
                                 
                    a += '<div class="row commentArea'+list.commentNo+'" style="padding-bottom: 5px; height:30px;">';                           
-                   a += '<div class="col-sm-1"><img src="/common/images/profile/'+list.user.profile+'" style="width: 30px; height: 30px; border-radius: 70px;"/></div>';                 
-                   a += '<div class="col-sm-3" style="font-size:medium">'+list.user.userNickname+'</div>';                 
-                   a += '<div class="col-sm-6" style="font-size:medium">'+list.commentDetailText+'</div>';                   
+                   a += '<div class="col-sm-1 col-1"><img src="/common/images/profile/'+list.user.profile+'" style="width: 30px; height: 30px; border-radius: 70px;"/></div>';                 
+                   a += '<div class="col-sm-3 col-3" style="font-size:medium">'+list.user.userNickname+'</div>';                 
+                   a += '<div class="col-sm-6 col-6" style="font-size:medium">'+list.commentDetailText+'</div>';                   
                    a += b+'<div class="w-100"></div>';                                
                    a += '</div>';
                   }else if(list.commentStatus=='2'){
@@ -161,8 +160,9 @@ function reportComment(commentNo, userNo){
 		<div class="commentList" align="left" style="padding-left: 10px;"></div>
 		
 		<div style="padding-bottom: 20px;margin-bottom: 30px;">
-		<div class="col-sm-10"><input type="text" id="<%=boardNo%>commentDetailText" placeholder="댓글을 입력해주세요" style="width: 400px;"></div>
-		<div class="col-sm-2" style="padding-left: 10;"><input class="btn btn-b" type="button" id="<%=boardNo%>Comment" value="등록" style="width:60px; height:30px; padding:0px;"></div>
+		<div class="col-sm-10 col-10"><input type="text" id="<%=boardNo%>commentDetailText" placeholder="댓글을 입력해주세요" style="width: 360px;"></div>
+		<div class="col-sm-2 col-2" style="padding-left: 0px; float: right;">
+		<input class="btn btn-b" type="button" id="<%=boardNo%>Comment" value="등록" style="width:60px; height:30px; padding:0px;"></div>
 		</div>
 </body>
 </html>

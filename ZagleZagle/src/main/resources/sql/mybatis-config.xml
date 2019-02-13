@@ -27,6 +27,7 @@
 		<typeAlias alias="like"	type="com.zagle.service.domain.Like"/>
 		<typeAlias alias="scrap"	type="com.zagle.service.domain.Scrap"/>
 		<typeAlias alias="companylist"	type="com.zagle.service.domain.CompanyList"/>
+		<typeAlias alias="link"	type="com.zagle.service.domain.Link"/>
 	</typeAliases>
 	
 	 <!-- SQL Definition :: file include -->

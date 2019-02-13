@@ -40,8 +40,7 @@ public class BoardDAOImpl implements BoardDAO{
 
 	@Override
 	public void addLink(Link link) throws Exception {
-		// TODO Auto-generated method stub
-		
+		sqlSession.insert("BoardMapper.addLink", link);
 	}
 
 	@Override
@@ -148,6 +147,11 @@ public class BoardDAOImpl implements BoardDAO{
 	@Override
 	public List<Board> getMapList(Search search) {
 		return sqlSession.selectList("BoardMapper.getMapList",search);
+	}
+
+	@Override
+	public List<Link> listLink(String photo1) throws Exception {
+		return sqlSession.selectList("BoardMapper.listLink", photo1);
 	}
 
 	

@@ -38,12 +38,6 @@ public class BoardServiceImpl implements BoardService{
 		this.kakaoRestDAOImpl=kakaoRestDAOImpl;
 	}
 	
-	@Autowired
-	@Qualifier("daumRestDAOImpl")
-	private RestBoardDAO daumRestDAOImpl;
-	public void setDaumRestDAOImpl(RestBoardDAO daumRestDAOImpl) {
-		this.daumRestDAOImpl=daumRestDAOImpl;
-	}
 
 	@Override
 	public void addBoard(Board board) throws Exception {
@@ -52,8 +46,7 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public void addLink(Link link) throws Exception {
-		// TODO Auto-generated method stub
-		
+		boardDAO.addLink(link);
 	}
 
 	@Override
@@ -188,6 +181,13 @@ public class BoardServiceImpl implements BoardService{
 	public List<Board> getMapList(Search search) {
 		List<Board> board = boardDAO.getMapList(search);
 		return board;
+	}
+
+
+	@Override
+	public List<Link> listLink(String photo1) throws Exception {
+		List<Link> list=boardDAO.listLink(photo1);
+		return list;
 	}
 
 	
