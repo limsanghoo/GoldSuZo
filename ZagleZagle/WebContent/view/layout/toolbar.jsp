@@ -143,13 +143,13 @@ $(function() {
 	});
 	
 	
-	$("a:contains('판매상품목록')").on("click" , function() {
+	$("a:contains('판매 상품')").on("click" , function() {
 		//$(self.location).attr("href","http://localhost:3000/");
 		self.location = "/trade/listSell"
 		
 	});
 
-	$("a:contains('구매상품목록')").on("click" , function() {
+	$("a:contains('구매 상품')").on("click" , function() {
 		//$(self.location).attr("href","http://localhost:3000/");
 		self.location = "/trade/listBuy"
 		
@@ -335,8 +335,8 @@ background-size: cover;
               	중고장터
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item">판매상품목록</a>
-              <a class="dropdown-item">구매상품목록</a>
+              <a class="dropdown-item">판매 상품</a>
+              <a class="dropdown-item">구매 상품</a>
             </div>
           </li>
           
