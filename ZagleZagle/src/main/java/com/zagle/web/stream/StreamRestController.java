@@ -104,7 +104,7 @@ public class StreamRestController {
 
 		    // 서버로 요청할 Header 
 		    HttpHeaders headers = new HttpHeaders();
-		    headers.add("Authorization","KakaoAK "+"afd426e1a2275874747bee8f57f4f304");
+		    headers.add("Authorization","KakaoAK "+"afd426e1a2275871414bee8f57f4f304");
 		    headers.add("Content-Type",MediaType.APPLICATION_FORM_URLENCODED_VALUE +";charset=UTF-8");
 
 		    HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(params, headers);
@@ -121,7 +121,7 @@ public class StreamRestController {
 		
 	}
 	
-	@RequestMapping(value = "json/start", method = RequestMethod.POST)
+	/*@RequestMapping(value = "json/start", method = RequestMethod.POST)
 	@ResponseBody 
 	public Map startStream(@RequestBody Spon spon,HttpSession session) throws Exception{
 			System.out.println("start메소드입니다..............");
@@ -139,13 +139,13 @@ public class StreamRestController {
 		    params.add("quantity","1");
 		    params.add("total_amount",spon.getPrice()+"");
 		    params.add("tax_free_amount","0");
-		    params.add("approval_url","http://192.168.016:8080/stream/json/kakaoOkStream?");
+		    params.add("approval_url","http://192.168.0.16:8080/stream/json/kakaoOkStream?");
 		    params.add("cancel_url","http://192.168.0.16:8080");
 		    params.add("fail_url","http://192.168.0.16:8080");
 
 		    // 서버로 요청할 Header 
 		    HttpHeaders headers = new HttpHeaders();
-		    headers.add("Authorization","KakaoAK "+"afd426e1a2275874747bee8f57f4f304");
+		    headers.add("Authorization","KakaoAK "+"afd426e1a2275871414bee8f57f4f304");
 		    headers.add("Content-Type",MediaType.APPLICATION_FORM_URLENCODED_VALUE +";charset=UTF-8");
 
 		    HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(params, headers);
@@ -163,7 +163,7 @@ public class StreamRestController {
 		  // return modelAndView;
 		  //  return "redirect:"+response.get("next_redirect_pc_url");
 		   return response;
-				} 
+				} */
 	 
 	@RequestMapping(value="json/addStream",method=RequestMethod.GET)
 	public ModelAndView addStream(@RequestParam("userNo")String userNo) throws Exception{
@@ -198,10 +198,10 @@ public class StreamRestController {
 		    params.add("partner_order_id",spon.getUserNo());
 		    params.add("partner_user_id",spon.getUserNo());
 		    params.add("pg_token",pg_token);
-			
+		
 	    // 서버로 요청할 Header
 		    HttpHeaders headers = new HttpHeaders();
-		    headers.add("Authorization","KakaoAK "+"afd426e1a2275874747bee8f57f4f304");
+		    headers.add("Authorization","KakaoAK "+"afd426e1a2275871414bee8f57f4f304");
 		    headers.add("Content-Type",MediaType.APPLICATION_FORM_URLENCODED +";charset=UTF-8");
 
 		    HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(params, headers);
@@ -323,9 +323,9 @@ public class StreamRestController {
 	@ResponseBody 
 	public Map<String,Object>listSpon(HttpSession session) throws Exception{
 	
-		//User user = (User)session.getAttribute("user");
-		User user = new User();
-		user.setUserNo("US10001");
+		User user = (User)session.getAttribute("user");
+	//	User user = new User();
+		//user.setUserNo("US10001");
 		Map<String,Object> map= new HashMap();
 		List<String>list = streamService.listSpon(user.getUserNo());
 		System.out.println(list); 
@@ -394,6 +394,7 @@ public class StreamRestController {
 		System.out.println(test2);
 		int result2 = (int) (test2/10*10); 
 		System.out.println(test2); 
+	//	User user = userService.getUser2((String)map.get("streamerNo"));
 		User user = userService.getUser2((String)map.get("streamerNo"));
 		System.out.println("getUser됏니?"+user);
 		Refund refund = new Refund();

@@ -128,7 +128,8 @@ $(function() {
 	   	            "Content-Type": "application/json"
 	   	        },    	        
 	             success : function (JSONData,status) {
-	           //alert("보내기 성공");
+	         //  alert("보내기 성공");
+	        //   alert(JSONData);
 	           var result = confirm("환급신청 완료! 환급리스트 화면으로 이동 하시겠습니까?");
 			     
 	 		  if(result){
@@ -139,17 +140,17 @@ $(function() {
 	 		  }  
 	             },
 	             error : function (err) { 
-	              //   alert("보내기 성공");
-	  	           var result = confirm("환급신청 완료! 환급리스트 화면으로 이동 하시겠습니까?");
+	            // alert(err);
+	  	            var result = confirm("환급신청 완료! 환급리스트 화면으로 이동 하시겠습니까?");
 	  			     
 	  	 		  if(result){
 	  	 			  //alert("환급리스트 공사중....") 
 	  	 			  self.location="/stream/listRefund";
 	  	 		  }else{ 
 	  	 			  self.location="/stream/listStream";
-	  	 		  }  
-	  	             
-	                 }  
+	  	 		  }   
+	  	              
+	                 }   
 	         }); 
 		 /*  addRefund();    
 		   var result = confirm("환급신청 완료! 환급리스트 화면으로 이동 하시겠습니까?");
