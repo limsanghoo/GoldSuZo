@@ -184,5 +184,6 @@ $(function() {
       </table> 
       </div>  
  	 <jsp:include page="/common/pageNavigation.jsp"/> 
+ 	 <jsp:include page="/view/layout/footer.jsp"></jsp:include>
 </body>
 </html>
