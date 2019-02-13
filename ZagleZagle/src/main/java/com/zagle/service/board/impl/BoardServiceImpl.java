@@ -38,17 +38,12 @@ public class BoardServiceImpl implements BoardService{
 		this.kakaoRestDAOImpl=kakaoRestDAOImpl;
 	}
 	
-
+////////////보드
 	@Override
 	public void addBoard(Board board) throws Exception {
 		boardDAO.addBoard(board);	
 	}
-
-	@Override
-	public void addLink(Link link) throws Exception {
-		boardDAO.addLink(link);
-	}
-
+	
 	@Override
 	public void updateBoard(Board board) throws Exception {
 		boardDAO.updateBoard(board);
@@ -73,18 +68,37 @@ public class BoardServiceImpl implements BoardService{
 	public Board getBoard(String boardNo) throws Exception {	
 		return boardDAO.getBoard(boardNo);
 	}
+	
+	
+	
+	
+//////////////링크
+	@Override
+	public void addLink(Link link) throws Exception {
+		boardDAO.addLink(link);
+	}
+	
+	@Override
+	public void deleteLink(String linkNo) throws Exception {
+		boardDAO.deleteLink(linkNo);
+	}
+	
+	@Override
+	public List<Link> listLink(String photo1) throws Exception {
+		List<Link> list=boardDAO.listLink(photo1);
+		return list;
+	}
 
+
+	
+////////////////신고
 	@Override
 	public void addReport(Report report) throws Exception {
 		boardDAO.addReport(report);	
 	}
 
-	@Override
-	public void getHotTag(Board board) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
+//////////////댓글
 	@Override
 	public void addComment(Comment comment) throws Exception {
 		boardDAO.addComment(comment);
@@ -103,11 +117,14 @@ public class BoardServiceImpl implements BoardService{
 		boardDAO.updateCommentStatus(comment);
 	}
 
+	
 	@Override
 	public void deleteComment(String commentNo) throws Exception {
 		boardDAO.deleteComment(commentNo);
 	}
 
+	
+//////////좋아요	
 	@Override
 	public void addLike(Like like) throws Exception {
 		boardDAO.addLike(like);
@@ -117,36 +134,9 @@ public class BoardServiceImpl implements BoardService{
 	public void updateLike(Like like) throws Exception {
 		boardDAO.updateLike(like);
 	}
-
-	@Override
-	public void shareBoard(Board board) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String addBoardVisionTag(String link) throws Exception {		
-		return kakaoRestDAOImpl.addBoardVisionTag(link);
-	}
-
-	@Override
-	public void addBoardDaumMap(Board board) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Map<String, Object> listMap(SearchBoard searchBoard) throws Exception {
-		
-		return null;
-	}
-
-	@Override
-	public void deleteLink(Link link) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
+	
+//////////스크랩
 	@Override
 	public void addScrap(Scrap scrap) throws Exception {
 		boardDAO.addScrap(scrap);
@@ -155,6 +145,14 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public void updateScrap(Scrap scrap) throws Exception {
 		boardDAO.updateScrap(scrap);
+	}	
+
+	
+///////////////맵
+	@Override
+	public Map<String, Object> listMap(SearchBoard searchBoard) throws Exception {
+		
+		return null;
 	}
 	
 	@Override
@@ -184,12 +182,11 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 
+//////////////카카오비전
 	@Override
-	public List<Link> listLink(String photo1) throws Exception {
-		List<Link> list=boardDAO.listLink(photo1);
-		return list;
+	public String addBoardVisionTag(String link) throws Exception {		
+		return kakaoRestDAOImpl.addBoardVisionTag(link);
 	}
-
 	
 
 }

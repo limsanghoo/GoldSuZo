@@ -39,12 +39,61 @@ $(function() {
 
 	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 	$( "button:contains('수정')"  ).on("click" , function() {
+		
+		var imgLength=$("img[name='img']").length;
+	      
+		  if(imgLength>3){
+			alert("사진은 세 장까지 등록 가능합니다.");
+			return;
+		  }
+		  
 		updateSell();
 	});
 	
 	$("button:contains('이전')").on("click", function() {
 		self.location="/trade/getSell?sellNo="+'${sell.sellNo}';
 		});
+	
+	$('#edit').bind("click",function(){
+		$("#img_box").empty();//원래 이미지 비우기
+		$("#newPhoto").append('<input id="file" type="file" multiple="multiple"><br/>* 사진은 한 장씩 등록해주세요 * 세 장까지 등록 가능합니다<br/><br/>');	//파일 첨부 버튼 생성
+		$("#hashTag").val("");//원래 해시태그 비우기
+		$("#link").val("");//원래 링크 비우기		
+		
+		var file = document.getElementById('file');
+		var image = document.getElementById('image');
+
+		file.onchange = function (event) {
+			
+			$('.wrap-loading').removeClass('display-none'); //로딩중 이미지 보여주기
+			
+		  var target = event.currentTarget;
+		  var xmlHttpRequest = new XMLHttpRequest();
+		  xmlHttpRequest.open('POST', 'https://api.imgur.com/3/image/', true);
+		  xmlHttpRequest.setRequestHeader("Authorization", "Client-ID c764d6730f6f9a6");
+		  xmlHttpRequest.onreadystatechange = function () {
+		    if (xmlHttpRequest.readyState == 4) {
+		      if (xmlHttpRequest.status == 200) {
+		        var result = JSON.parse(xmlHttpRequest.responseText);
+
+		        $("#img_box").append("<img src="+result.data.link+">");//이미지 미리보기
+		        
+		        var linkArea=$("#link");
+				linkArea.val(linkArea.val()+result.data.link+",");//이미지 링크 append
+				
+		        console.log(result);        
+		      
+		      }
+		      else {
+		      	alert("업로드 실패");
+		      }
+		    }
+		  };//()function 끝
+		  xmlHttpRequest.send(target.files[0]);
+		};//(event)function 끝
+		
+		
+	})//edit 끝
 	
 });	
  
@@ -94,7 +143,7 @@ $(function() {
 		
 		<div class="row">
 	  		<div class="col-xs-8 col-md-1 text-right" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: #777; padding-top: .5em; padding-bottom: .5em;"><strong>상품명</strong></div>
-			<div class="col-xs-4 col-md-4"><input type="text" class="form-control" id="sellName" name="sellName" placeholder="상품명"></div>
+			<div class="col-xs-4 col-md-4"><input type="text" class="form-control" id="sellName" name="sellName" value="${sell.sellName}"></div>
 			
 			<div class="col-xs-8 col-md-2 text-right" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: #777; padding-top: .5em; padding-bottom: .5em;"><strong>전화번호</strong></div>
 			<div class="col-xs-4 col-md-5">
@@ -117,7 +166,7 @@ $(function() {
 
 	    <div class="row">
 	    <div class="col-xs-8 col-md-1 text-right" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: #777; padding-top: .5em; padding-bottom: .5em;"><strong>가격</strong></div>
-			<div class="col-xs-3 col-md-3"><input type="text" class="form-control" id="sellPrice" name="sellPrice"></div>
+			<div class="col-xs-3 col-md-3"><input type="text" class="form-control" id="sellPrice" name="sellPrice" value="${sell.sellPrice}"></div>
 			<div class="col-xs-1 col-md-1">원</div>
 
 		    <div class="col-xs-8 col-md-2 text-right" style="border-right-width: 0.1em; border-right-style: solid; border-right-color: #777; padding-top: .5em; padding-bottom: .5em;"><strong>판매방식</strong></div>
@@ -136,7 +185,10 @@ $(function() {
 		<br/>
 	
 	  	<div class="row">
-			사진
+	  	<div class="col-xs-8 col-md-1" style="padding-top: .5em; padding-bottom: .5em;"><strong>사진</strong></div>
+	  	<div class="col-xs-4 col-md-11" style="border-left-width: 0.1em; border-left-style: solid; border-left-color: #777; padding-top: .5em; padding-bottom: .5em;">
+			<input class="btn" type="button" value="사진 수정하기" id="edit"/>
+			</div>
 		</div>
 		
 		<br/>

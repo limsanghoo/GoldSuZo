@@ -8,13 +8,13 @@
     <title>Dongne Vangne</title>
     <style>
     .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
-    .wrap * {padding: 0;margin: 0;}
+    .wrap * {padding: 0;}
     .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
     .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
     .info .title {font-weight: bold; font-size:14px;border-radius: 6px 6px 0 0;margin: -1px -1px 0 -1px;padding:10px; color: #fff;background: #d95050;background: #d95050;}
     .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
     .info .close:hover {cursor: pointer;}
-    .info .body {position: relative;overflow: hidden;}
+    .info .body {position: relative; overflow: hidden;}
     .info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
     .desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
     .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
@@ -23,7 +23,7 @@
     .info .link {color: #5085BB;}
 
 
-        div.row{
+        #window{
         	padding-top : 150px;
         }
      
@@ -45,8 +45,8 @@
 <jsp:include page="/view/layout/toolbar.jsp" />
 
 
-<div class="row"style="text-align: center; display: inherit;">
-				<select name="state" class="ct_input_g" style="width: 200px; height: 40px; background-color: white; border-radius: 5px;" onchange="fncGetState(this)">
+<div class="row" id="window" style="text-align: center; display: inherit;">
+				<select name="state" class="ct_input_g" style="width: 200px; height: 40px; background-color: white; border-radius: 5px;" onclick="fncGetState(this)">
 					<option value='' style="font-size:20px;"  selected>시·도</option>
 					<c:set var="i" value="0"/>
 					<c:forEach var="local" items="${list}">
@@ -70,6 +70,13 @@
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc9c3216a02c263f1acc2c4187e96443&libraries=services"></script>
 <script>
+
+$(window).bind("pageshow", function(event) {
+    if (event.originalEvent.persisted) {
+        document.location.reload();
+    }
+});
+
 var local = null;
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -232,8 +239,7 @@ function markerMake(data){
 	
 	var content = '<div class="wrap">' + 
     '    <div class="info">' + 
-    '        <div class="title">' + 
-   data[i].address +
+    '        <div class="title">' +data[i].address+
     '        </div>' + 
     '        <div class="body">' + 
     '            <div class="img">' +
@@ -338,5 +344,7 @@ function moveMap(local){
 }
 
 </script>
+
+<jsp:include page="/view/layout/footer.jsp"></jsp:include>
 </body>
 </html>

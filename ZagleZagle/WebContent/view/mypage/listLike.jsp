@@ -89,6 +89,30 @@
 					
 					commentList(boardNo);
 				})
+				
+				///신고 하기
+				$("input[value='신고']").bind("click",function(){
+					
+					if("${user.userNo}"==""){
+						swal("","로그인 후 이용 가능합니다.", "error");
+						return;
+					}
+					
+					var boardNo=$(this).data('report');
+					
+					var data = document.querySelector("#"+boardNo+"report").value;
+
+				    window.open("/view/board/addReport.jsp?val="+data, "addReport", "width=500, height=400, resizable=yes" );
+				});
+				
+				
+				//게시물 수정
+				$("input[value='수정']").bind("click",function(){
+		var boardNo=$(this).data('update');
+	
+		self.location="/board/updateBoard?boardNo="+boardNo;
+	})
+				
 
 });
 		

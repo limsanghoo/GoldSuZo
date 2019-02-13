@@ -19,7 +19,7 @@
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-	
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>  
 
 <script type="text/javascript">
 
@@ -89,12 +89,6 @@ background-color: whitesmoke;
 
 
 
-.tooltip fade bs-tooltip-top show {
-
-position: relative;
-}
-
-
 
 
 
@@ -107,7 +101,11 @@ script {
     display: none;
 }
 
+#plusfriend-addfriend-button{
 
+position: absolute;
+
+}
 
 #myg_container {
 
@@ -117,9 +115,9 @@ height: 500px;
 
 #myg_row {
 
-      background-color: #dceadf;
-    height: 1000px;`
-    padding-left: 32%;
+    background-color: #dceadf;
+    height: 1000px;
+       padding-left: 32%;
     padding-right: 10%;
     padding-top: 24%;
 }
@@ -157,7 +155,11 @@ transition: transform .35s;
 }
 
 
+#myg_container {
 
+padding-top: 30%;
+
+}
 
 
 </style>
@@ -182,14 +184,6 @@ transition: transform .35s;
 
 
 <jsp:include page="/view/layout/toolbar.jsp" />
-
-
-	
-
-<div id="myg_container"> 
-
-
-<div class="myg_container">
 
 
 

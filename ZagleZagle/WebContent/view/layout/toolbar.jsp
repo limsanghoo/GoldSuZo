@@ -17,7 +17,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script> 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-  
+  <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
   
   <!-- JavaScript Libraries -->
   <script src="/common/css/estateagency-master/lib/jquery/jquery.min.js"></script>
@@ -70,7 +70,7 @@ $(function() {
        alert("클릭 완료")
        
        
-       var  URL = "https://kauth.kakao.com/oauth/authorize?client_id=c3883a306a9faad67b127d7631568b29&redirect_uri=http://192.168.0.18:8080/user/kakaologin&response_type=code"
+       var  URL = "https://kauth.kakao.com/oauth/authorize?client_id=c3883a306a9faad67b127d7631568b29&redirect_uri=http://192.168.0.26:8080/user/kakaologin&response_type=code"
        popWin
        = window.open(URL,   "popWin",  "left=300,top=200,width=780,height=130,marginwidth=0,marginheight=0,"+
              "scrollbars=no,scrolling=no,menubar=no,resizable=no")
@@ -112,23 +112,30 @@ $(function() {
 	});
 	
 	
-	$("a:contains('전체 게시물')").on("click" , function() {
+	$("a:contains('전체 소식')").on("click" , function() {
 		//$(self.location).attr("href","http://localhost:3000/");
 		self.location = "/board/listBoard?view=all"
 		
 	});
 	
-	$("a:contains('동네 게시물')").on("click" , function() {
+	$("a:contains('동네 소식')").on("click" , function() {
 		//$(self.location).attr("href","http://localhost:3000/");
 		self.location = "/board/listBoard?view=town"
 		
 	});
 	
-	$("a:contains('방송 목록 보기')").on("click" , function() {
+	$("a:contains('ON동네')").on("click" , function() {
 		//$(self.location).attr("href","http://localhost:3000/");
 		self.location = "/stream/listStream"
 		
 	});
+	
+	$("a:contains('환급 관리')").on("click" , function() {
+		//$(self.location).attr("href","http://localhost:3000/");
+		self.location = "/stream/listRefund"
+		
+	});
+	
 	
 	$("a:contains('중고장터')").on("click" , function() {
 		self.location = "/trade/listTrade"
@@ -136,13 +143,13 @@ $(function() {
 	});
 	
 	
-	$("a:contains('판매상품목록')").on("click" , function() {
+	$("a:contains('판매 리스트')").on("click" , function() {
 		//$(self.location).attr("href","http://localhost:3000/");
 		self.location = "/trade/listSell"
 		
 	});
 
-	$("a:contains('구매상품목록')").on("click" , function() {
+	$("a:contains('구매 리스트')").on("click" , function() {
 		//$(self.location).attr("href","http://localhost:3000/");
 		self.location = "/trade/listBuy"
 		
@@ -314,12 +321,12 @@ background-size: cover;
           <c:if test="${sessionScope.user.userNo != null}">
           
           <li class="nav-item">
-            <a class="nav-link">전체 게시물</a>
+            <a class="nav-link">전체 소식</a>
           </li>
           
           
           <li class="nav-item">
-            <a class="nav-link">동네 게시물</a>
+            <a class="nav-link">동네 소식</a>
           </li>
           
           <li class="nav-item dropdown">
@@ -328,8 +335,8 @@ background-size: cover;
               	중고장터
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item">판매상품목록</a>
-              <a class="dropdown-item">구매상품목록</a>
+              <a class="dropdown-item">판매 리스트</a>
+              <a class="dropdown-item">구매 리스트</a>
             </div>
           </li>
           
@@ -340,8 +347,7 @@ background-size: cover;
               	ON동네 Air
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item">방송 목록 보기</a>
-              <a class="dropdown-item">후원 환급하기</a>
+              <a class="dropdown-item">환급 관리</a>
             </div>
           </li>
           
@@ -389,7 +395,7 @@ background-size: cover;
 			<a class="nav-link">LOGIN</a>
 			</li>
 		</c:if>
-			
+
 		 	
       </div>
       

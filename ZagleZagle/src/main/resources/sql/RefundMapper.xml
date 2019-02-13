@@ -21,7 +21,7 @@
 	<!-- SQL : INSERT -->
 	<insert 	id="addRefund"		parameterType="refund" >
 	 INSERT INTO refund(refund_no,user_no,user_nickname,refund_price,refund_date,bank_name,account,check_refund)
-	 VALUES('RE'||seq_re.nextval,#{streamerNo},#{streamerNickname},#{price},sysdate,#{bankname},#{account},'0')	
+	 VALUES('RE'||seq_re.nextval,#{streamerNo:VARCHAR},#{streamerNickname:VARCHAR},#{price:NUMERIC},sysdate,#{bankname:VARCHAR},#{account:VARCHAR},'0')	
 	</insert>
 	 	 
 	 	 
@@ -41,9 +41,9 @@
 	  <update	id="updateRefund"	parameterType="java.util.HashMap"> 
 	   	UPDATE refund
 	   	<set>
-	   	check_refund = #{check}
+	   	check_refund = #{check:VARCHAR}
 	   	</set>
-	   	WHERE refund_no = #{refundNo}  
+	   	WHERE refund_no = #{refundNo:VARCHAR}  
 	 </update>
 	 
 	 <select  id="getTotalCount"  parameterType="com.zagle.service.domain.SearchStream"	 resultType="int">
