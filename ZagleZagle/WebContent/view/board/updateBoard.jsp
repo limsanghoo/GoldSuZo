@@ -126,9 +126,9 @@ $(function(){
 	      swal("수정 하시겠습니까?","",{
 	    	  icon: "info",
 	    	  buttons: {
-	    	    cancel: "아니오",
+	    	    cancel: "취소",
 	    	    catch: {
-	    	      text: "예",
+	    	      text: "수정",
 	    	      value: "catch",
 	    	    },
 	    	  },

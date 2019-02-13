@@ -290,13 +290,10 @@ public class BoardRestController {
 			searchBoard.setPageSize(boardPageSize);
 			
 			Map<String , Object> map=boardService.listBoard(searchBoard);
-
-			Page resultPage=new Page(searchBoard.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, boardPageSize);
 			
 			List<Local> list = boardService.getState();//추가
 			
 			map.put("searchBoard", searchBoard);
-			map.put("resultPage", resultPage);
 			map.put("list",list);
 			
 			System.out.println(map);
@@ -311,6 +308,16 @@ public class BoardRestController {
 		 
 		 System.out.println("/json/addLink");
 		 
+		 String url=link.getUrl();
+		 
+		 System.out.println("url : "+url);
+		 
+		 String[] url2=url.split(":\\/\\/");
+		 
+		 if(url2.length==1) {
+			 link.setUrl(url2[1]);
+		 }
+		 	 		 
 		 boardService.addLink(link);
 		 
 		return 1;	 
@@ -329,6 +336,15 @@ public class BoardRestController {
 		 return list;
 	 }
 	 
-	 
+	 @RequestMapping( value="json/deleteLink/{linkNo}", method=RequestMethod.GET)
+	 public int addLink(@PathVariable("linkNo") String linkNo) throws Exception{
+		 
+		 System.out.println("/json/deleteLink");
+		 System.out.println("linkNo : "+linkNo);
+		 
+		 boardService.deleteLink(linkNo);
+		 
+		 return 1;	 
+	 }
 
 }

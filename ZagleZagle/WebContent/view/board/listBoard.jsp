@@ -129,7 +129,7 @@ body {
 
 
 #selectTown{
-	padding-top : 40px;
+/* 	padding-top : 40px; */
 	text-align: center;
 }
 
@@ -381,19 +381,36 @@ $(function(){
 		var boardNo=$(this).data('report');
 		
 		var data = document.querySelector("#"+boardNo+"report").value;
-
+		//addReport 팝업
 	    window.open("/view/board/addReport.jsp?val="+data, "addReport", "width=500, height=400, resizable=yes" );
 	});
 	
 	
-	//사진 링크
-	$("input[value='링크 추가']").bind("click",function(){
+	//사진 링크 관리
+	$("input[value='링크 관리']").bind("click",function(){
 		var photo1=$(this).data('photo1');
 		var boardNo=$(this).data('boardno');
-		
-		self.location="/board/addLink?boardNo="+boardNo;
+		//addLink 팝업
+	    window.open("/view/board/addLink.jsp?val="+photo1, "addLink", "width=700, height=700, resizable=no" );
+
 	});
 	
+	
+	//사진 링크 mouseover
+	$("div[name='listLink']").bind("mouseenter",function(){
+		
+		var photo1=$(this).data('photo1');
+	
+		getLink(photo1);
+	});
+	
+	
+	//사진 링크 mouseout
+	$("div[name='listLink']").bind("mouseleave",function(){
+
+		$(".listLink").empty(); 
+	});
+
 	
 	//검색 버튼 클릭
 	$("#search").bind("click",function(){
@@ -497,6 +514,9 @@ $(function(){
      //]]>
 	});//카카오 링크2 끝
 	
+	
+
+	
 });//function 끝
 
 
@@ -507,6 +527,48 @@ function enter() {
         	$("form").attr("method" , "POST").attr("action" , "/board/listBoard?view=${param.view}").submit();
         }
 }
+
+
+//getLink
+function getLink(photo1){
+	
+	var data={"photo1" : photo1};
+	
+	$.ajax({
+		url : '/board/json/listLink',
+		type: 'POST',
+		data : JSON.stringify(data),
+		headers:{
+            "Accept":"application/json",
+            "Content-Type": "application/json"
+         },
+		success:function(JSONData){
+			
+			var a='';
+			
+			 $.each(JSONData, function(i){
+             	
+                 var list = JSONData[i];
+                 
+                 var linkNo="'"+list.linkNo+"'"; 
+                 var url="'"+list.url+"'";            
+                 var coordX="'"+list.coordX+"'";                 
+                 var coordY="'"+list.coordY+"'";
+                 var photo1="'"+list.photo1+"'";
+                 
+                 a+='<span style="left: '+list.coordX+'px; top: '+list.coordY+'px; position: absolute; width:23px;">'
+                 a+='<a href="//'+list.url+'" target="_blank">'+'<img src="/common/images/board/plus.png">'+'</a>'
+                 a+='<input type="hidden" value='+list.linkNo+'>'
+                 a+='</span>'
+                 
+			 });
+			 
+			 $(".listLink").html(a); 
+		}//success 끝
+		
+	});//ajax 끝
+}
+
 
 
 
@@ -982,8 +1044,12 @@ function fncGetTown(){
 
 		<div>
 			<c:if test="${board.photo1 !=null}">
-			<div><img src="${board.photo1}" style="width: 100%"/>
-				<input type="button" value="링크 추가" data-photo1="${board.photo1}" data-boardNo="${board.boardNo}">
+			<div name="listLink" data-photo1="${board.photo1}">
+				<span class="listLink" style="position: absolute;"></span>
+				<c:if test="${user.userNo==board.user.userNo}">
+					<input style="position: absolute; top:25px; left:25px; background-color: #ffffff91; color: black;" type="button" class="btn" value="링크 관리" data-photo1="${board.photo1}" data-boardNo="${board.boardNo}">
+				</c:if>
+				<img src="${board.photo1}" style="width: 100%"/>			
 			</div>
 			<br/>
 			</c:if>

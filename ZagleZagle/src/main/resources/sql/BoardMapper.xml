@@ -223,12 +223,16 @@
 	 	WHERE photo1=#{value}
 	 </select>
 	 
-
+	 
+	<delete id="deleteLink" parameterType="string">
+		DELETE FROM link
+		WHERE link_no=#{value}
+	</delete>
 	
 	
 	
 	
-	
+<!-- ////////////////맵////////////////// -->	
 	<select id="getMapList" parameterType="string" resultMap="boardSelectMap">
 		select * from board where address like '${searchKeyword}%' and (board_status=1 or board_status=4)
 	</select>

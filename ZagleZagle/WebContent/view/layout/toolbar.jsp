@@ -17,7 +17,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script> 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-  
+  <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
   
   <!-- JavaScript Libraries -->
   <script src="/common/css/estateagency-master/lib/jquery/jquery.min.js"></script>
@@ -112,13 +112,13 @@ $(function() {
 	});
 	
 	
-	$("a:contains('전체 게시물')").on("click" , function() {
+	$("a:contains('전체 소식')").on("click" , function() {
 		//$(self.location).attr("href","http://localhost:3000/");
 		self.location = "/board/listBoard?view=all"
 		
 	});
 	
-	$("a:contains('동네 게시물')").on("click" , function() {
+	$("a:contains('동네 소식')").on("click" , function() {
 		//$(self.location).attr("href","http://localhost:3000/");
 		self.location = "/board/listBoard?view=town"
 		
@@ -143,13 +143,13 @@ $(function() {
 	});
 	
 	
-	$("a:contains('판매 상품')").on("click" , function() {
+	$("a:contains('판매 리스트')").on("click" , function() {
 		//$(self.location).attr("href","http://localhost:3000/");
 		self.location = "/trade/listSell"
 		
 	});
 
-	$("a:contains('구매 상품')").on("click" , function() {
+	$("a:contains('구매 리스트')").on("click" , function() {
 		//$(self.location).attr("href","http://localhost:3000/");
 		self.location = "/trade/listBuy"
 		
@@ -321,12 +321,12 @@ background-size: cover;
           <c:if test="${sessionScope.user.userNo != null}">
           
           <li class="nav-item">
-            <a class="nav-link">전체 게시물</a>
+            <a class="nav-link">전체 소식</a>
           </li>
           
           
           <li class="nav-item">
-            <a class="nav-link">동네 게시물</a>
+            <a class="nav-link">동네 소식</a>
           </li>
           
           <li class="nav-item dropdown">
@@ -335,8 +335,8 @@ background-size: cover;
               	중고장터
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item">판매 상품</a>
-              <a class="dropdown-item">구매 상품</a>
+              <a class="dropdown-item">판매 리스트</a>
+              <a class="dropdown-item">구매 리스트</a>
             </div>
           </li>
           
@@ -395,7 +395,7 @@ background-size: cover;
 			<a class="nav-link">LOGIN</a>
 			</li>
 		</c:if>
-			
+
 		 	
       </div>
       
