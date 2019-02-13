@@ -25,6 +25,11 @@
 	<link rel="stylesheet" href="/css/admin.css" type="text/css">
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 
+<!--  sweetAlert -->  	
+   	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+   	
+   	
+
 
 	<script type="text/javascript">
 	
@@ -36,16 +41,18 @@
 		
 
 		if(name == null || name.length<1){
-			alert("은행이름을 입력해주세요.");
+			
+			swal("실명인증을 먼저 해주세요.");
 			return;
 		}
 	
 		if(account == null || account.length<1){
-			alert("계좌번호를 입력해주세요.");
+			swal("실명인증을 먼저 해주세요.");
 			return;
 		}
-
+		
 		$("form").attr("method", "POST").attr("action", "/mypage/addAccount?snsNo=${snsNo}").submit();
+	    
 	}
 	
 
@@ -61,7 +68,9 @@
 	$(function() {
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		$("a[href='#' ]").on("click" , function() {
+			   swal("등록을 취소하셨습니다.");
 			$("form")[0].reset();
+			
 		});
 	});	
 
