@@ -50,10 +50,15 @@
 							fncUpdateUser();
 							  
 					  } else {
+						  
+					
+								   
 					    swal("수정을 취소하셨습니다.");
-					   
-					  }
 						
+						
+					  }
+					  
+							   
 					});
 		
 			});
@@ -65,8 +70,10 @@
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$("a[href='#' ]").on("click" , function() {
 				  swal("수정을 취소했습니다.");
-				$("form")[0].reset();
+				  history.go(-1);
+				  
 			});
+			
 		});	
 		
 		////////////////////////////////////////////////////////////////////////////////////////////
@@ -328,6 +335,32 @@
 
 <style>
 
+
+select {
+ font-size: 0.9em;
+  color: #fff;
+  font-weight: 100;
+  width: 25%;
+  display: inline-flex;
+  border: none;
+  padding: 0.4em;
+  border: solid 1px rgba(255, 255, 255, 0.37);
+  -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+  transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #fff 4%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #fff 4%);
+  background-position: -800px 0;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+
+ 
+ 
+
+}
+
+
 body {
  background-color:  #e2e2e2;
 }
@@ -380,7 +413,7 @@ padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
 	<div class="container">
 	
 		<div class="page-header text-center">
-	       <h3 class=" text-info">${user.userName}님 &nbsp;정보수정</h3>
+	       <h3 class=" text" style="color: #2eca6a">${user.userName}님 &nbsp;정보수정</h3>
 	    </div>
 	    
 	     <form enctype="multipart/form-data" method="post" id="perioe">

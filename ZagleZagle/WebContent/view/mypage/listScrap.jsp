@@ -20,6 +20,11 @@
 	 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+	
+ 	<!--  sweetAlert -->  	
+   	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+   	
+	
 
 
 		<script>
@@ -55,20 +60,33 @@
 	var boardNo = $(this).data("param")
 	var userNo = $(this).data("param2")
 
-	alert(checkScrap)
-	alert(boardNo)
-	alert(userNo)
-	
-		$.ajax({
-				
-				url: '/board/json/updateScrap/'+userNo+'/'+boardNo+'/'+checkScrap,
-				type: 'get',
-				success: function(data){
+		swal({
+				  title: "스크랩을 취소하시겠습니까?",
+			
 					
-					self.location="/mypage/listScrap"
-				
-				}
-	})
+				  buttons: true,
+				  buttons: true,
+				})
+				.then((willDelete) => {
+				  if (willDelete) {
+				  
+						$.ajax({
+							
+							url: '/board/json/updateScrap/'+userNo+'/'+boardNo+'/'+checkScrap,
+							type: 'get',
+							success: function(data){
+								
+								self.location="/mypage/listScrap"
+							
+							}
+				})
+				 
+				  } else {
+				    swal("취소하셨습니다.");
+				  }
+				});
+	
+	
 
 	
  });

@@ -35,7 +35,7 @@
 	
 	function fncGetList(currentPage) {
 		
-		alert("클릭")
+	
 		
 		$("#currentPage").val(currentPage)
 		$("form").attr("method" , "POST").attr("action" , "/admin/listBlackObject").submit();
@@ -49,7 +49,7 @@
 
 			$("li:contains('회원목록')").on("click" , function() {
 				
-				alert("클릭")
+		
 				
 				self.location = "/admin/listUser"
 			});
@@ -58,7 +58,7 @@
 			
 				$("li:contains('예비 블랙리스트')").on("click" , function() {
 				
-				alert("클릭")
+
 				
 				self.location = "/admin/listBlackObject"
 			});
@@ -67,14 +67,18 @@
 			
 			
 				$("li:contains('블랙리스트 목록')").on("click" , function() {
-				
-				alert("클릭")
+
 				
 				self.location = "/admin/listBlackList"
 			});
 			
 		
-			
+				$("#sponUser").on("click" , function() {
+					
+					
+					
+					$(self.location).attr("href","/stream/listRefund");
+				});
 		
 			
 		//================getBoard Ajax================//
@@ -237,7 +241,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/board/listBoard" title="ZagleZagle">ZagleZagle</a>
+                <a class="navbar-brand" href="/admin/siteManage" title="DongneVangne">DongneVangne</a>
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
@@ -251,13 +255,9 @@
                         </ul>
                     </li>
                     <li><a href="/admin/handleReport"><i class="fa fa-magic"></i>신고 처리</a></li>
-                    <li class="nav nav-list nav-list-expandable">
-                        <a><i class="fa fa-key"></i> 방문자 통계 <span class="caret"></span></a>
-                        <ul class="nav navbar-nav">
-                            <li><a href="#">Sub Item 1</a></li>
-                            <li><a href="#">Sub Item 2</a></li>
-                        </ul>
-                    <li>
+                    
+                  <li id="sponUser"><a href="#"><i class="glyphicon glyphicon-usd"></i>환급한 회원 목록</a></li>  
+                  
                 </ul>
          
             </div>
