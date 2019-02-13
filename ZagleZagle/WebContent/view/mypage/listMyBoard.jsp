@@ -276,5 +276,18 @@ padding-top: 20%;
 	<!-- PageNavigation End... -->
 	
 	
+	
+    
+    <div class="foot">
+ 	
+ 	<jsp:include page="/view/layout/footer.jsp"></jsp:include>
+ 	
+ 	
+ 	</div>
+	
+	
+	
+	
+	
 </body>
 </html>

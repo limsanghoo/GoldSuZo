@@ -336,6 +336,11 @@
 <style>
 
 
+#foot {
+
+padding-top: 100px;
+}
+
 select {
  font-size: 0.9em;
   color: #fff;
@@ -372,7 +377,7 @@ padding-top :120px;
 }
 
 
-   #uploadPro, img{
+   .uploadPro img{
          height: 70px;
          width: 70px;
          border:1.5px solid #f5f6fa;
@@ -422,8 +427,7 @@ padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
             
 	    
 	    
-	    
-	    	    <div id="uploadPro">
+	    	    <div class="uploadPro" id="uploadPro" align="center">
                
               <img src="/common/images/profile/${user.profile}"/>
                           
@@ -523,8 +527,13 @@ padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
 		  </div>
 		</form>
 		
+			<div id="foot">
+			<jsp:include page="/view/layout/footer.jsp"></jsp:include>
+			</div>
+		
+		
 		</div>
 
-
+			
 </body>
 </html>

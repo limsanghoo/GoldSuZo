@@ -102,7 +102,7 @@ padding-left: 50px;
 }
 
 
-   img{
+   .col-xs-8 img{
          height: 70px;
          width: 70px;
          border:1.5px solid #f5f6fa;
@@ -252,6 +252,10 @@ padding-left: 50px;
 		</div>
 		
 		<br/>
+		<div class="foot">
 		
+		<jsp:include page="/view/layout/footer.jsp"></jsp:include>
+		
+ 	</div>
 </body>
 </html>

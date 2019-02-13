@@ -116,7 +116,7 @@ height: 500px;
 #myg_row {
 
     background-color: #dceadf;
-    height: 1000px;
+    height: 780px;
        padding-left: 32%;
     padding-right: 10%;
     padding-top: 24%;
@@ -161,6 +161,10 @@ padding-top: 30%;
 
 }
 
+.foot {
+
+background-color: #dcead;
+}
 
 </style>
 	
@@ -252,16 +256,20 @@ padding-top: 30%;
   
 
     
+    
   
     </div> <!--  div id row 끝 -->
- </div>
-
-</div>
-
-
+ 
+ 	
 
 	
 	
+    <div class="foot">
+ 	
+ 	<jsp:include page="/view/layout/footer.jsp"></jsp:include>
+ 	
+ 	
+ 	</div>
 	
 	
 
