@@ -232,15 +232,14 @@ function markerMake(data){
 	
 	var content = '<div class="wrap">' + 
     '    <div class="info">' + 
-    '        <div class="title">' + 
-   data[i].address +
+    '        <div class="title">' +data[i].address+
     '        </div>' + 
     '        <div class="body">' + 
     '            <div class="img">' +
     '                <img src="'+data[i].photo1+'" width="73" height="70">' +
     '           </div>' + 
     '            <div class="desc">' + 
-    '                <div class="ellipsis">'+data[i].boardDetailText+'</div>' + 
+    '                <div class="ellipsis" style="word-break:break-all;">'+data[i].boardDetailText+'</div>' + 
     '            </div>' + 
     '        </div>' + 
     '    </div>' +    
