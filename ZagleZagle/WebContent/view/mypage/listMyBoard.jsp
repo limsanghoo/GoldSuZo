@@ -22,7 +22,8 @@
 
 
 		<script>
-		
+
+	
 		
 	
 		 $(function() {
@@ -37,6 +38,14 @@
 					
 					commentList(boardNo);
 				})
+				
+				
+				//게시물 수정
+				$("input[value='수정']").bind("click",function(){
+		var boardNo=$(this).data('update');
+	
+		self.location="/board/updateBoard?boardNo="+boardNo;
+	})
 
  });
 
@@ -230,6 +239,25 @@ padding-top: 20%;
 </div><!-- /.modal -->
 <!-- 모달1 끝 -->
 		
+			  
+<!-- 모달2 시작 -->
+<div class="modal"  aria-hidden="true" style="display: none; z-index: 1060;" id="${board.boardNo}modal2">
+    	<div class="modal-dialog modal-md">
+          <div class="modal-content">
+            <div class="modal-header">
+				<br/>
+            </div>
+            <div class="modal-body">
+             	삭제하시겠습니까?
+            </div>
+            <div class="modal-footer">
+              <a href="/board/deleteBoard?boardNo=${board.boardNo}" class="btn btn-b">삭제</a>
+              <button type="button" class="btn btn-a" data-dismiss="modal">닫기</button>
+            </div>
+          </div>
+        </div>
+</div>
+<!-- 모달2 끝 -->
 			  
 			  
 		    
