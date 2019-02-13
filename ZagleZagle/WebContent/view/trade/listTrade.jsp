@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -45,6 +46,7 @@ body {
     padding: 0;
     font-family: 'Poppins', sans-serif;
 	background: #333;
+	overflow-x: hidden; 
 }
 
 .grid{
@@ -66,6 +68,11 @@ body {
 .containerList .box img {
     max-width: 100%;
     background-size: cover;
+}
+
+.containerList .box p {
+    margin: 0;
+    padding: 0 0 10px;
 }
 
 
@@ -194,12 +201,17 @@ function search(){
 	</span>
 	</p>
 
-	<div><img src="${sell.sellPhoto1}" style="width:100%;" align="middle"/></div>
 
+	<div>
+	<img src="${sell.sellPhoto1}" style="width:100%;" align="middle"/>
+	</div>
+	
+	<div style="word-break:break-all;">
 	<p align="left"><strong>상&nbsp;품&nbsp;명</strong>&nbsp;:&nbsp;${sell.sellName}</p>
-	<p align="left"><strong>가&emsp;&nbsp;격</strong>&nbsp;:&nbsp;${sell.sellPrice} 원</p>
+	<p align="left"><strong>가&emsp;&nbsp;격</strong>&nbsp;:&nbsp;<fmt:formatNumber value="${sell.sellPrice}" type="number"/> 원</p>
 	<p align="left"><strong>상세정보</strong></p>
-	<p align="left">${sell.sellText}</p>
+	<p align="left" style="text-align: center;">${sell.sellText}</p>
+	</div>
 	
 </div>
 </li>
@@ -220,7 +232,7 @@ function search(){
 			} );
 		</script>
 </div><!-- /container -->
-
+<jsp:include page="/view/layout/footer.jsp"></jsp:include>
 </form>
 </body>
 </html>

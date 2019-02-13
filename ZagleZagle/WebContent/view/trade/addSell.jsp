@@ -38,6 +38,7 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="/common/js/medium-editor/dist/js/medium-editor.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>  
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script type="text/javascript">
 		
@@ -88,6 +89,7 @@ $(function() {
 		  
 		addSell();
 	});
+	
 	$("button:contains('이전')").on("click", function() {
 		 self.location="/trade/listTrade";
 		});
@@ -106,7 +108,26 @@ $(function() {
 
 		$("input:hidden[name='sellPhone']").val( value );
 		
-		$("form").attr("method" , "POST").attr("action" , "/trade/addSell").submit();
+		swal("등록 하시겠습니까?","",{
+	         icon: "info",
+	         buttons: {
+	           cancel: "아니오",
+	           catch: {
+	             text: "예",
+	             value: "catch",
+	           },
+	         },
+	       })
+	       .then((value) => {
+	         switch (value) {
+
+	           case "catch":
+	        	   $("form").attr("method" , "POST").attr("action" , "/trade/addSell").submit();
+	             break;
+	        
+	         }
+	       });
+		
  }
 		
 	</script>
