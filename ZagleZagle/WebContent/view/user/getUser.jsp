@@ -98,7 +98,7 @@ padding-top: 120px;
 
 .row{
 
-
+padding-left: 50px;
 }
 
 
@@ -167,7 +167,7 @@ padding-top: 120px;
 		
 	
 		<div class="row">
-	  		<div class="col-xs-4 col-md-5" align="right"><strong>프&nbsp;&nbsp;로&nbsp;&nbsp;필</strong></div>
+	  		<div class="col-xs-4 col-md-5 col-6" align="right"><strong>프&nbsp;&nbsp;로&nbsp;&nbsp;필</strong></div>
 	  		<div class="col-md-1"></div>
 	  		<div class="col-xs-8 col-md-6" align="left">
 			<img src="/common/images/profile/${user.profile}"/>
@@ -178,7 +178,7 @@ padding-top: 120px;
 		<hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-5" align="right"><strong>닉&nbsp;&nbsp;네&nbsp;&nbsp;임</strong></div>
+	  		<div class="col-xs-4 col-md-5 col-6" align="right"><strong>닉&nbsp;&nbsp;네&nbsp;&nbsp;임</strong></div>
 	  		<div class="col-md-1"></div>
 			<div class="col-xs-8 col-md-6" align="left">${user.userNickname}</div>
 		</div>
@@ -189,7 +189,7 @@ padding-top: 120px;
 	
 			
 		<div class="row">
-	  		<div class="col-xs-4 col-md-5" align="right"><strong>생년월일</strong></div>
+	  		<div class="col-xs-4 col-md-5 col-7" align="right"><strong>생년월일</strong></div>
 	  		<div class="col-md-1"></div>
 			<div class="col-xs-8 col-md-6" align="left">${user.userBirth}</div>
 		</div>
@@ -197,7 +197,7 @@ padding-top: 120px;
 			<hr/>
 			
 		<div class="row">
-	  		<div class="col-xs-4 col-md-5" align="right"><strong>주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</strong></div>
+	  		<div class="col-xs-4 col-md-5 col-3" align="right"><strong>주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</strong></div>
 	  		<div class="col-md-1"></div>
 			<div class="col-xs-8 col-md-6" align="left">${user.userAddr}</div>
 		</div>
@@ -206,7 +206,7 @@ padding-top: 120px;
 			
 			
 		<div class="row">
-	  		<div class="col-xs-4 col-md-5" align="right"><strong>활동점수</strong></div>
+	  		<div class="col-xs-4 col-md-5 col-7" align="right"><strong>활동점수</strong></div>
 	  		<div class="col-md-1"></div>
 			<div class="col-xs-8 col-md-6" align="left">${user.totalActiveScore}</div>
 		</div>
@@ -216,7 +216,7 @@ padding-top: 120px;
 
 			
 			<div class="row">
-	  		<div class="col-xs-4 col-md-5" align="right"><strong>계&emsp;&emsp;좌</strong></div>
+	  		<div class="col-xs-4 col-md-5 col-7" align="right"><strong>계&emsp;&emsp;좌</strong></div>
 	  		<div class="col-md-1"></div>
 			<div class="col-xs-8 col-md-6" align="left">
 			
@@ -233,7 +233,7 @@ padding-top: 120px;
 			<hr/>
 			
 					<div class="row">
-	  		<div class="col-xs-4 col-md-5" align="right"><strong>가입날짜</strong></div>
+	  		<div class="col-xs-4 col-md-5 col-7" align="right"><strong>가입날짜</strong></div>
 	  		<div class="col-md-1"></div>
 			<div class="col-xs-8 col-md-6" align="left">${user.regDate}</div>
 		</div>

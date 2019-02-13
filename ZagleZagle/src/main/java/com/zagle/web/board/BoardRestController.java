@@ -310,11 +310,23 @@ public class BoardRestController {
 	 public int addLink(@RequestBody Link link) throws Exception{
 		 
 		 System.out.println("/json/addLink");
-		 System.out.println(link);
 		 
 		 boardService.addLink(link);
 		 
 		return 1;	 
+	 }
+	 
+	 @RequestMapping(value="json/listLink", method=RequestMethod.POST)
+	 public List<Link> listLink(@RequestBody Map<String, String> map) throws Exception{
+		 
+		 System.out.println("/json/listLink");
+		 
+		 String photo1=map.get("photo1");
+
+	     List<Link> list=new ArrayList<Link>();
+		 list=boardService.listLink(photo1);	     
+		 
+		 return list;
 	 }
 	 
 	 

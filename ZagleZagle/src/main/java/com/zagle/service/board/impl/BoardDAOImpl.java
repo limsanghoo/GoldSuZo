@@ -149,6 +149,11 @@ public class BoardDAOImpl implements BoardDAO{
 		return sqlSession.selectList("BoardMapper.getMapList",search);
 	}
 
+	@Override
+	public List<Link> listLink(String photo1) throws Exception {
+		return sqlSession.selectList("BoardMapper.listLink", photo1);
+	}
+
 	
 
 	

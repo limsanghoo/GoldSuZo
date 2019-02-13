@@ -79,8 +79,7 @@ function commentInsert(boardNo,userNo, text){
        	$.ajax({
            url : '/board/json/listComment/'+boardNo,
            type : 'get',
-          // data : {'postNo':postNo},
-            success : function(JSONData){
+           success : function(JSONData){
             	
             	var a='';
             	var b='';
