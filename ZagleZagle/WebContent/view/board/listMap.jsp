@@ -23,7 +23,7 @@
     .info .link {color: #5085BB;}
 
 
-        div.row{
+        #window{
         	padding-top : 150px;
         }
      
@@ -45,7 +45,7 @@
 <jsp:include page="/view/layout/toolbar.jsp" />
 
 
-<div class="row"style="text-align: center; display: inherit;">
+<div class="row" id="window" style="text-align: center; display: inherit;">
 				<select name="state" class="ct_input_g" style="width: 200px; height: 40px; background-color: white; border-radius: 5px;" onchange="fncGetState(this)">
 					<option value='' style="font-size:20px;"  selected>시·도</option>
 					<c:set var="i" value="0"/>
@@ -232,15 +232,14 @@ function markerMake(data){
 	
 	var content = '<div class="wrap">' + 
     '    <div class="info">' + 
-    '        <div class="title">' + 
-   data[i].address +
+    '        <div class="title">' +data[i].address+
     '        </div>' + 
     '        <div class="body">' + 
     '            <div class="img">' +
     '                <img src="'+data[i].photo1+'" width="73" height="70">' +
     '           </div>' + 
     '            <div class="desc">' + 
-    '                <div class="ellipsis">'+data[i].boardDetailText+'</div>' + 
+    '                <div class="ellipsis" style="word-break:break-all;">'+data[i].boardDetailText+'</div>' + 
     '            </div>' + 
     '        </div>' + 
     '    </div>' +    
@@ -338,5 +337,7 @@ function moveMap(local){
 }
 
 </script>
+
+<jsp:include page="/view/layout/footer.jsp"></jsp:include>
 </body>
 </html>

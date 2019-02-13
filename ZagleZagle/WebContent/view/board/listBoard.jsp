@@ -91,7 +91,6 @@ body {
 
 .fullScreen{
 	background-size: cover;
-	background-image: url(/common/css/html5up-helios/images/pic03.jpg);
 	margin-right: 0;
 }
 
@@ -194,7 +193,7 @@ $(function(){
 			return;
 		}
 		
-		self.location="http://192.168.0.32:8080/board/addBoard?userNo=${user.userNo}";
+		self.location="/board/addBoard?userNo=${user.userNo}";
 	})
 	
 	//지도로 보기
@@ -307,7 +306,6 @@ $(function(){
 				
 			})
 		}//1, 2일때 끝
-
 		
 	});//좋아요 끝
 	
@@ -417,8 +415,7 @@ $(function(){
 		var likeCount=$(this).data('likecount');
 		
 		var boardNo=$(this).data('boardno');
-		
-		
+				
 		//<![CDATA[
 		// // 사용할 앱의 JavaScript 키를 설정해 주세요.
 		Kakao.init('83df98960f21b7281d6cdfddf483b6a5');
@@ -466,8 +463,7 @@ $(function(){
 		
 		var likeCount=$(this).data('likecount');
 		
-		var boardNo=$(this).data('boardno');
-		
+		var boardNo=$(this).data('boardno');		
 		
 	//<![CDATA[
     // // 사용할 앱의 JavaScript 키를 설정해 주세요.
@@ -835,22 +831,25 @@ function fncGetTown(){
 	</c:choose>
 	</span>
 	
-	<!-- 카카오링크 -->
-	<c:if test="${board.address!=null}">	
+	
+	<c:if test="${board.address!=null}">
+	<!-- 카카오링크 주소 있는 경우-->
 	<span id="${board.boardNo}kakao-link-btn" name="kakao1"
 	 data-address="${board.address}" data-boardDetailText="${board.boardDetailText}" data-hashTag="${board.hashTag}" data-photo1="${board.photo1}" data-likeCount="${board.likeCount}" data-boardNo="${board.boardNo}"
 	 style="display: inline; float: right; width: 30px; height: 40px; margin-top: 13px;">
 	<img src="/common/images/board/kakao.JPG"/>
 	</span>
 	
+	<!-- 카카오 네비 -->
 	<span id="${board.boardNo}kakaonavi-link-btn" name="navi"
 	 data-address="${board.address}" data-coord="${board.coord}"
 	 style="display: inline; float: right; width: 30px; height: 40px; margin-top: 13px;">
 	<img src="/common/images/board/navi.PNG"/>
-	</span>
-	
+	</span>	
 	</c:if>
 	
+	
+	<!-- 카카오링크 주소 없는 경우-->
 	<c:if test="${board.address==null}">
 	<span id="${board.boardNo}kakao-link-btn" name="kakao2"
 	 data-boardDetailText="${board.boardDetailText}" data-hashTag="${board.hashTag}" data-photo1="${board.photo1}" data-likeCount="${board.likeCount}" data-boardNo="${board.boardNo}"
@@ -863,7 +862,7 @@ function fncGetTown(){
 
 	
 <!-- 본문 시작 -->
-<div class="realBox" data-toggle="modal" data-target="#${board.boardNo}modal1">
+<div class="realBox" data-toggle="modal" data-target="#${board.boardNo}modal1" style="word-break:break-all;">
 
 <!-- 지도 시작 -->
 <c:if test="${board.coord !=null}">
