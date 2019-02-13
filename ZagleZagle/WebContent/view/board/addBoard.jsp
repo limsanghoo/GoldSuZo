@@ -16,6 +16,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 
+<!--  sweetAlert -->     
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -131,7 +133,7 @@ $(function(){
 	        
 	        $.ajax(	
 	        		{
-	        			url : "http://192.168.0.19:8080/board/json/addBoardVisionTag",
+	        			url : "/board/json/addBoardVisionTag",
 	        			method : "GET",
 	        			data : {
 	        				link : result.data.link
@@ -180,9 +182,30 @@ $(function(){
          alert("내용을 입력해주세요.");
          return;
       }
+	
+      //sweetalert
+      swal("등록 하시겠습니까?","",{
+    	  icon: "info",
+    	  buttons: {
+    	    cancel: "아니오",
+    	    catch: {
+    	      text: "예",
+    	      value: "catch",
+    	    },
+    	  },
+    	})
+    	.then((value) => {
+    	  switch (value) {
+    	    	 
+    	    case "catch":
+    	      $("form").attr("method" , "POST").attr("action" , "/board/addBoard").submit();
+    	      break;  	 
+    	  }
+    	});
       
-         $("form").attr("method" , "POST").attr("action" , "/board/addBoard").submit();
       
+        
+
    });
    
    $("button:contains('이전')").on("click", function() {
@@ -226,7 +249,7 @@ $(function(){
 		<div class="col-xs-8 col-md-2 text-right" style="padding-top: .5em; padding-bottom: .5em;"><strong>내용</strong></div>
 	
 			<div class="col-xs-4 col-md-10" style="border-left-width: 0.1em; border-left-style: solid; border-left-color: #777; padding-top: .5em; padding-bottom: .5em;">
-			<textarea class="editable" id="boardDetailText" name="boardDetailText"></textarea>
+			<textarea class="editable" id="boardDetailText" name="boardDetailText" style="height: 100px; overflow-y: auto;"></textarea>
 			</div>	
 </div>
 
@@ -259,13 +282,13 @@ $(function(){
 <!-- 주소 시작 -->
 <input class="btn" type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"/>
 <input class="btn" type="button" onclick="ummm()" value="지명 검색"/>
-<input class="form-control" type="text" name="address" id="sample5_address" placeholder="검색버튼을 눌러주세요" readOnly style="width:35%; margin-top: 5px;"/><br/>
+<input class="form-control" type="text" name="address" id="sample5_address" placeholder="검색버튼을 눌러주세요" readOnly style="width:60%; margin-top: 5px;"/><br/>
 <input type="hidden" name="coord" value=""/><!-- 좌표 -->
 <div class="row col-md-12">
 
-	<div class="col-md-5" id="map" style="width:500px; height:500px; margin-top:10px; display:none; margin-left: 0px; margin-right: 0px; z-index: -1;"></div>
+	<div class="col-md-6" id="map" style="width:600px; height:500px; margin-top:10px; display:none; margin-left: 0px; margin-right: 0px; z-index: -1;"></div>
 	
-	<div id="menu_wrap" class="col-md-4 bg_white"></div>
+	<div id="menu_wrap" class="col-md-5 bg_white"></div>
 		
 </div>
    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc9c3216a02c263f1acc2c4187e96443&libraries=services"></script>
@@ -672,20 +695,6 @@ $(function(){
 <div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: #2eca6a;"></div>
 <br/>
 
-<!-- 해시태그 시작 -->
-<div class="row">
-<div class="col-xs-8 col-md-2 text-right" style="padding-top: .5em; padding-bottom: .5em;"><strong>해시태그</strong></div>
-<div class="col-xs-4 col-md-10" style="border-left-width: 0.1em; border-left-style: solid; border-left-color: #777; padding-top: .5em; padding-bottom: .5em;">
-
-	 <input class="form-control" type="text" name="hashTag" id="hashTag" value=""/>
-	
-</div>
-</div>
-<!-- 해시태그 끝 -->
-
-<br/>
-<div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: #2eca6a;"></div>
-<br/>
 
 <!-- 사진 시작 -->
 <div class="row">
@@ -701,6 +710,23 @@ $(function(){
 </div>
 </div>
 <!-- 사진 끝 -->
+
+<br/>
+<div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: #2eca6a;"></div>
+<br/>
+
+<!-- 해시태그 시작 -->
+<div class="row">
+<div class="col-xs-8 col-md-2 text-right" style="padding-top: .5em; padding-bottom: .5em;"><strong>해시태그</strong></div>
+<div class="col-xs-4 col-md-10" style="border-left-width: 0.1em; border-left-style: solid; border-left-color: #777; padding-top: .5em; padding-bottom: .5em;">
+
+	 <input class="form-control" type="text" name="hashTag" id="hashTag" value=""/>
+	
+</div>
+</div>
+<!-- 해시태그 끝 -->
+
+
 
 <br/>
 
