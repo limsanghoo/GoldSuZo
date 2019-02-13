@@ -26,7 +26,7 @@
 <script src="/common/css/GridLoadingEffects/js/modernizr.custom.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>       
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>        
-        
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>    
         
  <!--  --> 
  <!-- Favicons -->
@@ -50,7 +50,7 @@
 <style>  
 
 body{
-background-color: #e2e2e2 !important; 
+background-color: #eaf2ec !important; 
 padding-top : 150px;
 }
 
@@ -128,28 +128,33 @@ $(function() {
 	   	            "Content-Type": "application/json"
 	   	        },    	        
 	             success : function (JSONData,status) {
-	           //alert("보내기 성공");
-	           var result = confirm("환급신청 완료! 환급리스트 화면으로 이동 하시겠습니까?");
-			     
-	 		  if(result){
-	 			  //alert("환급리스트 공사중....") 
-	 			  self.location="/stream/listRefund";
-	 		  }else{ 
-	 			  self.location="/stream/listStream";
-	 		  }  
+	         //  alert("보내기 성공");
+	        //   alert(JSONData);
+	     
 	             },
 	             error : function (err) { 
-	              //   alert("보내기 성공");
-	  	           var result = confirm("환급신청 완료! 환급리스트 화면으로 이동 하시겠습니까?");
-	  			     
-	  	 		  if(result){
+	            // alert(err);
+	  	        /*     var result = confirm("환급신청 완료! 환급리스트 화면으로 이동 하시겠습니까?"); */
+	  	          swal({
+						  title: "환급신청 완료!",
+						  text: "환급리스트 화면으로 이동 하시겠습니까?",
+						  icon:"success",
+						  buttons: ["취소", "이동"]
+						})
+						.then((willDelete) => {
+						  if (willDelete) {
+							  self.location="/stream/listRefund";
+						  }
+						});
+	  	        
+	  	 	/* 	  if(result){
 	  	 			  //alert("환급리스트 공사중....") 
 	  	 			  self.location="/stream/listRefund";
 	  	 		  }else{ 
 	  	 			  self.location="/stream/listStream";
-	  	 		  }  
-	  	             
-	                 }  
+	  	 		  }  */  
+	  	              
+	                 }   
 	         }); 
 		 /*  addRefund();    
 		   var result = confirm("환급신청 완료! 환급리스트 화면으로 이동 하시겠습니까?");
@@ -276,19 +281,8 @@ $(function() {
     <button class='btn btn-b' id="listRefund" name="listRefund">환급리스트이동</button> 
         <button class='btn btn-b' id="session" name="session">세션</button> 
          <button class='btn btn-b' id="session2" name="session">세션2</button>  
-         <div id="plusfriend-addfriend-button"></div>
-<script type='text/javascript'>
-  //<![CDATA[
-    // 사용할 앱의 JavaScript 키를 설정해 주세요.
-    Kakao.init('9eb4dc20c357b025d43287c96a92137d'); 
-    // 플러스친구 친구추가 버튼을 생성합니다.
-    Kakao.PlusFriend.createAddFriendButton({
-      container: '#plusfriend-addfriend-button',
-      plusFriendId: '_unxdxej' // 플러스친구 홈 URL에 명시된 id로 설정합니다.
-    });
-  //]]>
-</script>
-        
+ 
+          
   </div>
 					 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -351,18 +345,18 @@ $(function() {
     </div>  
   </div></div>	
 
-<div class="row" id="list">
+<div class="row" id="list" style="padding-left:0; padding-right:0;">
 <c:set var="i" value="0" /> 
 <c:forEach var="obj" items="${list}"> 
 <div class="col-sm-6 col-md-4">  
-	<div class="thumbnail">  
+	<div class="thumbnail" style="margin-left:60px; margin-right:60px;">  
 		<div style="margin: 10px;">
 		
 			<div class="profileusername">
 			<img id="profile" src="/common/images/profile/${obj.streamerProfile}" style="height:50px; width:50px; border-radius:70px;">&emsp;<strong>${obj.streamNickname}</strong>
 			</div>
 			
-			<br/>
+			<br/> 
 			
 			<div style="border-top-width: 0.1em; border-top-style: dashed; border-top-color: #7b7b7b;"></div><br/>
 			
@@ -394,6 +388,6 @@ $(function() {
 </div>
 </c:forEach>
 </div> 
-
+<jsp:include page="/view/layout/footer.jsp"></jsp:include>
 </body>
 </html>

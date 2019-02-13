@@ -56,7 +56,7 @@ public class StreamController {
 	int pageSize;
 	
 	@RequestMapping(value="addStream",method=RequestMethod.POST)
-	public ModelAndView addStream(@ModelAttribute("stream")Stream stream,MultipartHttpServletRequest mtfRequest) throws Exception{
+	public ModelAndView addStream(@ModelAttribute("stream")Stream stream,MultipartHttpServletRequest mtfRequest,HttpSession session) throws Exception{
 		System.out.println("Add controlloer");
 		System.out.println("stream모델 받은거"+stream);
 		
@@ -89,7 +89,7 @@ public class StreamController {
 		String stringdate = "2018-01-11";
 		Date date = new SimpleDateFormat("yyyy-MM-dd").parse(stringdate);
 		System.out.println(date);
-		User user = userService.getUser2("US10001");
+		User user = (User)session.getAttribute("user");
 		System.out.println(user);
 		stream.setUser(user);  
 		stream.setStreamDate(date);
@@ -180,11 +180,14 @@ public class StreamController {
 		System.out.println("listRefund==========");
 	//	User user = session.getAttribute("user");
 		//SearchStream searchStream = new SearchStream();
+	User user = (User)session.getAttribute("user");
+		
+		System.out.println("grade "+user);
 		if(searchStream.getCurrentPage() ==0 ){
 			searchStream.setCurrentPage(1);
 		}  
 		searchStream.setPageSize(pageSize); 
-		searchStream.setSearchUserNo("US10000");
+		searchStream.setSearchUserNo(user.getUserNo());
 		System.out.println("왜 안바뀌지????"+searchStream);
 		
 		System.out.println(searchStream.getEndRowNum());
@@ -196,9 +199,7 @@ public class StreamController {
 		modelAndView.addObject("list",map.get("list"));
 		modelAndView.addObject("count",map.get("count"));
 		modelAndView.addObject("resultPage",resultPage); 
-		User user = (User)session.getAttribute("user");
-		
-		System.out.println("grade "+user);
+	
 		
 		if(user.getGrade().equals("4")) {
 			modelAndView.setViewName("forward:/view/admin/siteManage2.jsp");	
