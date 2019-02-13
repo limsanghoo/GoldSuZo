@@ -311,6 +311,16 @@ public class BoardRestController {
 		 
 		 System.out.println("/json/addLink");
 		 
+		 String url=link.getUrl();
+		 
+		 System.out.println("url : "+url);
+		 
+		 String[] url2=url.split(":\\/\\/");
+		 
+		 if(url2.length==1) {
+			 link.setUrl(url2[1]);
+		 }
+		 	 		 
 		 boardService.addLink(link);
 		 
 		return 1;	 

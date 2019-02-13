@@ -35,6 +35,22 @@
 
 $(function(){
 	
+	//부모창에서 photo1 가져오기
+	window.onload = function () {
+		var search = window.location.search;
+	    var getData =  decodeURI(search);
+	    
+	    var photo1=getData.substring(5);
+
+	    
+	   $(".photo1").attr("src",photo1);
+	   $(".photo1").val(photo1);
+	   
+	   listLink(photo1); //링크 리스트 불러오기
+	   
+	}
+	
+	
 	//동적으로 추가된 태그는 이렇게 이벤트 걸어줘야 함
 	$(document).on("click","#addLink",function(){
 		
@@ -198,23 +214,6 @@ function action_coords(event) {
     );
 
 }
-
-
-//부모창에서 photo1 받아오기
-$(function(){
-
-window.onload = function () {
-	var search = window.location.search;
-    var getData =  decodeURI(search);
-    
-    var photo1=getData.substring(5);
-
-    
-   $(".photo1").attr("src",photo1);
-   $(".photo1").val(photo1);
-}
-
-});
 
 
 

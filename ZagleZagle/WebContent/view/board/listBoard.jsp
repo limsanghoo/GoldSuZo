@@ -386,8 +386,8 @@ $(function(){
 	});
 	
 	
-	//사진 링크 추가
-	$("input[value='링크 추가']").bind("click",function(){
+	//사진 링크 관리
+	$("input[value='링크 관리']").bind("click",function(){
 		var photo1=$(this).data('photo1');
 		var boardNo=$(this).data('boardno');
 		//addLink 팝업
@@ -396,21 +396,21 @@ $(function(){
 	});
 	
 	
-	//사진 링크 보기
-	$("input[value='링크 보기']").bind("click",function(){
+	//사진 링크 mouseover
+	$("div[name='listLink']").bind("mouseenter",function(){
+		
 		var photo1=$(this).data('photo1');
 	
 		getLink(photo1);
 	});
 	
 	
-	//모달 닫으면 listLink 없애기
-	$(".close").bind("click",function(){
-		
-		$(".listLink").empty();
-		
+	//사진 링크 mouseout
+	$("div[name='listLink']").bind("mouseleave",function(){
+
+		$(".listLink").empty(); 
 	});
-	
+
 	
 	//검색 버튼 클릭
 	$("#search").bind("click",function(){
@@ -532,8 +532,6 @@ function enter() {
 //getLink
 function getLink(photo1){
 	
-	alert("getLink 왔다");
-	
 	var data={"photo1" : photo1};
 	
 	$.ajax({
@@ -559,7 +557,7 @@ function getLink(photo1){
                  var photo1="'"+list.photo1+"'";
                  
                  a+='<span style="left: '+list.coordX+'px; top: '+list.coordY+'px; position: absolute; width:23px;">'
-                 a+='<a href='+url+'>'+'<img src="/common/images/board/plus.png">'+'</a>'
+                 a+='<a href="//'+list.url+'" target="_blank">'+'<img src="/common/images/board/plus.png">'+'</a>'
                  a+='<input type="hidden" value='+list.linkNo+'>'
                  a+='</span>'
                  
@@ -570,6 +568,8 @@ function getLink(photo1){
 		
 	});//ajax 끝
 }
+
+
 
 
 //시도 선택
@@ -1044,13 +1044,12 @@ function fncGetTown(){
 
 		<div>
 			<c:if test="${board.photo1 !=null}">
-			<div>
+			<div name="listLink" data-photo1="${board.photo1}">
 				<span class="listLink" style="position: absolute;"></span>
-				<img src="${board.photo1}" style="width: 100%"/>
 				<c:if test="${user.userNo==board.user.userNo}">
-					<input type="button" value="링크 추가" data-photo1="${board.photo1}" data-boardNo="${board.boardNo}">
+					<input style="position: absolute; top:25px; left:25px; background-color: #ffffff91; color: black;" type="button" class="btn" value="링크 관리" data-photo1="${board.photo1}" data-boardNo="${board.boardNo}">
 				</c:if>
-				<input type="button" value="링크 보기" data-photo1="${board.photo1}">
+				<img src="${board.photo1}" style="width: 100%"/>			
 			</div>
 			<br/>
 			</c:if>
