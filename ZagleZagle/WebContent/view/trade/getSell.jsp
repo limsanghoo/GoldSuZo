@@ -76,11 +76,11 @@
 	</div>
 	<c:if test="${user.userNo == sell.seller.userNo}">
 	<div class="col-lg-5 text-right">
-	<c:if test="${sell.sellState==10}">
+	<c:if test="${sell.sellState==10 || sell.sellState==30}">
 		<button type="button" class="btn btn-b">수정</button>
 		<button type="button" class="btn btn-b">삭제</button>
 	</c:if>
-	<c:if test="${sell.sellState!=10}">
+	<c:if test="${sell.sellState!=10 && sell.sellState!=30}">
 	  		<button type="button" class="btn btn-c">판매완료</button>
 	</c:if>
 		<button type="button" class="btn btn-a">이전</button>
