@@ -16,12 +16,7 @@ body {
   font-family:"Noto Sans KR", sans-serif;
   color: #555555; 
 }
-#margintable{
- padding :50px;
-   padding:1rem 1rem; 
-    padding-left :80px;
-    padding-right :80px;
-}
+
 h1{
  padding-left :40px; 
 }
@@ -68,7 +63,7 @@ h1{
        font-size:60px;  
        
       }
- 
+   
   </style>  
 
 
@@ -165,7 +160,14 @@ $(function() {
 			  <td align="left">${refund.account}</td>
 			  <td align="left">${refund.price}</td>
 			  <c:if test="${refund.checkRefund =='0'}">
-              <td align="left" class="checkRefund" data-param="0" data-param2="${refund.refundNo}"><button style="height:26px; text-align:center; padding-top:0;">환급진행중</button></td> 
+              <td align="left" data-param="0" data-param2="${refund.refundNo}">
+               <c:if test="${refund.streamerNo =='US10000'}">
+           	   <button  class="checkRefund"  style="height:26px; text-align:center; padding-top:0;">환급진행중</button>
+           	   </c:if> 
+           	   <c:if test="${refund.checkRefund !='US10000'}">
+           	   	환급진행중
+           	   </c:if>
+           	   </td> 
               </c:if>
               <c:if test="${refund.checkRefund =='1'}"> 
                <td align="left" data-param="1" data-param2="${refund.streamerNo}">환급완료</td>
