@@ -36,39 +36,6 @@ $(function() {
 	$("input:text[name='phone1']").val(phone[0]);
 	$("input:text[name='phone2']").val(phone[1]);
 	$("input:text[name='phone3']").val(phone[2]);
-	
-	var file = document.getElementById('file');
-	var image = document.getElementById('image');
-
-	file.onchange = function (event) {
-		
-		$('.wrap-loading').removeClass('display-none'); //로딩중 이미지 보여주기
-		
-	  var target = event.currentTarget;
-	  var xmlHttpRequest = new XMLHttpRequest();
-	  xmlHttpRequest.open('POST', 'https://api.imgur.com/3/image/', true); //원래 true
-	  xmlHttpRequest.setRequestHeader("Authorization", "Client-ID c764d6730f6f9a6");
-	  xmlHttpRequest.onreadystatechange = function () {
-
-	    if (xmlHttpRequest.readyState == 4) {
-	      if (xmlHttpRequest.status == 200) {
-	        var result = JSON.parse(xmlHttpRequest.responseText);
-	        $("#img_box").append("<img src='"+result.data.link+"' name='img' style=' height: 150px;'>&nbsp;");//이미지 미리보기
-	        
-	        var linkArea=$("#link");
-			linkArea.val(linkArea.val()+result.data.link+",");//이미지 링크 append
-			
-	        console.log(result);        
-    		
-	      }
-	      else {
-	      	alert("업로드 실패");
-	      }
-	      $('.wrap-loading').addClass('display-none'); //로딩중 이미지 감추기
-	    }
-	  };//()function 끝
-	  xmlHttpRequest.send(target.files[0]);
-	};//(event)function 끝
 
 	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 	$( "button:contains('수정')"  ).on("click" , function() {
@@ -86,6 +53,47 @@ $(function() {
 	$("button:contains('이전')").on("click", function() {
 		self.location="/trade/getSell?sellNo="+'${sell.sellNo}';
 		});
+	
+	$('#edit').bind("click",function(){
+		$("#img_box").empty();//원래 이미지 비우기
+		$("#newPhoto").append('<input id="file" type="file" multiple="multiple"><br/>* 사진은 한 장씩 등록해주세요 * 세 장까지 등록 가능합니다<br/><br/>');	//파일 첨부 버튼 생성
+		$("#hashTag").val("");//원래 해시태그 비우기
+		$("#link").val("");//원래 링크 비우기		
+		
+		var file = document.getElementById('file');
+		var image = document.getElementById('image');
+
+		file.onchange = function (event) {
+			
+			$('.wrap-loading').removeClass('display-none'); //로딩중 이미지 보여주기
+			
+		  var target = event.currentTarget;
+		  var xmlHttpRequest = new XMLHttpRequest();
+		  xmlHttpRequest.open('POST', 'https://api.imgur.com/3/image/', true);
+		  xmlHttpRequest.setRequestHeader("Authorization", "Client-ID c764d6730f6f9a6");
+		  xmlHttpRequest.onreadystatechange = function () {
+		    if (xmlHttpRequest.readyState == 4) {
+		      if (xmlHttpRequest.status == 200) {
+		        var result = JSON.parse(xmlHttpRequest.responseText);
+
+		        $("#img_box").append("<img src="+result.data.link+">");//이미지 미리보기
+		        
+		        var linkArea=$("#link");
+				linkArea.val(linkArea.val()+result.data.link+",");//이미지 링크 append
+				
+		        console.log(result);        
+		      
+		      }
+		      else {
+		      	alert("업로드 실패");
+		      }
+		    }
+		  };//()function 끝
+		  xmlHttpRequest.send(target.files[0]);
+		};//(event)function 끝
+		
+		
+	})//edit 끝
 	
 });	
  
@@ -179,11 +187,7 @@ $(function() {
 	  	<div class="row">
 	  	<div class="col-xs-8 col-md-1" style="padding-top: .5em; padding-bottom: .5em;"><strong>사진</strong></div>
 	  	<div class="col-xs-4 col-md-11" style="border-left-width: 0.1em; border-left-style: solid; border-left-color: #777; padding-top: .5em; padding-bottom: .5em;">
-			<input id=file type=file multiple="multiple"><br/>	
-			<div id="img_box"></div>
-			<br/>* 사진은 한 장씩 등록해주세요 * 세 장까지 등록 가능합니다<br/><br/>
-
-			<input type="hidden" id="link" value="" name="sellPhoto1"/><!-- 이미지 링크 append 되는 부분 -->
+			<input class="btn" type="button" value="사진 수정하기" id="edit"/>
 			</div>
 		</div>
 		
