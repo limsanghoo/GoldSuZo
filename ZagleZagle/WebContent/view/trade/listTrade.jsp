@@ -232,7 +232,7 @@ function search(){
 			} );
 		</script>
 </div><!-- /container -->
-
+<jsp:include page="/view/layout/footer.jsp"></jsp:include>
 </form>
 </body>
 </html>
