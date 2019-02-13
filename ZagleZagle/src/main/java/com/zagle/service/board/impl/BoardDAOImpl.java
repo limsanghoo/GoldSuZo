@@ -33,16 +33,13 @@ public class BoardDAOImpl implements BoardDAO{
 		System.out.println(this.getClass());
 	}
 
+	
+/////////보드	
 	@Override
 	public void addBoard(Board board) throws Exception {
 		sqlSession.insert("BoardMapper.addBoard", board);
 	}
-
-	@Override
-	public void addLink(Link link) throws Exception {
-		sqlSession.insert("BoardMapper.addLink", link);
-	}
-
+	
 	@Override
 	public void updateBoard(Board board) throws Exception {
 		sqlSession.update("BoardMapper.updateBoard", board);
@@ -58,31 +55,39 @@ public class BoardDAOImpl implements BoardDAO{
 	
 		return sqlSession.selectList("BoardMapper.listBoard", searchBoard);
 	}
-	
-
-	@Override
-	public int getTotalCount(SearchBoard searchBoard) throws Exception {
-	
-		return sqlSession.selectOne("BoardMapper.getTotalCount", searchBoard);
-	}
 
 	@Override
 	public Board getBoard(String boardNo) throws Exception {
 	
 		return sqlSession.selectOne("BoardMapper.getBoard", boardNo);
 	}
+	
+	
+///////////링크	
+	@Override
+	public void addLink(Link link) throws Exception {
+		sqlSession.insert("BoardMapper.addLink", link);
+	}
 
+	@Override
+	public List<Link> listLink(String photo1) throws Exception {
+		return sqlSession.selectList("BoardMapper.listLink", photo1);
+	}
+		
+	@Override
+	public void deleteLink(String linkNo) throws Exception {
+		sqlSession.delete("BoardMapper.deleteLink", linkNo);
+	}
+
+	
+////////////신고
 	@Override
 	public void addReport(Report report) throws Exception {
 		sqlSession.insert("ReportMapper.addReport", report);
 	}
 
-	@Override
-	public void getHotTag(Board board) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
 
+///////////댓글
 	@Override
 	public void addComment(Comment comment) throws Exception {
 		sqlSession.insert("BoardMapper.addComment", comment);
@@ -104,6 +109,8 @@ public class BoardDAOImpl implements BoardDAO{
 		sqlSession.delete("BoardMapper.deleteComment", commentNo);
 	}
 
+	
+///////////좋아요	
 	@Override
 	public void addLike(Like like) throws Exception {
 		sqlSession.insert("BoardMapper.addLike", like);
@@ -113,7 +120,9 @@ public class BoardDAOImpl implements BoardDAO{
 	public void updateLike(Like like) throws Exception {
 		sqlSession.update("BoardMapper.updateLike", like);
 	}
+
 	
+////////////스크랩	
 	@Override
 	public void addScrap(Scrap scrap) throws Exception {
 		sqlSession.insert("BoardMapper.addScrap", scrap);
@@ -123,7 +132,9 @@ public class BoardDAOImpl implements BoardDAO{
 	public void updateScrap(Scrap scrap) throws Exception {
 		sqlSession.update("BoardMapper.updateScrap", scrap);
 	}
+
 	
+////////////맵	
 	@Override
 	public List<Local> getState() throws Exception {
 		return sqlSession.selectList("MapMapper.getState");
@@ -149,12 +160,13 @@ public class BoardDAOImpl implements BoardDAO{
 		return sqlSession.selectList("BoardMapper.getMapList",search);
 	}
 
-	@Override
-	public List<Link> listLink(String photo1) throws Exception {
-		return sqlSession.selectList("BoardMapper.listLink", photo1);
-	}
 
-	
+///////////////////
+	@Override
+	public int getTotalCount(SearchBoard searchBoard) throws Exception {
+
+		return sqlSession.selectOne("BoardMapper.getTotalCount", searchBoard);
+	}	
 
 	
 

@@ -329,6 +329,15 @@ public class BoardRestController {
 		 return list;
 	 }
 	 
-	 
+	 @RequestMapping( value="json/deleteLink/{linkNo}", method=RequestMethod.GET)
+	 public int addLink(@PathVariable("linkNo") String linkNo) throws Exception{
+		 
+		 System.out.println("/json/deleteLink");
+		 System.out.println("linkNo : "+linkNo);
+		 
+		 boardService.deleteLink(linkNo);
+		 
+		 return 1;	 
+	 }
 
 }

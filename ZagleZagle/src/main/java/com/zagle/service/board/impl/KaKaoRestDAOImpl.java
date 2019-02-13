@@ -26,11 +26,6 @@ public class KaKaoRestDAOImpl implements RestBoardDAO{
 		this.sqlSession = sqlSession;
 	}
 
-	@Override
-	public void shareBoard(String boardNo) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public String addBoardVisionTag(String link) throws Exception {
@@ -67,11 +62,6 @@ public class KaKaoRestDAOImpl implements RestBoardDAO{
 		return eee;
 	}
 
-	@Override
-	public void addBoardDaumMap() throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void listMap() throws Exception {

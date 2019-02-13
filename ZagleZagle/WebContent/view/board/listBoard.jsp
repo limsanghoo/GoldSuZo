@@ -129,7 +129,7 @@ body {
 
 
 #selectTown{
-	padding-top : 40px;
+/* 	padding-top : 40px; */
 	text-align: center;
 }
 
@@ -381,7 +381,7 @@ $(function(){
 		var boardNo=$(this).data('report');
 		
 		var data = document.querySelector("#"+boardNo+"report").value;
-
+		//addReport 팝업
 	    window.open("/view/board/addReport.jsp?val="+data, "addReport", "width=500, height=400, resizable=yes" );
 	});
 	
@@ -390,8 +390,21 @@ $(function(){
 	$("input[value='링크 추가']").bind("click",function(){
 		var photo1=$(this).data('photo1');
 		var boardNo=$(this).data('boardno');
+		//addLink 팝업
+	    window.open("/view/board/addLink.jsp?val="+photo1, "addLink", "width=700, height=700, resizable=no" );
+
+	});
+	
+	$("input[value='링크 보기']").bind("click",function(){
+		var photo1=$(this).data('photo1');
+	
+		getLink(photo1);
+	});
+	
+	$(".close").bind("click",function(){
 		
-		self.location="/board/addLink?boardNo="+boardNo;
+		$(".listLink").empty();
+		
 	});
 	
 	
@@ -497,6 +510,9 @@ $(function(){
      //]]>
 	});//카카오 링크2 끝
 	
+	
+
+	
 });//function 끝
 
 
@@ -508,6 +524,48 @@ function enter() {
         }
 }
 
+
+//getLink
+function getLink(photo1){
+	
+	alert("getLink 왔다");
+	
+	var data={"photo1" : photo1};
+	
+	$.ajax({
+		url : '/board/json/listLink',
+		type: 'POST',
+		data : JSON.stringify(data),
+		headers:{
+            "Accept":"application/json",
+            "Content-Type": "application/json"
+         },
+		success:function(JSONData){
+			
+			var a='';
+			
+			 $.each(JSONData, function(i){
+             	
+                 var list = JSONData[i];
+                 
+                 var linkNo="'"+list.linkNo+"'"; 
+                 var url="'"+list.url+"'";            
+                 var coordX="'"+list.coordX+"'";                 
+                 var coordY="'"+list.coordY+"'";
+                 var photo1="'"+list.photo1+"'";
+                 
+                 a+='<span style="left: '+list.coordX+'px; top: '+list.coordY+'px; position: absolute; background-color:white; width:100px;">'
+                 a+='<a href='+list.url+'>'+list.url+'</a>'
+                 a+='<input type="hidden" value='+list.linkNo+'>'
+                 a+='</span>'
+                 
+			 });
+			 
+			 $(".listLink").html(a); 
+		}//success 끝
+		
+	});//ajax 끝
+}
 
 
 //시도 선택
@@ -982,8 +1040,13 @@ function fncGetTown(){
 
 		<div>
 			<c:if test="${board.photo1 !=null}">
-			<div><img src="${board.photo1}" style="width: 100%"/>
-				<input type="button" value="링크 추가" data-photo1="${board.photo1}" data-boardNo="${board.boardNo}">
+			<div>
+				<span class="listLink" style="position: absolute;"></span>
+				<img src="${board.photo1}" style="width: 100%"/>
+				<c:if test="${user.userNo==board.user.userNo}">
+					<input type="button" value="링크 추가" data-photo1="${board.photo1}" data-boardNo="${board.boardNo}">
+				</c:if>
+				<input type="button" value="링크 보기" data-photo1="${board.photo1}">
 			</div>
 			<br/>
 			</c:if>

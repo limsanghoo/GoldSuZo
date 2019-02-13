@@ -17,7 +17,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script> 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-  
+  <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
   
   <!-- JavaScript Libraries -->
   <script src="/common/css/estateagency-master/lib/jquery/jquery.min.js"></script>
@@ -395,7 +395,7 @@ background-size: cover;
 			<a class="nav-link">LOGIN</a>
 			</li>
 		</c:if>
-			
+
 		 	
       </div>
       
