@@ -117,8 +117,6 @@ function addLink(photo1, url, coordX, coordY){
 //링크 리스트
 function listLink(photo1){
 	
-	alert("리스트");
-	
 	var data={"photo1" : photo1};
 	
 	$.ajax({
@@ -145,7 +143,7 @@ function listLink(photo1){
                  
                  a+='<span style="left: '+list.coordX+'px; top: '+list.coordY+'px; position: absolute;">'
                  
-                 a+='<div style="background-color:white; width:180px; word-break:break-all;">'+list.url+'</div>'
+                 a+='<div style="background-color:white; width:150px; word-break:break-all; font-size:small;">'+list.url+'</div>'
                  a+='<input type="hidden" value='+list.linkNo+'>'
                  a+='<button class="btn" style="margin-top:5px;" onclick="deleteLink('+linkNo+','+photo1+')">삭제</button>'               
                  a+='</span>'             
@@ -190,7 +188,7 @@ function action_coords(event) {
     $("#image_panel").append(
     		'<span style="left: '+x+'px; top: '+y+'px; position: relative; display: block;">'
     		+'<span>'
-    		+'<textarea name="url"></textarea>'
+    		+'<textarea name="url" style="font-size:small;"></textarea>'
     		+'<input type="hidden" name="coordX" value="'+x+'">'
     		+'<input type="hidden" name="coordY" value="'+y+'">'
     		+'<br/>'

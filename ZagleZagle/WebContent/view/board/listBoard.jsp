@@ -386,7 +386,7 @@ $(function(){
 	});
 	
 	
-	//사진 링크
+	//사진 링크 추가
 	$("input[value='링크 추가']").bind("click",function(){
 		var photo1=$(this).data('photo1');
 		var boardNo=$(this).data('boardno');
@@ -395,12 +395,16 @@ $(function(){
 
 	});
 	
+	
+	//사진 링크 보기
 	$("input[value='링크 보기']").bind("click",function(){
 		var photo1=$(this).data('photo1');
 	
 		getLink(photo1);
 	});
 	
+	
+	//모달 닫으면 listLink 없애기
 	$(".close").bind("click",function(){
 		
 		$(".listLink").empty();
@@ -554,8 +558,8 @@ function getLink(photo1){
                  var coordY="'"+list.coordY+"'";
                  var photo1="'"+list.photo1+"'";
                  
-                 a+='<span style="left: '+list.coordX+'px; top: '+list.coordY+'px; position: absolute; background-color:white; width:100px;">'
-                 a+='<a href='+list.url+'>'+list.url+'</a>'
+                 a+='<span style="left: '+list.coordX+'px; top: '+list.coordY+'px; position: absolute; width:23px;">'
+                 a+='<a href='+url+'>'+'<img src="/common/images/board/plus.png">'+'</a>'
                  a+='<input type="hidden" value='+list.linkNo+'>'
                  a+='</span>'
                  
