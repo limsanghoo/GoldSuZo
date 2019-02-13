@@ -386,7 +386,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 					mdstart2.click();
 				}else if(msg.b_user.substring(0,msg.b_user.length-2)=="${user.userNickname}"&&msg.ms=="ok"){
 					alert(msg.no);
-					window.open("https://192.168.0.14/stream/videochat?applyuserNo="+msg.no,"_blank", "width=400, height=300, scrollbars=no,status=no");
+					window.open("https://192.168.0.16/stream/videochat?applyuserNo="+msg.no,"_blank", "width=400, height=300, scrollbars=no,status=no");
 				}else if(msg.b_user.substring(0,msg.b_user.length-2)=="${user.userNickname}"&&msg.ms=="no"){
 					alert("상대방이 거절하셧슴다.")
 				}
@@ -396,7 +396,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 				var name = $(this).val();
 				socket.emit("one_msg",{a_user:"${user.userNickname}",b_user:name,ms:"ok",no:"${user.userNo}"});
 				if (name.substring(name.length-2)=="@s") {
-					window.open("https://192.168.0.14/stream/videochat?applyuserNo=${user.userNo}","_blank", "width=400,status=no, height=300, scrollbars=no");  
+					window.open("https://192.168.0.16/stream/videochat?applyuserNo=${user.userNo}","_blank", "width=400,status=no, height=300, scrollbars=no");  
 				}else{
 					window.open("/chat/getChat?room=@@"+name,"_blank", "width=400, height=600, scrollbars=no ,location=no,resizable=yes,toolbar=no,status=no")
 				}
@@ -475,7 +475,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 				            	if (msg.substring(msg.length-3)=='mp4') {
 				            		setTimeout(function() {
 					            		while(true){
-						            		var path = 'http://192.168.0.19:8080/common/images/chat/'+msg;
+						            		var path = 'http://192.168.0.32:8080/common/images/chat/'+msg;
 						            		var re = doesFileExist2(path);
 						            		if (re) {
 						            			socket.emit("send_msg",msg);
@@ -486,7 +486,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 								}else{
 									setTimeout(function() {
 					            		while(true){
-						            		var path = 'http://192.168.0.19:8080/common/images/chat/'+msg;
+						            		var path = 'http://192.168.0.32:8080/common/images/chat/'+msg;
 						            		var re = doesFileExist2(path);
 						            		if (re) {
 						            			socket.emit("send_msg",msg);
@@ -551,7 +551,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 		            	if (msg.substring(msg.length-3)=='mp4') {
 		            		setTimeout(function() {
 			            		while(true){
-				            		var path = 'http://192.168.0.19:8080/common/images/chat/'+msg;
+				            		var path = 'http://192.168.0.32:8080/common/images/chat/'+msg;
 				            		var re = doesFileExist(path);
 				            		if (re) {
 				            			socket.emit("send_msg",msg);
@@ -562,7 +562,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 						}else{
 							setTimeout(function() {
 			            		while(true){
-				            		var path = 'http://192.168.0.19:8080/common/images/chat/'+msg;
+				            		var path = 'http://192.168.0.32:8080/common/images/chat/'+msg;
 				            		var re = doesFileExist(path);
 				            		if (re) {
 				            			socket.emit("send_msg",msg);

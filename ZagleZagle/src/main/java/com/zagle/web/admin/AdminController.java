@@ -60,6 +60,20 @@ public class AdminController {
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 	
+	
+	
+	@RequestMapping(value="siteManage")
+	public ModelAndView siteManage() throws Exception {
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/view/admin/siteManage.jsp");
+		
+		return modelAndView;
+		
+	}
+	
+	
+	
 	@RequestMapping(value="listUser")
 	public ModelAndView listUser(@ModelAttribute("SearchAdmin") SearchAdmin search, HttpServletRequest request) throws Exception {
 		

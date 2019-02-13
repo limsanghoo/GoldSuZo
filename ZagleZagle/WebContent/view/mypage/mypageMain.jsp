@@ -109,12 +109,16 @@ script {
 
 
 
+#myg_container {
 
+height: 500px;
+
+}
 
 #myg_row {
 
       background-color: #dceadf;
-    height: 1000px;
+    height: 1000px;`
     padding-left: 32%;
     padding-right: 10%;
     padding-top: 24%;
@@ -182,7 +186,10 @@ transition: transform .35s;
 
 	
 
+<div id="myg_container"> 
 
+
+<div class="myg_container">
 
 
 
@@ -253,13 +260,9 @@ transition: transform .35s;
     
   
     </div> <!--  div id row 끝 -->
- 
+ </div>
 
-
-
-
-
-
+</div>
 
 
 

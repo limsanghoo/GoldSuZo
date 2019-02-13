@@ -75,17 +75,24 @@ public class MypageController {
 	}
 	
 	@RequestMapping( value="addAccount", method=RequestMethod.POST)
-	public ModelAndView addAccount( @ModelAttribute("user") User user) throws Exception {
+	public ModelAndView addAccount( @ModelAttribute("user") User user, HttpSession session) throws Exception {
 		
 		System.out.println("/mypage/addAccount : POST");
 	 
 	    
 	    
 		mypageService.addAccount(user);
+	
+		
+		User user01 = (User) session.getAttribute("user");
+		
 		
 	   ModelAndView modelAndView = new ModelAndView();
+	   
+	   
 	   modelAndView.addObject("accUser", user);
-	   modelAndView.setViewName("forward:/view/mypage/MypageMain.jsp");
+	   modelAndView.addObject("user", user01);
+	   modelAndView.setViewName("/view/user/getUser.jsp");
 	   
 	   return modelAndView;
 	}
@@ -106,16 +113,18 @@ public class MypageController {
 		
 	}
 	@RequestMapping(value="updateAccount", method=RequestMethod.POST)
-	public ModelAndView updateAccount(@RequestParam("snsNo") String snsNo, @ModelAttribute("user") User user) throws Exception {
+	public ModelAndView updateAccount(@RequestParam("snsNo") String snsNo, @ModelAttribute("user") User user, HttpSession session) throws Exception {
 		
 		System.out.println("/mypage/updateAccount : POST");
 		
 		mypageService.addAccount(user);
 
+		User user01 = (User) session.getAttribute("user");
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject(user);
-		modelAndView.setViewName("redirect:/view/mypage/MypageMain.jsp");
+		 modelAndView.addObject("user", user01);
+		modelAndView.setViewName("/view/user/getUser.jsp");
 		
 		return modelAndView;
 	}

@@ -21,6 +21,10 @@
 	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
+	<!--  sweetAlert -->  	
+   	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+   	
+
 		<script>
 		
 		
@@ -32,21 +36,39 @@
 			var checkLike = '1';	 
 			var boardNo = $(this).data("param")
 			var userNo = $(this).data("param2")
+		
+			
+					swal({
+				  title: "좋아요를 취소하시겠습니까?",
+			
+					
+				  buttons: true,
+				  buttons: true,
+				})
+				.then((willDelete) => {
+				  if (willDelete) {
+				  
+						 
+						 $.ajax({
+							
+							url: '/board/json/updateLike/'+userNo+'/'+boardNo+'/'+checkLike,
+							type: 'get',
+							success: function(data){
+								
+							self.location="/mypage/listLike"
+								
+							}
+						 
+						 })
 				 
-			 alert(boardNo)
-			 alert(userNo)
-			 
-			 $.ajax({
-				
-				url: '/board/json/updateLike/'+userNo+'/'+boardNo+'/'+checkLike,
-				type: 'get',
-				success: function(data){
-					
-				self.location="/mypage/listLike"
-					
-				}
-			 
-			 })
+				  } else {
+				    swal("취소하셨습니다.");
+				  }
+				});
+	
+	
+			
+		
 			 
 		 });
 

@@ -26,13 +26,32 @@
 	<![endif]-->
 	
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+	
+	<!--  차트 js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js"></script>
+	<canvas id="myChart"></canvas>
+	
+	<script>
+	
+	var myLineChart = new Chart(ctx, {
+	    type: 'line',
+	    data: data,
+	    options: options
+	});
+	
+	</script>
+	
+	
+	
+	<!-- ------------------------------------------------------------------ -->
 	
 	<script type="text/javascript">
 	
 	
 	$(function() {
 		
-		$("#page-wrapper1").append('<iframe src="/board/listBoard" style="height:100%; width: 100%;" frameborder="0" scrolling="no"></iframe>');
+		$("#page-wrapper1").append('<iframe src="/board/listBoard" style="height:100vh; width: 100%;" frameborder="0" scrolling="no"></iframe>');
 	});
 	
 	
@@ -43,7 +62,7 @@
 
 			$("#listUser").on("click" , function() {
 				
-				alert("클릭")
+	
 				
 				$(self.location).attr("href","/admin/listUser");
 			});
@@ -98,8 +117,7 @@
 	
 #page-wrapper1 {
 
-	width: 100%;
-	height :1200px;
+	
     padding: 15px;
 	
 }
@@ -117,11 +135,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/board/listBoard" title="ZagleZagle">ZagleZagle</a>
+                <a class="navbar-brand" href="/board/listBoard" title="DongneVangne">DongneVangne</a>
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li class="active"><a href="siteManage.jsp"><i class="glyphicon glyphicon-th"></i> Dashboard</a></li>
+                    <li class="active"><a href="/admin/siteManage"><i class="glyphicon glyphicon-th"></i> Dashboard</a></li>
                     <li class="nav nav-list nav-list-expandable nav-list-expanded">
                         <a><i class="fa fa-user"></i> 회원목록 보기<span class="caret"></span></a>
                         <ul class="nav navbar-nav">
