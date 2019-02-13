@@ -70,7 +70,7 @@ $(function() {
        alert("클릭 완료")
        
        
-       var  URL = "https://kauth.kakao.com/oauth/authorize?client_id=c3883a306a9faad67b127d7631568b29&redirect_uri=http://192.168.0.18:8080/user/kakaologin&response_type=code"
+       var  URL = "https://kauth.kakao.com/oauth/authorize?client_id=c3883a306a9faad67b127d7631568b29&redirect_uri=http://192.168.0.26:8080/user/kakaologin&response_type=code"
        popWin
        = window.open(URL,   "popWin",  "left=300,top=200,width=780,height=130,marginwidth=0,marginheight=0,"+
              "scrollbars=no,scrolling=no,menubar=no,resizable=no")
@@ -124,11 +124,18 @@ $(function() {
 		
 	});
 	
-	$("a:contains('방송 목록 보기')").on("click" , function() {
+	$("a:contains('ON동네')").on("click" , function() {
 		//$(self.location).attr("href","http://localhost:3000/");
 		self.location = "/stream/listStream"
 		
 	});
+	
+	$("a:contains('환급 관리')").on("click" , function() {
+		//$(self.location).attr("href","http://localhost:3000/");
+		self.location = "/stream/listRefund"
+		
+	});
+	
 	
 	$("a:contains('중고장터')").on("click" , function() {
 		self.location = "/trade/listTrade"
@@ -340,8 +347,7 @@ background-size: cover;
               	ON동네 Air
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item">방송 목록 보기</a>
-              <a class="dropdown-item">후원 환급하기</a>
+              <a class="dropdown-item">환급 관리</a>
             </div>
           </li>
           

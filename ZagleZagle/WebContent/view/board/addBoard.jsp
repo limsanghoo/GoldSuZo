@@ -16,6 +16,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 
+<!--  sweetAlert -->     
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -131,7 +133,7 @@ $(function(){
 	        
 	        $.ajax(	
 	        		{
-	        			url : "http://192.168.0.19:8080/board/json/addBoardVisionTag",
+	        			url : "http://192.168.0.32:8080/board/json/addBoardVisionTag",
 	        			method : "GET",
 	        			data : {
 	        				link : result.data.link
@@ -180,9 +182,32 @@ $(function(){
          alert("내용을 입력해주세요.");
          return;
       }
+	
+      //sweetalert
+      swal("등록 하시겠습니까?","",{
+    	  icon: "info",
+    	  buttons: {
+    	    cancel: "아니오",
+    	    catch: {
+    	      text: "예",
+    	      value: "catch",
+    	    },
+    	  },
+    	})
+    	.then((value) => {
+    	  switch (value) {
+    	 
+    	 
+    	    case "catch":
+    	      $("form").attr("method" , "POST").attr("action" , "/board/addBoard").submit();
+    	      break;
+    	 
+    	  }
+    	});
       
-         $("form").attr("method" , "POST").attr("action" , "/board/addBoard").submit();
       
+        
+
    });
    
    $("button:contains('이전')").on("click", function() {

@@ -194,7 +194,7 @@ $(function(){
 			return;
 		}
 		
-		self.location="http://192.168.0.19:8080/board/addBoard?userNo=${user.userNo}";
+		self.location="http://192.168.0.32:8080/board/addBoard?userNo=${user.userNo}";
 	})
 	
 	//지도로 보기
@@ -432,8 +432,8 @@ $(function(){
 		      description: hashTag,
 		      imageUrl: photo1,
 		      link: {
-		        mobileWebUrl: 'http://192.168.0.19:8080/board/getBoard?view=mobile&boardNo='+boardNo,
-		        webUrl: 'http://192.168.0.19:8080/board/getBoard?view=mobile&boardNo='+boardNo
+		        mobileWebUrl: 'http://192.168.0.32:8080/board/getBoard?view=mobile&boardNo='+boardNo,
+		        webUrl: 'http://192.168.0.32:8080/board/getBoard?view=mobile&boardNo='+boardNo
 		      }
 		    },
 		    social: {
@@ -443,8 +443,8 @@ $(function(){
 		      {
 		        title: '웹으로 보기',
 		        link: {
-		          mobileWebUrl: 'http://192.168.0.19:8080/board/getBoard?boardNo='+boardNo,
-		          webUrl: 'http://192.168.0.19:8080/board/getBoard?boardNo='+boardNo
+		          mobileWebUrl: 'http://192.168.0.32:8080/board/getBoard?boardNo='+boardNo,
+		          webUrl: 'http://192.168.0.32:8080/board/getBoard?boardNo='+boardNo
 		        }
 		      }
 		    ]
@@ -481,8 +481,8 @@ $(function(){
           description: hashTag,
           imageUrl: photo1,
           link: {
-            mobileWebUrl: 'http://192.168.0.19:8080/board/getBoard?boardNo='+boardNo,
-            webUrl: 'http://192.168.0.19:8080/board/getBoard?boardNo='+boardNo
+            mobileWebUrl: 'http://192.168.0.32:8080/board/getBoard?boardNo='+boardNo,
+            webUrl: 'http://192.168.0.32:8080/board/getBoard?boardNo='+boardNo
           }
         },
         social: {
@@ -492,8 +492,8 @@ $(function(){
           {
             title: '웹으로 보기',
             link: {
-              mobileWebUrl: 'http://192.168.0.19:8080/board/getBoard?view=mobile&boardNo='+boardNo,
-              webUrl: 'http://192.168.0.19:8080/board/getBoard?view=mobile&boardNo='+boardNo
+              mobileWebUrl: 'http://192.168.0.32:8080/board/getBoard?view=mobile&boardNo='+boardNo,
+              webUrl: 'http://192.168.0.32:8080/board/getBoard?view=mobile&boardNo='+boardNo
             }
           }
         ]
