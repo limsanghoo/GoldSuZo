@@ -32,7 +32,9 @@
 
 
 	 
-	
+	<!-- Favicons -->
+  <link href="/common/css/estateagency-master/img/favicon2.png" rel="icon">
+  <link href="/common/css/estateagency-master/img/apple-touch-icon2.png" rel="apple-touch-icon">
 
 
 <!DOCTYPE html>
