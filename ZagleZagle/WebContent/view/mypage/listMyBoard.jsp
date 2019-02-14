@@ -23,7 +23,16 @@
 
 		<script>
 
-	
+			function fncGetList(currentPage) {
+			
+			
+			
+			$("#currentPage").val(currentPage)
+			
+
+			
+			$("form").attr("method" , "POST").attr("action" , "/mypage/listMyBoard").submit();
+		}
 		
 	
 		 $(function() {
@@ -58,7 +67,7 @@
 
  .my_container {
 
-    padding-top: 2%;
+    padding-top: 1%;
     padding-left: 15%;
     margin: auto;
     max-width: 1600px;
@@ -265,7 +274,10 @@ padding-top: 20%;
 	    </c:forEach>
 	
 
-		    
+		    <form>
+			  	  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
+			  </form>
 	
 	    
 	    </table>
@@ -278,16 +290,7 @@ padding-top: 20%;
 	
 	
     
-    <div class="foot">
- 	
- 	<jsp:include page="/view/layout/footer.jsp"></jsp:include>
- 	
- 	
- 	</div>
-	
-	
-	
-	
+    
 	
 </body>
 </html>

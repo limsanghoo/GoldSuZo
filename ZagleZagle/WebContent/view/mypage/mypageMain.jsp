@@ -103,14 +103,14 @@ script {
 
 #plusfriend-addfriend-button{
 
-position: absolute;
+position: relative;
 
 }
 
 .myg_container {
 
-    height: 900px;
-    /* margin-top: 8%; */
+    height: 700px;
+   
     padding-top: 6%;
     background-color: #dceadf;
 }
@@ -118,10 +118,10 @@ position: absolute;
 #myg_row {
 
         background-color: #dceadf;
-    height: 780px;
+    height: 820px;
     padding-left: 26%;
     padding-right: 1%;
-    padding-top: 17%;
+    padding-top: 6%;
 }
 
 #myg_row .myg_row1  {
@@ -213,7 +213,7 @@ margin:1%;
 	<div class="myg_row">
 	
 	
-	<div class=myg_row_group>
+	<div class="myg_row_group col-md-6">
   <span class="myg_row1">
   
   		

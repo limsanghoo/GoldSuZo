@@ -173,7 +173,7 @@
 				              
 				              setTimeout(function() {
 				                     while(true){
-				                        var path = 'http://192.168.0.50:8080/common/images/profile/'+data;
+				                        var path = 'http://192.168.0.29:8080/common/images/profile/'+data;
 				                        var re = doesFileExist(path);
 				                        if (re) {
 				                           
