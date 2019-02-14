@@ -47,11 +47,7 @@ public class BoardController {
 	@Autowired
 	@Qualifier("userServiceImpl")
 	private UserService userService;
-	
-	/*@Autowired
-	@Qualifier("chatServiceImpl")
-	private ChatService chatService;*/
-	
+
 	@Autowired
 	@Qualifier("adminServiceImpl")
 	private AdminService adminService;
@@ -67,9 +63,7 @@ public class BoardController {
 	int boardPageSize;
 	
 	
-	
-	
-	
+/////////////게시물
 	@RequestMapping(value="addBoard", method=RequestMethod.GET)
 	public ModelAndView addBoard(@RequestParam("userNo") String userNo) throws Exception{
 		
@@ -142,93 +136,6 @@ public class BoardController {
 		return modelAndView;
 	}
 	
-
-	@RequestMapping(value="addLink", method=RequestMethod.GET)
-	public ModelAndView addLink(@RequestParam("boardNo")String boardNo) throws Exception{
-		
-		System.out.println("/addLink GET");
-		
-		System.out.println("boardNo : "+boardNo);
-		
-		
-		ModelAndView modelAndView=new ModelAndView();
-		modelAndView.addObject("board", boardService.getBoard(boardNo));
-		modelAndView.setViewName("forward:/view/board/addLink.jsp");
-		
-		return modelAndView;
-	}
-	
-	@RequestMapping(value="addReport", method=RequestMethod.GET)
-	public ModelAndView addReport(@RequestParam("reportReason") String reportReason, @RequestParam("reportingUserNo") String reportingUserNo, 
-			@RequestParam("reportedBoardNo") String reportedBoardNo, @RequestParam("reportedUserNo") String reportedUserNo, @RequestParam("reportedCommentNo") String reportedCommentNo) throws Exception{
-		
-		System.out.println("/addReport");
-		System.out.println("reportReason : "+reportReason);
-		System.out.println("reportingUserNo : "+reportingUserNo);
-		System.out.println("reportedUserNo : "+reportedUserNo);
-		System.out.println("reportedBoardNo : "+reportedBoardNo);		
-		System.out.println("reportedCommentNo : "+reportedCommentNo);
-		
-		User reportingUser=new User();
-		reportingUser.setUserNo(reportingUserNo);
-		
-		User reportedUser=new User();
-		reportedUser.setUserNo(reportedUserNo);
-		
-		Board board=new Board();
-		board.setBoardNo(reportedBoardNo);
-		
-		Comment comment=new Comment();
-		comment.setCommentNo(reportedCommentNo);
-		
-		Report report=new Report();
-		report.setReportingUserNo(reportingUser);
-		report.setReportedUserNo(reportedUser);
-		report.setReportReason(reportReason);
-		report.setReportedBoardNo(board);
-		report.setReportedCommentNo(comment);
-		
-		boardService.addReport(report);
-		
-		//신고 횟수 카운트
-		int reportCount=adminService.checkReportCount(report);
-		
-		System.out.println("reportCount : "+reportCount);
-		
-		if(reportCount==3) {
-			
-			if(report.getReportedCommentNo().getCommentNo().equals("")) {
-			
-				//해당 게시물 블라인드 등록 blind code 0으로
-				Blind blind=new Blind();
-				blind.setBlindBoardNo(report.getReportedBoardNo());
-				adminService.addBlind(blind);
-				
-				//해당 게시물 boardStatus 3으로
-				board.setBoardStatus("3");
-				boardService.updateBoardStatus(board);		
-							
-			}else if(report.getReportedBoardNo().getBoardNo().equals("")) {
-								
-				//해당 댓글 블라인드 등록 blind code 0으로
-				Blind blind=new Blind();
-				blind.setBlindCommentNo(report.getReportedCommentNo());
-				adminService.addBlind(blind);
-				
-				//해당 게시물 commentStatus 2로
-				comment.setCommentStatus("2");
-				boardService.updateCommentStatus(comment);							
-			}
-						
-		}//신고 횟수 카운트 끝
-		
-		ModelAndView modelAndView=new ModelAndView();
-		modelAndView.setViewName("forward:/view/board/close.jsp");
-		
-		return modelAndView;
-	}
-	
-	
 	
 	@RequestMapping(value="deleteBoard", method=RequestMethod.GET)
 	public ModelAndView deleteBoard(@ModelAttribute("board") Board board) throws Exception{
@@ -263,14 +170,6 @@ public class BoardController {
 		ModelAndView modelAndView=new ModelAndView();
 		modelAndView.addObject("board", board);
 		modelAndView.setViewName("forward:/view/board/getBoard.jsp");
-		
-		return modelAndView;
-	}
-	
-	@RequestMapping(value="getHotTag", method=RequestMethod.GET)
-	public ModelAndView getHotTag() throws Exception{
-		
-		ModelAndView modelAndView=new ModelAndView();
 		
 		return modelAndView;
 	}
@@ -400,6 +299,98 @@ public class BoardController {
 		return modelAndView;
 	}
 	
+	
+	
+////////////////링크
+	@RequestMapping(value="addLink", method=RequestMethod.GET)
+	public ModelAndView addLink(@RequestParam("boardNo")String boardNo) throws Exception{
+		
+		System.out.println("/addLink GET");
+		
+		System.out.println("boardNo : "+boardNo);
+		
+		
+		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.addObject("board", boardService.getBoard(boardNo));
+		modelAndView.setViewName("forward:/view/board/addLink.jsp");
+		
+		return modelAndView;
+	}
+
+	
+////////////////////신고
+	@RequestMapping(value="addReport", method=RequestMethod.GET)
+	public ModelAndView addReport(@RequestParam("reportReason") String reportReason, @RequestParam("reportingUserNo") String reportingUserNo, 
+			@RequestParam("reportedBoardNo") String reportedBoardNo, @RequestParam("reportedUserNo") String reportedUserNo, @RequestParam("reportedCommentNo") String reportedCommentNo) throws Exception{
+		
+		System.out.println("/addReport");
+		System.out.println("reportReason : "+reportReason);
+		System.out.println("reportingUserNo : "+reportingUserNo);
+		System.out.println("reportedUserNo : "+reportedUserNo);
+		System.out.println("reportedBoardNo : "+reportedBoardNo);		
+		System.out.println("reportedCommentNo : "+reportedCommentNo);
+		
+		User reportingUser=new User();
+		reportingUser.setUserNo(reportingUserNo);
+		
+		User reportedUser=new User();
+		reportedUser.setUserNo(reportedUserNo);
+		
+		Board board=new Board();
+		board.setBoardNo(reportedBoardNo);
+		
+		Comment comment=new Comment();
+		comment.setCommentNo(reportedCommentNo);
+		
+		Report report=new Report();
+		report.setReportingUserNo(reportingUser);
+		report.setReportedUserNo(reportedUser);
+		report.setReportReason(reportReason);
+		report.setReportedBoardNo(board);
+		report.setReportedCommentNo(comment);
+		
+		boardService.addReport(report);
+		
+		//신고 횟수 카운트
+		int reportCount=adminService.checkReportCount(report);
+		
+		System.out.println("reportCount : "+reportCount);
+		
+		if(reportCount==3) {
+			
+			if(report.getReportedCommentNo().getCommentNo().equals("")) {
+			
+				//해당 게시물 블라인드 등록 blind code 0으로
+				Blind blind=new Blind();
+				blind.setBlindBoardNo(report.getReportedBoardNo());
+				adminService.addBlind(blind);
+				
+				//해당 게시물 boardStatus 3으로
+				board.setBoardStatus("3");
+				boardService.updateBoardStatus(board);		
+							
+			}else if(report.getReportedBoardNo().getBoardNo().equals("")) {
+								
+				//해당 댓글 블라인드 등록 blind code 0으로
+				Blind blind=new Blind();
+				blind.setBlindCommentNo(report.getReportedCommentNo());
+				adminService.addBlind(blind);
+				
+				//해당 게시물 commentStatus 2로
+				comment.setCommentStatus("2");
+				boardService.updateCommentStatus(comment);							
+			}
+						
+		}//신고 횟수 카운트 끝
+		
+		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.setViewName("forward:/view/board/close.jsp");
+		
+		return modelAndView;
+	}
+	
+	
+///////////////////맵	
 	@RequestMapping( value="listMap", method=RequestMethod.GET)
 	public ModelAndView listMap (HttpSession session) throws Exception{
 		
@@ -412,6 +403,8 @@ public class BoardController {
 		return modelAndView;
 	}
 	
+	
+///////////////////////////세션 테스트	
 	@RequestMapping(value="testUser")
 	public String testUser(HttpSession session) throws Exception{
 		
@@ -421,9 +414,9 @@ public class BoardController {
 		//testUser=userService.getUser2("US10003");
 		
 		//인호
-		testUser=userService.getUser2("US10023");
+		//testUser=userService.getUser2("US10023");
 
-		//testUser=userService.getUser3("김주현");
+		testUser=userService.getUser3("김주현");
 
 		//testUser=userService.getUser3("박현서");
 

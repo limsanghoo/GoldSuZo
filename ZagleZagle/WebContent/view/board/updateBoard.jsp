@@ -753,9 +753,6 @@ $(function(){
 </div>
 <!-- 해시태그 끝 -->
 
-<br/>
-
-
 </form>	
 </div><!-- col 12 끝 -->
 </div><!-- 컨테이너 끝 -->
@@ -764,7 +761,10 @@ $(function(){
 <!-- 로딩중 이미지 -->
 <div class="wrap-loading display-none">
     <div id="preloader" style="background:none; "></div>
-</div>   
+</div> 
+
+</br></br></br>
+<jsp:include page="/view/layout/footer.jsp"></jsp:include>
 
 </body>
 </html>

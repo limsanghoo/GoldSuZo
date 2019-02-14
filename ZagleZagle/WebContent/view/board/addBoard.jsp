@@ -726,10 +726,6 @@ $(function(){
 </div>
 <!-- 해시태그 끝 -->
 
-
-
-<br/>
-
 </form>
 
 </div><!-- col-12 끝 -->
@@ -742,7 +738,8 @@ $(function(){
 	<div id="preloader" style="background:none; "></div>
 </div>    
 
-
+</br></br></br>
+<jsp:include page="/view/layout/footer.jsp"></jsp:include>
 
 </body>
 

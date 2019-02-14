@@ -8,7 +8,6 @@
 <html>
 <head>
 
-<meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Loading Effects for Grid Items with CSS Animations" />
@@ -32,10 +31,6 @@
 
 <!--  sweetAlert -->     
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>       
-        
- <!-- Favicons -->
-  <link href="/common/css/estateagency-master/img/favicon.png" rel="icon">
-  <link href="/common/css/estateagency-master/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
@@ -391,7 +386,7 @@ $(function(){
 		var photo1=$(this).data('photo1');
 		var boardNo=$(this).data('boardno');
 		//addLink 팝업
-	    window.open("/view/board/addLink.jsp?val="+photo1, "addLink", "width=700, height=700, resizable=no" );
+	    window.open("/view/board/addLink.jsp?val="+photo1, "addLink", "width=700, height=800, resizable=no" );
 
 	});
 	
@@ -1047,7 +1042,7 @@ function fncGetTown(){
 			<div name="listLink" data-photo1="${board.photo1}">
 				<span class="listLink" style="position: absolute;"></span>
 				<c:if test="${user.userNo==board.user.userNo}">
-					<input style="position: absolute; top:25px; left:25px; background-color: #ffffff91; color: black;" type="button" class="btn" value="링크 관리" data-photo1="${board.photo1}" data-boardNo="${board.boardNo}">
+					<input style="position: absolute; top:25px; left:25px; background-color: #ffffff91; color: black; width: 60px; font-size: small; padding: 0px;" type="button" class="btn" value="링크 관리" data-photo1="${board.photo1}" data-boardNo="${board.boardNo}">
 				</c:if>
 				<img src="${board.photo1}" style="width: 100%"/>			
 			</div>
@@ -1129,10 +1124,16 @@ function fncGetTown(){
   
 </div><!-- /container -->
 
+<jsp:include page="/view/layout/footer.jsp"></jsp:include>
+
 </form>
 
 </div>
+
 </div><!-- row 끝 -->
+
+
+
     </body>
 </html>
 

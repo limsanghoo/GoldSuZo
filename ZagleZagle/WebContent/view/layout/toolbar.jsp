@@ -34,8 +34,8 @@
   <script src="/common/css/estateagency-master/js/main.js"></script>
 
   <!-- Favicons -->
-  <link href="/common/css/estateagency-master/img/favicon.png" rel="icon">
-  <link href="/common/css/estateagency-master/img/apple-touch-icon.png" rel="apple-touch-icon">
+<!--   <link href="/common/css/estateagency-master/img/favicon.png" rel="icon"> -->
+<!--   <link href="/common/css/estateagency-master/img/apple-touch-icon.png" rel="apple-touch-icon"> -->
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
@@ -111,12 +111,6 @@ $(function() {
 		
 	});
 	
-	
-	$("a:contains('전체 소식')").on("click" , function() {
-		//$(self.location).attr("href","http://localhost:3000/");
-		self.location = "/board/listBoard?view=all"
-		
-	});
 	
 	$("a:contains('동네 소식')").on("click" , function() {
 		//$(self.location).attr("href","http://localhost:3000/");
@@ -318,13 +312,9 @@ background-size: cover;
       <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
         <ul class="navbar-nav" style="cursor:pointer">   
 
+
           <c:if test="${sessionScope.user.userNo != null}">
-          
-          <li class="nav-item">
-            <a class="nav-link">전체 소식</a>
-          </li>
-          
-          
+         
           <li class="nav-item">
             <a class="nav-link">동네 소식</a>
           </li>
