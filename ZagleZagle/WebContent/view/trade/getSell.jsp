@@ -28,6 +28,10 @@
 }
 </style>
 
+ <!-- Favicons -->
+  <link href="/common/css/estateagency-master/img/favicon2.png" rel="icon">
+  <link href="/common/css/estateagency-master/img/apple-touch-icon2.png" rel="apple-touch-icon">
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 

@@ -10,6 +10,10 @@
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
+	 <!-- Favicons -->
+  <link href="/common/css/estateagency-master/img/favicon2.png" rel="icon">
+  <link href="/common/css/estateagency-master/img/apple-touch-icon2.png" rel="apple-touch-icon">
+	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
@@ -23,14 +27,7 @@
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-* {
-box-sizing: border-box;
--webkit-box-sizing: border-box;
--moz-box-sizing: border-box;
-}
-html {
-height: 100%;
-}
+
 body {
 margin: 0;
 height: 100%;
@@ -38,16 +35,6 @@ height: 100%;
 .wrap {
 min-height: 100%;
 position: relative;
-padding-bottom: 19px; /* footer height */
-}
-header {
-background-color: #EFEFEF;
-}
-section {
-background-color: #AFAFAF;
-}
-ol {
-margin: 0;
 }
 footer {
 position: absolute;
@@ -166,7 +153,6 @@ background-color: #333333;
  	<!-- PageNavigation Start... -->
 	<jsp:include page="/common/pageNavigation.jsp"/>
 	<!-- PageNavigation End... -->
-
-</body>
 <jsp:include page="/view/layout/footer.jsp"></jsp:include>
+</body>
 </html>

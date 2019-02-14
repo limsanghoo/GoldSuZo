@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상품수정</title>
+<title>DongneVangne</title>
 <style>
         div.editable{
         	border: 1px solid #777;
@@ -23,6 +23,10 @@
 
     }
 </style>
+
+ <!-- Favicons -->
+  <link href="/common/css/estateagency-master/img/favicon2.png" rel="icon">
+  <link href="/common/css/estateagency-master/img/apple-touch-icon2.png" rel="apple-touch-icon">
 
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
 
