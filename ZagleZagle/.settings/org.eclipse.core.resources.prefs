@@ -3,6 +3,7 @@
 >>>>>>>=refs/remotes/origin/master
 eclipse.preferences.version=1
 encoding//WebContent/view/admin/siteManage.jsp=UTF-8
+encoding//WebContent/view/board/NewFile.jsp=UTF-8
 encoding//WebContent/view/board/listBoard.jsp=UTF-8
 encoding//WebContent/view/mypage/listMyBoard.jsp=UTF-8
 encoding//WebContent/view/trade/addSell.jsp=UTF-8
