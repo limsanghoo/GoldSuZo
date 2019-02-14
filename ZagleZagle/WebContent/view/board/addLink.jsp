@@ -161,7 +161,7 @@ function listLink(photo1){
                  
                  a+='<div style="background-color:white; width:150px; word-break:break-all; font-size:small;">'+list.url+'</div>'
                  a+='<input type="hidden" value='+list.linkNo+'>'
-                 a+='<button class="btn" style="margin-top:5px;" onclick="deleteLink('+linkNo+','+photo1+')">삭제</button>'               
+                 a+='<button class="btn" style="margin-top:3px; font-size: small; padding-top: 0px; padding-bottom: 0px; padding-left: 5px; padding-right: 5px;" onclick="deleteLink('+linkNo+','+photo1+')">삭제</button>'               
                  a+='</span>'             
                  
 			 });
@@ -208,7 +208,7 @@ function action_coords(event) {
     		+'<input type="hidden" name="coordX" value="'+x+'">'
     		+'<input type="hidden" name="coordY" value="'+y+'">'
     		+'<br/>'
-    		+'<button class="btn" id="addLink" style="margin-top:5px;">등록</button>'
+    		+'<button class="btn" id="addLink" style="margin-top:3px; font-size: small; padding-top: 0px; padding-bottom: 0px; padding-left: 5px; padding-right: 5px; background-color: #2eca6a;">등록</button>'
     		+'</span>'
     		+'</span>'
     );
