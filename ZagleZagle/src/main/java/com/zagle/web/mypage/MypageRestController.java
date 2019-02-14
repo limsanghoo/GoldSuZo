@@ -416,11 +416,11 @@ User user = userService.getUser2(userNo);
 	
 	
 	
+
+	@RequestMapping(value="json/listScrap/{userNo}" ,method=RequestMethod.GET)
+	public Map<String, Object> listScrap(@PathVariable String userNo,HttpSession session) throws Exception {
 	
-	@RequestMapping(value="json/listScrap")
-	public Map<String, Object> listScrap(@RequestBody SearchMypage search,  HttpSession session) throws Exception {
-	
-	
+/*	
 	if(session.getAttribute("user") != null) {
 			
 			User user = (User) session.getAttribute("user");
@@ -432,13 +432,17 @@ User user = userService.getUser2(userNo);
 		}else if(session.getAttribute("user")==null) {
 			search.setMyUserNo(null);
 		}
+	*/
+		System.out.println("리스트 스크랩============"+userNo);
+		SearchMypage search = new SearchMypage();
+		User user = userService.getUser2(userNo);
+		search.setMyUserNo(user.getUserNo());
 		
 		Map<String, Object> map = mypageService.listScrap(search);
-		
-			
+
 		
 		System.out.println(map);
-		
+	
 		
 		ArrayList list = (ArrayList) map.get("list");
 		System.out.println(list);
