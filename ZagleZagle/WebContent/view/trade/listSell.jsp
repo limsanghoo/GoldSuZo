@@ -128,6 +128,6 @@
  	<!-- PageNavigation Start... -->
 	<jsp:include page="/common/pageNavigation.jsp"/>
 	<!-- PageNavigation End... -->
-
+<jsp:include page="/view/layout/footer.jsp"></jsp:include>
 </body>
 </html>

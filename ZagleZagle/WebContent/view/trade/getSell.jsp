@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상세보기</title>
+<title>DongneVangne</title>
 <style>
 .btn {
   transition: .5s ease;
@@ -33,6 +33,7 @@
 
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>  
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script type="text/javascript">
 		
@@ -48,11 +49,33 @@
 				});
 			 
 			 $( "button:contains('수정')" ).on("click" , function() {
-				 self.location="/trade/updateSell?sellNo="+'${sell.sellNo}';
+
+				self.location="/trade/updateSell?sellNo="+'${sell.sellNo}';
+
 				});
 			
 			 $("button:contains('삭제')").on("click", function() {
-				 self.location="/trade/updateSellState?sellNo=${sell.sellNo}&sellState=00";
+				 
+				 swal("정말로 삭제 하시겠습니까?","",{
+			         icon: "error",
+			         buttons: {
+			           cancel: "취소",
+			           catch: {
+			             text: "삭제",
+			             value: "catch",
+			           },
+			         },
+			       })
+			       .then((value) => {
+			         switch (value) {
+
+			           case "catch":
+			        	   self.location="/trade/updateSellState?sellNo=${sell.sellNo}&sellState=00";
+			             break;
+			        
+			         }
+			       });
+				 
 				});
 		});
 		

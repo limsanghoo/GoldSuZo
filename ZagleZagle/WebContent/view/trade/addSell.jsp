@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상품등록</title>
+<title>DongneVangne</title>
 <style>
       div.editable{
         	border: 1px solid #777;
