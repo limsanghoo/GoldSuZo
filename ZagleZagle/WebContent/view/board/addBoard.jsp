@@ -262,7 +262,7 @@ $(function(){
   
     var editor = new MediumEditor('.editable', {
     	extensions: {
-            'imageDragging': {}
+            'imageDragging': {} 
         },
         placeholder: {
             text: '내용은 필수 입력사항입니다',

@@ -1049,6 +1049,7 @@ function fncGetTown(){
       <div class="modal-body" style="text-align: center">  
 
 		<div>
+				
 			<c:if test="${board.photo1 !=null}">
 			<div name="listLink" data-photo1="${board.photo1}">
 				<span class="listLink" style="position: absolute;"></span>
