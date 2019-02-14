@@ -20,6 +20,10 @@
  <!--  sweetAlert -->     
       <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
       
+      <!-- Favicons -->
+  <link href="/common/css/estateagency-master/img/favicon2.png" rel="icon">
+  <link href="/common/css/estateagency-master/img/apple-touch-icon2.png" rel="apple-touch-icon">
+      
 <script>
 
 $(function() {

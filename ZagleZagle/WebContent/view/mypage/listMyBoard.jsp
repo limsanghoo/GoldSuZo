@@ -16,6 +16,10 @@
    <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
 	
 	 <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+	 
+	 <!-- Favicons -->
+  <link href="/common/css/estateagency-master/img/favicon2.png" rel="icon">
+  <link href="/common/css/estateagency-master/img/apple-touch-icon2.png" rel="apple-touch-icon">
    
 	 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
