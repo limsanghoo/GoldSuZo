@@ -416,9 +416,9 @@ public class BoardController {
 		//인호
 		//testUser=userService.getUser2("US10023");
 
-		testUser=userService.getUser3("김주현");
+		//testUser=userService.getUser3("김주현");
 
-		//testUser=userService.getUser3("박현서");
+		testUser=userService.getUser3("박현서");
 
 		//testUser=userService.getUser3("상후");
 		

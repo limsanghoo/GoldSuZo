@@ -25,12 +25,12 @@ $(function(){
 		var text=$("#<%=boardNo%>commentDetailText").val();
 		
 		if(userNo==""){
-			swal("","로그인 후 이용 가능합니다.", "error");
+			swal("로그인 후 이용 가능합니다","", "error");
 			return;
 		}
 		
 		if("${user.blackCode}"=='2'){
-			swal("","블랙리스트 회원은 이용할 수 없습니다.", "error");
+			swal("블랙리스트 회원은 이용할 수 없습니다","", "error");
 			return;
 		}
 			

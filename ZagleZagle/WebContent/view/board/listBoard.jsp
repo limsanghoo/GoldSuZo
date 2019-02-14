@@ -25,9 +25,6 @@
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="/common/css/GridLoadingEffects/js/modernizr.custom.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>       
- 
-<!-- 카톡 공유 -->       
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 <!--  sweetAlert -->     
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>       
@@ -188,7 +185,7 @@ $(function(){
 	$("input[value='게시물 등록']").bind("click",function(){
 		
 		if("${user.blackCode}"=='2'){
-			swal("","블랙리스트 회원은 이용할 수 없습니다.", "error");
+			swal("블랙리스트 회원은 이용할 수 없습니다","", "error");
 			return;
 		}
 		
@@ -226,7 +223,7 @@ $(function(){
 	var coordx = Number(y1);
 		alert(coordy);
 		alert(coordx);
-		  Kakao.init('bfb1e69b68a2d4c4b41ffd0d19fc47ff'); 
+		  //Kakao.init('bfb1e69b68a2d4c4b41ffd0d19fc47ff'); 
 		//self.location="/stream/goNavi?address="+address+"&coord="+coord		
 		Kakao.Navi.start({
             name: "현대백화점 판교점",
@@ -373,7 +370,7 @@ $(function(){
 	$("input[value='신고']").bind("click",function(){
 		
 		if("${user.userNo}"==""){
-			swal("","로그인 후 이용 가능합니다.", "error");
+			swal("로그인 후 이용 가능합니다","", "error");
 			return;
 		}
 		
@@ -434,7 +431,7 @@ $(function(){
 				
 		//<![CDATA[
 		// // 사용할 앱의 JavaScript 키를 설정해 주세요.
-		Kakao.init('83df98960f21b7281d6cdfddf483b6a5');
+		//Kakao.init('83df98960f21b7281d6cdfddf483b6a5');
 		// // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
 				
 		  Kakao.Link.sendDefault({
@@ -483,7 +480,7 @@ $(function(){
 		
 	//<![CDATA[
     // // 사용할 앱의 JavaScript 키를 설정해 주세요.
-    Kakao.init('83df98960f21b7281d6cdfddf483b6a5');
+    //Kakao.init('83df98960f21b7281d6cdfddf483b6a5');
     // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
     
       Kakao.Link.sendDefault({
@@ -513,10 +510,20 @@ $(function(){
      //]]>
 	});//카카오 링크2 끝
 	
-	
+	//창 사이즈에 따른 카카오 네비
+	window.onload = function () {
+		var width=window.innerWidth;
+
+		if(width<=1400){
+			$("span[name='navi']").append('<img src="/common/images/board/navi.PNG"/>');
+		}
+	   
+	}
 
 	
 });//function 끝
+
+
 
 
 //검색 엔터
@@ -679,13 +686,13 @@ function fncGetTown(){
 <form name="listBoard">
 
 
-<a href="/board/testUser">
-<input type="button" value="세션">
-</a>
+<!-- <a href="/board/testUser"> -->
+<!-- <input type="button" value="세션"> -->
+<!-- </a> -->
 
-<a href="/board/testUser2">
-<input type="button" value="어드민세션">
-</a>
+<!-- <a href="/board/testUser2"> -->
+<!-- <input type="button" value="어드민세션"> -->
+<!-- </a> -->
 
 
 <div class="row">
@@ -904,8 +911,8 @@ function fncGetTown(){
 	<!-- 카카오 네비 -->
 	<span id="${board.boardNo}kakaonavi-link-btn" name="navi"
 	 data-address="${board.address}" data-coord="${board.coord}"
-	 style="display: inline; float: right; width: 30px; height: 40px; margin-top: 13px;">
-	<img src="/common/images/board/navi.PNG"/>
+	 style="display: inline; float: right; width: 30px; height: 40px; margin-top: 13px; margin-right: 5px;">
+<!-- 	<img src="/common/images/board/navi.PNG"/> -->
 	</span>	
 	</c:if>
 	
@@ -1124,8 +1131,7 @@ function fncGetTown(){
 			} );
 		</script>
         
-        
-  
+         
 </div><!-- /container -->
 <jsp:include page="/view/layout/footer.jsp"></jsp:include>
 </form>
@@ -1134,5 +1140,3 @@ function fncGetTown(){
 </div><!-- row 끝 -->
     </body>
 </html>
-
-

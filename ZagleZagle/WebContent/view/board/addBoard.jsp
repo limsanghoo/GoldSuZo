@@ -176,14 +176,14 @@ $(function(){
 	  var imgLength=$("img[name='img']").length;
       
 	  if(imgLength>3){
-		alert("사진은 세 장까지 등록 가능합니다.");
+		  swal("사진은 세 장까지 등록 가능합니다","", "error");
 		return;
 	  }
 	   
       var boardDetailText=$("textarea[name='boardDetailText']").val();
       
       if(boardDetailText==""){
-         alert("내용을 입력해주세요.");
+    	  swal("내용을 입력해주세요","", "error");
          return;
       }
 	
