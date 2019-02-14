@@ -12,7 +12,6 @@
         }
         
       .wrap-loading div{ /*로딩 이미지*/
-
         text-align: center;
 
     }
@@ -87,7 +86,7 @@ $(function() {
 		var imgLength=$("img[name='img']").length;
 	      
 		  if(imgLength>3){
-			alert("사진은 세 장까지 등록 가능합니다.");
+			  swal("ERROR", "사진은 세 장까지 등록 가능합니다.", "error");
 			return;
 		  }
 		  
@@ -111,6 +110,25 @@ $(function() {
 		}
 
 		$("input:hidden[name='sellPhone']").val( value );
+		
+		var sellName=$("#sellName").val();
+		var sellPrice=$("#sellPrice").val();
+		var sellText=$("textarea[name='sellText']").val();
+		
+		if(sellName==""){
+			swal("ERROR", "상품명을 입력해주세요.", "error");
+	         return;
+	      };
+	      
+	      if(sellPrice==""){
+	    	  swal("ERROR", "상품가격을 입력해주세요.", "error");
+		         return;
+		      };
+		      
+	      if(sellText==""){
+	    	  swal("ERROR", "상세정보를 입력해주세요.", "error");
+		         return;
+		      };
 		
 		swal("등록 하시겠습니까?","",{
 	         icon: "info",
@@ -228,8 +246,7 @@ $(function() {
 		<div class="col-xs-8 col-md-1" style="padding-top: .5em; padding-bottom: .5em;"><strong>상세정보</strong></div>
 	
 			<div class="col-xs-4 col-md-11" style="border-left-width: 0.1em; border-left-style: solid; border-left-color: #777; padding-top: .5em; padding-bottom: .5em;">
-			<textarea class="editable" id="sellText" name="sellText">
-			</textarea>
+			<textarea class="editable" id="sellText" name="sellText"></textarea>
 			</div>
 		</div>
 		<br/>
@@ -243,9 +260,7 @@ $(function() {
         placeholder: {
             text: '여기에 내용을 작성 해 주세요',
             hideOnClick: true
-        }
-        
-    
+        }    
     });
     
     </script>
@@ -258,7 +273,7 @@ $(function() {
 
 <!-- 로딩중 이미지 -->
 <div class="wrap-loading display-none">
-	<div id="preloader" style="background:none; "></div>
+	<div id="preloader" style="background-color: #42424296"></div>
 </div>    
 
 </body>
