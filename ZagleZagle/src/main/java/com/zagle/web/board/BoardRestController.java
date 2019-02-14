@@ -310,7 +310,7 @@ public class BoardRestController {
 		 
 		 String url=link.getUrl();
 		 
-		 String[] url2=url.split(":\\/\\/"); //https://파싱
+		 String[] url2=url.split(":\\/\\/"); // https://파싱 정규식 표현
 		 
 		 if(url2.length==2) {
 			 link.setUrl(url2[1]);

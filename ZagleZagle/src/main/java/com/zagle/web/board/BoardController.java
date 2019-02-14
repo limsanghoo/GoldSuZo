@@ -81,6 +81,14 @@ public class BoardController {
 		
 		System.out.println("/addBoard POST");
 		
+		//따옴표 수정
+		String boardDetailText1=board.getBoardDetailText();
+		
+		String boardDetailText2=boardDetailText1.replaceAll("\"","'"); //큰 따옴표 정규식 표현
+		
+		board.setBoardDetailText(boardDetailText2);
+		
+		
 		//이미지 링크 파싱
 		String[] photo=board.getPhoto1().split(",");
 	
