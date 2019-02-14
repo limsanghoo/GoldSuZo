@@ -5,12 +5,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>updateBoard</title>
+<title>DongneVangne</title>
 
 <link rel="stylesheet" href="/common/js/medium-editor/dist/css/medium-editor.min.css">
 <link rel="stylesheet" href="/common/js/medium-editor/dist/css/themes/beagle.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+
+ <!-- Favicons -->
+  <link href="/common/css/estateagency-master/img/favicon2.png" rel="icon">
+  <link href="/common/css/estateagency-master/img/apple-touch-icon2.png" rel="apple-touch-icon">
 
 <!--  sweetAlert -->     
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 

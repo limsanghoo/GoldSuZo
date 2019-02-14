@@ -6,7 +6,7 @@
 <html>
 <head>
 
-<meta charset="UTF-8" />
+<title>DongneVangne</title>
 
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 
@@ -25,8 +25,8 @@
   <script src="/common/css/estateagency-master/js/main.js"></script>
 
   <!-- Favicons -->
-  <link href="/common/css/estateagency-master/img/favicon.png" rel="icon">
-  <link href="/common/css/estateagency-master/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="/common/css/estateagency-master/img/favicon2.png" rel="icon">
+  <link href="/common/css/estateagency-master/img/apple-touch-icon2.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">

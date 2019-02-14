@@ -33,10 +33,6 @@
   <!-- Template Main Javascript File -->
   <script src="/common/css/estateagency-master/js/main.js"></script>
 
-  <!-- Favicons -->
-<!--   <link href="/common/css/estateagency-master/img/favicon.png" rel="icon"> -->
-<!--   <link href="/common/css/estateagency-master/img/apple-touch-icon.png" rel="apple-touch-icon"> -->
-
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
 
