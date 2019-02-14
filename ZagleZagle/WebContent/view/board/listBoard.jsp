@@ -8,15 +8,15 @@
 <html>
 <head>
 
+<meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Loading Effects for Grid Items with CSS Animations" />
 <meta name="keywords" content="css animation, loading effect, google plus, grid items, masonry" />
 <meta name="author" content="Codrops" />
 
-<title>listBoard</title>  
+<title>DongneVangne</title>  
 
-<link rel="shortcut icon" href="../favicon.ico"> 
 <link rel="stylesheet" type="text/css" href="/common/css/GridLoadingEffects/css/default.css" />
 <link rel="stylesheet" type="text/css" href="/common/css/GridLoadingEffects/css/component.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
@@ -31,6 +31,10 @@
 
 <!--  sweetAlert -->     
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>       
+        
+ <!-- Favicons -->
+  <link href="/common/css/estateagency-master/img/favicon2.png" rel="icon">
+  <link href="/common/css/estateagency-master/img/apple-touch-icon2.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
@@ -1123,17 +1127,11 @@ function fncGetTown(){
         
   
 </div><!-- /container -->
-
 <jsp:include page="/view/layout/footer.jsp"></jsp:include>
-
 </form>
 
 </div>
-
 </div><!-- row 끝 -->
-
-
-
     </body>
 </html>
 

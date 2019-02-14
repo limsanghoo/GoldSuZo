@@ -11,9 +11,9 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>  
 
  <!-- Favicons -->
-  <link href="/common/css/estateagency-master/img/favicon.png" rel="icon">
-  <link href="/common/css/estateagency-master/img/apple-touch-icon.png" rel="apple-touch-icon">
-
+  <link href="/common/css/estateagency-master/img/favicon2.png" rel="icon">
+  <link href="/common/css/estateagency-master/img/apple-touch-icon2.png" rel="apple-touch-icon">
+  
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
 
@@ -29,7 +29,7 @@
   <!-- Main Stylesheet File -->
   <link href="/common/css/estateagency-master/css/style.css" rel="stylesheet"> 
 
-<title>addLink</title>
+<title>DongneVangne</title>
 
 <script type="text/javascript">
 
