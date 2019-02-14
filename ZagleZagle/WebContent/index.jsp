@@ -26,6 +26,10 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		
+		 <!-- Favicons -->
+  		<link href="/common/css/estateagency-master/img/favicon2.png" rel="icon">
+  		<link href="/common/css/estateagency-master/img/apple-touch-icon2.png" rel="apple-touch-icon">
+		
 		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -156,7 +160,16 @@ $(document).ready(function(){
 					
 						<footer>
 								<button class="button primary" id="login" data-toggle="modal" data-target="#modal1" >LOGIN</button>
-								<br/><br/><a href="/board/listBoard?view=all">온 동네 소식보기</a>
+								<br/><br/>
+								
+								<c:if test="${user.userNo==null}">
+								<a href="/board/listBoard?view=all">온 동네 소식보기</a>
+								</c:if>
+								
+								<c:if test="${user.userNo!=null}">
+								<a href="/board/listBoard?view=town">온 동네 소식보기</a>
+								</c:if>
+								
 							</ul>
 						</footer>
 					</section>

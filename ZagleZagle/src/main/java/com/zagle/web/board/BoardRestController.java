@@ -135,6 +135,23 @@ public class BoardRestController {
 	      
 	      return 1;
 	   }
+	
+	@RequestMapping(value="json/addCommentOne", method=RequestMethod.POST)
+	public void addComment(@RequestParam("userNo") String userNo,@RequestParam("boardNo") String boardNo,@RequestBody JSONObject detailText) throws Exception{
+		  
+	      System.out.println("/json/addComment GET");
+	      
+	      String textValue = (String) detailText.get("detailText");
+	      //Comment 도메인에 set
+	      Comment comment=new Comment();
+	      
+	      comment.setUser(userService.getUser2(userNo));
+	      comment.setBoard(boardService.getBoard(boardNo));
+	      comment.setCommentDetailText(textValue);
+	      comment.setCommentStatus("1"); //정상 댓글
+	      
+	      boardService.addComment(comment);
+	   }
 
 	   
 
@@ -262,7 +279,7 @@ public class BoardRestController {
 	 }
 	 
 	 @RequestMapping( value="json/listBoard", method=RequestMethod.POST)
-	 public Map<String,Object> listBoard(@RequestBody SearchBoard searchBoard, HttpSession session) throws Exception{
+	 public Map<String,Object> listBoard(@RequestBody SearchBoard searchBoard,@RequestParam("userNo") String userNo) throws Exception{
 		
 		 	if(searchBoard.getLocal()=="") {
 				searchBoard.setLocal(null);
@@ -276,16 +293,7 @@ public class BoardRestController {
 				searchBoard.setCurrentPage(1);
 			}
 			
-			if(session.getAttribute("user")!=null) {
-				
-				User user=(User)session.getAttribute("user");
-					
-				String loginUserNo=user.getUserNo();
-			
-				searchBoard.setLoginUserNo(loginUserNo);
-			}else if(session.getAttribute("user")==null) {
-				searchBoard.setLoginUserNo(null);
-			}
+			searchBoard.setLoginUserNo(userNo);
 			
 			searchBoard.setPageSize(boardPageSize);
 			

@@ -5,12 +5,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상품수정</title>
+<title>DongneVangne</title>
 <style>
         div.editable{
         	border: 1px solid #777;
         }
+        
+      .wrap-loading div{ /*로딩 이미지*/
+
+        text-align: center;
+
+    }
+
+    .display-none{ /*감추기*/
+
+        display:none;
+
+    }
 </style>
+
+ <!-- Favicons -->
+  <link href="/common/css/estateagency-master/img/favicon2.png" rel="icon">
+  <link href="/common/css/estateagency-master/img/apple-touch-icon2.png" rel="apple-touch-icon">
 
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
 
@@ -26,6 +42,8 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="/common/js/medium-editor/dist/js/medium-editor.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>  
+	
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
 
 <script type="text/javascript">
 		
@@ -76,7 +94,7 @@ $(function() {
 		      if (xmlHttpRequest.status == 200) {
 		        var result = JSON.parse(xmlHttpRequest.responseText);
 
-		        $("#img_box").append("<img src="+result.data.link+">");//이미지 미리보기
+		        $("#img_box").append("<img src="+result.data.link+"name='img' style=' height: 150px;'>&nbsp;");//이미지 미리보기
 		        
 		        var linkArea=$("#link");
 				linkArea.val(linkArea.val()+result.data.link+",");//이미지 링크 append
@@ -87,6 +105,7 @@ $(function() {
 		      else {
 		      	alert("업로드 실패");
 		      }
+		      $('.wrap-loading').addClass('display-none'); //로딩중 이미지 감추기
 		    }
 		  };//()function 끝
 		  xmlHttpRequest.send(target.files[0]);
@@ -110,7 +129,24 @@ $(function() {
 
 		$("input:hidden[name='sellPhone']").val(value);
 		
-		$("form").attr("method" , "POST").attr("action" , "/trade/updateSell").submit();
+		swal("수정 하시겠습니까?","",{
+	    	  icon: "info",
+	    	  buttons: {
+	    	    cancel: "취소",
+	    	    catch: {
+	    	      text: "수정",
+	    	      value: "catch",
+	    	    },
+	    	  },
+	    	})
+	    	.then((value) => {
+	    	  switch (value) {
+	    	    	 
+	    	    case "catch":
+	    	    	$("form").attr("method" , "POST").attr("action" , "/trade/updateSell").submit();
+	    	      break;  	 
+	    	  }
+	    	});
  }
 		
 	</script>
@@ -187,10 +223,38 @@ $(function() {
 	  	<div class="row">
 	  	<div class="col-xs-8 col-md-1" style="padding-top: .5em; padding-bottom: .5em;"><strong>사진</strong></div>
 	  	<div class="col-xs-4 col-md-11" style="border-left-width: 0.1em; border-left-style: solid; border-left-color: #777; padding-top: .5em; padding-bottom: .5em;">
+			
+		<div id="newPhoto">
+			
+			<input type="hidden" id="link" value="" name="sellPhoto1"/><!-- 이미지 링크 append 되는 부분 -->
+			
+			<div id="img_box">
+			
 			<input class="btn" type="button" value="사진 수정하기" id="edit"/>
-			</div>
-		</div>
+			<br/>
+			<br/>
+			<!-- 원래 이미지 보여주는 부분 시작-->
+			<c:if test="${sell.sellPhoto1 !=null}">
+			<img src="${sell.sellPhoto1}" style="height: 150px"/>
+			</c:if>
 		
+			<c:if test="${sell.sellPhoto2 !=null}">
+			<img src="${sell.sellPhoto2}" name="photo2" value="${sell.sellPhoto2}" style="height: 150px"/>
+			<input type="hidden" name="photo2" value="${sell.sellPhoto2}"/>
+			</c:if>
+			
+			<c:if test="${sell.sellPhoto3 !=null}">
+			<img src="${sell.sellPhoto3}" name="photo3" value="${sell.sellPhoto3}" style="height: 150px"/>
+			<input type="hidden" name="photo3" value="${sell.sellPhoto3}"/>
+			</c:if>
+			<!-- 원래 이미지 보여주는 부분 끝-->
+			
+			
+			</div><!-- /img_box -->
+		</div><!-- newPhoto -->
+
+		</div>
+		</div>
 		<br/>
 		
 		<div class="row" style="border-top-width: 0.1em; border-top-style: solid; border-top-color: #2eca6a;"></div>
@@ -228,6 +292,12 @@ $(function() {
 		
 </div>
 </div>
+
+<!-- 로딩중 이미지 -->
+<div class="wrap-loading display-none">
+	<div id="preloader" style="background:none; "></div>
+</div>    
+
 </form>
 
 </body>
