@@ -331,20 +331,15 @@ User user = userService.getUser2(userNo);
 		map.put("bdList", bdList);
 		return map;
 	}
-	@RequestMapping(value="json/listComment", method=RequestMethod.POST)
-	public Map<String, Object> listComment (@RequestBody SearchMypage search,  HttpSession session) throws Exception {
+	@RequestMapping(value="json/listComment/{userNo}", method=RequestMethod.GET)
+	public Map<String, Object>listComment(@PathVariable String userNo,HttpSession session) throws Exception {
 	
-		if(session.getAttribute("user") != null) {
-			
-			User user = (User) session.getAttribute("user");
-			
-			String mUser = user.getUserNo();
-			search.setMyUserNo(mUser);
-			
-			
-		}else if(session.getAttribute("user")==null) {
-			search.setMyUserNo(null);
-		}
+		System.out.println("리스트 댓글============"+userNo);
+		SearchMypage search = new SearchMypage();
+		User user = userService.getUser2(userNo);
+		search.setMyUserNo(user.getUserNo());
+		search.setMyUser(user);
+		
 		
 		Map<String, Object> map = mypageService.listComment(search);
 		
@@ -437,6 +432,7 @@ User user = userService.getUser2(userNo);
 		SearchMypage search = new SearchMypage();
 		User user = userService.getUser2(userNo);
 		search.setMyUserNo(user.getUserNo());
+		search.setMyUser(user);
 		
 		Map<String, Object> map = mypageService.listScrap(search);
 
