@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>addBoard</title>
+<title>DongneVangne</title>
 
 <link rel="stylesheet" href="css/demo.css">
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
@@ -15,6 +15,10 @@
 <link rel="stylesheet" href="/common/js/medium-editor/dist/css/themes/beagle.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+
+ <!-- Favicons -->
+  <link href="/common/css/estateagency-master/img/favicon2.png" rel="icon">
+  <link href="/common/css/estateagency-master/img/apple-touch-icon2.png" rel="apple-touch-icon">
 
 <!--  sweetAlert -->     
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
@@ -172,14 +176,14 @@ $(function(){
 	  var imgLength=$("img[name='img']").length;
       
 	  if(imgLength>3){
-		alert("사진은 세 장까지 등록 가능합니다.");
+		  swal("사진은 세 장까지 등록 가능합니다","", "error");
 		return;
 	  }
 	   
       var boardDetailText=$("textarea[name='boardDetailText']").val();
       
       if(boardDetailText==""){
-         alert("내용을 입력해주세요.");
+    	  swal("내용을 입력해주세요","", "error");
          return;
       }
 	
@@ -726,10 +730,6 @@ $(function(){
 </div>
 <!-- 해시태그 끝 -->
 
-
-
-<br/>
-
 </form>
 
 </div><!-- col-12 끝 -->
@@ -742,7 +742,8 @@ $(function(){
 	<div id="preloader" style="background:none; "></div>
 </div>    
 
-
+</br></br></br>
+<jsp:include page="/view/layout/footer.jsp"></jsp:include>
 
 </body>
 

@@ -14,7 +14,7 @@
 <meta name="keywords" content="css animation, loading effect, google plus, grid items, masonry" />
 <meta name="author" content="Codrops" />
 
-<title>listBoard</title>  
+<title>DongneVangne</title>  
 
 <link rel="shortcut icon" href="../favicon.ico"> 
 <link rel="stylesheet" type="text/css" href="/common/css/GridLoadingEffects/css/default.css" />
@@ -30,8 +30,8 @@
         
  <!--  --> 
  <!-- Favicons -->
-  <link href="/common/css/estateagency-master/img/favicon.png" rel="icon">
-  <link href="/common/css/estateagency-master/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="/common/css/estateagency-master/img/favicon2.png" rel="icon">
+  <link href="/common/css/estateagency-master/img/apple-touch-icon2.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">

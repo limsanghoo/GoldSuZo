@@ -13,9 +13,11 @@
 <meta name="keywords" content="css animation, loading effect, google plus, grid items, masonry" />
 <meta name="author" content="Codrops" />
 		
-<title>중고장터</title>
+<title>DongneVangne</title>
 
-<link rel="shortcut icon" href="../favicon.ico"> 
+ <!-- Favicons -->
+  <link href="/common/css/estateagency-master/img/favicon2.png" rel="icon">
+  <link href="/common/css/estateagency-master/img/apple-touch-icon2.png" rel="apple-touch-icon">
 <link rel="stylesheet" type="text/css" href="/common/css/GridLoadingEffects/css/default.css" />
 <link rel="stylesheet" type="text/css" href="/common/css/GridLoadingEffects/css/component.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
