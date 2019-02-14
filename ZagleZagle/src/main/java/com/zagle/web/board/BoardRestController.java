@@ -317,11 +317,9 @@ public class BoardRestController {
 		 
 		 String url=link.getUrl();
 		 
-		 System.out.println("url : "+url);
+		 String[] url2=url.split(":\\/\\/"); //https://파싱
 		 
-		 String[] url2=url.split(":\\/\\/");
-		 
-		 if(url2.length==1) {
+		 if(url2.length==2) {
 			 link.setUrl(url2[1]);
 		 }
 		 	 		 

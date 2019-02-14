@@ -9,6 +9,7 @@
 a {
 color:#8c8c8c;
 }
+
 </style>
 <body>
 
@@ -52,7 +53,11 @@ color:#8c8c8c;
             </ul>
           </nav>
           </div>
+
           <div class="credits">
+          © Copyright
+              <span class="color-b">DongneVangne</span> All Rights Reserved.
+              <br/>
             Designed by BootstrapMade
           </div>
         </div>
