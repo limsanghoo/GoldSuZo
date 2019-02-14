@@ -20,6 +20,9 @@
 	 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+	<!-- Favicons -->
+  <link href="/common/css/estateagency-master/img/favicon2.png" rel="icon">
+  <link href="/common/css/estateagency-master/img/apple-touch-icon2.png" rel="apple-touch-icon">
 	
  	<!--  sweetAlert -->  	
    	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -28,7 +31,19 @@
 
 
 		<script>
+
+		function fncGetList(currentPage) {
+			
+			
+			
+			$("#currentPage").val(currentPage)
+			
+
+			
+			$("form").attr("method" , "POST").attr("action" , "/mypage/listScrap").submit();
+		}
 		
+
 
 		 $(function() {
 			
@@ -136,7 +151,7 @@
 
 .my_container {
 
-   padding-top: 2%;
+   padding-top: 1%;
     padding-left: 15%;
     margin: auto;
     max-width: 1600px;
@@ -170,6 +185,7 @@
 <div class="my_container">
 
 <div class="page-header text-info">
+
 	       <h5>
 	        <img src="/common/images/mypage/scrapscarp.png" style="width:50px; height:50px;" > &nbsp;
 	       스크랩 게시물</h5>
@@ -198,9 +214,10 @@
 		   	
 		      <td align="left" class="detail" title="Click : 게시물 상세정보" data-toggle="modal" data-target="#${board.boardNo}bbb">${board.boardDetailText}</td>
 		      <td align="left">${board.boardRegDate} 				</td>
-		      <td align="left"> <span class="glyphicon glyphicon-ok" aria-hidden="true" data-param="${board.boardNo}" data-param2="${user.userNo}">Click</span>
+		      <td align="left"> <span class="glyphicon glyphicon-bookmark" aria-hidden="true" data-param="${board.boardNo}" data-param2="${user.userNo}">Click</span>
 				 </td>
 		      
+		  
 		    </tr>
 		    
 				
@@ -221,11 +238,11 @@
         <h4 class="row modal-title" id="gridSystemModalLabel">
          
         <div class="col-sm-2">
-        <img src="/common/images/profile/${user.profile}" style="height: 60px; width:60px; border-radius: 70px; vertical-align: middle; margin-left: 15px;"/>
+        <img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px; vertical-align: middle; margin-left: 15px;"/>
         </div>
         
         <div class="col-sm-3">
-		${user.userNickname}
+		${board.user.userNickname}
 		</div>
 		
 		<!-- 내 글만 수정, 삭제 -->
@@ -301,15 +318,15 @@
        
       </div>
       <!-- 모달1 바디 끝 -->
-      
+
       <!-- 모달1 푸터 시작 -->
       <div>
-      
+
 		<!-- listComment로 파라미터 보내기 -->      
      	<jsp:include page="/view/board/listComment.jsp">
      		<jsp:param name="boardNo" value="${board.boardNo}"/>
      	</jsp:include>
-    	
+  
       </div>
       <!-- 모달1 푸터 끝 -->
       
@@ -323,9 +340,16 @@
 		    
 		    
 	    </c:forEach>
-	    
+	          <form>
+			  	  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
+			  </form>
+		      
 	    </table>
-		    
+	    
+	    <!-- PageNavigation Start... -->
+	<jsp:include page="/common/pageNavigation.jsp"/>
+	<!-- PageNavigation End... -->
 	
 	</div>
 </body>

@@ -136,17 +136,18 @@ public class BoardRestController {
 	      return 1;
 	   }
 	
-	@RequestMapping(value="json/addComment/{userNo}/{boardNo}/{detailText}", method=RequestMethod.GET)
-	public void addComment(@PathVariable String userNo,@PathVariable String boardNo,String detailText) throws Exception{
+	@RequestMapping(value="json/addCommentOne", method=RequestMethod.POST)
+	public void addComment(@RequestParam("userNo") String userNo,@RequestParam("boardNo") String boardNo,@RequestBody JSONObject detailText) throws Exception{
 		  
 	      System.out.println("/json/addComment GET");
 	      
+	      String textValue = (String) detailText.get("detailText");
 	      //Comment 도메인에 set
 	      Comment comment=new Comment();
 	      
 	      comment.setUser(userService.getUser2(userNo));
 	      comment.setBoard(boardService.getBoard(boardNo));
-	      comment.setCommentDetailText(detailText);
+	      comment.setCommentDetailText(textValue);
 	      comment.setCommentStatus("1"); //정상 댓글
 	      
 	      boardService.addComment(comment);
@@ -317,9 +318,13 @@ public class BoardRestController {
 		 
 		 String url=link.getUrl();
 		 
+
 		 String[] url2=url.split(":\\/\\/"); // https://파싱 정규식 표현
+
+		 System.out.println("url : "+url);
+
 		 
-		 if(url2.length==2) {
+		 if(url2.length==1) {
 			 link.setUrl(url2[1]);
 		 }
 		 	 		 

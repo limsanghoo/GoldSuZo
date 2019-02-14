@@ -31,5 +31,11 @@ public interface MypageDao {
 	
 	public User checkAccount(User user) throws Exception;
 	
-	//public int getTotalCount(SearchMypage search) throws Exception ;
+	public int getTotalScrapList(SearchMypage search) throws Exception ;
+	
+	public int getTotalBoardList(SearchMypage search) throws Exception;
+	
+	public int getTotalCommentList(SearchMypage search) throws Exception;
+	
+	public int getTotalLikeList(SearchMypage search) throws Exception;
 }

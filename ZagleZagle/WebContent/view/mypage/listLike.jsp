@@ -19,6 +19,10 @@
    
 	 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	  
+	  <!-- Favicons -->
+  <link href="/common/css/estateagency-master/img/favicon2.png" rel="icon">
+  <link href="/common/css/estateagency-master/img/apple-touch-icon2.png" rel="apple-touch-icon">
 
 
 	<!--  sweetAlert -->  	
@@ -26,7 +30,18 @@
    	
 
 		<script>
+		/////page navigation//////
+
+		function fncGetList(currentPage) {
 		
+		
+		
+		$("#currentPage").val(currentPage)
+		
+
+		
+		$("form").attr("method" , "POST").attr("action" , "/mypage/listLike").submit();
+	}
 		
 		////////////좋아요 취소///////////
 		 $(function() {
@@ -132,7 +147,7 @@
 
 .my_container {
 
-   padding-top: 2%;
+   padding-top: 1%;
     padding-left: 15%;
     margin: auto;
     max-width: 1600px;
@@ -175,7 +190,7 @@
             <th align="center">No</th>
             <th align="left" >게시물 내용</th>
             <th align="left">작성 날짜</th>
-            <th align="left">취소 여부</th>
+            <th align="left">취소</th>
   
           </tr>
         </thead>
@@ -220,11 +235,11 @@
         <h4 class="row modal-title" id="gridSystemModalLabel">
          
         <div class="col-sm-2">
-        <img src="/common/images/profile/${user.profile}" style="height: 60px; width:60px; border-radius: 70px; vertical-align: middle; margin-left: 15px;"/>
+        <img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px; vertical-align: middle; margin-left: 15px;"/>
         </div>
         
         <div class="col-sm-3">
-		${user.userNickname}
+		${board.user.userNickname}
 		</div>
 		
 		<!-- 내 글만 수정, 삭제 -->
@@ -294,7 +309,11 @@
 		    
 	    </c:forEach>
 	    
-
+				<form>
+			  	  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
+			  </form>
+	
 	    
 	    </table>
 		   	 <!-- PageNavigation Start... -->

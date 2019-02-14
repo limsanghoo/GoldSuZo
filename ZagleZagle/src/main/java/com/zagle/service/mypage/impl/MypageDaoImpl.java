@@ -63,14 +63,27 @@ public class MypageDaoImpl implements MypageDao {
 		
 		return sqlSession.selectList("MypageMapper.listMyBoard", search);
 	}
-	
-	
-	/*
-	public int getTotalCount(SearchMypage search) throws Exception {
+	public int getTotalScrapList(SearchMypage search) throws Exception {
 		
-		return sqlSession.selectOne("MypageMapper.getTotalCount", search);
+		return sqlSession.selectOne("MypageMapper.getTotalScrapList", search);
 	}
-	*/
+	
+	public int getTotalBoardList(SearchMypage search) throws Exception {
+		
+		return sqlSession.selectOne("MypageMapper.getTotalBoardList", search);
+	}
+	
+	public int getTotalCommentList(SearchMypage search) throws Exception {
+		
+		return sqlSession.selectOne("MypageMapper.getTotalCommentList", search);
+	}
+	
+	
+	public int getTotalLikeList(SearchMypage search) throws Exception {
+		
+		return sqlSession.selectOne("MypageMapper.getTotalLikeList", search);
+	}
+
 	
 	
 	

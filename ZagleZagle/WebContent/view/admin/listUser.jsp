@@ -18,7 +18,9 @@
     <link rel="stylesheet" type="text/css" href="/common/css/PBDashboard/css/theme.css" />
     <link rel="stylesheet" type="text/css" href="/common/css/PBDashboard/css/dashboard.css" />
     
-    
+    <!-- Favicons -->
+  <link href="/common/css/estateagency-master/img/favicon2.png" rel="icon">
+  <link href="/common/css/estateagency-master/img/apple-touch-icon2.png" rel="apple-touch-icon">
     
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

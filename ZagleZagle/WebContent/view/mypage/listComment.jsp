@@ -19,10 +19,24 @@
    
 	 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	  
+	  <!-- Favicons -->
+  <link href="/common/css/estateagency-master/img/favicon2.png" rel="icon">
+  <link href="/common/css/estateagency-master/img/apple-touch-icon2.png" rel="apple-touch-icon">
 
 <script type="text/javascript">
 
 
+function fncGetList(currentPage) {
+
+
+
+$("#currentPage").val(currentPage)
+
+
+
+$("form").attr("method" , "POST").attr("action" , "/mypage/listComment").submit();
+}
 
  $(function() {
 		
@@ -75,8 +89,23 @@
 
 <style type="text/css">
 
+.detail{
+
+ width: 700px;
+    text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    word-wrap: normal !important;
+    display: block;
+    height: 1.2cm;
+
+}
+ 
+
+
 .my_container {
-   padding-top: 2%;
+   padding-top: 1%;
     padding-left: 15%;
     margin: auto;
     max-width: 1600px;
@@ -133,13 +162,13 @@
       
       <c:set var="i" value="0" />
 		   <c:forEach var="board" items="${Cboard}" >
+		    
 		   
-		   
-		   
+	
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
 			  <td align="left">${ i }</td>
-			  <td align="left" class="" title="Click : 댓글 작성한 게시물로 이동" data-toggle="modal" data-target="#${board.boardNo}modal">${board.boardDetailText}</td>
+			  <td align="left" class="detail" title="Click : 댓글 작성한 게시물로 이동" data-toggle="modal" data-target="#${board.boardNo}modal">${board.boardDetailText}</td>
 			  <td align="left">${board.boardRegDate}</td>
 		
 				</tr>
@@ -162,15 +191,30 @@
       </div> 
       
         <h4 class="row modal-title" id="gridSystemModalLabel">
-         
-        <div class="col-sm-2">
-        <img src="/common/images/profile/${user.profile}" style="height: 60px; width:60px; border-radius: 70px; vertical-align: middle; margin-left: 15px;"/>
-        </div>
         
+   	
+	
+ 
+ 
+
+
+        <div class="col-sm-2">
+        <img src="/common/images/profile/${board.user.profile}" style="height: 60px; width:60px; border-radius: 70px; vertical-align: middle; margin-left: 15px;"/>
+        </div>
+
+
+    
+         
+     
+ 	
         <div class="col-sm-3">
-		${user.userNickname}
+		${board.user.userNickname}
 		</div>
+	
+
 		
+	
+
 		<!-- 내 글만 수정, 삭제 -->
 		<c:if test="${user.userNo==board.user.userNo}">
 		<div class="col-sm-7" style="padding-left: 60px;">
@@ -188,7 +232,7 @@
         </c:if>     
          
         </h4>
-          
+
      <!-- 모달1 헤더 끝 -->
       
      <!-- 모달1 바디 시작 -->
@@ -257,9 +301,12 @@
 <!-- 모달2 끝 -->
 			  
 			  
-			  
-			  	</c:forEach>
-	
+			  		   </c:forEach>
+		
+			 <form>
+			  	  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
+			  </form>
 		    
 			  
 			</table>

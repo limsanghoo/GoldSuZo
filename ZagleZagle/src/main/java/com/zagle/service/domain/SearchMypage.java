@@ -5,7 +5,7 @@ public class SearchMypage {
 	
 	private int currentPage;
 	
-	
+
 	Board myBoard;
 	User myUser;
 	private String myUserNo;
@@ -35,8 +35,8 @@ public class SearchMypage {
 	public int getPageSize() {
 		return pageSize;
 	}
-	public void setPageSize(int paseSize) {
-		this.pageSize = paseSize;
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
 	}
 	
 	public int getCurrentPage() {

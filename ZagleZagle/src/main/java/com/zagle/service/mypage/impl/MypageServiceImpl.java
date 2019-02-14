@@ -53,11 +53,11 @@ public class MypageServiceImpl implements MypageService {
 	
 	public Map<String, Object> listComment(SearchMypage search) throws Exception {
 		List<Comment> list = mypageDao.commentList(search);
-		//int totalCount = mypageDao.getTotalCount(search);
+		int totalCount = mypageDao.getTotalCommentList(search);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
-		//map.put("totalCount", new Integer(totalCount));
+		map.put("totalCount", new Integer(totalCount));
 		
 		return map;
 	}
@@ -65,22 +65,25 @@ public class MypageServiceImpl implements MypageService {
 
 	public Map<String, Object> listLike(SearchMypage search) throws Exception {
 		List<Like> list = mypageDao.likeList(search);
-		//int totalCount = mypageDao.getTotalCount(search);
+		int totalCount = mypageDao.getTotalLikeList(search);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
-		//map.put("totalCount", new Integer(totalCount));
+		map.put("totalCount", new Integer(totalCount));
 		
 		return map;
 	}
 	
 	public Map<String, Object> listScrap(SearchMypage search) throws Exception {
 		List<Scrap> list = mypageDao.ScrapList(search);
-		//int totalCount = mypageDao.getTotalCount(search);
+		
+		int totalCount = mypageDao.getTotalScrapList(search);
+		
+		System.out.println("토탈 카운트는? :"+totalCount);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
-		//map.put("totalCount", new Integer(totalCount));
+		map.put("totalCount", new Integer(totalCount));
 		
 		return map;
 		
@@ -89,9 +92,13 @@ public class MypageServiceImpl implements MypageService {
 		
 		List<Board> list = mypageDao.MyBoardList(search);
 		
+		int totalCount = mypageDao.getTotalBoardList(search);
+		
+		System.out.println("토탈 카운트는? :"+totalCount);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
-		
+		map.put("totalCount", new Integer(totalCount));
 		return map;
 	}
 

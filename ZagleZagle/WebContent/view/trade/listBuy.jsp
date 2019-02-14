@@ -131,11 +131,15 @@ background-color: #333333;
 					
 					<c:if test="${buy.sellProd.sellStyle=='10'}">
 						<c:if test="${buy.sellProd.sellState=='40'}"><a href="/trade/payBuy?buyNo=${buy.buyNo}">결제하기</a></c:if>	
-						<c:if test="${buy.sellProd.sellState=='60'}"><a href="/trade/selectTracking?buyNo=${buy.buyNo}" onclick="window.open(this.href,'','width=1230, height=700, scrollbars=yes'); return false;" href="/trade/selectTracking?buyNo=${buy.buyNo}">배송조회</a></c:if>
+						<c:if test="${buy.sellProd.sellState=='60'}">
+							<a href="/trade/selectTracking?buyNo=${buy.buyNo}" onclick="window.open(this.href,'','width=1230, height=700, scrollbars=yes'); return false;" href="/trade/selectTracking?buyNo=${buy.buyNo}">배송조회</a>
+							&emsp;ㅣ&emsp;
+							<a href="/trade/updateSellState?sellNo=${buy.sellProd.sellNo}&sellState=70">거래완료</a>
+						</c:if>
 					</c:if>
 					
 					<c:if test="${buy.sellProd.sellStyle=='20'}">
-						<c:if test="${buy.sellProd.sellState=='50'}">거래종료</c:if>
+						<c:if test="${buy.sellProd.sellState=='50'}"><a href="/trade/updateSellState?sellNo=${buy.sellProd.sellNo}&sellState=70">거래완료</a></c:if>
 					</c:if>
 				</td>
 					

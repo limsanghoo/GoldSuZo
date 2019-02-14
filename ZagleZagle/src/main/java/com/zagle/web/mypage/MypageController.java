@@ -135,7 +135,9 @@ public class MypageController {
 		System.out.println("/mypage/listComment : GET/POST");
 		
 		
-		
+		if(searchMypage.getCurrentPage() ==0 ){
+			searchMypage.setCurrentPage(1);
+		}
 		
 		User user = (User) session.getAttribute("user");
 		user.getUserNo();
@@ -144,7 +146,9 @@ public class MypageController {
 		System.out.println("getUser 값 :"+user);
 		
 		 searchMypage.setMyUser(user);
-		
+		searchMypage.setPageSize(pageSize);
+
+			
 		
 		
 		Map<String, Object> map = mypageService.listComment(searchMypage);
@@ -155,27 +159,46 @@ public class MypageController {
 		
 		System.out.println(map.get("totalCount"));
 		
+		Page resultPage = new Page( searchMypage.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+	    System.out.println(resultPage);
 		
 		ArrayList list = (ArrayList) map.get("list");
 		System.out.println(list);
 		System.out.println(list.size());
 		List<Board> bdList = new ArrayList<Board>();
+	
+		
+		
 		for (int i = 0; i < list.size(); i++) {
 		
 			Mypage mp = (Mypage)list.get(i);
 			String bdNo = mp.getBoard().getBoardNo();
+			
 			Board bd = boardService.getBoard(bdNo);
-			bdList.add(bd);
+			
+			String userNo = bd.getUser().getUserNo();
+			
 
+
+			User user01 = userService.getUser2(userNo);
+			
+			bd.setUser(user01);
+			
+			bdList.add(bd);
+	
 		}
-		System.out.println(bdList);
+	
+		
+
 		
 	
 		
+		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("list", map.get("list"));
-
+		modelAndView.addObject("resultPage", resultPage);
 		modelAndView.addObject("Cboard", bdList);
+		
 		modelAndView.addObject(" searchMypage",  searchMypage);
 		modelAndView.setViewName("forward:/view/mypage/listComment.jsp");
 	
@@ -188,43 +211,60 @@ public class MypageController {
 		
 		System.out.println("/mypage/listMyboard : GET/POST");
 	
-		
+
+		if(searchMypage.getCurrentPage() ==0 ){
+			searchMypage.setCurrentPage(1);
+		}
 		
 		User user = (User) session.getAttribute("user");
 		
 		searchMypage.setMyUser(user);
-		
+		searchMypage.setPageSize(pageSize);
+
 		
 		System.out.println();
-		
-//		if(search.getCurrentPage()==0) {
-//			search.setCurrentPage(1);
-//		}
-//		search.setPageSize(pageSize);
-		
+
 		
 		Map<String, Object> map = mypageService.listMyBoard(searchMypage);
-//		Page resultPage = new Page(search.getCurrentPage(),((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-//		System.out.println(resultPage);
-//		
-		
+
 		System.out.println(map);
+		
+		Page resultPage = new Page( searchMypage.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+	    System.out.println(resultPage);
 		
 		ArrayList list = (ArrayList) map.get("list");
 		System.out.println(list);
 		List<Board> bdList = new ArrayList<Board>();
+		
+		
+		
 		for (int i = 0; i < list.size(); i++) {
 		
 			Mypage mp = (Mypage)list.get(i);
 			String bdNo = mp.getBoard().getBoardNo();
 			
+		
+			
+			
+			
+
+			
+		
+			
+			
 			Board bd = boardService.getBoard(bdNo);
+			String userNo = bd.getUser().getUserNo();
+			User user01 = userService.getUser2(userNo);
+			
+			
+			
+			bd.setUser(user01);
 			bdList.add(bd);
 		}
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("listBoard", bdList);
-//		modelAndView.addObject("resultPage", resultPage);
+		modelAndView.addObject("resultPage", resultPage);
 		modelAndView.addObject("searchMypage", searchMypage);
 		modelAndView.addObject("user", user);
 		modelAndView.setViewName("forward:/view/mypage/listMyBoard.jsp");
@@ -233,17 +273,34 @@ public class MypageController {
 		return modelAndView;
 	}
 	@RequestMapping(value="listScrap")
-	public ModelAndView listScrap(@ModelAttribute("SearchMypage") SearchMypage searchMypage, HttpSession session) throws Exception {
+	public ModelAndView listScrap(@ModelAttribute("SearchMypage") SearchMypage searchMypage, HttpSession session, HttpServletRequest request) throws Exception {
 		
+		System.out.println(searchMypage.getCurrentPage());
+	
 		System.out.println("/mypage/listScrap : GET/POST");
 		User user = (User) session.getAttribute("user");
 		
+		
 		System.out.println("user 확인 :"+user);
 		
+		if(searchMypage.getCurrentPage() ==0 ){
+			searchMypage.setCurrentPage(1);
+		}
+		
 		searchMypage.setMyUser(user);
-	
+		searchMypage.setPageSize(pageSize);
+
 		
 		Map<String, Object> map = mypageService.listScrap(searchMypage);
+	
+		System.out.println(searchMypage.getCurrentPage());
+		System.out.println(pageUnit);
+		System.out.println(pageSize);
+		
+		System.out.println(map.get("totalCount"));
+		
+		Page resultPage = new Page( searchMypage.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+	    System.out.println(resultPage);
 		
 		ArrayList list = (ArrayList) map.get("list");
 		System.out.println(list);
@@ -252,13 +309,20 @@ public class MypageController {
 		
 			Mypage mp = (Mypage)list.get(i);
 			String bdNo = mp.getBoard().getBoardNo();
+
+			
 			Board bd = boardService.getBoard(bdNo);
+			String userNo = bd.getUser().getUserNo();
+			User user01 = userService.getUser2(userNo);
+			
+			bd.setUser(user01);
 			bdList.add(bd);
 		}
 				
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("listBoard", bdList);
 		modelAndView.addObject("count", list.size());
+		modelAndView.addObject("resultPage", resultPage);
 		modelAndView.addObject("searchMypage", searchMypage);
 		modelAndView.setViewName("forward:/view/mypage/listScrap.jsp");
 		
@@ -284,9 +348,19 @@ public class MypageController {
 		
 		System.out.println("/mypage/listLike : GET/POST");
 		User user = (User) session.getAttribute("user");
+		
+		
+		if(search.getCurrentPage() ==0 ){
+			search.setCurrentPage(1);
+		}
+		
 		search.setMyUser(user);
+		search.setPageSize(pageSize);
 		
 		Map<String, Object> map = mypageService.listLike(search);
+		
+		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+	    System.out.println(resultPage);
 		
 		ArrayList list = (ArrayList) map.get("list");
 		System.out.println(list);
@@ -295,7 +369,15 @@ public class MypageController {
 		
 			Mypage mp = (Mypage)list.get(i);
 			String bdNo = mp.getBoard().getBoardNo();
+			
+			
+			
 			Board bd = boardService.getBoard(bdNo);
+			String userNo = bd.getUser().getUserNo();
+			User user01 = userService.getUser2(userNo);
+			
+			bd.setUser(user01);
+			
 			bdList.add(bd);
 		}
 				
@@ -303,6 +385,7 @@ public class MypageController {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("user", user);
+		modelAndView.addObject("resultPage", resultPage);
 		modelAndView.addObject("listBoard", bdList);
 		modelAndView.addObject("search", search);
 		modelAndView.setViewName("forward:/view/mypage/listLike.jsp");
