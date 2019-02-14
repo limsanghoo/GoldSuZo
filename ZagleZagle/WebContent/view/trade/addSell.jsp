@@ -260,6 +260,15 @@ $(function() {
         placeholder: {
             text: '여기에 내용을 작성 해 주세요',
             hideOnClick: true
+        },
+        toolbar: {
+            buttons: [
+                'bold',
+                'italic',
+                'underline',
+                'h2',
+                'h3'
+            ]
         }    
     });
     
