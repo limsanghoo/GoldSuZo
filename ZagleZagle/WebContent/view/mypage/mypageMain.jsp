@@ -107,19 +107,21 @@ position: absolute;
 
 }
 
-#myg_container {
+.myg_container {
 
-height: 500px;
-
+    height: 900px;
+    /* margin-top: 8%; */
+    padding-top: 6%;
+    background-color: #dceadf;
 }
 
 #myg_row {
 
-    background-color: #dceadf;
+        background-color: #dceadf;
     height: 780px;
-       padding-left: 32%;
-    padding-right: 10%;
-    padding-top: 24%;
+    padding-left: 26%;
+    padding-right: 1%;
+    padding-top: 17%;
 }
 
 #myg_row .myg_row1  {
@@ -166,6 +168,21 @@ padding-top: 30%;
 background-color: #dcead;
 }
 
+
+.myg_row_group {
+
+    margin: 9%;
+   
+    /* padding-top: 60%; */
+    position: relative;
+    /* position: absolute; */
+}
+
+.myg_row {
+
+margin:1%;
+}
+
 </style>
 	
 	
@@ -190,11 +207,13 @@ background-color: #dcead;
 <jsp:include page="/view/layout/toolbar.jsp" />
 
 
-
+<div class="myg_container">
 
 <div id="myg_row">	
+	<div class="myg_row">
 	
 	
+	<div class=myg_row_group>
   <span class="myg_row1">
   
   		
@@ -256,11 +275,16 @@ background-color: #dcead;
   
 
     
-    
+    </div><!--  div_row_group end -->
+  
+  
+  </div> <!--  div_row class end -->
   
     </div> <!--  div id row 끝 -->
  
- 	
+ 
+ 
+ 	</div><!-- div container end -->
 
 	
 	
