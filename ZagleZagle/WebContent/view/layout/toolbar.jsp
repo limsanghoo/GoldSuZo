@@ -242,6 +242,29 @@ $(function(){
             $("#btn").show();
          });
       });
+      
+
+$(function() {
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 500) {
+            $('#MOVE_TOP_BTN').fadeIn();
+        } else {
+            $('#MOVE_TOP_BTN').fadeOut();
+        }
+    });
+    
+    $(".back-to-top").click(function() {
+        $('html, body').animate({
+            scrollTop : 0
+        }, 400);
+        return false;
+    });
+});
+
+
+
+
+      
 </script>
  
  
@@ -279,6 +302,19 @@ background-size: cover;
 .navbar-default.navbar-trans, .navbar-default.navbar-reduce {
     border-bottom: 2px solid #2eca6a;
 }
+
+
+ 
+  .back-to-top {
+  	 position: fixed;
+    right: 2%;
+    bottom: 50px;
+    display: none;
+    z-index: 999;
+
+  }
+  
+  </style>
 
 </style> 
   
@@ -390,6 +426,7 @@ background-size: cover;
   </nav>
 <!--/ Nav End /--> 
   
+ 
 
 
   <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
