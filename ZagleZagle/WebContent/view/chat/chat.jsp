@@ -293,11 +293,11 @@ margin-top: -1px;
 input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
 #mdStart {position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
 </style>
-	<script src="http://192.168.0.20:82/socket.io/socket.io.js"></script>
+	<script src="http://192.168.0.45:82/socket.io/socket.io.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script>
 		$(document).ready(function() {
-			var socket = io("http://192.168.0.20:82");
+			var socket = io("http://192.168.0.45:82");
 			socket.emit("send_user",{id :"${user.userNickname}", addr : "${room}",pro : "${user.profile}"});
 			
 			//msg에서 키를 누를떄
@@ -475,7 +475,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 				            	if (msg.substring(msg.length-3)=='mp4') {
 				            		setTimeout(function() {
 					            		while(true){
-						            		var path = 'http://192.168.0.32:8080/common/images/chat/'+msg;
+						            		var path = 'http://192.168.0.43:8080/common/images/chat/'+msg;
 						            		var re = doesFileExist2(path);
 						            		if (re) {
 						            			socket.emit("send_msg",msg);
@@ -486,7 +486,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 								}else{
 									setTimeout(function() {
 					            		while(true){
-						            		var path = 'http://192.168.0.32:8080/common/images/chat/'+msg;
+						            		var path = 'http://192.168.0.43:8080/common/images/chat/'+msg;
 						            		var re = doesFileExist2(path);
 						            		if (re) {
 						            			socket.emit("send_msg",msg);
@@ -551,7 +551,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 		            	if (msg.substring(msg.length-3)=='mp4') {
 		            		setTimeout(function() {
 			            		while(true){
-				            		var path = 'http://192.168.0.32:8080/common/images/chat/'+msg;
+				            		var path = 'http://192.168.0.43:8080/common/images/chat/'+msg;
 				            		var re = doesFileExist(path);
 				            		if (re) {
 				            			socket.emit("send_msg",msg);
@@ -562,7 +562,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 						}else{
 							setTimeout(function() {
 			            		while(true){
-				            		var path = 'http://192.168.0.32:8080/common/images/chat/'+msg;
+				            		var path = 'http://192.168.0.43:8080/common/images/chat/'+msg;
 				            		var re = doesFileExist(path);
 				            		if (re) {
 				            			socket.emit("send_msg",msg);
