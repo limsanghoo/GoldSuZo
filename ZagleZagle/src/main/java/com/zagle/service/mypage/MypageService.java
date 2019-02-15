@@ -3,6 +3,7 @@ package com.zagle.service.mypage;
 import java.util.Map;
 
 import com.zagle.common.Search;
+import com.zagle.service.domain.Board;
 import com.zagle.service.domain.SearchMypage;
 import com.zagle.service.domain.User;
 

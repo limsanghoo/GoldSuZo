@@ -23,6 +23,8 @@
 	</resultMap>
 	
 	
+	
+	
 	<!-- SQL : INSERT -->
 	<update 	id="addAccount"		parameterType="user" >
 	 	UPDATE users
@@ -83,7 +85,7 @@
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
 	 
-<select id="listMyBoard" parameterType="com.zagle.service.domain.SearchBoard" resultMap="mypageSelectMap">
+	 <select id="listMyBoard" parameterType="com.zagle.service.domain.SearchMypage" resultMap="mypageSelectMap">
 		 SELECT *
 	 FROM ( SELECT inner_table.*, ROWNUM AS row_seq
 		 FROM ( SELECT u.user_no, b.board_no, b.board_detail_text,  b.board_reg_date
