@@ -186,7 +186,7 @@ public class UserRestController {
 				        MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 				        params.add("grant_type", "authorization_code");
 				        params.add("client_id", "c3883a306a9faad67b127d7631568b29");
-				        params.add("redirect_uri", "http://192.168.0.29:8080/user/kakaologin");
+				        params.add("redirect_uri", "http://192.168.0.46:8080/user/kakaologin");
 				        params.add("code", code);
 				   
 				        
