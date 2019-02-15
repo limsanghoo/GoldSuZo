@@ -48,9 +48,8 @@
   <!-- Main Stylesheet File -->
   <link href="/common/css/estateagency-master/css/style.css" rel="stylesheet">
 
-	<!--  sweetAlert -->     
-      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-      
+	<!--  sweetAlert -->  	
+   	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
   <!-- =======================================================
     Theme Name: EstateAgency
@@ -67,10 +66,10 @@ $(function() {
     
     $("#Kakao").on("click", function() {
        
-
-   
+ 
        
-       var  URL = "https://kauth.kakao.com/oauth/authorize?client_id=c3883a306a9faad67b127d7631568b29&redirect_uri=http://192.168.0.26:8080/user/kakaologin&response_type=code"
+       
+       var  URL = "https://kauth.kakao.com/oauth/authorize?client_id=c3883a306a9faad67b127d7631568b29&redirect_uri=http://192.168.0.46:8080/user/kakaologin&response_type=code"
        popWin
        = window.open(URL,   "popWin",  "left=300,top=200,width=780,height=130,marginwidth=0,marginheight=0,"+
              "scrollbars=no,scrolling=no,menubar=no,resizable=no")
@@ -91,34 +90,41 @@ $(function() {
 	
 	$("a:contains('LOGOUT')").on("click",function() {
 		
-		var snsNo = $(this).data("param");
+	
 		
-		swal({
-			  title: "로그아웃 하시겠습니까?",
+			var snsNo = $(this).data("param");
 			
-				
-			  buttons: true,
-			  buttons: true,
-			})
-			.then((willDelete) => {
-			  if (willDelete) {
-			  
-				  if(snsNo.startsWith("K")) {
-						
-						
-						$("form").attr("method" , "POST").attr("action" , "/user/logout/json").submit();
-						
-					}else if(snsNo.startsWith("N")){
-						
-						$("form").attr("method" , "POST").attr("action" , "/user/Nlogout").submit();
-					}else{
-						$("form").attr("method" , "POST").attr("action" , "/user/logout").submit();
-					}
-			 
-			  } else {
-			    swal("로그아웃을 취소하셨습니다.");
-			  }
-			});
+		
+			swal({
+				  title: "로그아웃 하시겠습니까?",
+				 
+					
+				  buttons: true,
+				  buttons: true,
+				})
+				.then((willDelete) => {
+				  if (willDelete) {
+				  
+				  
+						if(snsNo.startsWith("K")) {
+							
+							
+							$("form").attr("method" , "POST").attr("action" , "/user/logout/json").submit();
+							
+						}else if(snsNo.startsWith("N")){
+							
+							$("form").attr("method" , "POST").attr("action" , "/user/Nlogout").submit();
+						}else{
+							$("form").attr("method" , "POST").attr("action" , "/user/logout").submit();
+						}
+					  
+				 
+				  } else {
+				    swal("로그아웃을 취소하셨습니다.");
+				  }
+				});
+			
+		
 	
 		
 	});
