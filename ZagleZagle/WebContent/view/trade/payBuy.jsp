@@ -53,6 +53,7 @@
 	<script src="/common/js/medium-editor/dist/js/medium-editor.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>  
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 	
@@ -97,7 +98,7 @@ $(function() {
 	            var msg = '결제에 실패하였습니다.';
 	            msg += '에러내용 : ' + rsp.error_msg;
 	            
-	            alert(msg);
+	            swal("ERROR",msg, "error");
 	        }
 	    });
 	    
@@ -121,7 +122,6 @@ $(function() {
 			}, function(rsp) {
 			    if ( rsp.success ) {
 
-	    			alert(rsp.imp_uid);
 	    			$("input:hidden[name='payment']").val(rsp.imp_uid);
 			    	payBuy();
 
@@ -129,7 +129,7 @@ $(function() {
 			        var msg = '결제에 실패하였습니다.';
 			        msg += '에러내용 : ' + rsp.error_msg;
 			        
-			        alert(msg);
+			        swal("ERROR",msg, "error");
 			    }
 			});
 	 });	
