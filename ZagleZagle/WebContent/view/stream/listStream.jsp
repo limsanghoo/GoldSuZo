@@ -202,7 +202,7 @@ $(function() {
            if(JSONData==1){
         	   alert('강퇴당하셔서 입장 불가능 하십니다 ㅠ.ㅠ 다음기회에...~'); 
            }else{
-        		 window.open("https://192.168.0.16:443/stream/join?streamer="+streamer+"&userNo=${user.userNo}&userNickname=${user.userNickname}&userProfile=${user.profile}", "popup_window", "width=1450, height=900, scrollbars=no");
+        		 window.open("https://192.168.0.43:443/stream/join?streamer="+streamer+"&userNo=${user.userNo}&userNickname=${user.userNickname}&userProfile=${user.profile}", "popup_window", "width=1450, height=900, scrollbars=no");
            }  	                    
              },  
              error : function (err) { 

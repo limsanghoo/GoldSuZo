@@ -310,6 +310,7 @@ User user = userService.getUser2(userNo);
 	search.setCurrentPage(1);
 	//search.setCurrentPage(1);
 	search.setPageSize(pageSize);
+//	search.setLoginUserNo(userNo);
 	//SearchBoard search2 = new SearchBoad();
 //	search2.set
 	//Page resultPage = new Page( searchMypage.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
@@ -327,7 +328,7 @@ User user = userService.getUser2(userNo);
 //		System.out.println(resultPage);
 //		
 		
-		System.out.println(map);
+		System.out.println("이게 나와줘야됨"+map);
 		
 		ArrayList list = (ArrayList) map.get("list");
 		System.out.println(list);
@@ -341,6 +342,7 @@ User user = userService.getUser2(userNo);
 			bdList.add(bd);
 		}
 		map.put("bdList", bdList);
+		map.put("myList", map);
 		return map;
 	}
 	@RequestMapping(value="json/listComment/{userNo}", method=RequestMethod.GET)

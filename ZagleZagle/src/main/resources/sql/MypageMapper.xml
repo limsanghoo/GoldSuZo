@@ -16,11 +16,11 @@
 		<result property="board.boardNo" column="board_no" jdbcType="VARCHAR"/>
 		<result property="comment.commentDetailText"	column="comment_detail_text" jdbcType="VARCHAR"/>
 		<result property="like.likeNo"		column="like_no"	jdbcType="VARCHAR"/>
-		<result property="like.checkLike"	column="check_like"	jdbcType="VARCHAR"/>
+		<result property="board.checkLike"	column="check_like"	jdbcType="VARCHAR"/>
 		<result property="scrap.scrapNo"	column="scrap_no"	jdbcType="VARCHAR" />
 		<result property="scrap.checkScrap"	column="check_scrap"	jdbcType="VARCHAR" />
-	
-	</resultMap>
+		<result	property="board.likeUserNo"	column="like_user_no"	jdbcType="VARCHAR"/>
+		</resultMap>
 	
 	
 	
@@ -88,10 +88,10 @@
 	 <select id="listMyBoard" parameterType="com.zagle.service.domain.SearchMypage" resultMap="mypageSelectMap">
 		 SELECT *
 	 FROM ( SELECT inner_table.*, ROWNUM AS row_seq
-		 FROM ( SELECT u.user_no, b.board_no, b.board_detail_text,  b.board_reg_date
-		FROM users u, board b,like l
+		 FROM ( SELECT u.user_no, b.board_no, b.board_detail_text, b.board_reg_date,l.check_like,l.user_no as "like_user_no"
+		FROM users u, board b,likes l
 		WHERE u.user_no=b.user_no and u.user_no = #{myUser.userNo} and b.board_status=1 AND b.board_no=l.board_no(+) 
-		AND l.user_no(+)=#{loginUserNo} AND s.user_no(+)=#{loginUserNo}
+		AND l.user_no(+)=#{myUser.userNo} AND u.user_no(+)=#{myUser.userNo}
 		ORDER BY b.board_reg_date DESC )inner_table
 		WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
