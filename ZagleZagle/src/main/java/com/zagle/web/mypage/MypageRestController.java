@@ -29,6 +29,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 
@@ -46,6 +47,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.zagle.common.Page;
 import com.zagle.service.board.BoardService;
 import com.zagle.service.domain.Board;
 import com.zagle.service.domain.Mypage;
@@ -70,7 +72,12 @@ public class MypageRestController {
 	@Autowired
 	@Qualifier("boardServiceImpl")
 	private BoardService boardService;
-	
+
+	@Value("#{commonProperties['pageUnit']}")
+	int pageUnit;
+	@Value("#{commonProperties['pageSize']}")
+	int pageSize;
+
 	private RestTemplate restTemplate = new RestTemplate();
 	
 	
@@ -300,12 +307,15 @@ User user = userService.getUser2(userNo);
 	
 	SearchMypage search = new SearchMypage();
 	search.setMyUser(user);
-		
-		
+	search.setCurrentPage(1);
+	//search.setCurrentPage(1);
+	search.setPageSize(pageSize);
+	//Page resultPage = new Page( searchMypage.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+    //System.out.println(resultPage);
 		System.out.println();
 		
 //		if(search.getCurrentPage()==0) {
-//			search.setCurrentPage(1);
+		
 //		}
 //		search.setPageSize(pageSize);
 		
