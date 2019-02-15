@@ -487,8 +487,8 @@ $(function(){
           description: hashTag,
           imageUrl: photo1,
           link: {
-            mobileWebUrl: 'http://192.168.0.32:8080/board/getBoard?boardNo='+boardNo,
-            webUrl: 'http://192.168.0.32:8080/board/getBoard?boardNo='+boardNo
+            mobileWebUrl: '/board/getBoard?boardNo='+boardNo,
+            webUrl: '/getBoard?boardNo='+boardNo
           }
         },
         social: {
@@ -498,8 +498,8 @@ $(function(){
           {
             title: '웹으로 보기',
             link: {
-              mobileWebUrl: 'http://192.168.0.32:8080/board/getBoard?view=mobile&boardNo='+boardNo,
-              webUrl: 'http://192.168.0.32:8080/board/getBoard?view=mobile&boardNo='+boardNo
+              mobileWebUrl: '/board/getBoard?view=mobile&boardNo='+boardNo,
+              webUrl: '/board/getBoard?view=mobile&boardNo='+boardNo
             }
           }
         ]
@@ -692,7 +692,7 @@ function fncGetTown(){
 <!-- </a> -->
 
 
-<div class="row">
+<div class="row" style="padding-top: 30px;">
 <!-- 지도로 보기 -->
 <div class="col-md-2 col-md-offset-1">
 <c:if test="${user.userNo!=null}">

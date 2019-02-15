@@ -272,9 +272,16 @@ $(function(){
         placeholder: {
             text: '내용은 필수 입력사항입니다',
             hideOnClick: false
-        }
-        
-    
+        },
+        toolbar: {
+            buttons: [
+                'bold',
+                'italic',
+                'underline',
+                'h2',
+                'h3'
+            ]
+        }    
     });
     
 </script>
