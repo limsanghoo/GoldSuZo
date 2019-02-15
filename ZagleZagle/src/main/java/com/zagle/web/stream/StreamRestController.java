@@ -311,10 +311,12 @@ public class StreamRestController {
 		refund.setBankname(streamer.getBankName());
 		refund.setPrice(spon.getPrice()); 
 		refund.setStreamerNickname(user.getUserNickname());
-		
 	 	//ModelAndView modelAndView = new ModelAndView(); 
-		Map<String,Object> map = new HashMap<>();
-		map.put("userNo",user.getUserNo());
+		Map<String,Object> map = new HashMap<String,Object>();
+		String encode =  	URLEncoder.encode(user.getUserNickname(),"UTF-8");
+		System.out.println("인코딩 한 후 닉네임================"+encode);
+		map.put("userNo","https://192.168.0.16:443/stream/sponSpeech2?streamer="+streamer.getUserNo()+"&userNo="+user.getUserNo()+"&userNickname="+encode+"&userProfile=default.jpg&price="+spon.getPrice());
+		System.out.println("map결과"+map);
 		return map; 
  
 	}
@@ -410,6 +412,9 @@ public class StreamRestController {
 		String result = "성공";
 		return result;
 	}
+	
+
+	
 	
 }
 	
