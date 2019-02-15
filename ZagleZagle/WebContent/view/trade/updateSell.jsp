@@ -61,7 +61,7 @@ $(function() {
 		var imgLength=$("img[name='img']").length;
 	      
 		  if(imgLength>3){
-			alert("사진은 세 장까지 등록 가능합니다.");
+			swal("ERROR", "사진은 세 장까지 등록 가능합니다.", "error");
 			return;
 		  }
 		  
@@ -103,7 +103,7 @@ $(function() {
 		      
 		      }
 		      else {
-		      	alert("업로드 실패");
+		    	  swal("업로드실패.","다시 시도하세요", "error");
 		      }
 		      $('.wrap-loading').addClass('display-none'); //로딩중 이미지 감추기
 		    }
@@ -295,8 +295,8 @@ $(function() {
 
 <!-- 로딩중 이미지 -->
 <div class="wrap-loading display-none">
-	<div id="preloader" style="background:none; "></div>
-</div>    
+	<div id="preloader" style="background-color: #42424296"></div>
+</div>  
 
 </form>
 
