@@ -44,8 +44,8 @@ public class MypageServiceImpl implements MypageService {
 	public void addAccount(User user) throws Exception {
 		mypageDao.addAccount(user);
 	}
-
-
+	
+	
 	public void updateAccount(User user) throws Exception {
 		mypageDao.updateAccount(user);	
 	}
