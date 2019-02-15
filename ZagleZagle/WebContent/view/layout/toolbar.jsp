@@ -69,7 +69,7 @@ $(function() {
  
        
        
-       var  URL = "https://kauth.kakao.com/oauth/authorize?client_id=c3883a306a9faad67b127d7631568b29&redirect_uri=http://192.168.0.46:8080/user/kakaologin&response_type=code"
+       var  URL = "https://kauth.kakao.com/oauth/authorize?client_id=c3883a306a9faad67b127d7631568b29&redirect_uri=http://192.168.0.43:8080/user/kakaologin&response_type=code"
        popWin
        = window.open(URL,   "popWin",  "left=300,top=200,width=780,height=130,marginwidth=0,marginheight=0,"+
              "scrollbars=no,scrolling=no,menubar=no,resizable=no")
