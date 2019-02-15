@@ -12,6 +12,7 @@ import com.zagle.service.domain.Board;
 import com.zagle.service.domain.Comment;
 import com.zagle.service.domain.Like;
 import com.zagle.service.domain.Scrap;
+import com.zagle.service.domain.SearchBoard;
 import com.zagle.service.domain.SearchMypage;
 import com.zagle.service.domain.User;
 import com.zagle.service.mypage.MypageDao;
@@ -84,8 +85,8 @@ public class MypageDaoImpl implements MypageDao {
 		return sqlSession.selectOne("MypageMapper.getTotalLikeList", search);
 	}
 
-	
-	
+
+
 	
 	
 

@@ -243,22 +243,19 @@ public class MypageController {
 			Mypage mp = (Mypage)list.get(i);
 			String bdNo = mp.getBoard().getBoardNo();
 			
-		
-			
-			
-			
 
 			
-		
-			
-			
 			Board bd = boardService.getBoard(bdNo);
+	
+			
 			String userNo = bd.getUser().getUserNo();
+	
 			User user01 = userService.getUser2(userNo);
 			
 			
 			
 			bd.setUser(user01);
+	
 			bdList.add(bd);
 		}
 		

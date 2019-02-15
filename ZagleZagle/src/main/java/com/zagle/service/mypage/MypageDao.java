@@ -7,6 +7,7 @@ import com.zagle.service.domain.Board;
 import com.zagle.service.domain.Comment;
 import com.zagle.service.domain.Like;
 import com.zagle.service.domain.Scrap;
+import com.zagle.service.domain.SearchBoard;
 import com.zagle.service.domain.SearchMypage;
 import com.zagle.service.domain.User;
 
@@ -23,6 +24,8 @@ public interface MypageDao {
 	
 	///SELECT LIST
 	public List<Like> likeList(SearchMypage search) throws Exception;
+	
+
 	
 	///SELECTE LIST
 	public List<Scrap> ScrapList(SearchMypage search) throws Exception;
