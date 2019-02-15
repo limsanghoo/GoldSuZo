@@ -28,6 +28,10 @@
    
      <!--  sweetAlert -->     
       <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      
+      <!-- Favicons -->
+  <link href="/common/css/estateagency-master/img/favicon2.png" rel="icon">
+  <link href="/common/css/estateagency-master/img/apple-touch-icon2.png" rel="apple-touch-icon">
 
 	<script type="text/javascript">
 	
@@ -173,7 +177,7 @@
 				              
 				              setTimeout(function() {
 				                     while(true){
-				                        var path = 'http://192.168.0.50:8080/common/images/profile/'+data;
+				                        var path = 'http://192.168.0.29:8080/common/images/profile/'+data;
 				                        var re = doesFileExist(path);
 				                        if (re) {
 				                           

@@ -25,6 +25,10 @@
 	<link rel="stylesheet" href="/css/admin.css" type="text/css">
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 
+<!-- Favicons -->
+  <link href="/common/css/estateagency-master/img/favicon2.png" rel="icon">
+  <link href="/common/css/estateagency-master/img/apple-touch-icon2.png" rel="apple-touch-icon">
+
 
 	<script type="text/javascript">
 	

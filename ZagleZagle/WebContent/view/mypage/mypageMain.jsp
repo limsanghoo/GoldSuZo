@@ -20,6 +20,10 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>  
+	
+	<!-- Favicons -->
+  <link href="/common/css/estateagency-master/img/favicon2.png" rel="icon">
+  <link href="/common/css/estateagency-master/img/apple-touch-icon2.png" rel="apple-touch-icon">
 
 <script type="text/javascript">
 
@@ -103,23 +107,25 @@ script {
 
 #plusfriend-addfriend-button{
 
-position: absolute;
+position: relative;
 
 }
 
-#myg_container {
+.myg_container {
 
-height: 500px;
-
+    height: 700px;
+   
+    padding-top: 6%;
+    background-color: #dceadf;
 }
 
 #myg_row {
 
-    background-color: #dceadf;
-    height: 780px;
-       padding-left: 32%;
-    padding-right: 10%;
-    padding-top: 24%;
+        background-color: #dceadf;
+    height: 820px;
+    padding-left: 26%;
+    padding-right: 1%;
+    padding-top: 6%;
 }
 
 #myg_row .myg_row1  {
@@ -166,6 +172,21 @@ padding-top: 30%;
 background-color: #dcead;
 }
 
+
+.myg_row_group {
+
+    margin: 9%;
+   
+    /* padding-top: 60%; */
+    position: relative;
+    /* position: absolute; */
+}
+
+.myg_row {
+
+margin:1%;
+}
+
 </style>
 	
 	
@@ -190,11 +211,13 @@ background-color: #dcead;
 <jsp:include page="/view/layout/toolbar.jsp" />
 
 
-
+<div class="myg_container">
 
 <div id="myg_row">	
+	<div class="myg_row">
 	
 	
+	<div class="myg_row_group col-md-6">
   <span class="myg_row1">
   
   		
@@ -256,11 +279,16 @@ background-color: #dcead;
   
 
     
-    
+    </div><!--  div_row_group end -->
+  
+  
+  </div> <!--  div_row class end -->
   
     </div> <!--  div id row 끝 -->
  
- 	
+ 
+ 
+ 	</div><!-- div container end -->
 
 	
 	

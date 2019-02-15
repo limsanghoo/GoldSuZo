@@ -157,12 +157,12 @@ function reportComment(commentNo, userNo){
 </head>
 
 <body>
-		<div class="commentList" align="left" style="padding-left: 10px;"></div>
+		<div class="commentList" align="left" style="padding-left: 20px;"></div>
 		
-		<div style="padding-bottom: 20px;margin-bottom: 30px;">
-		<div class="col-sm-10 col-10"><input type="text" id="<%=boardNo%>commentDetailText" placeholder="댓글을 입력해주세요" style="width: 360px;"></div>
+		<div class="row" style="padding-bottom: 20px;margin-bottom: 30px;">
+		<div class="col-sm-10 col-10" style="padding-left: 30px;"><input type="text" id="<%=boardNo%>commentDetailText" placeholder="댓글을 입력해주세요" style="width: 100%;"></div>
 		<div class="col-sm-2 col-2" style="padding-left: 0px; float: right;">
-		<input class="btn btn-b" type="button" id="<%=boardNo%>Comment" value="등록" style="width:60px; height:30px; padding:0px;"></div>
+		<input class="btn btn-b" type="button" id="<%=boardNo%>Comment" value="등록" style="width:45px; height:30px; padding:0px;"></div>
 		</div>
 </body>
 </html>

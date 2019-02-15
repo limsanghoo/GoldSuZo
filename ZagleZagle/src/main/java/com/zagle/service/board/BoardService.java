@@ -62,8 +62,6 @@ public interface BoardService {
 
 	
 	//맵
-	public Map<String, Object> listMap(SearchBoard searchBoard) throws Exception;
-
 	public List<Local> getState() throws Exception;
 
 	public List<Local> getCity(Local local) throws Exception;

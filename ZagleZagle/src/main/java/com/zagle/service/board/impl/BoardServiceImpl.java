@@ -149,11 +149,6 @@ public class BoardServiceImpl implements BoardService{
 
 	
 ///////////////맵
-	@Override
-	public Map<String, Object> listMap(SearchBoard searchBoard) throws Exception {
-		
-		return null;
-	}
 	
 	@Override
 	public List<Local> getState() throws Exception {

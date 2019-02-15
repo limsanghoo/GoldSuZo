@@ -21,7 +21,9 @@
  	<!--  sweetAlert -->  	
    	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
    	
-   	
+   	<!-- Favicons -->
+  <link href="/common/css/estateagency-master/img/favicon2.png" rel="icon">
+  <link href="/common/css/estateagency-master/img/apple-touch-icon2.png" rel="apple-touch-icon">
    
    
     <!-- Bootstrap Dropdown Hover JS -->
@@ -189,7 +191,7 @@ padding-left: 50px;
 	
 			
 		<div class="row">
-	  		<div class="col-xs-4 col-md-5 col-7" align="right"><strong>생년월일</strong></div>
+	  		<div class="col-xs-4 col-md-5 col-9" align="right"><strong>생년월일</strong></div>
 	  		<div class="col-md-1"></div>
 			<div class="col-xs-8 col-md-6" align="left">${user.userBirth}</div>
 		</div>
@@ -206,7 +208,7 @@ padding-left: 50px;
 			
 			
 		<div class="row">
-	  		<div class="col-xs-4 col-md-5 col-7" align="right"><strong>활동점수</strong></div>
+	  		<div class="col-xs-4 col-md-5 col-9" align="right"><strong>활동점수</strong></div>
 	  		<div class="col-md-1"></div>
 			<div class="col-xs-8 col-md-6" align="left">${user.totalActiveScore}</div>
 		</div>
@@ -216,7 +218,7 @@ padding-left: 50px;
 
 			
 			<div class="row">
-	  		<div class="col-xs-4 col-md-5 col-7" align="right"><strong>계&emsp;&emsp;좌</strong></div>
+	  		<div class="col-xs-4 col-md-5 col-9" align="right"><strong>계&emsp;&emsp;좌</strong></div>
 	  		<div class="col-md-1"></div>
 			<div class="col-xs-8 col-md-6" align="left">
 			
@@ -233,7 +235,7 @@ padding-left: 50px;
 			<hr/>
 			
 					<div class="row">
-	  		<div class="col-xs-4 col-md-5 col-7" align="right"><strong>가입날짜</strong></div>
+	  		<div class="col-xs-4 col-md-5 col-9" align="right"><strong>가입날짜</strong></div>
 	  		<div class="col-md-1"></div>
 			<div class="col-xs-8 col-md-6" align="left">${user.regDate}</div>
 		</div>

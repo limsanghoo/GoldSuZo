@@ -81,7 +81,6 @@ body {
    	padding-right: 0px;
     padding: 0;
     font-family: 'Poppins', sans-serif;
-	/* background: #333; */
 	overflow-x: hidden;
 }
 
@@ -125,7 +124,6 @@ body {
 
 
 #selectTown{
-/* 	padding-top : 40px; */
 	text-align: center;
 }
 
@@ -162,7 +160,6 @@ input[name='report']{
 
 #weather{
 	background-image: url("https://i.imgur.com/wEnaF2K.png");
-/* 	background-image: url("https://i.imgur.com/rkzHSG4.jpg"); */
 	background-size: cover;
 	
 }
@@ -932,8 +929,21 @@ function fncGetTown(){
 <!-- 본문 시작 -->
 <div class="realBox" data-toggle="modal" data-target="#${board.boardNo}modal1" style="word-break:break-all;">
 
+
+<!-- //////////////////////지도&사진 있는 경우 캐러셀 시작 -->
+<c:if test="${board.address !=null && board.photo1 != null}">
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="2000" data-pause="hover">
+
+<ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+</ol>
+
+<div class="carousel-inner" role="listbox">
+         
+<div class="item active">
+
 <!-- 지도 시작 -->
-<c:if test="${board.coord !=null}">
 <div id="map${board.boardNo}" style="width:100%;height:350px;"></div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc9c3216a02c263f1acc2c4187e96443"></script>
 <script type="text/javascript">
@@ -983,13 +993,94 @@ function fncGetTown(){
       map.setZoomable(false);
    
 </script>
-</c:if>
+
 <!-- 지도 끝 -->
+	</div>
+         
+    <div class="item">
+        <img src="${board.photo1}" style="width:100%;height:350px;">
+    </div>
+</div><!-- carousel-inner 끝 -->
+
+
+
+<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev" style="background: none;">
+ 		<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+   	 <span class="sr-only">Previous</span>
+</a>
+
+<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next" style="background: none;">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+</a>
+
+</div><!-- 캐러셀 끝 -->
+</c:if><!-- 지도&사진 있는 경우 -->
+
+
+<!-- ////////////////////////////지도만 있는 경우 시작 -->
+<c:if test="${board.coord !=null && board.photo1 ==null}">
+<!-- 지도 시작 -->
+<div id="map${board.boardNo}" style="width:100%;height:350px;"></div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc9c3216a02c263f1acc2c4187e96443"></script>
+<script type="text/javascript">
+
+   
+   var mapContainer = document.getElementById('map${board.boardNo}'), // 이미지 지도를 표시할 div  
+   mapOption = { 
+           center: new daum.maps.LatLng(37.49463908698535, 127.02799333430488), // 이미지 지도의 중심좌표
+           level: 3, // 이미지 지도의 확대 레벨
+           disableDoubleClick: true
+       };
+   
+   var map = new daum.maps.Map(mapContainer, mapOption); 
+   var imageSrc = "/common/images/icons8-place-marker-filled-64 (2).png";
+
+   var bounds = new daum.maps.LatLngBounds();
+   
+   var coord = ('${board.coord}');
+   
+      var coordArray = coord.split(',');
+      var coordy = Number(coordArray[0]);
+      var coordx = Number(coordArray[1]);
+      
+      var markerPosition  = new daum.maps.LatLng(coordy, coordx); 
+
+      bounds.extend(markerPosition);
+      
+   // 마커 이미지의 이미지 크기 입니다
+       var imageSize = new daum.maps.Size(50, 50); 
+       var imageOption = {offset: new daum.maps.Point(25, 40)};
+       
+      // 마커 이미지를 생성합니다    
+          var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption); 
+          
+         // 마커를 생성합니다
+         var marker = new daum.maps.Marker({
+            map: map,
+             position: markerPosition,
+             image : markerImage // 마커 이미지 
+         });
+
+         marker.setMap(map);
+         map.setBounds(bounds);
+         map.setLevel(3);
+
+      map.setDraggable(false);
+      map.setZoomable(false);
+   
+</script>
+<!-- 지도 끝 -->
+</c:if>
+<!-- 지도만 있는 경우 끝 -->
 	
 	
+<!-- ///////////////////////////////사진만 있는 경우 시작 -->
 <c:if test="${board.coord ==null && board.photo1 !=null}">
 	<div><img src="${board.photo1}" style="width:100%;" align="middle"/></div>
-</c:if>	
+</c:if>
+<!-- 사진만 있는 경우 끝 -->
+
 
 	<p style="font-size: small; text-align: center;">${board.address}</p>
 	<p style="text-align: center;">${board.boardDetailText}</p>
@@ -1049,6 +1140,7 @@ function fncGetTown(){
       <div class="modal-body" style="text-align: center">  
 
 		<div>
+				
 			<c:if test="${board.photo1 !=null}">
 			<div name="listLink" data-photo1="${board.photo1}">
 				<span class="listLink" style="position: absolute;"></span>
