@@ -490,7 +490,7 @@ public class UserController {
 	
 	
 	
-	@RequestMapping( value="logout", method=RequestMethod.GET )
+	@RequestMapping( value="logout",  method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView logout(HttpSession session ) throws Exception{
 		
 		System.out.println("/user/logout : GET");
