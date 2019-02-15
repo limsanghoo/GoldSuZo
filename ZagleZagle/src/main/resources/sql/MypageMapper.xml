@@ -83,16 +83,18 @@
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
 	 
-	 <select id="listMyBoard" parameterType="com.zagle.service.domain.SearchBoard" resultMap="mypageSelectMap">
+<select id="listMyBoard" parameterType="com.zagle.service.domain.SearchBoard" resultMap="mypageSelectMap">
 		 SELECT *
 	 FROM ( SELECT inner_table.*, ROWNUM AS row_seq
 		 FROM ( SELECT u.user_no, b.board_no, b.board_detail_text,  b.board_reg_date
-		FROM users u, board b
-		WHERE u.user_no=b.user_no and u.user_no = #{myUser.userNo} and b.board_status=1
+		FROM users u, board b,like l
+		WHERE u.user_no=b.user_no and u.user_no = #{myUser.userNo} and b.board_status=1 AND b.board_no=l.board_no(+) 
+		AND l.user_no(+)=#{loginUserNo} AND s.user_no(+)=#{loginUserNo}
 		ORDER BY b.board_reg_date DESC )inner_table
 		WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
+
 	 
 	 
 	 <!-- 
