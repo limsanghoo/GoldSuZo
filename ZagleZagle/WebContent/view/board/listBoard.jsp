@@ -81,7 +81,6 @@ body {
    	padding-right: 0px;
     padding: 0;
     font-family: 'Poppins', sans-serif;
-	/* background: #333; */
 	overflow-x: hidden;
 }
 
@@ -125,7 +124,6 @@ body {
 
 
 #selectTown{
-/* 	padding-top : 40px; */
 	text-align: center;
 }
 
@@ -162,7 +160,6 @@ input[name='report']{
 
 #weather{
 	background-image: url("https://i.imgur.com/wEnaF2K.png");
-/* 	background-image: url("https://i.imgur.com/rkzHSG4.jpg"); */
 	background-size: cover;
 	
 }
