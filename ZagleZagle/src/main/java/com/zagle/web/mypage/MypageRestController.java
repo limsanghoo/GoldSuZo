@@ -310,6 +310,8 @@ User user = userService.getUser2(userNo);
 	search.setCurrentPage(1);
 	//search.setCurrentPage(1);
 	search.setPageSize(pageSize);
+	//SearchBoard search2 = new SearchBoad();
+//	search2.set
 	//Page resultPage = new Page( searchMypage.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
     //System.out.println(resultPage);
 		System.out.println();
