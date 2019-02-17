@@ -10,7 +10,6 @@ import java.net.URI;
 import java.net.URL;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +29,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 
@@ -48,7 +46,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.zagle.common.Page;
 import com.zagle.service.board.BoardService;
 import com.zagle.service.domain.Board;
 import com.zagle.service.domain.Mypage;
@@ -73,12 +70,7 @@ public class MypageRestController {
 	@Autowired
 	@Qualifier("boardServiceImpl")
 	private BoardService boardService;
-
-	@Value("#{commonProperties['pageUnit']}")
-	int pageUnit;
-	@Value("#{commonProperties['pageSize']}")
-	int pageSize;
-
+	
 	private RestTemplate restTemplate = new RestTemplate();
 	
 	
@@ -148,7 +140,7 @@ public class MypageRestController {
 	 final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
 	 
 	final String client_id ="l7xx60c67b59db9e4130aad0b4d113a9e890";
-	final String callBackURL ="http://192.168.0.43:8080/mypage/bankCallback";
+	final String callBackURL ="http://192.168.0.46:8080/mypage/bankCallback";
 	
 	  HttpHeaders headers = new HttpHeaders();
 	headers.add("Accept", "application/json");
@@ -158,7 +150,7 @@ public class MypageRestController {
        params.add("grant_type", "authorization_code");
        params.add("client_id", client_id);
        params.add("client_secret", "1efe286e56a94d85a44d7c0d7d19a144");
-       params.add("redirect_uri", "http://192.168.0.43:8080/mypage/bankCallback");
+       params.add("redirect_uri", "http://192.168.0.46:8080/mypage/bankCallback");
        params.add("code", code);
   
        
@@ -308,18 +300,12 @@ User user = userService.getUser2(userNo);
 	
 	SearchMypage search = new SearchMypage();
 	search.setMyUser(user);
-	search.setCurrentPage(1);
-	//search.setCurrentPage(1);
-	search.setPageSize(pageSize);
-//	search.setLoginUserNo(userNo);
-	//SearchBoard search2 = new SearchBoad();
-//	search2.set
-	//Page resultPage = new Page( searchMypage.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-    //System.out.println(resultPage);
+		
+		
 		System.out.println();
 		
 //		if(search.getCurrentPage()==0) {
-		
+//			search.setCurrentPage(1);
 //		}
 //		search.setPageSize(pageSize);
 		
@@ -328,8 +314,8 @@ User user = userService.getUser2(userNo);
 //		Page resultPage = new Page(search.getCurrentPage(),((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 //		System.out.println(resultPage);
 //		
-		/*
-		System.out.println("이게 나와줘야됨"+map);
+		
+		System.out.println(map);
 		
 		ArrayList list = (ArrayList) map.get("list");
 		System.out.println(list);
@@ -343,20 +329,22 @@ User user = userService.getUser2(userNo);
 			bdList.add(bd);
 		}
 		map.put("bdList", bdList);
-		map.put("myList", map);*/
 		return map;
 	}
-	@RequestMapping(value="json/listComment/{userNo}", method=RequestMethod.GET)
-	public Map<String, Object>listComment(@PathVariable String userNo,HttpSession session) throws Exception {
+	@RequestMapping(value="json/listComment", method=RequestMethod.POST)
+	public Map<String, Object> listComment (@RequestBody SearchMypage search,  HttpSession session) throws Exception {
 	
-		System.out.println("리스트 댓글============"+userNo);
-		SearchMypage search = new SearchMypage();
-		User user = userService.getUser2(userNo);
-		search.setMyUserNo(user.getUserNo());
-		search.setMyUser(user);
-		search.setCurrentPage(1);
-		//search.setCurrentPage(1);
-		search.setPageSize(pageSize);
+		if(session.getAttribute("user") != null) {
+			
+			User user = (User) session.getAttribute("user");
+			
+			String mUser = user.getUserNo();
+			search.setMyUserNo(mUser);
+			
+			
+		}else if(session.getAttribute("user")==null) {
+			search.setMyUserNo(null);
+		}
 		
 		Map<String, Object> map = mypageService.listComment(search);
 		
@@ -382,17 +370,11 @@ User user = userService.getUser2(userNo);
 		System.out.println(map);
 		return map;
 	}
-	@RequestMapping(value="json/listLike/{userNo}")
-	public Map<String, Object> listLike(@PathVariable String userNo,  HttpSession session) throws Exception {
+	@RequestMapping(value="json/listLike")
+	public Map<String, Object> listLike(@RequestBody SearchMypage search,  HttpSession session) throws Exception {
 	
 	
-		System.out.println("좋아요 스크랩============"+userNo);
-		SearchMypage search = new SearchMypage();
-		User user = userService.getUser2(userNo);
-		search.setMyUserNo(user.getUserNo());
-		search.setMyUser(user);
-		search.setCurrentPage(1);
-		search.setPageSize(pageSize);
+
 		Map<String, Object> map = mypageService.listLike(search);
 		
 			
@@ -444,7 +426,6 @@ User user = userService.getUser2(userNo);
 		SearchMypage search = new SearchMypage();
 		User user = userService.getUser2(userNo);
 		search.setMyUserNo(user.getUserNo());
-		search.setMyUser(user);
 		
 		Map<String, Object> map = mypageService.listScrap(search);
 
@@ -541,26 +522,4 @@ User user = userService.getUser2(userNo);
 		return null;
 	}
 	*/
-	
-	@RequestMapping(value="json/checkLike/{userNo}/{boardNo}", method=RequestMethod.GET)
-	public String checkLike(@PathVariable String userNo,@PathVariable String boardNo) throws Exception {
-
-		Map<String, String> map = new HashMap<String,String>();
-		
-			
-		
-		System.out.println(map);
-		
-		map.put("userNo",userNo);
-		map.put("boardNo",boardNo);
-		boolean result = mypageService.checkLike(map);
-		String result2;
-		if(result==true) {
-			result2="1";
-		}else {
-			result2="0";
-		}
-		System.out.println(result2);
-		return result2;
-	}
 }

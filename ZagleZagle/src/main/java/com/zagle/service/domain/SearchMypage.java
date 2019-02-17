@@ -9,9 +9,6 @@ public class SearchMypage {
 	Board myBoard;
 	User myUser;
 	private String myUserNo;
-	
-	
-	
 	public String getMyUserNo() {
 		return myUserNo;
 	}
@@ -77,11 +74,9 @@ public class SearchMypage {
 
 	@Override
 	public String toString() {
-		return "SearchMypage [currentPage=" + currentPage + ", myBoard=" + myBoard + ", myUser=" + myUser
-				+ ", myUserNo=" + myUserNo + ", pageSize=" + pageSize + ", endRowNum=" + endRowNum + ", startRowNum="
-				+ startRowNum + "]";
+		return "Search [currentPage=" + currentPage + ", searchCondition="
+			    + ", searchKeyword=" 
+				+ ", pageSize=" + pageSize + ", endRowNum=" + endRowNum
+				+ ", startRowNum=" + startRowNum + "]";
 	}
-
-
-	
 }
