@@ -98,9 +98,9 @@ public class StreamRestController {
 		    params.add("quantity","1");
 		    params.add("total_amount",price);
 		    params.add("tax_free_amount","0");
-		    params.add("approval_url","http://192.168.0.43:8080/stream/json/kakaoOkStream");
-		    params.add("cancel_url","http://192.168.0.43:8080");
-		    params.add("fail_url","http://192.168.0.43:8080");
+		    params.add("approval_url","http://192.168.0.16:8080/stream/json/kakaoOkStream");
+		    params.add("cancel_url","http://192.168.0.16:8080");
+		    params.add("fail_url","http://192.168.0.16:8080");
 
 		    // 서버로 요청할 Header 
 		    HttpHeaders headers = new HttpHeaders();
@@ -139,9 +139,9 @@ public class StreamRestController {
 		    params.add("quantity","1");
 		    params.add("total_amount",spon.getPrice()+"");
 		    params.add("tax_free_amount","0");
-		    params.add("approval_url","http://192.168.0.43:8080/stream/json/kakaoOkStream?");
-		    params.add("cancel_url","http://192.168.0.43:8080");
-		    params.add("fail_url","http://192.168.0.43:8080");
+		    params.add("approval_url","http://192.168.0.16:8080/stream/json/kakaoOkStream?");
+		    params.add("cancel_url","http://192.168.0.16:8080");
+		    params.add("fail_url","http://192.168.0.16:8080");
 
 		    // 서버로 요청할 Header 
 		    HttpHeaders headers = new HttpHeaders();
@@ -174,7 +174,7 @@ public class StreamRestController {
 	System.out.println("addStream[stream]="+stream);
 	streamService.addStream(stream);
 	
-	ModelAndView view = new ModelAndView("redirect:https://192.168.0.43:443/streamer="+user.getUserNo()+"&userName="+user.getUserNickname());
+	ModelAndView view = new ModelAndView("redirect:https://192.168.0.16:443/streamer="+user.getUserNo()+"&userName="+user.getUserNickname());
 	return view;	
 	}
 	
@@ -220,7 +220,7 @@ public class StreamRestController {
 		String encode =  	URLEncoder.encode(user.getUserNickname(),"UTF-8");
 		System.out.println("인코딩 한 후 닉네임================"+encode);
 		 	//ModelAndView view = new ModelAndView("redirect:"+url); 
-		 	ModelAndView view = new ModelAndView("redirect:https://192.168.0.43:443/stream/sponSpeech2?streamer="+streamer.getUserNo()+"&userNo="+user.getUserNo()+"&userNickname="+encode+"&userProfile=default.jpg&price="+session.getAttribute("price"));
+		 	ModelAndView view = new ModelAndView("redirect:https://192.168.0.16:443/stream/sponSpeech2?streamer="+streamer.getUserNo()+"&userNo="+user.getUserNo()+"&userNickname="+encode+"&userProfile=default.jpg&price="+session.getAttribute("price"));
 		//	ModelAndView view = new ModelAndView("redirect:http://192.168.0.12:8080/stream/));
 			//modelAndView.setViewName("forward:/view/stream/close.jsp");	
 		  	return view; 
@@ -311,12 +311,10 @@ public class StreamRestController {
 		refund.setBankname(streamer.getBankName());
 		refund.setPrice(spon.getPrice()); 
 		refund.setStreamerNickname(user.getUserNickname());
+		
 	 	//ModelAndView modelAndView = new ModelAndView(); 
-		Map<String,Object> map = new HashMap<String,Object>();
-		String encode =  	URLEncoder.encode(user.getUserNickname(),"UTF-8");
-		System.out.println("인코딩 한 후 닉네임================"+encode);
-		map.put("userNo","https://192.168.0.43:443/stream/sponSpeech2?streamer="+streamer.getUserNo()+"&userNo="+user.getUserNo()+"&userNickname="+encode+"&userProfile=default.jpg&price="+spon.getPrice());
-		System.out.println("map결과"+map);
+		Map<String,Object> map = new HashMap<>();
+		map.put("userNo",user.getUserNo());
 		return map; 
  
 	}
@@ -412,9 +410,6 @@ public class StreamRestController {
 		String result = "성공";
 		return result;
 	}
-	
-
-	
 	
 }
 	

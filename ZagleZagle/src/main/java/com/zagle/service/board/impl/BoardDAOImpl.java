@@ -58,8 +58,12 @@ public class BoardDAOImpl implements BoardDAO{
 
 	@Override
 	public Board getBoard(String boardNo) throws Exception {
+	int result = sqlSession.selectOne("MypageMapper.likeCount", boardNo);
+	Board board = new Board();
+	board = sqlSession.selectOne("BoardMapper.getBoard", boardNo);
+	board.setLikeCount(result);
 	
-		return sqlSession.selectOne("BoardMapper.getBoard", boardNo);
+		return board;
 	}
 	
 	

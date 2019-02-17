@@ -318,15 +318,15 @@ public class BoardRestController {
 		 
 		 String url=link.getUrl();
 		 
-		 String urlSub=url.substring(0, 4);
+
+		 String[] url2=url.split(":\\/\\/"); // https://파싱 정규식 표현
+
+		 System.out.println("url : "+url);
+
 		 
-		 if(urlSub.equals("http")) {
-			 link.setUrl(url);
-		 }else {
-			 link.setUrl("http:\\/\\/"+url);
+		 if(url2.length==1) {
+			 link.setUrl(url2[1]);
 		 }
-		 
-		 System.out.println(link);
 		 	 		 
 		 boardService.addLink(link);
 		 

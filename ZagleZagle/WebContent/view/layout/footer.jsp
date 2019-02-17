@@ -29,11 +29,11 @@ color:#8c8c8c;
 <script type='text/javascript'>
   //<![CDATA[
     // 사용할 앱의 JavaScript 키를 설정해 주세요.
-    Kakao.init('83df98960f21b7281d6cdfddf483b6a5'); 
+    Kakao.init('9eb4dc20c357b025d43287c96a92137d'); 
     // 플러스친구 친구추가 버튼을 생성합니다.
     Kakao.PlusFriend.createAddFriendButton({
       container: '#plusfriend-addfriend-button',
-      plusFriendId: '_ExnLxej' // 플러스친구 홈 URL에 명시된 id로 설정합니다.
+      plusFriendId: '_unxdxej' // 플러스친구 홈 URL에 명시된 id로 설정합니다.
     });
   //]]>
 </script>
