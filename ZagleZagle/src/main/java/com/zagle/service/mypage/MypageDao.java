@@ -1,6 +1,7 @@
 package com.zagle.service.mypage;
 
 import java.util.List;
+import java.util.Map;
 
 import com.zagle.common.Search;
 import com.zagle.service.domain.Board;
@@ -41,4 +42,6 @@ public interface MypageDao {
 	public int getTotalCommentList(SearchMypage search) throws Exception;
 	
 	public int getTotalLikeList(SearchMypage search) throws Exception;
+	
+	public boolean getCheckLike(Map<String,String> map) throws Exception;
 }

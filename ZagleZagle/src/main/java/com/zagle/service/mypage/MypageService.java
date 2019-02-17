@@ -23,6 +23,8 @@ public interface MypageService {
 	
 	public Boolean checkAccount(String realName, String userNo) throws Exception;
 	
+	public Boolean checkLike(Map<String,String>map) throws Exception;
+	
 	
 
 

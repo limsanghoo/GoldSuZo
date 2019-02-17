@@ -20,6 +20,7 @@
 		<result property="scrap.scrapNo"	column="scrap_no"	jdbcType="VARCHAR" />
 		<result property="scrap.checkScrap"	column="check_scrap"	jdbcType="VARCHAR" />
 		<result	property="board.likeUserNo"	column="like_user_no"	jdbcType="VARCHAR"/>
+		<result	property="board.boardDetailText"	column="detail_text"	jdbcType="VARCHAR"/>
 		</resultMap>
 	
 	
@@ -88,7 +89,7 @@
 	 <select id="listMyBoard" parameterType="com.zagle.service.domain.SearchMypage" resultMap="mypageSelectMap">
 		 SELECT *
 	 FROM ( SELECT inner_table.*, ROWNUM AS row_seq
-		 FROM ( SELECT u.user_no, b.board_no, b.board_detail_text, b.board_reg_date,l.check_like,l.user_no as "like_user_no"
+		 FROM ( SELECT u.user_no, b.board_no, b.board_detail_text as "detail_text", b.board_reg_date as "reg_date" ,l.check_like,l.user_no as "like_user_no"
 		FROM users u, board b,likes l
 		WHERE u.user_no=b.user_no and u.user_no = #{myUser.userNo} and b.board_status=1 AND b.board_no=l.board_no(+) 
 		AND l.user_no(+)=#{myUser.userNo} AND u.user_no(+)=#{myUser.userNo}
@@ -150,7 +151,12 @@
 	 ORDER BY scrap_no) countTable
 	 </select>
 	
-	
+	<select id="checkLike" parameterType="map" resultType="com.zagle.service.domain.Like">
+		 SELECT * 
+		 FROM likes 
+		 WHERE user_No = #{userNo}
+		 AND board_No = #{boardNo}
+	 </select>
 	 
 	 
 </mapper>

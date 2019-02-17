@@ -129,6 +129,13 @@ public class MypageServiceImpl implements MypageService {
 	
 		
 	}
+	
+public Boolean checkLike(Map<String,String>map) throws Exception {
+		Boolean result = mypageDao.getCheckLike(map);
+		
+return result;
+		
+	}
 
 	
 

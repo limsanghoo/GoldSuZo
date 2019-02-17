@@ -10,6 +10,7 @@ import java.net.URI;
 import java.net.URL;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -327,7 +328,7 @@ User user = userService.getUser2(userNo);
 //		Page resultPage = new Page(search.getCurrentPage(),((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 //		System.out.println(resultPage);
 //		
-		
+		/*
 		System.out.println("이게 나와줘야됨"+map);
 		
 		ArrayList list = (ArrayList) map.get("list");
@@ -342,7 +343,7 @@ User user = userService.getUser2(userNo);
 			bdList.add(bd);
 		}
 		map.put("bdList", bdList);
-		map.put("myList", map);
+		map.put("myList", map);*/
 		return map;
 	}
 	@RequestMapping(value="json/listComment/{userNo}", method=RequestMethod.GET)
@@ -353,7 +354,9 @@ User user = userService.getUser2(userNo);
 		User user = userService.getUser2(userNo);
 		search.setMyUserNo(user.getUserNo());
 		search.setMyUser(user);
-		
+		search.setCurrentPage(1);
+		//search.setCurrentPage(1);
+		search.setPageSize(pageSize);
 		
 		Map<String, Object> map = mypageService.listComment(search);
 		
@@ -379,22 +382,16 @@ User user = userService.getUser2(userNo);
 		System.out.println(map);
 		return map;
 	}
-	@RequestMapping(value="json/listLike")
-	public Map<String, Object> listLike(@RequestBody SearchMypage search,  HttpSession session) throws Exception {
+	@RequestMapping(value="json/listLike/{userNo}")
+	public Map<String, Object> listLike(@PathVariable String userNo,  HttpSession session) throws Exception {
 	
 	
-	if(session.getAttribute("user") != null) {
-			
-			User user = (User) session.getAttribute("user");
-			
-			String mUser = user.getUserNo();
-			search.setMyUserNo(mUser);
-			
-			
-		}else if(session.getAttribute("user")==null) {
-			search.setMyUserNo(null);
-		}
-		
+		System.out.println("좋아요 스크랩============"+userNo);
+		SearchMypage search = new SearchMypage();
+		User user = userService.getUser2(userNo);
+		search.setMyUserNo(user.getUserNo());
+		search.setMyUser(user);
+		search.setPageSize(pageSize);
 		Map<String, Object> map = mypageService.listLike(search);
 		
 			
@@ -543,4 +540,26 @@ User user = userService.getUser2(userNo);
 		return null;
 	}
 	*/
+	
+	@RequestMapping(value="json/checkLike/{userNo}/{boardNo}", method=RequestMethod.GET)
+	public String checkLike(@PathVariable String userNo,@PathVariable String boardNo) throws Exception {
+
+		Map<String, String> map = new HashMap<String,String>();
+		
+			
+		
+		System.out.println(map);
+		
+		map.put("userNo",userNo);
+		map.put("boardNo",boardNo);
+		boolean result = mypageService.checkLike(map);
+		String result2;
+		if(result==true) {
+			result2="1";
+		}else {
+			result2="0";
+		}
+		System.out.println(result2);
+		return result2;
+	}
 }
