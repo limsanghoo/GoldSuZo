@@ -158,5 +158,11 @@
 		 AND board_No = #{boardNo}
 	 </select>
 	 
+	 <select id="likeCount" parameterType="String" resultType="int">
+		 SELECT count(*)
+		 FROM likes 
+		 WHERE board_No = #{boardNo}
+	 </select>
+	 
 	 
 </mapper>

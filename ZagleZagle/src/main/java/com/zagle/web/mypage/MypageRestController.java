@@ -391,6 +391,7 @@ User user = userService.getUser2(userNo);
 		User user = userService.getUser2(userNo);
 		search.setMyUserNo(user.getUserNo());
 		search.setMyUser(user);
+		search.setCurrentPage(1);
 		search.setPageSize(pageSize);
 		Map<String, Object> map = mypageService.listLike(search);
 		
