@@ -3,7 +3,6 @@ package com.zagle.service.mypage;
 import java.util.Map;
 
 import com.zagle.common.Search;
-import com.zagle.service.domain.Board;
 import com.zagle.service.domain.SearchMypage;
 import com.zagle.service.domain.User;
 
@@ -22,8 +21,6 @@ public interface MypageService {
 	public Map<String, Object> listMyBoard(SearchMypage search) throws Exception;
 	
 	public Boolean checkAccount(String realName, String userNo) throws Exception;
-	
-	public Boolean checkLike(Map<String,String>map) throws Exception;
 	
 	
 

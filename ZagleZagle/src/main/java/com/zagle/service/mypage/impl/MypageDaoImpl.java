@@ -1,7 +1,6 @@
 package com.zagle.service.mypage.impl;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import com.zagle.service.domain.Board;
 import com.zagle.service.domain.Comment;
 import com.zagle.service.domain.Like;
 import com.zagle.service.domain.Scrap;
-import com.zagle.service.domain.SearchBoard;
 import com.zagle.service.domain.SearchMypage;
 import com.zagle.service.domain.User;
 import com.zagle.service.mypage.MypageDao;
@@ -86,21 +84,8 @@ public class MypageDaoImpl implements MypageDao {
 		return sqlSession.selectOne("MypageMapper.getTotalLikeList", search);
 	}
 
-	@Override
-	public boolean getCheckLike(Map<String, String> map) throws Exception {
-		// TODO Auto-generated method stub
-		boolean result;
-		if(sqlSession.selectOne("MypageMapper.getCheckLike",map)==null){
-			result = false;
-		}else {
-			result = true;
-		}
-		
-				return result;
-	}
-
-
-
+	
+	
 	
 	
 
