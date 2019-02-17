@@ -192,6 +192,19 @@ public class TradeController {
 	@RequestMapping(value="updateSell", method=RequestMethod.POST)
 	public ModelAndView updateSell(@ModelAttribute("sell") Sell sell) throws Exception{
 		
+		String[] photo=sell.getSellPhoto1().split(",");//이미지 링크 파싱
+		
+		if(photo.length==1) {
+			sell.setSellPhoto1(photo[0]);
+	    }else if(photo.length==2) {
+	    	sell.setSellPhoto1(photo[0]);
+	    	sell.setSellPhoto2(photo[1]);
+	    }else if(photo.length==3) {
+	        sell.setSellPhoto1(photo[0]);
+	        sell.setSellPhoto2(photo[1]);
+	        sell.setSellPhoto3(photo[2]);
+	    }
+		
 		tradeService.updateSell(sell);
 	
 		ModelAndView modelAndView = new ModelAndView();
