@@ -21,10 +21,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.zagle.common.Page;
-import com.zagle.common.Search;
+
 import com.zagle.service.board.BoardService;
 import com.zagle.service.domain.Board;
-import com.zagle.service.domain.Comment;
+
 import com.zagle.service.domain.Mypage;
 import com.zagle.service.domain.SearchMypage;
 import com.zagle.service.domain.User;
