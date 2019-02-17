@@ -35,6 +35,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.social.google.connect.GoogleConnectionFactory;
+import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
@@ -75,6 +77,11 @@ public class UserRestController {
 	private BoardService boardService;
 	
     private RestTemplate restTemplate = new RestTemplate(); 
+    
+
+
+	
+    
 	
 	public UserRestController() {
 		System.out.println(this.getClass());
@@ -108,7 +115,7 @@ public class UserRestController {
 		return userService.getUser(snsNo);
 	}
 	
-	
+	/*
 	@RequestMapping(value="json/getUserSession", method=RequestMethod.GET)
 	public User getUser(HttpSession session) throws Exception {
 		
@@ -117,7 +124,7 @@ public class UserRestController {
 		return (User)session.getAttribute("user");
 	}
 	
-	
+	*/
 	
 	/*
 	@RequestMapping(value="KakaoLogin", produces="application/json")
@@ -548,6 +555,8 @@ public class UserRestController {
 	        }
 	        return fileName;
 		}
+		
+		
 		
 		
 			

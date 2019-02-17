@@ -156,7 +156,7 @@ public class BoardRestController {
 	   
 
 	   @RequestMapping(value="json/listComment/{boardNo}", method=RequestMethod.GET)
-	   public List<Comment> getCommentList(@PathVariable String boardNo) throws Exception{
+	   public List<Comment> listComment(@PathVariable String boardNo) throws Exception{
 	      System.out.println("/json/listComment GET");
 	      System.out.println("boardNo : "+boardNo);
 	      

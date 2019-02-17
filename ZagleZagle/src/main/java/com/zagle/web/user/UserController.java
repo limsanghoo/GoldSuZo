@@ -95,6 +95,7 @@ public class UserController {
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 	
+	/*
 	@RequestMapping(value="login", method=RequestMethod.GET)
 	public ModelAndView login() throws Exception {
 		
@@ -105,7 +106,7 @@ public class UserController {
 		
 		return modelAndView;
 	}
-	
+	*/
 	
 	@RequestMapping(value="adminLogin", method=RequestMethod.GET)
 	public ModelAndView adminLogin() throws Exception {
@@ -260,6 +261,7 @@ public class UserController {
 		
 		return modelAndView;
 	}
+	/*
 	@RequestMapping(value="snsLogin/{userNo}", method=RequestMethod.POST)
 	public ModelAndView snsLogin(@PathVariable String userNo, HttpSession session) throws Exception {
 		
@@ -273,6 +275,7 @@ public class UserController {
 		
 		return modelAndView;
 	}
+	*/
 	
 	@RequestMapping(value="kakaologin", produces="application/json", 
 				method= {RequestMethod.GET, RequestMethod.POST})
