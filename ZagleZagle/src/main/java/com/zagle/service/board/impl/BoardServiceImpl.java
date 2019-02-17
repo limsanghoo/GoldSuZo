@@ -75,6 +75,7 @@ public class BoardServiceImpl implements BoardService{
 //////////////링크
 	@Override
 	public void addLink(Link link) throws Exception {
+		System.out.println("서비스 임플");
 		boardDAO.addLink(link);
 	}
 	

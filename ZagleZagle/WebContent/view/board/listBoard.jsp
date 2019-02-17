@@ -218,8 +218,7 @@ $(function(){
 		//alert(coord);
 	var coordy = Number(x1);
 	var coordx = Number(y1);
-		alert(coordy);
-		alert(coordx);
+
 		  //Kakao.init('bfb1e69b68a2d4c4b41ffd0d19fc47ff'); 
 		//self.location="/stream/goNavi?address="+address+"&coord="+coord		
 		Kakao.Navi.start({
@@ -439,8 +438,8 @@ $(function(){
 		      description: hashTag,
 		      imageUrl: photo1,
 		      link: {
-		        mobileWebUrl: 'http://192.168.0.32:8080/board/getBoard?view=mobile&boardNo='+boardNo,
-		        webUrl: 'http://192.168.0.32:8080/board/getBoard?view=mobile&boardNo='+boardNo
+		        mobileWebUrl: 'http://192.168.0.39:8080/board/getBoard?view=mobile&boardNo='+boardNo,
+		        webUrl: 'http://192.168.0.39:8080/board/getBoard?view=mobile&boardNo='+boardNo
 		      }
 		    },
 		    social: {
@@ -450,8 +449,8 @@ $(function(){
 		      {
 		        title: '웹으로 보기',
 		        link: {
-		          mobileWebUrl: 'http://192.168.0.32:8080/board/getBoard?boardNo='+boardNo,
-		          webUrl: 'http://192.168.0.32:8080/board/getBoard?boardNo='+boardNo
+		          mobileWebUrl: 'http://192.168.0.39:8080/board/getBoard?boardNo='+boardNo,
+		          webUrl: 'http://192.168.0.39:8080/board/getBoard?boardNo='+boardNo
 		        }
 		      }
 		    ]
@@ -487,8 +486,8 @@ $(function(){
           description: hashTag,
           imageUrl: photo1,
           link: {
-            mobileWebUrl: 'http://192.168.0.32:8080/board/getBoard?boardNo='+boardNo,
-            webUrl: 'http://192.168.0.32:8080/board/getBoard?boardNo='+boardNo
+            mobileWebUrl: 'http://192.168.0.39:8080/board/getBoard?boardNo='+boardNo,
+            webUrl: 'http://192.168.0.39:8080/getBoard?boardNo='+boardNo
           }
         },
         social: {
@@ -498,8 +497,8 @@ $(function(){
           {
             title: '웹으로 보기',
             link: {
-              mobileWebUrl: 'http://192.168.0.32:8080/board/getBoard?view=mobile&boardNo='+boardNo,
-              webUrl: 'http://192.168.0.32:8080/board/getBoard?view=mobile&boardNo='+boardNo
+              mobileWebUrl: 'http://192.168.0.39:8080/board/getBoard?view=mobile&boardNo='+boardNo,
+              webUrl: 'http://192.168.0.39:8080/board/getBoard?view=mobile&boardNo='+boardNo
             }
           }
         ]
@@ -560,7 +559,7 @@ function getLink(photo1){
                  var photo1="'"+list.photo1+"'";
                  
                  a+='<span style="left: '+list.coordX+'px; top: '+list.coordY+'px; position: absolute; width:23px;">'
-                 a+='<a href="//'+list.url+'" target="_blank">'+'<img src="/common/images/board/plus.png">'+'</a>'
+                 a+='<a href="'+list.url+'" target="_blank">'+'<img src="/common/images/board/plus.png">'+'</a>'
                  a+='<input type="hidden" value='+list.linkNo+'>'
                  a+='</span>'
                  
@@ -692,7 +691,7 @@ function fncGetTown(){
 <!-- </a> -->
 
 
-<div class="row">
+<div class="row" style="padding-top: 30px;">
 <!-- 지도로 보기 -->
 <div class="col-md-2 col-md-offset-1">
 <c:if test="${user.userNo!=null}">
@@ -1191,13 +1190,13 @@ function fncGetTown(){
 <div class="modal"  aria-hidden="true" style="display: none; z-index: 1060;" id="${board.boardNo}modal2">
     	<div class="modal-dialog modal-md">
           <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="border-bottom: none;">
 				<br/>
             </div>
-            <div class="modal-body">
-             	삭제하시겠습니까?
+            <div class="modal-body" style="text-align: center;">
+             	<h3>삭제하시겠습니까?</h3>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" style="border-top: none;">
               <a href="/board/deleteBoard?boardNo=${board.boardNo}" class="btn btn-b">삭제</a>
               <button type="button" class="btn btn-a" data-dismiss="modal">닫기</button>
             </div>

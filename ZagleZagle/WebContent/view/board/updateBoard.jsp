@@ -114,8 +114,8 @@ $(function(){
 		
 		var imgLength=$("img[name='img']").length;
 	      
-		  if(imgLength>3){
-			alert("사진은 세 장까지 등록 가능합니다.");
+		if(imgLength>3){
+			  swal("사진은 세 장까지 등록 가능합니다","", "error");
 			return;
 		  }
 		
@@ -123,7 +123,7 @@ $(function(){
 		var boardDetailText=$("textarea[name='boardDetailText']").val();
 		
 		if(boardDetailText==""){
-			alert("내용을 입력해주세요.");
+			swal("내용을 입력해주세요","", "error");
 		}
 		
 		//sweetalert
@@ -208,7 +208,7 @@ $(function(){
 		      
 		      }
 		      else {
-		      	alert("업로드 실패");
+		      	swal("업로드 실패","", "error");
 		      }
 		    }
 		  };//()function 끝
@@ -272,9 +272,16 @@ $(function(){
         placeholder: {
             text: '내용은 필수 입력사항입니다',
             hideOnClick: false
-        }
-        
-    
+        },
+        toolbar: {
+            buttons: [
+                'bold',
+                'italic',
+                'underline',
+                'h2',
+                'h3'
+            ]
+        }    
     });
     
 </script>
@@ -357,7 +364,7 @@ $(function(){
         var keyword = document.getElementById('keyword').value;
 
         if (!keyword.replace(/^\s+|\s+$/g, '')) {
-            alert('키워드를 입력해주세요!');
+            swal("키워드를 입력해주세요!","", "error");
             return false;
         }
 
@@ -377,13 +384,11 @@ $(function(){
             displayPagination(pagination);
 
         } else if (status === daum.maps.services.Status.ZERO_RESULT) {
-
-            alert('검색 결과가 존재하지 않습니다.');
+            swal("검색 결과가 존재하지 않습니다.","", "error");
             return;
 
         } else if (status === daum.maps.services.Status.ERROR) {
-
-            alert('검색 결과 중 오류가 발생했습니다.');
+            swal("검색 결과 중 오류가 발생했습니다.","", "error");
             return;
 
         }
