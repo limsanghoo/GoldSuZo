@@ -44,8 +44,8 @@ public class MypageServiceImpl implements MypageService {
 	public void addAccount(User user) throws Exception {
 		mypageDao.addAccount(user);
 	}
-	
-	
+
+
 	public void updateAccount(User user) throws Exception {
 		mypageDao.updateAccount(user);	
 	}
@@ -127,13 +127,6 @@ public class MypageServiceImpl implements MypageService {
 		return result;
 
 	
-		
-	}
-	
-public Boolean checkLike(Map<String,String>map) throws Exception {
-		Boolean result = mypageDao.getCheckLike(map);
-		
-return result;
 		
 	}
 

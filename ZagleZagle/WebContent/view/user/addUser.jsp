@@ -245,7 +245,7 @@ $(function() {
               
               setTimeout(function() {
                      while(true){
-                        var path = 'http://192.168.0.43:8080/common/images/profile/'+data;
+                        var path = 'http://192.168.0.46:8080/common/images/profile/'+data;
                         var re = doesFileExist(path);
                         if (re) {
                            
