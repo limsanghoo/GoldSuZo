@@ -101,7 +101,7 @@ function commentInsert(boardNo,userNo, text){
               			b='<div class="col-sm-2 col-2" style="margin-top: 5px;" onclick="reportComment('+commentNo+','+userNo+')"><img src="/common/images/board/siren.png" style="width:20px;"></div>';
               		}
                                 
-                   a += '<div class="row commentArea'+list.commentNo+'" style="padding-bottom: 5px; height:30px;">';                           
+                   a += '<div class="row commentArea'+list.commentNo+'" style="padding-bottom: 5px; height:30px; margin-bottom:15px;">';                           
                    a += '<div class="col-sm-1 col-1"><img src="/common/images/profile/'+list.user.profile+'" style="width: 30px; height: 30px; border-radius: 70px;"/></div>';                 
                    a += '<div class="col-sm-3 col-3" style="font-size:medium">'+list.user.userNickname+'</div>';                 
                    a += '<div class="col-sm-6 col-6" style="font-size:medium">'+list.commentDetailText+'</div>';                   
