@@ -185,7 +185,7 @@ public class MypageRestController {
 	@RequestMapping(value="confirmName")
 	public ModelAndView confrimName(HttpSession session, HttpServletRequest req) throws Exception {
 		
-		System.out.println("===================제발 되라 시바===============");
+		System.out.println("===================제발 되라 ===============");
 		
 	    
 		final String RequestURL ="https://testapi.open-platform.or.kr/inquiry/real_name";

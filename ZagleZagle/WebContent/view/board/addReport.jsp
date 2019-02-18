@@ -43,6 +43,10 @@
   <!-- Main Stylesheet File -->
   <link href="/common/css/estateagency-master/css/style.css" rel="stylesheet">
 
+
+<!--  sweetAlert -->     
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
+
 <script type="text/javascript">
 
 $(function(){
@@ -66,7 +70,7 @@ $(function(){
 		
 		
 		if(reportReason=='0'){
-			alert("신고 사유를 선택해주세요");
+			swal("신고 사유를 선택해주세요","", "error");
 			return;
 		}
 

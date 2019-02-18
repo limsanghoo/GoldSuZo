@@ -99,8 +99,6 @@ $(function(){
 //링크 등록
 function addLink(photo1, url, coordX, coordY){
 	
-	alert("애드 옴");
-	
 	var data={
 			"photo1" : photo1,
 			"url" : url,
