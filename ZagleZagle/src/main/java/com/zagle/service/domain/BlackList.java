@@ -6,10 +6,23 @@ public class BlackList {
 
 	private String blackNo;
 	private User blackUser;
+	
+	private String blackUserNo;
+	
+
 	private String banReason;
 	private String blackCheckCode;
 	private Date banStartDay;
 	private Date banExpireDay;
+	
+	
+	
+	public String getBlackUserNo() {
+		return blackUserNo;
+	}
+	public void setBlackUserNo(String blackUserNo) {
+		this.blackUserNo = blackUserNo;
+	}
 	
 	public String getBlackNo() {
 		return blackNo;

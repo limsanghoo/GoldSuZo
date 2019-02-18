@@ -276,6 +276,7 @@ public class AdminController {
 		
 		if(deleteCount == 2) {
 			user01.setBlackCode(1);
+			//user01.setDeleteCount(0);
 			userService.updateUser(user01);
 		}
 
@@ -496,6 +497,17 @@ public class AdminController {
 			
 			BlackList bk = (BlackList) list.get(i);
 			String blackNo = bk.getBlackNo();
+			User blackUserNo = bk.getBlackUser();
+			
+			String bkUserNo = blackUserNo.getUserNo();
+			
+			System.out.println("블랙유저 넘버"+bkUserNo);
+			
+			User blackUser = userService.getUser2(bkUserNo);
+			
+			
+			
+			System.out.println("blackUser"+blackUser);
 			
 			System.out.println("블랙넘 확인"+blackNo);
 			
@@ -522,7 +534,16 @@ public class AdminController {
 				bk.setBlackCheckCode(blackCheckCode);
 				bk.setBlackNo(blackNo);
 				
+				
+				
 				adminService.updateBlackCheckCode(bk);
+				blackUser.setBlackCode(4);
+				
+				System.out.println("userNo 확인" +blackUser);
+				
+				userService.updateUser(blackUser);
+				
+				System.out.println("업데이트 확인"+blackUser);
 			
 				compareVal = "N";
 			}else if (compare <= 0) {

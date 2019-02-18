@@ -76,9 +76,7 @@
 		,(SELECT count(*) FROM likes WHERE board_no=b.board_no AND check_like='1')likeCount
 		
 		
-		<if test="loginUserNo!=null">
 		, l.user_no AS like_user_no, NVL(l.check_like,'0') check_like, s.user_no AS scrap_user_no, NVL(s.check_scrap,'0') check_scrap
-		</if>	
 		
 		FROM users u, board b, likes l, scrap s
 		WHERE (u.user_no=b.user_no AND b.board_no=l.board_no(+)) AND (u.user_no=b.user_no AND b.board_no=s.board_no(+))
