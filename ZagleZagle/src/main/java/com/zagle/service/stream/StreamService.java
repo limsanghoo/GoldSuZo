@@ -20,8 +20,6 @@ public interface StreamService {
 	
 	public void addRefund(Refund refund)throws Exception; 
 	
-	public void joinStream(Map<String,Object> map)throws Exception;
-	
 	public Map<String,Object> listStream(SearchStream search)throws Exception;
 	
 	public List<String> listSpon(String userNo)throws Exception;
@@ -29,18 +27,6 @@ public interface StreamService {
 	public Map<String,Object> listRefund(SearchStream search)throws Exception; 
 	
 	public void updateRefund(Map<String,Object> map)throws Exception;
-	
-	public String kakaopayStream(Map<String,Object> map)throws Exception;
-	
-	public String naverpayStream(Map<String,Object> map)throws Exception;
-	
-	public String inicispayStream(Map<String,Object> map)throws Exception;
-	
-	public String kakaopayOkStream(Map<String,Object> map)throws Exception;
-	
-	public String naverpayOkStream(Map<String,Object> map)throws Exception;
-	
-	public String inicispayOkStream(Map<String,Object> map)throws Exception;
 	
 	
 	

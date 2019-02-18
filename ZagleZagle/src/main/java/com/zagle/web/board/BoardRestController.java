@@ -316,17 +316,17 @@ public class BoardRestController {
 		 
 		 System.out.println("/json/addLink");
 		 
-		 String url=link.getUrl();
+		 String url=link.getUrl();	 
+
+		 String urlSub=url.substring(0, 4);
 		 
-
-		 String[] url2=url.split(":\\/\\/"); // https://파싱 정규식 표현
-
-		 System.out.println("url : "+url);
-
-		 
-		 if(url2.length==1) {
-			 link.setUrl(url2[1]);
+		 if(urlSub.equals("http")) {
+			 link.setUrl(url);
+		 }else {
+			 link.setUrl("http:\\/\\/"+url);
 		 }
+		 
+		 System.out.println(link);
 		 	 		 
 		 boardService.addLink(link);
 		 

@@ -319,20 +319,20 @@ public class BoardController {
 	
 	
 ////////////////링크
-	@RequestMapping(value="addLink", method=RequestMethod.GET)
-	public ModelAndView addLink(@RequestParam("boardNo")String boardNo) throws Exception{
-		
-		System.out.println("/addLink GET");
-		
-		System.out.println("boardNo : "+boardNo);
-		
-		
-		ModelAndView modelAndView=new ModelAndView();
-		modelAndView.addObject("board", boardService.getBoard(boardNo));
-		modelAndView.setViewName("forward:/view/board/addLink.jsp");
-		
-		return modelAndView;
-	}
+//	@RequestMapping(value="addLink", method=RequestMethod.GET)
+//	public ModelAndView addLink(@RequestParam("boardNo")String boardNo) throws Exception{
+//		
+//		System.out.println("/addLink GET");
+//		
+//		System.out.println("boardNo : "+boardNo);
+//		
+//		
+//		ModelAndView modelAndView=new ModelAndView();
+//		modelAndView.addObject("board", boardService.getBoard(boardNo));
+//		modelAndView.setViewName("forward:/view/board/addLink.jsp");
+//		
+//		return modelAndView;
+//	}
 
 	
 ////////////////////신고

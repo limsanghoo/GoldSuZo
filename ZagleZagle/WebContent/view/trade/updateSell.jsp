@@ -261,9 +261,9 @@ $(function() {
 		<br/>
 		
 		<div class="row">
-		<div class="col-xs-8 col-md-2" style="padding-top: .5em; padding-bottom: .5em;"><strong>상세정보</strong></div>
+		<div class="col-xs-8 col-md-1" style="padding-top: .5em; padding-bottom: .5em;"><strong>상세정보</strong></div>
 	
-			<div class="col-xs-4 col-md-10" style="border-left-width: 0.1em; border-left-style: solid; border-left-color: #777; padding-top: .5em; padding-bottom: .5em;">
+			<div class="col-xs-4 col-md-11" style="border-left-width: 0.1em; border-left-style: solid; border-left-color: #777; padding-top: .5em; padding-bottom: .5em;">
 			<textarea class="editable" id="sellText" name="sellText">
 			${sell.sellText}
 			</textarea>

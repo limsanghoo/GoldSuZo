@@ -98,42 +98,14 @@ public class StreamController {
 	ModelAndView modelAndView = new ModelAndView();
 	//modelAndView.addObject("streamer",stream.getUser().getUserNo());
 	//modelAndView.addObject("userNo",stream.getUser().getUserNo());
-	System.out.println("왜 라스트로 안가니,,?");
 	modelAndView.setViewName("redirect:https://192.168.0.43:443/stream/add?streamer="+stream.getUser().getUserNo()+"&userNo="+stream.getUser().getUserNo());
 	return modelAndView;
 	}
 	  
-	@RequestMapping(value="listStream2",method=RequestMethod.GET)
-	public ModelAndView listStream2(@RequestParam("userNo")String userNo,HttpSession session) throws Exception{
-		
-		User user = userService.getUser2(userNo);	
-		//System.out.println("리스트유저 "+user);
-		session.setAttribute("user", user);
-	 	SearchStream search = new SearchStream();
-	 	search.setCurrentPage(1);
-	 	search.setPageSize(3);
-	 	Map<String,Object> map = streamService.listStream(search);	 	
-	 	List<Object> list = (List<Object>)map.get("list");
-
-     	System.out.println(list.toString());
-     	
-     	for(int i=0; i<list.size(); i++) {
-     		System.out.println(list.get(i));
-     	}
-     	ModelAndView modelandview = new ModelAndView();
-     	modelandview.addObject("list", map.get("list"));
-     	modelandview.setViewName("/view/stream/listStream.jsp");
-     	
-	return modelandview;
-	}
-	
-	
 	@RequestMapping(value="listStream",method=RequestMethod.GET)
 	public ModelAndView listStream(HttpSession session) throws Exception{
 		
-		//User user = userService.getUser2("US10023");	
-		//System.out.println("리스트유저 "+user);
-		//session.setAttribute("user", user);
+		System.out.println("listStream1");
 	 	SearchStream search = new SearchStream();
 	 	search.setCurrentPage(1);
 	 	search.setPageSize(3);
@@ -153,15 +125,15 @@ public class StreamController {
 	}
 	
 	
-	@RequestMapping(value="spon",method=RequestMethod.GET)
-	public ModelAndView sponStream(@RequestParam("userNo")String userNo,@RequestParam("streamerNo")String streamerNo,HttpSession session) throws Exception{
-		
-	 session.setAttribute("뭐야","대체");
-     	ModelAndView modelandview = new ModelAndView();
-     	modelandview.setViewName("/view/stream/sponStream.jsp");
-     	
-	return modelandview;
-	}
+//	@RequestMapping(value="spon",method=RequestMethod.GET)
+//	public ModelAndView sponStream(@RequestParam("userNo")String userNo,@RequestParam("streamerNo")String streamerNo,HttpSession session) throws Exception{
+//		
+//	 session.setAttribute("뭐야","대체");
+//     	ModelAndView modelandview = new ModelAndView();
+//     	modelandview.setViewName("/view/stream/sponStream.jsp");
+//     	
+//	return modelandview;
+//	}
 	
 	
 	@RequestMapping(value="addRefund",method=RequestMethod.POST)
@@ -178,8 +150,6 @@ public class StreamController {
 	@RequestMapping(value="listRefund")
 	public ModelAndView listRefund(@ModelAttribute("searchStream") SearchStream searchStream,HttpSession session) throws Exception{
 		System.out.println("listRefund==========");
-	//	User user = session.getAttribute("user");
-		//SearchStream searchStream = new SearchStream();
 	User user = (User)session.getAttribute("user");
 		
 		System.out.println("grade "+user);
@@ -188,7 +158,6 @@ public class StreamController {
 		}  
 		searchStream.setPageSize(pageSize); 
 		searchStream.setSearchUserNo(user.getUserNo());
-		System.out.println("왜 안바뀌지????"+searchStream);
 		
 		System.out.println(searchStream.getEndRowNum());
 		System.out.println(searchStream.getStartRowNum());
@@ -204,7 +173,6 @@ public class StreamController {
 		if(user.getGrade().equals("4")) {
 			modelAndView.setViewName("forward:/view/admin/siteManage2.jsp");	
 			
-			System.out.println("이거되나 확인");
 			
 		}else {
 		modelAndView.setViewName("forward:/view/stream/listRefund.jsp");	
