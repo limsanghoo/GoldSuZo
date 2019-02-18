@@ -154,25 +154,8 @@ $(function() {
 							  self.location="/stream/listRefund";
 						  }
 						});
-	  	        
-	  	 	/* 	  if(result){
-	  	 			  //alert("환급리스트 공사중....") 
-	  	 			  self.location="/stream/listRefund";
-	  	 		  }else{ 
-	  	 			  self.location="/stream/listStream";
-	  	 		  }  */  
-	  	              
 	                 }   
 	         }); 
-		 /*  addRefund();    
-		   var result = confirm("환급신청 완료! 환급리스트 화면으로 이동 하시겠습니까?");
-		     
-	 		  if(result){
-	 			  //alert("환급리스트 공사중....") 
-	 			  self.location="/stream/listRefund";
-	 		  }else{ 
-	 			  self.location="/stream/listStream";
-	 		  }  */
 	 		   
 	//	 $("#addRefundForm").attr("method", "POST").attr("action", "/stream/addRefund").submit();
 	});  
@@ -208,7 +191,8 @@ $(function() {
            //alert("보내기 성공");
           // alert(JSON.stringify(JSONData));
            if(JSONData==1){
-        	   alert('강퇴당하셔서 입장 불가능 하십니다 ㅠ.ㅠ 다음기회에...~'); 
+        	//   alert('강퇴당하셔서 입장 불가능 하십니다 ㅠ.ㅠ 다음기회에...~'); 
+        	   swal("강퇴당하셔서 입장 불가능 하십니다 ㅠ.ㅠ 다음기회에...~","", "error");
            }else{
         		 window.open("https://192.168.0.43:443/stream/join?streamer="+streamer+"&userNo=${user.userNo}&userNickname=${user.userNickname}&userProfile=${user.profile}", "popup_window", "width=1450, height=900, scrollbars=no");
            }  	                    
