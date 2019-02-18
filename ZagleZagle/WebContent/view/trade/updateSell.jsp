@@ -75,7 +75,6 @@ $(function() {
 	$('#edit').bind("click",function(){
 		$("#img_box").empty();//원래 이미지 비우기
 		$("#newPhoto").append('<input id="file" type="file" multiple="multiple"><br/>* 사진은 한 장씩 등록해주세요 * 세 장까지 등록 가능합니다<br/><br/>');	//파일 첨부 버튼 생성
-		$("#hashTag").val("");//원래 해시태그 비우기
 		$("#link").val("");//원래 링크 비우기		
 		
 		var file = document.getElementById('file');
@@ -226,7 +225,7 @@ $(function() {
 			
 		<div id="newPhoto">
 			
-			<input type="hidden" id="link" value="" name="sellPhoto1"/><!-- 이미지 링크 append 되는 부분 -->
+			<input type="hidden" id="link" value="${sell.sellPhoto1}" name="sellPhoto1"/><!-- 이미지 링크 append 되는 부분 -->
 			
 			<div id="img_box">
 			
@@ -239,13 +238,13 @@ $(function() {
 			</c:if>
 		
 			<c:if test="${sell.sellPhoto2 !=null}">
-			<img src="${sell.sellPhoto2}" name="photo2" value="${sell.sellPhoto2}" style="height: 150px"/>
-			<input type="hidden" name="photo2" value="${sell.sellPhoto2}"/>
+			<img src="${sell.sellPhoto2}" name="sellPhoto2" value="${sell.sellPhoto2}" style="height: 150px"/>
+			<input type="hidden" name="sellPhoto2" value="${sell.sellPhoto2}"/>
 			</c:if>
 			
 			<c:if test="${sell.sellPhoto3 !=null}">
-			<img src="${sell.sellPhoto3}" name="photo3" value="${sell.sellPhoto3}" style="height: 150px"/>
-			<input type="hidden" name="photo3" value="${sell.sellPhoto3}"/>
+			<img src="${sell.sellPhoto3}" name="sellPhoto3" value="${sell.sellPhoto3}" style="height: 150px"/>
+			<input type="hidden" name="sellPhoto3" value="${sell.sellPhoto3}"/>
 			</c:if>
 			<!-- 원래 이미지 보여주는 부분 끝-->
 			
