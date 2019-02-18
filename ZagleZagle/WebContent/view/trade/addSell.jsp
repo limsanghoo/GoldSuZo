@@ -14,7 +14,7 @@
       .wrap-loading div{ /*로딩 이미지*/
         text-align: center;
 
-    }
+    } 
 
     .display-none{ /*감추기*/
 

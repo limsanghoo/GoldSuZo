@@ -58,11 +58,6 @@ public class StreamDAOImpl  implements StreamDAO{
 		return sqlSession.selectOne("RefundMapper.getTotalCount", search);
 	}
 
-	@Override
-	public void refundStream(Refund refund) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void addSpon(Spon spon) throws Exception {

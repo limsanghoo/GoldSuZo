@@ -51,33 +51,6 @@ public class StreamServiceTest {
 	streamService.addStream(stream);
 	
 	}
-	//@Test
-	public void testJoinStream() throws Exception{
-	String stringdate = "2018-01-11";
-	Date date = new SimpleDateFormat("yyyy-MM-dd").parse(stringdate);
-	User user=new User();
-	user.setUserNo("US10001");
-	user.setProfile("default.jpg");
-	user.setUserName("user01");
-	user.setUserNickname("user01");
-	Stream stream = new Stream();
-	stream.setStreamContent("오늘레전드");
-	stream.setStreamDate(date);
-	stream.setStreamLikeCount(0);
-	stream.setStreamTitle("특집방송");
-	stream.setStreamViewCount(0);
-	stream.setUser(user);
-	
-	Map<String,Object> map= new HashMap<String, Object>();
-	
-	map.put("streamer","US10001");
-	map.put("userNo","US10002");
-	map.put("useProfile", "default.jpg");
-	map.put("userNickname","user02");
-	
-	streamService.joinStream(map);
-	}
-	
 	
 	// @Test
 	 public void testGetUserListAll() throws Exception{
