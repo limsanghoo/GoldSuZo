@@ -146,10 +146,7 @@
 				              
 				                success : function(data, statusText, xhr) {                                      
 				               //    $("#msg").val(data);
-				                  alert(data)
-				                  
-				                  alert("프로필 사진 등록 성공") 
-				                 
+				           
 				      
 				                },
 				                error : function(error) {
@@ -163,7 +160,7 @@
 				        
 				           ajaxReq.done(function(data){
 				        	   
-				        	   	alert(data)
+				        	  
 				        	  
 				       		 $("#coffee").val(data);
 				    
