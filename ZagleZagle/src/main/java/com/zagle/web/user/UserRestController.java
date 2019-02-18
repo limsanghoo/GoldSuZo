@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -535,17 +535,9 @@ public class UserRestController {
 	        while(files.hasNext()){
 	            String uploadFile = files.next();
 	            MultipartFile mFile = multipartFile.getFile(uploadFile);
-	            fileName = mFile.getOriginalFilename();
-	            System.out.println("실제 파일 이름 : " +fileName);
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	           
+	            UUID uuid = UUID.randomUUID();
+	            String[] extension = mFile.getOriginalFilename().split("\\.");
+				fileName = uuid + "." + extension[1];
 	            try {
 	                mFile.transferTo(new File(path,fileName));
 	               
@@ -553,13 +545,11 @@ public class UserRestController {
 	                e.printStackTrace();
 	            }
 	        }
+
 	        return fileName;
+  
 		}
-		
-		
-		
-		
-			
+
 }
 	
 
