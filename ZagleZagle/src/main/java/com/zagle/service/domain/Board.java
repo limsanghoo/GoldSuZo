@@ -1,6 +1,8 @@
 package com.zagle.service.domain;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Board {
 	
@@ -18,6 +20,7 @@ public class Board {
 	private String coord;
 	private String boardStatus;
 	private int likeCount;
+	private ArrayList<Comment> listComment ;
 	
 	private String checkLike;
 	private String likeUserNo;
@@ -28,6 +31,14 @@ public class Board {
 	
 
 	
+	public ArrayList<Comment> getListComment() {
+		return listComment;
+	}
+
+	public void setListComment(List<Comment> list) {
+		this.listComment = (ArrayList<Comment>) list;
+	}
+
 	public Board() {	
 	}
 

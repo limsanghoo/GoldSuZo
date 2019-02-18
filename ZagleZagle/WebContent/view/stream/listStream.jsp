@@ -76,6 +76,14 @@ margin: 0 0 20px;
 		$('#list').load('/stream/listStream').fadeIn("slow"); 
 		},3000); // 새로고침 시간 1000은 1초를 의미합니다.
    */
+   
+
+   $(function() {
+	    // Load song on page load
+	    var song = new Audio('http://192.168.0.43:8080/common/images/stream/music.mp3');
+	    song.load();
+   });
+   
 function ban()
  {
      alert('강퇴당하셨습니다 ㅠㅠㅠㅠㅠ');
@@ -128,7 +136,7 @@ $(function() {
 	   	            "Content-Type": "application/json"
 	   	        },    	        
 	             success : function (JSONData,status) {
-	         //  alert("보내기 성공");
+	           alert("보내기 성공");
 	        //   alert(JSONData);
 	     
 	             },
@@ -216,19 +224,7 @@ $(function() {
 	    	alert('ddd');	
 	    });
 	   
-	   
-	   $('button[id="session"]').on('click',function(){
-
-	    	//alert('ddd');	
-	    	self.location ="/stream/listStream2?userNo=US10023";
-	    });
-	    
-	   $('button[id="session2"]').on('click',function(){
-
-	    	//alert('ddd');	
-	    	self.location ="/stream/listStream2?userNo=US10003";
-	    });
-	   
+	
 	   
 	   
 	   $('button[name="refundbtn"]').on('click',function(){ 
@@ -279,9 +275,9 @@ $(function() {
 		<!--<button type="button" name="refundbtn" data-toggle="modal" data-target="#myModal2" style="margin:15px; padding:15px;">환급하기</button>  -->
    <button class="btn btn-b"  name="refundbtn" data-toggle="modal" data-target="#myModal2">환급하기</button>
     <button class='btn btn-b' id="listRefund" name="listRefund">환급리스트이동</button> 
-        <button class='btn btn-b' id="session" name="session">세션</button> 
+<!--         <button class='btn btn-b' id="session" name="session">세션</button> 
          <button class='btn btn-b' id="session2" name="session">세션2</button>  
- 
+ --> 
           
   </div>
 					 

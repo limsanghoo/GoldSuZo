@@ -76,7 +76,6 @@ public class StreamRestController {
 	public String  startStream2(@RequestParam("price")String price,@RequestParam("streamerNo")String streamerNo,@RequestParam("userNo")String userNo,HttpSession session) throws Exception{
 
 		System.out.println("get startstream2");
-		System.out.println("price가 찍히니..??"+price+streamerNo+userNo);
 		// System.out.println(body);
 		User streamer = new User();
 		User user = new User();
@@ -98,9 +97,9 @@ public class StreamRestController {
 		    params.add("quantity","1");
 		    params.add("total_amount",price);
 		    params.add("tax_free_amount","0");
-		    params.add("approval_url","http://192.168.0.16:8080/stream/json/kakaoOkStream");
-		    params.add("cancel_url","http://192.168.0.16:8080");
-		    params.add("fail_url","http://192.168.0.16:8080");
+		    params.add("approval_url","http://192.168.0.43:8080/stream/json/kakaoOkStream");
+		    params.add("cancel_url","http://192.168.0.43:8080");
+		    params.add("fail_url","http://192.168.0.43:8080");
 
 		    // 서버로 요청할 Header 
 		    HttpHeaders headers = new HttpHeaders();
@@ -120,50 +119,7 @@ public class StreamRestController {
 			return "redirect:"+response.get("next_redirect_pc_url");
 		
 	}
-	
-	/*@RequestMapping(value = "json/start", method = RequestMethod.POST)
-	@ResponseBody 
-	public Map startStream(@RequestBody Spon spon,HttpSession session) throws Exception{
-			System.out.println("start메소드입니다..............");
-		System.out.println(spon); 
-			spon.setPaymentNo("0");
-		// System.out.println(body);
-	      RestTemplate restTemplate = new RestTemplate();
-	      
-		    // 서버로 요청할 Body
-		    MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
-		    params.add("cid","TC0ONETIME");
-		    params.add("partner_order_id",spon.getUserNo());
-		    params.add("partner_user_id",spon.getUserNo());
-		    params.add("item_name","스트리밍후원");
-		    params.add("quantity","1");
-		    params.add("total_amount",spon.getPrice()+"");
-		    params.add("tax_free_amount","0");
-		    params.add("approval_url","http://192.168.0.16:8080/stream/json/kakaoOkStream?");
-		    params.add("cancel_url","http://192.168.0.16:8080");
-		    params.add("fail_url","http://192.168.0.16:8080");
 
-		    // 서버로 요청할 Header 
-		    HttpHeaders headers = new HttpHeaders();
-		    headers.add("Authorization","KakaoAK "+"afd426e1a2275871414bee8f57f4f304");
-		    headers.add("Content-Type",MediaType.APPLICATION_FORM_URLENCODED_VALUE +";charset=UTF-8");
-
-		    HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(params, headers);
-		    Map response = restTemplate.postForObject(new URI(HOST + "/v1/payment/ready"), request, Map.class);
-		    System.out.println(response.get("next_redirect_pc_url"));
-		    System.out.println(response);
-		    session.setAttribute("tid",response.get("tid"));
-		    session.setAttribute("spon",spon);
-		    session.setAttribute("아니","왜");
-		//   ModelAndView modelAndView = new ModelAndView();
-		 //  modelAndView.setViewName("jsonView");  
-		   String url =(String) response.get("next_redirect_pc_url");
-		 // modelAndView.addObject("purchase",purchase);
-		 //  modelAndView.addObject("url", response.get("next_redirect_pc_url"));
-		  // return modelAndView;
-		  //  return "redirect:"+response.get("next_redirect_pc_url");
-		   return response;
-				} */
 	 
 	@RequestMapping(value="json/addStream",method=RequestMethod.GET)
 	public ModelAndView addStream(@RequestParam("userNo")String userNo) throws Exception{
@@ -174,7 +130,7 @@ public class StreamRestController {
 	System.out.println("addStream[stream]="+stream);
 	streamService.addStream(stream);
 	
-	ModelAndView view = new ModelAndView("redirect:https://192.168.0.16:443/streamer="+user.getUserNo()+"&userName="+user.getUserNickname());
+	ModelAndView view = new ModelAndView("redirect:https://192.168.0.43:443/streamer="+user.getUserNo()+"&userName="+user.getUserNickname());
 	return view;	
 	}
 	
@@ -208,95 +164,15 @@ public class StreamRestController {
 		    Map response = restTemplate.postForObject(new URI(HOST + "/v1/payment/approve"), request, Map.class);
 		   streamService.addSpon(spon);
 		  	ModelAndView modelAndView = new ModelAndView();
-			//modelAndView.setViewName("redirect:https://192.168.0.12:443/stream/join?streamer="+spon.getStreamerNo()+"&userNo="+spon.getUserNo()+"&userNickname=user02&userProfile=default.jpg");
-		  //	modelAndView.setViewName("/stream/Close");
-		  	System.out.println("close.jsp로 갑니다");
-		  	User user = (User) session.getAttribute("user");
+			  	User user = (User) session.getAttribute("user");
 		  	User streamer = (User) session.getAttribute("streamer");
 		  	System.out.println("user닉네임===================="+user.getUserNickname());
-		  //	String url  = "https://192.168.0.47/stream/sponSpeech2?streamer="+streamer.getUserNo()+"&userNo="+user.getUserNo()+"&userNickname="+user.getUserNickname()+"&userProfile=default.jpg&price="+session.getAttribute("price");
-		  //	String encodeResult = URLEncoder.encode(url, "UTF-8");
-//System.out.println(encodeResult);
-		String encode =  	URLEncoder.encode(user.getUserNickname(),"UTF-8");
+		  		String encode =  	URLEncoder.encode(user.getUserNickname(),"UTF-8");
 		System.out.println("인코딩 한 후 닉네임================"+encode);
-		 	//ModelAndView view = new ModelAndView("redirect:"+url); 
-		 	ModelAndView view = new ModelAndView("redirect:https://192.168.0.16:443/stream/sponSpeech2?streamer="+streamer.getUserNo()+"&userNo="+user.getUserNo()+"&userNickname="+encode+"&userProfile=default.jpg&price="+session.getAttribute("price"));
-		//	ModelAndView view = new ModelAndView("redirect:http://192.168.0.12:8080/stream/));
-			//modelAndView.setViewName("forward:/view/stream/close.jsp");	
-		  	return view; 
+		  	ModelAndView view = new ModelAndView("redirect:https://192.168.0.43:443/stream/sponSpeech2?streamer="+streamer.getUserNo()+"&userNo="+user.getUserNo()+"&userNickname="+encode+"&userProfile=default.jpg&price="+session.getAttribute("price"));
+		return view; 
 	}
 	 
-	/*
-	@RequestMapping(value="json/kakaoOkStream")
-	public ModelAndView kakaoOkStream(@RequestParam("pg_token") String pg_token,HttpSession session) throws Exception{
-		System.out.println("add/kakao=================");
-			Spon spon = (Spon) session.getAttribute("spon");
-			String tid = String.valueOf(session.getAttribute("tid"));
-			System.out.println("pg_token===="+pg_token);
-			String aa = String.valueOf(session.getAttribute("아니"));
-			System.out.println(aa);
-			System.out.println(tid);
-			//System.out.println(spon);
-		  	User user = (User) session.getAttribute("user");
-		  	User streamer = (User) session.getAttribute("streamer");
-		
-			RestTemplate restTemplate = new RestTemplate();
-
-		    // 서버로 요청할 Body
-		    MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
-		    params.add("cid","TC0ONETIME");
-		    params.add("tid",tid);
-		    params.add("partner_order_id",spon.getUserNo());
-		    params.add("partner_user_id",spon.getUserNo());
-		    params.add("pg_token",pg_token);
-			
-	    // 서버로 요청할 Header
-		    HttpHeaders headers = new HttpHeaders();
-		    headers.add("Authorization","KakaoAK "+"afd426e1a2275874747bee8f57f4f304");
-		    headers.add("Content-Type",MediaType.APPLICATION_FORM_URLENCODED +";charset=UTF-8");
-
-		    HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(params, headers);
-		    Map response = restTemplate.postForObject(new URI(HOST + "/v1/payment/approve"), request, Map.class);
-		   streamService.addSpon(spon);
-		  	ModelAndView modelAndView = new ModelAndView();
-			//modelAndView.setViewName("redirect:https://192.168.0.12:443/stream/join?streamer="+spon.getStreamerNo()+"&userNo="+spon.getUserNo()+"&userNickname=user02&userProfile=default.jpg");
-		  //	modelAndView.setViewName("/stream/Close");
-		  	try {
-	            String apiURL = "https://192.168.0.12/stream/sponSpeech?streamer="+streamer.getUserNo()+"&userNo="+user.getUserNo()+"&userNickname="+user.getUserNickname()+"&userProfile=default.jpg&price="+session.getAttribute("price");
-	            URL url = new URL(apiURL);
-	            HttpURLConnection con = (HttpURLConnection)url.openConnection();
-	            con.setRequestMethod("GET");
-	            int responseCode = con.getResponseCode();
-	            BufferedReader br;
-	            if(responseCode==200) { // 정상 호출
-	                br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-	            } else {  // 에러 발생
-	                br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-	            }
-	            System.out.println("responseCode :"+responseCode);
-	            
-	            String inputLine;
-	            StringBuffer response2 = new StringBuffer();
-	            while ((inputLine = br.readLine()) != null) {
-	            	response2.append(inputLine);
-	            }
-	        	   br.close();}
-		  	catch (Exception e) {
-		            System.out.println(e);
-		        }
-	         
-	            System.out.println(response.toString());
-		  	
-		  	System.out.println("close.jsp로 갑니다");
-		  	
-		  	
-		  	//ModelAndView view = new ModelAndView("redirect:https://192.168.0.12/stream/sponSpeech?streamer="+streamer.getUserNo()+"&userNo="+user.getUserNo()+"&userNickname="+user.getUserNickname()+"&userProfile=default.jpg&price="+session.getAttribute("price"));
-		//	ModelAndView view = new ModelAndView("redirect:http://192.168.0.12:8080/stream/));
-			modelAndView.setViewName("forward:/view/stream/close.jsp");	
-		  	return modelAndView;
-	} */
-	
-	
 	@RequestMapping(value="json/inicisStream", method = RequestMethod.POST)   
 	@ResponseBody 
 	public Map<String,Object> inicisStream(@RequestBody Spon spon,HttpSession session) throws Exception{
@@ -324,14 +200,9 @@ public class StreamRestController {
 	public Map<String,Object>listSpon(HttpSession session) throws Exception{
 	
 		User user = (User)session.getAttribute("user");
-	//	User user = new User();
-		//user.setUserNo("US10001");
-		Map<String,Object> map= new HashMap();
+	Map<String,Object> map= new HashMap();
 		List<String>list = streamService.listSpon(user.getUserNo());
 		System.out.println(list); 
-		//int price = Integer.parseInt(list.get(2));
-		//int realprice = (int) (price * 0.3);
-		//System.out.println(realprice); 
 		int price=0;
 	
 	 
@@ -354,8 +225,6 @@ public class StreamRestController {
 		map.put("check",check);
 		map.put("refundNo",refundNo);
 		streamService.updateRefund(map);
-		//ModelAndView modelAndView = new ModelAndView(); 
-		// modelAndView.setViewName("jsonView");  
 	
 		if(check.equals("0")) {
 			//modelAndView.addObject("check",1);
@@ -378,8 +247,6 @@ public class StreamRestController {
 		map.put("streamer",streamer);
 		int result = (int) streamService.checkBan(map);
 		String string = String.valueOf(result);
-		//ModelAndView modelAndView = new ModelAndView(); 
-		// modelAndView.setViewName("jsonView");  
 	return string; 
 	}
 	
@@ -394,17 +261,16 @@ public class StreamRestController {
 		System.out.println(test2);
 		int result2 = (int) (test2/10*10); 
 		System.out.println(test2); 
-	//	User user = userService.getUser2((String)map.get("streamerNo"));
 		User user = userService.getUser2((String)map.get("streamerNo"));
-		System.out.println("getUser됏니?"+user);
+		
 		Refund refund = new Refund();
 		refund.setStreamerNo(user.getUserNo());
 		refund.setStreamerNickname(user.getUserNickname());
-		System.out.println("refund 도메인111"+refund);
+	
 		refund.setPrice(result2);  
 		refund.setAccount(user.getAccount());
 		refund.setBankname(user.getBankName());
-		System.out.println("refund 도메인22"+refund);
+	
 		streamService.addRefund(refund);
 		System.out.println(refund);
 		String result = "성공";

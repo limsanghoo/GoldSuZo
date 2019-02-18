@@ -108,7 +108,7 @@ public class MongoRestDAOImpl implements StreamRestDAO{
 	    dbcoll.insert(addObject);
         mongoClient.close();       
 	}
-	
+/*	
 	@Override
 	public void joinMongo(Map<String,Object> map) throws Exception {
 	
@@ -135,45 +135,8 @@ public class MongoRestDAOImpl implements StreamRestDAO{
 	        BasicDBObject searchQuery = new BasicDBObject().append("join",list);
 	        dbcoll.update(searchQuery, updateQuery);
 	        mongoClient.close();       
-	}
-	
-	
+	}*/
 
-	@Override
-	public Map<String, Object> kakaopayStream(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Map<String, Object> naverpayStream(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Map<String, Object> inicispayStream(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Map<String, Object> kakaopayOkStream(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Map<String, Object> naverpayOkStream(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Map<String, Object> inicispayOkStream(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public long getTotalCount(SearchStream search) throws Exception {
