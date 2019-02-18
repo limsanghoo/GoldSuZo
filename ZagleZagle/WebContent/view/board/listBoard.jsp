@@ -370,6 +370,11 @@ $(function(){
 			return;
 		}
 		
+		if("${user.blackCode}"=='2'){
+			swal("블랙리스트 회원은 이용할 수 없습니다","", "error");
+			return;
+		}
+		
 		var boardNo=$(this).data('report');
 		
 		var data = document.querySelector("#"+boardNo+"report").value;

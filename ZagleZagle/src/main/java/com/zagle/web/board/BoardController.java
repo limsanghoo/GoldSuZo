@@ -443,9 +443,9 @@ public class BoardController {
 		
 		//testUser=userService.getUser3("김춘배");
 		
-		testUser=userService.getUser3("페리오");
+		//testUser=userService.getUser3("페리오");
 		
-		//testUser=userService.getUser3("이지수");
+		testUser=userService.getUser3("이지수");
 		
 		//testUser=userService.getUser3("김주영");
 		
