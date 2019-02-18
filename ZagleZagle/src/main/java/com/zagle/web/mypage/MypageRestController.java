@@ -290,6 +290,7 @@ search.setPageSize(pageSize);
 			String bdNo = mp.getBoard().getBoardNo();
 			
 			Board bd = boardService.getBoard(bdNo);
+			System.out.println("bd"+bd);
 			bd.setListComment(boardService.listComment(bdNo));
 			bdList.add(bd);
 		}
