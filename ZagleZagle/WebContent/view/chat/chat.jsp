@@ -785,7 +785,6 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 							</div>
 						</div>
 						
-					
 					</div>
 				</div>
 			</div>
