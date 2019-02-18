@@ -431,7 +431,7 @@ public class BoardController {
 		//testUser=userService.getUser2("US10003");
 		
 		//인호
-		//testUser=userService.getUser2("US10023");
+		testUser=userService.getUser2("US10023");
 
 		//testUser=userService.getUser3("김주현");
 
@@ -443,7 +443,7 @@ public class BoardController {
 		
 		//testUser=userService.getUser3("김춘배");
 		
-		testUser=userService.getUser3("페리오");
+		//testUser=userService.getUser3("페리오");
 		
 		//testUser=userService.getUser3("이지수");
 		
