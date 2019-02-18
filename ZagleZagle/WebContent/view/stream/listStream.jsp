@@ -86,7 +86,8 @@ margin: 0 0 20px;
    
 function ban()
  {
-     alert('강퇴당하셨습니다 ㅠㅠㅠㅠㅠ');
+	   swal("강퇴당하셨습니다.......","", "error");
+	     
    }
    
    
@@ -188,11 +189,8 @@ $(function() {
    	            "Content-Type": "application/json"
    	        }, 
              success : function (JSONData,status) {
-           //alert("보내기 성공");
-          // alert(JSON.stringify(JSONData));
            if(JSONData==1){
-        	//   alert('강퇴당하셔서 입장 불가능 하십니다 ㅠ.ㅠ 다음기회에...~'); 
-        	   swal("강퇴당하셔서 입장 불가능 하십니다 ㅠ.ㅠ 다음기회에...~","", "error");
+        	   swal("강퇴 당하셔서 입장 불가능 하십니다 ","다음기회에...~", "error");
            }else{
         		 window.open("https://192.168.0.43:443/stream/join?streamer="+streamer+"&userNo=${user.userNo}&userNickname=${user.userNickname}&userProfile=${user.profile}", "popup_window", "width=1450, height=900, scrollbars=no");
            }  	                    
