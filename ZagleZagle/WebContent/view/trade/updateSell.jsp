@@ -225,7 +225,7 @@ $(function() {
 			
 		<div id="newPhoto">
 			
-			<input type="hidden" id="link" value="" name="sellPhoto1"/><!-- 이미지 링크 append 되는 부분 -->
+			<input type="hidden" id="link" value="${sell.sellPhoto1}" name="sellPhoto1"/><!-- 이미지 링크 append 되는 부분 -->
 			
 			<div id="img_box">
 			
