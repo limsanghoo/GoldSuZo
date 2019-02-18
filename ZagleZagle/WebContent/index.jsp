@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>    
+<%
+   
+    SecureRandom random = new SecureRandom();
+    String state = new BigInteger(130, random).toString();
+    session.setAttribute("state", state);
+ %>      
+    
+    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE HTML>
