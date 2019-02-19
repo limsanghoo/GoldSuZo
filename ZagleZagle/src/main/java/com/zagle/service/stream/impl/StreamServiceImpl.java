@@ -38,19 +38,7 @@ public class StreamServiceImpl implements StreamService{
 	public StreamServiceImpl() {
 		System.out.println(this.getClass());
 	}
-//	
-//	@Autowired
-//	@Qualifier("KakaoRestDAOImpl")
-//	private KakaoRestDaoImpl kakaoRestDaoImpl;
-//	
-//	@Autowired
-//	@Qualifier("NaverRestDAOImpl")
-//	private NaverRestDaoImpl naverRestDaoImpl;
-//	
-//	@Autowired
-//	@Qualifier("InicisRestDAOImpl")
-//	private InicisRestDaoImpl inicisRestDaoImpl;
-	
+
 	
 	@Override
 	public void addStream(Stream stream) throws Exception {
@@ -82,49 +70,6 @@ public class StreamServiceImpl implements StreamService{
 		map.put("count", new Integer(count));
 		return map;
 	}
-
-	@Override
-	public String kakaopayStream(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String naverpayStream(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String inicispayStream(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String kakaopayOkStream(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String naverpayOkStream(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String inicispayOkStream(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void joinStream(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		mongoRestDAOImpl.joinMongo(map);
-	}
-
 	@Override
 	public void addSpon(Spon spon) throws Exception {
 		streamDAO.addSpon(spon);

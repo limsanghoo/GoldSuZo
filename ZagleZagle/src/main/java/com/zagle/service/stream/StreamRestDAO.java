@@ -18,21 +18,7 @@ public interface StreamRestDAO {
 	
 	public long  checkBan(Map<String,Object> map) throws Exception;
 	
-	public void joinMongo(Map<String,Object> map)throws Exception;
-	
 	public long getTotalCount(SearchStream search)throws Exception;
-	
-	public Map<String,Object>kakaopayStream(Map<String,Object>map)throws Exception;
-	
-	public Map<String,Object>naverpayStream(Map<String,Object>map)throws Exception;
-	
-	public Map<String,Object>inicispayStream(Map<String,Object>map)throws Exception;
-	
-	public Map<String,Object>kakaopayOkStream(Map<String,Object>map)throws Exception;
-	
-	public Map<String,Object>naverpayOkStream(Map<String,Object>map)throws Exception;
-	
-	public Map<String,Object>inicispayOkStream(Map<String,Object>map)throws Exception;
 	
 	
 	

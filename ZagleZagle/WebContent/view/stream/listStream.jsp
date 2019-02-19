@@ -76,9 +76,18 @@ margin: 0 0 20px;
 		$('#list').load('/stream/listStream').fadeIn("slow"); 
 		},3000); // 새로고침 시간 1000은 1초를 의미합니다.
    */
+   
+
+   $(function() {
+	    // Load song on page load
+	    var song = new Audio('http://192.168.0.43:8080/common/images/stream/music.mp3');
+	    song.load();
+   });
+   
 function ban()
  {
-     alert('강퇴당하셨습니다 ㅠㅠㅠㅠㅠ');
+	   swal("강퇴당하셨습니다.......","", "error");
+	     
    }
    
    
@@ -128,7 +137,7 @@ $(function() {
 	   	            "Content-Type": "application/json"
 	   	        },    	        
 	             success : function (JSONData,status) {
-	         //  alert("보내기 성공");
+	           alert("보내기 성공");
 	        //   alert(JSONData);
 	     
 	             },
@@ -146,25 +155,8 @@ $(function() {
 							  self.location="/stream/listRefund";
 						  }
 						});
-	  	        
-	  	 	/* 	  if(result){
-	  	 			  //alert("환급리스트 공사중....") 
-	  	 			  self.location="/stream/listRefund";
-	  	 		  }else{ 
-	  	 			  self.location="/stream/listStream";
-	  	 		  }  */  
-	  	              
 	                 }   
 	         }); 
-		 /*  addRefund();    
-		   var result = confirm("환급신청 완료! 환급리스트 화면으로 이동 하시겠습니까?");
-		     
-	 		  if(result){
-	 			  //alert("환급리스트 공사중....") 
-	 			  self.location="/stream/listRefund";
-	 		  }else{ 
-	 			  self.location="/stream/listStream";
-	 		  }  */
 	 		   
 	//	 $("#addRefundForm").attr("method", "POST").attr("action", "/stream/addRefund").submit();
 	});  
@@ -197,10 +189,8 @@ $(function() {
    	            "Content-Type": "application/json"
    	        }, 
              success : function (JSONData,status) {
-           //alert("보내기 성공");
-          // alert(JSON.stringify(JSONData));
            if(JSONData==1){
-        	   alert('강퇴당하셔서 입장 불가능 하십니다 ㅠ.ㅠ 다음기회에...~'); 
+        	   swal("강퇴 당하셔서 입장 불가능 하십니다 ","다음기회에...~", "error");
            }else{
         		 window.open("https://192.168.0.43:443/stream/join?streamer="+streamer+"&userNo=${user.userNo}&userNickname=${user.userNickname}&userProfile=${user.profile}", "popup_window", "width=1450, height=900, scrollbars=no");
            }  	                    
@@ -216,19 +206,7 @@ $(function() {
 	    	alert('ddd');	
 	    });
 	   
-	   
-	   $('button[id="session"]').on('click',function(){
-
-	    	//alert('ddd');	
-	    	self.location ="/stream/listStream2?userNo=US10023";
-	    });
-	    
-	   $('button[id="session2"]').on('click',function(){
-
-	    	//alert('ddd');	
-	    	self.location ="/stream/listStream2?userNo=US10003";
-	    });
-	   
+	
 	   
 	   
 	   $('button[name="refundbtn"]').on('click',function(){ 
@@ -279,9 +257,9 @@ $(function() {
 		<!--<button type="button" name="refundbtn" data-toggle="modal" data-target="#myModal2" style="margin:15px; padding:15px;">환급하기</button>  -->
    <button class="btn btn-b"  name="refundbtn" data-toggle="modal" data-target="#myModal2">환급하기</button>
     <button class='btn btn-b' id="listRefund" name="listRefund">환급리스트이동</button> 
-        <button class='btn btn-b' id="session" name="session">세션</button> 
+<!--         <button class='btn btn-b' id="session" name="session">세션</button> 
          <button class='btn btn-b' id="session2" name="session">세션2</button>  
- 
+ --> 
           
   </div>
 					 

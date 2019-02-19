@@ -172,10 +172,7 @@
 		
 				var commentNo =$(this).data("param4");
 				
-				alert(boardNo)
-				alert(commentNo)
-				alert(blindNo)
-				
+			
 
 			
 			 if(boardNo == "") {

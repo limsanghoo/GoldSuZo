@@ -29,6 +29,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 
@@ -70,6 +71,14 @@ public class MypageRestController {
 	@Autowired
 	@Qualifier("boardServiceImpl")
 	private BoardService boardService;
+	
+	@Value("#{commonProperties['pageUnit']}")
+	//@Value("#{commonProperties['pageUnit'] ?: 3}")
+	int pageUnit;
+	
+	@Value("#{commonProperties['pageSize']}")
+	//@Value("#{commonProperties['pageSize'] ?: 2}")
+	int pageSize;
 	
 	private RestTemplate restTemplate = new RestTemplate();
 	
@@ -255,66 +264,21 @@ public class MypageRestController {
 	@RequestMapping(value="json/listMyBoard/{userNo}",method=RequestMethod.GET)
 	public Map<String,Object> listMyBoard(@PathVariable String userNo,HttpSession session) throws Exception {
 		System.out.println("listMyBoard 도착===="+userNo);
-		
-	/*	if(session.getAttribute("user") != null) {
-			
-			User user = (User) session.getAttribute("user");
-			
-			String mUser = user.getUserNo();
-			search.setMyUserNo(mUser);
-			
-			
-		}else if(session.getAttribute("user")==null) {
-			search.setMyUserNo(null);
-		}
-		SearchMypage search = new SearchMypage();
-		User user = userService.getUser2(userNo);
-		
-		search.setMyUserNo(user.getUserNo()); 
-		search.setCurrentPage(1);
-		Map<String, Object> map = mypageService.listMyBoard(search);
-		
-			
-		
-		System.out.println(map);
-		
-		
-		ArrayList list = (ArrayList) map.get("list");
-		System.out.println(list);
-		List<Board> bdList = new ArrayList<Board>();
-		for (int i = 0; i < list.size(); i++) {
-		
-			Mypage mp = (Mypage)list.get(i);
-			String bdNo = mp.getBoard().getBoardNo();
-			
-			Board bd = boardService.getBoard(bdNo);
-			bdList.add(bd);
-		}
-		
-		map.put("bdList", bdList);
-		
-		System.out.println(map);
-		return map;*/
-	//User user = (User) session.getAttribute("user");
-User user = userService.getUser2(userNo);
 	
-	SearchMypage search = new SearchMypage();
+SearchMypage search = new SearchMypage();
+User user = userService.getUser2(userNo);
+
+search.setMyUserNo(user.getUserNo()); 
+search.setCurrentPage(1);
+search.setPageSize(pageSize);
+//	SearchMypage search = new SearchMypage();
 	search.setMyUser(user);
 		
 		
 		System.out.println();
-		
-//		if(search.getCurrentPage()==0) {
-//			search.setCurrentPage(1);
-//		}
-//		search.setPageSize(pageSize);
-		
-		
+
 		Map<String, Object> map = mypageService.listMyBoard(search);
-//		Page resultPage = new Page(search.getCurrentPage(),((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-//		System.out.println(resultPage);
-//		
-		
+
 		System.out.println(map);
 		
 		ArrayList list = (ArrayList) map.get("list");
@@ -326,25 +290,24 @@ User user = userService.getUser2(userNo);
 			String bdNo = mp.getBoard().getBoardNo();
 			
 			Board bd = boardService.getBoard(bdNo);
+			System.out.println("bd"+bd);
+			bd.setListComment(boardService.listComment(bdNo));
 			bdList.add(bd);
 		}
 		map.put("bdList", bdList);
 		return map;
 	}
-	@RequestMapping(value="json/listComment", method=RequestMethod.POST)
-	public Map<String, Object> listComment (@RequestBody SearchMypage search,  HttpSession session) throws Exception {
+	@RequestMapping(value="json/listComment/{userNo}", method=RequestMethod.GET)
+	public Map<String, Object> listComment (@PathVariable String userNo,HttpSession session) throws Exception {
 	
-		if(session.getAttribute("user") != null) {
-			
-			User user = (User) session.getAttribute("user");
-			
-			String mUser = user.getUserNo();
-			search.setMyUserNo(mUser);
-			
-			
-		}else if(session.getAttribute("user")==null) {
-			search.setMyUserNo(null);
-		}
+		SearchMypage search = new SearchMypage();
+		User user = userService.getUser2(userNo);
+
+		search.setMyUserNo(user.getUserNo()); 
+		search.setCurrentPage(1);
+		search.setPageSize(pageSize);
+//			SearchMypage search = new SearchMypage();
+			search.setMyUser(user);
 		
 		Map<String, Object> map = mypageService.listComment(search);
 		
@@ -362,6 +325,7 @@ User user = userService.getUser2(userNo);
 			String bdNo = mp.getBoard().getBoardNo();
 			
 			Board bd = boardService.getBoard(bdNo);
+			bd.setListComment(boardService.listComment(bdNo));
 			bdList.add(bd);
 		}
 		
@@ -370,11 +334,17 @@ User user = userService.getUser2(userNo);
 		System.out.println(map);
 		return map;
 	}
-	@RequestMapping(value="json/listLike")
-	public Map<String, Object> listLike(@RequestBody SearchMypage search,  HttpSession session) throws Exception {
-	
-	
+	@RequestMapping(value="json/listLike/{userNo}")
+	public Map<String, Object> listLike(@PathVariable String userNo,  HttpSession session) throws Exception {
+		SearchMypage search = new SearchMypage();
+		User user = userService.getUser2(userNo);
 
+		search.setMyUserNo(user.getUserNo()); 
+		search.setCurrentPage(1);
+		search.setPageSize(pageSize);
+//			SearchMypage search = new SearchMypage();
+			search.setMyUser(user);
+	
 		Map<String, Object> map = mypageService.listLike(search);
 		
 			
@@ -391,6 +361,7 @@ User user = userService.getUser2(userNo);
 			String bdNo = mp.getBoard().getBoardNo();
 			
 			Board bd = boardService.getBoard(bdNo);
+			bd.setListComment(boardService.listComment(bdNo));
 			bdList.add(bd);
 		}
 		

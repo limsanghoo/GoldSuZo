@@ -22,8 +22,6 @@ public interface StreamDAO {
 	
 	public int getTotalCount(SearchStream search)throws Exception;
 	
-	public void refundStream(Refund refund)throws Exception;
-	
 	public List<String> listSpon(String userNo)throws Exception;
 
 	public void addRefund(Refund refund)throws Exception; 

@@ -67,7 +67,7 @@
 </head>
 <body>
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container" style="margin-top:150px">
+	<div class="container">
 	    <div class="col-12">
 	    
 	    <div class="row">
