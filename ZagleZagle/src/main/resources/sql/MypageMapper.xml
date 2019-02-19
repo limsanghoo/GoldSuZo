@@ -164,5 +164,11 @@
 		 WHERE board_No = #{boardNo}
 	 </select>
 	 
+	 	 <select id="getCoord" parameterType="String" resultType="String">
+		 SELECT coord
+		 FROM board
+		 WHERE board_No = #{boardNo}
+	 </select>
+	 
 	 
 </mapper>
