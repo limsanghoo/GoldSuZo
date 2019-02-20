@@ -33,38 +33,36 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	
 	<script type="text/javascript">
+	$(function(){
+		$("td:nth-child(5) i").on("click",function(){
+			
+			
+			var userNo = $(this).data("param2")
+			
 	
-	$(function() {
+			$("#userdata").val(userNo);
+		})
+	})
+	
+	
+	function fncAddBlackList() {
+	
+		
 		
 
-		
-		$("#addBlackList").on("click", function() {
-			
-		
-			fncAddBlackList();
-		});
+		var userNo = $("#userdata").val();
 		
 		
-		function fncAddBlackList() {
-			
-			var userNo = $("td:nth-child(5) i").data("param2");
-			
-			alert(userNo)
-			
-			var banReason=$("input[name='banReason']").val();
-			
-			alert(banReason)
-			
-			
-			$("form").attr("method" , "POST").attr("action" , "/admin/updateUser2?blackCode=2&userNo="+userNo).submit();
+		var banReason=$("input[name='"+userNo+"banReason']").val();
 		
-			
-		}
-		
-		
-	});
+		$("input[name='banReason']").val(banReason);
+
 	
+		
+		$("#addBlackUser").attr("method" , "POST").attr("action" , "/admin/updateUser2?blackCode=2&userNo="+userNo).submit();
 	
+		
+	}
 	
 	
 	
@@ -126,11 +124,11 @@
 	
 			
 			$("td:nth-child(2) i").on("click", function() {
-				alert("click 확인")
+			
 				
 				var userNo = $(this).data("param")
 				
-				alert(userNo)
+		
 				
 				$.ajax(
 					{
@@ -142,7 +140,7 @@
 							"Content-Type" : "application/json"
 						},
 						success : function(JSONData, status) {
-							alert(JSONData)
+						
 							var displayValue ="";
 							var temp ="";
 							
@@ -166,11 +164,11 @@
 			
 		
 			$("td:nth-child(3) i").on("click", function() {
-				alert("click 확인")
+	
 				
 				var userNo = $(this).data("param1")
 				
-				alert(userNo)
+			
 				
 				$.ajax(
 					{
@@ -182,7 +180,7 @@
 							"Content-Type" : "application/json"
 						},
 						success : function(JSONData, status) {
-							alert(JSONData)
+						
 							var displayValue ="";
 							var temp ="";
 							
@@ -237,7 +235,7 @@
 				
 				
 				var userNo = $(this).data("param3");
-				alert(userNo)
+			
 				
 				
 		
@@ -359,23 +357,30 @@
 		   
 		   
 		      <!--  신고 사유 모달창 -->
+		      
     <div class="modal" aria-hidden="true" style="display: none; z-index: 1060;" id="${user.userNo}modal1">
 	<div class="modal-dialog modal-md">
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
+            <div id="userdata" style="display: none;"></div>
+               <form id="addBlackUser">
               <div class="modal-body">
-              <form>
-              <input type="text" style="width: 100%" name="banReason" placeholder="제제 사유를 입력하세요">
+        
+              <input type="text" style="width: 100%" name="${user.userNo}banReason" placeholder="제제 사유를 입력하세요"/>
+              <input type="hidden" name="banReason" value=""/>
               </div>
+     		</form>
               <div class="modal-footer">
               
-              <button class="btn btn-primary" name="addBlackList" id="addBlackList">블랙리스트 등록</button>
-              </form>
+              <button type="button" class="btn btn-primary" name="addBlackList" onclick="javascript:fncAddBlackList()" data-param4="${user.userNo}">블랙리스트 등록</button>
+           
             </div>
+    
           </div>
         </div>
+        
 </div>
 
 	<!-- 모달3 끝 -->

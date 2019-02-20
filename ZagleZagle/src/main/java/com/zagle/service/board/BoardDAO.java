@@ -73,6 +73,4 @@ public interface BoardDAO {
 	public List<Board> getMapList(Search search);
 	
 
-	/////////////
-	public int getTotalCount(SearchBoard searchBoard) throws Exception;
 }

@@ -118,9 +118,9 @@
 																+"   이  름 :"+JSONData.userName+"<br/>"
 																+"   닉네임 : "+JSONData.userNickname+"<br/>"
 																+"   생일 : "+JSONData.userBirth+"<br/>"
-																+"   성별 : "+JSONData.userSex+"<br/>"
+																
 																+" SNS종류 :"+snsNo+"<br/>"
-																+" 가입날짜 : "+JSONData.regDate+"<br/>"
+														
 																+" 등 급 :"+grade+"<br/>" 
 																+"</h6>";
 									$("h6").remove();
@@ -259,7 +259,7 @@
               </div>
               <div class="modal-footer">
             	<a href="#" class="btn btn-primary" id="deleteBlack" data-param4="${blackList.blackUser.userNo}" 
-            						data-param5="${blackList.blackNo}">삭제</a>
+            						data-param5="${blackList.blackNo}">해지</a>
              
           
             </div>

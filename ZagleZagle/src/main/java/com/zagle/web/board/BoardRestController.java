@@ -57,11 +57,11 @@ public class BoardRestController {
 		System.out.println(this.getClass());
 	}
 	
-	@Value("#{commonProperties['pageUnit']}")
-	int pageUnit;
-	
-	@Value("#{commonProperties['boardPageSize']}")
-	int boardPageSize;
+//	@Value("#{commonProperties['pageUnit']}")
+//	int pageUnit;
+//	
+//	@Value("#{commonProperties['boardPageSize']}")
+//	int boardPageSize;
 
 	
 	@RequestMapping(value="json/addBoardVisionTag", method=RequestMethod.GET)
@@ -289,13 +289,13 @@ public class BoardRestController {
 				searchBoard.setSearchKeyword(null);
 			}
 			
-			if(searchBoard.getCurrentPage()==0) {
-				searchBoard.setCurrentPage(1);
-			}
+//			if(searchBoard.getCurrentPage()==0) {
+//				searchBoard.setCurrentPage(1);
+//			}
 			
 			searchBoard.setLoginUserNo(userNo);
 			
-			searchBoard.setPageSize(boardPageSize);
+//			searchBoard.setPageSize(boardPageSize);
 			
 			Map<String , Object> map=boardService.listBoard(searchBoard);
 			
@@ -316,9 +316,13 @@ public class BoardRestController {
 		 
 		 System.out.println("/json/addLink");
 		 
-		 String url=link.getUrl();	 
+		 String url=link.getUrl();
+		 
+		 System.out.println(url);
 
 		 String urlSub=url.substring(0, 4);
+		 
+		 System.out.println(urlSub);
 		 
 		 if(urlSub.equals("http")) {
 			 link.setUrl(url);

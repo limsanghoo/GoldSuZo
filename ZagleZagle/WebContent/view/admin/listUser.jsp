@@ -112,7 +112,7 @@
 									var displayValue = "<h6>"
 																+"   닉네임 : "+JSONData.userNickname+"<br/>"
 																+"   생일 : "+JSONData.userBirth+"<br/>"
-																+"   성별 : "+JSONData.userSex+"<br/>"
+																
 																+" SNS종류 :"+snsNo+"<br/>"
 																+"</h6>";
 									$("h6").remove();
