@@ -266,11 +266,11 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 #mdStart {position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
 
 </style>
-	<script src="http://192.168.0.20:82/socket.io/socket.io.js"></script>
+	<script src="http://192.168.0.45:82/socket.io/socket.io.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script>
 		$(document).ready(function() {
-			var socket = io("http://192.168.0.20:82");
+			var socket = io("http://192.168.0.45:82");
 			socket.emit("send_user",{id :"${user.userNickname}", addr : "${room}",pro : "${user.profile}"});
 			
 			//msg에서 키를 누를떄
@@ -388,7 +388,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 				                     
 				                 },
 				                 error : function(error) {
-				                     alert("파일 업로드에 실패하였습니다.");
+				                	 swal("파일업로드실패","","error");
 				                     console.log(error);
 				                     console.log(error.status);
 				                 }
@@ -463,7 +463,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 		                     
 		                 },
 		                 error : function(error) {
-		                     alert("파일 업로드에 실패하였습니다.");
+		                	 swal("파일업로드실패","","error");
 		                     console.log(error);
 		                     console.log(error.status);
 		                 }
@@ -523,11 +523,10 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 				                 data : { "text" : inputData},
 				                 success : function(data) {	         		                	 
 				                //	 $("#msg").val(data);
-				                	alert("번역성공!!")
 				                	 $('#msg').val(data).focus();
 				                 },
 				                 error : function(error) {
-				                     alert("번역실패.");
+				                	 swal("번역실패","","error");
 				                 }	
 			        
 			        });
@@ -540,7 +539,6 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 		    $("#msg_trans li a").on("click",function(){
 		        	var inputData = $('#msg').val();
 		        	var target = $(this).data("val");
-		        	alert(target)
 			        $.ajax({
 			                 type : 'post',
 			                 url : '/chat/json/translate2/',
@@ -559,18 +557,16 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 					                	"tranCode" : data.tranCode
 					                 },
 					                 success : function(data) {
-					                	alert("번역성공!!")
-					                	alert(data)
 					                	 $('#msg').val(data).focus();
 					                 },
 					                 error : function(error) {
-					                     alert("번역실패.");
+					                	 swal("번역실패","","error");
 					                 }	
 				        
 				        		});
 			                 },
 			                 error : function(error) {
-			                     alert("번역실패.");
+			                	 swal("번역실패","","error");
 			                 }	
 		        
 		        });

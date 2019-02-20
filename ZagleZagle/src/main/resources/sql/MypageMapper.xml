@@ -169,6 +169,15 @@
 		 FROM board
 		 WHERE board_No = #{boardNo}
 	 </select>
+	  
+	  
+	  	 <select id="getAddress" parameterType="String" resultType="String">
+		 SELECT address
+		 FROM board
+		 WHERE board_No = #{boardNo}
+	 </select>
+	 
+	 
 	 
 	 
 </mapper>
