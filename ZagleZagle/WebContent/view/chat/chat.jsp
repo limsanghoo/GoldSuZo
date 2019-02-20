@@ -386,7 +386,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 					$("#ok_chat").val(msg.a_user+"@s")
 					mdstart2.click();
 				}else if(msg.b_user.substring(0,msg.b_user.length-2)=="${user.userNickname}"&&msg.ms=="ok"){
-					window.open("https://192.168.0.16/stream/videochat?applyuserNo="+msg.no,"_blank", "width=400, height=300, scrollbars=no,status=no");
+					window.open("https://192.168.0.43/stream/videochat?applyuserNo="+msg.no,"_blank", "width=400, height=300, scrollbars=no,status=no");
 				}else if(msg.b_user.substring(0,msg.b_user.length-2)=="${user.userNickname}"&&msg.ms=="no"){
 					swal("상대방이 거절하셨습니다.","","error");
 					}
@@ -397,7 +397,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 				var name = $(this).val();
 				socket.emit("one_msg",{a_user:"${user.userNickname}",b_user:name,ms:"ok",no:"${user.userNo}"});
 				if (name.substring(name.length-2)=="@s") {
-					window.open("https://192.168.0.16/stream/videochat?applyuserNo=${user.userNo}","_blank", "width=400,status=no, height=300, scrollbars=no");  
+					window.open("https://192.168.0.43/stream/videochat?applyuserNo=${user.userNo}","_blank", "width=400,status=no, height=300, scrollbars=no");  
 				}else{
 					window.open("/chat/getChat?room=@@"+name,"_blank", "width=400, height=600, scrollbars=no ,location=no,resizable=yes,toolbar=no,status=no")
 				}
