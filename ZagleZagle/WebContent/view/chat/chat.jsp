@@ -473,43 +473,9 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 				             });
 				         
 				         testDrop.done(function(msg){
-				            	if (msg.substring(msg.length-3)=='mp4') {
-				            		setTimeout(function() {
-					            		while(true){
-						            		var path = 'http://192.168.0.43:8080/common/images/chat/'+msg;
-						            		var re = doesFileExist2(path);
-						            		if (re) {
-						            			socket.emit("send_msg",msg);
-												break;
-											}
-						            	}
-					            	},5000);
-								}else{
-									setTimeout(function() {
-					            		while(true){
-						            		var path = 'http://192.168.0.43:8080/common/images/chat/'+msg;
-						            		var re = doesFileExist2(path);
-						            		if (re) {
-						            			socket.emit("send_msg",msg);
-												break;
-											}
-						            	}
-					            	},2000);
-								}
-				            	
-				            	 function doesFileExist2(urlToFile) {
-									    var xhr = new XMLHttpRequest();
-									    xhr.open('HEAD', urlToFile, false);
-									    xhr.send();
-									     
-									    if (xhr.status == "404") {
-									        return false;
-									    } else {
-									        return true;
-									    }
-									}
-				          
-				            }); 
+				        	 socket.emit("send_msg",msg);
+								});
+				 
 				}
 
 	           
@@ -537,6 +503,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 		                     bar.width(percentVal);
 		                     percent.html(percentVal);
 		                     status.html(xhr.responseText);
+		                     
 		                     msg_process.click();
 		                     
 		                 },
@@ -548,11 +515,11 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 		             });
 		            
 		            ajaxReq.done(function(msg){
-		           
-		            	if (msg.substring(msg.length-3)=='mp4') {
+		            	socket.emit("send_msg",msg);
+		            	/*if (msg.substring(msg.length-3)=='mp4') {
 		            		setTimeout(function() {
 			            		while(true){
-				            		var path = 'http://192.168.0.43:8080/common/images/chat/'+msg;
+				            		var path = 'http://192.168.0.46:8080/common/images/chat/'+msg;
 				            		var re = doesFileExist(path);
 				            		if (re) {
 				            			socket.emit("send_msg",msg);
@@ -563,7 +530,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 						}else{
 							setTimeout(function() {
 			            		while(true){
-				            		var path = 'http://192.168.0.43:8080/common/images/chat/'+msg;
+				            		var path = 'http://192.168.0.46:8080/common/images/chat/'+msg;
 				            		var re = doesFileExist(path);
 				            		if (re) {
 				            			socket.emit("send_msg",msg);
@@ -571,7 +538,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 									}
 				            	}
 			            	},2000);
-						}
+						}*/
 		            	
 		            	
 		          
