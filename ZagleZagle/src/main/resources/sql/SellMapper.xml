@@ -30,13 +30,13 @@
 	 </insert>
 
 	<select id="listTrade" parameterType="Search" resultMap="sellSelectMap">
-		SELECT DISTINCT u.user_no, u.profile, u.user_nickname, s.* 
+		SELECT DISTINCT u.user_no, u.profile, u.user_nickname, s.*
 		FROM sell s, users u 
 		WHERE u.user_no=s.user_no 
 		<if test="searchCondition==1">
 			and (s.sell_state=10 or s.sell_state=30)
 				<if test="searchKeyword!=null">
-				and s.sell_text like '%'||#{searchKeyword}||'%'
+				and s.sell_name like '%'||#{searchKeyword}||'%'
 				</if>
 		</if>
 		<if test="searchCondition==null">
