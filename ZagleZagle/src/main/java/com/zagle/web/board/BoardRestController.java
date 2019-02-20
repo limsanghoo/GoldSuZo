@@ -316,9 +316,13 @@ public class BoardRestController {
 		 
 		 System.out.println("/json/addLink");
 		 
-		 String url=link.getUrl();	 
+		 String url=link.getUrl();
+		 
+		 System.out.println(url);
 
 		 String urlSub=url.substring(0, 4);
+		 
+		 System.out.println(urlSub);
 		 
 		 if(urlSub.equals("http")) {
 			 link.setUrl(url);
