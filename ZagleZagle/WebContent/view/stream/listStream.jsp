@@ -113,8 +113,27 @@ $(function() {
        
 	$("#upload").on("click", function() {
 		  // alert("전송됩니다~");
+		  var account = '${user.account}';
+		  if(account==null||account==''){
+			  // swal("계좌정보가 없습니다","계좌정보 추가 하시겠습니까?", "error");
+			     
+		         swal({
+					  title: "업로드 실패 !",
+					  text: "계좌정보가 없습니다! 추가 하시겠습니까?",
+					  icon:"success",
+					  buttons: ["취소", "이동"]
+					})
+					.then((willDelete) => {
+					  if (willDelete) {
+						  self.location="/mypage/addAccount";
+					  }
+					}); 
+		         
+		  }else{
+		   
 		   window.open("", "popup_window", "width=1450, height=900, toolbar=no, location=no, status=no, memubar=no, scrollbars=no, resizable=no,fullscreen=no");
 		   addStream();
+		  }
 	});
 	$("#refund").on("click", function() {
 		  // alert("환급합니다~");

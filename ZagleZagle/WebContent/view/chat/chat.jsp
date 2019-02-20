@@ -16,6 +16,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>  
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 		<title>Chat</title>
@@ -360,7 +361,6 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 			////////////1:1채팅신청///////
 			$("#btn_one").on("click",function(){
 				var name = $(this).text();
-				alert("버튼클릭 : ${user.userNo}")
 				socket.emit("one_msg",{a_user:"${user.userNickname}",b_user:name,ms:"${user.profile}"});
 			})
 			
@@ -379,17 +379,18 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 					window.open("/chat/getChat?room=@@"+msg.b_user,"_blank", "width=400, height=600, scrollbars=no ,location=no,resizable=yes,toolbar=no,status=no ")
 					
 				}else if(msg.b_user=="${user.userNickname}"&&msg.ms=="no"){
-					alert("상대방이 거절하셧슴다.")
+					swal("상대방이 거절하셨습니다.","","error");
+				       
 				}else if(msg.b_user.substring(0,msg.b_user.length-2)=="${user.userNickname}"&&msg.ms!="ok"&&msg.ms!="no"){
 					$("#m_body2").html("<img src='/common/images/profile/"+msg.ms+"' class='img-thumbnail' style='height: auto;width:150px'/><div >"+msg.a_user+"님이 1:1화상채팅신청을 하셨슴다.</div>");
 					$("#ok_chat").val(msg.a_user+"@s")
 					mdstart2.click();
 				}else if(msg.b_user.substring(0,msg.b_user.length-2)=="${user.userNickname}"&&msg.ms=="ok"){
-					alert(msg.no);
 					window.open("https://192.168.0.16/stream/videochat?applyuserNo="+msg.no,"_blank", "width=400, height=300, scrollbars=no,status=no");
 				}else if(msg.b_user.substring(0,msg.b_user.length-2)=="${user.userNickname}"&&msg.ms=="no"){
-					alert("상대방이 거절하셧슴다.")
-				}
+					swal("상대방이 거절하셨습니다.","","error");
+					}
+				
 			});
 			///////////1:1채팅신청결과///////
 			$("#ok_chat").on("click",function(){
@@ -465,7 +466,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 				                     
 				                 },
 				                 error : function(error) {
-				                     alert("파일 업로드에 실패하였습니다.");
+				                	 swal("파일업로드실패","","error");
 				                     console.log(error);
 				                     console.log(error.status);
 				                 }
@@ -540,7 +541,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 		                     
 		                 },
 		                 error : function(error) {
-		                     alert("파일 업로드에 실패하였습니다.");
+		                	 swal("파일업로드 실패","","error");
 		                     console.log(error);
 		                     console.log(error.status);
 		                 }
@@ -595,7 +596,6 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 			    $("#msg_trans li a").on("click",function(){
 			        	var inputData = $('#msg').val();
 			        	var target = $(this).data("val");
-			        	alert(target)
 				        $.ajax({
 				                 type : 'post',
 				                 url : '/chat/json/translate2/',
@@ -614,18 +614,16 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 						                	"tranCode" : data.tranCode
 						                 },
 						                 success : function(data) {
-						                	alert("번역성공!!")
-						                	alert(data)
 						                	 $('#msg').val(data).focus();
 						                 },
 						                 error : function(error) {
-						                     alert("번역실패.");
+						                	 swal("번역실패","","error");
 						                 }	
 					        
 					        		});
 				                 },
 				                 error : function(error) {
-				                     alert("번역실패.");
+				                	 swal("번역실패","","error");
 				                 }	
 			        
 			        });
@@ -641,11 +639,10 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 				                 data : { "text" : inputData},
 				                 success : function(data) {	         		                	 
 				                //	 $("#msg").val(data);
-				                	alert("번역성공!!")
 				                	 $('#msg').val(data).focus();
 				                 },
 				                 error : function(error) {
-				                     alert("번역실패.");
+				                	 swal("번역실패","","error");
 				                 }	
 			        
 			        });
