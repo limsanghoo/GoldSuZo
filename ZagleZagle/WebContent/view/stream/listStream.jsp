@@ -77,12 +77,6 @@ margin: 0 0 20px;
 		},3000); // 새로고침 시간 1000은 1초를 의미합니다.
    */
    
-
-   $(function() {
-	    // Load song on page load
-	    var song = new Audio('http://192.168.0.43:8080/common/images/stream/music.mp3');
-	    song.load();
-   });
    
 function ban()
  {
@@ -112,8 +106,9 @@ $(function() {
 	  var streamContent = $("input[name='streamContent']").val();
        
 	$("#upload").on("click", function() {
-		  // alert("전송됩니다~");
-		  var account = '${user.account}';
+		
+		  var account = '${user}';
+		//  alert(account);   
 		  if(account==null||account==''){
 			  // swal("계좌정보가 없습니다","계좌정보 추가 하시겠습니까?", "error");
 			     
