@@ -56,11 +56,11 @@ public class BoardController {
 		System.out.println(this.getClass());
 	}
 	
-	@Value("#{commonProperties['pageUnit']}")
-	int pageUnit;
-	
-	@Value("#{commonProperties['boardPageSize']}")
-	int boardPageSize;
+//	@Value("#{commonProperties['pageUnit']}")
+//	int pageUnit;
+//	
+//	@Value("#{commonProperties['boardPageSize']}")
+//	int boardPageSize;
 	
 	
 /////////////게시물
@@ -189,11 +189,11 @@ public class BoardController {
 		
 		SearchBoard searchBoard=new SearchBoard();
 		
-		if(searchBoard.getCurrentPage() ==0 ){
-			searchBoard.setCurrentPage(1);
-		}
-		
-		searchBoard.setPageSize(boardPageSize);		
+//		if(searchBoard.getCurrentPage() ==0 ){
+//			searchBoard.setCurrentPage(1);
+//		}
+//		
+//		searchBoard.setPageSize(boardPageSize);		
 		
 		if(session.getAttribute("user")!=null) {
 		
@@ -231,9 +231,9 @@ public class BoardController {
 			searchBoard.setSearchKeyword(null);
 		}
 		
-		if(searchBoard.getCurrentPage()==0) {
-			searchBoard.setCurrentPage(1);
-		}
+//		if(searchBoard.getCurrentPage()==0) {
+//			searchBoard.setCurrentPage(1);
+//		}
 		
 		if(session.getAttribute("user")!=null) {
 			
@@ -246,7 +246,7 @@ public class BoardController {
 			searchBoard.setLoginUserNo(null);
 		}
 		
-		searchBoard.setPageSize(boardPageSize);
+//		searchBoard.setPageSize(boardPageSize);
 		
 		Map<String , Object> map=boardService.listBoard(searchBoard);
 	
@@ -315,24 +315,6 @@ public class BoardController {
 		
 		return modelAndView;
 	}
-	
-	
-	
-////////////////링크
-//	@RequestMapping(value="addLink", method=RequestMethod.GET)
-//	public ModelAndView addLink(@RequestParam("boardNo")String boardNo) throws Exception{
-//		
-//		System.out.println("/addLink GET");
-//		
-//		System.out.println("boardNo : "+boardNo);
-//		
-//		
-//		ModelAndView modelAndView=new ModelAndView();
-//		modelAndView.addObject("board", boardService.getBoard(boardNo));
-//		modelAndView.setViewName("forward:/view/board/addLink.jsp");
-//		
-//		return modelAndView;
-//	}
 
 	
 ////////////////////신고

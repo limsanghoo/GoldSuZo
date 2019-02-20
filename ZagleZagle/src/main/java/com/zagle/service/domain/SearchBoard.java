@@ -2,11 +2,11 @@ package com.zagle.service.domain;
 
 public class SearchBoard {
 	
-	private int currentPage;
+//	private int currentPage;
 	private String searchKeyword;
-	private int pageSize;
-	private int endRowNum;
-	private int startRowNum;
+//	private int pageSize;
+//	private int endRowNum;
+//	private int startRowNum;
 	private int searchLike;
 	private String local;
 	private String loginUserNo;
@@ -14,13 +14,13 @@ public class SearchBoard {
 	public SearchBoard() {
 	}
 
-	public int getCurrentPage() {
-		return currentPage;
-	}
-
-	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
-	}
+//	public int getCurrentPage() {
+//		return currentPage;
+//	}
+//
+//	public void setCurrentPage(int currentPage) {
+//		this.currentPage = currentPage;
+//	}
 
 	public String getSearchKeyword() {
 		return searchKeyword;
@@ -30,29 +30,29 @@ public class SearchBoard {
 		this.searchKeyword = searchKeyword;
 	}
 
-	public int getPageSize() {
-		return pageSize;
-	}
-
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
-	}
-
-	public int getEndRowNum() {
-		return getCurrentPage()*getPageSize();
-	}
-
-	public void setEndRowNum(int endRowNum) {
-		this.endRowNum = endRowNum;
-	}
-
-	public int getStartRowNum() {
-		return (getCurrentPage()-1)*getPageSize()+1;
-	}
-
-	public void setStartRowNum(int startRowNum) {
-		this.startRowNum = startRowNum;
-	}
+//	public int getPageSize() {
+//		return pageSize;
+//	}
+//
+//	public void setPageSize(int pageSize) {
+//		this.pageSize = pageSize;
+//	}
+//
+//	public int getEndRowNum() {
+//		return getCurrentPage()*getPageSize();
+//	}
+//
+//	public void setEndRowNum(int endRowNum) {
+//		this.endRowNum = endRowNum;
+//	}
+//
+//	public int getStartRowNum() {
+//		return (getCurrentPage()-1)*getPageSize()+1;
+//	}
+//
+//	public void setStartRowNum(int startRowNum) {
+//		this.startRowNum = startRowNum;
+//	}
 
 	public int getSearchLike() {
 		return searchLike;
@@ -80,11 +80,11 @@ public class SearchBoard {
 
 	@Override
 	public String toString() {
-		return "SearchBoard [currentPage=" + currentPage + ", searchKeyword=" + searchKeyword + ", pageSize=" + pageSize
-				+ ", endRowNum=" + endRowNum + ", startRowNum=" + startRowNum + ", searchLike=" + searchLike
-				+ ", local="+local+", loginUserNo="+loginUserNo+"]";
+		return "SearchBoard [searchKeyword=" + searchKeyword + ", searchLike=" + searchLike + ", local=" + local
+				+ ", loginUserNo=" + loginUserNo + "]";
 	}
-	
+
+
 	
 
 }

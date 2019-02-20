@@ -63,10 +63,4 @@ public class KaKaoRestDAOImpl implements RestBoardDAO{
 	}
 
 
-	@Override
-	public void listMap() throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
