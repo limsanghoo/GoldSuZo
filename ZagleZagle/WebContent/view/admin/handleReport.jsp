@@ -128,11 +128,11 @@
 		///////////////////////getComment Ajax/////////////////////////////
 		
 			$("td:nth-child(3) i").on("click", function() {
-				alert("click 확인")
+				
 				
 				var commentNo = $(this).data("param1")
 				
-				alert(commentNo)
+			
 				
 				$.ajax(
 					{
@@ -144,7 +144,7 @@
 							"Content-Type" : "application/json"
 						},
 						success : function(JSONData, status) {
-							alert(JSONData)
+						
 						
 							
 							var displayValue ="<h6>"
@@ -201,8 +201,7 @@
 			    var commentNo = $(this).data("param5");
 				
 				
-				alert(blindNo)
-				
+			
 		
 			if(boardNo != null) { 
 				
