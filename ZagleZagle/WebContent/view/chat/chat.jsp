@@ -474,21 +474,8 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 				         
 				         testDrop.done(function(msg){
 				        	 socket.emit("send_msg",msg);
-								}
-				            	
-				            	 function doesFileExist2(urlToFile) {
-									    var xhr = new XMLHttpRequest();
-									    xhr.open('HEAD', urlToFile, false);
-									    xhr.send();
-									     
-									    if (xhr.status == "404") {
-									        return false;
-									    } else {
-									        return true;
-									    }
-									}
-				          
-				            }); 
+								});
+				 
 				}
 
 	           
@@ -516,6 +503,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 		                     bar.width(percentVal);
 		                     percent.html(percentVal);
 		                     status.html(xhr.responseText);
+		                     
 		                     msg_process.click();
 		                     
 		                 },

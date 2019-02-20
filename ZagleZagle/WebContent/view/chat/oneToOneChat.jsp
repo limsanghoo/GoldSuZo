@@ -396,7 +396,7 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 				         
 				         testDrop.done(function(msg){
 				        	 	socket.emit("send_msg",msg);
-								}
+								
 				            	
 				            	 function doesFileExist2(urlToFile) {
 									    var xhr = new XMLHttpRequest();
