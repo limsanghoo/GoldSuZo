@@ -388,36 +388,15 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 				                     
 				                 },
 				                 error : function(error) {
-				                     alert("파일 업로드에 실패하였습니다.");
+				                	 swal("파일업로드실패","","error");
 				                     console.log(error);
 				                     console.log(error.status);
 				                 }
 				             });
 				         
 				         testDrop.done(function(msg){
-				            	if (msg.substring(msg.length-3)=='mp4') {
-				            		setTimeout(function() {
-					            		while(true){
-						            		var path = 'http://192.168.0.32:8080/common/images/chat/'+msg;
-						            		var re = doesFileExist2(path);
-						            		if (re) {
-						            			socket.emit("send_msg",msg);
-												break;
-											}
-						            	}
-					            	},5000);
-								}else{
-									setTimeout(function() {
-					            		while(true){
-						            		var path = 'http://192.168.0.32:8080/common/images/chat/'+msg;
-						            		var re = doesFileExist2(path);
-						            		if (re) {
-						            			socket.emit("send_msg",msg);
-												break;
-											}
-						            	}
-					            	},2000);
-								}
+				        	 	socket.emit("send_msg",msg);
+								
 				            	
 				            	 function doesFileExist2(urlToFile) {
 									    var xhr = new XMLHttpRequest();
@@ -463,37 +442,15 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 		                     
 		                 },
 		                 error : function(error) {
-		                     alert("파일 업로드에 실패하였습니다.");
+		                	 swal("파일업로드실패","","error");
 		                     console.log(error);
 		                     console.log(error.status);
 		                 }
 		             });
 		            
 		            ajaxReq.done(function(msg){
-		           
-		            	if (msg.substring(msg.length-3)=='mp4') {
-		            		setTimeout(function() {
-			            		while(true){
-				            		var path = 'http://192.168.0.32:8080/common/images/chat/'+msg;
-				            		var re = doesFileExist(path);
-				            		if (re) {
-				            			socket.emit("send_msg",msg);
-										break;
-									}
-				            	}
-			            	},5000);
-						}else{
-							setTimeout(function() {
-			            		while(true){
-				            		var path = 'http://192.168.0.32:8080/common/images/chat/'+msg;
-				            		var re = doesFileExist(path);
-				            		if (re) {
-				            			socket.emit("send_msg",msg);
-										break;
-									}
-				            	}
-			            	},2000);
-						}
+		            	socket.emit("send_msg",msg);
+		            	
 		            	
 		            	
 		          
@@ -523,11 +480,10 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 				                 data : { "text" : inputData},
 				                 success : function(data) {	         		                	 
 				                //	 $("#msg").val(data);
-				                	alert("번역성공!!")
 				                	 $('#msg').val(data).focus();
 				                 },
 				                 error : function(error) {
-				                     alert("번역실패.");
+				                	 swal("번역실패","","error");
 				                 }	
 			        
 			        });
@@ -540,7 +496,6 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 		    $("#msg_trans li a").on("click",function(){
 		        	var inputData = $('#msg').val();
 		        	var target = $(this).data("val");
-		        	alert(target)
 			        $.ajax({
 			                 type : 'post',
 			                 url : '/chat/json/translate2/',
@@ -559,18 +514,16 @@ input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1p
 					                	"tranCode" : data.tranCode
 					                 },
 					                 success : function(data) {
-					                	alert("번역성공!!")
-					                	alert(data)
 					                	 $('#msg').val(data).focus();
 					                 },
 					                 error : function(error) {
-					                     alert("번역실패.");
+					                	 swal("번역실패","","error");
 					                 }	
 				        
 				        		});
 			                 },
 			                 error : function(error) {
-			                     alert("번역실패.");
+			                	 swal("번역실패","","error");
 			                 }	
 		        
 		        });
